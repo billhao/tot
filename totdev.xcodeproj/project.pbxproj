@@ -1,0 +1,405 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		EF6283761536674B004031D6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF6283751536674B004031D6 /* UIKit.framework */; };
+		EF6283781536674B004031D6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF6283771536674B004031D6 /* Foundation.framework */; };
+		EF62837A1536674B004031D6 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF6283791536674B004031D6 /* CoreGraphics.framework */; };
+		EF6283801536674C004031D6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EF62837E1536674C004031D6 /* InfoPlist.strings */; };
+		EF6283821536674C004031D6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EF6283811536674C004031D6 /* main.m */; };
+		EF6283861536674C004031D6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EF6283851536674C004031D6 /* AppDelegate.m */; };
+		EF62838E15366833004031D6 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF62838D15366833004031D6 /* MainWindow.xib */; };
+		EF62839115366860004031D6 /* totUITabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF6283901536685F004031D6 /* totUITabBarController.m */; };
+		EF62839815366D9A004031D6 /* totHomeRootController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF62839715366D9A004031D6 /* totHomeRootController.m */; };
+		EF62839B15366DB2004031D6 /* totActivityRootController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF62839A15366DB2004031D6 /* totActivityRootController.m */; };
+		EF62839E15366DCD004031D6 /* totReviewRootController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF62839D15366DCD004031D6 /* totReviewRootController.m */; };
+		EF6283A115366DE4004031D6 /* totSettingRootController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF6283A015366DE4004031D6 /* totSettingRootController.m */; };
+		EF6283A815366E3A004031D6 /* activity.png in Resources */ = {isa = PBXBuildFile; fileRef = EF6283A415366E3A004031D6 /* activity.png */; };
+		EF6283A915366E3A004031D6 /* home.png in Resources */ = {isa = PBXBuildFile; fileRef = EF6283A515366E3A004031D6 /* home.png */; };
+		EF6283AA15366E3A004031D6 /* review.png in Resources */ = {isa = PBXBuildFile; fileRef = EF6283A615366E3A004031D6 /* review.png */; };
+		EF6283AB15366E3A004031D6 /* setting.png in Resources */ = {isa = PBXBuildFile; fileRef = EF6283A715366E3A004031D6 /* setting.png */; };
+		EF6283AE15367730004031D6 /* totHomeEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF6283AD1536772F004031D6 /* totHomeEntryViewController.m */; };
+		EF6283B015367744004031D6 /* HomeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF6283AF15367744004031D6 /* HomeView.xib */; };
+		EF97E7CB153B4BA90037E52D /* totImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = EF97E7CA153B4BA90037E52D /* totImageView.m */; };
+		EF97E7CD153B4F040037E52D /* mainscreen.png in Resources */ = {isa = PBXBuildFile; fileRef = EF97E7CC153B4F040037E52D /* mainscreen.png */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		EF6283711536674B004031D6 /* totdev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = totdev.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EF6283751536674B004031D6 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		EF6283771536674B004031D6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		EF6283791536674B004031D6 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		EF62837D1536674C004031D6 /* totdev-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "totdev-Info.plist"; sourceTree = "<group>"; };
+		EF62837F1536674C004031D6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		EF6283811536674C004031D6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		EF6283831536674C004031D6 /* totdev-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "totdev-Prefix.pch"; sourceTree = "<group>"; };
+		EF6283841536674C004031D6 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		EF6283851536674C004031D6 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		EF62838D15366833004031D6 /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
+		EF62838F1536685F004031D6 /* totUITabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = totUITabBarController.h; sourceTree = "<group>"; };
+		EF6283901536685F004031D6 /* totUITabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = totUITabBarController.m; sourceTree = "<group>"; };
+		EF62839615366D9A004031D6 /* totHomeRootController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totHomeRootController.h; path = Home/totHomeRootController.h; sourceTree = "<group>"; };
+		EF62839715366D9A004031D6 /* totHomeRootController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totHomeRootController.m; path = Home/totHomeRootController.m; sourceTree = "<group>"; };
+		EF62839915366DB2004031D6 /* totActivityRootController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totActivityRootController.h; path = Activity/totActivityRootController.h; sourceTree = "<group>"; };
+		EF62839A15366DB2004031D6 /* totActivityRootController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totActivityRootController.m; path = Activity/totActivityRootController.m; sourceTree = "<group>"; };
+		EF62839C15366DCD004031D6 /* totReviewRootController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totReviewRootController.h; path = Review/totReviewRootController.h; sourceTree = "<group>"; };
+		EF62839D15366DCD004031D6 /* totReviewRootController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totReviewRootController.m; path = Review/totReviewRootController.m; sourceTree = "<group>"; };
+		EF62839F15366DE4004031D6 /* totSettingRootController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totSettingRootController.h; path = Setting/totSettingRootController.h; sourceTree = "<group>"; };
+		EF6283A015366DE4004031D6 /* totSettingRootController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totSettingRootController.m; path = Setting/totSettingRootController.m; sourceTree = "<group>"; };
+		EF6283A415366E3A004031D6 /* activity.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = activity.png; sourceTree = "<group>"; };
+		EF6283A515366E3A004031D6 /* home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home.png; sourceTree = "<group>"; };
+		EF6283A615366E3A004031D6 /* review.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = review.png; sourceTree = "<group>"; };
+		EF6283A715366E3A004031D6 /* setting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = setting.png; sourceTree = "<group>"; };
+		EF6283AC1536772F004031D6 /* totHomeEntryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totHomeEntryViewController.h; path = Home/totHomeEntryViewController.h; sourceTree = "<group>"; };
+		EF6283AD1536772F004031D6 /* totHomeEntryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totHomeEntryViewController.m; path = Home/totHomeEntryViewController.m; sourceTree = "<group>"; };
+		EF6283AF15367744004031D6 /* HomeView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeView.xib; sourceTree = "<group>"; };
+		EF97E7C9153B4BA90037E52D /* totImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totImageView.h; path = Utility/totImageView.h; sourceTree = "<group>"; };
+		EF97E7CA153B4BA90037E52D /* totImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totImageView.m; path = Utility/totImageView.m; sourceTree = "<group>"; };
+		EF97E7CC153B4F040037E52D /* mainscreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mainscreen.png; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		EF62836E1536674B004031D6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EF6283761536674B004031D6 /* UIKit.framework in Frameworks */,
+				EF6283781536674B004031D6 /* Foundation.framework in Frameworks */,
+				EF62837A1536674B004031D6 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		EF6283661536674B004031D6 = {
+			isa = PBXGroup;
+			children = (
+				EF62838C153667BD004031D6 /* resources */,
+				EF62837B1536674B004031D6 /* totdev */,
+				EF6283741536674B004031D6 /* Frameworks */,
+				EF6283721536674B004031D6 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		EF6283721536674B004031D6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EF6283711536674B004031D6 /* totdev.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EF6283741536674B004031D6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				EF6283751536674B004031D6 /* UIKit.framework */,
+				EF6283771536674B004031D6 /* Foundation.framework */,
+				EF6283791536674B004031D6 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		EF62837B1536674B004031D6 /* totdev */ = {
+			isa = PBXGroup;
+			children = (
+				EF97E7C1153B43DD0037E52D /* Util */,
+				EF62839515366D7A004031D6 /* Setting */,
+				EF62839415366D74004031D6 /* Review */,
+				EF62839315366D6A004031D6 /* Activity */,
+				EF62839215366D62004031D6 /* Home */,
+				EF6283841536674C004031D6 /* AppDelegate.h */,
+				EF6283851536674C004031D6 /* AppDelegate.m */,
+				EF62838F1536685F004031D6 /* totUITabBarController.h */,
+				EF6283901536685F004031D6 /* totUITabBarController.m */,
+				EF62837C1536674C004031D6 /* Supporting Files */,
+			);
+			path = totdev;
+			sourceTree = "<group>";
+		};
+		EF62837C1536674C004031D6 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				EF62837D1536674C004031D6 /* totdev-Info.plist */,
+				EF62837E1536674C004031D6 /* InfoPlist.strings */,
+				EF6283811536674C004031D6 /* main.m */,
+				EF6283831536674C004031D6 /* totdev-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		EF62838C153667BD004031D6 /* resources */ = {
+			isa = PBXGroup;
+			children = (
+				EF6283A215366DF1004031D6 /* Image */,
+				EF62838D15366833004031D6 /* MainWindow.xib */,
+				EF6283AF15367744004031D6 /* HomeView.xib */,
+			);
+			name = resources;
+			sourceTree = "<group>";
+		};
+		EF62839215366D62004031D6 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				EF62839615366D9A004031D6 /* totHomeRootController.h */,
+				EF62839715366D9A004031D6 /* totHomeRootController.m */,
+				EF6283AC1536772F004031D6 /* totHomeEntryViewController.h */,
+				EF6283AD1536772F004031D6 /* totHomeEntryViewController.m */,
+			);
+			name = Home;
+			sourceTree = "<group>";
+		};
+		EF62839315366D6A004031D6 /* Activity */ = {
+			isa = PBXGroup;
+			children = (
+				EF62839915366DB2004031D6 /* totActivityRootController.h */,
+				EF62839A15366DB2004031D6 /* totActivityRootController.m */,
+			);
+			name = Activity;
+			sourceTree = "<group>";
+		};
+		EF62839415366D74004031D6 /* Review */ = {
+			isa = PBXGroup;
+			children = (
+				EF62839C15366DCD004031D6 /* totReviewRootController.h */,
+				EF62839D15366DCD004031D6 /* totReviewRootController.m */,
+			);
+			name = Review;
+			sourceTree = "<group>";
+		};
+		EF62839515366D7A004031D6 /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				EF62839F15366DE4004031D6 /* totSettingRootController.h */,
+				EF6283A015366DE4004031D6 /* totSettingRootController.m */,
+			);
+			name = Setting;
+			sourceTree = "<group>";
+		};
+		EF6283A215366DF1004031D6 /* Image */ = {
+			isa = PBXGroup;
+			children = (
+				EF97E7C3153B49F30037E52D /* Home */,
+				EF6283A315366DF8004031D6 /* TabIcon */,
+			);
+			name = Image;
+			sourceTree = "<group>";
+		};
+		EF6283A315366DF8004031D6 /* TabIcon */ = {
+			isa = PBXGroup;
+			children = (
+				EF6283A415366E3A004031D6 /* activity.png */,
+				EF6283A515366E3A004031D6 /* home.png */,
+				EF6283A615366E3A004031D6 /* review.png */,
+				EF6283A715366E3A004031D6 /* setting.png */,
+			);
+			name = TabIcon;
+			sourceTree = "<group>";
+		};
+		EF97E7C1153B43DD0037E52D /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				EF97E7C9153B4BA90037E52D /* totImageView.h */,
+				EF97E7CA153B4BA90037E52D /* totImageView.m */,
+			);
+			name = Util;
+			sourceTree = "<group>";
+		};
+		EF97E7C3153B49F30037E52D /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				EF97E7CC153B4F040037E52D /* mainscreen.png */,
+			);
+			name = Home;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		EF6283701536674B004031D6 /* totdev */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EF6283891536674C004031D6 /* Build configuration list for PBXNativeTarget "totdev" */;
+			buildPhases = (
+				EF62836D1536674B004031D6 /* Sources */,
+				EF62836E1536674B004031D6 /* Frameworks */,
+				EF62836F1536674B004031D6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = totdev;
+			productName = totdev;
+			productReference = EF6283711536674B004031D6 /* totdev.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		EF6283681536674B004031D6 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+				ORGANIZATIONNAME = USC;
+			};
+			buildConfigurationList = EF62836B1536674B004031D6 /* Build configuration list for PBXProject "totdev" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = EF6283661536674B004031D6;
+			productRefGroup = EF6283721536674B004031D6 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				EF6283701536674B004031D6 /* totdev */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		EF62836F1536674B004031D6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EF6283801536674C004031D6 /* InfoPlist.strings in Resources */,
+				EF62838E15366833004031D6 /* MainWindow.xib in Resources */,
+				EF6283A815366E3A004031D6 /* activity.png in Resources */,
+				EF6283A915366E3A004031D6 /* home.png in Resources */,
+				EF6283AA15366E3A004031D6 /* review.png in Resources */,
+				EF6283AB15366E3A004031D6 /* setting.png in Resources */,
+				EF6283B015367744004031D6 /* HomeView.xib in Resources */,
+				EF97E7CD153B4F040037E52D /* mainscreen.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		EF62836D1536674B004031D6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EF6283821536674C004031D6 /* main.m in Sources */,
+				EF6283861536674C004031D6 /* AppDelegate.m in Sources */,
+				EF62839115366860004031D6 /* totUITabBarController.m in Sources */,
+				EF62839815366D9A004031D6 /* totHomeRootController.m in Sources */,
+				EF62839B15366DB2004031D6 /* totActivityRootController.m in Sources */,
+				EF62839E15366DCD004031D6 /* totReviewRootController.m in Sources */,
+				EF6283A115366DE4004031D6 /* totSettingRootController.m in Sources */,
+				EF6283AE15367730004031D6 /* totHomeEntryViewController.m in Sources */,
+				EF97E7CB153B4BA90037E52D /* totImageView.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		EF62837E1536674C004031D6 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EF62837F1536674C004031D6 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		EF6283871536674C004031D6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		EF6283881536674C004031D6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		EF62838A1536674C004031D6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "totdev/totdev-Prefix.pch";
+				INFOPLIST_FILE = "totdev/totdev-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		EF62838B1536674C004031D6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "totdev/totdev-Prefix.pch";
+				INFOPLIST_FILE = "totdev/totdev-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		EF62836B1536674B004031D6 /* Build configuration list for PBXProject "totdev" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EF6283871536674C004031D6 /* Debug */,
+				EF6283881536674C004031D6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EF6283891536674C004031D6 /* Build configuration list for PBXNativeTarget "totdev" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EF62838A1536674C004031D6 /* Debug */,
+				EF62838B1536674C004031D6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = EF6283681536674B004031D6 /* Project object */;
+}
