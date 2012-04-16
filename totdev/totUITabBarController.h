@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface totUITabBarController : UITabBarController
+@class totCameraViewController;
+
+@interface totUITabBarController : UITabBarController {
+    totCameraViewController *cameraView;
+}
+
+@property (nonatomic, retain) totCameraViewController *cameraView;
 
 @end

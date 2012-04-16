@@ -7,6 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EF2387EB153B7D1600B9C8BD /* ActivityEntryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF2387EA153B7D1600B9C8BD /* ActivityEntryView.xib */; };
+		EF2387EF153B7D7700B9C8BD /* totActivityEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2387EE153B7D7700B9C8BD /* totActivityEntryViewController.m */; };
+		EF2387F2153BC3E500B9C8BD /* challenge.png in Resources */ = {isa = PBXBuildFile; fileRef = EF2387F1153BC3E500B9C8BD /* challenge.png */; };
+		EF2387F5153BC4C300B9C8BD /* totActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2387F4153BC4C300B9C8BD /* totActivityViewController.m */; };
+		EF2387F7153BC4F300B9C8BD /* ActivityView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF2387F6153BC4F300B9C8BD /* ActivityView.xib */; };
+		EF2387F9153BC56E00B9C8BD /* CameraView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF2387F8153BC56D00B9C8BD /* CameraView.xib */; };
+		EF2387FC153BC5AB00B9C8BD /* totCameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2387FB153BC5AB00B9C8BD /* totCameraViewController.m */; };
+		EF2387FE153BC64A00B9C8BD /* ActivityInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF2387FD153BC64A00B9C8BD /* ActivityInfoView.xib */; };
+		EF238801153BC67B00B9C8BD /* totActivityInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF238800153BC67B00B9C8BD /* totActivityInfoViewController.m */; };
+		EF238803153BC6EB00B9C8BD /* ActivityAlbumView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF238802153BC6EB00B9C8BD /* ActivityAlbumView.xib */; };
+		EF238806153BC71400B9C8BD /* totActivityAlbumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF238805153BC71400B9C8BD /* totActivityAlbumViewController.m */; };
 		EF6283761536674B004031D6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF6283751536674B004031D6 /* UIKit.framework */; };
 		EF6283781536674B004031D6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF6283771536674B004031D6 /* Foundation.framework */; };
 		EF62837A1536674B004031D6 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF6283791536674B004031D6 /* CoreGraphics.framework */; };
@@ -30,6 +41,22 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		EF2387EA153B7D1600B9C8BD /* ActivityEntryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActivityEntryView.xib; sourceTree = "<group>"; };
+		EF2387ED153B7D7700B9C8BD /* totActivityEntryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totActivityEntryViewController.h; path = Activity/totActivityEntryViewController.h; sourceTree = "<group>"; };
+		EF2387EE153B7D7700B9C8BD /* totActivityEntryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totActivityEntryViewController.m; path = Activity/totActivityEntryViewController.m; sourceTree = "<group>"; };
+		EF2387F1153BC3E500B9C8BD /* challenge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = challenge.png; sourceTree = "<group>"; };
+		EF2387F3153BC4C300B9C8BD /* totActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totActivityViewController.h; path = Activity/totActivityViewController.h; sourceTree = "<group>"; };
+		EF2387F4153BC4C300B9C8BD /* totActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totActivityViewController.m; path = Activity/totActivityViewController.m; sourceTree = "<group>"; };
+		EF2387F6153BC4F300B9C8BD /* ActivityView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActivityView.xib; sourceTree = "<group>"; };
+		EF2387F8153BC56D00B9C8BD /* CameraView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CameraView.xib; sourceTree = "<group>"; };
+		EF2387FA153BC5AB00B9C8BD /* totCameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totCameraViewController.h; path = Utility/totCameraViewController.h; sourceTree = "<group>"; };
+		EF2387FB153BC5AB00B9C8BD /* totCameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totCameraViewController.m; path = Utility/totCameraViewController.m; sourceTree = "<group>"; };
+		EF2387FD153BC64A00B9C8BD /* ActivityInfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActivityInfoView.xib; sourceTree = "<group>"; };
+		EF2387FF153BC67B00B9C8BD /* totActivityInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totActivityInfoViewController.h; path = Activity/totActivityInfoViewController.h; sourceTree = "<group>"; };
+		EF238800153BC67B00B9C8BD /* totActivityInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totActivityInfoViewController.m; path = Activity/totActivityInfoViewController.m; sourceTree = "<group>"; };
+		EF238802153BC6EB00B9C8BD /* ActivityAlbumView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActivityAlbumView.xib; sourceTree = "<group>"; };
+		EF238804153BC71400B9C8BD /* totActivityAlbumViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totActivityAlbumViewController.h; path = Activity/totActivityAlbumViewController.h; sourceTree = "<group>"; };
+		EF238805153BC71400B9C8BD /* totActivityAlbumViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totActivityAlbumViewController.m; path = Activity/totActivityAlbumViewController.m; sourceTree = "<group>"; };
 		EF6283711536674B004031D6 /* totdev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = totdev.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF6283751536674B004031D6 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		EF6283771536674B004031D6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -77,6 +104,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		EF2387F0153BC3AC00B9C8BD /* Activity */ = {
+			isa = PBXGroup;
+			children = (
+				EF2387F1153BC3E500B9C8BD /* challenge.png */,
+			);
+			name = Activity;
+			sourceTree = "<group>";
+		};
 		EF6283661536674B004031D6 = {
 			isa = PBXGroup;
 			children = (
@@ -139,6 +174,11 @@
 				EF6283A215366DF1004031D6 /* Image */,
 				EF62838D15366833004031D6 /* MainWindow.xib */,
 				EF6283AF15367744004031D6 /* HomeView.xib */,
+				EF2387F8153BC56D00B9C8BD /* CameraView.xib */,
+				EF2387EA153B7D1600B9C8BD /* ActivityEntryView.xib */,
+				EF2387F6153BC4F300B9C8BD /* ActivityView.xib */,
+				EF2387FD153BC64A00B9C8BD /* ActivityInfoView.xib */,
+				EF238802153BC6EB00B9C8BD /* ActivityAlbumView.xib */,
 			);
 			name = resources;
 			sourceTree = "<group>";
@@ -159,6 +199,14 @@
 			children = (
 				EF62839915366DB2004031D6 /* totActivityRootController.h */,
 				EF62839A15366DB2004031D6 /* totActivityRootController.m */,
+				EF2387ED153B7D7700B9C8BD /* totActivityEntryViewController.h */,
+				EF2387EE153B7D7700B9C8BD /* totActivityEntryViewController.m */,
+				EF2387F3153BC4C300B9C8BD /* totActivityViewController.h */,
+				EF2387F4153BC4C300B9C8BD /* totActivityViewController.m */,
+				EF2387FF153BC67B00B9C8BD /* totActivityInfoViewController.h */,
+				EF238800153BC67B00B9C8BD /* totActivityInfoViewController.m */,
+				EF238804153BC71400B9C8BD /* totActivityAlbumViewController.h */,
+				EF238805153BC71400B9C8BD /* totActivityAlbumViewController.m */,
 			);
 			name = Activity;
 			sourceTree = "<group>";
@@ -184,6 +232,7 @@
 		EF6283A215366DF1004031D6 /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				EF2387F0153BC3AC00B9C8BD /* Activity */,
 				EF97E7C3153B49F30037E52D /* Home */,
 				EF6283A315366DF8004031D6 /* TabIcon */,
 			);
@@ -206,6 +255,8 @@
 			children = (
 				EF97E7C9153B4BA90037E52D /* totImageView.h */,
 				EF97E7CA153B4BA90037E52D /* totImageView.m */,
+				EF2387FA153BC5AB00B9C8BD /* totCameraViewController.h */,
+				EF2387FB153BC5AB00B9C8BD /* totCameraViewController.m */,
 			);
 			name = Util;
 			sourceTree = "<group>";
@@ -277,6 +328,12 @@
 				EF6283AB15366E3A004031D6 /* setting.png in Resources */,
 				EF6283B015367744004031D6 /* HomeView.xib in Resources */,
 				EF97E7CD153B4F040037E52D /* mainscreen.png in Resources */,
+				EF2387EB153B7D1600B9C8BD /* ActivityEntryView.xib in Resources */,
+				EF2387F2153BC3E500B9C8BD /* challenge.png in Resources */,
+				EF2387F7153BC4F300B9C8BD /* ActivityView.xib in Resources */,
+				EF2387F9153BC56E00B9C8BD /* CameraView.xib in Resources */,
+				EF2387FE153BC64A00B9C8BD /* ActivityInfoView.xib in Resources */,
+				EF238803153BC6EB00B9C8BD /* ActivityAlbumView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -296,6 +353,11 @@
 				EF6283A115366DE4004031D6 /* totSettingRootController.m in Sources */,
 				EF6283AE15367730004031D6 /* totHomeEntryViewController.m in Sources */,
 				EF97E7CB153B4BA90037E52D /* totImageView.m in Sources */,
+				EF2387EF153B7D7700B9C8BD /* totActivityEntryViewController.m in Sources */,
+				EF2387F5153BC4C300B9C8BD /* totActivityViewController.m in Sources */,
+				EF2387FC153BC5AB00B9C8BD /* totCameraViewController.m in Sources */,
+				EF238801153BC67B00B9C8BD /* totActivityInfoViewController.m in Sources */,
+				EF238806153BC71400B9C8BD /* totActivityAlbumViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

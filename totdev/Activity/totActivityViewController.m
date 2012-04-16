@@ -1,17 +1,15 @@
 //
-//  totUITabBarController.m
+//  totActivityViewController.m
 //  totdev
 //
-//  Created by Lixing Huang on 4/11/12.
+//  Created by Lixing Huang on 4/15/12.
 //  Copyright (c) 2012 USC. All rights reserved.
 //
 
-#import "totUITabBarController.h"
-#import "totCameraViewController.h"
+#import "totActivityViewController.h"
+#import "totImageView.h"
 
-@implementation totUITabBarController
-
-@synthesize cameraView;
+@implementation totActivityViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -39,17 +37,16 @@
 }
 */
 
+
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    totCameraViewController *aCameraView = [[totCameraViewController alloc] initWithNibName:@"CameraView" bundle:nil];
-    self.cameraView = aCameraView;
-    self.cameraView.view.frame = CGRectMake(0, 0, 0, 0);
-    [aCameraView release];
-    
-    [self.view addSubview:cameraView.view];
+    totImageView *background = [[totImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 411)];
+    [background imageFilePath:@"challenge.png"];
+    [self.view addSubview:background];
+    [background release];
 }
 
 
