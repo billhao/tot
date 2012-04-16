@@ -8,6 +8,21 @@
 
 #import <UIKit/UIKit.h>
 
-@interface totActivityRootController : UIViewController
+@class totActivityEntryViewController;
+@class totActivityViewController;
+@class totActivityInfoViewController;
+@class totActivityAlbumViewController;
+
+@interface totActivityRootController : UIViewController {
+    totActivityEntryViewController *activityEntryViewController;
+    totActivityViewController *activityViewController;
+    totActivityInfoViewController *activityInfoViewController;
+    totActivityAlbumViewController *activityAlbumViewController;
+}
+
+@property (nonatomic, retain) totActivityEntryViewController *activityEntryViewController;
+@property (nonatomic, retain) totActivityViewController *activityViewController;
+@property (nonatomic, retain) totActivityInfoViewController *activityInfoViewController;
+@property (nonatomic, retain) totActivityAlbumViewController *activityAlbumViewController;
 
 @end
