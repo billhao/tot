@@ -18,6 +18,7 @@
 @implementation totCameraViewController
 
 @synthesize imagePicker;
+@synthesize delegate;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -45,6 +46,11 @@
 }
 */
 
+//- (void)setDelegate:(id<CameraViewDelegate>)aDelegate {
+//    if( self.delegate != aDelegate ) {
+//        self.delegate = aDelegate;
+//    }
+//}
 
 - (void)launchPhotoCamera {
     bPhotoCamera = YES;
@@ -103,10 +109,16 @@
 
 
 - (void)image: (UIImage*)image didFinishSavingWithError:(NSError*)error contextInfo:(void*)contextInfo {
-
+    if( [delegate respondsToSelector:@selector(cameraView:didFinishSavingImageToAlbum:)] ) {
+        [delegate cameraView:self didFinishSavingImageToAlbum:image];
+    }
 }
 
 - (void)video: (NSString*)videoPath didFinishSavingWithError:(NSError*)error contextInfo:(NSString*)contextInfo {
+    if( [delegate respondsToSelector:@selector(cameraView:didFinishSavingVideoToAlbum:)] ) {
+        [delegate cameraView:self didFinishSavingVideoToAlbum:videoPath];
+    }
+    
     NSURL *contentURL = [NSURL fileURLWithPath:videoPath];
     
     // generate thumbnail
@@ -122,13 +134,20 @@
                 NSLog(@"couldn't generate thumbnail, error:%@", error);
             } else {
                 UIImage *thumbnail = [[UIImage alloc] initWithCGImage:im];
+                
                 UIImageWriteToSavedPhotosAlbum(thumbnail, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+                
+                if( [delegate respondsToSelector:@selector(cameraView:didFinishSavingThumbnail:)] ) {
+                    [delegate cameraView:self didFinishSavingThumbnail:thumbnail];
+                }
+                
                 [thumbnail release];
             }
             [generator release];
         };
         
-        [generator generateCGImagesAsynchronouslyForTimes:[NSArray arrayWithObject:[NSValue valueWithCMTime:thumbnailTime]] completionHandler:handler];
+        [generator generateCGImagesAsynchronouslyForTimes:[NSArray arrayWithObject:[NSValue valueWithCMTime:thumbnailTime]] 
+                                        completionHandler:handler];
     }
     
     [asset release];

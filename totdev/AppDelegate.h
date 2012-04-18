@@ -15,7 +15,7 @@
 	IBOutlet totUITabBarController *rootController;
 }
 
-@property (strong, nonatomic) IBOutlet totUITabBarController *rootController;
+@property (retain, nonatomic) IBOutlet totUITabBarController *rootController;
 @property (strong, nonatomic) IBOutlet UIWindow *window;
 
 @end
