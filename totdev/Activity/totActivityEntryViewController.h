@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "totCameraViewController.h"
+#import "totActivityRootController.h"
 
 enum {
     kActivityVisionAttention = 0,
@@ -22,7 +23,10 @@ enum {
 
 @interface totActivityEntryViewController : UIViewController <CameraViewDelegate> {    
     NSMutableArray *mActivityNames;
+    totActivityRootController *activityRootController;
 }
+
+@property (nonatomic, assign) totActivityRootController *activityRootController;
 
 - (void) launchCamera;
 

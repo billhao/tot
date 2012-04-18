@@ -13,16 +13,28 @@
 @class totActivityInfoViewController;
 @class totActivityAlbumViewController;
 
+enum {
+    kActivityEntryView = 0,
+    kActivityView = 1,
+    kActivityInfoView = 2,
+    kActivityAlbumView = 3
+};
+
 @interface totActivityRootController : UIViewController {
     totActivityEntryViewController *activityEntryViewController;
     totActivityViewController *activityViewController;
     totActivityInfoViewController *activityInfoViewController;
     totActivityAlbumViewController *activityAlbumViewController;
+    
+    NSDictionary *mViewStack;
+    int mCurrentViewIndex;
 }
 
 @property (nonatomic, retain) totActivityEntryViewController *activityEntryViewController;
 @property (nonatomic, retain) totActivityViewController *activityViewController;
 @property (nonatomic, retain) totActivityInfoViewController *activityInfoViewController;
 @property (nonatomic, retain) totActivityAlbumViewController *activityAlbumViewController;
+
+- (void) switchTo:(int)viewIndex;
 
 @end

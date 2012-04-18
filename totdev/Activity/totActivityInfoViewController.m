@@ -11,6 +11,8 @@
 
 @implementation totActivityInfoViewController
 
+@synthesize activityRootController;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -42,11 +44,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    totImageView *background = [[totImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 411)];
-    [background imageFilePath:@"challenge.png"];
-    [self.view addSubview:background];
-    [background release];
 }
 
 

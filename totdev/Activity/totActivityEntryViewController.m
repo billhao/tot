@@ -13,6 +13,8 @@
 
 @implementation totActivityEntryViewController
 
+@synthesize activityRootController;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -75,6 +77,8 @@
 // delegates of CameraView
 - (void) cameraView:(id)cameraView didFinishSavingImageToAlbum:(UIImage*)photo {
     printf("Save image to album\n");
+    
+    [activityRootController switchTo:kActivityInfoView];
 }
 
 - (void) cameraView:(id)cameraView didFinishSavingVideoToAlbum:(NSString*)videoPath {
@@ -88,8 +92,8 @@
 - (void) launchCamera {
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
     [appDelegate.rootController.cameraView setDelegate:self];
-//    [appDelegate.rootController.cameraView launchPhotoCamera];
-    [appDelegate.rootController.cameraView launchVideoCamera];
+    [appDelegate.rootController.cameraView launchPhotoCamera];
+//    [appDelegate.rootController.cameraView launchVideoCamera];
 }
 
 - (void)buttonPressed: (id)sender {

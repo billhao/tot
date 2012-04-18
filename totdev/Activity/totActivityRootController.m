@@ -53,26 +53,92 @@
     
     totActivityEntryViewController *anEntryView = [[totActivityEntryViewController alloc] initWithNibName:@"ActivityEntryView" bundle:nil];
     self.activityEntryViewController = anEntryView;
+    self.activityEntryViewController.activityRootController = self;
     [anEntryView release];
     
     totActivityViewController *activityView = [[totActivityViewController alloc] initWithNibName:@"ActivityView" bundle:nil];
     self.activityViewController = activityView;
+    self.activityViewController.activityRootController = self;
     [activityView release];
     
     totActivityInfoViewController *activityInfoView = [[totActivityInfoViewController alloc] initWithNibName:@"ActivityInfoView" bundle:nil];
     self.activityInfoViewController = activityInfoView;
+    self.activityInfoViewController.activityRootController = self;
     [activityInfoView release];
     
     totActivityAlbumViewController *activityAlbumView = [[totActivityAlbumViewController alloc] initWithNibName:@"ActivityAlbumView" bundle:nil];
     self.activityAlbumViewController = activityAlbumView;
+    self.activityAlbumViewController.activityRootController = self;
     [activityAlbumView release];
     
     [self.view addSubview:activityEntryViewController.view];
-//    [self.view addSubview:activityViewController.view];
-//    [self.view addSubview:activityInfoViewController.view];
-//    [self.view addSubview:activityAlbumViewController.view];
+    [self.view addSubview:activityInfoViewController.view];
+    [self.view addSubview:activityAlbumViewController.view];
+    [self.view addSubview:activityViewController.view];
+
+    activityEntryViewController.view.frame = CGRectMake(0, 0, 320, 411);
+    activityInfoViewController.view.frame = CGRectMake(320, 0, 320, 411);
+    activityAlbumViewController.view.frame = CGRectMake(320, 0, 320, 411);
+    activityViewController.view.frame = CGRectMake(320, 0, 320, 411);
+    
+    mCurrentViewIndex = kActivityEntryView;
 }
 
+- (UIView*)getViewByIndex:(int)viewIndex {
+    switch (viewIndex) {
+        case kActivityEntryView:
+            return activityEntryViewController.view;
+        case kActivityView:
+            return activityViewController.view;
+        case kActivityAlbumView:
+            return activityAlbumViewController.view;
+        case kActivityInfoView:
+            return activityInfoViewController.view;
+        default:
+            printf("Invalid view index\n");
+            return nil;
+    }
+}
+
+- (float)getViewXPositionByIndex:(int)viewIndex {
+    switch (viewIndex) {
+        case kActivityEntryView:
+            return activityEntryViewController.view.frame.origin.x;
+        case kActivityView:
+            return activityViewController.view.frame.origin.x;
+        case kActivityAlbumView:
+            return activityAlbumViewController.view.frame.origin.x;
+        case kActivityInfoView:
+            return activityInfoViewController.view.frame.origin.x;
+        default:
+            printf("Invalid view index\n");
+            return -1;
+    }
+}
+
+- (void)switchTo:(int)viewIndex {
+    float currentX = 0, nextX = 0;
+    UIView *currentView, *nextView;
+    
+    currentX = [self getViewXPositionByIndex:mCurrentViewIndex];
+    currentView = [self getViewByIndex:mCurrentViewIndex];
+    nextX = [self getViewXPositionByIndex:viewIndex];
+    nextView = [self getViewByIndex:viewIndex];
+    
+    [UIView beginAnimations:@"swipe" context:nil];
+	[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+	[UIView setAnimationDuration:0.5f];
+    
+    if( currentX < nextX ) {
+        currentView.frame = CGRectMake(-320, 0, 320, 411);
+    } else {
+        currentView.frame = CGRectMake(320, 0, 320, 411);
+    }
+    nextView.frame = CGRectMake(0, 0, 320, 411);
+    mCurrentViewIndex = viewIndex;
+    
+    [UIView commitAnimations];
+}
 
 - (void)viewDidUnload
 {

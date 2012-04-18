@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "totActivityRootController.h"
 
-@interface totActivityViewController : UIViewController
+@interface totActivityViewController : UIViewController {
+    totActivityRootController *activityRootController;
+}
+
+@property (nonatomic, assign) totActivityRootController *activityRootController;
 
 @end
