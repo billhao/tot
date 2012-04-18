@@ -76,10 +76,10 @@
     [self.view addSubview:activityAlbumViewController.view];
     [self.view addSubview:activityViewController.view];
 
-    activityEntryViewController.view.frame = CGRectMake(0, 0, 320, 411);
-    activityInfoViewController.view.frame = CGRectMake(320, 0, 320, 411);
-    activityAlbumViewController.view.frame = CGRectMake(320, 0, 320, 411);
-    activityViewController.view.frame = CGRectMake(320, 0, 320, 411);
+    activityEntryViewController.view.frame = CGRectMake(0, 0, SCREEN_W, SCREEN_H);
+    activityInfoViewController.view.frame = CGRectMake(SCREEN_W, 0, SCREEN_W, SCREEN_H);
+    activityAlbumViewController.view.frame = CGRectMake(SCREEN_W, 0, SCREEN_W, SCREEN_H);
+    activityViewController.view.frame = CGRectMake(SCREEN_W, 0, SCREEN_W, SCREEN_H);
     
     mCurrentViewIndex = kActivityEntryView;
 }
@@ -130,11 +130,11 @@
 	[UIView setAnimationDuration:0.5f];
     
     if( currentX < nextX ) {
-        currentView.frame = CGRectMake(-320, 0, 320, 411);
+        currentView.frame = CGRectMake(-SCREEN_W, 0, SCREEN_W, SCREEN_H);
     } else {
-        currentView.frame = CGRectMake(320, 0, 320, 411);
+        currentView.frame = CGRectMake(SCREEN_W, 0, SCREEN_W, SCREEN_H);
     }
-    nextView.frame = CGRectMake(0, 0, 320, 411);
+    nextView.frame = CGRectMake(0, 0, SCREEN_W, SCREEN_H);
     mCurrentViewIndex = viewIndex;
     
     [UIView commitAnimations];
