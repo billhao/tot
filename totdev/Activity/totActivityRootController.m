@@ -76,8 +76,8 @@
     [self.view addSubview:activityAlbumViewController.view];
     [self.view addSubview:activityViewController.view];
 
-    activityEntryViewController.view.frame = CGRectMake(0, 0, SCREEN_W, SCREEN_H);
-    activityInfoViewController.view.frame = CGRectMake(SCREEN_W, 0, SCREEN_W, SCREEN_H);
+    activityEntryViewController.view.frame = CGRectMake(SCREEN_W, 0, SCREEN_W, SCREEN_H);
+    activityInfoViewController.view.frame = CGRectMake(0, 0, SCREEN_W, SCREEN_H);
     activityAlbumViewController.view.frame = CGRectMake(SCREEN_W, 0, SCREEN_W, SCREEN_H);
     activityViewController.view.frame = CGRectMake(SCREEN_W, 0, SCREEN_W, SCREEN_H);
     

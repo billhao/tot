@@ -9,10 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "totActivityRootController.h"
 
-@interface totActivityInfoViewController : UIViewController {
+@interface totActivityInfoViewController : UIViewController <UITextViewDelegate> {
     totActivityRootController *activityRootController;
+    IBOutlet UITextView *mActivityDesc;
 }
 
 @property (nonatomic, assign) totActivityRootController *activityRootController;
+@property (nonatomic, retain) IBOutlet UITextView *mActivityDesc;
 
 @end
