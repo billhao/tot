@@ -17,4 +17,6 @@
 @property (nonatomic, assign) totActivityRootController *activityRootController;
 @property (nonatomic, retain) IBOutlet UITextView *mActivityDesc;
 
+- (void)setInfo: (NSMutableDictionary*)info;
+
 @end
