@@ -70,6 +70,10 @@
     [self enablePositionMemoryWithIdentifier:nil];  
 }  
 
+- (void)setMarginArray:(NSArray *)margins{
+    marginArray = margins;
+}
+
 - (UIScrollView *)getWithPosition:(int)page {  
     if (!contentArray) {  
         contentArray = [[[NSArray alloc] init] autorelease];  
@@ -101,55 +105,21 @@
     self.scrollView.showsHorizontalScrollIndicator = NO;
     
     UIView *main = [[[UIView alloc] initWithFrame:rectBase] autorelease];  
-    
+
     //load button here:
-    /*
-    int i = 0;  
-    for (UIImage *img in contentArray) { 
-        UIImageView *imageView = [[UIImageView alloc] init];  
-        imageView.image = img;  
-        imageView.contentMode = UIViewContentModeScaleAspectFit;  
-        imageView.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);  
-        imageView.backgroundColor = [UIColor blackColor];  
-        float ratio = img.size.width/rectScrollView.size.width;  
-        CGRect imageFrame = CGRectMake(i, 0, rectScrollView.size.width, (img.size.height / ratio));  
-        imageView.frame = imageFrame;  
-        [self.scrollView addSubview:(UIView *)imageView];  
-        i += scrollWidth;  
-        [imageView release];      
-    } */
-    
-    [main addSubview:scrollView];  
-    
-    UIButton *imageButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-
-    [imageButton setImage:[UIImage imageNamed:@"1.png"] 
-                 forState:UIControlStateNormal];
-    
-    [imageButton 
-     addTarget:self 
-     action:@selector(buttonPressed:) 
-     forControlEvents:UIControlEventTouchUpInside];
-    [imageButton setTag:1];
-    imageButton.frame = CGRectMake(5, 5,
-                                   90 , 90 );
-
-    [self.scrollView addSubview:imageButton];
-    [imageButton release];
-    
-    
-    
-    /*
-    for (int i = 0; i < ceil([contentArray count]/buttonsPerRow/3); i++) {
-        CGRect frame;
-        frame.origin.x = scrollWidth * i;
-        frame.origin.y = 0;
-        frame.size.width = scrollWidth;
-        frame.size.height = scrollHeight;
+    for (int i = 0; i < ceil((double)[contentArray count]/buttonsPerRow/3); i++) {
+       
+        UIView *subview = [[UIView alloc] 
+                           initWithFrame:CGRectMake(i*scrollWidth, 0, scrollWidth, scrollHeight)];
+        int remainButtons = 0;
+        if([contentArray count] >= (i+1)*buttonsPerRow*3){
+            remainButtons = buttonsPerRow*3;
+        }
+        else{
+            remainButtons = [contentArray count]- i*buttonsPerRow*3;
+        }
         
-        UIView *subview = [[UIView alloc] initWithFrame:frame];
-        
-        for (int j = 0; j< buttonsPerRow*3; j++){
+        for (int j = 0; j<remainButtons; j++){
             
             UIButton *imageButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
             
@@ -176,38 +146,35 @@
             imageButton.frame = CGRectMake(xPos, yPos,
                                            90 , 90 );
             
-            //[imageButton 
-            // setImage:[contentArray objectAtIndex:i*buttonsPerRow*3+j] 
-            // forState:UIControlStateNormal];
+            [imageButton 
+             setImage:[contentArray objectAtIndex:i*buttonsPerRow*3+j]  
+             forState:UIControlStateNormal];
             
-            NSString *imageFileName = [NSString stringWithFormat:@"%d.png",i*buttonsPerRow*3 + j + 1];
-            [imageButton setImage:[UIImage imageNamed:imageFileName] 
-                         forState:UIControlStateNormal];
-
             [imageButton 
              addTarget:self 
              action:@selector(buttonPressed:) 
              forControlEvents:UIControlEventTouchUpInside];
             [imageButton setTag:i*buttonsPerRow*3 + j +1];
             
-            [subview addSubview:imageButton];
-            [imageButton release];
+            [subview addSubview:(UIView *)imageButton];
+            //[imageButton release];
             
-            // margin
-            if (i*buttonsPerRow*3 + j <=1){
-                //add margin
+            if ([marginArray count] > [contentArray count]){
+                if ([[marginArray objectAtIndex:i*buttonsPerRow*3+j] boolValue]){
+                    //add margin
                 
-                UIImageView *margin;
-                margin =[[UIImageView alloc] initWithFrame:CGRectMake(
+                    UIImageView *margin;
+                    margin =[[UIImageView alloc] initWithFrame:CGRectMake(
                                                                       xPos,
                                                                       yPos,
                                                                       96,
                                                                       96)];
                 
-                margin.image=[UIImage imageNamed:@"margin.png"];
+                    margin.image=[UIImage imageNamed:@"margin.png"];
                 
-                [subview addSubview:margin];
-                [margin release];
+                    [subview addSubview:margin];
+                    [margin release];
+                }
             }
         }
     
@@ -216,12 +183,10 @@
     }
     
     scrollView.contentSize = CGSizeMake(scrollWidth
-                                        * ceil([contentArray count]/buttonsPerRow/3), 
+                                        * ceil((double)[contentArray count]/buttonsPerRow/3), 
                                         scrollHeight);
-
     
-  */
-    
+    [main addSubview:scrollView];
     
     if (pageControlEnabledTop) {  
         rectPageControl = CGRectMake(0, 5, scrollWidth, 15);  
@@ -231,13 +196,11 @@
     }  
     if (pageControlEnabledTop || pageControlEnabledBottom) {  
         pageControl = [[[UIPageControl alloc] initWithFrame:rectPageControl] autorelease];  
-        pageControl.numberOfPages = ceil([contentArray count]/buttonsPerRow/3);  
-        //pageControl.currentPage = page; 
-        pageControl.currentPage = 0;
+        pageControl.numberOfPages = ceil((double)[contentArray count]/buttonsPerRow/3);
+        pageControl.currentPage = page;
         [main addSubview:pageControl];  
     }  
     if (pageControlEnabledTop || pageControlEnabledBottom || rememberPosition) self.scrollView.delegate = self;  
-    //if (margin) [margin release];  //no margin here
     return (UIScrollView *)main;  
 }  
 

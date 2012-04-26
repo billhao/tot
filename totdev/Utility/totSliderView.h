@@ -24,7 +24,8 @@
 
     int buttonsPerRow;
     
-    NSArray *contentArray;  
+    NSArray *contentArray; 
+    NSArray *marginArray;
     
     UIColor *bcgColor;  
     
@@ -52,6 +53,9 @@
 /// set scroll view lay out: buttons per row
 // buttons per column = 2
 - (void)setLayout:(int)btnPerRow;
+
+///set margin
+-(void)setMarginArray:(NSArray *)margins;
 
 /// set the exactly same size as it is your parent view  
 - (void)setSizeFromParentView:(UIScrollView *)scView;  

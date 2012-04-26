@@ -8,6 +8,7 @@
 
 #import "totActivityViewController.h"
 #import "totImageView.h"
+#import "../Utility/totSliderView.h"
 
 @implementation totActivityViewController
 
@@ -39,16 +40,49 @@
 }
 */
 
+// load image content here for scroll view
+- (NSArray *)getImages {
+    NSMutableArray *arr = [[[NSMutableArray alloc] init] autorelease];  
+        
+    int eleNum = 26;
+
+    for (int i=0;i<eleNum;i++){
+        NSString *imageFileName = [NSString stringWithFormat:@"%d.png",i + 1];
+        
+        [arr addObject:[UIImage imageNamed:imageFileName]]; 
+    }
+        
+    return (NSArray *)arr;  
+}
+
+// set optional margin array to indicate which button(s) need a margin shows it has multiple content
+- (NSArray *)setMargin{
+    NSMutableArray *arr = [[[NSMutableArray alloc] init] autorelease];  
+    
+    int eleNum = 26;
+    
+    for (int i=0;i<eleNum;i++){
+        [arr addObject:[NSNumber numberWithBool:NO]];
+    }
+    
+    [arr replaceObjectAtIndex:0 withObject:[NSNumber numberWithBool:YES]];
+    [arr replaceObjectAtIndex:1 withObject:[NSNumber numberWithBool:YES]];
+
+    return arr;
+}
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    totImageView *background = [[totImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 411)];
-    [background imageFilePath:@"challenge.png"];
-    [self.view addSubview:background];
-    [background release];
+    totSliderView *sv = [[totSliderView alloc] init];  
+    [sv setContentArray:[self getImages]]; 
+    //[sv setMarginArray: [self setMargin]];
+    [sv setPosition:105];
+    [sv enablePageControlOnBottom];  
+    //[sv enablePageControlOnTop];
+    [self.view addSubview:[sv getWithPositionMemory]];  
 }
 
 
@@ -57,6 +91,8 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
+    
+    
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -64,5 +100,8 @@
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
+
+
+
 
 @end
