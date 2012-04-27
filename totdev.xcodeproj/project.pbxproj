@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3FC1B6FC1543680300295447 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FC1B6FB1543680300295447 /* libsqlite3.dylib */; };
+		3FC1B7001543689500295447 /* totdb.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 3FC1B6FF1543689500295447 /* totdb.sqlite */; };
+		3FC1B7061543841800295447 /* totModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FC1B7051543841800295447 /* totModel.m */; };
+		3FC1B7091544F19700295447 /* totEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FC1B7081544F19600295447 /* totEvent.m */; };
+		3FC1B70B1544F5D600295447 /* libc.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FC1B70A1544F5D600295447 /* libc.dylib */; };
 		EF2387EB153B7D1600B9C8BD /* ActivityEntryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF2387EA153B7D1600B9C8BD /* ActivityEntryView.xib */; };
 		EF2387EF153B7D7700B9C8BD /* totActivityEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2387EE153B7D7700B9C8BD /* totActivityEntryViewController.m */; };
 		EF2387F2153BC3E500B9C8BD /* challenge.png in Resources */ = {isa = PBXBuildFile; fileRef = EF2387F1153BC3E500B9C8BD /* challenge.png */; };
@@ -55,6 +60,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3FC1B6FB1543680300295447 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		3FC1B6FF1543689500295447 /* totdb.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = totdb.sqlite; sourceTree = "<group>"; };
+		3FC1B7041543841800295447 /* totModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totModel.h; path = totdev/Model/totModel.h; sourceTree = "<group>"; };
+		3FC1B7051543841800295447 /* totModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totModel.m; path = totdev/Model/totModel.m; sourceTree = "<group>"; };
+		3FC1B7071544F19600295447 /* totEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totEvent.h; path = totdev/Model/totEvent.h; sourceTree = "<group>"; };
+		3FC1B7081544F19600295447 /* totEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totEvent.m; path = totdev/Model/totEvent.m; sourceTree = "<group>"; };
+		3FC1B70A1544F5D600295447 /* libc.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libc.dylib; path = usr/lib/libc.dylib; sourceTree = SDKROOT; };
 		EF2387EA153B7D1600B9C8BD /* ActivityEntryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActivityEntryView.xib; sourceTree = "<group>"; };
 		EF2387ED153B7D7700B9C8BD /* totActivityEntryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totActivityEntryViewController.h; path = Activity/totActivityEntryViewController.h; sourceTree = "<group>"; };
 		EF2387EE153B7D7700B9C8BD /* totActivityEntryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totActivityEntryViewController.m; path = Activity/totActivityEntryViewController.m; sourceTree = "<group>"; };
@@ -123,6 +135,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3FC1B70B1544F5D600295447 /* libc.dylib in Frameworks */,
+				3FC1B6FC1543680300295447 /* libsqlite3.dylib in Frameworks */,
 				EF238829153E1A0D00B9C8BD /* QuartzCore.framework in Frameworks */,
 				EF238826153E19E800B9C8BD /* MediaPlayer.framework in Frameworks */,
 				EF238827153E19E800B9C8BD /* MobileCoreServices.framework in Frameworks */,
@@ -137,6 +151,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3FC1B6FE1543681900295447 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				3FC1B7041543841800295447 /* totModel.h */,
+				3FC1B7051543841800295447 /* totModel.m */,
+				3FC1B7071544F19600295447 /* totEvent.h */,
+				3FC1B7081544F19600295447 /* totEvent.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		EF2387F0153BC3AC00B9C8BD /* Activity */ = {
 			isa = PBXGroup;
 			children = (
@@ -165,10 +190,13 @@
 		EF6283661536674B004031D6 = {
 			isa = PBXGroup;
 			children = (
+				3FC1B70A1544F5D600295447 /* libc.dylib */,
+				3FC1B6FE1543681900295447 /* Model */,
 				EF62838C153667BD004031D6 /* resources */,
 				EF62837B1536674B004031D6 /* totdev */,
 				EF6283741536674B004031D6 /* Frameworks */,
 				EF6283721536674B004031D6 /* Products */,
+				3FC1B6FF1543689500295447 /* totdb.sqlite */,
 			);
 			sourceTree = "<group>";
 		};
@@ -183,6 +211,7 @@
 		EF6283741536674B004031D6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3FC1B6FB1543680300295447 /* libsqlite3.dylib */,
 				EF238828153E1A0C00B9C8BD /* QuartzCore.framework */,
 				EF238824153E19E700B9C8BD /* MediaPlayer.framework */,
 				EF238825153E19E800B9C8BD /* MobileCoreServices.framework */,
@@ -398,6 +427,7 @@
 				EF238819153CE0C000B9C8BD /* motor_skill.png in Resources */,
 				EF23881A153CE0C000B9C8BD /* vision_attention.png in Resources */,
 				EF23881C153E192700B9C8BD /* challenge_background.png in Resources */,
+				3FC1B7001543689500295447 /* totdb.sqlite in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -422,6 +452,8 @@
 				EF2387FC153BC5AB00B9C8BD /* totCameraViewController.m in Sources */,
 				EF238801153BC67B00B9C8BD /* totActivityInfoViewController.m in Sources */,
 				EF238806153BC71400B9C8BD /* totActivityAlbumViewController.m in Sources */,
+				3FC1B7061543841800295447 /* totModel.m in Sources */,
+				3FC1B7091544F19700295447 /* totEvent.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
