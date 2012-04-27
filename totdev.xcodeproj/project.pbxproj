@@ -11,7 +11,8 @@
 		3FC1B7001543689500295447 /* totdb.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 3FC1B6FF1543689500295447 /* totdb.sqlite */; };
 		3FC1B7061543841800295447 /* totModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FC1B7051543841800295447 /* totModel.m */; };
 		3FC1B7091544F19700295447 /* totEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FC1B7081544F19600295447 /* totEvent.m */; };
-		3FC1B70B1544F5D600295447 /* libc.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FC1B70A1544F5D600295447 /* libc.dylib */; };
+		3FE9B5F7154A303100199AAF /* test_Model.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FE9B5F6154A303100199AAF /* test_Model.m */; };
+		3FE9B5FA154A313700199AAF /* totSliderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FE9B5F9154A313700199AAF /* totSliderView.m */; };
 		EF2387EB153B7D1600B9C8BD /* ActivityEntryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF2387EA153B7D1600B9C8BD /* ActivityEntryView.xib */; };
 		EF2387EF153B7D7700B9C8BD /* totActivityEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2387EE153B7D7700B9C8BD /* totActivityEntryViewController.m */; };
 		EF2387F2153BC3E500B9C8BD /* challenge.png in Resources */ = {isa = PBXBuildFile; fileRef = EF2387F1153BC3E500B9C8BD /* challenge.png */; };
@@ -55,10 +56,6 @@
 		EF6283AB15366E3A004031D6 /* setting.png in Resources */ = {isa = PBXBuildFile; fileRef = EF6283A715366E3A004031D6 /* setting.png */; };
 		EF6283AE15367730004031D6 /* totHomeEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF6283AD1536772F004031D6 /* totHomeEntryViewController.m */; };
 		EF6283B015367744004031D6 /* HomeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF6283AF15367744004031D6 /* HomeView.xib */; };
-		EF7868521544A9A000E06BBF /* messagebox.png in Resources */ = {isa = PBXBuildFile; fileRef = EF7868501544A9A000E06BBF /* messagebox.png */; };
-		EF7868531544A9A000E06BBF /* messagebox2.png in Resources */ = {isa = PBXBuildFile; fileRef = EF7868511544A9A000E06BBF /* messagebox2.png */; };
-		EF7868571544BE0D00E06BBF /* camera.png in Resources */ = {isa = PBXBuildFile; fileRef = EF7868551544BE0D00E06BBF /* camera.png */; };
-		EF7868581544BE0D00E06BBF /* video.png in Resources */ = {isa = PBXBuildFile; fileRef = EF7868561544BE0D00E06BBF /* video.png */; };
 		EF97E7CB153B4BA90037E52D /* totImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = EF97E7CA153B4BA90037E52D /* totImageView.m */; };
 		EF97E7CD153B4F040037E52D /* mainscreen.png in Resources */ = {isa = PBXBuildFile; fileRef = EF97E7CC153B4F040037E52D /* mainscreen.png */; };
 /* End PBXBuildFile section */
@@ -70,7 +67,10 @@
 		3FC1B7051543841800295447 /* totModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totModel.m; path = totdev/Model/totModel.m; sourceTree = "<group>"; };
 		3FC1B7071544F19600295447 /* totEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totEvent.h; path = totdev/Model/totEvent.h; sourceTree = "<group>"; };
 		3FC1B7081544F19600295447 /* totEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totEvent.m; path = totdev/Model/totEvent.m; sourceTree = "<group>"; };
-		3FC1B70A1544F5D600295447 /* libc.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libc.dylib; path = usr/lib/libc.dylib; sourceTree = SDKROOT; };
+		3FE9B5F5154A303100199AAF /* test_Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = test_Model.h; path = Tests/test_Model.h; sourceTree = "<group>"; };
+		3FE9B5F6154A303100199AAF /* test_Model.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = test_Model.m; path = Tests/test_Model.m; sourceTree = "<group>"; };
+		3FE9B5F8154A313700199AAF /* totSliderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totSliderView.h; path = Utility/totSliderView.h; sourceTree = "<group>"; };
+		3FE9B5F9154A313700199AAF /* totSliderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totSliderView.m; path = Utility/totSliderView.m; sourceTree = "<group>"; };
 		EF2387EA153B7D1600B9C8BD /* ActivityEntryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActivityEntryView.xib; sourceTree = "<group>"; };
 		EF2387ED153B7D7700B9C8BD /* totActivityEntryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totActivityEntryViewController.h; path = Activity/totActivityEntryViewController.h; sourceTree = "<group>"; };
 		EF2387EE153B7D7700B9C8BD /* totActivityEntryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totActivityEntryViewController.m; path = Activity/totActivityEntryViewController.m; sourceTree = "<group>"; };
@@ -143,7 +143,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3FC1B70B1544F5D600295447 /* libc.dylib in Frameworks */,
 				3FC1B6FC1543680300295447 /* libsqlite3.dylib in Frameworks */,
 				EF238829153E1A0D00B9C8BD /* QuartzCore.framework in Frameworks */,
 				EF238826153E19E800B9C8BD /* MediaPlayer.framework in Frameworks */,
@@ -168,6 +167,16 @@
 				3FC1B7081544F19600295447 /* totEvent.m */,
 			);
 			name = Model;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		3FE9B5F4154A2FCF00199AAF /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				3FE9B5F5154A303100199AAF /* test_Model.h */,
+				3FE9B5F6154A303100199AAF /* test_Model.m */,
+			);
+			name = Tests;
 			sourceTree = "<group>";
 		};
 		EF2387F0153BC3AC00B9C8BD /* Activity */ = {
@@ -200,8 +209,7 @@
 		EF6283661536674B004031D6 = {
 			isa = PBXGroup;
 			children = (
-				3FC1B70A1544F5D600295447 /* libc.dylib */,
-				3FC1B6FE1543681900295447 /* Model */,
+				3FE9B5F4154A2FCF00199AAF /* Tests */,
 				EF62838C153667BD004031D6 /* resources */,
 				EF62837B1536674B004031D6 /* totdev */,
 				EF6283741536674B004031D6 /* Frameworks */,
@@ -237,6 +245,7 @@
 		EF62837B1536674B004031D6 /* totdev */ = {
 			isa = PBXGroup;
 			children = (
+				3FC1B6FE1543681900295447 /* Model */,
 				EF97E7C1153B43DD0037E52D /* Util */,
 				EF62839515366D7A004031D6 /* Setting */,
 				EF62839415366D74004031D6 /* Review */,
@@ -365,8 +374,8 @@
 		EF97E7C1153B43DD0037E52D /* Util */ = {
 			isa = PBXGroup;
 			children = (
-				15414F801549F47000C3C828 /* totSliderView.h */,
-				15414F811549F47000C3C828 /* totSliderView.m */,
+				3FE9B5F8154A313700199AAF /* totSliderView.h */,
+				3FE9B5F9154A313700199AAF /* totSliderView.m */,
 				EF97E7C9153B4BA90037E52D /* totImageView.h */,
 				EF97E7CA153B4BA90037E52D /* totImageView.m */,
 				EF2387FA153BC5AB00B9C8BD /* totCameraViewController.h */,
@@ -484,6 +493,8 @@
 				EF238806153BC71400B9C8BD /* totActivityAlbumViewController.m in Sources */,
 				3FC1B7061543841800295447 /* totModel.m in Sources */,
 				3FC1B7091544F19700295447 /* totEvent.m in Sources */,
+				3FE9B5F7154A303100199AAF /* test_Model.m in Sources */,
+				3FE9B5FA154A313700199AAF /* totSliderView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
