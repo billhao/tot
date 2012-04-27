@@ -91,10 +91,17 @@
     [super touchesBegan:touches withEvent:event];
 }
 
+- (void)setInfo:(NSMutableDictionary *)info {}
+
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    UIImageView *textbubble = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"messagebox.png"]];
+    textbubble.frame = CGRectMake(0, 35, 360, 180);    
+    [self.view insertSubview:textbubble belowSubview:mActivityDesc];
+    [textbubble release];
 }
 
 
