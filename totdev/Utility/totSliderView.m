@@ -159,7 +159,7 @@
             [subview addSubview:(UIView *)imageButton];
             //[imageButton release];
             
-            if ([marginArray count] > [contentArray count]){
+            if ([marginArray count] >= [contentArray count]){
                 if ([[marginArray objectAtIndex:i*buttonsPerRow*3+j] boolValue]){
                     //add margin
                 

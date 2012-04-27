@@ -78,7 +78,7 @@
     
     totSliderView *sv = [[totSliderView alloc] init];  
     [sv setContentArray:[self getImages]]; 
-    //[sv setMarginArray: [self setMargin]];
+    [sv setMarginArray: [self setMargin]];
     [sv setPosition:105];
     [sv enablePageControlOnBottom];  
     //[sv enablePageControlOnTop];
