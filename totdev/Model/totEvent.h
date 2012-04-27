@@ -1,10 +1,6 @@
-//
-//  totEvent.h
-//  totdev
-//
-//  Created by Hao on 4/22/12.
-//  Copyright (c) 2012 USC. All rights reserved.
-//
+// a totEvent object represents a single event
+// see test_Model.m for an exmaple
+// Created by Hao on 4/22/12.
 
 #import <Foundation/Foundation.h>
 

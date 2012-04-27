@@ -1,10 +1,6 @@
-//
-//  totModel.h
-//  totdev
-//
-//  Created by Hao on 4/21/12.
-//  Copyright (c) 2012 USC. All rights reserved.
-//
+// the model sets db connection, adds a record to db, or get a list of objects from db
+// see test_Model.m for an exmaple
+// Created by Hao on 4/21/12.
 
 #import <Foundation/Foundation.h>
 #import <sqlite3.h>
@@ -22,13 +18,20 @@
 - (id) init;
 - (void) dealloc;
 
-// reset the db to factory mode
-- (void) resetDB;
+// add an event
+- (Boolean) addEvent:(int)baby_id event:(NSString*)event datetime:(NSString*)datetime value:(NSString*)value;
 
+// get a list of events that contain the string in name
+- (NSMutableArray *) getEvent:(int)baby_id event:(NSString*)event;
+
+// utility functions below
+
+// copy empty tables with structure to document folder
 - (void) CopyDbToDocumentsFolder;
 - (NSString *) GetDocumentDirectory;
 
-- (Boolean) addEvent:(int)baby_id event:(NSString*)event datetime:(NSString*)datetime value:(NSString*)value;
-- (NSMutableArray *) getEvent:(int)baby_id event:(NSString*)event;
+// reset the db to factory mode, clear all the records
+- (void) resetDB;
+
 
 @end

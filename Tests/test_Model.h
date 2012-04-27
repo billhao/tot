@@ -1,10 +1,5 @@
-//
-//  test_Model.h
-//  totdev
-//
-//  Created by Hao on 4/26/12.
-//  Copyright (c) 2012 USC. All rights reserved.
-//
+// a usage example for totEvent and totModel
+// Created by Hao on 4/26/12.
 
 #import <Foundation/Foundation.h>
 
