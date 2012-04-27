@@ -55,6 +55,10 @@
 		EF6283AB15366E3A004031D6 /* setting.png in Resources */ = {isa = PBXBuildFile; fileRef = EF6283A715366E3A004031D6 /* setting.png */; };
 		EF6283AE15367730004031D6 /* totHomeEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF6283AD1536772F004031D6 /* totHomeEntryViewController.m */; };
 		EF6283B015367744004031D6 /* HomeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF6283AF15367744004031D6 /* HomeView.xib */; };
+		EF7868521544A9A000E06BBF /* messagebox.png in Resources */ = {isa = PBXBuildFile; fileRef = EF7868501544A9A000E06BBF /* messagebox.png */; };
+		EF7868531544A9A000E06BBF /* messagebox2.png in Resources */ = {isa = PBXBuildFile; fileRef = EF7868511544A9A000E06BBF /* messagebox2.png */; };
+		EF7868571544BE0D00E06BBF /* camera.png in Resources */ = {isa = PBXBuildFile; fileRef = EF7868551544BE0D00E06BBF /* camera.png */; };
+		EF7868581544BE0D00E06BBF /* video.png in Resources */ = {isa = PBXBuildFile; fileRef = EF7868561544BE0D00E06BBF /* video.png */; };
 		EF97E7CB153B4BA90037E52D /* totImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = EF97E7CA153B4BA90037E52D /* totImageView.m */; };
 		EF97E7CD153B4F040037E52D /* mainscreen.png in Resources */ = {isa = PBXBuildFile; fileRef = EF97E7CC153B4F040037E52D /* mainscreen.png */; };
 /* End PBXBuildFile section */
@@ -125,6 +129,10 @@
 		EF6283AC1536772F004031D6 /* totHomeEntryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totHomeEntryViewController.h; path = Home/totHomeEntryViewController.h; sourceTree = "<group>"; };
 		EF6283AD1536772F004031D6 /* totHomeEntryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totHomeEntryViewController.m; path = Home/totHomeEntryViewController.m; sourceTree = "<group>"; };
 		EF6283AF15367744004031D6 /* HomeView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeView.xib; sourceTree = "<group>"; };
+		EF7868501544A9A000E06BBF /* messagebox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = messagebox.png; sourceTree = "<group>"; };
+		EF7868511544A9A000E06BBF /* messagebox2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = messagebox2.png; sourceTree = "<group>"; };
+		EF7868551544BE0D00E06BBF /* camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera.png; sourceTree = "<group>"; };
+		EF7868561544BE0D00E06BBF /* video.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = video.png; sourceTree = "<group>"; };
 		EF97E7C9153B4BA90037E52D /* totImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totImageView.h; path = Utility/totImageView.h; sourceTree = "<group>"; };
 		EF97E7CA153B4BA90037E52D /* totImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totImageView.m; path = Utility/totImageView.m; sourceTree = "<group>"; };
 		EF97E7CC153B4F040037E52D /* mainscreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mainscreen.png; sourceTree = "<group>"; };
@@ -165,6 +173,8 @@
 		EF2387F0153BC3AC00B9C8BD /* Activity */ = {
 			isa = PBXGroup;
 			children = (
+				EF7868541544BDED00E06BBF /* CameraView */,
+				EF78684E1544A96500E06BBF /* InfoView */,
 				EF23880A153CE09C00B9C8BD /* EntryView */,
 				EF2387F1153BC3E500B9C8BD /* challenge.png */,
 				EF23881B153E192700B9C8BD /* challenge_background.png */,
@@ -334,9 +344,29 @@
 			name = TabIcon;
 			sourceTree = "<group>";
 		};
+		EF78684E1544A96500E06BBF /* InfoView */ = {
+			isa = PBXGroup;
+			children = (
+				EF7868501544A9A000E06BBF /* messagebox.png */,
+				EF7868511544A9A000E06BBF /* messagebox2.png */,
+			);
+			name = InfoView;
+			sourceTree = "<group>";
+		};
+		EF7868541544BDED00E06BBF /* CameraView */ = {
+			isa = PBXGroup;
+			children = (
+				EF7868551544BE0D00E06BBF /* camera.png */,
+				EF7868561544BE0D00E06BBF /* video.png */,
+			);
+			name = CameraView;
+			sourceTree = "<group>";
+		};
 		EF97E7C1153B43DD0037E52D /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				15414F801549F47000C3C828 /* totSliderView.h */,
+				15414F811549F47000C3C828 /* totSliderView.m */,
 				EF97E7C9153B4BA90037E52D /* totImageView.h */,
 				EF97E7CA153B4BA90037E52D /* totImageView.m */,
 				EF2387FA153BC5AB00B9C8BD /* totCameraViewController.h */,

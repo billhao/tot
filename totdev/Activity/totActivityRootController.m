@@ -116,6 +116,45 @@
     }
 }
 
+- (void)switchTo:(int)viewIndex withContextInfo:(NSMutableDictionary *)info {
+    float currentX = 0, nextX = 0;
+    UIView *currentView, *nextView;
+    
+    currentX = [self getViewXPositionByIndex:mCurrentViewIndex];
+    currentView = [self getViewByIndex:mCurrentViewIndex];
+    nextX = [self getViewXPositionByIndex:viewIndex];
+    nextView = [self getViewByIndex:viewIndex];
+    
+    // info contains the data structure which needs to be passed into next view
+    switch (viewIndex) {
+        case kActivityEntryView:
+            break;
+        case kActivityView:
+            break;
+        case kActivityAlbumView:
+            break;
+        case kActivityInfoView:
+            [activityInfoViewController setInfo:info];
+            break;
+        default:
+            break;
+    }
+    
+    [UIView beginAnimations:@"swipe" context:nil];
+	[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+	[UIView setAnimationDuration:0.5f];
+    
+    if( currentX < nextX ) {
+        currentView.frame = CGRectMake(-SCREEN_W, 0, SCREEN_W, SCREEN_H);
+    } else {
+        currentView.frame = CGRectMake(SCREEN_W, 0, SCREEN_W, SCREEN_H);
+    }
+    nextView.frame = CGRectMake(0, 0, SCREEN_W, SCREEN_H);
+    mCurrentViewIndex = viewIndex;
+    
+    [UIView commitAnimations];
+}
+
 - (void)switchTo:(int)viewIndex {
     float currentX = 0, nextX = 0;
     UIView *currentView, *nextView;

@@ -23,6 +23,10 @@ enum {
     kActivityAlbumView = 3
 };
 
+enum {
+    kViewName = 0,
+};
+
 @interface totActivityRootController : UIViewController {
     totActivityEntryViewController *activityEntryViewController;
     totActivityViewController *activityViewController;
@@ -39,5 +43,6 @@ enum {
 @property (nonatomic, retain) totActivityAlbumViewController *activityAlbumViewController;
 
 - (void) switchTo:(int)viewIndex;
+- (void) switchTo:(int)viewIndex withContextInfo:(NSMutableDictionary*)info;
 
 @end

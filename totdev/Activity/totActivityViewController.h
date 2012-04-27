@@ -11,8 +11,12 @@
 
 @interface totActivityViewController : UIViewController {
     totActivityRootController *activityRootController;
+    
 }
 
 @property (nonatomic, assign) totActivityRootController *activityRootController;
+
+
+
 
 @end
