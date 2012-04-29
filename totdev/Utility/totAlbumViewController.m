@@ -85,6 +85,7 @@
     
     // Build myTitleBarView
     UIView *aTitleBarView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
+    aTitleBarView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:.5];
     self.myTitleBarView = aTitleBarView;
     [aTitleBarView release];
     [self.view addSubview:self.myTitleBarView];
@@ -97,7 +98,7 @@
     UIScrollView *anotherScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
     self.myFullSizeImageScrollView = anotherScrollView;
     [anotherScrollView release];
-    [self.view addSubview:self.myFullSizeImageScrollView];
+    [self.view insertSubview:self.myFullSizeImageScrollView belowSubview:myTitleBarView];
     // Minimize the views
     self.myTitleBarView.frame = CGRectMake(0, 0, 0, 0);
     self.myScrollView.frame = CGRectMake(0, 0, 0, 0);
@@ -156,9 +157,10 @@
  *     - a controller want to display a photo album 
  * =================================
  */
-- (void)MakeFullView
+- (void)MakeFullView: (NSMutableArray *)inputPathArray
 {
     // Dummy Parameters
+    /*
     NSArray *inputPathArray = [NSArray arrayWithObjects:
                                @"a01.jpg",
                                @"a02.jpg",
@@ -183,7 +185,7 @@
                                @"a10.jpg",
                                @"fox.mp4.jpg",
                                nil];
-                               
+     */
     
     // Copy parameter to myPathArray
     int count = [inputPathArray count];
@@ -267,6 +269,7 @@
  */
 -(UIImage*)getSquareImage:(UIImage*)origImage
 {  
+    /*
     CGRect rect = CGRectMake(0, 80, 320, 320);
     CGImageRef subImageRef = CGImageCreateWithImageInRect(origImage.CGImage, rect);  
     UIGraphicsBeginImageContext(rect.size);  
@@ -275,7 +278,37 @@
     UIImage* squareImage = [UIImage imageWithCGImage:subImageRef];  
     UIGraphicsEndImageContext();
     CGImageRelease(subImageRef);
-    return squareImage;  
+    return squareImage;
+    */
+    
+    UIImage *squareImage;
+    
+    if(origImage.size.width == origImage.size.height){
+        squareImage = origImage;
+    } else {
+        CGRect rect;
+        
+        if(origImage.size.width > origImage.size.height){
+            rect = CGRectMake(round((double)(origImage.size.width-origImage.size.height)/2), 
+                              0, 
+                              origImage.size.height,
+                              origImage.size.height);
+        } else{
+            rect = CGRectMake(0,
+                              round((double)(origImage.size.height-origImage.size.width)/2), 
+                              origImage.size.width,
+                              origImage.size.width);
+        }
+        
+        CGImageRef subImageRef = CGImageCreateWithImageInRect(origImage.CGImage, rect);  
+        UIGraphicsBeginImageContext(rect.size);  
+        CGContextRef context = UIGraphicsGetCurrentContext();  
+        CGContextDrawImage(context, rect, subImageRef);  
+        squareImage = [UIImage imageWithCGImage:subImageRef];  
+        UIGraphicsEndImageContext();
+        CGImageRelease(subImageRef);
+    }
+    return squareImage;
 }
 
 /* =================================
@@ -307,6 +340,8 @@
     myFullSizeImageScrollView.backgroundColor = [UIColor blackColor];
     
     // Add content to myFullSizeImageScrollView
+    myTitleBarView.hidden = YES;
+    myScrollView.hidden = YES;
     int numberOfImage= [myPathArray count];
     myFullSizeImageScrollView.frame = CGRectMake(0, 0, 320, 480);
     myFullSizeImageScrollView.contentSize = CGSizeMake(myScrollView.frame.size.width * numberOfImage, myScrollView.frame.size.height);
@@ -332,9 +367,10 @@
  */
 -(void) FullScreenImageClicked: (UIButton *)clickedButton
 {
-    if (myFullSizeImageScrollView.frame.size.height == 480 /*displaying full-screen image*/) {
-        myFullSizeImageScrollView.frame = CGRectMake(0, 60, 320, 420);
+    if (myTitleBarView.hidden == YES /*already displaying full-screen image*/) {
+        myFullSizeImageScrollView.frame = CGRectMake(0, 0, 320, 480);
         myFullSizeImageScrollView.scrollEnabled = NO;
+        myTitleBarView.hidden = NO;
         myTitleBarView.frame = CGRectMake(0, 0, 320, 60);
         // IF the a video capture is clicked, add a Play button on the title bar.
         int selectedImage = [clickedButton tag];
@@ -349,7 +385,8 @@
             [self.myTitleBarView addSubview:playButton];
             [playButton release];
         }
-    } else /*displaying title bar and image*/{
+    } else /*already displaying title bar and image*/{
+        myTitleBarView.hidden = YES;
         myFullSizeImageScrollView.frame = CGRectMake(0, 0, 320, 480);
         myFullSizeImageScrollView.scrollEnabled = YES;
         myTitleBarView.frame = CGRectMake(0, 0, 0, 0);
@@ -385,6 +422,16 @@
 -(void) ReturnButtonClicked
 {
     if (myFullSizeImageScrollView.frame.size.height > 0 /*Current at FullSizeImageScrollVIew*/) {
+        // Remove Play button from title bar
+        CGPoint curFullScreenImagePos = self.myFullSizeImageScrollView.contentOffset;
+        CGFloat offsetX = curFullScreenImagePos.x;
+        int offsetIndex = offsetX / 320;
+        for (UIView *subview in [self.myTitleBarView subviews]) {
+            if (subview.tag == offsetIndex) {
+                [subview removeFromSuperview];
+            }
+        }
+        
         // Remove image thumnails from myFullSizeImageScrollView
         for(UIView *subview in [self.myFullSizeImageScrollView subviews]) {
             [subview removeFromSuperview];
@@ -392,7 +439,9 @@
         // Return to thumbnail scroll view
         self.myFullSizeImageScrollView.frame = CGRectMake(0, 0, 0, 0);
         self.myScrollView.frame = CGRectMake(0, 60, 320, 420);
+        self.myScrollView.hidden = NO;
         self.myTitleBarView.frame = CGRectMake(0, 0, 320, 60);
+        self.myTitleBarView.hidden = NO;
     } else /*Current at thumnail scroll view*/ {
         [self MakeNoView];
     }

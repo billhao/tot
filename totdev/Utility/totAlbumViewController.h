@@ -27,7 +27,7 @@
 @property (retain, nonatomic) NSMutableArray *myPathArray;
 
 - (void) MakeNoView;
-- (void) MakeFullView;
+- (void) MakeFullView: (NSMutableArray *)inputPathArray;
 - (UIImage*) getSquareImage: (UIImage *)origImage;
 - (void) thumbnailClicked: (UIButton *)clickedButton;
 - (void) FullScreenImageClicked: (UIButton *)clickedButton;
