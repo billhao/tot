@@ -7,15 +7,23 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Model/totModel.h"
 
 @class totUITabBarController;
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate> {
     UIWindow *window;
 	IBOutlet totUITabBarController *rootController;
+    
+    // global
+    totModel *mTotData;
+    int mBabyId;
 }
 
 @property (retain, nonatomic) IBOutlet totUITabBarController *rootController;
 @property (strong, nonatomic) IBOutlet UIWindow *window;
+@property (assign, nonatomic) int mBabyId;
+
+- (totModel*) getDataModel;
 
 @end

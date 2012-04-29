@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "totCameraViewController.h"
 #import "totActivityRootController.h"
+#import "../Model/totModel.h"
+#import "../Model/totEvent.h"
 
 enum {
     kActivityVisionAttention = 0,
@@ -21,13 +23,15 @@ enum {
     kActivityMotorSkill = 7
 };
 
-@interface totActivityEntryViewController : UIViewController <CameraViewDelegate> {    
+@interface totActivityEntryViewController : UIViewController {    
     NSMutableArray *mActivityNames;
+    NSMutableDictionary *mActivityMembers;
+
     totActivityRootController *activityRootController;
+    
+    totModel *mTotModel;
 }
 
 @property (nonatomic, assign) totActivityRootController *activityRootController;
-
-- (void) launchCamera;
 
 @end

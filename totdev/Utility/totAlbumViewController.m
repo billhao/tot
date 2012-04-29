@@ -6,7 +6,7 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "albumViewController.h"
+#import "totAlbumViewController.h"
 #import "moviePlayerViewController.h"
 
 @implementation albumViewController

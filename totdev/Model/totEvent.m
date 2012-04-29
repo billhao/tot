@@ -22,10 +22,14 @@
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     //[dateFormatter setDateStyle:NSDateFormatterShortStyle];
     //[dateFormatter setTimeStyle:NSDateFormatterShortStyle];
+    
     [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
         
     NSString *formattedDateString = [dateFormatter stringFromDate:self.datetime];
     //NSLog(@"formattedDateString: %@", formattedDateString);
+    
+    [dateFormatter release];
+    
     return formattedDateString;
 }
 
@@ -38,7 +42,13 @@
 }
 
 -(NSString*) toString {
-    return [NSString stringWithFormat:@"%d\t%d\t%@\t%@\t%@", event_id, baby_id, [self getTimeText], name, value ];
+    return [NSString stringWithFormat:@"%d\t%d\t%@\t%@\t%@", event_id, baby_id, [self getTimeText], name, value];
+}
+
+-(void)dealloc {
+    [datetime release];
+    [name release];
+    [value release];
 }
 
 @end
