@@ -34,4 +34,6 @@ enum {
 
 @property (nonatomic, assign) totActivityRootController *activityRootController;
 
+- (void)prepareMessage:(NSMutableDictionary*)message for:(int)activity;
+
 @end

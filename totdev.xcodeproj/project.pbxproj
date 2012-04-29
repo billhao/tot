@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		15414FBD154CBB8F00C3C828 /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = 15414F9D154CBB8F00C3C828 /* 1.png */; };
-		15414FBE154CBB8F00C3C828 /* 2.png in Resources */ = {isa = PBXBuildFile; fileRef = 15414F9E154CBB8F00C3C828 /* 2.png */; };
 		15414FBF154CBB8F00C3C828 /* 3.png in Resources */ = {isa = PBXBuildFile; fileRef = 15414F9F154CBB8F00C3C828 /* 3.png */; };
 		15414FC0154CBB8F00C3C828 /* 4.png in Resources */ = {isa = PBXBuildFile; fileRef = 15414FA0154CBB8F00C3C828 /* 4.png */; };
 		15414FC1154CBB8F00C3C828 /* 5.png in Resources */ = {isa = PBXBuildFile; fileRef = 15414FA1154CBB8F00C3C828 /* 5.png */; };
@@ -48,6 +46,11 @@
 		3FE9B5FA154A313700199AAF /* totSliderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FE9B5F9154A313700199AAF /* totSliderView.m */; };
 		CE5C09FC154CCFDB00D41114 /* moviePlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5C09F9154CCFDB00D41114 /* moviePlayerViewController.m */; };
 		CE5C09FD154CCFDB00D41114 /* totAlbumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5C09FB154CCFDB00D41114 /* totAlbumViewController.m */; };
+		EF043C2B154D238000975BCD /* camera.png in Resources */ = {isa = PBXBuildFile; fileRef = EF043C29154D238000975BCD /* camera.png */; };
+		EF043C2C154D238000975BCD /* video.png in Resources */ = {isa = PBXBuildFile; fileRef = EF043C2A154D238000975BCD /* video.png */; };
+		EF043C32154D39CC00975BCD /* messagebox.png in Resources */ = {isa = PBXBuildFile; fileRef = EF043C31154D39CC00975BCD /* messagebox.png */; };
+		EF043C39154DBB5200975BCD /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = EF043C37154DBB5200975BCD /* 1.png */; };
+		EF043C3A154DBB5200975BCD /* 2.png in Resources */ = {isa = PBXBuildFile; fileRef = EF043C38154DBB5200975BCD /* 2.png */; };
 		EF2387EB153B7D1600B9C8BD /* ActivityEntryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF2387EA153B7D1600B9C8BD /* ActivityEntryView.xib */; };
 		EF2387EF153B7D7700B9C8BD /* totActivityEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2387EE153B7D7700B9C8BD /* totActivityEntryViewController.m */; };
 		EF2387F2153BC3E500B9C8BD /* challenge.png in Resources */ = {isa = PBXBuildFile; fileRef = EF2387F1153BC3E500B9C8BD /* challenge.png */; };
@@ -96,8 +99,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		15414F9D154CBB8F00C3C828 /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1.png; sourceTree = "<group>"; };
-		15414F9E154CBB8F00C3C828 /* 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 2.png; sourceTree = "<group>"; };
 		15414F9F154CBB8F00C3C828 /* 3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 3.png; sourceTree = "<group>"; };
 		15414FA0154CBB8F00C3C828 /* 4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 4.png; sourceTree = "<group>"; };
 		15414FA1154CBB8F00C3C828 /* 5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 5.png; sourceTree = "<group>"; };
@@ -144,6 +145,11 @@
 		CE5C09F9154CCFDB00D41114 /* moviePlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = moviePlayerViewController.m; path = Utility/moviePlayerViewController.m; sourceTree = "<group>"; };
 		CE5C09FA154CCFDB00D41114 /* totAlbumViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totAlbumViewController.h; path = Utility/totAlbumViewController.h; sourceTree = "<group>"; };
 		CE5C09FB154CCFDB00D41114 /* totAlbumViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totAlbumViewController.m; path = Utility/totAlbumViewController.m; sourceTree = "<group>"; };
+		EF043C29154D238000975BCD /* camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera.png; sourceTree = "<group>"; };
+		EF043C2A154D238000975BCD /* video.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = video.png; sourceTree = "<group>"; };
+		EF043C31154D39CC00975BCD /* messagebox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = messagebox.png; sourceTree = "<group>"; };
+		EF043C37154DBB5200975BCD /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1.png; sourceTree = "<group>"; };
+		EF043C38154DBB5200975BCD /* 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 2.png; sourceTree = "<group>"; };
 		EF2387EA153B7D1600B9C8BD /* ActivityEntryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActivityEntryView.xib; sourceTree = "<group>"; };
 		EF2387ED153B7D7700B9C8BD /* totActivityEntryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totActivityEntryViewController.h; path = Activity/totActivityEntryViewController.h; sourceTree = "<group>"; };
 		EF2387EE153B7D7700B9C8BD /* totActivityEntryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totActivityEntryViewController.m; path = Activity/totActivityEntryViewController.m; sourceTree = "<group>"; };
@@ -202,10 +208,7 @@
 		EF6283AC1536772F004031D6 /* totHomeEntryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totHomeEntryViewController.h; path = Home/totHomeEntryViewController.h; sourceTree = "<group>"; };
 		EF6283AD1536772F004031D6 /* totHomeEntryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totHomeEntryViewController.m; path = Home/totHomeEntryViewController.m; sourceTree = "<group>"; };
 		EF6283AF15367744004031D6 /* HomeView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeView.xib; sourceTree = "<group>"; };
-		EF7868501544A9A000E06BBF /* messagebox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = messagebox.png; sourceTree = "<group>"; };
 		EF7868511544A9A000E06BBF /* messagebox2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = messagebox2.png; sourceTree = "<group>"; };
-		EF7868551544BE0D00E06BBF /* camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera.png; sourceTree = "<group>"; };
-		EF7868561544BE0D00E06BBF /* video.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = video.png; sourceTree = "<group>"; };
 		EF97E7C9153B4BA90037E52D /* totImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totImageView.h; path = Utility/totImageView.h; sourceTree = "<group>"; };
 		EF97E7CA153B4BA90037E52D /* totImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totImageView.m; path = Utility/totImageView.m; sourceTree = "<group>"; };
 		EF97E7CC153B4F040037E52D /* mainscreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mainscreen.png; sourceTree = "<group>"; };
@@ -234,8 +237,8 @@
 		15414F9B154CBB6400C3C828 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				15414F9D154CBB8F00C3C828 /* 1.png */,
-				15414F9E154CBB8F00C3C828 /* 2.png */,
+				EF043C37154DBB5200975BCD /* 1.png */,
+				EF043C38154DBB5200975BCD /* 2.png */,
 				15414F9F154CBB8F00C3C828 /* 3.png */,
 				15414FA0154CBB8F00C3C828 /* 4.png */,
 				15414FA1154CBB8F00C3C828 /* 5.png */,
@@ -469,7 +472,7 @@
 		EF78684E1544A96500E06BBF /* InfoView */ = {
 			isa = PBXGroup;
 			children = (
-				EF7868501544A9A000E06BBF /* messagebox.png */,
+				EF043C31154D39CC00975BCD /* messagebox.png */,
 				EF7868511544A9A000E06BBF /* messagebox2.png */,
 			);
 			name = InfoView;
@@ -478,8 +481,8 @@
 		EF7868541544BDED00E06BBF /* CameraView */ = {
 			isa = PBXGroup;
 			children = (
-				EF7868551544BE0D00E06BBF /* camera.png */,
-				EF7868561544BE0D00E06BBF /* video.png */,
+				EF043C29154D238000975BCD /* camera.png */,
+				EF043C2A154D238000975BCD /* video.png */,
 			);
 			name = CameraView;
 			sourceTree = "<group>";
@@ -586,8 +589,6 @@
 				EF23881A153CE0C000B9C8BD /* vision_attention.png in Resources */,
 				EF23881C153E192700B9C8BD /* challenge_background.png in Resources */,
 				3FC1B7001543689500295447 /* totdb.sqlite in Resources */,
-				15414FBD154CBB8F00C3C828 /* 1.png in Resources */,
-				15414FBE154CBB8F00C3C828 /* 2.png in Resources */,
 				15414FBF154CBB8F00C3C828 /* 3.png in Resources */,
 				15414FC0154CBB8F00C3C828 /* 4.png in Resources */,
 				15414FC1154CBB8F00C3C828 /* 5.png in Resources */,
@@ -618,6 +619,11 @@
 				15414FDA154CBB8F00C3C828 /* 30.png in Resources */,
 				15414FDB154CBB8F00C3C828 /* margin.png in Resources */,
 				15414FDC154CBB8F00C3C828 /* play-button.png in Resources */,
+				EF043C2B154D238000975BCD /* camera.png in Resources */,
+				EF043C2C154D238000975BCD /* video.png in Resources */,
+				EF043C32154D39CC00975BCD /* messagebox.png in Resources */,
+				EF043C39154DBB5200975BCD /* 1.png in Resources */,
+				EF043C3A154DBB5200975BCD /* 2.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

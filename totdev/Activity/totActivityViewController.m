@@ -16,12 +16,14 @@
 
 @synthesize activityRootController;
 @synthesize mSliderView;
+@synthesize mCurrentActivityID;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        mMessage = [[NSMutableDictionary alloc] init];
     }
     return self;
 }
@@ -63,24 +65,46 @@
 
 #pragma totCameraViewController delegate
 - (void) cameraView:(id)cameraView didFinishSavingImageToAlbum:(UIImage*)photo {
-    [activityRootController switchTo:kActivityInfoView];
+    NSDate* today = [NSDate date];
+    NSTimeInterval interval = [today timeIntervalSince1970];
+    NSString *filename = [[NSString alloc] initWithFormat:@"%d.jpg", (int)interval];
+
+    [self saveImage:photo intoFile:filename];
+    if( [mMessage objectForKey:@"storedVideo"] )
+        [mMessage removeObjectForKey:@"storedVideo"];
+    [mMessage setObject:filename forKey:@"storedImage"];
+    [mMessage setObject:self.mCurrentActivityID forKey:@"activity"];
+    
+    [activityRootController switchTo:kActivityInfoView withContextInfo:mMessage];
 }
 
 - (void) cameraView:(id)cameraView didFinishSavingVideoToAlbum:(NSString*)videoPath {
+    NSDate *today = [NSDate date];
+    NSTimeInterval interval = [today timeIntervalSince1970];
+    NSString *filename = [[NSString alloc] initWithFormat:@"%d.mov", (int)interval];
+    [self saveVideo:videoPath intoFile:filename];
     
+    [mMessage setObject:filename forKey:@"storedVideo"];
 }
 
 - (void) cameraView:(id)cameraView didFinishSavingThumbnail:(UIImage*)thumbnail {
-
+    NSString *videoFilename = [mMessage objectForKey:@"storedVideo"];
+    NSString *thumbFilename = [videoFilename stringByAppendingString:@".jpg"];
+    
+    [self saveImage:thumbnail intoFile:thumbFilename];
+    [mMessage setObject:thumbFilename forKey:@"storedImage"];
+    [mMessage setObject:self.mCurrentActivityID forKey:@"activity"];
+    
+    [activityRootController switchTo:kActivityInfoView withContextInfo:mMessage];
 }
 
-- (void) launchCamera {
+- (void) launchCamera:(id)sender {
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
     [appDelegate.rootController.cameraView setDelegate:self];
     [appDelegate.rootController.cameraView launchPhotoCamera];
 }
 
-- (void) launchVideo {
+- (void) launchVideo:(id)sender {
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
     [appDelegate.rootController.cameraView setDelegate:self];
     [appDelegate.rootController.cameraView launchVideoCamera];
@@ -90,67 +114,47 @@
     // message contains two objects:
     // images => MSMutableArray, each element is a path to the image
     // margin => MSMutableArray, each element is a yes or no
-    if( mActivityMemberImages ) {
-        [mActivityMemberImages release];
-    }
-    mActivityMemberImages = nil;
-    mActivityMemberImages = [[NSMutableArray alloc] init];
 
-    if( mActivityMemberMargin ) {
-        [mActivityMemberMargin release];
-    }
-    mActivityMemberMargin = nil;
-    mActivityMemberMargin = [[NSMutableArray alloc] init];
+    [mSliderView cleanScrollView];
     
+    NSMutableArray *activityMemberImages = [[NSMutableArray alloc] init];
+    NSMutableArray *activityMemberMargin = [[NSMutableArray alloc] init];
+    
+    self.mCurrentActivityID = [message objectForKey:@"activity"];
     NSMutableArray *images = [message objectForKey:@"images"];
     NSMutableArray *margin = [message objectForKey:@"margin"];
     for( int i = 0; i < [images count]; i++ ) {
-        [mActivityMemberImages addObject:[UIImage imageNamed:[images objectAtIndex:i]]];
-        [mActivityMemberMargin addObject:[margin objectAtIndex:i]];
+        [activityMemberImages addObject:[UIImage imageNamed:[images objectAtIndex:i]]];
+        [activityMemberMargin addObject:[margin objectAtIndex:i]];
     }
+    [mSliderView setContentArray:activityMemberImages];
+    [mSliderView setMarginArray:activityMemberMargin];
+    [mSliderView getWithPositionMemoryIdentifier:@"activityView"];
     
+    [activityMemberImages release];
+    [activityMemberMargin release];
 }
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
-}
-
-
-- (void)viewWillAppear:(BOOL)animated {
-    // create slider view
-    totSliderView *sv = [[totSliderView alloc] init];
-    self.mSliderView = sv;
-    [mSliderView setContentArray:mActivityMemberImages]; 
-    [mSliderView setMarginArray:mActivityMemberMargin];
-    [mSliderView setPosition:10];
+    
+    mSliderView = [[totSliderView alloc] initWithFrame:CGRectMake(0, 10, 320, 260)];
     [mSliderView enablePageControlOnBottom];
-    [self.view addSubview:[mSliderView getWithPositionMemoryIdentifier:@"activityView"]];
-    [sv release];
-    
-    // create buttons
-    mCameraButton = [[UIButton alloc] initWithFrame:CGRectMake(40, 320, 75, 40)];
-    mVideoButton = [[UIButton alloc] initWithFrame:CGRectMake(160, 320, 75, 40)];
-    
-    [mCameraButton setImage:[UIImage imageNamed:@"camera.png"] forState:UIControlStateNormal];
-    [mCameraButton addTarget:self action:@selector(launchCamera:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:mCameraButton];
-    
-    [mVideoButton setImage:[UIImage imageNamed:@"video.png"] forState:UIControlStateNormal];
-    [mVideoButton addTarget:self action:@selector(launchVideo:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:mVideoButton];
-}
+    [self.view addSubview:mSliderView];
 
-- (void)viewWillDisappear:(BOOL)animated {
-    // Remove title and return botton from myTitleBarView
-    for(UIView *subview in [self.view subviews]) {
-        [subview removeFromSuperview];
-    }
+    // create camera buttons
+    UIButton *cameraButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    cameraButton.frame = CGRectMake(60, 300, 60, 40);
+    [cameraButton setImage:[UIImage imageNamed:@"camera.png"] forState:UIControlStateNormal];
+    [cameraButton addTarget:self action:@selector(launchCamera:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:cameraButton];
     
-    [mSliderView release];
-    [mVideoButton release];
-    [mCameraButton release];
+    UIButton *videoButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    videoButton.frame = CGRectMake(180, 300, 60, 40);
+    [videoButton setImage:[UIImage imageNamed:@"video.png"] forState:UIControlStateNormal];
+    [videoButton addTarget:self action:@selector(launchVideo:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:videoButton];
 }
 
 - (void)viewDidUnload
@@ -159,12 +163,8 @@
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
     [mSliderView release];
-    
-    [mActivityMemberImages release];
-    [mActivityMemberMargin release];
-    
-    mActivityMemberImages = nil;
-    mActivityMemberMargin = nil;
+    [mCurrentActivityID release];
+    [mMessage release];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

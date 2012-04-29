@@ -16,16 +16,17 @@
     totActivityRootController *activityRootController;
     totSliderView *mSliderView;
     
-    NSMutableArray *mActivityMemberImages;
-    NSMutableArray *mActivityMemberMargin;
-    
-    UIButton *mCameraButton, *mVideoButton;
+    NSNumber *mCurrentActivityID;    
+    NSMutableDictionary *mMessage;
 }
 
 @property (nonatomic, assign) totActivityRootController *activityRootController;
 @property (nonatomic, retain) totSliderView *mSliderView;
+@property (nonatomic, retain) NSNumber *mCurrentActivityID;
 
 // receive parameters passed by other module for initialization or customization
 - (void)receiveMessage: (NSMutableDictionary*)message;
+- (void)launchCamera:(id)sender;
+- (void)launchVideo:(id)sender;
 
 @end

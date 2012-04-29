@@ -70,10 +70,9 @@
 - (void) moviePreloadDidFinish:(NSNotification*)notification 
 {
 	// Remove observer
-	[[NSNotificationCenter 	defaultCenter] 
-     removeObserver:self
-     name:MPMoviePlayerContentPreloadDidFinishNotification
-     object:nil];
+	[[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:MPMoviePlayerLoadStateDidChangeNotification
+                                                  object:nil];
     
 	// Play the movie
  	[mp play];
@@ -122,7 +121,7 @@
         // Register to receive a notification when the movie is in memory and ready to play.
         [[NSNotificationCenter defaultCenter] addObserver:self 
                                                  selector:@selector(moviePreloadDidFinish:) 
-                                                     name:MPMoviePlayerContentPreloadDidFinishNotification 
+                                                     name:MPMoviePlayerLoadStateDidChangeNotification 
                                                    object:nil];
     }
     

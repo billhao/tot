@@ -16,26 +16,15 @@
 
 @end
 
-@interface totSliderView :NSObject <UIScrollViewDelegate> {  
-    UIView *main;
-    
+@interface totSliderView :UIView <UIScrollViewDelegate> {
     UIScrollView *scrollView;  
-    UIPageControl *pageControl; 
+    UIPageControl *pageControl;
     
-    CGRect rectBase;
-    CGRect rectScrollView;  
-    CGRect rectPageControl;  
+    int scrollWidth, scrollHeight, scrollYOrigin, numOfRows;
+    UIColor *bcgColor;
     
-    int scrollWidth;  
-    int scrollHeight;
-    int scrollYOrigin;
-
-    int numOfRows;
-    
-    NSArray *contentArray; 
-    NSArray *marginArray;
-    
-    UIColor *bcgColor;  
+    NSMutableArray *contentArray; 
+    NSMutableArray *marginArray;
     
     BOOL pageControlEnabledTop;  
     BOOL pageControlEnabledBottom;  
@@ -46,28 +35,28 @@
     id <totSliderViewDelegate> delegate;
 }  
 
-@property (nonatomic, retain) UIScrollView *scrollView;  
 @property (nonatomic, retain) id <totSliderViewDelegate> delegate;
+@property (nonatomic, assign) int numOfRows;
 
 /// returns width of the scollview  
-- (int)getScrollViewWidth;  
+//- (int)getScrollViewWidth;  
 
 /// set Position by yOrigin (xOrigin is always 0
 /// and size is fixed
-- (void)setPosition:(int)yOrigin;
+//- (void)setPosition:(int)yOrigin;
 
 /// set scroll view lay out: buttons per row
 // buttons per column = 2
-- (void)setLayout:(int)btnPerRow;
+//- (void)setLayout:(int)btnPerRow;
 
 ///set margin
 -(void)setMarginArray:(NSArray *)margins;
 
+/// set an array with images you want to display in your new scroll view  
+- (void)setContentArray:(NSArray *)images;
+
 /// set background color for your UIScrollView  
 - (void)setBackGroundColor:(UIColor *)color;  
-
-/// set an array with images you want to display in your new scroll view  
-- (void)setContentArray:(NSArray *)images;  
 
 /// display page control for the scroll view on the top of the view (inset)  
 - (void)enablePageControlOnTop;  
@@ -76,23 +65,25 @@
 - (void)enablePageControlOnBottom;  
 
 /// enable position history  
-- (void)enablePositionMemory:(NSString *)identifier;  
+//- (void)enablePositionMemory:(NSString *)identifier;  
 
 /// enable position history with custom memory identifier  
-- (void)enablePositionMemoryWithIdentifier:(NSString *)identifier;  
+//- (void)enablePositionMemoryWithIdentifier:(NSString *)identifier;  
 
 /// returns your UIScrollView with predefined page  
-- (UIScrollView *)getWithPosition:(int)page;  
+//- (UIScrollView *)getWithPosition:(int)page;  
 
 /// returns your UIScrollView with enabled position history  
-- (UIScrollView *)getWithPositionMemory:(NSString *)identifier;  
+//- (UIScrollView *)getWithPositionMemory:(NSString *)identifier;  
 
 /// returns your UIScrollView with enabled position history with custom memory identifier  
-- (UIScrollView *)getWithPositionMemoryIdentifier:(NSString *)identifier;  
+- (void)getWithPositionMemoryIdentifier:(NSString *)identifier;  
 
 /// returns your UIScrollView  
-- (UIScrollView *)get;  
+- (void)get;
 
+/// clean all subviews from scroll view
+- (void)cleanScrollView;
 
 - (void)buttonPressed:(id)sender;
 

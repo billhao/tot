@@ -150,7 +150,7 @@
     self.view.frame = CGRectMake(0, 0, 320, 480);
     self.myScrollView.frame = CGRectMake(0, 60, 320, 420);
     self.myTitleBarView.frame = CGRectMake(0, 0, 320, 60);
-    [[UIApplication sharedApplication] setStatusBarHidden:YES animated:NO];
+    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
     
     // Add content to myTitleBarView
     /*** Title ***/

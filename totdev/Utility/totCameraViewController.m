@@ -95,16 +95,16 @@
             UISaveVideoAtPathToSavedPhotosAlbum(tempFilePath, self, @selector(video:didFinishSavingWithError:contextInfo:), tempFilePath);
         }
     }
-    
-    [picker dismissModalViewControllerAnimated:YES];
+}
+
+- (void)hideCamera {
+    [imagePicker dismissModalViewControllerAnimated:YES];
     [imagePicker release];
     self.view.frame = CGRectMake(0, 0, 0, 0);
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController*)picker {
-    [picker dismissModalViewControllerAnimated:YES];
-    [imagePicker release];
-    self.view.frame = CGRectMake(0, 0, 0, 0);
+    [self hideCamera];
 }
 
 
@@ -112,6 +112,7 @@
     if( [delegate respondsToSelector:@selector(cameraView:didFinishSavingImageToAlbum:)] ) {
         [delegate cameraView:self didFinishSavingImageToAlbum:image];
     }
+    [self hideCamera];
 }
 
 - (void)video: (NSString*)videoPath didFinishSavingWithError:(NSError*)error contextInfo:(NSString*)contextInfo {
@@ -140,7 +141,7 @@
                 if( [delegate respondsToSelector:@selector(cameraView:didFinishSavingThumbnail:)] ) {
                     [delegate cameraView:self didFinishSavingThumbnail:thumbnail];
                 }
-                
+                [self hideCamera];
                 [thumbnail release];
             }
             [generator release];

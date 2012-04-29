@@ -7,12 +7,15 @@
 //
 
 #import "totActivityInfoViewController.h"
+#import "totActivityEntryViewController.h"
 #import "totImageView.h"
+#import "../Utility/totSliderView.h"
 
 @implementation totActivityInfoViewController
 
 @synthesize activityRootController;
 @synthesize mActivityDesc;
+@synthesize mCurrentActivityID;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -93,7 +96,46 @@
 
 // receive parameters passed by other module for initialization or customization
 - (void)receiveMessage: (NSMutableDictionary*)message {
-
+    const char* vals [] = { // the name should correspond to the image file name
+        "task1,task2", // vision attention
+        "task1,task2", // eye contact
+        "task1,task2", // mirror test
+        "task1,task2", // imitation
+        "task1,task2", // gesture
+        "3,4,5,6,7,8,9,10,11,12", // emotion
+        "task1,task2", // chew
+        "task1,task2"  // motorskill
+    };
+    
+    [mSliderView cleanScrollView];
+    
+    NSString *filename = [message objectForKey:@"storedImage"];
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentDirectory = [paths objectAtIndex:0];
+    NSString *path = [documentDirectory stringByAppendingPathComponent:filename];
+    
+    self.mCurrentActivityID = [message objectForKey:@"activity"];
+    NSString *memb_str = [NSString stringWithUTF8String:vals[[self.mCurrentActivityID intValue]]];
+    NSArray  *member = [memb_str componentsSeparatedByString:@","];
+    
+    // insert the image
+    [mThumbnail setImage:[UIImage imageWithContentsOfFile:path]];
+    
+    // display the slider view
+    NSMutableArray *images = [[NSMutableArray alloc] init];
+    NSMutableArray *margin = [[NSMutableArray alloc] init];
+    
+    for( int i=0; i<[member count]; i++ ) {
+        [images addObject:[UIImage imageNamed:[[member objectAtIndex:i] stringByAppendingString:@".png"]]];
+        [margin addObject:[NSNumber numberWithBool:NO]];
+    }
+    
+    [mSliderView setContentArray:images];
+    [mSliderView setMarginArray:margin];    
+    [images release];
+    [margin release];
+    
+    [mSliderView getWithPositionMemoryIdentifier:@"infoview"];
 }
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
@@ -101,18 +143,36 @@
 {
     [super viewDidLoad];
     
-    UIImageView *textbubble = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"messagebox.png"]];
-    textbubble.frame = CGRectMake(0, 35, 360, 180);    
-    [self.view insertSubview:textbubble belowSubview:mActivityDesc];
-    [textbubble release];
+    mThumbnail = [[UIImageView alloc] initWithFrame:CGRectMake(0, 10, 50, 50)];
+    [self.view addSubview:mThumbnail];
+    
+//    UIImageView *textbubble = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"messagebox.png"]];
+//    textbubble.frame = CGRectMake(0, 35, 360, 180);
+//    [self.view insertSubview:textbubble belowSubview:mActivityDesc];
+//    [textbubble release];
+    
+    mSliderView = [[totSliderView alloc] initWithFrame:CGRectMake(0, 151, 320, 260)];
+    [mSliderView enablePageControlOnBottom];
+    [self.view addSubview:mSliderView];
 }
 
+- (IBAction)save:(id)sender {
+    NSMutableDictionary *message = [[NSMutableDictionary alloc] init];
+    
+    [activityRootController.activityEntryViewController prepareMessage:message for:[mCurrentActivityID intValue]];
+    [activityRootController switchTo:kActivityView withContextInfo:message];
+    
+    [message release];
+}
 
 - (void)viewDidUnload
 {
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
+    [mSliderView release];
+    [mThumbnail release];
+    [mCurrentActivityID release];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

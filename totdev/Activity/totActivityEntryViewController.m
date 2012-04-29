@@ -53,7 +53,7 @@
             "task1,task2", // mirror test
             "task1,task2", // imitation
             "task1,task2", // gesture
-            "1,2,3,4,5,6,7,8,9,10", // emotion
+            "3,4,5,6,7,8,9,10,11,12", // emotion
             "task1,task2", // chew
             "task1,task2"  // motorskill
         };
@@ -128,7 +128,7 @@
         int querySize = [queryResult count];
         switch(querySize) {
             case 0:
-                [images addObject:[[members objectAtIndex:0] stringByAppendingString:@".png"]];
+                [images addObject:[[members objectAtIndex:i] stringByAppendingString:@".png"]];
                 [margin addObject:[NSNumber numberWithBool:NO]];
                 break;
             case 1:
@@ -146,6 +146,7 @@
     
     [message setObject:images forKey:@"images"];
     [message setObject:margin forKey:@"margin"];
+    [message setObject:[NSNumber numberWithInt:activity] forKey:@"activity"];
     
     [margin release];
     [images release];
@@ -178,11 +179,11 @@
     [background release];
     
     // create eight buttons
-    int x[8] = {10, 122, 235, 10, 235, 10, 122, 235};
-    int y[8] = {33, 33, 33, 158, 158, 283, 283, 283};
     int w    = 75;
     int h    = 75;
-    
+    int x[8] = {10, 122, 235, 10, 235, 10, 122, 235};
+    int y[8] = {33, 33, 33, 158, 158, 283, 283, 283};
+
     for( int i=0; i<8; i++ ) {
         UIButton *imageButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         imageButton.frame = CGRectMake(x[i], y[i], w, h);

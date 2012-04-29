@@ -14,7 +14,7 @@
 @class totActivityAlbumViewController;
 
 const static int SCREEN_W = 320;
-const static int SCREEN_H = 411;
+const static int SCREEN_H = 460;
 
 enum {
     kActivityEntryView = 0,
