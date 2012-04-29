@@ -46,6 +46,7 @@
 
 - (void)setContentArray:(NSArray *)images {  
     contentArray = images;  
+    [contentArray retain];
 }  
 
 - (void)setBackGroundColor:(UIColor *)color {  
@@ -73,6 +74,7 @@
 
 - (void)setMarginArray:(NSArray *)margins{
     marginArray = margins;
+    [marginArray retain];
 }
 
 - (UIScrollView *)getWithPosition:(int)page {
@@ -265,6 +267,9 @@
 
 
 - (void)dealloc {  
+    [contentArray release];
+    [marginArray release];
+    
     [scrollView release];
     
     if(!pageControlEnabledTop||!pageControlEnabledBottom)

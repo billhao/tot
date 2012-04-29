@@ -96,11 +96,11 @@
     [sv setPosition:105];
     [sv enablePageControlOnBottom];  
     //[sv enablePageControlOnTop];
-    [self.view addSubview:[sv getWithPositionMemory:@"2nd"]];  
+    [self.view addSubview:[sv getWithPositionMemory:@"1st"]];  
     //[self.view addSubview:[sv get]];//no memory to hold last-viewed page position
      
     //for test 
-    //self.view.backgroundColor = [UIColor blackColor];
+    self.view.backgroundColor = [UIColor blackColor];
 }
 
 
