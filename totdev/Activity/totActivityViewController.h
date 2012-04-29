@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "totActivityRootController.h"
+#import "../Utility/totSliderView.h"
 
-@interface totActivityViewController : UIViewController {
+@interface totActivityViewController : UIViewController <totSliderViewDelegate> {
     totActivityRootController *activityRootController;
     
 }

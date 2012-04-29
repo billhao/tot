@@ -8,47 +8,48 @@
 
 #import "totSliderView.h"
 #import "totImageView.h"
-#define kIGUIScrollViewImagePageIdentifier                      @"kIGUIScrollViewImagePageIdentifier"  
-#define kIGUIScrollViewImageDefaultPageIdentifier               @"Default"  
+#define totGUIScrollViewImagePageIdentifier                      @"totGUIScrollViewImagePageIdentifier"  
+#define totGUIScrollViewImageDefaultPageIdentifier               @"Default"  
+
+#define DEFAULT_WIDTH 320
+#define DEFAULT_HEIGHT 260 
+#define DEFAULT_NUMOFROWS 2
+// layout parameters
+#define LEFT_MARGIN 10
+#define TOP_MARGIN 20
+#define HORI_INTERVAL 15
+#define VERTI_INTERVAL 20
+#define BUTTON_WIDTH 90
+#define BUTTON_HEIGHT 90
 
 @implementation totSliderView
 
 @synthesize scrollView;  
+@synthesize delegate;
 
 - (int)getScrollViewWidth {  
     return ([contentArray count] * scrollWidth);  
 }  
 
-- (void)setWidth:(int)width andHeight:(int)height {  
-    scrollWidth = width;  
-    scrollHeight = height;  
-    if (!width || !height) rectScrollView = [[UIScreen mainScreen] applicationFrame];  
-    else rectScrollView = CGRectMake(0, 0, width, height);  
-}  
 
 -(void)setPosition:(int)yOrigin{
-    scrollWidth = 320;
-    scrollHeight = 260;
+    scrollWidth = DEFAULT_WIDTH;
+    scrollHeight = DEFAULT_HEIGHT;
     scrollYOrigin = yOrigin;
-    rectScrollView = CGRectMake(0, 0, scrollWidth, scrollHeight);  
 }
 
-- (void)setSizeFromParentView:(UIScrollView *)scView {  
-    scrollWidth = scView.frame.size.width;  
-    scrollHeight = scView.frame.size.height;  
-    rectScrollView = CGRectMake(0, 0, scrollWidth, scrollHeight);  
-}  
 
--(void)setLayout:(int)btnPerRow{
-    buttonsPerRow = btnPerRow;
-    // btnPerCol is always 3;
+-(void)setLayout:(int)noOfRows{
+    numOfRows = noOfRows;
+    // btnPerRow is always 3;
 }
 
 - (void)setContentArray:(NSArray *)images {  
     contentArray = images;  
+    [contentArray retain];
 }  
 
-- (void)setBackGroudColor:(UIColor *)color {  
+- (void)setBackGroundColor:(UIColor *)color {  
     bcgColor = color;  
 }  
 
@@ -62,113 +63,142 @@
 
 - (void)enablePositionMemoryWithIdentifier:(NSString *)identifier {  
     rememberPosition = YES;  
-    if (!identifier) identifier = kIGUIScrollViewImageDefaultPageIdentifier;  
+    if (!identifier) 
+        identifier = totGUIScrollViewImageDefaultPageIdentifier;  
     positionIdentifier = identifier;  
 }  
 
-- (void)enablePositionMemory {  
-    [self enablePositionMemoryWithIdentifier:nil];  
+- (void)enablePositionMemory:(NSString *)identifier {  
+    [self enablePositionMemoryWithIdentifier:identifier];  
 }  
 
 - (void)setMarginArray:(NSArray *)margins{
     marginArray = margins;
+    [marginArray retain];
 }
 
-- (UIScrollView *)getWithPosition:(int)page {  
-    if (!contentArray) {  
-        contentArray = [[[NSArray alloc] init] autorelease];  
-    }  
-    if (page > [contentArray count]) page = 0;  
+- (UIScrollView *)getWithPosition:(int)page {
+    if (!contentArray)
+        contentArray = [[[NSArray alloc] init] autorelease]; 
     
-    if (!scrollWidth || !scrollHeight) {  
-        rectScrollView = [[UIScreen mainScreen] applicationFrame];  
-        scrollWidth = rectScrollView.size.width;  
-        scrollHeight = rectScrollView.size.height;  
-    }
-    if(!scrollYOrigin){
+    if(!numOfRows)
+        numOfRows = DEFAULT_NUMOFROWS; 
+    
+    int totalPageNumbers = 
+        ceil((double)[contentArray count]/numOfRows/3);
+
+    if (page > totalPageNumbers) 
+        page = 0;  
+    
+    //set default parameters
+    if (!scrollWidth)  
+        scrollWidth = DEFAULT_WIDTH;
+        
+    if (!scrollHeight)
+        scrollHeight = DEFAULT_HEIGHT;
+    
+    if(!scrollYOrigin)
         scrollYOrigin = 0;
-    }
-    if(!buttonsPerRow){
-        buttonsPerRow = 2; //by default;
-    }
     
-    rectBase = CGRectMake(0, scrollYOrigin, scrollWidth, scrollHeight);  
     rectScrollView = CGRectMake(0, 0, scrollWidth, scrollHeight);  
     
     self.scrollView = [[UIScrollView alloc] initWithFrame:rectScrollView];  
     self.scrollView.contentSize = CGSizeMake([self getScrollViewWidth], scrollHeight);  
-    if (!bcgColor) bcgColor = [UIColor blackColor];  
-    self.scrollView.backgroundColor = bcgColor;  
+    if (!bcgColor) bcgColor = [UIColor clearColor];  
+    self.scrollView.backgroundColor = bcgColor;  //by default transparent
     self.scrollView.alwaysBounceHorizontal = YES;  
     self.scrollView.contentOffset = CGPointMake(page * scrollWidth, 0);  
     self.scrollView.pagingEnabled = YES;  
     self.scrollView.showsHorizontalScrollIndicator = NO;
     
-    UIView *main = [[[UIView alloc] initWithFrame:rectBase] autorelease];  
+    rectBase = CGRectMake(0, scrollYOrigin, scrollWidth, scrollHeight);  
+    main = [[[UIView alloc] initWithFrame:rectBase] autorelease];  
 
     //load button here:
-    for (int i = 0; i < ceil((double)[contentArray count]/buttonsPerRow/3); i++) {
-       
+    for (int i = 0; i < totalPageNumbers; i++) {
         UIView *subview = [[UIView alloc] 
                            initWithFrame:CGRectMake(i*scrollWidth, 0, scrollWidth, scrollHeight)];
+        
         int remainButtons = 0;
-        if([contentArray count] >= (i+1)*buttonsPerRow*3){
-            remainButtons = buttonsPerRow*3;
-        }
-        else{
-            remainButtons = [contentArray count]- i*buttonsPerRow*3;
-        }
+        if([contentArray count] >= (i+1)*numOfRows*3)
+            remainButtons = numOfRows*3;
+        else
+            remainButtons = [contentArray count]- i*numOfRows*3;
         
         for (int j = 0; j<remainButtons; j++){
+            int xPos, yPos;
+            // button layout
+            if (j == 0 || j== 3)
+                xPos = LEFT_MARGIN;
+            else if (j == 1 || j==4)
+                xPos = LEFT_MARGIN+(BUTTON_WIDTH+HORI_INTERVAL)*1;
+            else if (j== 2|| j == 5)
+                xPos = LEFT_MARGIN+(BUTTON_WIDTH+HORI_INTERVAL)*2;
             
-            UIButton *imageButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+            if(j <=2)
+                yPos = TOP_MARGIN;
+            else
+                yPos = TOP_MARGIN+BUTTON_HEIGHT+VERTI_INTERVAL;
             
-            int xPos;
-            int yPos;
-            
-            if (j == 0 || j== 3){
-                xPos = 10;
-            }
-            else if (j == 1 || j==4){
-                xPos = 10+90+15;
-            }
-            else if (j== 2|| j == 5){
-                xPos = 10+90+15+90+15;
-            }
-            
-            if(j <=2){
-                yPos = 20;
-            }
-            else{
-                yPos = 20+90+20;
-                
-            }
+            UIButton *imageButton = [[UIButton alloc] initWithFrame:CGRectMake(xPos, yPos, 90, 90)];
+                        
             imageButton.frame = CGRectMake(xPos, yPos,
                                            90 , 90 );
             
+            //image resizing
+            UIImage *origImage=[contentArray objectAtIndex:i*numOfRows*3+j];
+            UIImage *squareImage;
+            
+            if(origImage.size.width == origImage.size.height){
+                squareImage = origImage;
+            }
+            else{
+                CGRect rect;
+
+                if(origImage.size.width > origImage.size.height){
+                    rect = CGRectMake(round((double)(origImage.size.width-origImage.size.height)/2), 
+                                      0, 
+                                      origImage.size.height,
+                                      origImage.size.height);
+
+                }
+                else{
+                    rect = CGRectMake(0,
+                                      round((double)(origImage.size.height-origImage.size.width)/2), 
+                                      origImage.size.width,
+                                      origImage.size.width);
+
+                }
+                
+                CGImageRef subImageRef = CGImageCreateWithImageInRect(origImage.CGImage, rect);  
+                UIGraphicsBeginImageContext(rect.size);  
+                CGContextRef context = UIGraphicsGetCurrentContext();  
+                CGContextDrawImage(context, rect, subImageRef);  
+                squareImage = [UIImage imageWithCGImage:subImageRef];  
+                UIGraphicsEndImageContext();
+                CGImageRelease(subImageRef);
+            }
+            
             [imageButton 
-             setImage:[contentArray objectAtIndex:i*buttonsPerRow*3+j]  
+             setImage:squareImage
              forState:UIControlStateNormal];
             
             [imageButton 
              addTarget:self 
              action:@selector(buttonPressed:) 
              forControlEvents:UIControlEventTouchUpInside];
-            [imageButton setTag:i*buttonsPerRow*3 + j +1];
+            [imageButton setTag:i*numOfRows*3 + j +1];
             
             [subview addSubview:(UIView *)imageButton];
-            //[imageButton release];
+            [imageButton release];
             
             if ([marginArray count] >= [contentArray count]){
-                if ([[marginArray objectAtIndex:i*buttonsPerRow*3+j] boolValue]){
+                if ([[marginArray objectAtIndex:i*numOfRows*3+j] boolValue]){
                     //add margin
-                
                     UIImageView *margin;
-                    margin =[[UIImageView alloc] initWithFrame:CGRectMake(
-                                                                      xPos,
-                                                                      yPos,
-                                                                      96,
-                                                                      96)];
+                    margin =[[UIImageView alloc] 
+                             initWithFrame:CGRectMake(xPos,yPos,
+                                                      96,96)];
                 
                     margin.image=[UIImage imageNamed:@"margin.png"];
                 
@@ -183,24 +213,25 @@
     }
     
     scrollView.contentSize = CGSizeMake(scrollWidth
-                                        * ceil((double)[contentArray count]/buttonsPerRow/3), 
+                                        * totalPageNumbers, 
                                         scrollHeight);
     
     [main addSubview:scrollView];
     
-    if (pageControlEnabledTop) {  
+    if (pageControlEnabledTop) 
         rectPageControl = CGRectMake(0, 5, scrollWidth, 15);  
-    }  
-    else if (pageControlEnabledBottom) {  
+    else if (pageControlEnabledBottom)  
         rectPageControl = CGRectMake(0, (scrollHeight - 20), scrollWidth, 15);  
-    }  
+
     if (pageControlEnabledTop || pageControlEnabledBottom) {  
         pageControl = [[[UIPageControl alloc] initWithFrame:rectPageControl] autorelease];  
-        pageControl.numberOfPages = ceil((double)[contentArray count]/buttonsPerRow/3);
+        pageControl.numberOfPages = totalPageNumbers;
         pageControl.currentPage = page;
         [main addSubview:pageControl];  
     }  
-    if (pageControlEnabledTop || pageControlEnabledBottom || rememberPosition) self.scrollView.delegate = self;  
+    if (pageControlEnabledTop || pageControlEnabledBottom || rememberPosition) 
+        self.scrollView.delegate = self;  
+    
     return (UIScrollView *)main;  
 }  
 
@@ -208,42 +239,43 @@
     return [self getWithPosition:0];  
 }  
 
-- (UIScrollView *)getWithPositionMemory {  
-    [self enablePositionMemory];  
-    return [self getWithPosition:[[[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@%@", kIGUIScrollViewImagePageIdentifier, kIGUIScrollViewImageDefaultPageIdentifier]] intValue]];  
+- (UIScrollView *)getWithPositionMemory:(NSString *)identifier {  
+    [self enablePositionMemory:identifier];  
+    return [self getWithPosition:[[[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@%@", totGUIScrollViewImagePageIdentifier, positionIdentifier]] intValue]];  
 }  
 
 - (UIScrollView *)getWithPositionMemoryIdentifier:(NSString *)identifier {  
     [self enablePositionMemoryWithIdentifier:identifier];  
-    return [self getWithPosition:[[[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@%@", kIGUIScrollViewImagePageIdentifier, positionIdentifier]] intValue]];  
+    return [self getWithPosition:[[[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@%@", totGUIScrollViewImagePageIdentifier, positionIdentifier]] intValue]];  
 }  
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)sv {  
     int page = sv.contentOffset.x / sv.frame.size.width;  
     pageControl.currentPage = page;  
     if (rememberPosition) {  
-        [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%d", page] forKey:[NSString stringWithFormat:@"%@%@", kIGUIScrollViewImagePageIdentifier, positionIdentifier]];  
+        [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%d", page] forKey:[NSString stringWithFormat:@"%@%@", totGUIScrollViewImagePageIdentifier, positionIdentifier]];  
         [[NSUserDefaults standardUserDefaults] synchronize];  
     }  
 }  
 
 //button actions
 - (void)buttonPressed:(id)sender {
-	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Button pressed"
-													message:[NSString stringWithFormat:@"You pressed the button on button %d.", [sender tag]]
-												   delegate:nil
-										  cancelButtonTitle:@"OK"
-										  otherButtonTitles:nil];
-    
-    
-	[alert show];
-	[alert release];
-    
+    if( [delegate respondsToSelector:@selector(buttonPressed:)] ) {
+        [delegate buttonPressed:sender];
+    }
 }
 
 
 - (void)dealloc {  
-    [scrollView release];  
+    [contentArray release];
+    [marginArray release];
+    
+    [scrollView release];
+    
+    if(!pageControlEnabledTop||!pageControlEnabledBottom)
+        [pageControl release];
+    
+    [main release];
     [super dealloc];  
 }  
 
