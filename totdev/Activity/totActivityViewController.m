@@ -71,18 +71,36 @@
     return arr;
 }
 
+#pragma totSliderView delegate
+- (void)buttonPressed:(id)sender {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Button pressed"
+													message:[NSString stringWithFormat:@"You pressed the button on button %d.", [sender tag]]
+												   delegate:nil
+										  cancelButtonTitle:@"OK"
+										  otherButtonTitles:nil];
+    
+    
+	[alert show];
+	[alert release];
+}
+
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
     totSliderView *sv = [[totSliderView alloc] init];  
+    [sv setDelegate:self];
     [sv setContentArray:[self getImages]]; 
     [sv setMarginArray: [self setMargin]];
     [sv setPosition:105];
     [sv enablePageControlOnBottom];  
     //[sv enablePageControlOnTop];
-    [self.view addSubview:[sv getWithPositionMemory]];  
+    [self.view addSubview:[sv getWithPositionMemory:@"2nd"]];  
+    //[self.view addSubview:[sv get]];//no memory to hold last-viewed page position
+     
+    //for test 
+    //self.view.backgroundColor = [UIColor blackColor];
 }
 
 

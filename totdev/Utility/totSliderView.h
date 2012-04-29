@@ -9,10 +9,18 @@
 #import <Foundation/Foundation.h>  
 #import <UIKit/UIKit.h>  
 
+@protocol totSliderViewDelegate <NSObject>
+
+@optional
+- (void)buttonPressed: (id)sender;
+
+@end
+
 @interface totSliderView :NSObject <UIScrollViewDelegate> {  
+    UIView *main;
     
     UIScrollView *scrollView;  
-    UIPageControl *pageControl;  
+    UIPageControl *pageControl; 
     
     CGRect rectBase;
     CGRect rectScrollView;  
@@ -22,7 +30,7 @@
     int scrollHeight;
     int scrollYOrigin;
 
-    int buttonsPerRow;
+    int numOfRows;
     
     NSArray *contentArray; 
     NSArray *marginArray;
@@ -35,16 +43,14 @@
     BOOL rememberPosition;  
     NSString *positionIdentifier;  
     
-    
+    id <totSliderViewDelegate> delegate;
 }  
 
 @property (nonatomic, retain) UIScrollView *scrollView;  
+@property (nonatomic, retain) id <totSliderViewDelegate> delegate;
 
 /// returns width of the scollview  
 - (int)getScrollViewWidth;  
-
-/// set width and height for your final UIScrollView  
-- (void)setWidth:(int)width andHeight:(int)height;  
 
 /// set Position by yOrigin (xOrigin is always 0
 /// and size is fixed
@@ -57,11 +63,8 @@
 ///set margin
 -(void)setMarginArray:(NSArray *)margins;
 
-/// set the exactly same size as it is your parent view  
-- (void)setSizeFromParentView:(UIScrollView *)scView;  
-
 /// set background color for your UIScrollView  
-- (void)setBackGroudColor:(UIColor *)color;  
+- (void)setBackGroundColor:(UIColor *)color;  
 
 /// set an array with images you want to display in your new scroll view  
 - (void)setContentArray:(NSArray *)images;  
@@ -73,7 +76,7 @@
 - (void)enablePageControlOnBottom;  
 
 /// enable position history  
-- (void)enablePositionMemory;  
+- (void)enablePositionMemory:(NSString *)identifier;  
 
 /// enable position history with custom memory identifier  
 - (void)enablePositionMemoryWithIdentifier:(NSString *)identifier;  
@@ -82,7 +85,7 @@
 - (UIScrollView *)getWithPosition:(int)page;  
 
 /// returns your UIScrollView with enabled position history  
-- (UIScrollView *)getWithPositionMemory;  
+- (UIScrollView *)getWithPositionMemory:(NSString *)identifier;  
 
 /// returns your UIScrollView with enabled position history with custom memory identifier  
 - (UIScrollView *)getWithPositionMemoryIdentifier:(NSString *)identifier;  
