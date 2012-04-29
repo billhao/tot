@@ -39,6 +39,7 @@
 		15414FDA154CBB8F00C3C828 /* 30.png in Resources */ = {isa = PBXBuildFile; fileRef = 15414FBA154CBB8F00C3C828 /* 30.png */; };
 		15414FDB154CBB8F00C3C828 /* margin.png in Resources */ = {isa = PBXBuildFile; fileRef = 15414FBB154CBB8F00C3C828 /* margin.png */; };
 		15414FDC154CBB8F00C3C828 /* play-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 15414FBC154CBB8F00C3C828 /* play-button.png */; };
+		15414FDF154CCB8900C3C828 /* totUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 15414FDE154CCB8800C3C828 /* totUtility.m */; };
 		3FC1B6FC1543680300295447 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FC1B6FB1543680300295447 /* libsqlite3.dylib */; };
 		3FC1B7001543689500295447 /* totdb.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 3FC1B6FF1543689500295447 /* totdb.sqlite */; };
 		3FC1B7061543841800295447 /* totModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FC1B7051543841800295447 /* totModel.m */; };
@@ -125,6 +126,8 @@
 		15414FBA154CBB8F00C3C828 /* 30.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 30.png; sourceTree = "<group>"; };
 		15414FBB154CBB8F00C3C828 /* margin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = margin.png; sourceTree = "<group>"; };
 		15414FBC154CBB8F00C3C828 /* play-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "play-button.png"; sourceTree = "<group>"; };
+		15414FDD154CCB8800C3C828 /* totUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totUtility.h; path = Utility/totUtility.h; sourceTree = "<group>"; };
+		15414FDE154CCB8800C3C828 /* totUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totUtility.m; path = Utility/totUtility.m; sourceTree = "<group>"; };
 		3FC1B6FB1543680300295447 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		3FC1B6FF1543689500295447 /* totdb.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = totdb.sqlite; sourceTree = "<group>"; };
 		3FC1B7041543841800295447 /* totModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totModel.h; path = totdev/Model/totModel.h; sourceTree = "<group>"; };
@@ -484,6 +487,8 @@
 				EF97E7CA153B4BA90037E52D /* totImageView.m */,
 				EF2387FA153BC5AB00B9C8BD /* totCameraViewController.h */,
 				EF2387FB153BC5AB00B9C8BD /* totCameraViewController.m */,
+				15414FDD154CCB8800C3C828 /* totUtility.h */,
+				15414FDE154CCB8800C3C828 /* totUtility.m */,
 			);
 			name = Util;
 			sourceTree = "<group>";
@@ -631,6 +636,7 @@
 				3FC1B7091544F19700295447 /* totEvent.m in Sources */,
 				3FE9B5F7154A303100199AAF /* test_Model.m in Sources */,
 				3FE9B5FA154A313700199AAF /* totSliderView.m in Sources */,
+				15414FDF154CCB8900C3C828 /* totUtility.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

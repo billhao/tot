@@ -8,6 +8,8 @@
 
 #import "totSliderView.h"
 #import "totImageView.h"
+#import "../Utility/totUtility.h"
+
 #define totGUIScrollViewImagePageIdentifier                      @"totGUIScrollViewImagePageIdentifier"  
 #define totGUIScrollViewImageDefaultPageIdentifier               @"Default"  
 
@@ -147,38 +149,8 @@
             
             //image resizing
             UIImage *origImage=[contentArray objectAtIndex:i*numOfRows*3+j];
-            UIImage *squareImage;
-            
-            if(origImage.size.width == origImage.size.height){
-                squareImage = origImage;
-            }
-            else{
-                CGRect rect;
-
-                if(origImage.size.width > origImage.size.height){
-                    rect = CGRectMake(round((double)(origImage.size.width-origImage.size.height)/2), 
-                                      0, 
-                                      origImage.size.height,
-                                      origImage.size.height);
-
-                }
-                else{
-                    rect = CGRectMake(0,
-                                      round((double)(origImage.size.height-origImage.size.width)/2), 
-                                      origImage.size.width,
-                                      origImage.size.width);
-
-                }
-                
-                CGImageRef subImageRef = CGImageCreateWithImageInRect(origImage.CGImage, rect);  
-                UIGraphicsBeginImageContext(rect.size);  
-                CGContextRef context = UIGraphicsGetCurrentContext();  
-                CGContextDrawImage(context, rect, subImageRef);  
-                squareImage = [UIImage imageWithCGImage:subImageRef];  
-                UIGraphicsEndImageContext();
-                CGImageRelease(subImageRef);
-            }
-            
+            UIImage *squareImage=[totUtility squareCropImage:origImage];
+                        
             [imageButton 
              setImage:squareImage
              forState:UIControlStateNormal];
@@ -221,7 +193,7 @@
     if (pageControlEnabledTop) 
         rectPageControl = CGRectMake(0, 5, scrollWidth, 15);  
     else if (pageControlEnabledBottom)  
-        rectPageControl = CGRectMake(0, (scrollHeight - 20), scrollWidth, 15);  
+        rectPageControl = CGRectMake(0, (scrollHeight - 30), scrollWidth, 15);  
 
     if (pageControlEnabledTop || pageControlEnabledBottom) {  
         pageControl = [[[UIPageControl alloc] initWithFrame:rectPageControl] autorelease];  

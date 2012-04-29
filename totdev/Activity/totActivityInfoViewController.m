@@ -8,6 +8,8 @@
 
 #import "totActivityInfoViewController.h"
 #import "totImageView.h"
+#import "../Utility/totSliderView.h"
+#import "../Utility/totUtility.h"
 
 @implementation totActivityInfoViewController
 
@@ -93,15 +95,101 @@
 
 - (void)setInfo:(NSMutableDictionary *)info {}
 
+
+// load image content here for scroll view
+- (NSArray *)getImages {
+    NSMutableArray *arr = [[[NSMutableArray alloc] init] autorelease];  
+    
+    int eleNum = 26;
+    
+    for (int i=0;i<eleNum;i++){
+        NSString *imageFileName = [NSString stringWithFormat:@"%d.png",i + 1];
+        
+        [arr addObject:[UIImage imageNamed:imageFileName]]; 
+    }
+    
+    return (NSArray *)arr;  
+}
+
+// set optional margin array to indicate which button(s) need a margin shows it has multiple content
+- (NSArray *)setMargin{
+    NSMutableArray *arr = [[[NSMutableArray alloc] init] autorelease];  
+    
+    int eleNum = 26;
+    
+    for (int i=0;i<eleNum;i++){
+        [arr addObject:[NSNumber numberWithBool:NO]];
+    }
+    
+    [arr replaceObjectAtIndex:0 withObject:[NSNumber numberWithBool:YES]];
+    [arr replaceObjectAtIndex:1 withObject:[NSNumber numberWithBool:YES]];
+    
+    return arr;
+}
+
+#pragma totSliderView delegate
+- (void)buttonPressed:(id)sender {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Button pressed"
+													message:[NSString stringWithFormat:@"You pressed the button on button %d.", [sender tag]]
+												   delegate:nil
+										  cancelButtonTitle:@"OK"
+										  otherButtonTitles:nil];
+    
+    
+	[alert show];
+	[alert release];
+}
+
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
+    int textbox_xOrigin=140;
+    int textbox_yOrigin=20;
+    int textbox_width = 170;
+    int textbox_height = 130;
+    
+    UITextView *textbox = [[UITextView alloc] init];
+    textbox.frame = CGRectMake(textbox_xOrigin, textbox_yOrigin,
+                               textbox_width, textbox_height);   
+    textbox.backgroundColor =[UIColor clearColor];
+    [self.view addSubview:textbox];
+    [textbox release];
+    
     UIImageView *textbubble = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"messagebox.png"]];
-    textbubble.frame = CGRectMake(0, 35, 360, 180);    
-    [self.view insertSubview:textbubble belowSubview:mActivityDesc];
+    textbubble.frame = CGRectMake(textbox_xOrigin-40,-5,
+                                  textbox_width+80, textbox_height+60);    
+    
+    //[self.view insertSubview:textbubble belowSubview:mActivityDesc];
+    [self.view insertSubview:textbubble belowSubview:textbox];
     [textbubble release];
+    
+    
+    //load image    
+    UIImage* origImage = [UIImage imageNamed:@"1.png"];
+    UIImage *squareImage = [totUtility squareCropImage:origImage];
+    
+
+    UIImageView *img = [[UIImageView alloc] init];
+    img.frame = CGRectMake(10, textbox_yOrigin, 120, 120);
+    img.image = squareImage;
+    [self.view addSubview:img];
+    [img release];
+    
+    //load slider view
+    totSliderView *sv = [[totSliderView alloc] init];  
+    [sv setDelegate:self];
+    [sv setContentArray:[self getImages]]; 
+    [sv setMarginArray: [self setMargin]];
+    [sv setPosition:151];
+    [sv enablePageControlOnBottom];  
+    [self.view addSubview:[sv getWithPositionMemory:@"InfoView"]];  
+    //[self.view addSubview:[sv get]];//no memory to hold last-viewed page position
+    
+    //for test 
+    self.view.backgroundColor = [UIColor blackColor];
+
 }
 
 

@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "totActivityRootController.h"
+#import "../Utility/totSliderView.h"
 
-@interface totActivityInfoViewController : UIViewController <UITextViewDelegate> {
+@interface totActivityInfoViewController : UIViewController <UITextViewDelegate,totSliderViewDelegate> {
     totActivityRootController *activityRootController;
-    IBOutlet UITextView *mActivityDesc;
 }
 
 @property (nonatomic, assign) totActivityRootController *activityRootController;
