@@ -46,6 +46,8 @@
 		3FC1B7091544F19700295447 /* totEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FC1B7081544F19600295447 /* totEvent.m */; };
 		3FE9B5F7154A303100199AAF /* test_Model.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FE9B5F6154A303100199AAF /* test_Model.m */; };
 		3FE9B5FA154A313700199AAF /* totSliderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FE9B5F9154A313700199AAF /* totSliderView.m */; };
+		CE5C09FC154CCFDB00D41114 /* moviePlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5C09F9154CCFDB00D41114 /* moviePlayerViewController.m */; };
+		CE5C09FD154CCFDB00D41114 /* totAlbumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5C09FB154CCFDB00D41114 /* totAlbumViewController.m */; };
 		EF2387EB153B7D1600B9C8BD /* ActivityEntryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF2387EA153B7D1600B9C8BD /* ActivityEntryView.xib */; };
 		EF2387EF153B7D7700B9C8BD /* totActivityEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2387EE153B7D7700B9C8BD /* totActivityEntryViewController.m */; };
 		EF2387F2153BC3E500B9C8BD /* challenge.png in Resources */ = {isa = PBXBuildFile; fileRef = EF2387F1153BC3E500B9C8BD /* challenge.png */; };
@@ -138,6 +140,10 @@
 		3FE9B5F6154A303100199AAF /* test_Model.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = test_Model.m; path = Tests/test_Model.m; sourceTree = "<group>"; };
 		3FE9B5F8154A313700199AAF /* totSliderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totSliderView.h; path = Utility/totSliderView.h; sourceTree = "<group>"; };
 		3FE9B5F9154A313700199AAF /* totSliderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totSliderView.m; path = Utility/totSliderView.m; sourceTree = "<group>"; };
+		CE5C09F8154CCFDB00D41114 /* moviePlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = moviePlayerViewController.h; path = Utility/moviePlayerViewController.h; sourceTree = "<group>"; };
+		CE5C09F9154CCFDB00D41114 /* moviePlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = moviePlayerViewController.m; path = Utility/moviePlayerViewController.m; sourceTree = "<group>"; };
+		CE5C09FA154CCFDB00D41114 /* totAlbumViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totAlbumViewController.h; path = Utility/totAlbumViewController.h; sourceTree = "<group>"; };
+		CE5C09FB154CCFDB00D41114 /* totAlbumViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totAlbumViewController.m; path = Utility/totAlbumViewController.m; sourceTree = "<group>"; };
 		EF2387EA153B7D1600B9C8BD /* ActivityEntryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActivityEntryView.xib; sourceTree = "<group>"; };
 		EF2387ED153B7D7700B9C8BD /* totActivityEntryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totActivityEntryViewController.h; path = Activity/totActivityEntryViewController.h; sourceTree = "<group>"; };
 		EF2387EE153B7D7700B9C8BD /* totActivityEntryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totActivityEntryViewController.m; path = Activity/totActivityEntryViewController.m; sourceTree = "<group>"; };
@@ -481,6 +487,10 @@
 		EF97E7C1153B43DD0037E52D /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				CE5C09F8154CCFDB00D41114 /* moviePlayerViewController.h */,
+				CE5C09F9154CCFDB00D41114 /* moviePlayerViewController.m */,
+				CE5C09FA154CCFDB00D41114 /* totAlbumViewController.h */,
+				CE5C09FB154CCFDB00D41114 /* totAlbumViewController.m */,
 				3FE9B5F8154A313700199AAF /* totSliderView.h */,
 				3FE9B5F9154A313700199AAF /* totSliderView.m */,
 				EF97E7C9153B4BA90037E52D /* totImageView.h */,
@@ -637,6 +647,8 @@
 				3FE9B5F7154A303100199AAF /* test_Model.m in Sources */,
 				3FE9B5FA154A313700199AAF /* totSliderView.m in Sources */,
 				15414FDF154CCB8900C3C828 /* totUtility.m in Sources */,
+				CE5C09FC154CCFDB00D41114 /* moviePlayerViewController.m in Sources */,
+				CE5C09FD154CCFDB00D41114 /* totAlbumViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
