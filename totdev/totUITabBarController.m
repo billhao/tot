@@ -7,11 +7,13 @@
 //
 
 #import "totUITabBarController.h"
-#import "totCameraViewController.h"
+#import "Utility/totCameraViewController.h"
+#import "Utility/totAlbumViewController.h"
 
 @implementation totUITabBarController
 
 @synthesize cameraView;
+@synthesize albumView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -49,7 +51,12 @@
     self.cameraView.view.frame = CGRectMake(0, 0, 0, 0);
     [aCameraView release];
     
+    albumViewController *anAlbumView = [[albumViewController alloc] init];
+    self.albumView = anAlbumView;
+    [anAlbumView release];
+    
     [self.view addSubview:cameraView.view];
+    [self.view addSubview:albumView.view];
 }
 
 
@@ -58,6 +65,8 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
+    [cameraView release];
+    [albumView release];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

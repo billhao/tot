@@ -127,6 +127,8 @@
     self.myScrollView.frame = CGRectMake(0, 0, 0, 0);
     self.myFullSizeImageScrollView.frame = CGRectMake(0, 0, 0, 0);
     self.view.frame = CGRectMake(0, 0, 0, 0);
+    
+    [myPathArray release];
 }
 
 /* =================================
@@ -139,12 +141,11 @@
 {
     // Copy parameter to myPathArray
     int count = [inputPathArray count];
-    NSMutableArray *aPathArray = [[NSMutableArray alloc] initWithCapacity:count];
+    myPathArray = [[NSMutableArray alloc] initWithCapacity:count];
     for (int i = 0; i < count; i++) {
         NSString *aPath = [inputPathArray objectAtIndex: i];
-        [aPathArray addObject:aPath];
+        [myPathArray addObject:aPath];
     }
-    myPathArray = aPathArray;
 
     // Make the views visible
     self.view.frame = CGRectMake(0, 0, 320, 480);
@@ -186,7 +187,8 @@
     for (int i = 0; i < numberOfViews; i++) {
         for (int j = 0; j < 12; j++) {
             if (numberOfObjects == (i * 12 + j)) break; // Have added all the images in the array
-            UIImage *aImage = [UIImage imageNamed:[myPathArray objectAtIndex:(i * 12 + j)]];
+            //UIImage *aImage = [UIImage imageNamed:[myPathArray objectAtIndex:(i * 12 + j)]];
+            UIImage *aImage = [UIImage imageWithContentsOfFile:[myPathArray objectAtIndex:(i * 12 + j)]];
             UIImage *aSquareImage = [self getSquareImage:aImage];
             // Add movie icon for video capture
             uint isVideoFile = [self CheckFileType:[myPathArray objectAtIndex:(i * 12 + j)]];
@@ -298,7 +300,8 @@
     for (int i = 0; i < numberOfImage; i++) {
         UIButton *imgButton = [[UIButton alloc] initWithFrame:CGRectMake(i*320, 0, 320, 480)];
         imgButton.tintColor = [UIColor clearColor];
-        [imgButton setBackgroundImage:[UIImage imageNamed:[myPathArray objectAtIndex:(i)]] forState:UIControlStateNormal];
+        //[imgButton setBackgroundImage:[UIImage imageNamed:[myPathArray objectAtIndex:(i)]] forState:UIControlStateNormal];
+        [imgButton setBackgroundImage:[UIImage imageWithContentsOfFile:[myPathArray objectAtIndex:(i)]] forState:UIControlStateNormal];
         [imgButton addTarget:self action:@selector(FullScreenImageClicked:) forControlEvents:UIControlEventTouchDown];
         [imgButton setTag:i];  // this tag will be used to index into myPathArray for the pressed full-screen img
         [self.myFullSizeImageScrollView addSubview:imgButton];
@@ -399,7 +402,8 @@
 -(void) StartMoviePlayer: (NSString *)filename
 {
     // Play movie from the bundle
-    NSString *path = [[NSBundle mainBundle] pathForResource:filename ofType:@"mp4" inDirectory:nil];
+//    NSString *path = [[NSBundle mainBundle] pathForResource:filename ofType:@"mp4" inDirectory:nil];
+    NSString *path = [[NSBundle mainBundle] pathForResource:filename ofType:@"m4v" inDirectory:nil];
     
 	// Create custom movie player   
     myMoviePlayerView = [[[moviePlayerViewController alloc] initWithPath:path] autorelease];
@@ -426,6 +430,8 @@
     NSUInteger count = [arr count];
     NSString *fileType = [arr objectAtIndex:(count-2)];
     if ([fileType isEqualToString: @"mp4"] == YES) {
+        return 1;
+    } else if ([fileType isEqualToString: @"m4v"] == YES) {
         return 1;
     } else {
         return 0;

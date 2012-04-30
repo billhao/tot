@@ -10,6 +10,7 @@
 #import "totImageView.h"
 #import "totActivityRootController.h"
 #import "AppDelegate.h"
+#import "totActivityUtility.h"
 
 @implementation totActivityEntryViewController
 
@@ -20,20 +21,9 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        const char *names [] = {
-            "vision_attention", 
-            "eye_contact",
-            "mirror_test",
-            "imitation",
-            "gesture",
-            "emotion",
-            "chew",
-            "motor_skill"
-        };
-        
         mActivityNames = [[NSMutableArray alloc] init];
         for( int i=0; i<8; i++ ) {
-            [mActivityNames addObject:[NSString stringWithUTF8String:names[i]]];
+            [mActivityNames addObject:[NSString stringWithUTF8String:ACTIVITY_NAMES[i]]];
         }
         
         // mapping from activity to its child items
@@ -47,20 +37,10 @@
             kActivityChew,
             kActivityMotorSkill
         };
-        const char* vals [] = { // the name should correspond to the image file name
-            "task1,task2", // vision attention
-            "task1,task2", // eye contact
-            "task1,task2", // mirror test
-            "task1,task2", // imitation
-            "task1,task2", // gesture
-            "3,4,5,6,7,8,9,10,11,12", // emotion
-            "task1,task2", // chew
-            "task1,task2"  // motorskill
-        };
         
         mActivityMembers = [[NSMutableDictionary alloc] init];
         for( int i=0; i<8; i++ ) {
-            [mActivityMembers setObject:[NSString stringWithUTF8String:vals[i]] 
+            [mActivityMembers setObject:[NSString stringWithUTF8String:ACTIVITY_MEMBERS[i]] 
                                  forKey:[NSNumber numberWithInt:keys[i]]];
         }
         
@@ -88,25 +68,6 @@
 }
 */
 
-- (int)getCurrentBabyID {
-    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-    return appDelegate.mBabyId;
-}
-
-
-// key=value;key=value
-- (void)extractFromEvent:(totEvent*)evt intoImageArray:(NSMutableArray*)imgs {
-    NSArray *data = [evt.value componentsSeparatedByString:@";"];
-    for( int j=0; j<[data count]; j++ ) {
-        NSString *data_str = [data objectAtIndex:j];
-        NSString *key = [[data_str componentsSeparatedByString:@"="] objectAtIndex:0];
-        NSString *val = [[data_str componentsSeparatedByString:@"="] objectAtIndex:1];
-        if( [key isEqualToString:@"image"] ) {
-            [imgs addObject:val];
-        }
-    }
-}
-
 - (void)prepareMessage:(NSMutableDictionary*)message for:(int)activity{
     char query[256] = {0};
     NSString *type_str = [mActivityNames objectAtIndex:activity];
@@ -116,7 +77,7 @@
     NSMutableArray *images = [[NSMutableArray alloc] init];
     NSMutableArray *margin = [[NSMutableArray alloc] init];
     
-    int currentBabyId = [self getCurrentBabyID];
+    int currentBabyId = [totActivityUtility getCurrentBabyID];
     
     for( int i=0; i<[members count]; i++ ) {
         const char* c_str_type = [type_str UTF8String];
@@ -132,12 +93,12 @@
                 [margin addObject:[NSNumber numberWithBool:NO]];
                 break;
             case 1:
-                [self extractFromEvent:[queryResult objectAtIndex:0] 
+                [totActivityUtility extractFromEvent:[queryResult objectAtIndex:0] 
                         intoImageArray:images];
                 [margin addObject:[NSNumber numberWithBool:NO]];
                 break;
             default:
-                [self extractFromEvent:[queryResult objectAtIndex:0] 
+                [totActivityUtility extractFromEvent:[queryResult objectAtIndex:0] 
                         intoImageArray:images];
                 [margin addObject:[NSNumber numberWithBool:YES]];
                 break;

@@ -20,6 +20,7 @@
 
 -(NSString*) getTimeText {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    
     //[dateFormatter setDateStyle:NSDateFormatterShortStyle];
     //[dateFormatter setTimeStyle:NSDateFormatterShortStyle];
     
@@ -46,7 +47,7 @@
 }
 
 -(void)dealloc {
-    [datetime release];
+    //[datetime release];
     [name release];
     [value release];
 }

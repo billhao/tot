@@ -130,7 +130,7 @@
             UIImage *squareImage=[totUtility squareCropImage:origImage];
             [imageButton setImage:squareImage forState:UIControlStateNormal];
             [imageButton addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
-            [imageButton setTag:i*numOfRows*3 + j +1];
+            [imageButton setTag:i*numOfRows*3 + j + 1];
             [subview addSubview:(UIView *)imageButton];
             [imageButton release];
             

@@ -6,9 +6,11 @@
 //  Copyright (c) 2012 USC. All rights reserved.
 //
 
+#import "AppDelegate.h"
 #import "totActivityInfoViewController.h"
 #import "totActivityEntryViewController.h"
-#import "totImageView.h"
+#import "totActivityUtility.h"
+#import "../Utility/totImageView.h"
 #import "../Utility/totSliderView.h"
 
 @implementation totActivityInfoViewController
@@ -22,6 +24,8 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+        mTotModel = [appDelegate getDataModel];
     }
     return self;
 }
@@ -32,6 +36,13 @@
     [super didReceiveMemoryWarning];
     
     // Release any cached data, images, etc that aren't in use.
+}
+
+- (void)backToActivityView {
+    NSMutableDictionary *message = [[NSMutableDictionary alloc] init];
+    [activityRootController.activityEntryViewController prepareMessage:message for:[mCurrentActivityID intValue]];
+    [activityRootController switchTo:kActivityView withContextInfo:message];
+    [message release];
 }
 
 #pragma mark - View lifecycle
@@ -94,32 +105,83 @@
     [super touchesBegan:touches withEvent:event];
 }
 
+#pragma mark - totSliderView delegate
+- (void)buttonPressed:(id)sender {
+    UIButton *btn = (UIButton*)sender;
+    int tag = [btn tag];
+    tag = tag - 1; // index starts from 0
+    
+    NSString *activity = [NSString stringWithUTF8String: ACTIVITY_NAMES[[mCurrentActivityID intValue]]];
+    NSString *memb_str = [NSString stringWithUTF8String: ACTIVITY_MEMBERS[[mCurrentActivityID intValue]]];
+    NSArray *member = [memb_str componentsSeparatedByString:@","];
+    NSString *the_member = [member objectAtIndex:tag];
+    
+    sprintf(mEventName, "%s/%s", [activity UTF8String], [the_member UTF8String]);
+    printf("Event name: %s\n", mEventName);
+    
+    // pop up alertView, confirm to save to db
+    UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"" 
+                                                      message:@"Press OK to Save" 
+                                                     delegate:self 
+                                            cancelButtonTitle:@"Cancel" 
+                                            otherButtonTitles:@"OK", nil];
+    [message show];
+}
+
+#pragma mark - UIAlertView delegate
+- (void)alertView:(UIAlertView*)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
+    if( [title isEqualToString:@"OK"] ) {
+        //save to db
+        NSDate *now = [NSDate date];
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+        NSString *formattedDateString = [dateFormatter stringFromDate:now];
+        [dateFormatter release];
+        
+        char data[256]={0};
+        sprintf(data, "image=%s", mImagePath);
+        if( mIsVideo )
+            sprintf(data, "%s;video=%s", data, mVideoPath);
+        
+        printf("insert to db: %s\n", data);
+        
+        [mTotModel addEvent:[totActivityUtility getCurrentBabyID] 
+                      event:[NSString stringWithUTF8String:mEventName] 
+                   datetime:formattedDateString 
+                      value:[NSString stringWithUTF8String:data]];
+        
+        [self backToActivityView];
+    }
+}
+
+
 // receive parameters passed by other module for initialization or customization
 - (void)receiveMessage: (NSMutableDictionary*)message {
-    const char* vals [] = { // the name should correspond to the image file name
-        "task1,task2", // vision attention
-        "task1,task2", // eye contact
-        "task1,task2", // mirror test
-        "task1,task2", // imitation
-        "task1,task2", // gesture
-        "3,4,5,6,7,8,9,10,11,12", // emotion
-        "task1,task2", // chew
-        "task1,task2"  // motorskill
-    };
-    
     [mSliderView cleanScrollView];
     
+    NSString *videoFilename = [message objectForKey:@"storedVideo"];
     NSString *filename = [message objectForKey:@"storedImage"];
+    
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentDirectory = [paths objectAtIndex:0];
-    NSString *path = [documentDirectory stringByAppendingPathComponent:filename];
+    
+    NSString *imagePath = [documentDirectory stringByAppendingPathComponent:filename];
+    sprintf(mImagePath, "%s", [imagePath UTF8String]);
+    if( videoFilename ) {
+        NSString *videoPath = [documentDirectory stringByAppendingPathComponent:videoFilename];
+        sprintf(mVideoPath, "%s", [videoPath UTF8String]);
+        mIsVideo = YES;
+    } else {
+        mIsVideo = NO;
+    }
     
     self.mCurrentActivityID = [message objectForKey:@"activity"];
-    NSString *memb_str = [NSString stringWithUTF8String:vals[[self.mCurrentActivityID intValue]]];
+    NSString *memb_str = [NSString stringWithUTF8String:ACTIVITY_MEMBERS[[self.mCurrentActivityID intValue]]];
     NSArray  *member = [memb_str componentsSeparatedByString:@","];
     
     // insert the image
-    [mThumbnail setImage:[UIImage imageWithContentsOfFile:path]];
+    [mThumbnail setImage:[UIImage imageWithContentsOfFile:imagePath]];
     
     // display the slider view
     NSMutableArray *images = [[NSMutableArray alloc] init];
@@ -152,17 +214,9 @@
 //    [textbubble release];
     
     mSliderView = [[totSliderView alloc] initWithFrame:CGRectMake(0, 151, 320, 260)];
+    [mSliderView setDelegate:self];
     [mSliderView enablePageControlOnBottom];
     [self.view addSubview:mSliderView];
-}
-
-- (IBAction)save:(id)sender {
-    NSMutableDictionary *message = [[NSMutableDictionary alloc] init];
-    
-    [activityRootController.activityEntryViewController prepareMessage:message for:[mCurrentActivityID intValue]];
-    [activityRootController switchTo:kActivityView withContextInfo:message];
-    
-    [message release];
 }
 
 - (void)viewDidUnload

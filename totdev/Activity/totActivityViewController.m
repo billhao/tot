@@ -6,11 +6,13 @@
 //  Copyright (c) 2012 USC. All rights reserved.
 //
 
+#import "AppDelegate.h"
 #import "totActivityViewController.h"
 #import "totUITabBarController.h"
+#import "totActivityUtility.h"
 #import "../Utility/totSliderView.h"
 #import "../Utility/totImageView.h"
-#import "AppDelegate.h"
+#import "../Utility/totAlbumViewController.h"
 
 @implementation totActivityViewController
 
@@ -24,6 +26,9 @@
     if (self) {
         // Custom initialization
         mMessage = [[NSMutableDictionary alloc] init];
+        
+        AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+        mTotModel = [appDelegate getDataModel];
     }
     return self;
 }
@@ -98,6 +103,41 @@
     [activityRootController switchTo:kActivityInfoView withContextInfo:mMessage];
 }
 
+#pragma totSliderView delegate
+- (void)buttonPressed: (id)sender {
+    UIButton *btn = (UIButton*)sender;
+    int tag = [btn tag];
+    tag = tag - 1;
+    
+    NSString *activity = [NSString stringWithUTF8String: ACTIVITY_NAMES[[mCurrentActivityID intValue]]];
+    NSString *memb_str = [NSString stringWithUTF8String: ACTIVITY_MEMBERS[[mCurrentActivityID intValue]]];
+    NSArray *member = [memb_str componentsSeparatedByString:@","];
+    NSString *the_member = [member objectAtIndex:tag];
+    
+    int currentBabyId = [totActivityUtility getCurrentBabyID];
+    
+    char query[256] = {0};
+    sprintf(query, "%s/%s", [activity UTF8String], [the_member UTF8String] );
+    
+    NSMutableArray *queryResult = [mTotModel getEvent:currentBabyId event:[NSString stringWithUTF8String:query]];
+    NSMutableArray *images = [[NSMutableArray alloc] init];
+    
+    int querySize = [queryResult count];
+    if( querySize != 0 ) {
+        for( int i = 0; i < querySize; i++ ) {
+            [totActivityUtility extractFromEvent:[queryResult objectAtIndex:i] 
+                                  intoImageArray:images];
+        }
+        
+        // launch the album view
+        AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+        [appDelegate.rootController.albumView MakeFullView:images]; 
+    }
+    
+    [images release];
+}
+
+
 - (void) launchCamera:(id)sender {
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
     [appDelegate.rootController.cameraView setDelegate:self];
@@ -123,10 +163,17 @@
     self.mCurrentActivityID = [message objectForKey:@"activity"];
     NSMutableArray *images = [message objectForKey:@"images"];
     NSMutableArray *margin = [message objectForKey:@"margin"];
+    
     for( int i = 0; i < [images count]; i++ ) {
-        [activityMemberImages addObject:[UIImage imageNamed:[images objectAtIndex:i]]];
+        NSArray *tokens = [[images objectAtIndex:i] componentsSeparatedByString:@"."];
+        NSString *ext = [tokens objectAtIndex:1];
+        if( [ext isEqualToString:@"jpg"] )
+            [activityMemberImages addObject:[UIImage imageWithContentsOfFile:[images objectAtIndex:i]]];
+        else
+            [activityMemberImages addObject:[UIImage imageNamed:[images objectAtIndex:i]]];
         [activityMemberMargin addObject:[margin objectAtIndex:i]];
     }
+    
     [mSliderView setContentArray:activityMemberImages];
     [mSliderView setMarginArray:activityMemberMargin];
     [mSliderView getWithPositionMemoryIdentifier:@"activityView"];
@@ -140,6 +187,7 @@
     [super viewDidLoad];
     
     mSliderView = [[totSliderView alloc] initWithFrame:CGRectMake(0, 10, 320, 260)];
+    [mSliderView setDelegate:self];
     [mSliderView enablePageControlOnBottom];
     [self.view addSubview:mSliderView];
 

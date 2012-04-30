@@ -57,6 +57,9 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
+    
+    printf("%s\n", ACTIVITY_NAMES[0]);
+    printf("%s\n", ACTIVITY_MEMBERS[0]);
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

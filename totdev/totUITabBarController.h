@@ -9,11 +9,14 @@
 #import <UIKit/UIKit.h>
 
 @class totCameraViewController;
+@class albumViewController;
 
 @interface totUITabBarController : UITabBarController {
     totCameraViewController *cameraView;
+    albumViewController *albumView;
 }
 
 @property (nonatomic, retain) totCameraViewController *cameraView;
+@property (nonatomic, retain) albumViewController *albumView;
 
 @end

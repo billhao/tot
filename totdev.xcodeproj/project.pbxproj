@@ -51,6 +51,9 @@
 		EF043C32154D39CC00975BCD /* messagebox.png in Resources */ = {isa = PBXBuildFile; fileRef = EF043C31154D39CC00975BCD /* messagebox.png */; };
 		EF043C39154DBB5200975BCD /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = EF043C37154DBB5200975BCD /* 1.png */; };
 		EF043C3A154DBB5200975BCD /* 2.png in Resources */ = {isa = PBXBuildFile; fileRef = EF043C38154DBB5200975BCD /* 2.png */; };
+		EF043C3F154DE2F500975BCD /* movie_thumbnail-01.png in Resources */ = {isa = PBXBuildFile; fileRef = EF043C3C154DE2F500975BCD /* movie_thumbnail-01.png */; };
+		EF043C40154DE2F500975BCD /* play_button.png in Resources */ = {isa = PBXBuildFile; fileRef = EF043C3D154DE2F500975BCD /* play_button.png */; };
+		EF043C41154DE2F500975BCD /* rtn_button.png in Resources */ = {isa = PBXBuildFile; fileRef = EF043C3E154DE2F500975BCD /* rtn_button.png */; };
 		EF2387EB153B7D1600B9C8BD /* ActivityEntryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF2387EA153B7D1600B9C8BD /* ActivityEntryView.xib */; };
 		EF2387EF153B7D7700B9C8BD /* totActivityEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2387EE153B7D7700B9C8BD /* totActivityEntryViewController.m */; };
 		EF2387F2153BC3E500B9C8BD /* challenge.png in Resources */ = {isa = PBXBuildFile; fileRef = EF2387F1153BC3E500B9C8BD /* challenge.png */; };
@@ -96,6 +99,7 @@
 		EF6283B015367744004031D6 /* HomeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF6283AF15367744004031D6 /* HomeView.xib */; };
 		EF97E7CB153B4BA90037E52D /* totImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = EF97E7CA153B4BA90037E52D /* totImageView.m */; };
 		EF97E7CD153B4F040037E52D /* mainscreen.png in Resources */ = {isa = PBXBuildFile; fileRef = EF97E7CC153B4F040037E52D /* mainscreen.png */; };
+		EFA1DE32154DF41F00970F0C /* totActivityUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = EFA1DE31154DF41F00970F0C /* totActivityUtility.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -150,6 +154,9 @@
 		EF043C31154D39CC00975BCD /* messagebox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = messagebox.png; sourceTree = "<group>"; };
 		EF043C37154DBB5200975BCD /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1.png; sourceTree = "<group>"; };
 		EF043C38154DBB5200975BCD /* 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 2.png; sourceTree = "<group>"; };
+		EF043C3C154DE2F500975BCD /* movie_thumbnail-01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "movie_thumbnail-01.png"; sourceTree = "<group>"; };
+		EF043C3D154DE2F500975BCD /* play_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play_button.png; sourceTree = "<group>"; };
+		EF043C3E154DE2F500975BCD /* rtn_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rtn_button.png; sourceTree = "<group>"; };
 		EF2387EA153B7D1600B9C8BD /* ActivityEntryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActivityEntryView.xib; sourceTree = "<group>"; };
 		EF2387ED153B7D7700B9C8BD /* totActivityEntryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totActivityEntryViewController.h; path = Activity/totActivityEntryViewController.h; sourceTree = "<group>"; };
 		EF2387EE153B7D7700B9C8BD /* totActivityEntryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totActivityEntryViewController.m; path = Activity/totActivityEntryViewController.m; sourceTree = "<group>"; };
@@ -212,6 +219,8 @@
 		EF97E7C9153B4BA90037E52D /* totImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totImageView.h; path = Utility/totImageView.h; sourceTree = "<group>"; };
 		EF97E7CA153B4BA90037E52D /* totImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totImageView.m; path = Utility/totImageView.m; sourceTree = "<group>"; };
 		EF97E7CC153B4F040037E52D /* mainscreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mainscreen.png; sourceTree = "<group>"; };
+		EFA1DE30154DF41F00970F0C /* totActivityUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totActivityUtility.h; path = Activity/totActivityUtility.h; sourceTree = "<group>"; };
+		EFA1DE31154DF41F00970F0C /* totActivityUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totActivityUtility.m; path = Activity/totActivityUtility.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -292,6 +301,16 @@
 				3FE9B5F6154A303100199AAF /* test_Model.m */,
 			);
 			name = Tests;
+			sourceTree = "<group>";
+		};
+		EF043C3B154DE2D600975BCD /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				EF043C3C154DE2F500975BCD /* movie_thumbnail-01.png */,
+				EF043C3D154DE2F500975BCD /* play_button.png */,
+				EF043C3E154DE2F500975BCD /* rtn_button.png */,
+			);
+			name = Utility;
 			sourceTree = "<group>";
 		};
 		EF2387F0153BC3AC00B9C8BD /* Activity */ = {
@@ -426,6 +445,8 @@
 				EF238800153BC67B00B9C8BD /* totActivityInfoViewController.m */,
 				EF238804153BC71400B9C8BD /* totActivityAlbumViewController.h */,
 				EF238805153BC71400B9C8BD /* totActivityAlbumViewController.m */,
+				EFA1DE30154DF41F00970F0C /* totActivityUtility.h */,
+				EFA1DE31154DF41F00970F0C /* totActivityUtility.m */,
 			);
 			name = Activity;
 			sourceTree = "<group>";
@@ -451,6 +472,7 @@
 		EF6283A215366DF1004031D6 /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				EF043C3B154DE2D600975BCD /* Utility */,
 				EF2387F0153BC3AC00B9C8BD /* Activity */,
 				EF97E7C3153B49F30037E52D /* Home */,
 				EF6283A315366DF8004031D6 /* TabIcon */,
@@ -624,6 +646,9 @@
 				EF043C32154D39CC00975BCD /* messagebox.png in Resources */,
 				EF043C39154DBB5200975BCD /* 1.png in Resources */,
 				EF043C3A154DBB5200975BCD /* 2.png in Resources */,
+				EF043C3F154DE2F500975BCD /* movie_thumbnail-01.png in Resources */,
+				EF043C40154DE2F500975BCD /* play_button.png in Resources */,
+				EF043C41154DE2F500975BCD /* rtn_button.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -655,6 +680,7 @@
 				15414FDF154CCB8900C3C828 /* totUtility.m in Sources */,
 				CE5C09FC154CCFDB00D41114 /* moviePlayerViewController.m in Sources */,
 				CE5C09FD154CCFDB00D41114 /* totAlbumViewController.m in Sources */,
+				EFA1DE32154DF41F00970F0C /* totActivityUtility.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
