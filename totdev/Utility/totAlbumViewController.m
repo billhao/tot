@@ -69,16 +69,19 @@
     self.myTitleBarView = aTitleBarView;
     [aTitleBarView release];
     [self.view addSubview:self.myTitleBarView];
+    
     // Build myScrollView
     UIScrollView *aScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 60, 320, 420)];
     self.myScrollView = aScrollView;
     [aScrollView release];
     [self.view addSubview:self.myScrollView];
+    
     // Build myFullSizeImageScrollView
     UIScrollView *anotherScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
     self.myFullSizeImageScrollView = anotherScrollView;
     [anotherScrollView release];
     [self.view insertSubview:self.myFullSizeImageScrollView belowSubview:myTitleBarView];
+    
     // Minimize the views
     self.myTitleBarView.hidden = YES;
     self.myScrollView.hidden = YES;
@@ -468,10 +471,10 @@
     UIGraphicsBeginImageContext(size);
     
     CGPoint pointImg1 = CGPointMake(0,0);
-    [img drawAtPoint:pointImg1 ];
+    [img drawAtPoint:pointImg1];
     
     CGPoint pointImage2 = CGPointMake(0,0);
-    [img2 drawAtPoint:pointImage2 ];
+    [img2 drawAtPoint:pointImage2];
     
     UIImage* result = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
