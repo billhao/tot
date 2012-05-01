@@ -9,11 +9,13 @@
 #import "totUITabBarController.h"
 #import "Utility/totCameraViewController.h"
 #import "Utility/totAlbumViewController.h"
+#import "Utility/totPhotoView.h"
 
 @implementation totUITabBarController
 
 @synthesize cameraView;
 @synthesize albumView;
+@synthesize photoView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -55,8 +57,14 @@
     self.albumView = anAlbumView;
     [anAlbumView release];
     
+    totPhotoView *aPhotoView = [[totPhotoView alloc] initWithNibName:@"PhotoView" bundle:nil];
+    self.photoView = aPhotoView;
+    self.photoView.view.frame = CGRectMake(0, 0, 0, 0);
+    [aPhotoView release];
+    
     [self.view addSubview:cameraView.view];
     [self.view addSubview:albumView.view];
+    [self.view addSubview:photoView.view];
 }
 
 

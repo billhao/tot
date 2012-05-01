@@ -14,5 +14,6 @@
 
 + (int)getCurrentBabyID;
 + (void)extractFromEvent:(totEvent*)evt intoImageArray:(NSMutableArray*)imgs;
++ (UIImage*)imageWithImage:(UIImage*)image scaledToSize:(CGSize)newSize;
 
 @end

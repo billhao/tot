@@ -10,6 +10,7 @@
 #import "totActivityViewController.h"
 #import "totUITabBarController.h"
 #import "totActivityUtility.h"
+#import "totActivityConst.h"
 #import "../Utility/totSliderView.h"
 #import "../Utility/totImageView.h"
 #import "../Utility/totAlbumViewController.h"
@@ -51,11 +52,21 @@
 */
 
 // utility functions
+- (void) printFileSize:(NSString*) path {
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSDictionary *fileAttr = [fileManager attributesOfItemAtPath:path error:nil];
+    if( fileAttr ) {
+        NSString *fileSize = [fileAttr objectForKey:@"NSFileSize"];
+        NSLog(@"%@\n", fileSize);
+    }
+}
+
 - (void) saveImage:(UIImage*)photo intoFile:(NSString*)filename {
+    UIImage *resizedPhoto = [totActivityUtility imageWithImage:photo scaledToSize:CGSizeMake(320, 480)];
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentDirectory = [paths objectAtIndex:0];
     NSString *imagePath = [documentDirectory stringByAppendingPathComponent:filename];
-    NSData *data = UIImageJPEGRepresentation(photo, 0.8);
+    NSData *data = UIImageJPEGRepresentation(resizedPhoto, 0.8);
     [data writeToFile:imagePath atomically:NO];
 }
 
@@ -79,6 +90,7 @@
         [mMessage removeObjectForKey:@"storedVideo"];
     [mMessage setObject:filename forKey:@"storedImage"];
     [mMessage setObject:self.mCurrentActivityID forKey:@"activity"];
+    [filename release];
     
     [activityRootController switchTo:kActivityInfoView withContextInfo:mMessage];
 }
@@ -88,8 +100,8 @@
     NSTimeInterval interval = [today timeIntervalSince1970];
     NSString *filename = [[NSString alloc] initWithFormat:@"%d.mov", (int)interval];
     [self saveVideo:videoPath intoFile:filename];
-    
     [mMessage setObject:filename forKey:@"storedVideo"];
+    [filename release];
 }
 
 - (void) cameraView:(id)cameraView didFinishSavingThumbnail:(UIImage*)thumbnail {
@@ -129,9 +141,13 @@
                                   intoImageArray:images];
         }
         
-        // launch the album view
         AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-        [appDelegate.rootController.albumView MakeFullView:images]; 
+        [appDelegate.rootController.albumView MakeFullView:images];
+        
+        //NSMutableDictionary *msg = [[NSMutableDictionary alloc] init];
+        //[msg setObject:images forKey:@"images"];
+        //[activityRootController switchTo:kActivityAlbumView withContextInfo:msg];
+        //[msg release];
     }
     
     [images release];
@@ -166,7 +182,7 @@
     
     for( int i = 0; i < [images count]; i++ ) {
         NSArray *tokens = [[images objectAtIndex:i] componentsSeparatedByString:@"."];
-        NSString *ext = [tokens objectAtIndex:1];
+        NSString *ext = [tokens lastObject];
         if( [ext isEqualToString:@"jpg"] )
             [activityMemberImages addObject:[UIImage imageWithContentsOfFile:[images objectAtIndex:i]]];
         else
@@ -186,6 +202,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    // create the slider view
     mSliderView = [[totSliderView alloc] initWithFrame:CGRectMake(0, 10, 320, 260)];
     [mSliderView setDelegate:self];
     [mSliderView enablePageControlOnBottom];

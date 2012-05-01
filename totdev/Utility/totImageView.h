@@ -8,10 +8,20 @@
 
 #import <UIKit/UIKit.h>
 
-@interface totImageView : UIImageView {
+@protocol totImageViewDelegate <NSObject>
 
+@optional
+- (void)touchesEndedDelegate:(NSSet *)touches withEvent:(UIEvent *)event;
+
+@end
+
+@interface totImageView : UIImageView {
+    id<totImageViewDelegate> delegate;
 }
 
-- (void) imageFilePath:(NSString*)path;
+@property (nonatomic, retain) id<totImageViewDelegate> delegate;
+
+- (void)imageFilePath:(NSString*)path;
+- (void)imageFromFileContent:(NSString*)path;
 
 @end

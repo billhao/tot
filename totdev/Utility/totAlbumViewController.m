@@ -64,26 +64,27 @@
     [super viewDidLoad];
     
     // Build myTitleBarView
-    UIView *aTitleBarView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
+    UIView *aTitleBarView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 60)];
     aTitleBarView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:.5];
     self.myTitleBarView = aTitleBarView;
     [aTitleBarView release];
     [self.view addSubview:self.myTitleBarView];
     // Build myScrollView
-    UIScrollView *aScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
+    UIScrollView *aScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 60, 320, 420)];
     self.myScrollView = aScrollView;
     [aScrollView release];
     [self.view addSubview:self.myScrollView];
     // Build myFullSizeImageScrollView
-    UIScrollView *anotherScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
+    UIScrollView *anotherScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
     self.myFullSizeImageScrollView = anotherScrollView;
     [anotherScrollView release];
     [self.view insertSubview:self.myFullSizeImageScrollView belowSubview:myTitleBarView];
     // Minimize the views
-    self.myTitleBarView.frame = CGRectMake(0, 0, 0, 0);
-    self.myScrollView.frame = CGRectMake(0, 0, 0, 0);
-    self.myFullSizeImageScrollView.frame = CGRectMake(0, 0, 0, 0);
-    self.view.frame = CGRectMake(0, 0, 0, 0);
+    self.myTitleBarView.hidden = YES;
+    self.myScrollView.hidden = YES;
+    self.myFullSizeImageScrollView.hidden = YES;
+    self.view.frame = CGRectMake(0, 0, 320, 480);
+    self.view.hidden = YES;
     self.view.backgroundColor = [UIColor blackColor];
 }
 
@@ -123,10 +124,15 @@
         [subview removeFromSuperview];
     }
     // Minimize all the frames
-    self.myTitleBarView.frame = CGRectMake(0, 0, 0, 0);
-    self.myScrollView.frame = CGRectMake(0, 0, 0, 0);
-    self.myFullSizeImageScrollView.frame = CGRectMake(0, 0, 0, 0);
-    self.view.frame = CGRectMake(0, 0, 0, 0);
+    ////self.myTitleBarView.frame = CGRectMake(0, 0, 0, 0);
+    ////self.myScrollView.frame = CGRectMake(0, 0, 0, 0);
+    ////self.myFullSizeImageScrollView.frame = CGRectMake(0, 0, 0, 0);
+    //self.view.frame = CGRectMake(0, 0, 0, 0);
+    self.myTitleBarView.hidden = YES;
+    self.myScrollView.hidden = YES;
+    self.myFullSizeImageScrollView.hidden = YES;
+    self.view.hidden = YES;
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
     
     [myPathArray release];
 }
@@ -148,10 +154,13 @@
     }
 
     // Make the views visible
-    self.view.frame = CGRectMake(0, 0, 320, 480);
-    self.myScrollView.frame = CGRectMake(0, 60, 320, 420);
-    self.myTitleBarView.frame = CGRectMake(0, 0, 320, 60);
-    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
+    ////self.view.frame = CGRectMake(0, 0, 320, 480);
+    ////self.myScrollView.frame = CGRectMake(0, 60, 320, 420);
+    ////self.myTitleBarView.frame = CGRectMake(0, 0, 320, 60);
+    self.view.hidden = NO;
+    self.myTitleBarView.hidden = NO;
+    self.myScrollView.hidden = NO;
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
     
     // Add content to myTitleBarView
     /*** Title ***/
@@ -163,8 +172,9 @@
     myLabel.backgroundColor = [UIColor clearColor];
     [self.myTitleBarView addSubview:myLabel];
     [myLabel release];
+    
     /*** RETURN button ***/
-    UIButton *rtnButton = [[UIButton alloc] initWithFrame:CGRectMake(15, 20, 20, 20)];
+    UIButton *rtnButton = [[UIButton alloc] initWithFrame:CGRectMake(15, 20, 60, 60)];
     rtnButton.backgroundColor = [UIColor clearColor];
     [rtnButton setBackgroundImage: [UIImage imageNamed:@"rtn_button.png"] forState:UIControlStateNormal];
     [rtnButton addTarget:self action:@selector(ReturnButtonClicked) forControlEvents:UIControlEventTouchUpInside];
@@ -187,9 +197,8 @@
     for (int i = 0; i < numberOfViews; i++) {
         for (int j = 0; j < 12; j++) {
             if (numberOfObjects == (i * 12 + j)) break; // Have added all the images in the array
-            //UIImage *aImage = [UIImage imageNamed:[myPathArray objectAtIndex:(i * 12 + j)]];
             UIImage *aImage = [UIImage imageWithContentsOfFile:[myPathArray objectAtIndex:(i * 12 + j)]];
-            UIImage *aSquareImage = [self getSquareImage:aImage];
+            UIImage *aSquareImage = [self getSquareImage:aImage];  // lots of overhead!!!
             // Add movie icon for video capture
             uint isVideoFile = [self CheckFileType:[myPathArray objectAtIndex:(i * 12 + j)]];
             if (isVideoFile == 1) {
@@ -292,7 +301,9 @@
     // Add content to myFullSizeImageScrollView
     myTitleBarView.hidden = YES;
     myScrollView.hidden = YES;
-    myFullSizeImageScrollView.frame = CGRectMake(0, 0, 320, 480);
+    ////myFullSizeImageScrollView.frame = CGRectMake(0, 0, 320, 480);
+    myFullSizeImageScrollView.hidden = NO;
+    
     int numberOfImage= [myPathArray count];
     myFullSizeImageScrollView.contentSize = CGSizeMake(myScrollView.frame.size.width * numberOfImage, 
                                                        myScrollView.frame.size.height);
@@ -320,10 +331,8 @@
 -(void) FullScreenImageClicked: (UIButton *)clickedButton
 {
     if (myTitleBarView.hidden == YES /*already displaying full-screen image*/) {
-        myFullSizeImageScrollView.frame = CGRectMake(0, 0, 320, 480);
         myFullSizeImageScrollView.scrollEnabled = NO;
         myTitleBarView.hidden = NO;
-        myTitleBarView.frame = CGRectMake(0, 0, 320, 60);
         // IF the a video capture is clicked, add a Play button on the title bar.
         int selectedImage = [clickedButton tag];
         NSString *selectedPath = [myPathArray objectAtIndex:selectedImage];
@@ -339,16 +348,15 @@
         }
     } else /*already displaying title bar and image*/{
         myTitleBarView.hidden = YES;
-        myFullSizeImageScrollView.frame = CGRectMake(0, 0, 320, 480);
         myFullSizeImageScrollView.scrollEnabled = YES;
-        myTitleBarView.frame = CGRectMake(0, 0, 0, 0);
         // Remove any possible Play button
-        int PossiblePlayButtonTag = [clickedButton tag];
+        //int PossiblePlayButtonTag = [clickedButton tag];
         for (UIView *subview in [self.myTitleBarView subviews]) {
-            if (subview.tag == PossiblePlayButtonTag) {
+            if ([subview respondsToSelector:@selector(StartMoviePlayer:)]) {
                 [subview removeFromSuperview];
             }
         }
+        
     }
 }
 
@@ -373,26 +381,23 @@
 
 -(void) ReturnButtonClicked
 {
-    if (myFullSizeImageScrollView.frame.size.height > 0 /*Current at FullSizeImageScrollVIew*/) {
+    if (myFullSizeImageScrollView.hidden == NO /*Current at FullSizeImageScrollVIew*/) {
         // Remove Play button from title bar
-        CGPoint curFullScreenImagePos = self.myFullSizeImageScrollView.contentOffset;
-        CGFloat offsetX = curFullScreenImagePos.x;
-        int offsetIndex = offsetX / 320;
+        //CGPoint curFullScreenImagePos = self.myFullSizeImageScrollView.contentOffset;
+        //CGFloat offsetX = curFullScreenImagePos.x;
         for (UIView *subview in [self.myTitleBarView subviews]) {
-            if (subview.tag == offsetIndex) {
+            if ([subview respondsToSelector:@selector(StartMoviePlayer:)]) {
                 [subview removeFromSuperview];
             }
         }
         // Remove image thumnails from myFullSizeImageScrollView
-        for(UIView *subview in [self.myFullSizeImageScrollView subviews]) {
-            [subview removeFromSuperview];
-        }
+        //for(UIView *subview in [self.myFullSizeImageScrollView subviews]) {
+        //    [subview removeFromSuperview];
+        //}
         // Return to thumbnail scroll view
-        self.myFullSizeImageScrollView.frame = CGRectMake(0, 0, 0, 0);
+        //self.myFullSizeImageScrollView.frame = CGRectMake(0, 0, 0, 0);
         self.myFullSizeImageScrollView.hidden = YES;
-        self.myScrollView.frame = CGRectMake(0, 60, 320, 420);
         self.myScrollView.hidden = NO;
-        self.myTitleBarView.frame = CGRectMake(0, 0, 320, 60);
         self.myTitleBarView.hidden = NO;
     } else /*Current at thumnail scroll view*/ {
         [self MakeNoView];
@@ -402,11 +407,10 @@
 -(void) StartMoviePlayer: (NSString *)filename
 {
     // Play movie from the bundle
-//    NSString *path = [[NSBundle mainBundle] pathForResource:filename ofType:@"mp4" inDirectory:nil];
-    NSString *path = [[NSBundle mainBundle] pathForResource:filename ofType:@"m4v" inDirectory:nil];
+    //NSString *path = [[NSBundle mainBundle] pathForResource:filename ofType:@"mp4" inDirectory:nil];
     
 	// Create custom movie player   
-    myMoviePlayerView = [[[moviePlayerViewController alloc] initWithPath:path] autorelease];
+    myMoviePlayerView = [[[moviePlayerViewController alloc] initWithPath:filename] autorelease];
     
 	// Show the movie player as modal
  	[self presentModalViewController:myMoviePlayerView animated:YES];
@@ -425,13 +429,12 @@
  */
 -(uint) CheckFileType: (NSString *)path
 {
-    NSArray *arr = [path componentsSeparatedByCharactersInSet:
-                    [NSCharacterSet characterSetWithCharactersInString:@"."]];
+    NSArray *arr = [path componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"."]];
     NSUInteger count = [arr count];
     NSString *fileType = [arr objectAtIndex:(count-2)];
     if ([fileType isEqualToString: @"mp4"] == YES) {
         return 1;
-    } else if ([fileType isEqualToString: @"m4v"] == YES) {
+    } else if ([fileType isEqualToString: @"mov"] == YES) {
         return 1;
     } else {
         return 0;
@@ -448,8 +451,7 @@
  */
 -(NSString *) GetVideoPath: (NSString *)path
 {
-    NSString *videoPath = [path substringToIndex:([path length] - 8)];
-    [videoPath retain];
+    NSString *videoPath = [path substringToIndex:([path length] - 4)];
     return videoPath;
 }
 
@@ -468,7 +470,7 @@
     CGPoint pointImg1 = CGPointMake(0,0);
     [img drawAtPoint:pointImg1 ];
     
-    CGPoint pointImage2 = CGPointMake(0, 0);
+    CGPoint pointImage2 = CGPointMake(0,0);
     [img2 drawAtPoint:pointImage2 ];
     
     UIImage* result = UIGraphicsGetImageFromCurrentImageContext();

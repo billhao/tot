@@ -19,7 +19,6 @@
 @synthesize activityInfoViewController;
 @synthesize activityAlbumViewController;
 
-
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -133,6 +132,7 @@
             [activityViewController receiveMessage:info];
             break;
         case kActivityAlbumView:
+            [activityAlbumViewController receiveMessage:info];
             break;
         case kActivityInfoView:
             [activityInfoViewController receiveMessage:info];

@@ -130,14 +130,21 @@
         generator.appliesPreferredTrackTransform = TRUE;
         CMTime thumbnailTime = CMTimeMakeWithSeconds(0, 30);
         
+        CGImageRef im = [generator copyCGImageAtTime:thumbnailTime actualTime:nil error:nil];
+        UIImage *thumbnail = [[UIImage alloc] initWithCGImage:im];
+        if( [delegate respondsToSelector:@selector(cameraView:didFinishSavingThumbnail:)] ) {
+            [delegate cameraView:self didFinishSavingThumbnail:thumbnail];
+        }
+        [self hideCamera];
+        [thumbnail release];
+        CGImageRelease(im);
+        
+        /*
         AVAssetImageGeneratorCompletionHandler handler = ^(CMTime requestedTime, CGImageRef im, CMTime actualTime, AVAssetImageGeneratorResult result, NSError *error) {
             if( result != AVAssetImageGeneratorSucceeded ) {
                 NSLog(@"couldn't generate thumbnail, error:%@", error);
             } else {
                 UIImage *thumbnail = [[UIImage alloc] initWithCGImage:im];
-                
-                UIImageWriteToSavedPhotosAlbum(thumbnail, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
-                
                 if( [delegate respondsToSelector:@selector(cameraView:didFinishSavingThumbnail:)] ) {
                     [delegate cameraView:self didFinishSavingThumbnail:thumbnail];
                 }
@@ -149,6 +156,7 @@
         
         [generator generateCGImagesAsynchronouslyForTimes:[NSArray arrayWithObject:[NSValue valueWithCMTime:thumbnailTime]] 
                                         completionHandler:handler];
+        */
     }
     
     [asset release];

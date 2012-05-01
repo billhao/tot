@@ -11,6 +11,7 @@
 #import "totActivityRootController.h"
 #import "AppDelegate.h"
 #import "totActivityUtility.h"
+#import "totActivityConst.h"
 
 @implementation totActivityEntryViewController
 

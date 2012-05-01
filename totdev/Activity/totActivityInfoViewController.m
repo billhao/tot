@@ -10,6 +10,7 @@
 #import "totActivityInfoViewController.h"
 #import "totActivityEntryViewController.h"
 #import "totActivityUtility.h"
+#import "totActivityConst.h"
 #import "../Utility/totImageView.h"
 #import "../Utility/totSliderView.h"
 
@@ -133,9 +134,10 @@
     NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
     if( [title isEqualToString:@"OK"] ) {
         //save to db
-        NSDate *now = [NSDate date];
+        
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+        NSDate *now = [NSDate date];
         NSString *formattedDateString = [dateFormatter stringFromDate:now];
         [dateFormatter release];
         
@@ -143,6 +145,8 @@
         sprintf(data, "image=%s", mImagePath);
         if( mIsVideo )
             sprintf(data, "%s;video=%s", data, mVideoPath);
+        if( mActivityDesc.text.length != 0 )
+            sprintf(data, "%s;desc=%s", data, [mActivityDesc.text UTF8String]);
         
         printf("insert to db: %s\n", data);
         
@@ -213,6 +217,7 @@
 //    [self.view insertSubview:textbubble belowSubview:mActivityDesc];
 //    [textbubble release];
     
+    // create the slider view
     mSliderView = [[totSliderView alloc] initWithFrame:CGRectMake(0, 151, 320, 260)];
     [mSliderView setDelegate:self];
     [mSliderView enablePageControlOnBottom];

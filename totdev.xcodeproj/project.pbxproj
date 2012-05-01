@@ -79,6 +79,8 @@
 		EF238826153E19E800B9C8BD /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF238824153E19E700B9C8BD /* MediaPlayer.framework */; };
 		EF238827153E19E800B9C8BD /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF238825153E19E800B9C8BD /* MobileCoreServices.framework */; };
 		EF238829153E1A0D00B9C8BD /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF238828153E1A0C00B9C8BD /* QuartzCore.framework */; };
+		EF5FBB59154E6A0A00CBBA27 /* totPhotoView.m in Sources */ = {isa = PBXBuildFile; fileRef = EF5FBB58154E6A0900CBBA27 /* totPhotoView.m */; };
+		EF5FBB5C154E7B8E00CBBA27 /* PhotoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF5FBB5B154E7B8E00CBBA27 /* PhotoView.xib */; };
 		EF6283761536674B004031D6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF6283751536674B004031D6 /* UIKit.framework */; };
 		EF6283781536674B004031D6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF6283771536674B004031D6 /* Foundation.framework */; };
 		EF62837A1536674B004031D6 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF6283791536674B004031D6 /* CoreGraphics.framework */; };
@@ -187,6 +189,9 @@
 		EF238824153E19E700B9C8BD /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		EF238825153E19E800B9C8BD /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		EF238828153E1A0C00B9C8BD /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		EF5FBB57154E6A0900CBBA27 /* totPhotoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totPhotoView.h; path = Utility/totPhotoView.h; sourceTree = "<group>"; };
+		EF5FBB58154E6A0900CBBA27 /* totPhotoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totPhotoView.m; path = Utility/totPhotoView.m; sourceTree = "<group>"; };
+		EF5FBB5B154E7B8E00CBBA27 /* PhotoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoView.xib; sourceTree = "<group>"; };
 		EF6283711536674B004031D6 /* totdev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = totdev.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF6283751536674B004031D6 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		EF6283771536674B004031D6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -221,6 +226,7 @@
 		EF97E7CC153B4F040037E52D /* mainscreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mainscreen.png; sourceTree = "<group>"; };
 		EFA1DE30154DF41F00970F0C /* totActivityUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totActivityUtility.h; path = Activity/totActivityUtility.h; sourceTree = "<group>"; };
 		EFA1DE31154DF41F00970F0C /* totActivityUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totActivityUtility.m; path = Activity/totActivityUtility.m; sourceTree = "<group>"; };
+		EFB259F5154FE30C00C4984A /* totActivityConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totActivityConst.h; path = Activity/totActivityConst.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -417,6 +423,7 @@
 				EF2387F6153BC4F300B9C8BD /* ActivityView.xib */,
 				EF2387FD153BC64A00B9C8BD /* ActivityInfoView.xib */,
 				EF238802153BC6EB00B9C8BD /* ActivityAlbumView.xib */,
+				EF5FBB5B154E7B8E00CBBA27 /* PhotoView.xib */,
 			);
 			name = resources;
 			sourceTree = "<group>";
@@ -435,6 +442,7 @@
 		EF62839315366D6A004031D6 /* Activity */ = {
 			isa = PBXGroup;
 			children = (
+				EFB259F5154FE30C00C4984A /* totActivityConst.h */,
 				EF62839915366DB2004031D6 /* totActivityRootController.h */,
 				EF62839A15366DB2004031D6 /* totActivityRootController.m */,
 				EF2387ED153B7D7700B9C8BD /* totActivityEntryViewController.h */,
@@ -516,6 +524,8 @@
 				CE5C09F9154CCFDB00D41114 /* moviePlayerViewController.m */,
 				CE5C09FA154CCFDB00D41114 /* totAlbumViewController.h */,
 				CE5C09FB154CCFDB00D41114 /* totAlbumViewController.m */,
+				EF5FBB57154E6A0900CBBA27 /* totPhotoView.h */,
+				EF5FBB58154E6A0900CBBA27 /* totPhotoView.m */,
 				3FE9B5F8154A313700199AAF /* totSliderView.h */,
 				3FE9B5F9154A313700199AAF /* totSliderView.m */,
 				EF97E7C9153B4BA90037E52D /* totImageView.h */,
@@ -649,6 +659,7 @@
 				EF043C3F154DE2F500975BCD /* movie_thumbnail-01.png in Resources */,
 				EF043C40154DE2F500975BCD /* play_button.png in Resources */,
 				EF043C41154DE2F500975BCD /* rtn_button.png in Resources */,
+				EF5FBB5C154E7B8E00CBBA27 /* PhotoView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -681,6 +692,7 @@
 				CE5C09FC154CCFDB00D41114 /* moviePlayerViewController.m in Sources */,
 				CE5C09FD154CCFDB00D41114 /* totAlbumViewController.m in Sources */,
 				EFA1DE32154DF41F00970F0C /* totActivityUtility.m in Sources */,
+				EF5FBB59154E6A0A00CBBA27 /* totPhotoView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

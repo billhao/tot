@@ -9,10 +9,17 @@
 #import <UIKit/UIKit.h>
 #import "totActivityRootController.h"
 
+@class moviePlayerViewController;
+
 @interface totActivityAlbumViewController : UIViewController {
     totActivityRootController *activityRootController;
+    UIScrollView *mScrollView;
+    moviePlayerViewController *myMoviePlayerView;
+    NSMutableArray *mPaths;
 }
 
 @property (nonatomic, assign) totActivityRootController *activityRootController;
+
+- (void)receiveMessage: (NSMutableDictionary*)message;
 
 @end
