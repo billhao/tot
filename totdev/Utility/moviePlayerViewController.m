@@ -27,6 +27,10 @@
 	return self;
 }
 
+- (void)setPath:(NSString*)moviePath {
+    movieURL = [NSURL fileURLWithPath:moviePath];
+}
+
 /*---------------------------------------------------------------------------
  * For 3.2 and 4.x devices
  * For 3.1.x devices see moviePreloadDidFinish:
@@ -102,6 +106,8 @@
                                                   object:nil];
     
 	[self dismissModalViewControllerAnimated:YES];
+    
+    [mp release];
 }
 
 /*---------------------------------------------------------------------------

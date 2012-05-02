@@ -28,21 +28,10 @@
         }
         
         // mapping from activity to its child items
-        const int keys[] = {
-            kActivityVisionAttention,
-            kActivityEyeContact,
-            kActivityMirrorTest,
-            kActivityImitation,
-            kActivityGesture,
-            kActivityEmotion,
-            kActivityChew,
-            kActivityMotorSkill
-        };
-        
         mActivityMembers = [[NSMutableDictionary alloc] init];
         for( int i=0; i<8; i++ ) {
             [mActivityMembers setObject:[NSString stringWithUTF8String:ACTIVITY_MEMBERS[i]] 
-                                 forKey:[NSNumber numberWithInt:keys[i]]];
+                                 forKey:[NSNumber numberWithInt:i]];
         }
         
         AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
@@ -136,15 +125,15 @@
     [super viewDidLoad];
     
     totImageView *background = [[totImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 411)];
-    [background imageFilePath:@"challenge_background.png"];
+    [background imageFilePath:@"family_fun_main_bg.png"];
     [self.view addSubview:background];
     [background release];
     
     // create eight buttons
     int w    = 75;
     int h    = 75;
-    int x[8] = {10, 122, 235, 10, 235, 10, 122, 235};
-    int y[8] = {33, 33, 33, 158, 158, 283, 283, 283};
+    int x[8] = {20, 120, 220, 20, 120, 220, 20, 120};
+    int y[8] = {20, 20, 20, 124, 124, 124, 230, 230};
 
     for( int i=0; i<8; i++ ) {
         UIButton *imageButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];

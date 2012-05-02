@@ -23,6 +23,8 @@
     NSMutableDictionary *mMessage;
     
     totModel *mTotModel;
+    
+    UIImageView *mBackground;
 }
 
 @property (nonatomic, assign) totActivityRootController *activityRootController;

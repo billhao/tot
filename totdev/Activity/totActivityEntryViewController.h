@@ -13,14 +13,14 @@
 #import "../Model/totEvent.h"
 
 enum {
-    kActivityVisionAttention = 0,
-    kActivityEyeContact = 1,
-    kActivityMirrorTest = 2,
-    kActivityImitation = 3,
-    kActivityGesture = 4,
-    kActivityEmotion = 5,
-    kActivityChew = 6,
-    kActivityMotorSkill = 7
+    kActivityEyeContact = 0,
+    kActivityVisionAttention = 1,
+    kActivityMotorSkill = 2,
+    kActivityEmotion = 3,
+    kActivityChew = 4,
+    kActivityGesture = 5,
+    kActivityMirrorTest = 6,
+    kActivityImitation = 7
 };
 
 @interface totActivityEntryViewController : UIViewController {    

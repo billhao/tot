@@ -10,25 +10,25 @@
 #define totdev_totActivityConst_h
 
 const static const char *ACTIVITY_NAMES [] = {
-    "vision_attention", 
     "eye_contact",
-    "mirror_test",
-    "imitation",
+    "vision_attention", 
+    "motor_skill",
+    "emotion",    
+    "chew",    
     "gesture",
-    "emotion",
-    "chew",
-    "motor_skill"
+    "mirror_test",
+    "imitation"
 };
 
 const static const char *ACTIVITY_MEMBERS [] = { // the name should correspond to the image file name
-    "task1,task2", // vision attention
-    "task1,task2", // eye contact
-    "task1,task2", // mirror test
-    "task1,task2", // imitation
-    "task1,task2", // gesture
-    "3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24", // emotion
-    "task1,task2", // chew
-    "task1,task2"  // motorskill
+    "", // eye contact
+    "", // vision attention
+    "motor_skill_stand,motor_skill_walk,motor_skill_run,motor_skill_dance,motor_skill_jump,motor_skill_cruise,motor_skill_crawl,motor_skill_sit,motor_skill_roll_over,motor_skill_kick_leg,motor_skill_lift_neck",  // motorskill
+    "emotion_happy,emotion_sad,emotion_surprise,emotion_angry,emotion_disgust,emotion_fear", // emotion
+    "", // chew
+    "gesture_point,gesture_clap,gesture_wave,gesture_suck_thumb,gesture_suck_toe", // gesture
+    "", // mirror test
+    ""  // imitation
 };
 
 #endif

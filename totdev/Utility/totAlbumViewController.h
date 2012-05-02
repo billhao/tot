@@ -22,7 +22,7 @@
 @property (retain, nonatomic) UIView *myTitleBarView;
 @property (retain, nonatomic) UIScrollView *myScrollView;
 @property (retain, nonatomic) UIScrollView *myFullSizeImageScrollView;
-@property (retain, nonatomic) moviePlayerViewController *myMoviePlayerView;
+//@property (retain, nonatomic) moviePlayerViewController *myMoviePlayerView;
 
 @property (retain, nonatomic) NSMutableArray *myPathArray;
 

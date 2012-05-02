@@ -10,6 +10,7 @@
 #import "totActivityViewController.h"
 #import "totUITabBarController.h"
 #import "totActivityUtility.h"
+#import "totActivityEntryViewController.h"
 #import "totActivityConst.h"
 #import "../Utility/totSliderView.h"
 #import "../Utility/totImageView.h"
@@ -180,6 +181,14 @@
     NSMutableArray *images = [message objectForKey:@"images"];
     NSMutableArray *margin = [message objectForKey:@"margin"];
     
+    switch ( [mCurrentActivityID intValue] ) {
+        case kActivityEmotion:
+            [mBackground setImage:[UIImage imageNamed:@"emotion_bg.png"]];
+            break;
+        default:
+            break;
+    }
+    
     for( int i = 0; i < [images count]; i++ ) {
         NSArray *tokens = [[images objectAtIndex:i] componentsSeparatedByString:@"."];
         NSString *ext = [tokens lastObject];
@@ -202,21 +211,25 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    // create background
+    mBackground = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
+    [self.view addSubview:mBackground];
+    
     // create the slider view
-    mSliderView = [[totSliderView alloc] initWithFrame:CGRectMake(0, 10, 320, 260)];
+    mSliderView = [[totSliderView alloc] initWithFrame:CGRectMake(0, 50, 320, 260)];
     [mSliderView setDelegate:self];
     [mSliderView enablePageControlOnBottom];
     [self.view addSubview:mSliderView];
 
     // create camera buttons
     UIButton *cameraButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    cameraButton.frame = CGRectMake(60, 300, 60, 40);
+    cameraButton.frame = CGRectMake(60, 300, 75, 75);
     [cameraButton setImage:[UIImage imageNamed:@"camera.png"] forState:UIControlStateNormal];
     [cameraButton addTarget:self action:@selector(launchCamera:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:cameraButton];
     
     UIButton *videoButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    videoButton.frame = CGRectMake(180, 300, 60, 40);
+    videoButton.frame = CGRectMake(180, 300, 75, 75);
     [videoButton setImage:[UIImage imageNamed:@"video.png"] forState:UIControlStateNormal];
     [videoButton addTarget:self action:@selector(launchVideo:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:videoButton];
@@ -227,6 +240,7 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
+    [mBackground release];
     [mSliderView release];
     [mCurrentActivityID release];
     [mMessage release];

@@ -102,6 +102,8 @@
     if (page > totalPageNumbers) 
         page = 0;
     
+    [self cleanScrollView];
+    
     scrollView.contentSize = CGSizeMake([self getScrollViewWidth], scrollHeight);  
     if (!bcgColor) bcgColor = [UIColor clearColor];
     scrollView.backgroundColor = bcgColor;  //by default transparent

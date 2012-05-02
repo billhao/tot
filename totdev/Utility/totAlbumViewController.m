@@ -14,7 +14,7 @@
 @synthesize myTitleBarView;
 @synthesize myScrollView;
 @synthesize myFullSizeImageScrollView;
-@synthesize myMoviePlayerView;
+//@synthesize myMoviePlayerView;
 
 @synthesize myPathArray;
 
@@ -89,6 +89,8 @@
     self.view.frame = CGRectMake(0, 0, 320, 480);
     self.view.hidden = YES;
     self.view.backgroundColor = [UIColor blackColor];
+    
+    myMoviePlayerView = [[moviePlayerViewController alloc] init];
 }
 
 
@@ -97,6 +99,11 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
+    [myTitleBarView release];
+    [myScrollView release];
+    [myFullSizeImageScrollView release];
+    [myMoviePlayerView release];
+    [myPathArray release];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -135,7 +142,7 @@
     self.myScrollView.hidden = YES;
     self.myFullSizeImageScrollView.hidden = YES;
     self.view.hidden = YES;
-    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
+    [[UIApplication sharedApplication] setStatusBarHidden:NO animated:YES];
     
     [myPathArray release];
 }
@@ -413,7 +420,8 @@
     //NSString *path = [[NSBundle mainBundle] pathForResource:filename ofType:@"mp4" inDirectory:nil];
     
 	// Create custom movie player   
-    myMoviePlayerView = [[[moviePlayerViewController alloc] initWithPath:filename] autorelease];
+    //myMoviePlayerView = [[moviePlayerViewController alloc] initWithPath:filename];
+    [myMoviePlayerView setPath:filename];
     
 	// Show the movie player as modal
  	[self presentModalViewController:myMoviePlayerView animated:YES];

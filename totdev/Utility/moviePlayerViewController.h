@@ -18,6 +18,7 @@
 }
 
 - (id)initWithPath:(NSString *)moviePath;
+- (void)setPath:(NSString*)moviePath;
 - (void)readyPlayer;
 
 @end
