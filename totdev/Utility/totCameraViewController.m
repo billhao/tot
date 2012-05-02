@@ -95,16 +95,16 @@
             UISaveVideoAtPathToSavedPhotosAlbum(tempFilePath, self, @selector(video:didFinishSavingWithError:contextInfo:), tempFilePath);
         }
     }
-    
-    [picker dismissModalViewControllerAnimated:YES];
+}
+
+- (void)hideCamera {
+    [imagePicker dismissModalViewControllerAnimated:YES];
     [imagePicker release];
     self.view.frame = CGRectMake(0, 0, 0, 0);
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController*)picker {
-    [picker dismissModalViewControllerAnimated:YES];
-    [imagePicker release];
-    self.view.frame = CGRectMake(0, 0, 0, 0);
+    [self hideCamera];
 }
 
 
@@ -112,6 +112,7 @@
     if( [delegate respondsToSelector:@selector(cameraView:didFinishSavingImageToAlbum:)] ) {
         [delegate cameraView:self didFinishSavingImageToAlbum:image];
     }
+    [self hideCamera];
 }
 
 - (void)video: (NSString*)videoPath didFinishSavingWithError:(NSError*)error contextInfo:(NSString*)contextInfo {
@@ -129,18 +130,25 @@
         generator.appliesPreferredTrackTransform = TRUE;
         CMTime thumbnailTime = CMTimeMakeWithSeconds(0, 30);
         
+        CGImageRef im = [generator copyCGImageAtTime:thumbnailTime actualTime:nil error:nil];
+        UIImage *thumbnail = [[UIImage alloc] initWithCGImage:im];
+        if( [delegate respondsToSelector:@selector(cameraView:didFinishSavingThumbnail:)] ) {
+            [delegate cameraView:self didFinishSavingThumbnail:thumbnail];
+        }
+        [self hideCamera];
+        [thumbnail release];
+        CGImageRelease(im);
+        
+        /*
         AVAssetImageGeneratorCompletionHandler handler = ^(CMTime requestedTime, CGImageRef im, CMTime actualTime, AVAssetImageGeneratorResult result, NSError *error) {
             if( result != AVAssetImageGeneratorSucceeded ) {
                 NSLog(@"couldn't generate thumbnail, error:%@", error);
             } else {
                 UIImage *thumbnail = [[UIImage alloc] initWithCGImage:im];
-                
-                UIImageWriteToSavedPhotosAlbum(thumbnail, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
-                
                 if( [delegate respondsToSelector:@selector(cameraView:didFinishSavingThumbnail:)] ) {
                     [delegate cameraView:self didFinishSavingThumbnail:thumbnail];
                 }
-                
+                [self hideCamera];
                 [thumbnail release];
             }
             [generator release];
@@ -148,6 +156,7 @@
         
         [generator generateCGImagesAsynchronouslyForTimes:[NSArray arrayWithObject:[NSValue valueWithCMTime:thumbnailTime]] 
                                         completionHandler:handler];
+        */
     }
     
     [asset release];

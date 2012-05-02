@@ -6,21 +6,27 @@
 //  Copyright (c) 2012 USC. All rights reserved.
 //
 
+#import "AppDelegate.h"
 #import "totActivityInfoViewController.h"
-#import "totImageView.h"
+#import "totActivityEntryViewController.h"
+#import "totActivityUtility.h"
+#import "totActivityConst.h"
+#import "../Utility/totImageView.h"
 #import "../Utility/totSliderView.h"
-#import "../Utility/totUtility.h"
 
 @implementation totActivityInfoViewController
 
 @synthesize activityRootController;
 @synthesize mActivityDesc;
+@synthesize mCurrentActivityID;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+        mTotModel = [appDelegate getDataModel];
     }
     return self;
 }
@@ -31,6 +37,13 @@
     [super didReceiveMemoryWarning];
     
     // Release any cached data, images, etc that aren't in use.
+}
+
+- (void)backToActivityView {
+    NSMutableDictionary *message = [[NSMutableDictionary alloc] init];
+    [activityRootController.activityEntryViewController prepareMessage:message for:[mCurrentActivityID intValue]];
+    [activityRootController switchTo:kActivityView withContextInfo:message];
+    [message release];
 }
 
 #pragma mark - View lifecycle
@@ -93,51 +106,102 @@
     [super touchesBegan:touches withEvent:event];
 }
 
-- (void)setInfo:(NSMutableDictionary *)info {}
-
-
-// load image content here for scroll view
-- (NSArray *)getImages {
-    NSMutableArray *arr = [[[NSMutableArray alloc] init] autorelease];  
-    
-    int eleNum = 26;
-    
-    for (int i=0;i<eleNum;i++){
-        NSString *imageFileName = [NSString stringWithFormat:@"%d.png",i + 1];
-        
-        [arr addObject:[UIImage imageNamed:imageFileName]]; 
-    }
-    
-    return (NSArray *)arr;  
-}
-
-// set optional margin array to indicate which button(s) need a margin shows it has multiple content
-- (NSArray *)setMargin{
-    NSMutableArray *arr = [[[NSMutableArray alloc] init] autorelease];  
-    
-    int eleNum = 26;
-    
-    for (int i=0;i<eleNum;i++){
-        [arr addObject:[NSNumber numberWithBool:NO]];
-    }
-    
-    [arr replaceObjectAtIndex:0 withObject:[NSNumber numberWithBool:YES]];
-    [arr replaceObjectAtIndex:1 withObject:[NSNumber numberWithBool:YES]];
-    
-    return arr;
-}
-
-#pragma totSliderView delegate
+#pragma mark - totSliderView delegate
 - (void)buttonPressed:(id)sender {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Button pressed"
-													message:[NSString stringWithFormat:@"You pressed the button on button %d.", [sender tag]]
-												   delegate:nil
-										  cancelButtonTitle:@"OK"
-										  otherButtonTitles:nil];
+    UIButton *btn = (UIButton*)sender;
+    int tag = [btn tag];
+    tag = tag - 1; // index starts from 0
     
+    NSString *activity = [NSString stringWithUTF8String: ACTIVITY_NAMES[[mCurrentActivityID intValue]]];
+    NSString *memb_str = [NSString stringWithUTF8String: ACTIVITY_MEMBERS[[mCurrentActivityID intValue]]];
+    NSArray *member = [memb_str componentsSeparatedByString:@","];
+    NSString *the_member = [member objectAtIndex:tag];
     
-	[alert show];
-	[alert release];
+    sprintf(mEventName, "%s/%s", [activity UTF8String], [the_member UTF8String]);
+    printf("Event name: %s\n", mEventName);
+    
+    // pop up alertView, confirm to save to db
+    UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"" 
+                                                      message:@"Press OK to Save" 
+                                                     delegate:self 
+                                            cancelButtonTitle:@"Cancel" 
+                                            otherButtonTitles:@"OK", nil];
+    [message show];
+}
+
+#pragma mark - UIAlertView delegate
+- (void)alertView:(UIAlertView*)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
+    if( [title isEqualToString:@"OK"] ) {
+        //save to db
+        
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+        NSDate *now = [NSDate date];
+        NSString *formattedDateString = [dateFormatter stringFromDate:now];
+        [dateFormatter release];
+        
+        char data[256]={0};
+        sprintf(data, "image=%s", mImagePath);
+        if( mIsVideo )
+            sprintf(data, "%s;video=%s", data, mVideoPath);
+        if( mActivityDesc.text.length != 0 )
+            sprintf(data, "%s;desc=%s", data, [mActivityDesc.text UTF8String]);
+        
+        printf("insert to db: %s\n", data);
+        
+        [mTotModel addEvent:[totActivityUtility getCurrentBabyID] 
+                      event:[NSString stringWithUTF8String:mEventName] 
+                   datetime:formattedDateString 
+                      value:[NSString stringWithUTF8String:data]];
+        
+        [self backToActivityView];
+    }
+}
+
+
+// receive parameters passed by other module for initialization or customization
+- (void)receiveMessage: (NSMutableDictionary*)message {
+    [mSliderView cleanScrollView];
+    
+    NSString *videoFilename = [message objectForKey:@"storedVideo"];
+    NSString *filename = [message objectForKey:@"storedImage"];
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentDirectory = [paths objectAtIndex:0];
+    
+    NSString *imagePath = [documentDirectory stringByAppendingPathComponent:filename];
+    sprintf(mImagePath, "%s", [imagePath UTF8String]);
+    if( videoFilename ) {
+        NSString *videoPath = [documentDirectory stringByAppendingPathComponent:videoFilename];
+        sprintf(mVideoPath, "%s", [videoPath UTF8String]);
+        mIsVideo = YES;
+    } else {
+        mIsVideo = NO;
+    }
+    
+    self.mCurrentActivityID = [message objectForKey:@"activity"];
+    NSString *memb_str = [NSString stringWithUTF8String:ACTIVITY_MEMBERS[[self.mCurrentActivityID intValue]]];
+    NSArray  *member = [memb_str componentsSeparatedByString:@","];
+    
+    // insert the image
+    [mThumbnail setImage:[UIImage imageWithContentsOfFile:imagePath]];
+    
+    // display the slider view
+    NSMutableArray *images = [[NSMutableArray alloc] init];
+    NSMutableArray *margin = [[NSMutableArray alloc] init];
+    
+    for( int i=0; i<[member count]; i++ ) {
+        [images addObject:[UIImage imageNamed:[[member objectAtIndex:i] stringByAppendingString:@".png"]]];
+        [margin addObject:[NSNumber numberWithBool:NO]];
+    }
+    
+    [mSliderView setContentArray:images];
+    [mSliderView setMarginArray:margin];    
+    [images release];
+    [margin release];
+    
+    [mSliderView getWithPositionMemoryIdentifier:@"infoview"];
 }
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
@@ -145,59 +209,29 @@
 {
     [super viewDidLoad];
     
-    int textbox_xOrigin=140;
-    int textbox_yOrigin=20;
-    int textbox_width = 170;
-    int textbox_height = 130;
+    mThumbnail = [[UIImageView alloc] initWithFrame:CGRectMake(0, 10, 50, 50)];
+    [self.view addSubview:mThumbnail];
     
-    UITextView *textbox = [[UITextView alloc] init];
-    textbox.frame = CGRectMake(textbox_xOrigin, textbox_yOrigin,
-                               textbox_width, textbox_height);   
-    textbox.backgroundColor =[UIColor clearColor];
-    [self.view addSubview:textbox];
-    [textbox release];
+//    UIImageView *textbubble = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"messagebox.png"]];
+//    textbubble.frame = CGRectMake(0, 35, 360, 180);
+//    [self.view insertSubview:textbubble belowSubview:mActivityDesc];
+//    [textbubble release];
     
-    UIImageView *textbubble = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"messagebox.png"]];
-    textbubble.frame = CGRectMake(textbox_xOrigin-40,-5,
-                                  textbox_width+80, textbox_height+60);    
-    
-    //[self.view insertSubview:textbubble belowSubview:mActivityDesc];
-    [self.view insertSubview:textbubble belowSubview:textbox];
-    [textbubble release];
-    
-    
-    //load image    
-    UIImage* origImage = [UIImage imageNamed:@"1.png"];
-    UIImage *squareImage = [totUtility squareCropImage:origImage];
-    
-
-    UIImageView *img = [[UIImageView alloc] init];
-    img.frame = CGRectMake(10, textbox_yOrigin, 120, 120);
-    img.image = squareImage;
-    [self.view addSubview:img];
-    [img release];
-    
-    //load slider view
-    totSliderView *sv = [[totSliderView alloc] init];  
-    [sv setDelegate:self];
-    [sv setContentArray:[self getImages]]; 
-    [sv setMarginArray: [self setMargin]];
-    [sv setPosition:151];
-    [sv enablePageControlOnBottom];  
-    [self.view addSubview:[sv getWithPositionMemory:@"InfoView"]];  
-    //[self.view addSubview:[sv get]];//no memory to hold last-viewed page position
-    
-    //for test 
-    self.view.backgroundColor = [UIColor blackColor];
-
+    // create the slider view
+    mSliderView = [[totSliderView alloc] initWithFrame:CGRectMake(0, 151, 320, 260)];
+    [mSliderView setDelegate:self];
+    [mSliderView enablePageControlOnBottom];
+    [self.view addSubview:mSliderView];
 }
-
 
 - (void)viewDidUnload
 {
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
+    [mSliderView release];
+    [mThumbnail release];
+    [mCurrentActivityID release];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

@@ -8,8 +8,10 @@
 
 #import "totActivityEntryViewController.h"
 #import "totImageView.h"
+#import "totActivityRootController.h"
 #import "AppDelegate.h"
-#import "totUITabBarController.h"
+#import "totActivityUtility.h"
+#import "totActivityConst.h"
 
 @implementation totActivityEntryViewController
 
@@ -20,21 +22,31 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        const char *names [] = {
-            "vision_attention.png", 
-            "eye_contact.png",
-            "mirror_test.png",
-            "imitation.png",
-            "gesture.png",
-            "emotion.png",
-            "chew.png",
-            "motor_skill.png"
-        };
-        
         mActivityNames = [[NSMutableArray alloc] init];
         for( int i=0; i<8; i++ ) {
-            [mActivityNames addObject:[NSString stringWithUTF8String:names[i]]];
+            [mActivityNames addObject:[NSString stringWithUTF8String:ACTIVITY_NAMES[i]]];
         }
+        
+        // mapping from activity to its child items
+        const int keys[] = {
+            kActivityVisionAttention,
+            kActivityEyeContact,
+            kActivityMirrorTest,
+            kActivityImitation,
+            kActivityGesture,
+            kActivityEmotion,
+            kActivityChew,
+            kActivityMotorSkill
+        };
+        
+        mActivityMembers = [[NSMutableDictionary alloc] init];
+        for( int i=0; i<8; i++ ) {
+            [mActivityMembers setObject:[NSString stringWithUTF8String:ACTIVITY_MEMBERS[i]] 
+                                 forKey:[NSNumber numberWithInt:keys[i]]];
+        }
+        
+        AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+        mTotModel = [appDelegate getDataModel];
     }
     return self;
 }
@@ -57,77 +69,65 @@
 }
 */
 
-- (void) saveImage:(UIImage*)photo intoFile:(NSString*)filename {
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentDirectory = [paths objectAtIndex:0];
-    NSString *imagePath = [documentDirectory stringByAppendingPathComponent:filename];
-    NSData *data = UIImageJPEGRepresentation(photo, 0.8);
-    [data writeToFile:imagePath atomically:NO];
-}
-
-- (void) saveVideo:(NSString*)videoPath intoFile:(NSString*)filename {
-    NSURL *contentURL = [NSURL fileURLWithPath:videoPath];
-    NSData *videoData = [NSData dataWithContentsOfURL:contentURL];
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentDirectory = [paths objectAtIndex:0];
-    NSString *path = [documentDirectory stringByAppendingPathComponent:filename];
-    [videoData writeToFile:path atomically:NO];
-}
-
-// delegates of CameraView
-- (void) cameraView:(id)cameraView didFinishSavingImageToAlbum:(UIImage*)photo {
-    printf("Save image to album\n");
+- (void)prepareMessage:(NSMutableDictionary*)message for:(int)activity{
+    char query[256] = {0};
+    NSString *type_str = [mActivityNames objectAtIndex:activity];
+    NSString *memb_str = [mActivityMembers objectForKey:[NSNumber numberWithInt:activity]];
+    NSArray  *members  = [memb_str componentsSeparatedByString:@","];
     
-    [activityRootController switchTo:kActivityInfoView];
-}
-
-- (void) cameraView:(id)cameraView didFinishSavingVideoToAlbum:(NSString*)videoPath {
-    printf("Save video to album\n");
-}
-
-- (void) cameraView:(id)cameraView didFinishSavingThumbnail:(UIImage*)thumbnail {
-    printf("Get the thumbnail\n");
-}
-
-- (void) launchCamera {
-    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-    [appDelegate.rootController.cameraView setDelegate:self];
-    [appDelegate.rootController.cameraView launchPhotoCamera];
-//    [appDelegate.rootController.cameraView launchVideoCamera];
+    NSMutableArray *images = [[NSMutableArray alloc] init];
+    NSMutableArray *margin = [[NSMutableArray alloc] init];
+    
+    int currentBabyId = [totActivityUtility getCurrentBabyID];
+    
+    for( int i=0; i<[members count]; i++ ) {
+        const char* c_str_type = [type_str UTF8String];
+        const char* c_str_memb = [[members objectAtIndex:i] UTF8String];
+        sprintf(query, "%s/%s", c_str_type, c_str_memb);
+        
+        NSMutableArray *queryResult = [mTotModel getEvent:currentBabyId event:[NSString stringWithUTF8String:query]];
+        
+        int querySize = [queryResult count];
+        switch(querySize) {
+            case 0:
+                [images addObject:[[members objectAtIndex:i] stringByAppendingString:@".png"]];
+                [margin addObject:[NSNumber numberWithBool:NO]];
+                break;
+            case 1:
+                [totActivityUtility extractFromEvent:[queryResult objectAtIndex:0] 
+                        intoImageArray:images];
+                [margin addObject:[NSNumber numberWithBool:NO]];
+                break;
+            default:
+                [totActivityUtility extractFromEvent:[queryResult objectAtIndex:0] 
+                        intoImageArray:images];
+                [margin addObject:[NSNumber numberWithBool:YES]];
+                break;
+        }
+    }
+    
+    [message setObject:images forKey:@"images"];
+    [message setObject:margin forKey:@"margin"];
+    [message setObject:[NSNumber numberWithInt:activity] forKey:@"activity"];
+    
+    [margin release];
+    [images release];
 }
 
 - (void)buttonPressed: (id)sender {
+    NSMutableDictionary *message = [[NSMutableDictionary alloc] init];
     UIButton *btn = (UIButton*)sender;
     int tag = [btn tag];
-    switch (tag) {
-        case kActivityVisionAttention:
-            printf("VisionAttention\n");
-            [self launchCamera];
-            break;
-        case kActivityEyeContact:
-            printf("EyeContact\n");
-            break;
-        case kActivityMirrorTest:
-            printf("MirroTest\n");
-            break;
-        case kActivityImitation:
-            printf("Imitation\n");
-            break;
-        case kActivityGesture:
-            printf("Gesture\n");
-            break;
-        case kActivityEmotion:
-            printf("Emotion\n");
-            break;
-        case kActivityChew:
-            printf("Chew\n");
-            break;
-        case kActivityMotorSkill:
-            printf("MotorSkill\n");
-            break;
-        default:
-            break;
-    }
+    
+    printf("%s\n", [[mActivityNames objectAtIndex:tag] UTF8String]);
+    
+    // message contains two objects:
+    // images => MSMutableArray, each element is a path to the image
+    // margin => MSMutableArray, each element is a yes or no
+    [self prepareMessage:message for:tag];
+    [activityRootController switchTo:kActivityView withContextInfo:message];
+    
+    [message release];
 }
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
@@ -141,19 +141,19 @@
     [background release];
     
     // create eight buttons
-    int x[8] = {10, 122, 235, 10, 235, 10, 122, 235};
-    int y[8] = {33, 33, 33, 158, 158, 283, 283, 283};
     int w    = 75;
     int h    = 75;
-    
+    int x[8] = {10, 122, 235, 10, 235, 10, 122, 235};
+    int y[8] = {33, 33, 33, 158, 158, 283, 283, 283};
+
     for( int i=0; i<8; i++ ) {
         UIButton *imageButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         imageButton.frame = CGRectMake(x[i], y[i], w, h);
         imageButton.tag = i;
-        [imageButton setImage:[UIImage imageNamed:[mActivityNames objectAtIndex:i]] 
-                     forState:UIControlStateNormal];
-        [imageButton addTarget:self action:@selector(buttonPressed:) 
-              forControlEvents:UIControlEventTouchUpInside];
+        
+        NSString *imageName = [[mActivityNames objectAtIndex:i] stringByAppendingString:@".png"];
+        [imageButton setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
+        [imageButton addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:imageButton];
     }
 }
@@ -166,6 +166,7 @@
     // e.g. self.myOutlet = nil;
     
     [mActivityNames release];
+    [mActivityMembers release];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

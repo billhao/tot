@@ -13,6 +13,7 @@
 
 @synthesize window = _window;
 @synthesize rootController;
+@synthesize mBabyId;
 
 - (void)dealloc
 {
@@ -21,12 +22,22 @@
     [super dealloc];
 }
 
+- (totModel*) getDataModel {
+    return mTotData;
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     // Override point for customization after application launch.
     
     //self.window.backgroundColor = [UIColor whiteColor];
+    
+    // for now, set babyID
+    mBabyId = 1;
+    
+    // initialize database
+    mTotData = [[totModel alloc] init];
     
     [self.window addSubview:rootController.view];
     
@@ -72,6 +83,7 @@
      Save data if appropriate.
      See also applicationDidEnterBackground:.
      */
+    [mTotData release];
 }
 
 @end

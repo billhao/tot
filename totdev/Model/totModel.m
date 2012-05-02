@@ -115,7 +115,7 @@
 }
 
 - (NSMutableArray *) getEvent :(int)baby_id event:(NSString*)event {
-    NSMutableArray *events = [[NSMutableArray alloc] init];
+    NSMutableArray *events = [[[NSMutableArray alloc] init] autorelease];
     sqlite3_stmt *stmt = nil;
     @try {
         if (db == nil) {
@@ -131,7 +131,7 @@
             return events;
         }
         int ret = sqlite3_bind_text(stmt, 1, [searchname UTF8String], -1, SQLITE_TRANSIENT);
-        //NSLog(@"[db] getEvent bind_text %d", ret);
+        NSLog(@"[db] getEvent bind_text %d", ret);
 
         while (sqlite3_step(stmt)==SQLITE_ROW) {
             int i = sqlite3_column_int(stmt, 0);
@@ -139,6 +139,7 @@
             NSString *name  = [NSString stringWithUTF8String:(char *) sqlite3_column_text(stmt, 2)];
             NSString *value = [NSString stringWithUTF8String:(char *) sqlite3_column_text(stmt, 3)];
             //NSLog(@"[db] record, %d, %@", i, value);
+            
             totEvent *e = [[totEvent alloc] init];
             e.event_id = i;
             e.baby_id = baby_id;
@@ -147,6 +148,7 @@
             NSLog(@"%@", time);
             [e setTimeFromText:time];
             [events addObject:e];
+            [e release];
         }
     }
     @catch (NSException *exception) {

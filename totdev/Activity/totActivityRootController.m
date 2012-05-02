@@ -19,7 +19,6 @@
 @synthesize activityInfoViewController;
 @synthesize activityAlbumViewController;
 
-
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -76,24 +75,24 @@
     [self.view addSubview:activityAlbumViewController.view];
     [self.view addSubview:activityViewController.view];
 
-    activityEntryViewController.view.frame = CGRectMake(SCREEN_W, 0, SCREEN_W, SCREEN_H);
-    activityInfoViewController.view.frame = CGRectMake(0, 0, SCREEN_W, SCREEN_H);
+    activityEntryViewController.view.frame = CGRectMake(0, 0, SCREEN_W, SCREEN_H);
+    activityInfoViewController.view.frame = CGRectMake(SCREEN_W, 0, SCREEN_W, SCREEN_H);
     activityAlbumViewController.view.frame = CGRectMake(SCREEN_W, 0, SCREEN_W, SCREEN_H);
     activityViewController.view.frame = CGRectMake(SCREEN_W, 0, SCREEN_W, SCREEN_H);
     
     mCurrentViewIndex = kActivityEntryView;
 }
 
-- (UIView*)getViewByIndex:(int)viewIndex {
+- (UIViewController*)getViewByIndex:(int)viewIndex {
     switch (viewIndex) {
         case kActivityEntryView:
-            return activityEntryViewController.view;
+            return activityEntryViewController;
         case kActivityView:
-            return activityViewController.view;
+            return activityViewController;
         case kActivityAlbumView:
-            return activityAlbumViewController.view;
+            return activityAlbumViewController;
         case kActivityInfoView:
-            return activityInfoViewController.view;
+            return activityInfoViewController;
         default:
             printf("Invalid view index\n");
             return nil;
@@ -118,7 +117,7 @@
 
 - (void)switchTo:(int)viewIndex withContextInfo:(NSMutableDictionary *)info {
     float currentX = 0, nextX = 0;
-    UIView *currentView, *nextView;
+    UIViewController *currentView, *nextView;
     
     currentX = [self getViewXPositionByIndex:mCurrentViewIndex];
     currentView = [self getViewByIndex:mCurrentViewIndex];
@@ -130,11 +129,13 @@
         case kActivityEntryView:
             break;
         case kActivityView:
+            [activityViewController receiveMessage:info];
             break;
         case kActivityAlbumView:
+            [activityAlbumViewController receiveMessage:info];
             break;
         case kActivityInfoView:
-            [activityInfoViewController setInfo:info];
+            [activityInfoViewController receiveMessage:info];
             break;
         default:
             break;
@@ -145,11 +146,11 @@
 	[UIView setAnimationDuration:0.5f];
     
     if( currentX < nextX ) {
-        currentView.frame = CGRectMake(-SCREEN_W, 0, SCREEN_W, SCREEN_H);
+        currentView.view.frame = CGRectMake(-SCREEN_W, 0, SCREEN_W, SCREEN_H);
     } else {
-        currentView.frame = CGRectMake(SCREEN_W, 0, SCREEN_W, SCREEN_H);
+        currentView.view.frame = CGRectMake(SCREEN_W, 0, SCREEN_W, SCREEN_H);
     }
-    nextView.frame = CGRectMake(0, 0, SCREEN_W, SCREEN_H);
+    nextView.view.frame = CGRectMake(0, 0, SCREEN_W, SCREEN_H);
     mCurrentViewIndex = viewIndex;
     
     [UIView commitAnimations];
@@ -157,7 +158,7 @@
 
 - (void)switchTo:(int)viewIndex {
     float currentX = 0, nextX = 0;
-    UIView *currentView, *nextView;
+    UIViewController *currentView, *nextView;
     
     currentX = [self getViewXPositionByIndex:mCurrentViewIndex];
     currentView = [self getViewByIndex:mCurrentViewIndex];
@@ -169,12 +170,14 @@
 	[UIView setAnimationDuration:0.5f];
     
     if( currentX < nextX ) {
-        currentView.frame = CGRectMake(-SCREEN_W, 0, SCREEN_W, SCREEN_H);
+        currentView.view.frame = CGRectMake(-SCREEN_W, 0, SCREEN_W, SCREEN_H);
     } else {
-        currentView.frame = CGRectMake(SCREEN_W, 0, SCREEN_W, SCREEN_H);
+        currentView.view.frame = CGRectMake(SCREEN_W, 0, SCREEN_W, SCREEN_H);
     }
-    nextView.frame = CGRectMake(0, 0, SCREEN_W, SCREEN_H);
+    nextView.view.frame = CGRectMake(0, 0, SCREEN_W, SCREEN_H);
     mCurrentViewIndex = viewIndex;
+    
+    activityInfoViewController.view.frame = CGRectMake(0, 0, SCREEN_W, SCREEN_H);
     
     [UIView commitAnimations];
 }

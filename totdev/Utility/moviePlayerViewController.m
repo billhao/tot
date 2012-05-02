@@ -22,8 +22,7 @@
 	// Initialize and create movie URL
     if (self = [super init])
     {
-        movieURL = [NSURL fileURLWithPath:moviePath];    
-        [movieURL retain];
+        movieURL = [NSURL fileURLWithPath:moviePath];
     }
 	return self;
 }
@@ -38,10 +37,9 @@
 	if ([mp loadState] != MPMovieLoadStateUnknown)
     {
         // Remove observer
-        [[NSNotificationCenter 	defaultCenter] 
-         removeObserver:self
-         name:MPMoviePlayerLoadStateDidChangeNotification 
-         object:nil];
+        [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                        name:MPMoviePlayerLoadStateDidChangeNotification 
+                                                      object:nil];
         
         // When tapping movie, status bar will appear, it shows up
         // in portrait mode by default. Set orientation to landscape
@@ -70,13 +68,25 @@
 - (void) moviePreloadDidFinish:(NSNotification*)notification 
 {
 	// Remove observer
-	[[NSNotificationCenter 	defaultCenter] 
-     removeObserver:self
-     name:MPMoviePlayerContentPreloadDidFinishNotification
-     object:nil];
+	[[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:MPMoviePlayerContentPreloadDidFinishNotification
+                                                  object:nil];
     
-	// Play the movie
- 	[mp play];
+	[[UIApplication sharedApplication] setStatusBarOrientation:UIInterfaceOrientationLandscapeRight animated:NO];
+    
+    // Rotate the view for landscape playback
+    [[self view] setBounds:CGRectMake(0, 0, 480, 320)];
+    [[self view] setCenter:CGPointMake(160, 240)];
+    [[self view] setTransform:CGAffineTransformMakeRotation(M_PI / 2)]; 
+    
+    // Set frame of movieplayer
+    [[mp view] setFrame:CGRectMake(0, 0, 480, 320)];
+    
+    // Add movie player as subview
+    [[self view] addSubview:[mp view]];   
+    
+    // Play the movie
+    [mp play];
 }
 
 /*---------------------------------------------------------------------------
@@ -87,12 +97,11 @@
     [[UIApplication sharedApplication] setStatusBarHidden:YES];
     
  	// Remove observer
-    [[NSNotificationCenter 	defaultCenter] 
-     removeObserver:self
-     name:MPMoviePlayerPlaybackDidFinishNotification 
-     object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:MPMoviePlayerPlaybackDidFinishNotification 
+                                                  object:nil];
     
-	[self dismissModalViewControllerAnimated:YES];	
+	[self dismissModalViewControllerAnimated:YES];
 }
 
 /*---------------------------------------------------------------------------
@@ -100,7 +109,7 @@
  *--------------------------------------------------------------------------*/
 - (void) readyPlayer
 {
- 	mp =  [[MPMoviePlayerController alloc] initWithContentURL:movieURL];
+    mp =  [[MPMoviePlayerController alloc] initWithContentURL:movieURL];
     
     if ([mp respondsToSelector:@selector(loadState)]) 
     {
