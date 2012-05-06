@@ -98,6 +98,11 @@
     [model addEvent:baby_id event:EVENT_BASIC_WEIGHT datetime:date value:weight];
     [model addEvent:baby_id event:EVENT_BASIC_HEAD datetime:date value:head];
     
+    NSString* summary = [NSString stringWithFormat:@"%@\nHeight %@\nWeight %@\nHead Circumference %@", @"today", height, weight, head ];
+    [mSummary setTitle:summary forState:UIControlStateNormal];
+    [self.view bringSubviewToFront:mSummary];
+    [mSummary setHidden:false];
+    
     // get a list of events containing "emotion"
     NSString* event = [[NSString alloc] initWithString:@"basic"];
     // return from getEvent is an array of totEvent object

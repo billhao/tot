@@ -17,6 +17,7 @@
     IBOutlet UIButton    *mOKButton;
     IBOutlet UIButton    *mDatetime;
     IBOutlet UIButton    *mDatetimeImage;
+    IBOutlet UIButton    *mSummary;
     
     totModel* model;
     STHorizontalPicker* picker_height;

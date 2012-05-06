@@ -8,6 +8,7 @@
 
 #import "totHomeRootController.h"
 #import "totHomeEntryViewController.h"
+#import "totHomeHeightViewController.h"
 
 @implementation totHomeRootController
 
@@ -44,6 +45,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    totHomeHeightViewController* pHeightView = [[totHomeHeightViewController alloc] initWithNibName:@"totHomeHeightViewController" bundle:nil];
+    [self.view addSubview:pHeightView.view];
+    return;
     
     totHomeEntryViewController *aHomeView = [[totHomeEntryViewController alloc] initWithNibName:@"HomeView" bundle:nil];
     self.homeEntryViewController = aHomeView;
