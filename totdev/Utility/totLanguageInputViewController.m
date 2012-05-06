@@ -138,12 +138,15 @@
         [aImgView release];
         
         /* Set timer to call MakeNoView */
-        [NSTimer scheduledTimerWithTimeInterval:1.5f
+        [NSTimer scheduledTimerWithTimeInterval:1.8f
                                          target:self
                                        selector:@selector(MakeNoView)
                                        userInfo:nil
                                         repeats:NO];
     } else {
+        /* Hide keyboard */
+        [self.m_textView resignFirstResponder];
+
         [self MakeNoView];
     }
 }
