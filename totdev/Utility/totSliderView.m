@@ -13,8 +13,8 @@
 #define totGUIScrollViewImagePageIdentifier         @"totGUIScrollViewImagePageIdentifier"  
 #define totGUIScrollViewImageDefaultPageIdentifier  @"Default"  
 
-#define DEFAULT_WIDTH       320
-#define DEFAULT_HEIGHT      260 
+#define DEFAULT_WIDTH       270
+#define DEFAULT_HEIGHT      280 
 #define DEFAULT_NUMOFROWS   2
 
 // layout parameters
@@ -22,7 +22,7 @@
 #define TOP_MARGIN          20
 #define HORI_INTERVAL       15
 #define VERTI_INTERVAL      20
-#define BUTTON_WIDTH        90
+#define BUTTON_WIDTH        75
 #define BUTTON_HEIGHT       90
 
 @implementation totSliderView
@@ -114,7 +114,7 @@
 
     //load button here:
     for (int i = 0; i < totalPageNumbers; i++) {
-        UIView *subview = [[UIView alloc] initWithFrame:CGRectMake(i*scrollWidth, 0, scrollWidth, scrollHeight)];
+        UIView *subview = [[UIView alloc] initWithFrame:CGRectMake(i*scrollWidth, 5, scrollWidth, scrollHeight)];
         
         int remainButtons = 0;
         if([contentArray count] >= (i+1)*numOfRows*3)
@@ -122,15 +122,22 @@
         else
             remainButtons = [contentArray count]- i*numOfRows*3;
         
+        int xx[6] = {7, 97, 187, 7, 97, 187};
+        int yy[6] = {5, 5, 5, 100, 100, 100};
+        
         for (int j = 0; j<remainButtons; j++){
-            int xPos = LEFT_MARGIN+(BUTTON_WIDTH+HORI_INTERVAL)*(j%3);
-            int yPos = TOP_MARGIN+(BUTTON_HEIGHT+VERTI_INTERVAL)*(j/3);
+            //int xPos = LEFT_MARGIN+(BUTTON_WIDTH+HORI_INTERVAL)*(j%3);
+            //int yPos = TOP_MARGIN+(BUTTON_HEIGHT+VERTI_INTERVAL)*(j/3);
+            int xPos = xx[j];
+            int yPos = yy[j];
             
             // button
-            UIButton *imageButton = [[UIButton alloc] initWithFrame:CGRectMake(xPos, yPos, 90, 90)];            
+            UIButton *imageButton = [[UIButton alloc] initWithFrame:CGRectMake(xPos, yPos, BUTTON_WIDTH, BUTTON_HEIGHT)];            
+            
             UIImage *origImage=[contentArray objectAtIndex:i*numOfRows*3+j];
-            UIImage *squareImage=[totUtility squareCropImage:origImage];
-            [imageButton setImage:squareImage forState:UIControlStateNormal];
+            //UIImage *squareImage=[totUtility squareCropImage:origImage];
+            
+            [imageButton setImage:origImage forState:UIControlStateNormal];
             [imageButton addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
             [imageButton setTag:i*numOfRows*3 + j + 1];
             [subview addSubview:(UIView *)imageButton];
@@ -138,7 +145,7 @@
             
             // margin
             if ([[marginArray objectAtIndex:i*numOfRows*3+j] boolValue]){
-                UIImageView *margin = [[UIImageView alloc] initWithFrame:CGRectMake(xPos,yPos,96,96)];
+                UIImageView *margin = [[UIImageView alloc] initWithFrame:CGRectMake(xPos,yPos,BUTTON_WIDTH+8,BUTTON_HEIGHT+8)];
                 margin.image=[UIImage imageNamed:@"margin.png"];
                 [subview addSubview:margin];
                 [margin release];

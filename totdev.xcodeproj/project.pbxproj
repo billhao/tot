@@ -29,6 +29,8 @@
 		EF0D6BE51555AE930027F012 /* weight.png in Resources */ = {isa = PBXBuildFile; fileRef = EF0D6BDC1555AE930027F012 /* weight.png */; };
 		EF0D6BE71555B36B0027F012 /* clock.png in Resources */ = {isa = PBXBuildFile; fileRef = EF0D6BE61555B36B0027F012 /* clock.png */; };
 		EF0D6BEA1555CCD00027F012 /* totTimerController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF0D6BE91555CCD00027F012 /* totTimerController.m */; };
+		EF0D6BEF155631880027F012 /* gesture_salut.png in Resources */ = {isa = PBXBuildFile; fileRef = EF0D6BED155631880027F012 /* gesture_salut.png */; };
+		EF0D6BF0155631880027F012 /* motor_skill_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = EF0D6BEE155631880027F012 /* motor_skill_bg.png */; };
 		EF2387EB153B7D1600B9C8BD /* ActivityEntryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF2387EA153B7D1600B9C8BD /* ActivityEntryView.xib */; };
 		EF2387EF153B7D7700B9C8BD /* totActivityEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2387EE153B7D7700B9C8BD /* totActivityEntryViewController.m */; };
 		EF2387F5153BC4C300B9C8BD /* totActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2387F4153BC4C300B9C8BD /* totActivityViewController.m */; };
@@ -44,6 +46,9 @@
 		EF238826153E19E800B9C8BD /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF238824153E19E700B9C8BD /* MediaPlayer.framework */; };
 		EF238827153E19E800B9C8BD /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF238825153E19E800B9C8BD /* MobileCoreServices.framework */; };
 		EF238829153E1A0D00B9C8BD /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF238828153E1A0C00B9C8BD /* QuartzCore.framework */; };
+		EF4CEE5915563E2400109BCC /* totLanguageInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF4CEE5815563E2400109BCC /* totLanguageInputViewController.m */; };
+		EF4CEE5C15563EDC00109BCC /* message_cloud.png in Resources */ = {isa = PBXBuildFile; fileRef = EF4CEE5B15563EDC00109BCC /* message_cloud.png */; };
+		EF4CEE5E15563FD000109BCC /* done-01.png in Resources */ = {isa = PBXBuildFile; fileRef = EF4CEE5D15563FD000109BCC /* done-01.png */; };
 		EF5FBB59154E6A0A00CBBA27 /* totPhotoView.m in Sources */ = {isa = PBXBuildFile; fileRef = EF5FBB58154E6A0900CBBA27 /* totPhotoView.m */; };
 		EF5FBB5C154E7B8E00CBBA27 /* PhotoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF5FBB5B154E7B8E00CBBA27 /* PhotoView.xib */; };
 		EF6283761536674B004031D6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF6283751536674B004031D6 /* UIKit.framework */; };
@@ -99,8 +104,6 @@
 		EFD840361550FAA600F75B69 /* gesture_suck_thumb.png in Resources */ = {isa = PBXBuildFile; fileRef = EFD8401C1550FAA600F75B69 /* gesture_suck_thumb.png */; };
 		EFD840371550FAA600F75B69 /* gesture_suck_toe.png in Resources */ = {isa = PBXBuildFile; fileRef = EFD8401D1550FAA600F75B69 /* gesture_suck_toe.png */; };
 		EFD840381550FAA600F75B69 /* gesture_wave.png in Resources */ = {isa = PBXBuildFile; fileRef = EFD8401E1550FAA600F75B69 /* gesture_wave.png */; };
-		EFD840391550FAA600F75B69 /* motor_skill_bg_1.png in Resources */ = {isa = PBXBuildFile; fileRef = EFD8401F1550FAA600F75B69 /* motor_skill_bg_1.png */; };
-		EFD8403A1550FAA600F75B69 /* motor_skill_bg_2.png in Resources */ = {isa = PBXBuildFile; fileRef = EFD840201550FAA600F75B69 /* motor_skill_bg_2.png */; };
 		EFD8403B1550FAA600F75B69 /* motor_skill_crawl.png in Resources */ = {isa = PBXBuildFile; fileRef = EFD840211550FAA600F75B69 /* motor_skill_crawl.png */; };
 		EFD8403C1550FAA600F75B69 /* motor_skill_cruise.png in Resources */ = {isa = PBXBuildFile; fileRef = EFD840221550FAA600F75B69 /* motor_skill_cruise.png */; };
 		EFD8403D1550FAA600F75B69 /* motor_skill_dance.png in Resources */ = {isa = PBXBuildFile; fileRef = EFD840231550FAA600F75B69 /* motor_skill_dance.png */; };
@@ -149,6 +152,8 @@
 		EF0D6BE81555CCD00027F012 /* totTimerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totTimerController.h; path = Home/totTimerController.h; sourceTree = "<group>"; };
 		EF0D6BE91555CCD00027F012 /* totTimerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totTimerController.m; path = Home/totTimerController.m; sourceTree = "<group>"; };
 		EF0D6BEC1555EC240027F012 /* totEventName.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totEventName.h; path = totdev/Model/totEventName.h; sourceTree = "<group>"; };
+		EF0D6BED155631880027F012 /* gesture_salut.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = gesture_salut.png; path = Resources/Activity/View/gesture_salut.png; sourceTree = "<group>"; };
+		EF0D6BEE155631880027F012 /* motor_skill_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = motor_skill_bg.png; path = Resources/Activity/View/motor_skill_bg.png; sourceTree = "<group>"; };
 		EF2387EA153B7D1600B9C8BD /* ActivityEntryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActivityEntryView.xib; sourceTree = "<group>"; };
 		EF2387ED153B7D7700B9C8BD /* totActivityEntryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totActivityEntryViewController.h; path = Activity/totActivityEntryViewController.h; sourceTree = "<group>"; };
 		EF2387EE153B7D7700B9C8BD /* totActivityEntryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totActivityEntryViewController.m; path = Activity/totActivityEntryViewController.m; sourceTree = "<group>"; };
@@ -169,6 +174,10 @@
 		EF238824153E19E700B9C8BD /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		EF238825153E19E800B9C8BD /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		EF238828153E1A0C00B9C8BD /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		EF4CEE5715563E2400109BCC /* totLanguageInputViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totLanguageInputViewController.h; path = Home/totLanguageInputViewController.h; sourceTree = "<group>"; };
+		EF4CEE5815563E2400109BCC /* totLanguageInputViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totLanguageInputViewController.m; path = Home/totLanguageInputViewController.m; sourceTree = "<group>"; };
+		EF4CEE5B15563EDC00109BCC /* message_cloud.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = message_cloud.png; sourceTree = "<group>"; };
+		EF4CEE5D15563FD000109BCC /* done-01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "done-01.png"; sourceTree = "<group>"; };
 		EF5FBB57154E6A0900CBBA27 /* totPhotoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totPhotoView.h; path = Utility/totPhotoView.h; sourceTree = "<group>"; };
 		EF5FBB58154E6A0900CBBA27 /* totPhotoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totPhotoView.m; path = Utility/totPhotoView.m; sourceTree = "<group>"; };
 		EF5FBB5B154E7B8E00CBBA27 /* PhotoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoView.xib; sourceTree = "<group>"; };
@@ -238,8 +247,6 @@
 		EFD8401C1550FAA600F75B69 /* gesture_suck_thumb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = gesture_suck_thumb.png; path = Resources/Activity/View/gesture_suck_thumb.png; sourceTree = "<group>"; };
 		EFD8401D1550FAA600F75B69 /* gesture_suck_toe.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = gesture_suck_toe.png; path = Resources/Activity/View/gesture_suck_toe.png; sourceTree = "<group>"; };
 		EFD8401E1550FAA600F75B69 /* gesture_wave.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = gesture_wave.png; path = Resources/Activity/View/gesture_wave.png; sourceTree = "<group>"; };
-		EFD8401F1550FAA600F75B69 /* motor_skill_bg_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = motor_skill_bg_1.png; path = Resources/Activity/View/motor_skill_bg_1.png; sourceTree = "<group>"; };
-		EFD840201550FAA600F75B69 /* motor_skill_bg_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = motor_skill_bg_2.png; path = Resources/Activity/View/motor_skill_bg_2.png; sourceTree = "<group>"; };
 		EFD840211550FAA600F75B69 /* motor_skill_crawl.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = motor_skill_crawl.png; path = Resources/Activity/View/motor_skill_crawl.png; sourceTree = "<group>"; };
 		EFD840221550FAA600F75B69 /* motor_skill_cruise.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = motor_skill_cruise.png; path = Resources/Activity/View/motor_skill_cruise.png; sourceTree = "<group>"; };
 		EFD840231550FAA600F75B69 /* motor_skill_dance.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = motor_skill_dance.png; path = Resources/Activity/View/motor_skill_dance.png; sourceTree = "<group>"; };
@@ -285,14 +292,14 @@
 				EFD840161550FAA600F75B69 /* emotion_happy.png */,
 				EFD840171550FAA600F75B69 /* emotion_sad.png */,
 				EFD840181550FAA600F75B69 /* emotion_surprise.png */,
+				EF0D6BED155631880027F012 /* gesture_salut.png */,
 				EFD840191550FAA600F75B69 /* gesture_bg.png */,
 				EFD8401A1550FAA600F75B69 /* gesture_clap.png */,
 				EFD8401B1550FAA600F75B69 /* gesture_point.png */,
 				EFD8401C1550FAA600F75B69 /* gesture_suck_thumb.png */,
 				EFD8401D1550FAA600F75B69 /* gesture_suck_toe.png */,
 				EFD8401E1550FAA600F75B69 /* gesture_wave.png */,
-				EFD8401F1550FAA600F75B69 /* motor_skill_bg_1.png */,
-				EFD840201550FAA600F75B69 /* motor_skill_bg_2.png */,
+				EF0D6BEE155631880027F012 /* motor_skill_bg.png */,
 				EFD840211550FAA600F75B69 /* motor_skill_crawl.png */,
 				EFD840221550FAA600F75B69 /* motor_skill_cruise.png */,
 				EFD840231550FAA600F75B69 /* motor_skill_dance.png */,
@@ -455,6 +462,8 @@
 		EF62839215366D62004031D6 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				EF4CEE5715563E2400109BCC /* totLanguageInputViewController.h */,
+				EF4CEE5815563E2400109BCC /* totLanguageInputViewController.m */,
 				EF62839615366D9A004031D6 /* totHomeRootController.h */,
 				EF62839715366D9A004031D6 /* totHomeRootController.m */,
 				EF6283AC1536772F004031D6 /* totHomeEntryViewController.h */,
@@ -564,6 +573,8 @@
 		EF97E7C3153B49F30037E52D /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				EF4CEE5D15563FD000109BCC /* done-01.png */,
+				EF4CEE5B15563EDC00109BCC /* message_cloud.png */,
 				EF0D6BE61555B36B0027F012 /* clock.png */,
 				EF0D6BD41555AE930027F012 /* diaper.png */,
 				EF0D6BD51555AE930027F012 /* food.png */,
@@ -677,8 +688,6 @@
 				EFD840361550FAA600F75B69 /* gesture_suck_thumb.png in Resources */,
 				EFD840371550FAA600F75B69 /* gesture_suck_toe.png in Resources */,
 				EFD840381550FAA600F75B69 /* gesture_wave.png in Resources */,
-				EFD840391550FAA600F75B69 /* motor_skill_bg_1.png in Resources */,
-				EFD8403A1550FAA600F75B69 /* motor_skill_bg_2.png in Resources */,
 				EFD8403B1550FAA600F75B69 /* motor_skill_crawl.png in Resources */,
 				EFD8403C1550FAA600F75B69 /* motor_skill_cruise.png in Resources */,
 				EFD8403D1550FAA600F75B69 /* motor_skill_dance.png in Resources */,
@@ -700,6 +709,10 @@
 				EF0D6BE41555AE930027F012 /* sleep.png in Resources */,
 				EF0D6BE51555AE930027F012 /* weight.png in Resources */,
 				EF0D6BE71555B36B0027F012 /* clock.png in Resources */,
+				EF0D6BEF155631880027F012 /* gesture_salut.png in Resources */,
+				EF0D6BF0155631880027F012 /* motor_skill_bg.png in Resources */,
+				EF4CEE5C15563EDC00109BCC /* message_cloud.png in Resources */,
+				EF4CEE5E15563FD000109BCC /* done-01.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -737,6 +750,7 @@
 				EFD8404D1551199000F75B69 /* totNavigationBar.m in Sources */,
 				EF0D6BD21555A7700027F012 /* totHomeSleepingView.m in Sources */,
 				EF0D6BEA1555CCD00027F012 /* totTimerController.m in Sources */,
+				EF4CEE5915563E2400109BCC /* totLanguageInputViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

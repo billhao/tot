@@ -17,8 +17,6 @@
 
 @synthesize mWidth;
 @synthesize mHeight;
-@synthesize mComponentWidth;
-@synthesize mComponentHeight;
 @synthesize delegate;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -27,6 +25,14 @@
     if (self) {
         // Custom initialization
     }
+    return self;
+}
+
+- (id)init {
+    mComponentHeight= PICKER_HEIGHT;
+    mComponentWidth = PICKER_COMPONENT_WIDTH;
+    mWidth = 3*mComponentWidth+20;
+    mHeight= mComponentHeight+BUTTON_HEIGHT+10;
     return self;
 }
 
@@ -40,21 +46,40 @@
 
 #pragma mark - UIPickerView delegate
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
-    if( component == kPickerHour )
-        mCurrentHourIdx = row;
-    else if( component == kPickerMinute )
-        mCurrentMinuteIdx = row;
-    else
-        mCurrentAmPm = row;
+    if( mMode == kTime ) {
+        if( component == kPickerHour )
+            mCurrentHourIdx = row;
+        else if( component == kPickerMinute )
+            mCurrentMinuteIdx = row;
+        else
+            mCurrentAmPm = row;
+    } else {
+        if( component == kPickerYear )
+            mCurrentYearIdx = row;
+        else if( component == kPickerMonth )
+            mCurrentMonthIdx = row;
+        else
+            mCurrentDayIdx = row;
+    }
+    
 }
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
-    if ( component == kPickerAmPm )
-        return [mAmPm count];
-    else if ( component == kPickerMinute )
-        return [mMinute count];
-    else
-        return [mHour count];
+    if( mMode == kTime ) {
+        if ( component == kPickerAmPm )
+            return [mAmPm count];
+        else if ( component == kPickerMinute )
+            return [mMinute count];
+        else
+            return [mHour count];
+    } else {
+        if ( component == kPickerYear )
+            return [mYear count];
+        else if ( component == kPickerMonth )
+            return [mMonth count];
+        else
+            return [mDay count];
+    }
 }
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
@@ -62,12 +87,22 @@
 }
 
 - (NSString*)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
-    if( component == kPickerHour ) {
-        return [mHour objectAtIndex:row];
-    } else if( component == kPickerMinute ) {
-        return [mMinute objectAtIndex:row];
+    if( mMode == kTime ) {
+        if( component == kPickerHour ) {
+            return [mHour objectAtIndex:row];
+        } else if( component == kPickerMinute ) {
+            return [mMinute objectAtIndex:row];
+        } else {
+            return [mAmPm objectAtIndex:row];
+        }
     } else {
-        return [mAmPm objectAtIndex:row];
+        if( component == kPickerYear ) {
+            return [mYear objectAtIndex:row];
+        } else if( component == kPickerMonth ) {
+            return [mMonth objectAtIndex:row];
+        } else {
+            return [mDay objectAtIndex:row];
+        }
     }
 }
 
@@ -85,9 +120,11 @@
 }
 */
 
+- (void)setMode:(int)m { mMode = m; }
+
 - (void)setCurrentHour:(int)h andMinute:(int)m andAmPm:(int)ap {
     if( 1 <= h && h <= 12 ) {
-        [mTimePicker selectRow:h inComponent:kPickerHour animated:NO];
+        [mTimePicker selectRow:h-1 inComponent:kPickerHour animated:NO];
     }
     if( 0 <= m && m <= 59 ) {
         [mTimePicker selectRow:m inComponent:kPickerMinute animated:NO];
@@ -97,15 +134,36 @@
     }
 }
 
+- (void)setCurrentYear:(int)y andMonth:(int)m andDay:(int)d {
+    if( 2012 <= y && y <= 2020 ) {
+        [mTimePicker selectRow:(y-2010) inComponent:kPickerYear animated:NO];
+    }
+    if( 1 <= m && m <= 12 ) {
+        [mTimePicker selectRow:(m-1) inComponent:kPickerMonth animated:NO];
+    }
+    if( 1 <= d && d <= 31 ) {
+        [mTimePicker selectRow:(d-1) inComponent:kPickerDay animated:NO];
+    }
+}
+
 - (void)buttonPressed: (id)sender {
     UIButton *btn = (UIButton*)sender;
     int tag = btn.tag;
     if( tag == kButtonOK ) {
         if( [delegate respondsToSelector:@selector(saveCurrentTime:)] ) {
-            NSString *time = [[NSString alloc] initWithFormat:@"%s,%s,%s", 
-                              [[mHour objectAtIndex:mCurrentHourIdx] UTF8String],
-                              [[mMinute objectAtIndex:mCurrentMinuteIdx] UTF8String],
-                              [[mAmPm objectAtIndex:mCurrentAmPm] UTF8String]];
+            NSString *time = nil;
+            if( mMode == kTime ) {
+                time = [[NSString alloc] initWithFormat:@"%s,%s,%s",
+                        [[mHour objectAtIndex:mCurrentHourIdx] UTF8String],
+                        [[mMinute objectAtIndex:mCurrentMinuteIdx] UTF8String],
+                        [[mAmPm objectAtIndex:mCurrentAmPm] UTF8String]];
+            } else {
+                time = [[NSString alloc] initWithFormat:@"%s,%s,%s",
+                        [[mYear objectAtIndex:mCurrentYearIdx] UTF8String],
+                        [[mMinute objectAtIndex:mCurrentMonthIdx] UTF8String],
+                        [[mDay objectAtIndex:mCurrentDayIdx] UTF8String]];
+            }
+            
             [delegate saveCurrentTime:time];
             [time release];
         }
@@ -119,27 +177,29 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
+   [super viewDidLoad];
+
+    self.view.userInteractionEnabled = YES;
     
-    int buttonWidth = BUTTON_WIDTH, buttonHeight = BUTTON_HEIGHT;
-    mComponentHeight= PICKER_HEIGHT;
-    mComponentWidth = PICKER_COMPONENT_WIDTH;
-    mWidth = 3*mComponentWidth+30;
-    mHeight= mComponentHeight + buttonHeight + 10;
-    
-    mAmPm = [[NSMutableArray alloc] init];
-    [mAmPm addObject:@"am"];
-    [mAmPm addObject:@"pm"];
-    
+    int buttonWidth = BUTTON_WIDTH, 
+        buttonHeight = BUTTON_HEIGHT;    
+    mAmPm = [[NSMutableArray alloc] init]; [mAmPm addObject:@"am"]; [mAmPm addObject:@"pm"];
     mHour = [[NSMutableArray alloc] init];
-    for ( int i = 1; i <= 12; i++ ) {
+    for ( int i = 1; i <= 12; i++ ) 
         [mHour addObject:[NSString stringWithFormat:@"%d", i]];
-    }
-    
     mMinute = [[NSMutableArray alloc] init];
-    for ( int i = 0; i <= 59; i++ ) {
+    for ( int i = 0; i <= 59; i++ ) 
         [mMinute addObject:[NSString stringWithFormat:@"%02d", i]];
-    }
+    
+    mYear = [[NSMutableArray alloc] init];
+    for( int i = 2012; i <= 2020; i++ ) 
+        [mYear addObject:[NSString stringWithFormat:@"%d", i]];
+    mMonth = [[NSMutableArray alloc] init];
+    for( int i = 1; i <= 12; i++ ) 
+        [mMonth addObject:[NSString stringWithFormat:@"%02d", i]];
+    mDay = [[NSMutableArray alloc] init];
+    for( int i = 1; i <= 31; i++ ) 
+        [mDay addObject:[NSString stringWithFormat:@"%02d", i]];
     
     mTimePicker = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 0, mWidth, mComponentHeight)];
     mTimePicker.dataSource = self;
@@ -148,6 +208,7 @@
     
     [self.view addSubview:mTimePicker];
     
+    // add buttons
     int margin = (mWidth-(2*buttonWidth+10))/2;
     
     UIButton *okBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
@@ -183,6 +244,9 @@
     [mAmPm release];
     [mHour release];
     [mMinute release];
+    [mYear release];
+    [mMonth release];
+    [mDay release];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

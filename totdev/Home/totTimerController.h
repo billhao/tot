@@ -19,6 +19,17 @@ enum {
     kPickerAmPm = 2
 };
 
+enum {
+    kPickerYear = 0,
+    kPickerMonth = 1,
+    kPickerDay
+};
+
+enum {
+    kDate = 0,
+    kTime
+};
+
 @protocol totTimerControllerDelegate <NSObject>
 
 @optional
@@ -29,17 +40,21 @@ enum {
 
 @interface totTimerController : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate> {
     UIPickerView *mTimePicker;
+    
     NSMutableArray *mHour, *mMinute, *mAmPm;
+    NSMutableArray *mYear, *mMonth, *mDay;
+    
+    int mMode;
+    
     int mComponentWidth, mComponentHeight;
     int mWidth, mHeight;
     int mCurrentHourIdx, mCurrentMinuteIdx, mCurrentAmPm;
+    int mCurrentYearIdx, mCurrentMonthIdx, mCurrentDayIdx;
     id<totTimerControllerDelegate> delegate;
 }
 
 @property (nonatomic, assign) int mWidth;
 @property (nonatomic, assign) int mHeight;
-@property (nonatomic, assign) int mComponentWidth;
-@property (nonatomic, assign) int mComponentHeight;
 @property (nonatomic, retain) id<totTimerControllerDelegate> delegate;
 
 // set the current time
@@ -47,5 +62,8 @@ enum {
 // m: 0-59
 // ap: 0: am, 1: pm
 - (void)setCurrentHour:(int)h andMinute:(int)m andAmPm:(int)ap;
+- (void)setCurrentYear:(int)y andMonth:(int)m andDay:(int)d;
+
+- (void)setMode: (int)m;
 
 @end
