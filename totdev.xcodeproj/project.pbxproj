@@ -723,6 +723,10 @@
 				EF0D6BE51555AE930027F012 /* weight.png in Resources */,
 				EF0D6BE71555B36B0027F012 /* clock.png in Resources */,
 				3F454D2E1555A84700AC66EE /* totHomeHeightViewController.xib in Resources */,
+				EF0D6BEF155631880027F012 /* gesture_salut.png in Resources */,
+				EF0D6BF0155631880027F012 /* motor_skill_bg.png in Resources */,
+				EF4CEE5C15563EDC00109BCC /* message_cloud.png in Resources */,
+				EF4CEE5E15563FD000109BCC /* done-01.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -762,6 +766,7 @@
 				EF0D6BEA1555CCD00027F012 /* totTimerController.m in Sources */,
 				3F454D2D1555A84700AC66EE /* totHomeHeightViewController.m in Sources */,
 				3F454D321555B1B200AC66EE /* STHorizontalPicker.m in Sources */,
+				EF4CEE5915563E2400109BCC /* totLanguageInputViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
