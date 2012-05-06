@@ -136,7 +136,7 @@
     int y[8] = {20, 20, 20, 124, 124, 124, 230, 230};
 
     for( int i=0; i<8; i++ ) {
-        UIButton *imageButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        UIButton *imageButton = [UIButton buttonWithType:UIButtonTypeCustom];
         imageButton.frame = CGRectMake(x[i], y[i], w, h);
         imageButton.tag = i;
         

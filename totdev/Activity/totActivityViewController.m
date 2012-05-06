@@ -185,6 +185,9 @@
         case kActivityEmotion:
             [mBackground setImage:[UIImage imageNamed:@"emotion_bg.png"]];
             break;
+        case kActivityMotorSkill:
+            [mBackground setImage:[UIImage imageNamed:@"motor_skill_bg_1.png"]];
+            break;
         default:
             break;
     }
@@ -218,7 +221,8 @@
     // create the slider view
     mSliderView = [[totSliderView alloc] initWithFrame:CGRectMake(0, 50, 320, 260)];
     [mSliderView setDelegate:self];
-    [mSliderView enablePageControlOnBottom];
+    //[mSliderView enablePageControlOnBottom];
+    [mSliderView enablePageControlOnTop];
     [self.view addSubview:mSliderView];
 
     // create camera buttons
