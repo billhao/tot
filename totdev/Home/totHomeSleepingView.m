@@ -16,13 +16,15 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
+        self.userInteractionEnabled = YES;
+        
         mWidth = self.frame.size.width;
-        mHeight = self.frame.size.height;
+        mHeight= self.frame.size.height;
         
         mClock = [[totTimerController alloc] init];
+        mClock.view.frame = CGRectMake((mWidth-mClock.mWidth)/2, mHeight, mClock.mWidth, mClock.mHeight);
         [mClock setDelegate:self];
         [self addSubview:mClock.view];
-        mClock.view.frame = CGRectMake((mWidth-mClock.mWidth)/2, mHeight, mClock.mWidth, mClock.mHeight);
         
         mClockBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         mClockBtn.frame = CGRectMake(100, 100, 25, 25);
@@ -43,11 +45,13 @@
     [UIView beginAnimations:@"swipe" context:nil];
 	[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
 	[UIView setAnimationDuration:0.5f];
-    mClock.view.frame = CGRectMake((mWidth-mClock.mWidth)/2, mHeight-mClock.mHeight, mClock.mWidth, mClock.mHeight);
+    mClock.view.frame = CGRectMake((mWidth-mClock.mWidth)/2, mHeight-mClock.mHeight-80, mClock.mWidth, mClock.mHeight);
     [UIView commitAnimations];
 }
 
 - (void)hideTimePicker {
+    self.hidden = YES;
+    
     mClockBtn.hidden = NO;
     [self setBackgroundColor:[UIColor clearColor]];
     [UIView beginAnimations:@"swipe" context:nil];
@@ -92,7 +96,13 @@
     if ( hour > 12 )
         hour = hour - 12;
     
-    [mClock setCurrentHour:hour-1 andMinute:minute andAmPm:ap];
+    [mClock setCurrentHour:hour andMinute:minute andAmPm:ap];
+}
+
+- (void)startTimer {}
+
+- (void)makeNoView {
+    self.hidden = YES;
 }
 
 #pragma mark - totTimerControllerDelegate
@@ -104,11 +114,6 @@
     [self hideTimePicker];
 }
 
-- (void)startTimer {}
-
-- (void)makeNoView {
-    self.hidden = YES;
-}
 
 - (void)dealloc {
     [mClock release];   

@@ -58,22 +58,27 @@
     // Add the message cloud into m_topView
     UIImageView *aImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 20, 320, 180)];
     aImgView.image = [UIImage imageNamed:@"message_cloud.png"];
-    [self.view addSubview:aImgView];    
+    [self.view addSubview:aImgView];
+    [aImgView release];
+    
     // Construct m_textField
     UITextView *aTxtView = [[UITextView alloc] initWithFrame:CGRectMake(80, 56, 170, 80)];
     [aTxtView  setFont: [UIFont fontWithName:@"ArialMT" size:22]];
     aTxtView.editable = YES;
     aTxtView.textAlignment = UITextAlignmentLeft;
     aTxtView.backgroundColor = [UIColor clearColor];
-    m_textView = aTxtView;
-    [self.view addSubview:m_textView];
+    self.m_textView = aTxtView;
     [aTxtView release];
+    [self.view addSubview:m_textView];
+    
+    
     // Construct m_confirmButton
     UIButton *aBtn = [[UIButton alloc] initWithFrame:CGRectMake(145, 200, 30, 30)];
     aBtn.backgroundColor = [UIColor clearColor];
     [aBtn setBackgroundImage: [UIImage imageNamed:@"play_button.png"] forState:UIControlStateNormal];
     [aBtn addTarget:self action:@selector(ConfirmButtonClicked) forControlEvents:UIControlEventTouchUpInside];
-    m_confirmButton = aBtn;
+    self.m_confirmButton = aBtn;
+    [aBtn release];
     [self.view addSubview:m_confirmButton];
     
     //Initially hide all the views
@@ -117,6 +122,8 @@
         [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
         NSDate* curDate = [NSDate date];
         NSString *formattedDateString = [dateFormatter stringFromDate:curDate];
+        [dateFormatter release];
+        
         /* Get input text */
         NSString* inputTxt = m_textView.text;
         /* Add to database */
