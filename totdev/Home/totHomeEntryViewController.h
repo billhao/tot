@@ -8,6 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
-@interface totHomeEntryViewController : UIViewController
+@class totHomeSleepingView;
+
+enum {
+    kBasicLanguage,
+    kBasicSleep
+};
+
+@interface totHomeEntryViewController : UIViewController {
+    totHomeSleepingView *mHomeSleepingView;
+}
 
 @end
