@@ -94,6 +94,7 @@
     // e.g. self.myOutlet = nil;
     
     [mHomeSleepingView release];
+    [mLanguageInputView release];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

@@ -114,7 +114,6 @@
     [self hideTimePicker];
 }
 
-
 - (void)dealloc {
     [mClock release];   
 }
