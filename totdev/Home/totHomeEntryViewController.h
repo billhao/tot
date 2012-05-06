@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @class totHomeSleepingView;
+@class totLanguageInputViewController;
 
 enum {
     kBasicLanguage,
@@ -17,6 +18,7 @@ enum {
 
 @interface totHomeEntryViewController : UIViewController {
     totHomeSleepingView *mHomeSleepingView;
+    totLanguageInputViewController *mLanguageInputView;
 }
 
 @end

@@ -186,7 +186,10 @@
             [mBackground setImage:[UIImage imageNamed:@"emotion_bg.png"]];
             break;
         case kActivityMotorSkill:
-            [mBackground setImage:[UIImage imageNamed:@"motor_skill_bg_1.png"]];
+            [mBackground setImage:[UIImage imageNamed:@"motor_skill_bg.png"]];
+            break;
+        case kActivityGesture:
+            [mBackground setImage:[UIImage imageNamed:@"gesture_bg.png"]];
             break;
         default:
             break;
@@ -219,21 +222,20 @@
     [self.view addSubview:mBackground];
     
     // create the slider view
-    mSliderView = [[totSliderView alloc] initWithFrame:CGRectMake(0, 50, 320, 260)];
+    mSliderView = [[totSliderView alloc] initWithFrame:CGRectMake(25, 78, 270, 300)];
     [mSliderView setDelegate:self];
-    //[mSliderView enablePageControlOnBottom];
-    [mSliderView enablePageControlOnTop];
+    [mSliderView enablePageControlOnBottom];
     [self.view addSubview:mSliderView];
 
     // create camera buttons
-    UIButton *cameraButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    cameraButton.frame = CGRectMake(60, 300, 75, 75);
+    UIButton *cameraButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    cameraButton.frame = CGRectMake(74, 316, 90, 60);
     [cameraButton setImage:[UIImage imageNamed:@"camera.png"] forState:UIControlStateNormal];
     [cameraButton addTarget:self action:@selector(launchCamera:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:cameraButton];
     
-    UIButton *videoButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    videoButton.frame = CGRectMake(180, 300, 75, 75);
+    UIButton *videoButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    videoButton.frame = CGRectMake(160, 316, 90, 60);
     [videoButton setImage:[UIImage imageNamed:@"video.png"] forState:UIControlStateNormal];
     [videoButton addTarget:self action:@selector(launchVideo:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:videoButton];

@@ -8,6 +8,7 @@
 
 #import "totHomeEntryViewController.h"
 #import "totHomeSleepingView.h"
+#import "totLanguageInputViewController.h"
 #import "../Utility/totImageView.h"
 
 @implementation totHomeEntryViewController
@@ -18,6 +19,7 @@
     if (self) {
         // Custom initialization
         mHomeSleepingView = [[totHomeSleepingView alloc] initWithFrame:CGRectMake(0, 0, 320, 411)];
+        mLanguageInputView = [[totLanguageInputViewController alloc] init];
     }
     return self;
 }
@@ -47,6 +49,7 @@
             [mHomeSleepingView startSleeping];
             break;
         case kBasicLanguage:
+            [mLanguageInputView Display];
             break;
         default:
             break;
@@ -59,7 +62,7 @@
     [super viewDidLoad];
     
     // create background
-    totImageView *background = [[totImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 411)];
+    totImageView *background = [[totImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 460)];
     [background imageFilePath:@"home_background.png"];
     [self.view addSubview:background];
     [background release];
@@ -81,6 +84,7 @@
     
     // create subview
     [self.view addSubview:mHomeSleepingView];
+    [self.view addSubview:mLanguageInputView.view];
 }
 
 - (void)viewDidUnload
@@ -90,6 +94,7 @@
     // e.g. self.myOutlet = nil;
     
     [mHomeSleepingView release];
+    [mLanguageInputView release];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
