@@ -9,6 +9,12 @@
 #ifndef totdev_totEventName_h
 #define totdev_totEventName_h
 
-const static char *EMOTION_HAPPY = "emotion/happy";
+// basic - height, weigth, head circumference
+NSString *EVENT_BASIC_HEIGHT     = @"basic/height";
+NSString *EVENT_BASIC_WEIGHT     = @"basic/weight";
+NSString *EVENT_BASIC_HEAD       = @"basic/head";
+
+// activity - emotion
+NSString *EVENT_EMOTION_HAPPY    = @"emotion/happy";
 
 #endif

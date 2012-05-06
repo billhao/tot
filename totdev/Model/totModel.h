@@ -19,7 +19,8 @@
 - (void) dealloc;
 
 // add an event
-- (Boolean) addEvent:(int)baby_id event:(NSString*)event datetime:(NSString*)datetime value:(NSString*)value;
+- (Boolean) addEvent:(int)baby_id event:(NSString*)event datetimeString:(NSString*)datetime value:(NSString*)value;
+- (Boolean) addEvent:(int)baby_id event:(NSString*)event datetime:(NSDate*)datetime value:(NSString*)value;
 
 // get a list of events that contain the string in name
 - (NSMutableArray *) getEvent:(int)baby_id event:(NSString*)event;

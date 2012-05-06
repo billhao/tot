@@ -31,7 +31,6 @@
         NSLog(@"Return from db: %@", [e toString]);        
     }
     [event release];
-    [events release];
     [model release];
 }
 
