@@ -124,7 +124,7 @@
         totModel* totModel = [appDelegate getDataModel];
         [totModel addEvent:0 event:@"language" datetime:formattedDateString value:inputTxt ];
         
-        /* Clear text */
+        /* Clear textview text */
         m_textView.text = @"";
         
         /* Hide keyboard */
