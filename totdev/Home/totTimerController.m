@@ -119,6 +119,8 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
+    [super viewDidLoad];
+    
     int buttonWidth = BUTTON_WIDTH, buttonHeight = BUTTON_HEIGHT;
     mComponentHeight= PICKER_HEIGHT;
     mComponentWidth = PICKER_COMPONENT_WIDTH;
@@ -162,7 +164,14 @@
     [cancelBtn addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:cancelBtn];
     
-    [super viewDidLoad];
+    /*
+    UIButton *testBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    testBtn.frame = CGRectMake(110, 200, 70, 30);
+    testBtn.tag = kButtonCancel;
+    [testBtn setTitle:@"Cancel" forState:UIControlStateNormal];
+    [testBtn addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:testBtn];
+     */
 }
 
 - (void)viewDidUnload
