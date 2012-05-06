@@ -46,10 +46,6 @@
 {
     [super viewDidLoad];
     
-    totHomeHeightViewController* pHeightView = [[totHomeHeightViewController alloc] initWithNibName:@"totHomeHeightViewController" bundle:nil];
-    [self.view addSubview:pHeightView.view];
-    return;
-    
     totHomeEntryViewController *aHomeView = [[totHomeEntryViewController alloc] initWithNibName:@"HomeView" bundle:nil];
     self.homeEntryViewController = aHomeView;
     [aHomeView release];
