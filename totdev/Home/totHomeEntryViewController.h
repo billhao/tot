@@ -12,8 +12,14 @@
 @class totLanguageInputViewController;
 
 enum {
-    kBasicLanguage,
-    kBasicSleep
+    kBasicLanguage=0,
+    kBasicSleep=1,
+    kBasicHeight=2,
+    kBasicFood=3,
+    kBasicDiaper=4,
+    kBasicHealth=5,
+    kBasicWeight=6,
+    kBasicHead=7
 };
 
 @interface totHomeEntryViewController : UIViewController {

@@ -69,19 +69,19 @@
     [background release];
 
     // create buttons
-    UIButton *sleepButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    sleepButton.frame = CGRectMake(20, 20, 75, 75);
-    sleepButton.tag = kBasicSleep;
-    [sleepButton setImage:[UIImage imageNamed:@"sleep.png"] forState:UIControlStateNormal];
-    [sleepButton addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:sleepButton];
-    
-    UIButton *languageButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    languageButton.frame = CGRectMake(100, 100, 75, 75);
-    languageButton.tag = kBasicLanguage;
-    [languageButton setImage:[UIImage imageNamed:@"language.png"] forState:UIControlStateNormal];
-    [languageButton addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:languageButton];
+    int buttonW[8] = {117, 120, 102, 67, 112, 85, 90, 65};
+    int buttonH[8] = {127, 97, 275, 87, 90, 87, 92, 75};
+    int buttonX[8] = {22, 200, 5, 240, 112, 225, 225, 132};
+    int buttonY[8] = {22, 45, 150, 142, 247, 230, 318, 85};
+    const char *buttonName[8] = {"language.png", "sleep.png", "height.png", "food.png", "diaper.png", "health.png", "weight.png", "head.png"};
+    for( int i = 0; i <= 7; i++ ) {
+        UIButton *function = [UIButton buttonWithType:UIButtonTypeCustom];
+        function.frame = CGRectMake(buttonX[i], buttonY[i], buttonW[i], buttonH[i]);
+        function.tag = i;
+        [function setImage:[UIImage imageNamed:[NSString stringWithUTF8String:buttonName[i]]] forState:UIControlStateNormal];
+        [function addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:function];
+    }
     
     // create subview
     [self.view addSubview:mHomeSleepingView];

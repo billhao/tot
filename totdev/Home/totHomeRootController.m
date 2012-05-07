@@ -48,9 +48,14 @@
 {
     [super viewDidLoad];
     
-    //totHomeEntryViewController *aHomeView = [[totHomeEntryViewController alloc]
-    //    initWithNibName:@"HomeView" bundle:nil];
+    totHomeEntryViewController *aHomeView = [[totHomeEntryViewController alloc]
+        initWithNibName:@"HomeView" bundle:nil];
 
+    self.homeEntryViewController = aHomeView;
+    [self.view addSubview:homeEntryViewController.view];
+    [aHomeView release];
+    
+    /*
     totHomeFeedingViewController *homeFeedingView = [[totHomeFeedingViewController alloc]
                                             initWithNibName:@"homeFeedingView" bundle:nil];
     self.homeFeedingViewController = homeFeedingView;
@@ -58,7 +63,8 @@
     [homeFeedingView release];
 
     [self.view addSubview:homeFeedingViewController.view];
-    homeFeedingViewController.view.frame = CGRectMake(0, 0, 320, 480);   
+    homeFeedingViewController.view.frame = CGRectMake(0, 0, 320, 480);
+    */
 }
 
 
