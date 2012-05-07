@@ -10,8 +10,8 @@
 
 #define PICKER_COMPONENT_WIDTH 100
 #define PICKER_HEIGHT          200
-#define BUTTON_WIDTH           70
-#define BUTTON_HEIGHT          30
+#define BUTTON_WIDTH           90
+#define BUTTON_HEIGHT          50
 
 @implementation totTimerController
 
@@ -32,7 +32,7 @@
     mComponentHeight= PICKER_HEIGHT;
     mComponentWidth = PICKER_COMPONENT_WIDTH;
     mWidth = 3*mComponentWidth+20;
-    mHeight= mComponentHeight+BUTTON_HEIGHT+10;
+    mHeight= mComponentHeight+10+BUTTON_HEIGHT;
     return self;
 }
 
@@ -153,7 +153,7 @@
         if( [delegate respondsToSelector:@selector(saveCurrentTime:)] ) {
             NSString *time = nil;
             if( mMode == kTime ) {
-                time = [[NSString alloc] initWithFormat:@"%s,%s,%s",
+                time = [[NSString alloc] initWithFormat:@"%s:%s:%s",
                         [[mHour objectAtIndex:mCurrentHourIdx] UTF8String],
                         [[mMinute objectAtIndex:mCurrentMinuteIdx] UTF8String],
                         [[mAmPm objectAtIndex:mCurrentAmPm] UTF8String]];
@@ -201,7 +201,7 @@
     for( int i = 1; i <= 31; i++ ) 
         [mDay addObject:[NSString stringWithFormat:@"%02d", i]];
     
-    mTimePicker = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 0, mWidth, mComponentHeight)];
+    mTimePicker = [[UIPickerView alloc] initWithFrame:CGRectMake(0, -10, mWidth, mComponentHeight)];
     mTimePicker.dataSource = self;
     mTimePicker.delegate = self;
     mTimePicker.showsSelectionIndicator = YES;
@@ -212,14 +212,14 @@
     int margin = (mWidth-(2*buttonWidth+10))/2;
     
     UIButton *okBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    okBtn.frame = CGRectMake(margin, mComponentHeight, buttonWidth, buttonHeight);
+    okBtn.frame = CGRectMake(margin, mComponentHeight-30, buttonWidth, buttonHeight);
     okBtn.tag = kButtonOK;    
     [okBtn setTitle:@"OK" forState:UIControlStateNormal];
     [okBtn addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:okBtn];
     
     UIButton *cancelBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    cancelBtn.frame = CGRectMake(mWidth-margin-buttonWidth, mComponentHeight, buttonWidth, buttonHeight);
+    cancelBtn.frame = CGRectMake(mWidth-margin-buttonWidth, mComponentHeight-30, buttonWidth, buttonHeight);
     cancelBtn.tag = kButtonCancel;
     [cancelBtn setTitle:@"Cancel" forState:UIControlStateNormal];
     [cancelBtn addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];

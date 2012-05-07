@@ -152,7 +152,7 @@
         
         [mTotModel addEvent:[totActivityUtility getCurrentBabyID] 
                       event:[NSString stringWithUTF8String:mEventName] 
-                   datetime:formattedDateString 
+                   datetimeString:formattedDateString 
                       value:[NSString stringWithUTF8String:data]];
         
         [self backToActivityView];

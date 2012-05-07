@@ -136,14 +136,13 @@
         [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
         NSDate* curDate = [NSDate date];
         NSString *formattedDateString = [dateFormatter stringFromDate:curDate];
-        [dateFormatter release];
         
         /* Get input text */
         NSString* inputTxt = m_textView.text;
         /* Add to database */
         AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
         totModel* totModel = [appDelegate getDataModel];
-        [totModel addEvent:0 event:@"language" datetime:formattedDateString value:inputTxt ];
+        [totModel addEvent:0 event:@"language" datetimeString:formattedDateString value:inputTxt ];
         
         /* Clear textview text */
         m_textView.text = @"";
@@ -164,6 +163,7 @@
                                        selector:@selector(MakeNoView)
                                        userInfo:nil
                                         repeats:NO];
+        [dateFormatter release];
     } else {
         /* Hide keyboard */
         [self.m_textView resignFirstResponder];

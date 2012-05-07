@@ -23,6 +23,7 @@
         
         mClock = [[totTimerController alloc] init];
         mClock.view.frame = CGRectMake((mWidth-mClock.mWidth)/2, mHeight, mClock.mWidth, mClock.mHeight);
+        [mClock setMode:kTime];
         [mClock setDelegate:self];
         [self addSubview:mClock.view];
         
@@ -38,24 +39,35 @@
     return self;
 }
 
+- (void)setParentView:(UIView *)parent {
+    mParentView = parent;
+}
+
 - (void)showTimePicker {
     mClockBtn.hidden = YES;
 //    [self setBackgroundColor:[UIColor blackColor]];
 //    [self setAlpha:0.8f];
-    [UIView beginAnimations:@"swipe" context:nil];
+    [UIView beginAnimations:@"showPicker" context:nil];
 	[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
 	[UIView setAnimationDuration:0.5f];
-    mClock.view.frame = CGRectMake((mWidth-mClock.mWidth)/2, mHeight-mClock.mHeight-20, mClock.mWidth, mClock.mHeight);
+    mClock.view.frame = CGRectMake((mWidth-mClock.mWidth)/2, mHeight-mClock.mHeight-60, mClock.mWidth, mClock.mHeight);
     [UIView commitAnimations];
 }
 
+- (void)animationFinished:(NSString*)animationID finished:(NSNumber*)finished context:(void*)context {
+    if( [animationID isEqualToString:@"hidePicker"] ) {
+        self.hidden = YES;
+    }
+}
+
 - (void)hideTimePicker {
-    self.hidden = YES;
-    
     mClockBtn.hidden = NO;
     [self setBackgroundColor:[UIColor clearColor]];
-    [UIView beginAnimations:@"swipe" context:nil];
-	[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+    
+    [UIView beginAnimations:@"hidePicker" context:nil];
+	[UIView setAnimationDelegate:self];
+    [UIView setAnimationDidStopSelector:@selector(animationFinished:finished:context:)];
+    [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
 	[UIView setAnimationDuration:0.5f];
     mClock.view.frame = CGRectMake((mWidth-mClock.mWidth)/2, mHeight, mClock.mWidth, mClock.mHeight);
     [UIView commitAnimations];
@@ -97,10 +109,11 @@
     int ap = 0;
     int hour = [hourNum intValue];
     int minute = [minuteNum intValue];
-    if ( hour > 11 )
-        ap = 1;
+    if ( hour > 11 ) ap = 1;
     if ( hour > 12 )
         hour = hour - 12;
+    else if ( hour == 0 )
+        hour = 12;
     
     [mClock setCurrentHour:hour andMinute:minute andAmPm:ap];
     

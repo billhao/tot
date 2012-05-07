@@ -11,6 +11,7 @@
 
 @interface totHomeSleepingView : UIView <totTimerControllerDelegate> {
     UIButton *mClockBtn;
+    UIView *mParentView;
     totTimerController *mClock;
     int mWidth, mHeight;
     bool mStart;
@@ -18,5 +19,8 @@
 
 - (void)startSleeping;
 - (void)stopSleeping;
+- (void)setParentView:(UIView*)parent;
+
+- (void)animationFinished:(NSString*)animationID finished:(NSNumber*)finished context:(void*)context;
 
 @end
