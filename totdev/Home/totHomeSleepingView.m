@@ -40,12 +40,12 @@
 
 - (void)showTimePicker {
     mClockBtn.hidden = YES;
-    [self setBackgroundColor:[UIColor blackColor]];
-    [self setAlpha:0.8f];
+//    [self setBackgroundColor:[UIColor blackColor]];
+//    [self setAlpha:0.8f];
     [UIView beginAnimations:@"swipe" context:nil];
 	[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
 	[UIView setAnimationDuration:0.5f];
-    mClock.view.frame = CGRectMake((mWidth-mClock.mWidth)/2, mHeight-mClock.mHeight-80, mClock.mWidth, mClock.mHeight);
+    mClock.view.frame = CGRectMake((mWidth-mClock.mWidth)/2, mHeight-mClock.mHeight-20, mClock.mWidth, mClock.mHeight);
     [UIView commitAnimations];
 }
 
@@ -69,6 +69,10 @@
     
 }
 
+- (void)startTimer {
+    
+}
+
 - (void)startSleeping {
     self.hidden = NO;
     
@@ -79,6 +83,7 @@
     NSString *formattedDateString = [dateFormatter stringFromDate:now];
     [dateFormatter release];
     
+    // extract hour and minute values
     NSArray *tokens = [formattedDateString componentsSeparatedByString:@" "];
     NSArray *comps = [[tokens objectAtIndex:1] componentsSeparatedByString:@":"];
     
@@ -88,6 +93,7 @@
     NSNumber *minuteNum = [f numberFromString:[comps objectAtIndex:1]];
     [f release];
     
+    // initialize the picker view to display the current time
     int ap = 0;
     int hour = [hourNum intValue];
     int minute = [minuteNum intValue];
@@ -97,9 +103,9 @@
         hour = hour - 12;
     
     [mClock setCurrentHour:hour andMinute:minute andAmPm:ap];
+    
+    [self startTimer];
 }
-
-- (void)startTimer {}
 
 - (void)makeNoView {
     self.hidden = YES;

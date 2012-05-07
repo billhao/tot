@@ -223,6 +223,8 @@
     [cancelBtn addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:cancelBtn];
     
+    [self.view setBackgroundColor:[UIColor blackColor]];
+    
     [super viewDidLoad];
 }
 

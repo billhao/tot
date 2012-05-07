@@ -25,6 +25,7 @@
     
     NSMutableArray *contentArray; 
     NSMutableArray *marginArray;
+    NSMutableArray *isIconArray;
     
     BOOL pageControlEnabledTop;  
     BOOL pageControlEnabledBottom;  
@@ -55,7 +56,10 @@
 /// set an array with images you want to display in your new scroll view  
 - (void)setContentArray:(NSArray *)images;
 
-/// set background color for your UIScrollView  
+/// set an array indicating whether this icon has user photos or not
+- (void)setIsIconArray:(NSArray*)isIcon;
+
+/// set background color for your UIScrollView
 - (void)setBackGroundColor:(UIColor *)color;  
 
 /// display page control for the scroll view on the top of the view (inset)  

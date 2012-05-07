@@ -18,10 +18,10 @@
 #define DEFAULT_NUMOFROWS   2
 
 // layout parameters
-#define LEFT_MARGIN         10
-#define TOP_MARGIN          20
-#define HORI_INTERVAL       15
-#define VERTI_INTERVAL      20
+//#define LEFT_MARGIN         10
+//#define TOP_MARGIN          20
+//#define HORI_INTERVAL       15
+//#define VERTI_INTERVAL      20
 #define BUTTON_WIDTH        75
 #define BUTTON_HEIGHT       90
 
@@ -68,10 +68,16 @@
     contentArray = [[NSMutableArray alloc] initWithArray:images];
 }  
 
-- (void)setMarginArray:(NSArray *)margins{
+- (void)setMarginArray:(NSArray *)margins {
     if( marginArray )
         [marginArray release];
     marginArray = [[NSMutableArray alloc] initWithArray:margins];
+}
+
+- (void)setIsIconArray:(NSArray*)isIcon {
+    if( isIconArray )
+        [isIconArray release];
+    isIconArray = [[NSMutableArray alloc] initWithArray:isIcon];
 }
 
 - (void)setBackGroundColor:(UIColor *)color {  
@@ -131,21 +137,31 @@
             int xPos = xx[j];
             int yPos = yy[j];
             
-            // button
-            UIButton *imageButton = [[UIButton alloc] initWithFrame:CGRectMake(xPos, yPos, BUTTON_WIDTH, BUTTON_HEIGHT)];            
-            
-            UIImage *origImage=[contentArray objectAtIndex:i*numOfRows*3+j];
-            //UIImage *squareImage=[totUtility squareCropImage:origImage];
-            
-            [imageButton setImage:origImage forState:UIControlStateNormal];
-            [imageButton addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
-            [imageButton setTag:i*numOfRows*3 + j + 1];
-            [subview addSubview:(UIView *)imageButton];
-            [imageButton release];
+            if( [[isIconArray objectAtIndex:i*numOfRows*3+j] boolValue] ) {
+                UIButton *imageButton = [[UIButton alloc] initWithFrame:CGRectMake(xPos, yPos, BUTTON_WIDTH, BUTTON_HEIGHT)];
+                UIImage  *origImage   = [contentArray objectAtIndex:i*numOfRows*3+j];
+                [imageButton setImage:origImage forState:UIControlStateNormal];
+                [imageButton addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
+                [imageButton setTag:i*numOfRows*3+j+1];
+                [subview addSubview:(UIView *)imageButton];
+                [imageButton release];
+            } else {
+                UIImageView *bckground = [[UIImageView alloc] initWithFrame:CGRectMake(xPos, yPos, BUTTON_WIDTH, BUTTON_HEIGHT)];
+                UIButton *imageButton = [[UIButton alloc] initWithFrame:CGRectMake(xPos, yPos, BUTTON_WIDTH, BUTTON_WIDTH)];
+                UIImage *origImage = [contentArray objectAtIndex:i*numOfRows*3+j];
+                UIImage *squareImage = [totUtility squareCropImage:origImage];
+                [imageButton setImage:squareImage forState:UIControlStateNormal];
+                [imageButton addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
+                [imageButton setTag:i*numOfRows*3+j+1];
+                [subview addSubview:imageButton];
+                [subview addSubview:bckground];
+                [imageButton release];
+                [bckground release];
+            }
             
             // margin
             if ([[marginArray objectAtIndex:i*numOfRows*3+j] boolValue]){
-                UIImageView *margin = [[UIImageView alloc] initWithFrame:CGRectMake(xPos,yPos,BUTTON_WIDTH+8,BUTTON_HEIGHT+8)];
+                UIImageView *margin = [[UIImageView alloc] initWithFrame:CGRectMake(xPos,yPos,BUTTON_WIDTH+8,BUTTON_WIDTH+8)];
                 margin.image=[UIImage imageNamed:@"margin.png"];
                 [subview addSubview:margin];
                 [margin release];
@@ -210,8 +226,10 @@
 - (void)dealloc {  
     [contentArray release];
     [marginArray release];
-    [scrollView release];
+    [isIconArray release];
     [pageControl release];
+    [scrollView release];
+
     [super dealloc];  
 }  
 
