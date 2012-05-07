@@ -52,23 +52,25 @@
     totHomeEntryViewController *aHomeView = [[totHomeEntryViewController alloc] initWithNibName:@"HomeView" bundle:nil];
     self.homeEntryViewController = aHomeView;
     self.homeEntryViewController.homeRootController = self;
-    [self.view addSubview:homeEntryViewController.view];
     [aHomeView release];
     
     totHomeFeedingViewController *aFeedView = 
         [[totHomeFeedingViewController alloc] initWithNibName:@"homeFeedingView" bundle:nil];
     self.homeFeedingViewController = aFeedView;
     self.homeFeedingViewController.homeRootController = self;
-    [self.view addSubview:homeFeedingViewController.view];
     [aFeedView release];
     
     totHomeHeightViewController *aHeightView = 
         [[totHomeHeightViewController alloc] initWithNibName:@"totHomeHeightViewController" bundle:nil];
     self.homeHeightViewController = aHeightView;
     self.homeHeightViewController.homeRootController = self;
-    [self.view addSubview:homeHeightViewController.view];
     [aHeightView release];
     
+    [self.view addSubview:homeEntryViewController.view];
+    [self.view addSubview:homeFeedingViewController.view];
+    [self.view addSubview:homeHeightViewController.view];
+    
+    self.homeEntryViewController.view.frame = CGRectMake(0, 0, 320, 460);
     self.homeFeedingViewController.view.frame = CGRectMake(320, 0, 320, 460);
     self.homeHeightViewController.view.frame = CGRectMake(320, 0, 320, 460);
     
