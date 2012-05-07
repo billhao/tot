@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		15414FDF154CCB8900C3C828 /* totUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 15414FDE154CCB8800C3C828 /* totUtility.m */; };
+		3F454D2D1555A84700AC66EE /* totHomeHeightViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F454D2B1555A84700AC66EE /* totHomeHeightViewController.m */; };
+		3F454D2E1555A84700AC66EE /* totHomeHeightViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F454D2C1555A84700AC66EE /* totHomeHeightViewController.xib */; };
+		3F454D321555B1B200AC66EE /* STHorizontalPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F454D311555B1B200AC66EE /* STHorizontalPicker.m */; };
 		3FC1B6FC1543680300295447 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FC1B6FB1543680300295447 /* libsqlite3.dylib */; };
 		3FC1B7001543689500295447 /* totdb.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 3FC1B6FF1543689500295447 /* totdb.sqlite */; };
 		3FC1B7061543841800295447 /* totModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FC1B7051543841800295447 /* totModel.m */; };
@@ -17,6 +20,10 @@
 		CE5C09FC154CCFDB00D41114 /* moviePlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5C09F9154CCFDB00D41114 /* moviePlayerViewController.m */; };
 		CE5C09FD154CCFDB00D41114 /* totAlbumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5C09FB154CCFDB00D41114 /* totAlbumViewController.m */; };
 		CEDB78B9155107C300805CC8 /* totImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDB78B8155107C300805CC8 /* totImageCache.m */; };
+		CEF102691556FD3F007E1111 /* message_cloud_revised-01.png in Resources */ = {isa = PBXBuildFile; fileRef = CEF102651556FD3F007E1111 /* message_cloud_revised-01.png */; };
+		CEF1026A1556FD3F007E1111 /* message_cloud_revised-02.png in Resources */ = {isa = PBXBuildFile; fileRef = CEF102661556FD3F007E1111 /* message_cloud_revised-02.png */; };
+		CEF1026B1556FD3F007E1111 /* message_cloud_revised-03.png in Resources */ = {isa = PBXBuildFile; fileRef = CEF102671556FD3F007E1111 /* message_cloud_revised-03.png */; };
+		CEF1026C1556FD3F007E1111 /* message_cloud_revised-04.png in Resources */ = {isa = PBXBuildFile; fileRef = CEF102681556FD3F007E1111 /* message_cloud_revised-04.png */; };
 		EF0D6BD21555A7700027F012 /* totHomeSleepingView.m in Sources */ = {isa = PBXBuildFile; fileRef = EF0D6BD11555A7700027F012 /* totHomeSleepingView.m */; };
 		EF0D6BDD1555AE930027F012 /* diaper.png in Resources */ = {isa = PBXBuildFile; fileRef = EF0D6BD41555AE930027F012 /* diaper.png */; };
 		EF0D6BDE1555AE930027F012 /* food.png in Resources */ = {isa = PBXBuildFile; fileRef = EF0D6BD51555AE930027F012 /* food.png */; };
@@ -121,6 +128,11 @@
 /* Begin PBXFileReference section */
 		15414FDD154CCB8800C3C828 /* totUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totUtility.h; path = Utility/totUtility.h; sourceTree = "<group>"; };
 		15414FDE154CCB8800C3C828 /* totUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totUtility.m; path = Utility/totUtility.m; sourceTree = "<group>"; };
+		3F454D2A1555A84700AC66EE /* totHomeHeightViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totHomeHeightViewController.h; path = Home/totHomeHeightViewController.h; sourceTree = "<group>"; };
+		3F454D2B1555A84700AC66EE /* totHomeHeightViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totHomeHeightViewController.m; path = Home/totHomeHeightViewController.m; sourceTree = "<group>"; };
+		3F454D2C1555A84700AC66EE /* totHomeHeightViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = totHomeHeightViewController.xib; path = Home/totHomeHeightViewController.xib; sourceTree = "<group>"; };
+		3F454D301555B1B200AC66EE /* STHorizontalPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STHorizontalPicker.h; sourceTree = "<group>"; };
+		3F454D311555B1B200AC66EE /* STHorizontalPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STHorizontalPicker.m; sourceTree = "<group>"; };
 		3FC1B6FB1543680300295447 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		3FC1B6FF1543689500295447 /* totdb.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = totdb.sqlite; sourceTree = "<group>"; };
 		3FC1B7041543841800295447 /* totModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totModel.h; path = totdev/Model/totModel.h; sourceTree = "<group>"; };
@@ -137,6 +149,10 @@
 		CE5C09FB154CCFDB00D41114 /* totAlbumViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totAlbumViewController.m; path = Utility/totAlbumViewController.m; sourceTree = "<group>"; };
 		CEDB78B7155107C300805CC8 /* totImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = totImageCache.h; sourceTree = "<group>"; };
 		CEDB78B8155107C300805CC8 /* totImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = totImageCache.m; sourceTree = "<group>"; };
+		CEF102651556FD3F007E1111 /* message_cloud_revised-01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "message_cloud_revised-01.png"; sourceTree = "<group>"; };
+		CEF102661556FD3F007E1111 /* message_cloud_revised-02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "message_cloud_revised-02.png"; sourceTree = "<group>"; };
+		CEF102671556FD3F007E1111 /* message_cloud_revised-03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "message_cloud_revised-03.png"; sourceTree = "<group>"; };
+		CEF102681556FD3F007E1111 /* message_cloud_revised-04.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "message_cloud_revised-04.png"; sourceTree = "<group>"; };
 		EF0D6BD01555A7700027F012 /* totHomeSleepingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totHomeSleepingView.h; path = Home/totHomeSleepingView.h; sourceTree = "<group>"; };
 		EF0D6BD11555A7700027F012 /* totHomeSleepingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totHomeSleepingView.m; path = Home/totHomeSleepingView.m; sourceTree = "<group>"; };
 		EF0D6BD41555AE930027F012 /* diaper.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = diaper.png; path = Resources/Home/diaper.png; sourceTree = "<group>"; };
@@ -472,6 +488,9 @@
 				EF0D6BD11555A7700027F012 /* totHomeSleepingView.m */,
 				EF0D6BE81555CCD00027F012 /* totTimerController.h */,
 				EF0D6BE91555CCD00027F012 /* totTimerController.m */,
+				3F454D2A1555A84700AC66EE /* totHomeHeightViewController.h */,
+				3F454D2B1555A84700AC66EE /* totHomeHeightViewController.m */,
+				3F454D2C1555A84700AC66EE /* totHomeHeightViewController.xib */,
 			);
 			name = Home;
 			sourceTree = "<group>";
@@ -548,6 +567,8 @@
 		EF97E7C1153B43DD0037E52D /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				3F454D301555B1B200AC66EE /* STHorizontalPicker.h */,
+				3F454D311555B1B200AC66EE /* STHorizontalPicker.m */,
 				CEDB78B7155107C300805CC8 /* totImageCache.h */,
 				CEDB78B8155107C300805CC8 /* totImageCache.m */,
 				CE5C09F8154CCFDB00D41114 /* moviePlayerViewController.h */,
@@ -573,6 +594,10 @@
 		EF97E7C3153B49F30037E52D /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				CEF102651556FD3F007E1111 /* message_cloud_revised-01.png */,
+				CEF102661556FD3F007E1111 /* message_cloud_revised-02.png */,
+				CEF102671556FD3F007E1111 /* message_cloud_revised-03.png */,
+				CEF102681556FD3F007E1111 /* message_cloud_revised-04.png */,
 				EF4CEE5D15563FD000109BCC /* done-01.png */,
 				EF4CEE5B15563EDC00109BCC /* message_cloud.png */,
 				EF0D6BE61555B36B0027F012 /* clock.png */,
@@ -709,10 +734,15 @@
 				EF0D6BE41555AE930027F012 /* sleep.png in Resources */,
 				EF0D6BE51555AE930027F012 /* weight.png in Resources */,
 				EF0D6BE71555B36B0027F012 /* clock.png in Resources */,
+				3F454D2E1555A84700AC66EE /* totHomeHeightViewController.xib in Resources */,
 				EF0D6BEF155631880027F012 /* gesture_salut.png in Resources */,
 				EF0D6BF0155631880027F012 /* motor_skill_bg.png in Resources */,
 				EF4CEE5C15563EDC00109BCC /* message_cloud.png in Resources */,
 				EF4CEE5E15563FD000109BCC /* done-01.png in Resources */,
+				CEF102691556FD3F007E1111 /* message_cloud_revised-01.png in Resources */,
+				CEF1026A1556FD3F007E1111 /* message_cloud_revised-02.png in Resources */,
+				CEF1026B1556FD3F007E1111 /* message_cloud_revised-03.png in Resources */,
+				CEF1026C1556FD3F007E1111 /* message_cloud_revised-04.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -750,6 +780,8 @@
 				EFD8404D1551199000F75B69 /* totNavigationBar.m in Sources */,
 				EF0D6BD21555A7700027F012 /* totHomeSleepingView.m in Sources */,
 				EF0D6BEA1555CCD00027F012 /* totTimerController.m in Sources */,
+				3F454D2D1555A84700AC66EE /* totHomeHeightViewController.m in Sources */,
+				3F454D321555B1B200AC66EE /* STHorizontalPicker.m in Sources */,
 				EF4CEE5915563E2400109BCC /* totLanguageInputViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -768,6 +800,38 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		3F454D331555C96700AC66EE /* Ad hoc */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = "Ad hoc";
+		};
+		3F454D341555C96700AC66EE /* Ad hoc */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_ENTITLEMENTS[sdk=*]" = "";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "totdev/totdev-Prefix.pch";
+				INFOPLIST_FILE = "totdev/totdev-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = "Ad hoc";
+		};
 		EF6283871536674C004031D6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -843,6 +907,7 @@
 			buildConfigurations = (
 				EF6283871536674C004031D6 /* Debug */,
 				EF6283881536674C004031D6 /* Release */,
+				3F454D331555C96700AC66EE /* Ad hoc */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -852,6 +917,7 @@
 			buildConfigurations = (
 				EF62838A1536674C004031D6 /* Debug */,
 				EF62838B1536674C004031D6 /* Release */,
+				3F454D341555C96700AC66EE /* Ad hoc */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

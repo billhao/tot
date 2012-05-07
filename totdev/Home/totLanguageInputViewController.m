@@ -65,21 +65,35 @@
     UITextView *aTxtView = [[UITextView alloc] initWithFrame:CGRectMake(80, 56, 170, 80)];
     [aTxtView  setFont: [UIFont fontWithName:@"ArialMT" size:22]];
     aTxtView.editable = YES;
+    aTxtView.delegate = self;
     aTxtView.textAlignment = UITextAlignmentLeft;
     aTxtView.backgroundColor = [UIColor clearColor];
     self.m_textView = aTxtView;
     [aTxtView release];
     [self.view addSubview:m_textView];
     
-    
     // Construct m_confirmButton
-    UIButton *aBtn = [[UIButton alloc] initWithFrame:CGRectMake(145, 200, 30, 30)];
+    UIButton *aBtn = [[UIButton alloc] initWithFrame:CGRectMake(80, 210, 55, 37)];
     aBtn.backgroundColor = [UIColor clearColor];
-    [aBtn setBackgroundImage: [UIImage imageNamed:@"play_button.png"] forState:UIControlStateNormal];
+    [aBtn setBackgroundImage: [UIImage imageNamed:@"message_cloud_revised-02.png"] forState:UIControlStateNormal];
     [aBtn addTarget:self action:@selector(ConfirmButtonClicked) forControlEvents:UIControlEventTouchUpInside];
-    self.m_confirmButton = aBtn;
-    [aBtn release];
+    m_confirmButton = aBtn;
     [self.view addSubview:m_confirmButton];
+    
+    // Construct history button
+    UIButton *bBtn = [[UIButton alloc] initWithFrame:CGRectMake(120, 240, 75, 45)];
+    bBtn.backgroundColor = [UIColor clearColor];
+    [bBtn setBackgroundImage: [UIImage imageNamed:@"message_cloud_revised-03.png"] forState:UIControlStateNormal];
+    [bBtn addTarget:self action:@selector(ConfirmButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:bBtn];
+    
+    // Construct share button
+    UIButton *cBtn = [[UIButton alloc] initWithFrame:CGRectMake(160, 280, 115, 65)];
+    cBtn.backgroundColor = [UIColor clearColor];
+    [cBtn setBackgroundImage: [UIImage imageNamed:@"message_cloud_revised-04.png"] forState:UIControlStateNormal];
+    [cBtn addTarget:self action:@selector(ConfirmButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:cBtn];
+
     
     //Initially hide all the views
     m_textView.hidden = YES;
@@ -177,6 +191,31 @@
 {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+#pragma mark - UITextView delegates
+- (void)textViewDidBeginEditing:(UITextView *)textView {
+    //    printf("textViewDidBeginEditing\n");
+}
+
+// called when the keyboard disappears
+- (BOOL)textViewShouldEndEditing:(UITextView *)textView {
+    //    printf("textViewShouldEndEditing\n");
+    return YES;
+}
+
+- (void)textViewDidEndEditing:(UITextView *)textView {
+    //    printf("textViewDidEndEditing\n");
+}
+
+// whenever the user types the keyboard
+- (BOOL)textView:(UITextView*)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    if( [text isEqualToString:@"\n"] ) {
+        [textView resignFirstResponder];
+        return NO;
+    }
+    
+    return YES;
 }
 
 @end

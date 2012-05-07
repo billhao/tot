@@ -79,8 +79,16 @@
     NSString *homeDir = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
     return homeDir;
 }
-                                
-- (Boolean) addEvent:(int)baby_id event:(NSString*)event datetime:(NSString*)datetime value:(NSString*)value {
+
+- (Boolean) addEvent:(int)baby_id event:(NSString*)event datetime:(NSDate*)datetime value:(NSString*)value {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSString *formattedDateString = [dateFormatter stringFromDate:datetime];
+    [dateFormatter release];
+    return [self addEvent:baby_id event:event datetimeString:formattedDateString value:value];
+}
+
+- (Boolean) addEvent:(int)baby_id event:(NSString*)event datetimeString:(NSString*)datetime value:(NSString*)value {
     if (db == nil) {
         NSLog(@"Can't open db");
         return false;

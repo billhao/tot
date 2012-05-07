@@ -8,6 +8,7 @@
 
 #import "totHomeRootController.h"
 #import "totHomeEntryViewController.h"
+#import "totHomeHeightViewController.h"
 
 @implementation totHomeRootController
 
