@@ -23,6 +23,12 @@
         picker_height = nil;
         picker_weight = nil;
         picker_head = nil;
+        
+//        mClockBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//        mClockBtn.frame = CGRectMake(100, 100, 25, 25);
+//        [mClockBtn setImage:[UIImage imageNamed:@"clock.png"] forState:UIControlStateNormal];
+//        [mClockBtn addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
+//        [self addSubview:mClockBtn];
     }
     return self;
 }
@@ -43,7 +49,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     // height scroll bar
-    picker_height = [[STHorizontalPicker alloc] initWithFrame:mHeight.frame];
+    picker_height = [[STHorizontalPicker alloc] initWithFrame:mHeightPlaceHolder.frame];
     picker_height.name = @"picker_height";
     [picker_height setMinimumValue:0.0];
     [picker_height setMaximumValue:6.0];
@@ -54,7 +60,7 @@
     [picker_height release];
     
     // weight scroll bar
-    picker_weight = [[STHorizontalPicker alloc] initWithFrame:mWeight.frame];
+    picker_weight = [[STHorizontalPicker alloc] initWithFrame:mWeightPlaceHolder.frame];
     picker_weight.name = @"picker_weight";
     [picker_weight setMinimumValue:0.0];
     [picker_weight setMaximumValue:6.0];
@@ -65,7 +71,7 @@
     [picker_weight release];
     
     // head circumference scroll bar
-    picker_head = [[STHorizontalPicker alloc] initWithFrame:mHead.frame];
+    picker_head = [[STHorizontalPicker alloc] initWithFrame:mHeadPlaceHolder.frame];
     picker_head.name = @"picker_head";
     [picker_head setMinimumValue:0.0];
     [picker_head setMaximumValue:6.0];
@@ -79,6 +85,15 @@
     [mOKButton addTarget:self action:@selector(OKButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [mDatetime addTarget:self action:@selector(DatetimeClicked:) forControlEvents:UIControlEventTouchUpInside];
     [mDatetimeImage addTarget:self action:@selector(DatetimeClicked:) forControlEvents:UIControlEventTouchUpInside];
+
+    // set up date picker
+    mWidth = self.view.frame.size.width;
+    mHeight= self.view.frame.size.height;
+    
+    mClock = [[totTimerController alloc] init];
+    mClock.view.frame = CGRectMake((mWidth-mClock.mWidth)/2, mHeight, mClock.mWidth, mClock.mHeight);
+    [mClock setDelegate:self];
+    [self.view addSubview:mClock.view];
 }
 
 - (void)pickerView:(STHorizontalPicker *)picker didSelectValue:(CGFloat)value{
@@ -117,7 +132,41 @@
 // display date selection
 - (void)DatetimeClicked: (UIButton *)button {
     NSLog(@"%@", @"[basic][height] datetime clicked");
+    [self showTimePicker];
+}
+
+
+- (void)showTimePicker {
+    //mClockBtn.hidden = YES;
+    [self.view setBackgroundColor:[UIColor blackColor]];
+    [self.view setAlpha:0.8f];
+    [UIView beginAnimations:@"swipe" context:nil];
+	[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+	[UIView setAnimationDuration:0.5f];
+    mClock.view.frame = CGRectMake((mWidth-mClock.mWidth)/2, mHeight-mClock.mHeight-80, mClock.mWidth, mClock.mHeight);
+    [UIView commitAnimations];
+}
+
+- (void)hideTimePicker {
+    //self.hidden = YES;
     
+    //mClockBtn.hidden = NO;
+    [self.view setBackgroundColor:[UIColor clearColor]];
+    [UIView beginAnimations:@"swipe" context:nil];
+	[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+	[UIView setAnimationDuration:0.5f];
+    mClock.view.frame = CGRectMake((mWidth-mClock.mWidth)/2, mHeight, mClock.mWidth, mClock.mHeight);
+    [UIView commitAnimations];
+}
+
+#pragma mark - totTimerControllerDelegate
+-(void)saveCurrentTime:(NSString*)time {
+    NSLog(@"%@", time);
+    [self hideTimePicker];
+}
+
+-(void)cancelCurrentTime {
+    [self hideTimePicker];
 }
 
 - (void)viewDidUnload

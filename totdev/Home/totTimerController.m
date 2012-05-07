@@ -158,9 +158,9 @@
                         [[mMinute objectAtIndex:mCurrentMinuteIdx] UTF8String],
                         [[mAmPm objectAtIndex:mCurrentAmPm] UTF8String]];
             } else {
-                time = [[NSString alloc] initWithFormat:@"%s,%s,%s",
+                time = [[NSString alloc] initWithFormat:@"%s-%s-%s",
                         [[mYear objectAtIndex:mCurrentYearIdx] UTF8String],
-                        [[mMinute objectAtIndex:mCurrentMonthIdx] UTF8String],
+                        [[mMonth objectAtIndex:mCurrentMonthIdx] UTF8String],
                         [[mDay objectAtIndex:mCurrentDayIdx] UTF8String]];
             }
             
