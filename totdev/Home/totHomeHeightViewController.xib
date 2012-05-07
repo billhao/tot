@@ -98,7 +98,7 @@
 						<string key="NSFrame">{{20, 255}, {157, 21}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="484513930"/>
+						<reference key="NSNextKeyView" ref="696383880"/>
 						<string key="NSReuseIdentifierKey">_NS:328</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -337,7 +337,7 @@
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
-						<string key="IBUINormalTitle">May 5, 2012  3:12 PM</string>
+						<string key="IBUINormalTitle">May 5, 2012</string>
 						<object class="NSColor" key="IBUIHighlightedTitleColor">
 							<int key="NSColorSpace">1</int>
 							<bytes key="NSRGB">MC4xOTYwNzg0MzE0IDAuMzA5ODAzOTIxNiAwLjUyMTU2ODYyNzUAA</bytes>
@@ -368,15 +368,15 @@
 							<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
 						</object>
 						<reference key="IBUINormalTitleShadowColor" ref="900997879"/>
-						<object class="NSCustomResource" key="IBUIHighlightedImage" id="791893505">
+						<object class="NSCustomResource" key="IBUIHighlightedImage" id="367666977">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">video.png</string>
+							<string key="NSResourceName">clock.png</string>
 						</object>
-						<reference key="IBUINormalImage" ref="791893505"/>
+						<reference key="IBUINormalImage" ref="367666977"/>
 						<reference key="IBUIFontDescription" ref="581208323"/>
 						<reference key="IBUIFont" ref="771225543"/>
 					</object>
-					<object class="IBUIButton" id="484513930">
+					<object class="IBUIButton" id="696383880">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">-2147483356</int>
 						<string key="NSFrame">{{56, 129}, {209, 147}}</string>
@@ -455,7 +455,7 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">mSummary</string>
 						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="484513930"/>
+						<reference key="destination" ref="696383880"/>
 					</object>
 					<int key="connectionID">43</int>
 				</object>
@@ -509,7 +509,7 @@
 							<reference ref="14808723"/>
 							<reference ref="946919502"/>
 							<reference ref="119595546"/>
-							<reference ref="484513930"/>
+							<reference ref="696383880"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -610,7 +610,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">42</int>
-						<reference key="object" ref="484513930"/>
+						<reference key="object" ref="696383880"/>
 						<reference key="parent" ref="191373211"/>
 					</object>
 				</array>
@@ -631,10 +631,10 @@
 				<string key="29.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<real value="0.0" key="29.IBUIButtonInspectorSelectedStateConfigurationMetadataKey"/>
 				<string key="36.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<real value="1" key="36.IBUIButtonInspectorSelectedStateConfigurationMetadataKey"/>
+				<real value="0.0" key="36.IBUIButtonInspectorSelectedStateConfigurationMetadataKey"/>
 				<string key="4.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="40.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<real value="1" key="40.IBUIButtonInspectorSelectedStateConfigurationMetadataKey"/>
+				<real value="0.0" key="40.IBUIButtonInspectorSelectedStateConfigurationMetadataKey"/>
 				<string key="42.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<real value="0.0" key="42.IBUIButtonInspectorSelectedStateConfigurationMetadataKey"/>
 				<string key="5.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -704,8 +704,8 @@
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<object class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
-			<string key="NS.key.0">video.png</string>
-			<string key="NS.object.0">{180, 120}</string>
+			<string key="NS.key.0">clock.png</string>
+			<string key="NS.object.0">{48, 48}</string>
 		</object>
 		<string key="IBCocoaTouchPluginVersion">933</string>
 	</data>

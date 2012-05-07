@@ -162,6 +162,7 @@
 #pragma mark - totTimerControllerDelegate
 -(void)saveCurrentTime:(NSString*)time {
     NSLog(@"%@", time);
+    [mDatetime setTitle:time forState:UIControlStateNormal];
     [self hideTimePicker];
 }
 
