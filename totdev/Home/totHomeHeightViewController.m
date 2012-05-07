@@ -127,6 +127,10 @@
         NSLog(@"Return from db: %@", [e toString]);        
     }
     [event release];
+    
+    [head release];
+    [weight release];
+    [height release];
 }
 
 // display date selection
@@ -175,6 +179,10 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
+    [mClock release];
+    [picker_head release];
+    [picker_height release];
+    [picker_weight release];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

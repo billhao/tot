@@ -6,14 +6,15 @@
 //  Copyright (c) 2012 USC. All rights reserved.
 //
 
-#import "totHomeFeedingViewController.h"
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
+#import "AppDelegate.h"
+#import "totHomeFeedingViewController.h"
 #import "totHomeRootController.h"
 #import "../Utility/totSliderView.h"
 #import "../Model/totModel.h"
-#import "STHorizontalPicker.h"
-#import "AppDelegate.h"
+#import "../STHorizontalPicker.h"
+
 
 @implementation totHomeFeedingViewController
 
@@ -43,6 +44,10 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
+- (void)pickerView:(STHorizontalPicker *)picker didSelectValue:(CGFloat)value {
+
+}
+
 #pragma mark - View lifecycle
 
 /*
@@ -56,39 +61,6 @@
     UIButton *btn = (UIButton*)sender;
     int tag = [btn tag];
     tag = tag - 1;
-    
-    /*
-    NSString *activity = [NSString stringWithUTF8String: ACTIVITY_NAMES[[mCurrentActivityID intValue]]];
-    NSString *memb_str = [NSString stringWithUTF8String: ACTIVITY_MEMBERS[[mCurrentActivityID intValue]]];
-    NSArray *member = [memb_str componentsSeparatedByString:@","];
-    NSString *the_member = [member objectAtIndex:tag];
-    
-    int currentBabyId = [totActivityUtility getCurrentBabyID];
-    
-    char query[256] = {0};
-    sprintf(query, "%s/%s", [activity UTF8String], [the_member UTF8String] );
-    
-    NSMutableArray *queryResult = [mTotModel getEvent:currentBabyId event:[NSString stringWithUTF8String:query]];
-    NSMutableArray *images = [[NSMutableArray alloc] init];
-    
-    int querySize = [queryResult count];
-    if( querySize != 0 ) {
-        for( int i = 0; i < querySize; i++ ) {
-            [totActivityUtility extractFromEvent:[queryResult objectAtIndex:i] 
-                                  intoImageArray:images];
-        }
-        
-        AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-        [appDelegate.rootController.albumView MakeFullView:images];
-        
-        //NSMutableDictionary *msg = [[NSMutableDictionary alloc] init];
-        //[msg setObject:images forKey:@"images"];
-        //[activityRootController switchTo:kActivityAlbumView withContextInfo:msg];
-        //[msg release];
-    }
-    
-    [images release];
-     */
 }
 
 
@@ -97,13 +69,11 @@
 {
     [super viewDidLoad];
     
-
-    
     // create the slider view
     mSliderView = [[totSliderView alloc] initWithFrame:CGRectMake(25, 45, 270, 300)];
     [mSliderView setDelegate:self];
-    //[mSliderView enablePageControlOnBottom];
     [mSliderView enablePageControlOnTop];
+    
     //load image
     NSMutableArray *foodImages = [[NSMutableArray alloc] init];
     [foodImages addObject:[UIImage imageNamed:@"emotion_angry.png"]];
@@ -114,9 +84,9 @@
     [foodImages addObject:[UIImage imageNamed:@"gesture_suck_toe.png"]];
     [foodImages addObject:[UIImage imageNamed:@"gesture_point.png"]];
     [foodImages addObject:[UIImage imageNamed:@"emotion_happy.png"]];
-
     [mSliderView setContentArray:foodImages];
     [foodImages release];
+    
     [mSliderView getWithPositionMemoryIdentifier:@"homeFeedingView"];
 
     [self.view addSubview:mSliderView];
@@ -135,8 +105,7 @@
     [picker_quantity setDelegate:self];
     [picker_quantity setValue:2.3];
     [self.view addSubview:picker_quantity];
-    [picker_quantity release];
-
+//    [picker_quantity release];
     
     //create ok button
     mOKButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
@@ -146,6 +115,7 @@
 
 }
 
+- (void)OKButtonClicked: (UIButton *)button {}
 
 - (void)viewDidUnload
 {
@@ -156,6 +126,7 @@
     [mSliderView release];
     [mMessage release];
     [navigationBar release];
+    [picker_quantity release];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

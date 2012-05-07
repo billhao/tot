@@ -33,8 +33,10 @@
 - (id)initWithFrame:(CGRect)frame {
     if( self = [super initWithFrame:frame] ) {
         self.userInteractionEnabled = YES;
-        scrollWidth   = DEFAULT_WIDTH;
-        scrollHeight  = DEFAULT_HEIGHT;
+        //scrollWidth   = DEFAULT_WIDTH;
+        //scrollHeight  = DEFAULT_HEIGHT;
+        scrollWidth   = frame.size.width;
+        scrollHeight  = frame.size.height;
         scrollYOrigin = frame.origin.y;
         numOfRows     = DEFAULT_NUMOFROWS;
         
@@ -66,6 +68,20 @@
     if( contentArray )
         [contentArray release];
     contentArray = [[NSMutableArray alloc] initWithArray:images];
+    
+    if( marginArray )
+        [marginArray release];
+    marginArray  = [[NSMutableArray alloc] init];
+    
+    if( isIconArray )
+        [isIconArray release];
+    isIconArray  = [[NSMutableArray alloc] init];
+    
+    for( int i = 0; i < [contentArray count]; i++ ) {
+        [marginArray addObject:[NSNumber numberWithBool:NO]];
+        [isIconArray addObject:[NSNumber numberWithBool:YES]];
+    }
+    
 }  
 
 - (void)setMarginArray:(NSArray *)margins {

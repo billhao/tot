@@ -10,8 +10,8 @@
 #import <Foundation/Foundation.h>
 #import "totHomeRootController.h"
 #import "../Utility/totSliderView.h"
+#import "../STHorizontalPicker.h"
 #import "../Model/totModel.h"
-#import "STHorizontalPicker.h"
 
 
 @interface totHomeFeedingViewController : UIViewController<STHorizontalPickerDelegate,totSliderViewDelegate> {
