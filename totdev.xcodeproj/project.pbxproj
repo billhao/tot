@@ -747,14 +747,11 @@
 				EF0D6BF0155631880027F012 /* motor_skill_bg.png in Resources */,
 				EF4CEE5C15563EDC00109BCC /* message_cloud.png in Resources */,
 				EF4CEE5E15563FD000109BCC /* done-01.png in Resources */,
-<<<<<<< HEAD
 				1572880315575B31005771DB /* homeFeedingView.xib in Resources */,
-=======
 				CEF102691556FD3F007E1111 /* message_cloud_revised-01.png in Resources */,
 				CEF1026A1556FD3F007E1111 /* message_cloud_revised-02.png in Resources */,
 				CEF1026B1556FD3F007E1111 /* message_cloud_revised-03.png in Resources */,
 				CEF1026C1556FD3F007E1111 /* message_cloud_revised-04.png in Resources */,
->>>>>>> 8e6d17589c717184e86d20f5d6a494d225a51650
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
