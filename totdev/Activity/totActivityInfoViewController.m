@@ -190,16 +190,20 @@
     // display the slider view
     NSMutableArray *images = [[NSMutableArray alloc] init];
     NSMutableArray *margin = [[NSMutableArray alloc] init];
+    NSMutableArray *icon = [[NSMutableArray alloc] init];
     
     for( int i=0; i<[member count]; i++ ) {
         [images addObject:[UIImage imageNamed:[[member objectAtIndex:i] stringByAppendingString:@".png"]]];
         [margin addObject:[NSNumber numberWithBool:NO]];
+        [icon addObject:[NSNumber numberWithBool:YES]];
     }
     
     [mSliderView setContentArray:images];
-    [mSliderView setMarginArray:margin];    
+    [mSliderView setMarginArray:margin];
+    [mSliderView setIsIconArray:icon];
     [images release];
     [margin release];
+    [icon release];
     
     [mSliderView getWithPositionMemoryIdentifier:@"infoview"];
 }

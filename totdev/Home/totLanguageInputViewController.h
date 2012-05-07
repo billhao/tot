@@ -10,7 +10,7 @@
 #import "totEvent.h"
 #import "totModel.h"
 
-@interface totLanguageInputViewController : UIViewController
+@interface totLanguageInputViewController : UIViewController <UITextViewDelegate>
 {
     UITextView* m_textView;
     UIButton* m_confirmButton;

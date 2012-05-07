@@ -176,6 +176,7 @@
     
     NSMutableArray *activityMemberImages = [[NSMutableArray alloc] init];
     NSMutableArray *activityMemberMargin = [[NSMutableArray alloc] init];
+    NSMutableArray *isIcon = [[NSMutableArray alloc] init];
     
     self.mCurrentActivityID = [message objectForKey:@"activity"];
     NSMutableArray *images = [message objectForKey:@"images"];
@@ -198,19 +199,24 @@
     for( int i = 0; i < [images count]; i++ ) {
         NSArray *tokens = [[images objectAtIndex:i] componentsSeparatedByString:@"."];
         NSString *ext = [tokens lastObject];
-        if( [ext isEqualToString:@"jpg"] )
+        if( [ext isEqualToString:@"jpg"] ) {
             [activityMemberImages addObject:[UIImage imageWithContentsOfFile:[images objectAtIndex:i]]];
-        else
+            [isIcon addObject:[NSNumber numberWithBool:NO]];
+        } else {
             [activityMemberImages addObject:[UIImage imageNamed:[images objectAtIndex:i]]];
+            [isIcon addObject:[NSNumber numberWithBool:YES]];
+        }
         [activityMemberMargin addObject:[margin objectAtIndex:i]];
     }
     
     [mSliderView setContentArray:activityMemberImages];
     [mSliderView setMarginArray:activityMemberMargin];
+    [mSliderView setIsIconArray:isIcon];
     [mSliderView getWithPositionMemoryIdentifier:@"activityView"];
     
     [activityMemberImages release];
     [activityMemberMargin release];
+    [isIcon release];
 }
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
