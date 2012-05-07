@@ -8,12 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+
 @class totHomeEntryViewController;
+@class totHomeFeedingViewController;
 
 @interface totHomeRootController : UIViewController {
     totHomeEntryViewController *homeEntryViewController;
+    totHomeFeedingViewController *homeFeedingViewController;
 }
 
 @property (nonatomic, retain) totHomeEntryViewController *homeEntryViewController;
+@property (nonatomic, retain) totHomeFeedingViewController *homeFeedingViewController;
 
 @end
