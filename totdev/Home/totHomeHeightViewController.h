@@ -11,7 +11,11 @@
 #import "STHorizontalPicker.h"
 #import "totTimerController.h"
 
+@class totHomeRootController;
+
 @interface totHomeHeightViewController : UIViewController <STHorizontalPickerDelegate, totTimerControllerDelegate> {
+    totHomeRootController *homeRootController;
+    
     IBOutlet UITextField *mHeightPlaceHolder;
     IBOutlet UITextField *mWeightPlaceHolder;
     IBOutlet UITextField *mHeadPlaceHolder;
@@ -32,6 +36,8 @@
     int mWidth, mHeight;
     bool mStart;
 }
+
+@property (nonatomic, assign) totHomeRootController *homeRootController;
 
 - (void)pickerView:(STHorizontalPicker *)picker didSelectValue:(CGFloat)value;
 - (void)OKButtonClicked: (UIButton *)button;

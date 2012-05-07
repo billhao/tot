@@ -9,9 +9,12 @@
 #import "totHomeEntryViewController.h"
 #import "totHomeSleepingView.h"
 #import "totLanguageInputViewController.h"
+#import "totHomeRootController.h"
 #import "../Utility/totImageView.h"
 
 @implementation totHomeEntryViewController
+
+@synthesize homeRootController;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -52,6 +55,14 @@
         case kBasicLanguage:
             [mLanguageInputView Display];
             break;
+        case kBasicFood:
+            [homeRootController switchTo:kHomeViewFeedView withContextInfo:nil];
+            break;
+        case kBasicHeight:
+        case kBasicWeight:
+        case kBasicHead:
+            [homeRootController switchTo:kHomeViewHeightView withContextInfo:nil];
+            break;
         default:
             break;
     }
@@ -71,9 +82,18 @@
     // create buttons
     int buttonW[8] = {117, 120, 102, 67, 112, 85, 90, 65};
     int buttonH[8] = {127, 97, 275, 87, 90, 87, 92, 75};
-    int buttonX[8] = {22, 200, 5, 240, 112, 225, 225, 132};
+    int buttonX[8] = {5, 200, 5, 240, 112, 225, 225, 132};
     int buttonY[8] = {22, 45, 150, 142, 247, 230, 318, 85};
-    const char *buttonName[8] = {"language.png", "sleep.png", "height.png", "food.png", "diaper.png", "health.png", "weight.png", "head.png"};
+    const char *buttonName[8] = {
+        "language.png", 
+        "sleep.png", 
+        "height.png", 
+        "food.png", 
+        "diaper.png", 
+        "health.png", 
+        "weight.png", 
+        "head.png"
+    };
     for( int i = 0; i <= 7; i++ ) {
         UIButton *function = [UIButton buttonWithType:UIButtonTypeCustom];
         function.frame = CGRectMake(buttonX[i], buttonY[i], buttonW[i], buttonH[i]);

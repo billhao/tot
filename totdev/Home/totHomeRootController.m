@@ -15,6 +15,7 @@
 
 @synthesize homeEntryViewController;
 @synthesize homeFeedingViewController;
+@synthesize homeHeightViewController;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -48,25 +49,95 @@
 {
     [super viewDidLoad];
     
-    totHomeEntryViewController *aHomeView = [[totHomeEntryViewController alloc]
-        initWithNibName:@"HomeView" bundle:nil];
-
+    totHomeEntryViewController *aHomeView = [[totHomeEntryViewController alloc] initWithNibName:@"HomeView" bundle:nil];
     self.homeEntryViewController = aHomeView;
+    self.homeEntryViewController.homeRootController = self;
     [self.view addSubview:homeEntryViewController.view];
     [aHomeView release];
     
-    /*
-    totHomeFeedingViewController *homeFeedingView = [[totHomeFeedingViewController alloc]
-                                            initWithNibName:@"homeFeedingView" bundle:nil];
-    self.homeFeedingViewController = homeFeedingView;
+    totHomeFeedingViewController *aFeedView = 
+        [[totHomeFeedingViewController alloc] initWithNibName:@"homeFeedingView" bundle:nil];
+    self.homeFeedingViewController = aFeedView;
     self.homeFeedingViewController.homeRootController = self;
-    [homeFeedingView release];
-
     [self.view addSubview:homeFeedingViewController.view];
-    homeFeedingViewController.view.frame = CGRectMake(0, 0, 320, 480);
-    */
+    [aFeedView release];
+    
+    totHomeHeightViewController *aHeightView = 
+        [[totHomeHeightViewController alloc] initWithNibName:@"totHomeHeightViewController" bundle:nil];
+    self.homeHeightViewController = aHeightView;
+    self.homeHeightViewController.homeRootController = self;
+    [self.view addSubview:homeHeightViewController.view];
+    [aHeightView release];
+    
+    self.homeFeedingViewController.view.frame = CGRectMake(320, 0, 320, 460);
+    self.homeHeightViewController.view.frame = CGRectMake(320, 0, 320, 460);
+    
+    mCurrentViewIndex = kHomeViewEntryView;
 }
 
+
+- (UIViewController*)getViewByIndex:(int)viewIndex {
+    switch (viewIndex) {
+        case kHomeViewEntryView:
+            return homeEntryViewController;
+        case kHomeViewFeedView:
+            return homeFeedingViewController;
+        case kHomeViewHeightView:
+            return homeHeightViewController;
+        default:
+            printf("Invalid view index\n");
+            return nil;
+    }
+}
+
+- (float)getViewXPositionByIndex:(int)viewIndex {
+    switch (viewIndex) {
+        case kHomeViewEntryView:
+            return homeEntryViewController.view.frame.origin.x;
+        case kHomeViewFeedView:
+            return homeFeedingViewController.view.frame.origin.x;
+        case kHomeViewHeightView:
+            return homeHeightViewController.view.frame.origin.x;
+        default:
+            printf("Invalid view index\n");
+            return -1;
+    }
+}
+
+- (void) switchTo:(int)viewIndex withContextInfo:(NSMutableDictionary*)info {
+    float currentX = 0, nextX = 0;
+    UIViewController *currentView, *nextView;
+    
+    currentX = [self getViewXPositionByIndex:mCurrentViewIndex];
+    currentView = [self getViewByIndex:mCurrentViewIndex];
+    nextX = [self getViewXPositionByIndex:viewIndex];
+    nextView = [self getViewByIndex:viewIndex];
+    
+    switch (viewIndex) {
+        case kHomeViewEntryView:
+            break;
+        case kHomeViewFeedView:
+            break;
+        case kHomeViewHeightView:
+            break;
+        default:
+            break;
+    }
+    
+    [UIView beginAnimations:@"swipe" context:nil];
+    [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+    [UIView setAnimationDuration:0.5f];
+    
+    if( currentX < nextX ) {
+        currentView.view.frame = CGRectMake(-320, 0, 320, 460);
+    } else {
+        currentView.view.frame = CGRectMake(320, 0, 320, 460);
+    }
+    nextView.view.frame = CGRectMake(0, 0, 320, 460);
+    mCurrentViewIndex = viewIndex;
+    
+    [UIView commitAnimations];
+}
 
 - (void)viewDidUnload
 {
@@ -75,6 +146,7 @@
     // e.g. self.myOutlet = nil;
     [homeEntryViewController release];
     [homeFeedingViewController release];
+    [homeHeightViewController release];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

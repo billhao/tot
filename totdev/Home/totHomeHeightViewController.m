@@ -13,6 +13,8 @@
 
 @implementation totHomeHeightViewController
 
+@synthesize homeRootController;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -45,7 +47,6 @@
 
 - (void)viewDidLoad
 {
-    NSLog(@"%@", @"view did load");
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     // height scroll bar
@@ -142,12 +143,12 @@
 
 - (void)showTimePicker {
     //mClockBtn.hidden = YES;
-    [self.view setBackgroundColor:[UIColor blackColor]];
-    [self.view setAlpha:0.8f];
+    //[self.view setBackgroundColor:[UIColor blackColor]];
+    //[self.view setAlpha:0.8f];
     [UIView beginAnimations:@"swipe" context:nil];
 	[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
 	[UIView setAnimationDuration:0.5f];
-    mClock.view.frame = CGRectMake((mWidth-mClock.mWidth)/2, mHeight-mClock.mHeight-80, mClock.mWidth, mClock.mHeight);
+    mClock.view.frame = CGRectMake((mWidth-mClock.mWidth)/2, mHeight-mClock.mHeight-45, mClock.mWidth, mClock.mHeight);
     [UIView commitAnimations];
 }
 
