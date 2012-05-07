@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		15414FDF154CCB8900C3C828 /* totUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 15414FDE154CCB8800C3C828 /* totUtility.m */; };
+		15414FF91556F99600C3C828 /* totHomeFeedingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15414FF81556F99600C3C828 /* totHomeFeedingViewController.m */; };
+		1572880315575B31005771DB /* homeFeedingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1572880215575B31005771DB /* homeFeedingView.xib */; };
 		3F454D2D1555A84700AC66EE /* totHomeHeightViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F454D2B1555A84700AC66EE /* totHomeHeightViewController.m */; };
 		3F454D2E1555A84700AC66EE /* totHomeHeightViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F454D2C1555A84700AC66EE /* totHomeHeightViewController.xib */; };
 		3F454D321555B1B200AC66EE /* STHorizontalPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F454D311555B1B200AC66EE /* STHorizontalPicker.m */; };
@@ -124,6 +126,9 @@
 /* Begin PBXFileReference section */
 		15414FDD154CCB8800C3C828 /* totUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totUtility.h; path = Utility/totUtility.h; sourceTree = "<group>"; };
 		15414FDE154CCB8800C3C828 /* totUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totUtility.m; path = Utility/totUtility.m; sourceTree = "<group>"; };
+		15414FF71556F99600C3C828 /* totHomeFeedingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totHomeFeedingViewController.h; path = Home/totHomeFeedingViewController.h; sourceTree = "<group>"; };
+		15414FF81556F99600C3C828 /* totHomeFeedingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totHomeFeedingViewController.m; path = Home/totHomeFeedingViewController.m; sourceTree = "<group>"; };
+		1572880215575B31005771DB /* homeFeedingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = homeFeedingView.xib; sourceTree = "<group>"; };
 		3F454D2A1555A84700AC66EE /* totHomeHeightViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totHomeHeightViewController.h; path = Home/totHomeHeightViewController.h; sourceTree = "<group>"; };
 		3F454D2B1555A84700AC66EE /* totHomeHeightViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totHomeHeightViewController.m; path = Home/totHomeHeightViewController.m; sourceTree = "<group>"; };
 		3F454D2C1555A84700AC66EE /* totHomeHeightViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = totHomeHeightViewController.xib; path = Home/totHomeHeightViewController.xib; sourceTree = "<group>"; };
@@ -463,6 +468,7 @@
 				EF2387FD153BC64A00B9C8BD /* ActivityInfoView.xib */,
 				EF238802153BC6EB00B9C8BD /* ActivityAlbumView.xib */,
 				EF5FBB5B154E7B8E00CBBA27 /* PhotoView.xib */,
+				1572880215575B31005771DB /* homeFeedingView.xib */,
 			);
 			name = resources;
 			sourceTree = "<group>";
@@ -483,6 +489,8 @@
 				3F454D2A1555A84700AC66EE /* totHomeHeightViewController.h */,
 				3F454D2B1555A84700AC66EE /* totHomeHeightViewController.m */,
 				3F454D2C1555A84700AC66EE /* totHomeHeightViewController.xib */,
+				15414FF71556F99600C3C828 /* totHomeFeedingViewController.h */,
+				15414FF81556F99600C3C828 /* totHomeFeedingViewController.m */,
 			);
 			name = Home;
 			sourceTree = "<group>";
@@ -727,6 +735,7 @@
 				EF0D6BF0155631880027F012 /* motor_skill_bg.png in Resources */,
 				EF4CEE5C15563EDC00109BCC /* message_cloud.png in Resources */,
 				EF4CEE5E15563FD000109BCC /* done-01.png in Resources */,
+				1572880315575B31005771DB /* homeFeedingView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -767,6 +776,7 @@
 				3F454D2D1555A84700AC66EE /* totHomeHeightViewController.m in Sources */,
 				3F454D321555B1B200AC66EE /* STHorizontalPicker.m in Sources */,
 				EF4CEE5915563E2400109BCC /* totLanguageInputViewController.m in Sources */,
+				15414FF91556F99600C3C828 /* totHomeFeedingViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

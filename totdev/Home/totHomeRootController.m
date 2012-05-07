@@ -9,10 +9,12 @@
 #import "totHomeRootController.h"
 #import "totHomeEntryViewController.h"
 #import "totHomeHeightViewController.h"
+#import "totHomeFeedingViewController.h"
 
 @implementation totHomeRootController
 
 @synthesize homeEntryViewController;
+@synthesize homeFeedingViewController;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -46,11 +48,17 @@
 {
     [super viewDidLoad];
     
-    totHomeEntryViewController *aHomeView = [[totHomeEntryViewController alloc] initWithNibName:@"HomeView" bundle:nil];
-    self.homeEntryViewController = aHomeView;
-    [aHomeView release];
-    
-    [self.view addSubview:homeEntryViewController.view];
+    //totHomeEntryViewController *aHomeView = [[totHomeEntryViewController alloc]
+    //    initWithNibName:@"HomeView" bundle:nil];
+
+    totHomeFeedingViewController *homeFeedingView = [[totHomeFeedingViewController alloc]
+                                            initWithNibName:@"homeFeedingView" bundle:nil];
+    self.homeFeedingViewController = homeFeedingView;
+    self.homeFeedingViewController.homeRootController = self;
+    [homeFeedingView release];
+
+    [self.view addSubview:homeFeedingViewController.view];
+    homeFeedingViewController.view.frame = CGRectMake(0, 0, 320, 480);   
 }
 
 
@@ -60,6 +68,7 @@
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
     [homeEntryViewController release];
+    [homeFeedingViewController release];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
