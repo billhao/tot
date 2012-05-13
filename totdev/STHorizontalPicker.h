@@ -45,6 +45,14 @@
 - (CGFloat)alpha;
 @end
 
+//================================
+// STPointerLayerDelegate interface
+//================================
+@interface STPointerLayerDelegate : NSObject {}
+
+- (void)drawLayer:(CALayer *)layer inContext:(CGContextRef)context;
+
+@end
 
 //================================
 // STHorizontalPicker interface
@@ -62,7 +70,9 @@
     CGFloat fontSize;
     
     @private
-    CGFloat scale; // Drawing scale    
+    CGFloat scale; // Drawing scale
+    
+    STPointerLayerDelegate* pointerLayerDelegate; // there was a problem if using autorelease for this object, manually release at the end
 }
 
 @property (nonatomic, retain) NSString *name;
@@ -90,16 +100,5 @@
 - (id)delegate;
 - (void)setDelegate:(id<STHorizontalPickerDelegate>)newDelegate;
 - (void)callDelegateWithNewValueFromOffset:(CGFloat)offset;
-
-@end
-
-
-
-//================================
-// STPointerLayerDelegate interface
-//================================
-@interface STPointerLayerDelegate : NSObject {}
-
-- (void)drawLayer:(CALayer *)layer inContext:(CGContextRef)context;
 
 @end

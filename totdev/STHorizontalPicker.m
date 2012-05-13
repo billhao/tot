@@ -185,7 +185,8 @@ const float POINTER_HEIGHT = 7.0f;
         self.pointerLayer.opacity = 1.0;
         self.pointerLayer.contentsScale = scale;
         self.pointerLayer.frame = CGRectMake(0.0f, 0.0f, self.frame.size.width, self.frame.size.height);
-        self.pointerLayer.delegate = [[[STPointerLayerDelegate alloc] init] autorelease];
+        pointerLayerDelegate = [[STPointerLayerDelegate alloc] init];
+        self.pointerLayer.delegate = pointerLayerDelegate;
         [self.layer insertSublayer:self.pointerLayer above:gradientLayer];
         [self.pointerLayer setNeedsDisplay];
     }
@@ -371,6 +372,7 @@ const float POINTER_HEIGHT = 7.0f;
     [scrollView release];
     [scrollViewMarkerContainerView release];
     [scrollViewMarkerLayerArray release];
+    [pointerLayerDelegate release];
     [pointerLayer release];
     [super dealloc];
 }
