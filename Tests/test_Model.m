@@ -20,7 +20,7 @@
     [model resetDB];
     
     // add an event
-    [model addEvent:0 event:@"emotion/sadness" datetime:@"2011-10-1 6:05:0" value:@"file path" ];
+    [model addEvent:0 event:@"emotion/sadness" datetimeString:@"2011-10-1 6:05:0" value:@"file path" ];
     
     // get a list of events containing "emotion"
     NSString* event = [[NSString alloc] initWithString:@"emotion"];

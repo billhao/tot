@@ -57,7 +57,7 @@
     [picker_height setSteps:60];
     [picker_height setDelegate:self];
     [picker_height setValue:2.3];
-    //[self.view addSubview:picker_height];
+    [self.view addSubview:picker_height];
     [picker_height release];
     
     // weight scroll bar
@@ -68,7 +68,7 @@
     [picker_weight setSteps:60];
     [picker_weight setDelegate:self];
     [picker_weight setValue:2.3];
-    //[self.view addSubview:picker_weight];
+    [self.view addSubview:picker_weight];
     [picker_weight release];
     
     // head circumference scroll bar
@@ -79,7 +79,7 @@
     [picker_head setSteps:60];
     [picker_head setDelegate:self];
     [picker_head setValue:2.3];
-    //[self.view addSubview:picker_head];
+    [self.view addSubview:picker_head];
     [picker_head release];
 
     // set up events
