@@ -6,15 +6,11 @@
 //  Copyright (c) 2012 USC. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-#import <Foundation/Foundation.h>
 #import "AppDelegate.h"
 #import "totHomeFeedingViewController.h"
-#import "totHomeRootController.h"
-#import "../Utility/totSliderView.h"
-#import "../Model/totModel.h"
-#import "../STHorizontalPicker.h"
-
+#import "totEventName.h"
+#import "totEvent.h"
+#import "../Utility/totUtility.h"
 
 @implementation totHomeFeedingViewController
 
@@ -23,6 +19,7 @@
 @synthesize mCurrentFoodID;
 @synthesize navigationBar;
 @synthesize mOKButton;
+@synthesize mDatetime;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -72,7 +69,8 @@
     // create the slider view
     mSliderView = [[totSliderView alloc] initWithFrame:CGRectMake(25, 45, 270, 300)];
     [mSliderView setDelegate:self];
-    [mSliderView enablePageControlOnTop];
+    //[mSliderView enablePageControlOnTop];
+    [mSliderView enablePageControlOnBottom];
     
     //load image
     NSMutableArray *foodImages = [[NSMutableArray alloc] init];
@@ -111,14 +109,115 @@
     
     //create ok button
     mOKButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    mOKButton.frame = CGRectMake(20, 347, 280, 40);
+    mOKButton.frame = CGRectMake(150, 347, 160, 40);
     [mOKButton setTitle:@"OK" forState:UIControlStateNormal];
     [self.view addSubview:mOKButton];
+    
+
+
+    mDatetime = [UIButton buttonWithType:UIButtonTypeCustom];
+    mDatetime.frame = CGRectMake(10, 347, 130, 40);
+    [mDatetime setTitle:[totUtility nowTimeString] forState:UIControlStateNormal];
+    [self.view addSubview:mDatetime];  
+    
+    // set up events
+    [mOKButton addTarget:self action:@selector(OKButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [mDatetime addTarget:self action:@selector(DatetimeClicked:) forControlEvents:UIControlEventTouchUpInside];
+
+    
+    // set up date picker
+    mWidth = self.view.frame.size.width;
+    mHeight= self.view.frame.size.height;
+    
+    mClock = [[totTimerController alloc] init];
+    mClock.view.frame = CGRectMake((mWidth-mClock.mWidth)/2, mHeight, mClock.mWidth, mClock.mHeight);
+    [mClock setMode:kTime];
+    [mClock setDelegate:self];
+    [self.view addSubview:mClock.view];
 
 }
 
-- (void)OKButtonClicked: (UIButton *)button {}
 
+- (void)OKButtonClicked: (UIButton *)button {
+    NSLog(@"%@", @"[feeding] ok button clicked");
+    int baby_id = 0;
+    NSDate* date = [NSDate date];
+    NSString* quantity = [[NSString alloc] initWithFormat:@"%.1f", picker_quantity.value];
+    
+    
+    [mTotModel addEvent:baby_id event:EVENT_FEEDING_MILK datetime:date value:quantity];
+    
+    NSString* summary = [NSString stringWithFormat:@"%@\n@ %@%@", @"today", @"Milk", quantity,@"Oz" ];
+   
+    /*
+    [mSummary setTitle:summary forState:UIControlStateNormal];
+    [self.view bringSubviewToFront:mSummary];
+    [mSummary setHidden:false];
+    
+    // get a list of events containing "emotion"
+    NSString* event = [[NSString alloc] initWithString:@"basic"];
+    // return from getEvent is an array of totEvent object
+    // a totEvent represents a single event
+    NSMutableArray *events = [model getEvent:0 event:event];
+    for (totEvent* e in events) {
+        NSLog(@"Return from db: %@", [e toString]);        
+    }
+    [event release];
+    */
+    
+    [quantity release];
+    
+    
+
+}
+
+
+- (void)showTimePicker {
+    [UIView beginAnimations:@"swipe" context:nil];
+	[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+	[UIView setAnimationDuration:0.5f];
+    mClock.view.frame = CGRectMake((mWidth-mClock.mWidth)/2, mHeight-mClock.mHeight, mClock.mWidth, mClock.mHeight);
+    [UIView commitAnimations];
+}
+
+// display date selection
+- (void)DatetimeClicked: (UIButton *)button {
+    NSLog(@"%@", @"[feeding] datetime clicked");
+    [self showTimePicker];
+}
+
+- (void)hideTimePicker {
+    [UIView beginAnimations:@"swipe" context:nil];
+	[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+	[UIView setAnimationDuration:0.5f];
+    mClock.view.frame = CGRectMake((mWidth-mClock.mWidth)/2, mHeight, mClock.mWidth, mClock.mHeight);
+    [UIView commitAnimations];
+}
+
+#pragma mark - totTimerControllerDelegate
+-(void)saveCurrentTime:(NSString*)time {
+    NSLog(@"%@", time);
+    NSString *formattedTime;
+    //need to parse time before display
+    NSArray* timeComponent = [time componentsSeparatedByString: @":"];
+    
+    formattedTime = [NSString stringWithFormat:@"%@:%@ %@",
+                     [timeComponent objectAtIndex:0],
+                     [timeComponent objectAtIndex:1],
+                     [[timeComponent objectAtIndex:2] uppercaseString]];
+
+    [mDatetime setTitle:formattedTime forState:UIControlStateNormal];
+
+    //[formattedTime release];
+    [self hideTimePicker];
+}
+
+-(void)cancelCurrentTime {
+    [self hideTimePicker];
+}
+
+
+ 
 - (void)viewDidUnload
 {
     [super viewDidUnload];
@@ -129,6 +228,9 @@
     [mMessage release];
     [navigationBar release];
     [picker_quantity release];
+    [mOKButton release];
+    [mClock release];
+    [mDatetime release];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

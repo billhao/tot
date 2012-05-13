@@ -48,4 +48,17 @@
 }
 
 
++(NSString *)nowTimeString{
+    
+    NSDate *now = [NSDate date];
+	NSDateFormatter *formatter = nil;
+    NSString *nowString;
+	formatter = [[NSDateFormatter alloc] init];
+	[formatter setTimeStyle:NSDateFormatterShortStyle];//mm:ss AM
+	nowString =[formatter stringFromDate:now];
+	[formatter release];
+    
+    return  nowString;
+}
+
 @end

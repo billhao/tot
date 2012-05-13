@@ -12,6 +12,7 @@
 #import "../Utility/totSliderView.h"
 #import "../STHorizontalPicker.h"
 #import "../Model/totModel.h"
+#import "totTimerController.h"
 
 
 @interface totHomeFeedingViewController : UIViewController<STHorizontalPickerDelegate,totSliderViewDelegate> {
@@ -19,6 +20,7 @@
     totSliderView *mSliderView;
     UINavigationBar *navigationBar;
     UIButton *mOKButton;
+    UIButton *mDatetime;
     
     NSMutableDictionary *mMessage;
     
@@ -28,6 +30,11 @@
     UIImageView *mBackground;
     
     STHorizontalPicker* picker_quantity;
+    
+    // for date picker
+    totTimerController *mClock;
+    int mWidth, mHeight;
+
 
 }
 
@@ -36,6 +43,7 @@
 @property (nonatomic, retain) NSNumber *mCurrentFoodID;
 @property (nonatomic, retain) UINavigationBar* navigationBar;
 @property (nonatomic, retain) UIButton* mOKButton;
+@property (nonatomic, retain) UIButton* mDatetime;
 
 
 // receive parameters passed by other module for initialization or customization
