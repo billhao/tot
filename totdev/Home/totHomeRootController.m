@@ -130,6 +130,8 @@
     [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
     [UIView setAnimationDuration:0.5f];
     
+    [currentView viewWillDisappear:NO];
+    
     if( currentX < nextX ) {
         currentView.view.frame = CGRectMake(-320, 0, 320, 460);
     } else {
@@ -137,6 +139,8 @@
     }
     nextView.view.frame = CGRectMake(0, 0, 320, 460);
     mCurrentViewIndex = viewIndex;
+    
+    [nextView viewWillAppear:NO];
     
     [UIView commitAnimations];
 }
