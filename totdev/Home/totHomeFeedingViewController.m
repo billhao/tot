@@ -18,9 +18,9 @@
 @synthesize mSliderView;
 @synthesize mCurrentFoodID;
 //@synthesize navigationBar;
-@synthesize mOKButton;
-@synthesize mDatetime;
-@synthesize mSummary;
+//@synthesize mOKButton;
+//@synthesize mDatetime;
+//@synthesize mSummary;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -43,7 +43,7 @@
 }
 
 - (void)pickerView:(STHorizontalPicker *)picker didSelectValue:(CGFloat)value {
-        NSLog(@"didSelectValue %f", value);
+    NSLog(@"didSelectValue %f", value);
 }
 
 #pragma mark - View lifecycle
@@ -106,7 +106,7 @@
     [self.view addSubview:mSliderView];
     
     //create title navigation bar
-   // navigationBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
+    //navigationBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
     //[self.view addSubview:navigationBar];
     mNavigationBar= [[totNavigationBar alloc] initWithFrame:CGRectMake(0, 0, 320, 40)];
     [mNavigationBar setLeftButtonTitle:@"Back"];
@@ -241,25 +241,21 @@
     [self hideTimePicker];
 }
 
-
- 
 - (void)viewDidUnload
 {
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
-    [mBackground release];
+    //[mBackground release];
     [mSliderView release];
-    [mMessage release];
-//    [navigationBar release];
+    //[mMessage release];
+    //[navigationBar release];
     [picker_quantity release];
-    [mOKButton release];
+    //[mOKButton release];
+    //[mDatetime release];
+    //[mSummary release];
     [mClock release];
-    [mDatetime release];
-    [mSummary release];
     [mNavigationBar release];
-    [picker_quantity release];
-
 }
 
 

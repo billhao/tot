@@ -209,9 +209,10 @@
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
     [mClock release];
-    [picker_head release];
-    [picker_height release];
-    [picker_weight release];
+    [mNavigationBar release];
+    //[picker_head release];
+    //[picker_height release];
+    //[picker_weight release];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

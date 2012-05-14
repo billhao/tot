@@ -25,12 +25,12 @@
     UIButton *mDatetime;
     UIButton *mSummary;
     
-    NSMutableDictionary *mMessage;
+    //NSMutableDictionary *mMessage;
     
     NSNumber *mCurrentFoodID;    
     totModel *mTotModel;
     
-    UIImageView *mBackground;
+    //UIImageView *mBackground;
     
     STHorizontalPicker* picker_quantity;
     
@@ -45,9 +45,9 @@
 @property (nonatomic, retain) totSliderView *mSliderView;
 @property (nonatomic, retain) NSNumber *mCurrentFoodID;
 //@property (nonatomic, retain) UINavigationBar* navigationBar;
-@property (nonatomic, retain) UIButton* mOKButton;
-@property (nonatomic, retain) UIButton* mDatetime;
-@property (nonatomic, retain) UIButton* mSummary;
+//@property (nonatomic, retain) UIButton* mOKButton;
+//@property (nonatomic, retain) UIButton* mDatetime;
+//@property (nonatomic, retain) UIButton* mSummary;
 
 
 // receive parameters passed by other module for initialization or customization
