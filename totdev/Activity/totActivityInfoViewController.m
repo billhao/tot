@@ -214,7 +214,10 @@
 #pragma mark - totNavigationBar delegate
 - (void)navLeftButtonPressed:(id)sender {
     // delete file in the document directory
-    
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    [fileManager removeItemAtPath:[NSString stringWithUTF8String:mImagePath] error:nil];
+    if( mIsVideo )
+        [fileManager removeItemAtPath:[NSString stringWithUTF8String:mVideoPath] error:nil];
     
     [mActivityDesc setText:@""];
     [mActivityDesc resignFirstResponder];
