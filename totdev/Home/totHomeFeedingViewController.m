@@ -97,7 +97,6 @@
     [self.view addSubview:navigationBar];
     
     //create picker for oz
-    /*
     picker_quantity = [[STHorizontalPicker alloc] initWithFrame:CGRectMake(0, 0, 320, 31)];
     picker_quantity.name = @"picker_weight";
     [picker_quantity setMinimumValue:0.0];
@@ -106,8 +105,7 @@
     [picker_quantity setDelegate:self];
     [picker_quantity setValue:2.3];
     [self.view addSubview:picker_quantity];
-//    [picker_quantity release];
-     */
+    [picker_quantity release];
     
     //create ok button
     mOKButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
