@@ -219,6 +219,15 @@
     [isIcon release];
 }
 
+#pragma mark - totNavigationBar delegate
+- (void)navLeftButtonPressed:(id)sender {
+    [activityRootController switchTo:kActivityEntryView];
+}
+
+- (void)navRightButtonPressed:(id)sender {
+    printf("Test right button\n");
+}
+
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -226,6 +235,15 @@
     // create background
     mBackground = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
     [self.view addSubview:mBackground];
+    
+    // create navigation bar
+    mNavigationBar = [[totNavigationBar alloc] initWithFrame:CGRectMake(0, 0, 320, 40)];
+    [mNavigationBar setDelegate:self];
+    [mNavigationBar setLeftButtonTitle:@"Back"];
+    [mNavigationBar setRightButtonTitle:@"Test"];
+    [mNavigationBar setBackgroundColor:[UIColor grayColor]];
+    [mNavigationBar setAlpha:0.5];
+    [self.view addSubview:mNavigationBar];
     
     // create the slider view
     mSliderView = [[totSliderView alloc] initWithFrame:CGRectMake(25, 78, 270, 300)];
@@ -256,6 +274,7 @@
     [mSliderView release];
     [mCurrentActivityID release];
     [mMessage release];
+    [mNavigationBar release];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

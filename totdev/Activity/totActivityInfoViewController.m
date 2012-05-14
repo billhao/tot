@@ -155,6 +155,9 @@
                    datetimeString:formattedDateString 
                       value:[NSString stringWithUTF8String:data]];
         
+        [mActivityDesc setText:@""];
+        [mActivityDesc resignFirstResponder];
+        
         [self backToActivityView];
     }
 }
@@ -208,12 +211,31 @@
     [mSliderView getWithPositionMemoryIdentifier:@"infoview"];
 }
 
+#pragma mark - totNavigationBar delegate
+- (void)navLeftButtonPressed:(id)sender {
+    // delete file in the document directory
+    
+    
+    [mActivityDesc setText:@""];
+    [mActivityDesc resignFirstResponder];
+    [self backToActivityView];
+}
+
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+    // add navigation bar
+    mNavigationBar = [[totNavigationBar alloc] initWithFrame:CGRectMake(0, 0, 320, 40)];
+    [mNavigationBar setDelegate:self];
+    [mNavigationBar setLeftButtonTitle:@"Back"];
+    [mNavigationBar setBackgroundColor:[UIColor grayColor]];
+    [mNavigationBar setAlpha:0.5];
+    [self.view addSubview:mNavigationBar];
     
-    mThumbnail = [[UIImageView alloc] initWithFrame:CGRectMake(0, 10, 50, 50)];
+    // add thumbnail of the just taken photo
+    mThumbnail = [[UIImageView alloc] initWithFrame:CGRectMake(0, 60, 50, 50)];
     [self.view addSubview:mThumbnail];
     
 //    UIImageView *textbubble = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"messagebox.png"]];
@@ -222,7 +244,8 @@
 //    [textbubble release];
     
     // create the slider view
-    mSliderView = [[totSliderView alloc] initWithFrame:CGRectMake(0, 151, 320, 260)];
+    mSliderView = [[totSliderView alloc] initWithFrame:CGRectMake(25, 151, 270, 260)];
+    //mSliderView = [[totSliderView alloc] initWithFrame:CGRectMake(0, 151, 320, 260)];
     [mSliderView setDelegate:self];
     [mSliderView enablePageControlOnBottom];
     [self.view addSubview:mSliderView];
@@ -233,6 +256,7 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
+    [mNavigationBar release];
     [mSliderView release];
     [mThumbnail release];
     [mCurrentActivityID release];

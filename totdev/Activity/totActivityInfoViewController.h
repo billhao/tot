@@ -9,11 +9,14 @@
 #import <UIKit/UIKit.h>
 #import "totActivityRootController.h"
 #import "../Utility/totSliderView.h"
+#import "../Utility/totNavigationBar.h"
 #import "../Model/totModel.h"
 
 @class totSliderView;
 
-@interface totActivityInfoViewController : UIViewController <UITextViewDelegate, totSliderViewDelegate, UIAlertViewDelegate> {
+@interface totActivityInfoViewController : UIViewController <UITextViewDelegate, totSliderViewDelegate, UIAlertViewDelegate, totNavigationBarDelegate> {
+
+    totNavigationBar *mNavigationBar;
     totActivityRootController *activityRootController;
     IBOutlet UITextView *mActivityDesc;
     totSliderView *mSliderView;

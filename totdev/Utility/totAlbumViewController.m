@@ -54,6 +54,15 @@
     [super loadView];
 }
 
+#pragma mark - totNavigationBar delegate
+- (void)navLeftButtonPressed:(id)sender {
+    [self ReturnButtonClicked];
+}
+
+- (void)navRightButtonPressed:(id)sender {
+    [self PlayButtonClicked:(UIButton*)sender];
+}
+
 /* =================================
  * ViewDidLoad
  *   Implement viewDidLoad to do additional setup after loading the view, typically from a nib. 
@@ -64,10 +73,21 @@
     [super viewDidLoad];
     
     // Build myTitleBarView
-    UIView *aTitleBarView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 60)];
-    aTitleBarView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:.5];
+    //UIView *aTitleBarView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 60)];
+    //aTitleBarView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:.5];
+    //self.myTitleBarView = aTitleBarView;
+    //[aTitleBarView release];
+    
+    totNavigationBar *aTitleBarView = [[totNavigationBar alloc] initWithFrame:CGRectMake(0, 20, 320, 40)];
     self.myTitleBarView = aTitleBarView;
     [aTitleBarView release];
+    [myTitleBarView setDelegate:self];
+    [myTitleBarView setBackgroundColor:[UIColor blueColor]];
+    [myTitleBarView setAlpha:0.8];
+    [myTitleBarView setLeftButtonTitle:@"Back"];
+    [myTitleBarView setRightButtonTitle:@"Play"];
+    [myTitleBarView hideRightButton];
+    [myTitleBarView setNavigationBarTitle:@"Photo" andColor:[UIColor blackColor]];
     [self.view addSubview:self.myTitleBarView];
     
     // Build myScrollView
@@ -78,6 +98,7 @@
     
     // Build myFullSizeImageScrollView
     UIScrollView *anotherScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
+    //UIScrollView *anotherScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, 320, 460)];
     self.myFullSizeImageScrollView = anotherScrollView;
     [anotherScrollView release];
     [self.view insertSubview:self.myFullSizeImageScrollView belowSubview:myTitleBarView];
@@ -121,14 +142,16 @@
 - (void)MakeNoView
 {
     // Remove title and return botton from myTitleBarView
-    for(UIView *subview in [myTitleBarView subviews]) {
-        [subview removeFromSuperview];
-    }
+    //for(UIView *subview in [myTitleBarView subviews]) {
+    //    [subview removeFromSuperview];
+    //}
+    
     // Remove image thumnails from myScrollView
     for(UIView *subview in [myScrollView subviews]) {
         [subview removeFromSuperview];
     }
     [myScrollView setContentOffset:CGPointMake(0, 0)];  // show the first page the next time albumView is invoked
+    
     // Remove image thumnails from myFullSizeImageScrollView
     for(UIView *subview in [myFullSizeImageScrollView subviews]) {
         [subview removeFromSuperview];
@@ -142,7 +165,8 @@
     self.myScrollView.hidden = YES;
     self.myFullSizeImageScrollView.hidden = YES;
     self.view.hidden = YES;
-    [[UIApplication sharedApplication] setStatusBarHidden:NO animated:YES];
+    //[[UIApplication sharedApplication] setStatusBarHidden:NO animated:YES];
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationSlide];
     
     [myPathArray release];
 }
@@ -170,26 +194,27 @@
     self.view.hidden = NO;
     self.myTitleBarView.hidden = NO;
     self.myScrollView.hidden = NO;
-    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
     
     // Add content to myTitleBarView
     /*** Title ***/
-    UILabel *myLabel = [[UILabel alloc] initWithFrame:CGRectMake(60, 15, 200, 30)];
-    myLabel.text = @"Photo";
-    [myLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:18.0]];
-    myLabel.textAlignment = UITextAlignmentCenter;
-    myLabel.textColor = [UIColor whiteColor];
-    myLabel.backgroundColor = [UIColor clearColor];
-    [self.myTitleBarView addSubview:myLabel];
-    [myLabel release];
+    
+    //UILabel *myLabel = [[UILabel alloc] initWithFrame:CGRectMake(60, 15, 200, 30)];
+    //myLabel.text = @"Photo";
+    //[myLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:18.0]];
+    //myLabel.textAlignment = UITextAlignmentCenter;
+    //myLabel.textColor = [UIColor whiteColor];
+    //myLabel.backgroundColor = [UIColor clearColor];
+    //[self.myTitleBarView addSubview:myLabel];
+    //[myLabel release];
     
     /*** RETURN button ***/
-    UIButton *rtnButton = [[UIButton alloc] initWithFrame:CGRectMake(15, 20, 60, 60)];
-    rtnButton.backgroundColor = [UIColor clearColor];
-    [rtnButton setBackgroundImage: [UIImage imageNamed:@"rtn_button.png"] forState:UIControlStateNormal];
-    [rtnButton addTarget:self action:@selector(ReturnButtonClicked) forControlEvents:UIControlEventTouchUpInside];
-    [self.myTitleBarView addSubview:rtnButton];
-    [rtnButton release];
+    //UIButton *rtnButton = [[UIButton alloc] initWithFrame:CGRectMake(15, 20, 60, 60)];
+    //rtnButton.backgroundColor = [UIColor clearColor];
+    //[rtnButton setBackgroundImage: [UIImage imageNamed:@"rtn_button.png"] forState:UIControlStateNormal];
+    //[rtnButton addTarget:self action:@selector(ReturnButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+    //[self.myTitleBarView addSubview:rtnButton];
+    //[rtnButton release];
     
     // Set property of myScrollView
     myScrollView.pagingEnabled = YES;
@@ -348,25 +373,26 @@
         NSString *selectedPath = [myPathArray objectAtIndex:selectedImage];
         uint fileType = [self CheckFileType:selectedPath];
         if (fileType == 1) {
-            UIButton *playButton = [[UIButton alloc] initWithFrame:CGRectMake(285, 20, 20, 20)];
-            playButton.backgroundColor = [UIColor clearColor];
-            [playButton setBackgroundImage: [UIImage imageNamed:@"play_button.png"] forState:UIControlStateNormal];
-            [playButton addTarget:self action:@selector(PlayButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
-            [playButton setTag:selectedImage]; // this tag will be used to find the path to the video. And used to remove the button subview from myTitleBarView
-            [self.myTitleBarView addSubview:playButton];
-            [playButton release];
+            [myTitleBarView showRightButton];
+            //UIButton *playButton = [[UIButton alloc] initWithFrame:CGRectMake(285, 20, 20, 20)];
+            //playButton.backgroundColor = [UIColor clearColor];
+            //[playButton setBackgroundImage: [UIImage imageNamed:@"play_button.png"] forState:UIControlStateNormal];
+            //[playButton addTarget:self action:@selector(PlayButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+            //[playButton setTag:selectedImage]; // this tag will be used to find the path to the video. And used to remove the button subview from myTitleBarView
+            //[self.myTitleBarView addSubview:playButton];
+            //[playButton release];
         }
     } else /*already displaying title bar and image*/{
+        [myTitleBarView hideRightButton];
         myTitleBarView.hidden = YES;
         myFullSizeImageScrollView.scrollEnabled = YES;
         // Remove any possible Play button
         //int PossiblePlayButtonTag = [clickedButton tag];
-        for (UIView *subview in [self.myTitleBarView subviews]) {
-            if ([subview respondsToSelector:@selector(StartMoviePlayer:)]) {
-                [subview removeFromSuperview];
-            }
-        }
-        
+        //for (UIView *subview in [self.myTitleBarView subviews]) {
+        //    if ([subview respondsToSelector:@selector(StartMoviePlayer:)]) {
+        //        [subview removeFromSuperview];
+        //    }
+        //}
     }
 }
 
