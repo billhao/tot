@@ -6,6 +6,7 @@
 //  Copyright (c) 2012 USC. All rights reserved.
 //
 
+#import "totHomeRootController.h"
 #import "totHomeHeightViewController.h"
 #import "AppDelegate.h"
 #import "totEventName.h"
@@ -86,6 +87,7 @@
     [mOKButton addTarget:self action:@selector(OKButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [mDatetime addTarget:self action:@selector(DatetimeClicked:) forControlEvents:UIControlEventTouchUpInside];
     [mDatetimeImage addTarget:self action:@selector(DatetimeClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [mSummary addTarget:self action:@selector(SummaryClicked:) forControlEvents:UIControlEventTouchUpInside];
 
     // set up date picker
     mWidth = self.view.frame.size.width;
@@ -132,6 +134,11 @@
     [head release];
     [weight release];
     [height release];
+}
+
+// click on summary, return to home
+- (void)SummaryClicked: (UIButton *)button {
+    [homeRootController switchTo:kHomeViewEntryView withContextInfo:nil];
 }
 
 // display date selection
