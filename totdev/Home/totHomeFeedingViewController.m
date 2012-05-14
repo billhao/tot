@@ -262,6 +262,16 @@
 
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    NSLog(@"%@", @"[height] viewWillAppear");
+    [mSummary removeFromSuperview];
+    
+    //reset time
+    // reset quantity on button
+    
+}
+
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations
