@@ -7,11 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "totNavigationBar.h"
 
 @class moviePlayerViewController;
 
-@interface albumViewController : UIViewController {
-    UIView *myTitleBarView;  // The control bars at the top of a view
+@interface albumViewController : UIViewController <totNavigationBarDelegate> {
+    //UIView *myTitleBarView;  // The control bars at the top of a view
+    totNavigationBar *myTitleBarView;
     UIScrollView *myScrollView;  // thumbnail scroll view
     UIScrollView *myFullSizeImageScrollView;  // full-size image scroll view
     moviePlayerViewController *myMoviePlayerView;  // full screen movie player view
