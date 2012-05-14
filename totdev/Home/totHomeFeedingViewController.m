@@ -17,7 +17,7 @@
 @synthesize homeRootController;
 @synthesize mSliderView;
 @synthesize mCurrentFoodID;
-@synthesize navigationBar;
+//@synthesize navigationBar;
 @synthesize mOKButton;
 @synthesize mDatetime;
 @synthesize mSummary;
@@ -67,6 +67,11 @@
     
 }
 
+- (void) navLeftButtonPressed:(id)sender{
+    
+    [homeRootController switchTo:kHomeViewEntryView withContextInfo:nil];
+    
+}
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
@@ -97,9 +102,14 @@
     [self.view addSubview:mSliderView];
     
     //create title navigation bar
-    navigationBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
-    
-    [self.view addSubview:navigationBar];
+   // navigationBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
+    //[self.view addSubview:navigationBar];
+    mNavigationBar= [[totNavigationBar alloc] initWithFrame:CGRectMake(0, 0, 320, 40)];
+    [mNavigationBar setLeftButtonTitle:@"Back"];
+    [mNavigationBar setNavigationBarTitle:@"Feeding" andColor:[UIColor blackColor]];
+    [mNavigationBar setBackgroundColor:[UIColor yellowColor]];
+    [mNavigationBar setDelegate:self];
+    [self.view addSubview:mNavigationBar];
     
     //create picker for oz
     picker_quantity = [[STHorizontalPicker alloc] initWithFrame:CGRectMake(0, 265, 320, 31)];
@@ -198,12 +208,13 @@
     [mBackground release];
     [mSliderView release];
     [mMessage release];
-    [navigationBar release];
+//    [navigationBar release];
     [picker_quantity release];
     [mOKButton release];
     [mClock release];
     [mDatetime release];
     [mSummary release];
+    [mNavigationBar release];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
