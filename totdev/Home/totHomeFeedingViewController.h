@@ -15,7 +15,7 @@
 #import "totTimerController.h"
 #import "../Utility/totNavigationBar.h"
 
-@interface totHomeFeedingViewController : UIViewController<STHorizontalPickerDelegate,totSliderViewDelegate,totNavigationBarDelegate> {
+@interface totHomeFeedingViewController : UIViewController<STHorizontalPickerDelegate,totSliderViewDelegate,totNavigationBarDelegate,totTimerControllerDelegate> {
     totHomeRootController *homeRootController;
     totSliderView *mSliderView;
     //UINavigationBar *navigationBar;
@@ -54,6 +54,7 @@
 //- (void)receiveMessage: (NSMutableDictionary*)message;
 - (void)pickerView:(STHorizontalPicker *)picker didSelectValue:(CGFloat)value;
 - (void)OKButtonClicked: (UIButton *)button;
+- (void)SummaryButtonClicked: (UIButton *)button;
 
 
 @end

@@ -43,7 +43,7 @@
 }
 
 - (void)pickerView:(STHorizontalPicker *)picker didSelectValue:(CGFloat)value {
-
+        NSLog(@"didSelectValue %f", value);
 }
 
 #pragma mark - View lifecycle
@@ -70,6 +70,10 @@
 - (void) navLeftButtonPressed:(id)sender{
     
     [homeRootController switchTo:kHomeViewEntryView withContextInfo:nil];
+    
+    
+    //need to do clean up
+    //xxxxxxxxxx
     
 }
 
@@ -120,7 +124,6 @@
     [picker_quantity setDelegate:self];
     [picker_quantity setValue:2.3];
     [self.view addSubview:picker_quantity];
-    [picker_quantity release];
     
     //create ok button
     mOKButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
@@ -144,6 +147,7 @@
     // set up events
     [mOKButton addTarget:self action:@selector(OKButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [mDatetime addTarget:self action:@selector(DatetimeClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [mSummary addTarget:self action:@selector(SummaryButtonClicked:) forControlEvents: UIControlEventTouchUpInside];
 
     
     // set up date picker
@@ -163,12 +167,12 @@
     NSLog(@"%@", @"[feeding] ok button clicked");
     int baby_id = 0;
     NSDate* date = [NSDate date];
-    NSString* quantity = [[NSString alloc] initWithFormat:@"%.1f", picker_quantity.value];
+    NSString* quantity = [[NSString alloc] initWithFormat:@"%.1f", picker_quantity.currentValue];
     
     
     [mTotModel addEvent:baby_id event:EVENT_FEEDING_MILK datetime:date value:quantity];
     
-    NSString* summary = [NSString stringWithFormat:@"%@\n%@ %@%@", @"today", @"Milk", quantity,@"Oz" ];
+    NSString* summary = [NSString stringWithFormat:@"%@\n%@ %@%@", mDatetime.titleLabel.text, @"Milk", quantity,@"oz" ];
    
     [mSummary setTitle:summary forState:UIControlStateNormal];
     [self.view bringSubviewToFront:mSummary];
@@ -188,6 +192,10 @@
     [quantity release];
 }
 
+-(void)SummaryButtonClicked:(UIButton *)button{
+    [homeRootController switchTo:kHomeViewEntryView withContextInfo:nil];
+}
+
 
 - (void)showTimePicker {
     [UIView beginAnimations:@"swipe" context:nil];
@@ -197,6 +205,41 @@
     [UIView commitAnimations];
 }
 
+// display date selection
+- (void)DatetimeClicked: (UIButton *)button {
+    NSLog(@"%@", @"[feeding] datetime clicked");
+    [self showTimePicker];
+}
+
+- (void)hideTimePicker {
+    [UIView beginAnimations:@"swipe" context:nil];
+	[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+	[UIView setAnimationDuration:0.5f];
+    mClock.view.frame = CGRectMake((mWidth-mClock.mWidth)/2, 480, mClock.mWidth, mClock.mHeight);
+    [UIView commitAnimations];
+}
+
+#pragma mark - totTimerControllerDelegate
+-(void)saveCurrentTime:(NSString*)time {
+    NSLog(@"%@", time);
+    NSString *formattedTime;
+    //need to parse time before display
+    NSArray* timeComponent = [time componentsSeparatedByString: @":"];
+    
+    formattedTime = [NSString stringWithFormat:@"%@:%@ %@",
+                     [timeComponent objectAtIndex:0],
+                     [timeComponent objectAtIndex:1],
+                     [[timeComponent objectAtIndex:2] uppercaseString]];
+    
+    [mDatetime setTitle:formattedTime forState:UIControlStateNormal];
+    
+    //[formattedTime release];
+    [self hideTimePicker];
+}
+
+-(void)cancelCurrentTime {
+    [self hideTimePicker];
+}
 
 
  
@@ -215,6 +258,8 @@
     [mDatetime release];
     [mSummary release];
     [mNavigationBar release];
+    [picker_quantity release];
+
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
