@@ -73,9 +73,12 @@
     CGFloat scale; // Drawing scale
     
     STPointerLayerDelegate* pointerLayerDelegate; // there was a problem if using autorelease for this object, manually release at the end
+
+    CGFloat currentValue;
 }
 
 @property (nonatomic, retain) NSString *name;
+@property (nonatomic, assign) CGFloat currentValue;
 
 - (void)snapToMarkerAnimated:(BOOL)animated;
 

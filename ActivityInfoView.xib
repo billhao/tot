@@ -38,7 +38,7 @@
 					<object class="IBUITextView" id="548765644">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">274</int>
-						<string key="NSFrame">{{60, 10}, {250, 80}}</string>
+						<string key="NSFrame">{{60, 60}, {250, 80}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView"/>
@@ -153,17 +153,6 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">totActivityInfoViewController</string>
 					<string key="superclassName">UIViewController</string>
-					<object class="NSMutableDictionary" key="actions">
-						<string key="NS.key.0">save:</string>
-						<string key="NS.object.0">id</string>
-					</object>
-					<object class="NSMutableDictionary" key="actionInfosByName">
-						<string key="NS.key.0">save:</string>
-						<object class="IBActionInfo" key="NS.object.0">
-							<string key="name">save:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-					</object>
 					<object class="NSMutableDictionary" key="outlets">
 						<string key="NS.key.0">mActivityDesc</string>
 						<string key="NS.object.0">UITextView</string>

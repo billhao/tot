@@ -76,7 +76,7 @@ const float POINTER_HEIGHT = 7.0f;
     
 @implementation STHorizontalPicker
 
-@synthesize scrollView, scrollViewMarkerContainerView, scrollViewMarkerLayerArray, name, pointerLayer;
+@synthesize scrollView, scrollViewMarkerContainerView, scrollViewMarkerLayerArray, name, pointerLayer, currentValue;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -216,6 +216,7 @@ const float POINTER_HEIGHT = 7.0f;
     target = target > steps ? steps - 1 : target;
     CGFloat newValue = target * (maximumValue - minimumValue) / steps + minimumValue;
     
+    currentValue = newValue;
     [delegate pickerView:self didSelectValue:newValue];
     
 }
@@ -333,6 +334,8 @@ const float POINTER_HEIGHT = 7.0f;
 - (void)setValue:(CGFloat)newValue {
     value = newValue > maximumValue ? maximumValue : newValue;
     value = newValue < minimumValue ? minimumValue : newValue;
+    
+    currentValue = value;
     
     CGFloat itemWidth = (float) DISTANCE_BETWEEN_ITEMS;
     CGFloat xValue = (newValue - minimumValue) / ((maximumValue-minimumValue) / steps) * itemWidth + TEXT_LAYER_WIDTH / 2;
