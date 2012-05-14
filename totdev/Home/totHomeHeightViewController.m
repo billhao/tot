@@ -97,6 +97,16 @@
     mClock.view.frame = CGRectMake((mWidth-mClock.mWidth)/2, mHeight, mClock.mWidth, mClock.mHeight);
     [mClock setDelegate:self];
     [self.view addSubview:mClock.view];
+
+    //create title navigation bar
+    // navigationBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
+    //[self.view addSubview:navigationBar];
+    mNavigationBar= [[totNavigationBar alloc] initWithFrame:CGRectMake(0, 0, 320, 40)];
+    [mNavigationBar setLeftButtonTitle:@"Back"];
+    [mNavigationBar setNavigationBarTitle:@"Height & Weight" andColor:[UIColor blackColor]];
+    [mNavigationBar setBackgroundColor:[UIColor whiteColor]];
+    [mNavigationBar setDelegate:self];
+    [self.view addSubview:mNavigationBar];
 }
 
 - (void)pickerView:(STHorizontalPicker *)picker didSelectValue:(CGFloat)value{
@@ -147,6 +157,11 @@
     [self showTimePicker];
 }
 
+- (void) navLeftButtonPressed:(id)sender{
+    
+    [homeRootController switchTo:kHomeViewEntryView withContextInfo:nil];
+    
+}
 
 - (void)showTimePicker {
     //mClockBtn.hidden = YES;

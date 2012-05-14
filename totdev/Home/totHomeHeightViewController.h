@@ -10,10 +10,11 @@
 #import "totModel.h"
 #import "STHorizontalPicker.h"
 #import "totTimerController.h"
+#import "totNavigationBar.h"
 
 @class totHomeRootController;
 
-@interface totHomeHeightViewController : UIViewController <STHorizontalPickerDelegate, totTimerControllerDelegate> {
+@interface totHomeHeightViewController : UIViewController <STHorizontalPickerDelegate, totTimerControllerDelegate, totNavigationBarDelegate> {
     totHomeRootController *homeRootController;
     
     IBOutlet UITextField *mHeightPlaceHolder;
@@ -35,6 +36,8 @@
     totTimerController *mClock;
     int mWidth, mHeight;
     bool mStart;
+
+    totNavigationBar *mNavigationBar;
 }
 
 @property (nonatomic, assign) totHomeRootController *homeRootController;
