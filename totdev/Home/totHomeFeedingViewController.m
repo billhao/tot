@@ -262,12 +262,14 @@
 
 }
 
+
 - (void)viewWillAppear:(BOOL)animated {
     NSLog(@"%@", @"[height] viewWillAppear");
-    [mSummary removeFromSuperview];
-    
+    //[mSummary removeFromSuperview];
+    [mSummary setHidden:YES];
     //reset time
-    // reset quantity on button
+    //reset quantity on button
+    //reset picker 
     
 }
 
