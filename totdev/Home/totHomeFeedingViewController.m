@@ -20,6 +20,7 @@
 @synthesize navigationBar;
 @synthesize mOKButton;
 @synthesize mDatetime;
+@synthesize mSummary;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -58,6 +59,12 @@
     UIButton *btn = (UIButton*)sender;
     int tag = [btn tag];
     tag = tag - 1;
+    
+    
+    
+    //need to expose an API in 
+    
+    
 }
 
 
@@ -95,7 +102,7 @@
     [self.view addSubview:navigationBar];
     
     //create picker for oz
-    picker_quantity = [[STHorizontalPicker alloc] initWithFrame:CGRectMake(0, 0, 320, 31)];
+    picker_quantity = [[STHorizontalPicker alloc] initWithFrame:CGRectMake(0, 265, 320, 31)];
     picker_quantity.name = @"picker_weight";
     [picker_quantity setMinimumValue:0.0];
     [picker_quantity setMaximumValue:6.0];
@@ -118,6 +125,12 @@
     [mDatetime setTitle:[totUtility nowTimeString] forState:UIControlStateNormal];
     [self.view addSubview:mDatetime];  
     
+    mSummary = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    mSummary.frame = CGRectMake(50, 80, 220, 311);
+    [mSummary setHidden:YES];
+    [self.view addSubview:mSummary];  
+
+    
     // set up events
     [mOKButton addTarget:self action:@selector(OKButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [mDatetime addTarget:self action:@selector(DatetimeClicked:) forControlEvents:UIControlEventTouchUpInside];
@@ -128,7 +141,7 @@
     mHeight= self.view.frame.size.height;
     
     mClock = [[totTimerController alloc] init];
-    mClock.view.frame = CGRectMake((mWidth-mClock.mWidth)/2, mHeight, mClock.mWidth, mClock.mHeight);
+    mClock.view.frame = CGRectMake((mWidth-mClock.mWidth)/2, 480, mClock.mWidth, mClock.mHeight);
     [mClock setMode:kTime];
     [mClock setDelegate:self];
     [self.view addSubview:mClock.view];
@@ -145,28 +158,24 @@
     
     [mTotModel addEvent:baby_id event:EVENT_FEEDING_MILK datetime:date value:quantity];
     
-    NSString* summary = [NSString stringWithFormat:@"%@\n@ %@%@", @"today", @"Milk", quantity,@"Oz" ];
+    NSString* summary = [NSString stringWithFormat:@"%@\n%@ %@%@", @"today", @"Milk", quantity,@"Oz" ];
    
-    /*
     [mSummary setTitle:summary forState:UIControlStateNormal];
     [self.view bringSubviewToFront:mSummary];
     [mSummary setHidden:false];
     
     // get a list of events containing "emotion"
-    NSString* event = [[NSString alloc] initWithString:@"basic"];
+    NSString* event = [[NSString alloc] initWithString:@"fedding"];
     // return from getEvent is an array of totEvent object
     // a totEvent represents a single event
-    NSMutableArray *events = [model getEvent:0 event:event];
+    NSMutableArray *events = [mTotModel getEvent:0 event:event];
     for (totEvent* e in events) {
         NSLog(@"Return from db: %@", [e toString]);        
     }
     [event release];
-    */
+    
     
     [quantity release];
-    
-    
-
 }
 
 
@@ -178,41 +187,6 @@
     [UIView commitAnimations];
 }
 
-// display date selection
-- (void)DatetimeClicked: (UIButton *)button {
-    NSLog(@"%@", @"[feeding] datetime clicked");
-    [self showTimePicker];
-}
-
-- (void)hideTimePicker {
-    [UIView beginAnimations:@"swipe" context:nil];
-	[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-	[UIView setAnimationDuration:0.5f];
-    mClock.view.frame = CGRectMake((mWidth-mClock.mWidth)/2, mHeight, mClock.mWidth, mClock.mHeight);
-    [UIView commitAnimations];
-}
-
-#pragma mark - totTimerControllerDelegate
--(void)saveCurrentTime:(NSString*)time {
-    NSLog(@"%@", time);
-    NSString *formattedTime;
-    //need to parse time before display
-    NSArray* timeComponent = [time componentsSeparatedByString: @":"];
-    
-    formattedTime = [NSString stringWithFormat:@"%@:%@ %@",
-                     [timeComponent objectAtIndex:0],
-                     [timeComponent objectAtIndex:1],
-                     [[timeComponent objectAtIndex:2] uppercaseString]];
-
-    [mDatetime setTitle:formattedTime forState:UIControlStateNormal];
-
-    //[formattedTime release];
-    [self hideTimePicker];
-}
-
--(void)cancelCurrentTime {
-    [self hideTimePicker];
-}
 
 
  
@@ -229,6 +203,7 @@
     [mOKButton release];
     [mClock release];
     [mDatetime release];
+    [mSummary release];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

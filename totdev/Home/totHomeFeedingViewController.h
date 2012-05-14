@@ -21,6 +21,7 @@
     UINavigationBar *navigationBar;
     UIButton *mOKButton;
     UIButton *mDatetime;
+    UIButton *mSummary;
     
     NSMutableDictionary *mMessage;
     
@@ -44,6 +45,7 @@
 @property (nonatomic, retain) UINavigationBar* navigationBar;
 @property (nonatomic, retain) UIButton* mOKButton;
 @property (nonatomic, retain) UIButton* mDatetime;
+@property (nonatomic, retain) UIButton* mSummary;
 
 
 // receive parameters passed by other module for initialization or customization
