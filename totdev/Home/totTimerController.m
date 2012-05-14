@@ -212,14 +212,14 @@
     int margin = (mWidth-(2*buttonWidth+10))/2;
     
     UIButton *okBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    okBtn.frame = CGRectMake(margin, mComponentHeight-30, buttonWidth, buttonHeight);
+    okBtn.frame = CGRectMake(margin, mComponentHeight-10, buttonWidth, buttonHeight);
     okBtn.tag = kButtonOK;    
     [okBtn setTitle:@"OK" forState:UIControlStateNormal];
     [okBtn addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:okBtn];
     
     UIButton *cancelBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    cancelBtn.frame = CGRectMake(mWidth-margin-buttonWidth, mComponentHeight-30, buttonWidth, buttonHeight);
+    cancelBtn.frame = CGRectMake(mWidth-margin-buttonWidth, mComponentHeight-10, buttonWidth, buttonHeight);
     cancelBtn.tag = kButtonCancel;
     [cancelBtn setTitle:@"Cancel" forState:UIControlStateNormal];
     [cancelBtn addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];

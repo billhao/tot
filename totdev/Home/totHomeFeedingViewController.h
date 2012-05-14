@@ -12,13 +12,18 @@
 #import "../Utility/totSliderView.h"
 #import "../STHorizontalPicker.h"
 #import "../Model/totModel.h"
+#import "totTimerController.h"
+#import "../Utility/totNavigationBar.h"
 
-
-@interface totHomeFeedingViewController : UIViewController<STHorizontalPickerDelegate,totSliderViewDelegate> {
+@interface totHomeFeedingViewController : UIViewController<STHorizontalPickerDelegate,totSliderViewDelegate,totNavigationBarDelegate> {
     totHomeRootController *homeRootController;
     totSliderView *mSliderView;
-    UINavigationBar *navigationBar;
+    //UINavigationBar *navigationBar;
+    totNavigationBar *mNavigationBar;
+    
     UIButton *mOKButton;
+    UIButton *mDatetime;
+    UIButton *mSummary;
     
     NSMutableDictionary *mMessage;
     
@@ -28,14 +33,21 @@
     UIImageView *mBackground;
     
     STHorizontalPicker* picker_quantity;
+    
+    // for date picker
+    totTimerController *mClock;
+    int mWidth, mHeight;
+
 
 }
 
 @property (nonatomic, assign) totHomeRootController *homeRootController;
 @property (nonatomic, retain) totSliderView *mSliderView;
 @property (nonatomic, retain) NSNumber *mCurrentFoodID;
-@property (nonatomic, retain) UINavigationBar* navigationBar;
+//@property (nonatomic, retain) UINavigationBar* navigationBar;
 @property (nonatomic, retain) UIButton* mOKButton;
+@property (nonatomic, retain) UIButton* mDatetime;
+@property (nonatomic, retain) UIButton* mSummary;
 
 
 // receive parameters passed by other module for initialization or customization

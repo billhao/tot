@@ -6,6 +6,7 @@
 //  Copyright (c) 2012 USC. All rights reserved.
 //
 
+#import "totHomeRootController.h"
 #import "totHomeHeightViewController.h"
 #import "AppDelegate.h"
 #import "totEventName.h"
@@ -86,6 +87,7 @@
     [mOKButton addTarget:self action:@selector(OKButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [mDatetime addTarget:self action:@selector(DatetimeClicked:) forControlEvents:UIControlEventTouchUpInside];
     [mDatetimeImage addTarget:self action:@selector(DatetimeClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [mSummary addTarget:self action:@selector(SummaryClicked:) forControlEvents:UIControlEventTouchUpInside];
 
     // set up date picker
     mWidth = self.view.frame.size.width;
@@ -95,6 +97,16 @@
     mClock.view.frame = CGRectMake((mWidth-mClock.mWidth)/2, mHeight, mClock.mWidth, mClock.mHeight);
     [mClock setDelegate:self];
     [self.view addSubview:mClock.view];
+
+    //create title navigation bar
+    // navigationBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
+    //[self.view addSubview:navigationBar];
+    mNavigationBar= [[totNavigationBar alloc] initWithFrame:CGRectMake(0, 0, 320, 40)];
+    [mNavigationBar setLeftButtonTitle:@"Back"];
+    [mNavigationBar setNavigationBarTitle:@"Height & Weight" andColor:[UIColor blackColor]];
+    [mNavigationBar setBackgroundColor:[UIColor whiteColor]];
+    [mNavigationBar setDelegate:self];
+    [self.view addSubview:mNavigationBar];
 }
 
 - (void)pickerView:(STHorizontalPicker *)picker didSelectValue:(CGFloat)value{
@@ -134,12 +146,22 @@
     [height release];
 }
 
+// click on summary, return to home
+- (void)SummaryClicked: (UIButton *)button {
+    [homeRootController switchTo:kHomeViewEntryView withContextInfo:nil];
+}
+
 // display date selection
 - (void)DatetimeClicked: (UIButton *)button {
     NSLog(@"%@", @"[basic][height] datetime clicked");
     [self showTimePicker];
 }
 
+- (void) navLeftButtonPressed:(id)sender{
+    
+    [homeRootController switchTo:kHomeViewEntryView withContextInfo:nil];
+    
+}
 
 - (void)showTimePicker {
     //mClockBtn.hidden = YES;

@@ -6,23 +6,21 @@
 //  Copyright (c) 2012 USC. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-#import <Foundation/Foundation.h>
 #import "AppDelegate.h"
 #import "totHomeFeedingViewController.h"
-#import "totHomeRootController.h"
-#import "../Utility/totSliderView.h"
-#import "../Model/totModel.h"
-#import "../STHorizontalPicker.h"
-
+#import "totEventName.h"
+#import "totEvent.h"
+#import "../Utility/totUtility.h"
 
 @implementation totHomeFeedingViewController
 
 @synthesize homeRootController;
 @synthesize mSliderView;
 @synthesize mCurrentFoodID;
-@synthesize navigationBar;
+//@synthesize navigationBar;
 @synthesize mOKButton;
+@synthesize mDatetime;
+@synthesize mSummary;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -61,8 +59,19 @@
     UIButton *btn = (UIButton*)sender;
     int tag = [btn tag];
     tag = tag - 1;
+    
+    
+    
+    //need to expose an API in 
+    
+    
 }
 
+- (void) navLeftButtonPressed:(id)sender{
+    
+    [homeRootController switchTo:kHomeViewEntryView withContextInfo:nil];
+    
+}
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
@@ -72,7 +81,8 @@
     // create the slider view
     mSliderView = [[totSliderView alloc] initWithFrame:CGRectMake(25, 45, 270, 300)];
     [mSliderView setDelegate:self];
-    [mSliderView enablePageControlOnTop];
+    //[mSliderView enablePageControlOnTop];
+    [mSliderView enablePageControlOnBottom];
     
     //load image
     NSMutableArray *foodImages = [[NSMutableArray alloc] init];
@@ -92,12 +102,17 @@
     [self.view addSubview:mSliderView];
     
     //create title navigation bar
-    navigationBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
-    
-    [self.view addSubview:navigationBar];
+   // navigationBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
+    //[self.view addSubview:navigationBar];
+    mNavigationBar= [[totNavigationBar alloc] initWithFrame:CGRectMake(0, 0, 320, 40)];
+    [mNavigationBar setLeftButtonTitle:@"Back"];
+    [mNavigationBar setNavigationBarTitle:@"Feeding" andColor:[UIColor blackColor]];
+    [mNavigationBar setBackgroundColor:[UIColor yellowColor]];
+    [mNavigationBar setDelegate:self];
+    [self.view addSubview:mNavigationBar];
     
     //create picker for oz
-    picker_quantity = [[STHorizontalPicker alloc] initWithFrame:CGRectMake(0, 0, 320, 31)];
+    picker_quantity = [[STHorizontalPicker alloc] initWithFrame:CGRectMake(0, 265, 320, 31)];
     picker_quantity.name = @"picker_weight";
     [picker_quantity setMinimumValue:0.0];
     [picker_quantity setMaximumValue:6.0];
@@ -109,14 +124,82 @@
     
     //create ok button
     mOKButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    mOKButton.frame = CGRectMake(20, 347, 280, 40);
+    mOKButton.frame = CGRectMake(150, 347, 160, 40);
     [mOKButton setTitle:@"OK" forState:UIControlStateNormal];
     [self.view addSubview:mOKButton];
+    
+
+
+    mDatetime = [UIButton buttonWithType:UIButtonTypeCustom];
+    mDatetime.frame = CGRectMake(10, 347, 130, 40);
+    [mDatetime setTitle:[totUtility nowTimeString] forState:UIControlStateNormal];
+    [self.view addSubview:mDatetime];  
+    
+    mSummary = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    mSummary.frame = CGRectMake(50, 80, 220, 311);
+    [mSummary setHidden:YES];
+    [self.view addSubview:mSummary];  
+
+    
+    // set up events
+    [mOKButton addTarget:self action:@selector(OKButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [mDatetime addTarget:self action:@selector(DatetimeClicked:) forControlEvents:UIControlEventTouchUpInside];
+
+    
+    // set up date picker
+    mWidth = self.view.frame.size.width;
+    mHeight= self.view.frame.size.height;
+    
+    mClock = [[totTimerController alloc] init];
+    mClock.view.frame = CGRectMake((mWidth-mClock.mWidth)/2, 480, mClock.mWidth, mClock.mHeight);
+    [mClock setMode:kTime];
+    [mClock setDelegate:self];
+    [self.view addSubview:mClock.view];
 
 }
 
-- (void)OKButtonClicked: (UIButton *)button {}
 
+- (void)OKButtonClicked: (UIButton *)button {
+    NSLog(@"%@", @"[feeding] ok button clicked");
+    int baby_id = 0;
+    NSDate* date = [NSDate date];
+    NSString* quantity = [[NSString alloc] initWithFormat:@"%.1f", picker_quantity.value];
+    
+    
+    [mTotModel addEvent:baby_id event:EVENT_FEEDING_MILK datetime:date value:quantity];
+    
+    NSString* summary = [NSString stringWithFormat:@"%@\n%@ %@%@", @"today", @"Milk", quantity,@"Oz" ];
+   
+    [mSummary setTitle:summary forState:UIControlStateNormal];
+    [self.view bringSubviewToFront:mSummary];
+    [mSummary setHidden:false];
+    
+    // get a list of events containing "emotion"
+    NSString* event = [[NSString alloc] initWithString:@"fedding"];
+    // return from getEvent is an array of totEvent object
+    // a totEvent represents a single event
+    NSMutableArray *events = [mTotModel getEvent:0 event:event];
+    for (totEvent* e in events) {
+        NSLog(@"Return from db: %@", [e toString]);        
+    }
+    [event release];
+    
+    
+    [quantity release];
+}
+
+
+- (void)showTimePicker {
+    [UIView beginAnimations:@"swipe" context:nil];
+	[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+	[UIView setAnimationDuration:0.5f];
+    mClock.view.frame = CGRectMake((mWidth-mClock.mWidth)/2, mHeight-mClock.mHeight, mClock.mWidth, mClock.mHeight);
+    [UIView commitAnimations];
+}
+
+
+
+ 
 - (void)viewDidUnload
 {
     [super viewDidUnload];
@@ -125,8 +208,13 @@
     [mBackground release];
     [mSliderView release];
     [mMessage release];
-    [navigationBar release];
+//    [navigationBar release];
     [picker_quantity release];
+    [mOKButton release];
+    [mClock release];
+    [mDatetime release];
+    [mSummary release];
+    [mNavigationBar release];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

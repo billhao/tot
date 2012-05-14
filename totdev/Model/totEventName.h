@@ -10,11 +10,22 @@
 #define totdev_totEventName_h
 
 // basic - height, weigth, head circumference
-NSString *EVENT_BASIC_HEIGHT     = @"basic/height";
-NSString *EVENT_BASIC_WEIGHT     = @"basic/weight";
-NSString *EVENT_BASIC_HEAD       = @"basic/head";
+static NSString *EVENT_BASIC_HEIGHT     = @"basic/height";
+static NSString *EVENT_BASIC_WEIGHT     = @"basic/weight";
+static NSString *EVENT_BASIC_HEAD       = @"basic/head";
+
+// feeding
+static NSString *EVENT_FEEDING_MILK = @"feeding/milk";
+static NSString *EVENT_FEEDING_WATER = @"feeding/water";
+static NSString *EVENT_FEEDING_RICE = @"feeding/rice";
+static NSString *EVENT_FEEDING_FRUIT = @"feeding/fruit";
+static NSString *EVENT_FEEDING_VEGETABLE = @"feeding/vegetable";
+static NSString *EVENT_FEEDING_CHEESE = @"feeding/cheese";
+static NSString *EVENT_FEEDING_BREAD = @"feeding/bread";
+static NSString *EVENT_FEEDING_EGG = @"feeding/egg";
+
 
 // activity - emotion
-NSString *EVENT_EMOTION_HAPPY    = @"emotion/happy";
+static NSString *EVENT_EMOTION_HAPPY    = @"emotion/happy";
 
 #endif

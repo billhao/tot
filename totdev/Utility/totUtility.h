@@ -12,5 +12,7 @@
 
 
 +(UIImage *)squareCropImage:(UIImage *)origImage;  
++(NSString *)nowTimeString;
+
 
 @end
