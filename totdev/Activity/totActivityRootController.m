@@ -177,8 +177,6 @@
     nextView.view.frame = CGRectMake(0, 0, SCREEN_W, SCREEN_H);
     mCurrentViewIndex = viewIndex;
     
-    activityInfoViewController.view.frame = CGRectMake(0, 0, SCREEN_W, SCREEN_H);
-    
     [UIView commitAnimations];
 }
 

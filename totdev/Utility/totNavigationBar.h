@@ -12,8 +12,8 @@
 @protocol totNavigationBarDelegate <NSObject>
 
 @optional
--(void)leftButtonPressed:(id)sender;
--(void)rightButtonPressed:(id)sender;
+-(void)navLeftButtonPressed:(id)sender;
+-(void)navRightButtonPressed:(id)sender;
 
 @end
 
@@ -21,7 +21,25 @@
     UIImageView *mBackground;
     UIButton *mLeftButton;
     UIButton *mRightButton;
+    
+    int mWidth, mHeight;
+    
     id<totNavigationBarDelegate> delegate;
 }
+
+@property (nonatomic, retain) id<totNavigationBarDelegate> delegate;
+
+- (void)setNavigationBarTitle:(NSString*)title andColor:(UIColor*)clr;
+- (void)setBackgroundImage:(NSString*)path;
+
+- (void)setLeftButtonImg:(NSString*)path;
+- (void)setLeftButtonTitle:(NSString*)title;
+- (void)setRightButtonImg:(NSString*)path;
+- (void)setRightButtonTitle:(NSString*)title;
+
+- (void)hideLeftButton;
+- (void)showLeftButton;
+- (void)hideRightButton;
+- (void)showRightButton;
 
 @end

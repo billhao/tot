@@ -121,7 +121,7 @@
     int totalPageNumbers = 
         ceil((double)[contentArray count]/numOfRows/3);
 
-    if (page > totalPageNumbers) 
+    if (page-1 > totalPageNumbers) 
         page = 0;
     
     [self cleanScrollView];
@@ -177,7 +177,7 @@
             
             // margin
             if ([[marginArray objectAtIndex:i*numOfRows*3+j] boolValue]){
-                UIImageView *margin = [[UIImageView alloc] initWithFrame:CGRectMake(xPos,yPos,BUTTON_WIDTH+8,BUTTON_WIDTH+8)];
+                UIImageView *margin = [[UIImageView alloc] initWithFrame:CGRectMake(xPos,yPos,BUTTON_WIDTH+4,BUTTON_WIDTH+4)];
                 margin.image=[UIImage imageNamed:@"margin.png"];
                 [subview addSubview:margin];
                 [margin release];
