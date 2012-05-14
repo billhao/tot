@@ -119,25 +119,26 @@
     NSLog(@"%@", @"[basic][height] ok button clicked");
     int baby_id = 0;
     NSDate* date = [NSDate date];
-    NSString* height = [[NSString alloc] initWithFormat:@"%.2f", picker_height.value];
-    NSString* weight = [[NSString alloc] initWithFormat:@"%.2f", picker_weight.value];
-    NSString* head   = [[NSString alloc] initWithFormat:@"%.2f", picker_head.value];
+    NSString* height = [[NSString alloc] initWithFormat:@"%.2f", picker_height.currentValue];
+    NSString* weight = [[NSString alloc] initWithFormat:@"%.2f", picker_weight.currentValue];
+    NSString* head   = [[NSString alloc] initWithFormat:@"%.2f", picker_head.currentValue];
     [model addEvent:baby_id event:EVENT_BASIC_HEIGHT datetime:date value:height];
     [model addEvent:baby_id event:EVENT_BASIC_WEIGHT datetime:date value:weight];
     [model addEvent:baby_id event:EVENT_BASIC_HEAD datetime:date value:head];
     
     NSString* summary = [NSString stringWithFormat:@"%@\nHeight %@\nWeight %@\nHead Circumference %@", @"today", height, weight, head ];
     [mSummary setTitle:summary forState:UIControlStateNormal];
+    [self.view addSubview:mSummary];
     [self.view bringSubviewToFront:mSummary];
-    [mSummary setHidden:false];
-    
+    //[mSummary setHidden:false];
+
     // get a list of events containing "emotion"
     NSString* event = [[NSString alloc] initWithString:@"basic"];
     // return from getEvent is an array of totEvent object
     // a totEvent represents a single event
     NSMutableArray *events = [model getEvent:0 event:event];
     for (totEvent* e in events) {
-        NSLog(@"Return from db: %@", [e toString]);        
+        //NSLog(@"Return from db: %@", [e toString]);        
     }
     [event release];
     
@@ -161,6 +162,11 @@
     
     [homeRootController switchTo:kHomeViewEntryView withContextInfo:nil];
     
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    NSLog(@"%@", @"[height] viewWillAppear");
+    [mSummary removeFromSuperview];
 }
 
 - (void)showTimePicker {
