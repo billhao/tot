@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Model/totModel.h"
+#import "totImageCache.h"
 
 @class totUITabBarController;
 
@@ -16,10 +17,12 @@
 	IBOutlet totUITabBarController *rootController;
     
     // global
+    totImageCache *mCache;
     totModel *mTotData;
     int mBabyId;
 }
 
+@property (retain, nonatomic) totImageCache *mCache;
 @property (retain, nonatomic) IBOutlet totUITabBarController *rootController;
 @property (strong, nonatomic) IBOutlet UIWindow *window;
 @property (assign, nonatomic) int mBabyId;

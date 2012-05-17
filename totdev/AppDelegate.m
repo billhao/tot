@@ -14,6 +14,7 @@
 @synthesize window = _window;
 @synthesize rootController;
 @synthesize mBabyId;
+@synthesize mCache;
 
 - (void)dealloc
 {
@@ -35,6 +36,9 @@
     
     // for now, set babyID
     mBabyId = 1;
+    
+    // initialize the image cache
+    mCache = [[totImageCache alloc] init];
     
     // initialize database
     mTotData = [[totModel alloc] init];
@@ -84,6 +88,7 @@
      See also applicationDidEnterBackground:.
      */
     [mTotData release];
+    [mCache release];
 }
 
 @end

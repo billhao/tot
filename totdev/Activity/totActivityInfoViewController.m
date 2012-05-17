@@ -55,25 +55,25 @@
 }
 */
 
+#pragma mark - UITextView delegates
 // called when the keyboard appears
 - (BOOL)textViewShouldBeginEditing:(UITextView *)textView {
-//    printf("textViewShouldBeginEditing\n");
+    //printf("textViewShouldBeginEditing\n");
     return YES;
 }
 
-#pragma mark - UITextView delegates
 - (void)textViewDidBeginEditing:(UITextView *)textView {
-//    printf("textViewDidBeginEditing\n");
+    //printf("textViewDidBeginEditing\n");
 }
 
 // called when the keyboard disappears
 - (BOOL)textViewShouldEndEditing:(UITextView *)textView {
-//    printf("textViewShouldEndEditing\n");
+    //printf("textViewShouldEndEditing\n");
     return YES;
 }
 
 - (void)textViewDidEndEditing:(UITextView *)textView {
-//    printf("textViewDidEndEditing\n");
+    //printf("textViewDidEndEditing\n");
     printf("%s\n", [textView.text UTF8String]);
 }
 
@@ -188,7 +188,9 @@
     NSArray  *member = [memb_str componentsSeparatedByString:@","];
     
     // insert the image
-    [mThumbnail setImage:[UIImage imageWithContentsOfFile:imagePath]];
+    //[mThumbnail setImage:[UIImage imageWithContentsOfFile:imagePath]];
+    AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+    [mThumbnail setImage:[delegate.mCache getImageWithKey:filename]];
     
     // display the slider view
     NSMutableArray *images = [[NSMutableArray alloc] init];
@@ -229,6 +231,8 @@
 {
     [super viewDidLoad];
 
+    [mActivityDesc setDelegate:self];
+    
     // add navigation bar
     mNavigationBar = [[totNavigationBar alloc] initWithFrame:CGRectMake(0, 0, 320, 40)];
     [mNavigationBar setDelegate:self];
@@ -247,7 +251,7 @@
 //    [textbubble release];
     
     // create the slider view
-    mSliderView = [[totSliderView alloc] initWithFrame:CGRectMake(25, 151, 270, 260)];
+    mSliderView = [[totSliderView alloc] initWithFrame:CGRectMake(25, 180, 270, 260)];
     //mSliderView = [[totSliderView alloc] initWithFrame:CGRectMake(0, 151, 320, 260)];
     [mSliderView setDelegate:self];
     [mSliderView enablePageControlOnBottom];

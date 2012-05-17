@@ -87,6 +87,10 @@
     NSString *filename = [[NSString alloc] initWithFormat:@"%d.jpg", (int)interval];
 
     [self saveImage:photo intoFile:filename];
+    
+    AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+    [delegate.mCache addImage:photo WithKey:filename];
+    
     if( [mMessage objectForKey:@"storedVideo"] )
         [mMessage removeObjectForKey:@"storedVideo"];
     [mMessage setObject:filename forKey:@"storedImage"];
@@ -110,6 +114,10 @@
     NSString *thumbFilename = [videoFilename stringByAppendingString:@".jpg"];
     
     [self saveImage:thumbnail intoFile:thumbFilename];
+    
+    AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+    [delegate.mCache addImage:thumbnail WithKey:thumbFilename];
+    
     [mMessage setObject:thumbFilename forKey:@"storedImage"];
     [mMessage setObject:self.mCurrentActivityID forKey:@"activity"];
     
