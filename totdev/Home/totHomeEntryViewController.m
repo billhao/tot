@@ -21,7 +21,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        mHomeSleepingView = [[totHomeSleepingView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
+        mHomeSleepingView = [[totHomeSleepingView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) andParentView:self.view];
         mLanguageInputView = [[totLanguageInputViewController alloc] init];
     }
     return self;
@@ -49,8 +49,10 @@
     int tag = btn.tag;
     switch (tag) {
         case kBasicSleep:
-            [mHomeSleepingView setParentView:self.view];
-            [mHomeSleepingView startSleeping];
+            if( mHomeSleepingView.mIsSleeping )
+                [mHomeSleepingView stopSleeping];
+            else
+                [mHomeSleepingView startSleeping];
             break;
         case kBasicLanguage:
             [mLanguageInputView Display];

@@ -9,18 +9,35 @@
 #import <UIKit/UIKit.h>
 #import "totTimerController.h"
 
+
 @interface totHomeSleepingView : UIView <totTimerControllerDelegate> {
-    UIButton *mClockBtn;
     UIView *mParentView;
+    
     totTimerController *mClock;
     int mWidth, mHeight;
-    bool mStart;
+    bool mIsSleeping;
+    
+    UIButton *mClockBtn, *mConfirmButton;
+    UIImageView *mBackground, *mDisplayBackground;
+    UILabel *mTimeLabel, *mDisplayLabel;
+    
+    NSTimer *mSleepTimer;
+    
+    int _year, _month, _day;
+    int _hour, _minute, _second, _ap;
 }
 
+@property (nonatomic, readonly) bool mIsSleeping;
+
+- (id)initWithFrame:(CGRect)frame andParentView:(UIView*)parent;
 - (void)startSleeping;
 - (void)stopSleeping;
-- (void)setParentView:(UIView*)parent;
 
 - (void)animationFinished:(NSString*)animationID finished:(NSNumber*)finished context:(void*)context;
+- (void)calculateDisplayedTime:(int)gap;
+- (void)handleTime;
+- (void)makeNoView;
+- (void)makeFullView;
+- (void)makeDisplayView;
 
 @end

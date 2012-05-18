@@ -93,6 +93,7 @@
 		EFB25A5F15505E1500C4984A /* home.png in Resources */ = {isa = PBXBuildFile; fileRef = EFB25A5B15505E1500C4984A /* home.png */; };
 		EFB25A6015505E1500C4984A /* review.png in Resources */ = {isa = PBXBuildFile; fileRef = EFB25A5C15505E1500C4984A /* review.png */; };
 		EFB25A6115505E1500C4984A /* setting.png in Resources */ = {isa = PBXBuildFile; fileRef = EFB25A5D15505E1500C4984A /* setting.png */; };
+		EFBE580B1565A8FC003433D6 /* Logo.png in Resources */ = {isa = PBXBuildFile; fileRef = EFBE580A1565A8FC003433D6 /* Logo.png */; };
 		EFD840101550FA8500F75B69 /* family_fun_main_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = EFD8400F1550FA8500F75B69 /* family_fun_main_bg.png */; };
 		EFD8402C1550FAA600F75B69 /* emotion_angry.png in Resources */ = {isa = PBXBuildFile; fileRef = EFD840121550FAA600F75B69 /* emotion_angry.png */; };
 		EFD8402D1550FAA600F75B69 /* emotion_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = EFD840131550FAA600F75B69 /* emotion_bg.png */; };
@@ -248,6 +249,7 @@
 		EFB25A5B15505E1500C4984A /* home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = home.png; path = Resources/Tab/home.png; sourceTree = "<group>"; };
 		EFB25A5C15505E1500C4984A /* review.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = review.png; path = Resources/Tab/review.png; sourceTree = "<group>"; };
 		EFB25A5D15505E1500C4984A /* setting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = setting.png; path = Resources/Tab/setting.png; sourceTree = "<group>"; };
+		EFBE580A1565A8FC003433D6 /* Logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Logo.png; path = Resources/Logo.png; sourceTree = "<group>"; };
 		EFD8400F1550FA8500F75B69 /* family_fun_main_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = family_fun_main_bg.png; path = Resources/Activity/family_fun_main_bg.png; sourceTree = "<group>"; };
 		EFD840121550FAA600F75B69 /* emotion_angry.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = emotion_angry.png; path = Resources/Activity/View/emotion_angry.png; sourceTree = "<group>"; };
 		EFD840131550FAA600F75B69 /* emotion_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = emotion_bg.png; path = Resources/Activity/View/emotion_bg.png; sourceTree = "<group>"; };
@@ -467,6 +469,7 @@
 		EF62838C153667BD004031D6 /* resources */ = {
 			isa = PBXGroup;
 			children = (
+				EFBE580A1565A8FC003433D6 /* Logo.png */,
 				EF6283A215366DF1004031D6 /* Image */,
 				EF62838D15366833004031D6 /* MainWindow.xib */,
 				EF6283AF15367744004031D6 /* HomeView.xib */,
@@ -768,6 +771,7 @@
 				EFFB60A115584974006C4C80 /* message_cloud_revised-04.png in Resources */,
 				EFFB60A215584974006C4C80 /* message_cloud.png in Resources */,
 				EFFB60A415584A8B006C4C80 /* done-01.png in Resources */,
+				EFBE580B1565A8FC003433D6 /* Logo.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

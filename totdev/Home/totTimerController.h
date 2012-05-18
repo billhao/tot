@@ -53,6 +53,13 @@ enum {
     id<totTimerControllerDelegate> delegate;
 }
 
+@property (nonatomic, readonly) int mMode;
+@property (nonatomic, readonly) int mCurrentHourIdx;
+@property (nonatomic, readonly) int mCurrentMinuteIdx;
+@property (nonatomic, readonly) int mCurrentAmPm;
+@property (nonatomic, readonly) int mCurrentYearIdx;
+@property (nonatomic, readonly) int mCurrentMonthIdx;
+@property (nonatomic, readonly) int mCurrentDayIdx;
 @property (nonatomic, assign) int mWidth;
 @property (nonatomic, assign) int mHeight;
 @property (nonatomic, retain) id<totTimerControllerDelegate> delegate;

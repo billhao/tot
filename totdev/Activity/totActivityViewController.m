@@ -207,8 +207,15 @@
     for( int i = 0; i < [images count]; i++ ) {
         NSArray *tokens = [[images objectAtIndex:i] componentsSeparatedByString:@"."];
         NSString *ext = [tokens lastObject];
+        
+        AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+        UIImage *cachedImg = [delegate.mCache getImageWithKey:[images objectAtIndex:i]];
+        
         if( [ext isEqualToString:@"jpg"] ) {
-            [activityMemberImages addObject:[UIImage imageWithContentsOfFile:[images objectAtIndex:i]]];
+            if( cachedImg )
+                [activityMemberImages addObject:cachedImg];
+            else
+                [activityMemberImages addObject:[UIImage imageWithContentsOfFile:[images objectAtIndex:i]]];
             [isIcon addObject:[NSNumber numberWithBool:NO]];
         } else {
             [activityMemberImages addObject:[UIImage imageNamed:[images objectAtIndex:i]]];

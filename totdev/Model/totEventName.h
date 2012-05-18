@@ -9,23 +9,42 @@
 #ifndef totdev_totEventName_h
 #define totdev_totEventName_h
 
-// basic - height, weigth, head circumference
+// basic
 static NSString *EVENT_BASIC_HEIGHT     = @"basic/height";
 static NSString *EVENT_BASIC_WEIGHT     = @"basic/weight";
 static NSString *EVENT_BASIC_HEAD       = @"basic/head";
+static NSString *EVENT_BASIC_SLEEP      = @"basic/sleep";
+static NSString *EVENT_BASIC_LANGUAGE   = @"basic/language";
 
 // feeding
-static NSString *EVENT_FEEDING_MILK = @"feeding/milk";
-static NSString *EVENT_FEEDING_WATER = @"feeding/water";
-static NSString *EVENT_FEEDING_RICE = @"feeding/rice";
-static NSString *EVENT_FEEDING_FRUIT = @"feeding/fruit";
-static NSString *EVENT_FEEDING_VEGETABLE = @"feeding/vegetable";
-static NSString *EVENT_FEEDING_CHEESE = @"feeding/cheese";
-static NSString *EVENT_FEEDING_BREAD = @"feeding/bread";
-static NSString *EVENT_FEEDING_EGG = @"feeding/egg";
+static NSString *EVENT_FEEDING_MILK     = @"feeding/milk";
+static NSString *EVENT_FEEDING_WATER    = @"feeding/water";
+static NSString *EVENT_FEEDING_RICE     = @"feeding/rice";
+static NSString *EVENT_FEEDING_FRUIT    = @"feeding/fruit";
+static NSString *EVENT_FEEDING_VEGETABLE= @"feeding/vegetable";
+static NSString *EVENT_FEEDING_CHEESE   = @"feeding/cheese";
+static NSString *EVENT_FEEDING_BREAD    = @"feeding/bread";
+static NSString *EVENT_FEEDING_EGG      = @"feeding/egg";
 
 
 // activity - emotion
-static NSString *EVENT_EMOTION_HAPPY    = @"emotion/happy";
+static NSString *EVENT_EMOTION_HAPPY    = @"emotion/emotion_happy";
+static NSString *EVENT_EMOTION_SAD      = @"emotion/emotion_sad";
+static NSString *EVENT_EMOTION_SURPRISE = @"emotion/emotion_surprise";
+static NSString *EVENT_EMOTION_ANGRY    = @"emotion/emotion_angry";
+static NSString *EVENT_EMOTION_DISGUST  = @"emotion/emotion_disgust";
+static NSString *EVENT_EMOTION_FEAR     = @"emotion/emotion_fear";
+
+static NSString *EVENT_MOTOR_STAND      = @"motor_skill/motor_skill_stand";
+static NSString *EVENT_MOTOR_WALK       = @"motor_skill/motor_skill_walk";
+static NSString *EVENT_MOTOR_RUN        = @"motor_skill/motor_skill_run";
+static NSString *EVENT_MOTOR_DANCE      = @"motor_skill/motor_skill_dance";
+static NSString *EVENT_MOTOR_JUMP       = @"motor_skill/motor_skill_jump";
+static NSString *EVENT_MOTOR_CRUISE     = @"motor_skill/motor_skill_cruise";
+static NSString *EVENT_MOTOR_CRAWL      = @"motor_skill/motor_skill_crawl";
+static NSString *EVENT_MOTOR_SIT        = @"motor_skill/motor_skill_sit";
+static NSString *EVENT_MOTOR_ROLLOVER   = @"motor_skill/motor_skill_roll_over";
+static NSString *EVENT_MOTOR_KICKLEG    = @"motor_skill/motor_skill_kick_leg";
+static NSString *EVENT_MOTOR_LIFTNECK   = @"motor_skill/motor_skill_lift_neck";
 
 #endif

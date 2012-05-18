@@ -8,6 +8,7 @@
 
 #import "totLanguageInputViewController.h"
 #import "AppDelegate.h"
+#import "../Model/totEventName.h"
 
 @implementation totLanguageInputViewController
 
@@ -77,23 +78,25 @@
     aBtn.backgroundColor = [UIColor clearColor];
     [aBtn setBackgroundImage: [UIImage imageNamed:@"message_cloud_revised-02.png"] forState:UIControlStateNormal];
     [aBtn addTarget:self action:@selector(ConfirmButtonClicked) forControlEvents:UIControlEventTouchUpInside];
-    m_confirmButton = aBtn;
+    self.m_confirmButton = aBtn;
     [self.view addSubview:m_confirmButton];
+    [aBtn release];
     
     // Construct history button
-    UIButton *bBtn = [[UIButton alloc] initWithFrame:CGRectMake(120, 240, 75, 45)];
+    UIButton *bBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    bBtn.frame = CGRectMake(120, 240, 75, 45);
     bBtn.backgroundColor = [UIColor clearColor];
     [bBtn setBackgroundImage: [UIImage imageNamed:@"message_cloud_revised-03.png"] forState:UIControlStateNormal];
     [bBtn addTarget:self action:@selector(ConfirmButtonClicked) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:bBtn];
     
     // Construct share button
-    UIButton *cBtn = [[UIButton alloc] initWithFrame:CGRectMake(160, 280, 115, 65)];
+    UIButton *cBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    cBtn.frame = CGRectMake(160, 280, 115, 65);
     cBtn.backgroundColor = [UIColor clearColor];
     [cBtn setBackgroundImage: [UIImage imageNamed:@"message_cloud_revised-04.png"] forState:UIControlStateNormal];
     [cBtn addTarget:self action:@selector(ConfirmButtonClicked) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:cBtn];
-
     
     //Initially hide all the views
     m_textView.hidden = YES;
@@ -142,7 +145,7 @@
         /* Add to database */
         AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
         totModel* totModel = [appDelegate getDataModel];
-        [totModel addEvent:0 event:@"language" datetimeString:formattedDateString value:inputTxt ];
+        [totModel addEvent:0 event:EVENT_BASIC_LANGUAGE datetimeString:formattedDateString value:inputTxt ];
         
         /* Clear textview text */
         m_textView.text = @"";

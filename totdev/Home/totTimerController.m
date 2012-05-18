@@ -15,6 +15,13 @@
 
 @implementation totTimerController
 
+@synthesize mMode;
+@synthesize mCurrentAmPm;
+@synthesize mCurrentDayIdx;
+@synthesize mCurrentHourIdx;
+@synthesize mCurrentMonthIdx;
+@synthesize mCurrentMinuteIdx;
+@synthesize mCurrentYearIdx;
 @synthesize mWidth;
 @synthesize mHeight;
 @synthesize delegate;
