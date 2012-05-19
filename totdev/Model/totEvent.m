@@ -12,10 +12,7 @@
 
 @implementation totEvent
 
-@synthesize event_id;
-@synthesize baby_id;
-@synthesize name;
-@synthesize value;
+@synthesize event_id, baby_id, name, value, datetime;
 
 -(NSString*) getTimeText {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];

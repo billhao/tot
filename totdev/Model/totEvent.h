@@ -16,6 +16,7 @@
 @property (nonatomic) int      baby_id;
 @property (nonatomic, retain) NSString *name;
 @property (nonatomic, retain) NSString *value;
+@property (nonatomic, retain) NSDate   *datetime;
 
 // return datetime of the event in string
 -(NSString*) getTimeText;
