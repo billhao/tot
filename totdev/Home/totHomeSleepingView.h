@@ -28,8 +28,10 @@
 }
 
 @property (nonatomic, readonly) bool mIsSleeping;
+@property (nonatomic, assign) UIView *mParentView;
 
-- (id)initWithFrame:(CGRect)frame andParentView:(UIView*)parent;
+- (id)initWithFrame:(CGRect)frame;
+- (void)addTimeDisplayLabel;
 - (void)startSleeping;
 - (void)stopSleeping;
 
@@ -38,6 +40,7 @@
 - (void)handleTime;
 - (void)makeNoView;
 - (void)makeFullView;
-- (void)makeDisplayView;
+- (void)makeDisplayLabelView;
+- (void)removeDisplayLabelView;
 
 @end

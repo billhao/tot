@@ -16,17 +16,17 @@
 @implementation totHomeSleepingView
 
 @synthesize mIsSleeping;
+@synthesize mParentView;
 
-static NSString *justSleepString = @"Just slept :)";
 static int gInterval = 0;
+static NSString *justSleepString = @"Just slept :)";
 
-- (id)initWithFrame:(CGRect)frame andParentView:(UIView*)parent
+- (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
         self.userInteractionEnabled = YES;
-        
-        mParentView = parent;
+        self.hidden = YES;
         
         mWidth = self.frame.size.width;
         mHeight= self.frame.size.height;
@@ -66,41 +66,48 @@ static int gInterval = 0;
         [mConfirmButton addTarget:self action:@selector(confirm) forControlEvents:UIControlEventTouchUpInside];
         [self insertSubview:mConfirmButton aboveSubview:mBackground];
         
-        /* display view after the user confirms sleeping */
-        mDisplayLabel = [[UILabel alloc] initWithFrame:CGRectMake(220, 120-200, 100, 30)];
-        mDisplayLabel.backgroundColor = [UIColor clearColor];
-        mDisplayLabel.text = @"";
-        [mDisplayLabel setFont:[UIFont fontWithName:@"Arial" size:13.0]];
-        [mParentView addSubview:mDisplayLabel];
-        
         [self setBackgroundColor:[UIColor clearColor]];
-        self.hidden = YES;
-        
-        // check whether we need setup a timer or not
-        AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
-        totModel *model = [delegate getDataModel];
-        NSMutableArray *sleepRecords = [model getEvent:delegate.mBabyId event:EVENT_BASIC_SLEEP];
-        if( [sleepRecords count] > 0 ) {
-            totEvent *evt = [sleepRecords objectAtIndex:0];
-            if( [evt.value isEqualToString:@"start"] ) {
-                mIsSleeping = YES;
-                
-                // find the interval
-                gInterval = 100;
-                
-                // start the timer
-                mSleepTimer = [NSTimer scheduledTimerWithTimeInterval:60 
-                                                               target:self 
-                                                             selector:@selector(handleTime) 
-                                                             userInfo:nil 
-                                                              repeats:YES];
-                [self makeDisplayView];
-            }
-        }
     }
     return self;
 }
 
+- (void)addTimeDisplayLabel {
+    if( !mParentView ) {
+        printf("assign parent view first\n");
+        return;
+    }
+    
+    mDisplayLabel = [[UILabel alloc] initWithFrame:CGRectMake(220, 120-200, 100, 30)];
+    mDisplayLabel.backgroundColor = [UIColor clearColor];
+    mDisplayLabel.text = @"";
+    [mDisplayLabel setFont:[UIFont fontWithName:@"Arial" size:13.0]];
+    [mParentView addSubview:mDisplayLabel];
+    
+    // check whether we need setup a timer or not
+    AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+    totModel *model = [delegate getDataModel];
+    NSMutableArray *sleepRecords = [model getEvent:delegate.mBabyId event:EVENT_BASIC_SLEEP];
+    if( [sleepRecords count] > 0 ) {
+        totEvent *evt = [sleepRecords objectAtIndex:0];
+        if( [evt.value isEqualToString:@"start"] ) {
+            mIsSleeping = YES;
+            
+            // find the interval
+            NSTimeInterval lastDiff = [evt.datetime timeIntervalSinceNow];
+            gInterval = -(int)lastDiff;
+            
+            // start the timer
+            mSleepTimer = [NSTimer scheduledTimerWithTimeInterval:60 
+                                                           target:self 
+                                                         selector:@selector(handleTime) 
+                                                         userInfo:nil 
+                                                          repeats:YES];
+            [self makeDisplayLabelView];
+        }
+    }
+}
+
+/// gap: the number of seconds
 - (void)calculateDisplayedTime:(int)gap {
     char desc[64] = {0};
     if( gap == 1 ) {
@@ -120,7 +127,7 @@ static int gInterval = 0;
     }
 }
 
-- (void)removeDisplayView {
+- (void)removeDisplayLabelView {
     [UIView beginAnimations:@"removeDisplay" context:nil];
     [UIView setAnimationDelegate:self];
     [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
@@ -129,7 +136,7 @@ static int gInterval = 0;
     [UIView commitAnimations];
 }
 
-- (void)makeDisplayView {
+- (void)makeDisplayLabelView {
     if( mIsSleeping ) {
         if( gInterval == 0 )
             [mDisplayLabel setText:justSleepString];
@@ -181,7 +188,7 @@ static int gInterval = 0;
             if( [subview isKindOfClass:[UIButton class]] )
                 subview.hidden = NO;
         }
-        [self makeDisplayView];
+        [self makeDisplayLabelView];
     }
 }
 
@@ -216,10 +223,10 @@ static int gInterval = 0;
     
     NSNumberFormatter * f = [[NSNumberFormatter alloc] init];
     [f setNumberStyle:NSNumberFormatterDecimalStyle];
-    _year = [[f numberFromString:[comps1 objectAtIndex:0]] intValue];
-    _month = [[f numberFromString:[comps1 objectAtIndex:1]] intValue];
-    _day = [[f numberFromString:[comps1 objectAtIndex:2]] intValue];
-    _hour = [[f numberFromString:[comps2 objectAtIndex:0]] intValue];
+    _year   = [[f numberFromString:[comps1 objectAtIndex:0]] intValue];
+    _month  = [[f numberFromString:[comps1 objectAtIndex:1]] intValue];
+    _day    = [[f numberFromString:[comps1 objectAtIndex:2]] intValue];
+    _hour   = [[f numberFromString:[comps2 objectAtIndex:0]] intValue];
     _minute = [[f numberFromString:[comps2 objectAtIndex:1]] intValue];
     _second = [[f numberFromString:[comps2 objectAtIndex:2]] intValue];
     
@@ -241,6 +248,7 @@ static int gInterval = 0;
 
 - (void)cancel {
     mIsSleeping = NO;
+    
     [self makeNoView];
 }
 
@@ -258,7 +266,7 @@ static int gInterval = 0;
     // save it into db
     AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
     totModel *model = [delegate getDataModel];
-    [model addEvent:delegate.mBabyId event:EVENT_BASIC_SLEEP datetime:[NSString stringWithUTF8String:now] value:@"start"];
+    [model addEvent:delegate.mBabyId event:EVENT_BASIC_SLEEP datetimeString:[NSString stringWithUTF8String:now] value:@"start"];
     
     // start a NSTimer to refresh the time label
     mSleepTimer = [NSTimer scheduledTimerWithTimeInterval:60 
@@ -295,18 +303,18 @@ static int gInterval = 0;
     
     [self findCurrentTime];
     sprintf(now, "%04d-%02d-%02d %02d:%02d:%02d", _year, _month, _day, _hour, _minute, _second);
-    printf("sleep end: %s", now);
+    printf("sleep end: %s\n", now);
 
     // insert into db
     AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
     totModel *model = [delegate getDataModel];
-    [model addEvent:delegate.mBabyId event:EVENT_BASIC_SLEEP datetime:[NSString stringWithUTF8String:now] value:@"end"];
+    [model addEvent:delegate.mBabyId event:EVENT_BASIC_SLEEP datetimeString:[NSString stringWithUTF8String:now] value:@"end"];
     
     // clear the timer
     [mSleepTimer invalidate];
     
     // clean the label from parent view
-    [self removeDisplayView];
+    [self removeDisplayLabelView];
     
     mIsSleeping = NO;
 }

@@ -21,7 +21,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        mHomeSleepingView = [[totHomeSleepingView alloc] initWithFrame:CGRectMake(0, 0, 320, 480) andParentView:self.view];
+        mHomeSleepingView = [[totHomeSleepingView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
         mLanguageInputView = [[totLanguageInputViewController alloc] init];
     }
     return self;
@@ -106,7 +106,10 @@
     }
     
     // create subview
+    mHomeSleepingView.mParentView = self.view;
     [self.view addSubview:mHomeSleepingView];
+    [mHomeSleepingView addTimeDisplayLabel];
+    
     [self.view addSubview:mLanguageInputView.view];
 }
 
