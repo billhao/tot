@@ -13,6 +13,9 @@
 #define BUTTON_WIDTH           90
 #define BUTTON_HEIGHT          50
 
+#define START_YEAR             2012
+#define END_YEAR               2020
+
 @implementation totTimerController
 
 @synthesize mMode;
@@ -49,6 +52,38 @@
     [super didReceiveMemoryWarning];
     
     // Release any cached data, images, etc that aren't in use.
+}
+
+- (void)setCurrentTime {
+    NSDate *now = [NSDate date];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    
+    // extract hour and minute values
+    NSArray *tokens = [[dateFormatter stringFromDate:now] componentsSeparatedByString:@" "];
+    NSArray *comps1 = [[tokens objectAtIndex:0] componentsSeparatedByString:@"-"];
+    NSArray *comps2 = [[tokens objectAtIndex:1] componentsSeparatedByString:@":"];
+    
+    NSNumberFormatter * f = [[NSNumberFormatter alloc] init];
+    [f setNumberStyle:NSNumberFormatterDecimalStyle];
+    
+    if( mMode == kTime ) {
+        int h = [[f numberFromString:[comps2 objectAtIndex:0]] intValue];
+        int m = [[f numberFromString:[comps2 objectAtIndex:1]] intValue];
+        int ap = 0;
+        if ( h > 11 ) ap = 1;
+        if ( h > 12 ) h = h - 12;
+        else if ( h == 0 ) h = 12;
+        [self setCurrentHour:h andMinute:m andAmPm:ap];
+    } else {
+        int y = [[f numberFromString:[comps1 objectAtIndex:0]] intValue];
+        int m = [[f numberFromString:[comps1 objectAtIndex:1]] intValue];
+        int d = [[f numberFromString:[comps1 objectAtIndex:2]] intValue];
+        [self setCurrentYear:y andMonth:m andDay:d];
+    }
+    
+    [dateFormatter release];
+    [f release];
 }
 
 #pragma mark - UIPickerView delegate
@@ -131,24 +166,30 @@
 
 - (void)setCurrentHour:(int)h andMinute:(int)m andAmPm:(int)ap {
     if( 1 <= h && h <= 12 ) {
+        mCurrentHourIdx = h-1;
         [mTimePicker selectRow:h-1 inComponent:kPickerHour animated:NO];
     }
     if( 0 <= m && m <= 59 ) {
+        mCurrentMinuteIdx = m;
         [mTimePicker selectRow:m inComponent:kPickerMinute animated:NO];
     }
     if( 0 <= ap && ap <= 1 ) {
+        mCurrentAmPm = ap;
         [mTimePicker selectRow:ap inComponent:kPickerAmPm animated:NO];
     }
 }
 
 - (void)setCurrentYear:(int)y andMonth:(int)m andDay:(int)d {
-    if( 2012 <= y && y <= 2020 ) {
-        [mTimePicker selectRow:(y-2010) inComponent:kPickerYear animated:NO];
+    if( START_YEAR <= y && y <= END_YEAR ) {
+        mCurrentYearIdx = (y-START_YEAR);
+        [mTimePicker selectRow:(y-START_YEAR) inComponent:kPickerYear animated:NO];
     }
     if( 1 <= m && m <= 12 ) {
+        mCurrentMonthIdx = m-1;
         [mTimePicker selectRow:(m-1) inComponent:kPickerMonth animated:NO];
     }
     if( 1 <= d && d <= 31 ) {
+        mCurrentDayIdx = d-1;
         [mTimePicker selectRow:(d-1) inComponent:kPickerDay animated:NO];
     }
 }

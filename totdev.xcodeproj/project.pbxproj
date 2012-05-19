@@ -36,6 +36,8 @@
 		EF0D6BEA1555CCD00027F012 /* totTimerController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF0D6BE91555CCD00027F012 /* totTimerController.m */; };
 		EF0D6BEF155631880027F012 /* gesture_salut.png in Resources */ = {isa = PBXBuildFile; fileRef = EF0D6BED155631880027F012 /* gesture_salut.png */; };
 		EF0D6BF0155631880027F012 /* motor_skill_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = EF0D6BEE155631880027F012 /* motor_skill_bg.png */; };
+		EF168A6E156856E500FDFBD6 /* homeDiaperView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF168A6D156856E500FDFBD6 /* homeDiaperView.xib */; };
+		EF168A721568571500FDFBD6 /* totHomeDiaperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF168A711568571500FDFBD6 /* totHomeDiaperViewController.m */; };
 		EF2387EB153B7D1600B9C8BD /* ActivityEntryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF2387EA153B7D1600B9C8BD /* ActivityEntryView.xib */; };
 		EF2387EF153B7D7700B9C8BD /* totActivityEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2387EE153B7D7700B9C8BD /* totActivityEntryViewController.m */; };
 		EF2387F5153BC4C300B9C8BD /* totActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2387F4153BC4C300B9C8BD /* totActivityViewController.m */; };
@@ -172,6 +174,9 @@
 		EF0D6BEC1555EC240027F012 /* totEventName.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totEventName.h; path = totdev/Model/totEventName.h; sourceTree = "<group>"; };
 		EF0D6BED155631880027F012 /* gesture_salut.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = gesture_salut.png; path = Resources/Activity/View/gesture_salut.png; sourceTree = "<group>"; };
 		EF0D6BEE155631880027F012 /* motor_skill_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = motor_skill_bg.png; path = Resources/Activity/View/motor_skill_bg.png; sourceTree = "<group>"; };
+		EF168A6D156856E500FDFBD6 /* homeDiaperView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = homeDiaperView.xib; sourceTree = "<group>"; };
+		EF168A701568571500FDFBD6 /* totHomeDiaperViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totHomeDiaperViewController.h; path = Home/totHomeDiaperViewController.h; sourceTree = "<group>"; };
+		EF168A711568571500FDFBD6 /* totHomeDiaperViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totHomeDiaperViewController.m; path = Home/totHomeDiaperViewController.m; sourceTree = "<group>"; };
 		EF2387EA153B7D1600B9C8BD /* ActivityEntryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActivityEntryView.xib; sourceTree = "<group>"; };
 		EF2387ED153B7D7700B9C8BD /* totActivityEntryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totActivityEntryViewController.h; path = Activity/totActivityEntryViewController.h; sourceTree = "<group>"; };
 		EF2387EE153B7D7700B9C8BD /* totActivityEntryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totActivityEntryViewController.m; path = Activity/totActivityEntryViewController.m; sourceTree = "<group>"; };
@@ -481,6 +486,7 @@
 				EF5FBB5B154E7B8E00CBBA27 /* PhotoView.xib */,
 				1572880215575B31005771DB /* homeFeedingView.xib */,
 				3F454D2C1555A84700AC66EE /* homeHeightViewController.xib */,
+				EF168A6D156856E500FDFBD6 /* homeDiaperView.xib */,
 			);
 			name = resources;
 			sourceTree = "<group>";
@@ -502,6 +508,8 @@
 				3F454D2B1555A84700AC66EE /* totHomeHeightViewController.m */,
 				15414FF71556F99600C3C828 /* totHomeFeedingViewController.h */,
 				15414FF81556F99600C3C828 /* totHomeFeedingViewController.m */,
+				EF168A701568571500FDFBD6 /* totHomeDiaperViewController.h */,
+				EF168A711568571500FDFBD6 /* totHomeDiaperViewController.m */,
 			);
 			name = Home;
 			sourceTree = "<group>";
@@ -772,6 +780,7 @@
 				EFFB60A215584974006C4C80 /* message_cloud.png in Resources */,
 				EFFB60A415584A8B006C4C80 /* done-01.png in Resources */,
 				EFBE580B1565A8FC003433D6 /* Logo.png in Resources */,
+				EF168A6E156856E500FDFBD6 /* homeDiaperView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -813,6 +822,7 @@
 				3F454D321555B1B200AC66EE /* STHorizontalPicker.m in Sources */,
 				EF4CEE5915563E2400109BCC /* totLanguageInputViewController.m in Sources */,
 				15414FF91556F99600C3C828 /* totHomeFeedingViewController.m in Sources */,
+				EF168A721568571500FDFBD6 /* totHomeDiaperViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
