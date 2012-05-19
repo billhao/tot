@@ -9,6 +9,8 @@
 #import "AppDelegate.h"
 #import "totUITabBarController.h"
 
+#import "test_Model.h"
+
 @implementation AppDelegate
 
 @synthesize window = _window;
@@ -42,6 +44,11 @@
     
     // initialize database
     mTotData = [[totModel alloc] init];
+    
+    // general method to test a code snippet, which could be just empty
+    test_Model* test = [[test_Model alloc] init];
+    BOOL re = [test test];
+    if( !re ) return FALSE;
     
     [self.window addSubview:rootController.view];
     

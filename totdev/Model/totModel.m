@@ -123,6 +123,10 @@
 }
 
 - (NSMutableArray *) getEvent :(int)baby_id event:(NSString*)event {
+    return [self getEvent:baby_id event:event limit:-1]; // call the same function with no limit
+}
+
+- (NSMutableArray *) getEvent:(int)baby_id event:(NSString*)event limit:(int) limit {
     NSMutableArray *events = [[[NSMutableArray alloc] init] autorelease];
     sqlite3_stmt *stmt = nil;
     @try {
@@ -130,17 +134,18 @@
             NSLog(@"Can't open db");
             return events;
         }
-
+        
         NSString* searchname = [NSString stringWithFormat:@"%%%@%%", event];
         //NSLog(@"%@", searchname);
-        const char *sql = "SELECT event.event_id, event.time, event.name, event.value FROM event WHERE name LIKE ? ORDER BY event.time DESC";
+        const char *sql = "SELECT event.event_id, event.time, event.name, event.value FROM event WHERE name LIKE ? ORDER BY event.time DESC LIMIT ?";
         if(sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) != SQLITE_OK) {
             NSLog(@"[db] Problem with prepare statement");
             return events;
         }
         int ret = sqlite3_bind_text(stmt, 1, [searchname UTF8String], -1, SQLITE_TRANSIENT);
         NSLog(@"[db] getEvent bind_text %d", ret);
-
+        sqlite3_bind_int(stmt, 2, limit);
+        
         while (sqlite3_step(stmt)==SQLITE_ROW) {
             int i = sqlite3_column_int(stmt, 0);
             NSString *time  = [NSString stringWithUTF8String:(char *) sqlite3_column_text(stmt, 1)];
@@ -153,7 +158,7 @@
             e.baby_id = baby_id;
             e.name = name;
             e.value = value;
-            NSLog(@"%@", time);
+            //NSLog(@"%@", time);
             [e setTimeFromText:time];
             [events addObject:e];
             [e release];
@@ -165,7 +170,7 @@
     @finally {
         if( stmt != nil ) sqlite3_finalize(stmt);
         return events;
-    } 
+    }
 }
 
 - (void) resetDB {

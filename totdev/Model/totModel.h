@@ -24,6 +24,8 @@
 
 // get a list of events that contain the string in name
 - (NSMutableArray *) getEvent:(int)baby_id event:(NSString*)event;
+// return only limited events
+- (NSMutableArray *) getEvent:(int)baby_id event:(NSString*)event limit:(int) limit;
 
 // utility functions below
 

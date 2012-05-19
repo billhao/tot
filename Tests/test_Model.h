@@ -6,5 +6,6 @@
 @interface test_Model : NSObject
 
 -(void) test_Model;
+-(BOOL) test; // for testing any code snippet
 
 @end

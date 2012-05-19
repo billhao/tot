@@ -6,6 +6,7 @@
 //  Copyright (c) 2012 USC. All rights reserved.
 //
 
+#import "AppDelegate.h"
 #import "test_Model.h"
 #import "totModel.h"
 #import "totEvent.h"
@@ -34,4 +35,22 @@
     [model release];
 }
 
+-(BOOL) test {
+    totEvent* e = [[totEvent alloc] init];
+    [e setTimeFromText:@"2011-10-2 5:0:0"];
+    NSLog(@"%@", [e getTimeText]);
+    NSLog(@"%@", [e toString]);
+    
+
+    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    totModel* model = [appDelegate getDataModel];
+    // return from getEvent is an array of totEvent object
+    // a totEvent represents a single event
+    NSMutableArray *events = [model getEvent:0 event:@"emotion" limit:1];
+    for (totEvent* e in events) {
+        NSLog(@"Return from db: %@", [e toString]);        
+    }
+
+    return FALSE;
+}
 @end
