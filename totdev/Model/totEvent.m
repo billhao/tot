@@ -14,7 +14,6 @@
 
 @synthesize event_id;
 @synthesize baby_id;
-@synthesize datetime;
 @synthesize name;
 @synthesize value;
 
@@ -26,7 +25,7 @@
     
     [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
         
-    NSString *formattedDateString = [dateFormatter stringFromDate:self.datetime];
+    NSString *formattedDateString = [dateFormatter stringFromDate:datetime];
     //NSLog(@"formattedDateString: %@", formattedDateString);
     
     [dateFormatter release];

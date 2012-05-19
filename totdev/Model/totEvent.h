@@ -14,7 +14,6 @@
 
 @property (nonatomic) int      event_id;
 @property (nonatomic) int      baby_id;
-@property (nonatomic, retain) NSDate   *datetime;
 @property (nonatomic, retain) NSString *name;
 @property (nonatomic, retain) NSString *value;
 
