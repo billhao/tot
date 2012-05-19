@@ -16,7 +16,7 @@
 
 #import "STHorizontalPicker.h"
 
-const int DISTANCE_BETWEEN_ITEMS = 100;
+const int DISTANCE_BETWEEN_ITEMS = 60;
 const int TEXT_LAYER_WIDTH = 40;
 const int NUMBER_OF_ITEMS = 15;
 const float FONT_SIZE = 16.0f;
@@ -268,6 +268,47 @@ const float POINTER_HEIGHT = 7.0f;
         [self.scrollViewMarkerLayerArray addObject:textLayer];
         [self.scrollViewMarkerContainerView.layer addSublayer:textLayer];
     }
+}
+
+- (void)setupMarkers2 {
+    [self removeAllMarkers];
+    
+    steps = values.count;
+    // Calculate the new size of the content
+    float leftPadding = self.frame.size.width / 2;
+    float rightPadding = leftPadding;
+    float contentWidth = leftPadding + (steps * DISTANCE_BETWEEN_ITEMS) + rightPadding + TEXT_LAYER_WIDTH / 2;
+    self.scrollView.contentSize = CGSizeMake(contentWidth, self.frame.size.height);
+    
+    // Set the size of the marker container view
+    [self.scrollViewMarkerContainerView setFrame:CGRectMake(0.0f, 0.0f, contentWidth, self.frame.size.height)];
+    
+    // Configure the new markers
+    self.scrollViewMarkerLayerArray = [NSMutableArray arrayWithCapacity:steps];
+    int i = 0;
+    for(NSString* str in values) {
+    //for (int i = 0; i < steps; i++) {
+        CATextLayer *textLayer = [CATextLayer layer];
+        textLayer.contentsScale = scale;
+        textLayer.frame = CGRectIntegral(CGRectMake(leftPadding + i*DISTANCE_BETWEEN_ITEMS, self.frame.size.height / 2 - fontSize / 2 + 1, TEXT_LAYER_WIDTH, 40));
+        textLayer.foregroundColor = [UIColor blackColor].CGColor;
+        textLayer.alignmentMode = kCAAlignmentCenter;
+        textLayer.fontSize = fontSize;
+        
+        textLayer.string = str;
+        [self.scrollViewMarkerLayerArray addObject:textLayer];
+        [self.scrollViewMarkerContainerView.layer addSublayer:textLayer];
+        i++;
+    }
+}
+
+- (NSMutableArray*)values {
+    return values;
+}
+
+- (void)setValues:(NSMutableArray *)newValues {
+    values = newValues;
+    [self setupMarkers2];
 }
 
 - (CGFloat)minimumValue {

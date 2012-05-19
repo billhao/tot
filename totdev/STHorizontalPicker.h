@@ -58,9 +58,12 @@
 // STHorizontalPicker interface
 //================================
 @interface STHorizontalPicker : UIView <UIScrollViewDelegate> {
+    NSMutableArray* values;
+    
     CGFloat value;
     
     NSUInteger steps;
+    
     CGFloat minimumValue;
     CGFloat maximumValue;
     
@@ -79,6 +82,9 @@
 
 @property (nonatomic, retain) NSString *name;
 @property (nonatomic, assign) CGFloat currentValue;
+
+- (NSMutableArray*)values;
+- (void)setValues:(NSMutableArray *)newValues;
 
 - (void)snapToMarkerAnimated:(BOOL)animated;
 
