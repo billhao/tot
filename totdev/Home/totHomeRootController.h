@@ -12,17 +12,20 @@
 @class totHomeEntryViewController;
 @class totHomeFeedingViewController;
 @class totHomeHeightViewController;
+@class totHomeDiaperViewController;
 
 enum {
     kHomeViewEntryView = 0,
     kHomeViewFeedView = 1,
-    kHomeViewHeightView = 2
+    kHomeViewHeightView = 2,
+    kHomeViewDiaperView = 3
 };
 
 @interface totHomeRootController : UIViewController {
     totHomeEntryViewController *homeEntryViewController;
     totHomeFeedingViewController *homeFeedingViewController;
     totHomeHeightViewController *homeHeightViewController;
+    totHomeDiaperViewController *homeDiaperViewController;
     
     int mCurrentViewIndex;
 }
@@ -30,6 +33,7 @@ enum {
 @property (nonatomic, retain) totHomeEntryViewController *homeEntryViewController;
 @property (nonatomic, retain) totHomeFeedingViewController *homeFeedingViewController;
 @property (nonatomic, retain) totHomeHeightViewController *homeHeightViewController;
+@property (nonatomic, retain) totHomeDiaperViewController *homeDiaperViewController;
 
 - (void) switchTo:(int)viewIndex withContextInfo:(NSMutableDictionary*)info;
 

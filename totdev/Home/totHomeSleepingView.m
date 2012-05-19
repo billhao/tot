@@ -92,9 +92,17 @@ static NSString *justSleepString = @"Just slept :)";
         if( [evt.value isEqualToString:@"start"] ) {
             mIsSleeping = YES;
             
+            NSString *t_str = [evt getTimeText];
+            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+            [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+            
+            NSDate *t = [dateFormatter dateFromString:t_str];
+            NSDate *now = [NSDate date];
+            NSTimeInterval t1 = [now timeIntervalSince1970];
+            NSTimeInterval t2 = [t timeIntervalSince1970];
+            
             // find the interval
-            NSTimeInterval lastDiff = [evt.datetime timeIntervalSinceNow];
-            gInterval = -(int)lastDiff;
+            gInterval = (t1-t2)/60;
             
             // start the timer
             mSleepTimer = [NSTimer scheduledTimerWithTimeInterval:60 
@@ -103,6 +111,8 @@ static NSString *justSleepString = @"Just slept :)";
                                                          userInfo:nil 
                                                           repeats:YES];
             [self makeDisplayLabelView];
+            
+            [dateFormatter release];
         }
     }
 }
@@ -239,10 +249,12 @@ static NSString *justSleepString = @"Just slept :)";
     if ( h > 11 ) _ap = 1;
     if ( h > 12 ) h = h - 12;
     else if ( h == 0 ) h = 12;
+    
     [mClock setCurrentHour:h
                  andMinute:_minute
                    andAmPm:_ap];
     
+    //[mClock setCurrentTime];
     [self showTimePicker];
 }
 
@@ -323,7 +335,7 @@ static NSString *justSleepString = @"Just slept :)";
 -(void)saveCurrentTime:(NSString*)time {
     [self hideTimePicker];
     
-    _hour = mClock.mCurrentHourIdx;
+    _hour = mClock.mCurrentHourIdx+1;
     _minute = mClock.mCurrentMinuteIdx;
     _ap = mClock.mCurrentAmPm;
     if ( _ap == 1 && _hour != 12 )

@@ -64,6 +64,8 @@ enum {
 @property (nonatomic, assign) int mHeight;
 @property (nonatomic, retain) id<totTimerControllerDelegate> delegate;
 
+- (void)setCurrentTime;
+
 // set the current time
 // h: 1-12
 // m: 0-59
