@@ -11,7 +11,7 @@
 		15414FF91556F99600C3C828 /* totHomeFeedingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15414FF81556F99600C3C828 /* totHomeFeedingViewController.m */; };
 		1572880315575B31005771DB /* homeFeedingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1572880215575B31005771DB /* homeFeedingView.xib */; };
 		3F454D2D1555A84700AC66EE /* totHomeHeightViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F454D2B1555A84700AC66EE /* totHomeHeightViewController.m */; };
-		3F454D2E1555A84700AC66EE /* totHomeHeightViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F454D2C1555A84700AC66EE /* totHomeHeightViewController.xib */; };
+		3F454D2E1555A84700AC66EE /* homeHeightViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F454D2C1555A84700AC66EE /* homeHeightViewController.xib */; };
 		3F454D321555B1B200AC66EE /* STHorizontalPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F454D311555B1B200AC66EE /* STHorizontalPicker.m */; };
 		3FC1B6FC1543680300295447 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FC1B6FB1543680300295447 /* libsqlite3.dylib */; };
 		3FC1B7001543689500295447 /* totdb.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 3FC1B6FF1543689500295447 /* totdb.sqlite */; };
@@ -136,7 +136,7 @@
 		1572880215575B31005771DB /* homeFeedingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = homeFeedingView.xib; sourceTree = "<group>"; };
 		3F454D2A1555A84700AC66EE /* totHomeHeightViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totHomeHeightViewController.h; path = Home/totHomeHeightViewController.h; sourceTree = "<group>"; };
 		3F454D2B1555A84700AC66EE /* totHomeHeightViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totHomeHeightViewController.m; path = Home/totHomeHeightViewController.m; sourceTree = "<group>"; };
-		3F454D2C1555A84700AC66EE /* totHomeHeightViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = totHomeHeightViewController.xib; path = Home/totHomeHeightViewController.xib; sourceTree = "<group>"; };
+		3F454D2C1555A84700AC66EE /* homeHeightViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = homeHeightViewController.xib; path = totdev/Home/homeHeightViewController.xib; sourceTree = "<group>"; };
 		3F454D301555B1B200AC66EE /* STHorizontalPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STHorizontalPicker.h; sourceTree = "<group>"; };
 		3F454D311555B1B200AC66EE /* STHorizontalPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STHorizontalPicker.m; sourceTree = "<group>"; };
 		3FC1B6FB1543680300295447 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
@@ -480,6 +480,7 @@
 				EF238802153BC6EB00B9C8BD /* ActivityAlbumView.xib */,
 				EF5FBB5B154E7B8E00CBBA27 /* PhotoView.xib */,
 				1572880215575B31005771DB /* homeFeedingView.xib */,
+				3F454D2C1555A84700AC66EE /* homeHeightViewController.xib */,
 			);
 			name = resources;
 			sourceTree = "<group>";
@@ -499,7 +500,6 @@
 				EF0D6BE91555CCD00027F012 /* totTimerController.m */,
 				3F454D2A1555A84700AC66EE /* totHomeHeightViewController.h */,
 				3F454D2B1555A84700AC66EE /* totHomeHeightViewController.m */,
-				3F454D2C1555A84700AC66EE /* totHomeHeightViewController.xib */,
 				15414FF71556F99600C3C828 /* totHomeFeedingViewController.h */,
 				15414FF81556F99600C3C828 /* totHomeFeedingViewController.m */,
 			);
@@ -761,7 +761,7 @@
 				EF0D6BE41555AE930027F012 /* sleep.png in Resources */,
 				EF0D6BE51555AE930027F012 /* weight.png in Resources */,
 				EF0D6BE71555B36B0027F012 /* clock.png in Resources */,
-				3F454D2E1555A84700AC66EE /* totHomeHeightViewController.xib in Resources */,
+				3F454D2E1555A84700AC66EE /* homeHeightViewController.xib in Resources */,
 				EF0D6BEF155631880027F012 /* gesture_salut.png in Resources */,
 				EF0D6BF0155631880027F012 /* motor_skill_bg.png in Resources */,
 				1572880315575B31005771DB /* homeFeedingView.xib in Resources */,
