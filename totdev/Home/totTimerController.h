@@ -64,6 +64,8 @@ enum {
 @property (nonatomic, assign) int mHeight;
 @property (nonatomic, retain) id<totTimerControllerDelegate> delegate;
 
+- (void)setCurrentTime;
+
 // set the current time
 // h: 1-12
 // m: 0-59
@@ -72,5 +74,8 @@ enum {
 - (void)setCurrentYear:(int)y andMonth:(int)m andDay:(int)d;
 
 - (void)setMode: (int)m;
+
+// return "May" from 5
++ (NSString*)getMonthString:(int)month;
 
 @end

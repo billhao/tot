@@ -53,36 +53,45 @@
     // height scroll bar
     picker_height = [[STHorizontalPicker alloc] initWithFrame:mHeightPlaceHolder.frame];
     picker_height.name = @"picker_height";
-    [picker_height setMinimumValue:0.0];
-    [picker_height setMaximumValue:6.0];
-    [picker_height setSteps:60];
+//    NSMutableArray* heights = [NSMutableArray arrayWithObjects:
+//                                                             @"1'4\"", @"1'5\"", @"1'6\"", @"1'7\"", @"1'8\"", @"1'9\"", @"1'10\"", @"1'11\"",
+//                               @"2'1\"", @"2'2\"", @"2'3\"", @"2'4\"", @"2'5\"", @"2'6\"", @"2'7\"", @"2'8\"", @"2'9\"", @"2'10\"", @"2'11\"",
+//                               @"3'1\"", @"3'2\"", @"3'3\"", @"3'4\"", @"3'5\"", @"3'6\"", @"3'7\"", @"3'8\"", @"3'9\"", @"3'10\"", @"3'11\"",
+//                               @"4'1\"", @"4'2\"", @"4'3\"", @"4'4\"", @"4'5\"", @"4'6\"", @"4'7\"", @"4'8\"", @"4'9\"", @"4'10\"", @"4'11\"",
+//                               nil];
+//    [picker_height setValues:heights];
+    [picker_height setMinimumValue:16.0];
+    [picker_height setMaximumValue:80.0];
+    [picker_height setSteps:640];
+    [picker_height setValue:16.0];
     [picker_height setDelegate:self];
-    [picker_height setValue:2.3];
     [self.view addSubview:picker_height];
     [picker_height release];
     
     // weight scroll bar
     picker_weight = [[STHorizontalPicker alloc] initWithFrame:mWeightPlaceHolder.frame];
     picker_weight.name = @"picker_weight";
-    [picker_weight setMinimumValue:0.0];
-    [picker_weight setMaximumValue:6.0];
-    [picker_weight setSteps:60];
+    [picker_weight setMinimumValue:4.0];
+    [picker_weight setMaximumValue:40.0];
+    [picker_weight setSteps:360];
     [picker_weight setDelegate:self];
-    [picker_weight setValue:2.3];
+    [picker_weight setValue:4.0];
     [self.view addSubview:picker_weight];
     [picker_weight release];
     
     // head circumference scroll bar
     picker_head = [[STHorizontalPicker alloc] initWithFrame:mHeadPlaceHolder.frame];
     picker_head.name = @"picker_head";
-    [picker_head setMinimumValue:0.0];
-    [picker_head setMaximumValue:6.0];
-    [picker_head setSteps:60];
+    [picker_head setMinimumValue:10.0];
+    [picker_head setMaximumValue:24.0];
+    [picker_head setSteps:140];
     [picker_head setDelegate:self];
-    [picker_head setValue:2.3];
+    [picker_head setValue:10.0];
     [self.view addSubview:picker_head];
     [picker_head release];
 
+    [mDatetime setTitle:[self getCurrentDate] forState:UIControlStateNormal];
+    
     // set up events
     [mOKButton addTarget:self action:@selector(OKButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [mDatetime addTarget:self action:@selector(DatetimeClicked:) forControlEvents:UIControlEventTouchUpInside];
@@ -107,6 +116,13 @@
     [mNavigationBar setBackgroundColor:[UIColor whiteColor]];
     [mNavigationBar setDelegate:self];
     [self.view addSubview:mNavigationBar];
+}
+
+- (NSString*)getCurrentDate {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
+    [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+    return [dateFormatter stringFromDate:[NSDate date]];
 }
 
 - (void)pickerView:(STHorizontalPicker *)picker didSelectValue:(CGFloat)value{
@@ -178,6 +194,7 @@
 	[UIView setAnimationDuration:0.5f];
     mClock.view.frame = CGRectMake((mWidth-mClock.mWidth)/2, mHeight-mClock.mHeight-45, mClock.mWidth, mClock.mHeight);
     [UIView commitAnimations];
+    [mClock setCurrentTime];
 }
 
 - (void)hideTimePicker {

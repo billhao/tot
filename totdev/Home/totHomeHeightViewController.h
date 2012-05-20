@@ -50,4 +50,6 @@
 - (void)showTimePicker;
 - (void)hideTimePicker;
 
+- (NSString*)getCurrentDate;
+
 @end
