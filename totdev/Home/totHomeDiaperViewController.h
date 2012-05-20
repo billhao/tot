@@ -8,9 +8,16 @@
 
 #import <UIKit/UIKit.h>
 #import "totHomeRootController.h"
+#import "totTimerController.h"
+#import "../Utility/totNavigationBar.h"
 
-@interface totHomeDiaperViewController : UIViewController {
+@interface totHomeDiaperViewController : UIViewController <totNavigationBarDelegate, totTimerControllerDelegate> {
     totHomeRootController *mHomeRootController;
+    totNavigationBar *mNavigationBar;
+    totTimerController *mClock;
+
+    UILabel *wetDiaper, *solidDiaper, *wetSolidDiaper;
+    UILabel *currentTimeLabel;
 }
 
 @property (nonatomic, assign) totHomeRootController *mHomeRootController;

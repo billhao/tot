@@ -15,6 +15,7 @@ static NSString *EVENT_BASIC_WEIGHT     = @"basic/weight";
 static NSString *EVENT_BASIC_HEAD       = @"basic/head";
 static NSString *EVENT_BASIC_SLEEP      = @"basic/sleep";
 static NSString *EVENT_BASIC_LANGUAGE   = @"basic/language";
+static NSString *EVENT_BASIC_DIAPER     = @"basic/diaper";
 
 // feeding
 static NSString *EVENT_FEEDING_MILK     = @"feeding/milk";

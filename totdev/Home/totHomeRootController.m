@@ -96,6 +96,8 @@
             return homeFeedingViewController;
         case kHomeViewHeightView:
             return homeHeightViewController;
+        case kHomeViewDiaperView:
+            return homeDiaperViewController;
         default:
             printf("Invalid view index\n");
             return nil;
@@ -110,6 +112,8 @@
             return homeFeedingViewController.view.frame.origin.x;
         case kHomeViewHeightView:
             return homeHeightViewController.view.frame.origin.x;
+        case kHomeViewDiaperView:
+            return homeDiaperViewController.view.frame.origin.x;
         default:
             printf("Invalid view index\n");
             return -1;
@@ -131,6 +135,8 @@
         case kHomeViewFeedView:
             break;
         case kHomeViewHeightView:
+            break;
+        case kHomeViewDiaperView:
             break;
         default:
             break;
