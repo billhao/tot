@@ -90,6 +90,8 @@
     [self.view addSubview:picker_head];
     [picker_head release];
 
+    [mDatetime setTitle:[self getCurrentDate] forState:UIControlStateNormal];
+    
     // set up events
     [mOKButton addTarget:self action:@selector(OKButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [mDatetime addTarget:self action:@selector(DatetimeClicked:) forControlEvents:UIControlEventTouchUpInside];
@@ -114,6 +116,13 @@
     [mNavigationBar setBackgroundColor:[UIColor whiteColor]];
     [mNavigationBar setDelegate:self];
     [self.view addSubview:mNavigationBar];
+}
+
+- (NSString*)getCurrentDate {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
+    [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+    return [dateFormatter stringFromDate:[NSDate date]];
 }
 
 - (void)pickerView:(STHorizontalPicker *)picker didSelectValue:(CGFloat)value{
@@ -185,6 +194,7 @@
 	[UIView setAnimationDuration:0.5f];
     mClock.view.frame = CGRectMake((mWidth-mClock.mWidth)/2, mHeight-mClock.mHeight-45, mClock.mWidth, mClock.mHeight);
     [UIView commitAnimations];
+    [mClock setCurrentTime];
 }
 
 - (void)hideTimePicker {

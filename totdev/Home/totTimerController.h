@@ -75,4 +75,7 @@ enum {
 
 - (void)setMode: (int)m;
 
+// return "May" from 5
++ (NSString*)getMonthString:(int)month;
+
 @end

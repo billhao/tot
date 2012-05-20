@@ -206,10 +206,11 @@
                         [[mMinute objectAtIndex:mCurrentMinuteIdx] UTF8String],
                         [[mAmPm objectAtIndex:mCurrentAmPm] UTF8String]];
             } else {
-                time = [[NSString alloc] initWithFormat:@"%s-%s-%s",
-                        [[mYear objectAtIndex:mCurrentYearIdx] UTF8String],
-                        [[mMonth objectAtIndex:mCurrentMonthIdx] UTF8String],
-                        [[mDay objectAtIndex:mCurrentDayIdx] UTF8String]];
+                int m = [[mMonth objectAtIndex:mCurrentMonthIdx] intValue];
+                time = [[NSString alloc] initWithFormat:@"%s %s, %s",
+                        [[totTimerController getMonthString:m] UTF8String],
+                        [[mDay objectAtIndex:mCurrentDayIdx] UTF8String],
+                        [[mYear objectAtIndex:mCurrentYearIdx] UTF8String]];
             }
             
             [delegate saveCurrentTime:time];
@@ -220,6 +221,48 @@
             [delegate cancelCurrentTime];
         }
     }
+}
+
++ (NSString*)getMonthString:(int)month {
+    switch (month) {
+        case 1:
+            return @"Jan";
+            break;
+        case 2:
+            return @"Feb";
+            break;
+        case 3:
+            return @"Mar";
+            break;
+        case 4:
+            return @"Apr";
+            break;
+        case 5:
+            return @"May";
+            break;
+        case 6:
+            return @"Jun";
+            break;
+        case 7:
+            return @"Jul";
+            break;
+        case 8:
+            return @"Aug";
+            break;
+        case 9:
+            return @"Sep";
+            break;
+        case 10:
+            return @"Oct";
+            break;
+        case 11:
+            return @"Nov";
+            break;
+        case 12:
+            return @"Dec";
+            break;
+    }
+    return @"";
 }
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
