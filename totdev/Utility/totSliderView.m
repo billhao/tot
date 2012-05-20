@@ -77,17 +77,47 @@
         [isIconArray release];
     isIconArray  = [[NSMutableArray alloc] init];
     
+    if( labelArray )
+        [labelArray release];
+    labelArray = [[NSMutableArray alloc] init]; //containing UILabel
+    
+    if( buttonArray )
+        [buttonArray release];
+    buttonArray = [[NSMutableArray alloc] init];
+    
     for( int i = 0; i < [contentArray count]; i++ ) {
         [marginArray addObject:[NSNumber numberWithBool:NO]];
         [isIconArray addObject:[NSNumber numberWithBool:YES]];
+        
     }
     
-}  
+}
 
 - (void)setMarginArray:(NSArray *)margins {
     if( marginArray )
         [marginArray release];
     marginArray = [[NSMutableArray alloc] initWithArray:margins];
+}
+
+- (void)setButton:(int)idx andWithValue:(float)value{
+    //add new view on button
+    
+    //deside label position
+    NSString *value_string = [NSString stringWithFormat:@"%.1f %@", value,@"oz" ];
+    
+    ((UILabel*)[labelArray objectAtIndex:idx]).text = value_string;
+}
+
+- (void)clearButtonLabels{
+    for(int i=0; i<[labelArray count]; i++){
+        ((UILabel*)[labelArray objectAtIndex:i]).text = @"";
+    }
+}
+
+- (void)clearButtonBGColor{
+    for(int i=0; i<[contentArray count]; i++){
+        ((UIButton*)[buttonArray objectAtIndex:i]).backgroundColor = [UIColor clearColor];
+    }
 }
 
 - (void)setIsIconArray:(NSArray*)isIcon {
@@ -134,7 +164,7 @@
     scrollView.pagingEnabled = YES;  
     scrollView.showsHorizontalScrollIndicator = NO;
 
-    //load button here:
+    //load button here: //plus blank label here
     for (int i = 0; i < totalPageNumbers; i++) {
         UIView *subview = [[UIView alloc] initWithFrame:CGRectMake(i*scrollWidth, 5, scrollWidth, scrollHeight)];
         
@@ -160,6 +190,9 @@
                 [imageButton addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
                 [imageButton setTag:i*numOfRows*3+j+1];
                 [subview addSubview:(UIView *)imageButton];
+                
+                [buttonArray addObject:imageButton];
+                
                 [imageButton release];
             } else {
                 UIImageView *bckground = [[UIImageView alloc] initWithFrame:CGRectMake(xPos, yPos, BUTTON_WIDTH, BUTTON_HEIGHT)];
@@ -182,6 +215,26 @@
                 [subview addSubview:margin];
                 [margin release];
             }
+            
+            //add blank label
+            UILabel *myLabel = [[UILabel alloc] initWithFrame:CGRectMake(xPos, yPos, BUTTON_WIDTH, BUTTON_HEIGHT)];
+            
+            myLabel.backgroundColor = [UIColor clearColor]; // [UIColor brownColor];
+            myLabel.font = [UIFont fontWithName:@"Arial" size: 14.0];
+            
+            myLabel.shadowColor = [UIColor yellowColor];
+            myLabel.shadowOffset = CGSizeMake(1,1);
+            myLabel.textColor = [UIColor blueColor];
+            
+            myLabel.textAlignment = UITextAlignmentCenter; 
+            myLabel.text = @"";//init blank
+            
+            myLabel.userInteractionEnabled = NO;//user can point through
+            
+            [subview addSubview:myLabel];
+            [labelArray addObject:myLabel];
+            
+            [myLabel release];
         }
         
         [scrollView addSubview:subview];
@@ -245,7 +298,9 @@
     [isIconArray release];
     [pageControl release];
     [scrollView release];
-
+    [labelArray release];
+    [buttonArray release];
+     
     [super dealloc];  
 }  
 

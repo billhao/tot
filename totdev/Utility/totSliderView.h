@@ -26,6 +26,8 @@
     NSMutableArray *contentArray; 
     NSMutableArray *marginArray;
     NSMutableArray *isIconArray;
+    NSMutableArray *labelArray;
+    NSMutableArray *buttonArray;
     
     BOOL pageControlEnabledTop;  
     BOOL pageControlEnabledBottom;  
@@ -61,6 +63,15 @@
 
 /// set background color for your UIScrollView
 - (void)setBackGroundColor:(UIColor *)color;  
+
+/// set a value of a button
+- (void)setButton:(int)idx andWithValue:(float)value;
+
+/// clear all labels on all buttons
+- (void)clearButtonLabels;
+
+/// clear all background clear on buttons
+- (void)clearButtonBGColor;
 
 /// display page control for the scroll view on the top of the view (inset)  
 - (void)enablePageControlOnTop;  

@@ -12,6 +12,8 @@
 #import "totEvent.h"
 #import "../Utility/totUtility.h"
 
+#define DEFAULT_QUANTITY 2.3 //magic number
+
 @implementation totHomeFeedingViewController
 
 @synthesize homeRootController;
@@ -44,6 +46,17 @@
 
 - (void)pickerView:(STHorizontalPicker *)picker didSelectValue:(CGFloat)value {
     NSLog(@"didSelectValue %f", value);
+    // change the associate number on buttons
+    
+    //testing
+    //NSString *temp =[[NSString alloc] initWithFormat:@"%.1f", picker_quantity.currentValue];
+    //[mOKButton setTitle:temp forState:UIControlStateNormal];
+    //[temp release];
+    
+    //need to expose an API in 
+    [mSliderView setButton:buttonSelected andWithValue:picker_quantity.currentValue];
+
+    
 }
 
 #pragma mark - View lifecycle
@@ -60,11 +73,15 @@
     int tag = [btn tag];
     tag = tag - 1;
     
+    picker_quantity.hidden = NO;
+    [picker_quantity setValue:DEFAULT_QUANTITY];
     
-    
-    //need to expose an API in 
-    
-    
+    buttonSelected = tag;
+        
+    //reset all button bacground color;
+    [mSliderView clearButtonBGColor];
+    ((UIButton *)sender).backgroundColor = [UIColor redColor];
+
 }
 
 - (void) navLeftButtonPressed:(id)sender{
@@ -76,6 +93,8 @@
     //xxxxxxxxxx
     
 }
+
+
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
@@ -105,12 +124,14 @@
 
     [self.view addSubview:mSliderView];
     
+    buttonSelected = 0;
+    
     //create title navigation bar
     //navigationBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
     //[self.view addSubview:navigationBar];
     mNavigationBar= [[totNavigationBar alloc] initWithFrame:CGRectMake(0, 0, 320, 40)];
     [mNavigationBar setLeftButtonTitle:@"Back"];
-    [mNavigationBar setNavigationBarTitle:@"Feeding" andColor:[UIColor blackColor]];
+    [mNavigationBar setNavigationBarTitle:@"Feeding" andColor:[UIColor darkGrayColor]];
     [mNavigationBar setBackgroundColor:[UIColor yellowColor]];
     [mNavigationBar setDelegate:self];
     [self.view addSubview:mNavigationBar];
@@ -122,7 +143,10 @@
     [picker_quantity setMaximumValue:6.0];
     [picker_quantity setSteps:60];
     [picker_quantity setDelegate:self];
-    [picker_quantity setValue:2.3];
+    [picker_quantity setValue:DEFAULT_QUANTITY];
+    //diable picker quantity
+    picker_quantity.hidden =YES;
+    
     [self.view addSubview:picker_quantity];
     
     //create ok button
@@ -264,9 +288,19 @@
     //[mSummary removeFromSuperview];
     [mSummary setHidden:YES];
     //reset time
-    //reset quantity on button
-    //reset picker 
+    [mDatetime setTitle:[totUtility nowTimeString] forState:UIControlStateNormal];
+
+    //reset time picker
     
+    
+    //reset quantity on picker
+    [picker_quantity setValue:DEFAULT_QUANTITY];
+    picker_quantity.hidden = YES;
+    
+    //reset quantiy on buttons
+    [mSliderView clearButtonLabels];
+    [mSliderView clearButtonBGColor];
+
 }
 
 

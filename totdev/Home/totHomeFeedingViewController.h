@@ -37,6 +37,8 @@
     // for date picker
     totTimerController *mClock;
     int mWidth, mHeight;
+    
+    int buttonSelected;
 
 
 }
