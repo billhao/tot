@@ -56,7 +56,7 @@
     //need to expose an API in 
     [mSliderView setButton:buttonSelected andWithValue:picker_quantity.currentValue];
 
-    
+    quantityList[buttonSelected] =picker_quantity.currentValue;    
 }
 
 #pragma mark - View lifecycle
@@ -165,6 +165,8 @@
     mSummary = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     mSummary.frame = CGRectMake(50, 80, 220, 311);
     [mSummary setHidden:YES];
+    mSummary.titleLabel.lineBreakMode=UILineBreakModeWordWrap;
+    //mSummary.titleLabel.frame= mSummary.bounds;
     [self.view addSubview:mSummary];  
 
     
@@ -182,7 +184,13 @@
     mClock.view.frame = CGRectMake((mWidth-mClock.mWidth)/2, 480, mClock.mWidth, mClock.mHeight);
     [mClock setMode:kTime];
     [mClock setDelegate:self];
+    [mClock setCurrentTime];
     [self.view addSubview:mClock.view];
+    
+    for (int i=0; i<DEFAULT_MENU ; i++) {
+        quantityList[i]=0;    
+    }
+
 
 }
 
@@ -191,13 +199,27 @@
     NSLog(@"%@", @"[feeding] ok button clicked");
     int baby_id = 0;
     NSDate* date = [NSDate date];
-    NSString* quantity = [[NSString alloc] initWithFormat:@"%.1f", picker_quantity.currentValue];
+    
+    NSString* summary = [NSString stringWithFormat:@"**%@", mDatetime.titleLabel.text ];
+    NSLog(@"%@", summary);
+
+
+    for(int i=0;i<DEFAULT_MENU;i++){
+        if(quantityList[i]>0){
+            NSString* temp = [NSString stringWithFormat:@"%@-%d:\t%.1f %@", @"food",i, quantityList[i],@"oz" ];
+            
+            summary = [NSString stringWithFormat:@"%@\n%@",summary,temp ];
+            
+            NSString* quantity = [NSString stringWithFormat:@"%.1f", picker_quantity];
+            
+            // food list needs renew
+            [mTotModel addEvent:baby_id event:EVENT_FEEDING_MILK datetime:date value:quantity];
+            NSLog(@"%@",summary);
+        }
+        
+    }
     
     
-    [mTotModel addEvent:baby_id event:EVENT_FEEDING_MILK datetime:date value:quantity];
-    
-    NSString* summary = [NSString stringWithFormat:@"%@\n%@ %@%@", mDatetime.titleLabel.text, @"Milk", quantity,@"oz" ];
-   
     [mSummary setTitle:summary forState:UIControlStateNormal];
     [self.view bringSubviewToFront:mSummary];
     [mSummary setHidden:false];
@@ -213,7 +235,6 @@
     [event release];
     
     
-    [quantity release];
 }
 
 -(void)SummaryButtonClicked:(UIButton *)button{
@@ -291,7 +312,7 @@
     [mDatetime setTitle:[totUtility nowTimeString] forState:UIControlStateNormal];
 
     //reset time picker
-    
+    [mClock setCurrentTime];
     
     //reset quantity on picker
     [picker_quantity setValue:DEFAULT_QUANTITY];
@@ -300,6 +321,11 @@
     //reset quantiy on buttons
     [mSliderView clearButtonLabels];
     [mSliderView clearButtonBGColor];
+    
+    //clear quantityList
+    for(int i=0;i<DEFAULT_MENU;i++){
+        quantityList[i]=0;
+    }
 
 }
 
