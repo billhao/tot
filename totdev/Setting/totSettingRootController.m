@@ -36,17 +36,21 @@
 }
 */
 
-/*
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+ // customize the tab bar item
+ [[self tabBarItem] setFinishedSelectedImage:[UIImage imageNamed:@"setting_selected"] withFinishedUnselectedImage:[UIImage imageNamed:@"setting"]];
+ [[self tabBarItem] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor grayColor], UITextAttributeTextColor, nil] forState:UIControlStateSelected];
+ 
 }
-*/
 
 - (void)viewDidUnload
 {
     [super viewDidUnload];
+    
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }
