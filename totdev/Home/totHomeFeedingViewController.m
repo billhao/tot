@@ -12,6 +12,8 @@
 #import "totEvent.h"
 #import "../Utility/totUtility.h"
 
+#define DEFAULT_QUANTITY 2.3 //magic number
+
 @implementation totHomeFeedingViewController
 
 @synthesize homeRootController;
@@ -44,6 +46,17 @@
 
 - (void)pickerView:(STHorizontalPicker *)picker didSelectValue:(CGFloat)value {
     NSLog(@"didSelectValue %f", value);
+    // change the associate number on buttons
+    
+    //testing
+    //NSString *temp =[[NSString alloc] initWithFormat:@"%.1f", picker_quantity.currentValue];
+    //[mOKButton setTitle:temp forState:UIControlStateNormal];
+    //[temp release];
+    
+    //need to expose an API in 
+    [mSliderView setButton:buttonSelected andWithValue:picker_quantity.currentValue];
+
+    quantityList[buttonSelected] =picker_quantity.currentValue;    
 }
 
 #pragma mark - View lifecycle
@@ -60,11 +73,15 @@
     int tag = [btn tag];
     tag = tag - 1;
     
+    picker_quantity.hidden = NO;
+    [picker_quantity setValue:DEFAULT_QUANTITY];
     
-    
-    //need to expose an API in 
-    
-    
+    buttonSelected = tag;
+        
+    //reset all button bacground color;
+    [mSliderView clearButtonBGColor];
+    ((UIButton *)sender).backgroundColor = [UIColor redColor];
+
 }
 
 - (void) navLeftButtonPressed:(id)sender{
@@ -76,6 +93,8 @@
     //xxxxxxxxxx
     
 }
+
+
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
@@ -105,12 +124,14 @@
 
     [self.view addSubview:mSliderView];
     
+    buttonSelected = 0;
+    
     //create title navigation bar
     //navigationBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
     //[self.view addSubview:navigationBar];
     mNavigationBar= [[totNavigationBar alloc] initWithFrame:CGRectMake(0, 0, 320, 40)];
     [mNavigationBar setLeftButtonTitle:@"Back"];
-    [mNavigationBar setNavigationBarTitle:@"Feeding" andColor:[UIColor blackColor]];
+    [mNavigationBar setNavigationBarTitle:@"Feeding" andColor:[UIColor darkGrayColor]];
     [mNavigationBar setBackgroundColor:[UIColor yellowColor]];
     [mNavigationBar setDelegate:self];
     [self.view addSubview:mNavigationBar];
@@ -122,7 +143,10 @@
     [picker_quantity setMaximumValue:6.0];
     [picker_quantity setSteps:60];
     [picker_quantity setDelegate:self];
-    [picker_quantity setValue:2.3];
+    [picker_quantity setValue:DEFAULT_QUANTITY];
+    //diable picker quantity
+    picker_quantity.hidden =YES;
+    
     [self.view addSubview:picker_quantity];
     
     //create ok button
@@ -141,6 +165,8 @@
     mSummary = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     mSummary.frame = CGRectMake(50, 80, 220, 311);
     [mSummary setHidden:YES];
+    mSummary.titleLabel.lineBreakMode=UILineBreakModeWordWrap;
+    //mSummary.titleLabel.frame= mSummary.bounds;
     [self.view addSubview:mSummary];  
 
     
@@ -158,7 +184,13 @@
     mClock.view.frame = CGRectMake((mWidth-mClock.mWidth)/2, 480, mClock.mWidth, mClock.mHeight);
     [mClock setMode:kTime];
     [mClock setDelegate:self];
+    [mClock setCurrentTime];
     [self.view addSubview:mClock.view];
+    
+    for (int i=0; i<DEFAULT_MENU ; i++) {
+        quantityList[i]=0;    
+    }
+
 
 }
 
@@ -167,13 +199,27 @@
     NSLog(@"%@", @"[feeding] ok button clicked");
     int baby_id = 0;
     NSDate* date = [NSDate date];
-    NSString* quantity = [[NSString alloc] initWithFormat:@"%.1f", picker_quantity.currentValue];
+    
+    NSString* summary = [NSString stringWithFormat:@"**%@", mDatetime.titleLabel.text ];
+    NSLog(@"%@", summary);
+
+
+    for(int i=0;i<DEFAULT_MENU;i++){
+        if(quantityList[i]>0){
+            NSString* temp = [NSString stringWithFormat:@"%@-%d:\t%.1f %@", @"food",i, quantityList[i],@"oz" ];
+            
+            summary = [NSString stringWithFormat:@"%@\n%@",summary,temp ];
+            
+            NSString* quantity = [NSString stringWithFormat:@"%.1f", picker_quantity];
+            
+            // food list needs renew
+            [mTotModel addEvent:baby_id event:EVENT_FEEDING_MILK datetime:date value:quantity];
+            NSLog(@"%@",summary);
+        }
+        
+    }
     
     
-    [mTotModel addEvent:baby_id event:EVENT_FEEDING_MILK datetime:date value:quantity];
-    
-    NSString* summary = [NSString stringWithFormat:@"%@\n%@ %@%@", mDatetime.titleLabel.text, @"Milk", quantity,@"oz" ];
-   
     [mSummary setTitle:summary forState:UIControlStateNormal];
     [self.view bringSubviewToFront:mSummary];
     [mSummary setHidden:false];
@@ -189,7 +235,6 @@
     [event release];
     
     
-    [quantity release];
 }
 
 -(void)SummaryButtonClicked:(UIButton *)button{
@@ -264,9 +309,24 @@
     //[mSummary removeFromSuperview];
     [mSummary setHidden:YES];
     //reset time
-    //reset quantity on button
-    //reset picker 
+    [mDatetime setTitle:[totUtility nowTimeString] forState:UIControlStateNormal];
+
+    //reset time picker
+    [mClock setCurrentTime];
     
+    //reset quantity on picker
+    [picker_quantity setValue:DEFAULT_QUANTITY];
+    picker_quantity.hidden = YES;
+    
+    //reset quantiy on buttons
+    [mSliderView clearButtonLabels];
+    [mSliderView clearButtonBGColor];
+    
+    //clear quantityList
+    for(int i=0;i<DEFAULT_MENU;i++){
+        quantityList[i]=0;
+    }
+
 }
 
 

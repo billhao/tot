@@ -65,6 +65,9 @@
         case kBasicHead:
             [homeRootController switchTo:kHomeViewHeightView withContextInfo:nil];
             break;
+        case kBasicDiaper:
+            [homeRootController switchTo:kHomeViewDiaperView withContextInfo:nil];
+            break;
         default:
             break;
     }

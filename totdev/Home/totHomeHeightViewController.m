@@ -119,7 +119,7 @@
 }
 
 - (NSString*)getCurrentDate {
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
     [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
     [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
     return [dateFormatter stringFromDate:[NSDate date]];

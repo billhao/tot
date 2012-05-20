@@ -15,6 +15,8 @@
 #import "totTimerController.h"
 #import "../Utility/totNavigationBar.h"
 
+#define DEFAULT_MENU 8
+
 @interface totHomeFeedingViewController : UIViewController<STHorizontalPickerDelegate,totSliderViewDelegate,totNavigationBarDelegate,totTimerControllerDelegate> {
     totHomeRootController *homeRootController;
     totSliderView *mSliderView;
@@ -37,7 +39,9 @@
     // for date picker
     totTimerController *mClock;
     int mWidth, mHeight;
-
+    
+    int buttonSelected;
+    float quantityList[8]; 
 
 }
 
