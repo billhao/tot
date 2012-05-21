@@ -10,6 +10,7 @@
 		15414FDF154CCB8900C3C828 /* totUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 15414FDE154CCB8800C3C828 /* totUtility.m */; };
 		15414FF91556F99600C3C828 /* totHomeFeedingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15414FF81556F99600C3C828 /* totHomeFeedingViewController.m */; };
 		1572880315575B31005771DB /* homeFeedingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1572880215575B31005771DB /* homeFeedingView.xib */; };
+		3F186A5E1569CCEC00FC9E2C /* home_background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F186A5D1569CCEC00FC9E2C /* home_background@2x.png */; };
 		3F3F1F1A15698C050025F029 /* tab_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F3F1F1915698C050025F029 /* tab_background.png */; };
 		3F3FF8431569912F004E4584 /* tab_selected_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F3FF8421569912F004E4584 /* tab_selected_background.png */; };
 		3F3FF84615699650004E4584 /* home@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F3FF84515699650004E4584 /* home@2x.png */; };
@@ -142,6 +143,7 @@
 		15414FF71556F99600C3C828 /* totHomeFeedingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totHomeFeedingViewController.h; path = Home/totHomeFeedingViewController.h; sourceTree = "<group>"; };
 		15414FF81556F99600C3C828 /* totHomeFeedingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totHomeFeedingViewController.m; path = Home/totHomeFeedingViewController.m; sourceTree = "<group>"; };
 		1572880215575B31005771DB /* homeFeedingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = homeFeedingView.xib; sourceTree = "<group>"; };
+		3F186A5D1569CCEC00FC9E2C /* home_background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "home_background@2x.png"; path = "Resources/Home/home_background@2x.png"; sourceTree = "<group>"; };
 		3F3F1F1915698C050025F029 /* tab_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tab_background.png; path = Resources/Tab/tab_background.png; sourceTree = "<group>"; };
 		3F3FF8421569912F004E4584 /* tab_selected_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tab_selected_background.png; path = Resources/Tab/tab_selected_background.png; sourceTree = "<group>"; };
 		3F3FF84515699650004E4584 /* home@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "home@2x.png"; path = "Resources/Tab/home@2x.png"; sourceTree = "<group>"; };
@@ -647,6 +649,7 @@
 				EF0D6BD71555AE930027F012 /* health.png */,
 				EF0D6BD81555AE930027F012 /* height.png */,
 				EF0D6BD91555AE930027F012 /* home_background.png */,
+				3F186A5D1569CCEC00FC9E2C /* home_background@2x.png */,
 				EF0D6BDA1555AE930027F012 /* language.png */,
 				EF0D6BDB1555AE930027F012 /* sleep.png */,
 				EF0D6BDC1555AE930027F012 /* weight.png */,
@@ -805,6 +808,7 @@
 				3F3FF85215699AA4004E4584 /* activity_selected@2x.png in Resources */,
 				3F3FF85315699AA4004E4584 /* review_selected@2x.png in Resources */,
 				3F3FF85415699AA4004E4584 /* setting_selected@2x.png in Resources */,
+				3F186A5E1569CCEC00FC9E2C /* home_background@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -25,6 +25,10 @@
     if (self) {
         // Custom initialization
         NSLog(@"%@", @"activity initWithNibName");
+        // customize the tab bar item
+        self.tabBarItem.title = @"Activity";
+        [[self tabBarItem] setFinishedSelectedImage:[UIImage imageNamed:@"activity_selected"] withFinishedUnselectedImage:[UIImage imageNamed:@"activity"]];
+        [[self tabBarItem] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor grayColor], UITextAttributeTextColor, nil] forState:UIControlStateSelected];
     }
     return self;
 }
@@ -52,9 +56,6 @@
     [super viewDidLoad];
     
     NSLog(@"%@", @"activity didload");
-    // customize the tab bar item
-    [[self tabBarItem] setFinishedSelectedImage:[UIImage imageNamed:@"activity_selected"] withFinishedUnselectedImage:[UIImage imageNamed:@"activity"]];
-    [[self tabBarItem] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor grayColor], UITextAttributeTextColor, nil] forState:UIControlStateSelected];
 
     totActivityEntryViewController *anEntryView = [[totActivityEntryViewController alloc] initWithNibName:@"ActivityEntryView" bundle:nil];
     self.activityEntryViewController = anEntryView;

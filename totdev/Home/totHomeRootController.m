@@ -25,6 +25,10 @@
     if (self) {
         // Custom initialization
         NSLog(@"%@", @"home init");
+        self.tabBarItem.title = @"Home";
+        [[self tabBarItem] setFinishedSelectedImage:[UIImage imageNamed:@"home_selected"] withFinishedUnselectedImage:[UIImage imageNamed:@"home"]];
+        [[self tabBarItem] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor grayColor], UITextAttributeTextColor, nil] forState:UIControlStateSelected];
+        //[[self tabBarItem] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor grayColor], UITextAttributeTextColor, nil]  forState:UIControlStateNormal];
     }
     return self;
 }
@@ -54,9 +58,6 @@
 
     // customize the tab bar item
     NSLog(@"%@", @"home didload");
-    [[self tabBarItem] setFinishedSelectedImage:[UIImage imageNamed:@"home_selected"] withFinishedUnselectedImage:[UIImage imageNamed:@"home"]];
-    [[self tabBarItem] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor grayColor], UITextAttributeTextColor, nil] forState:UIControlStateSelected];
-    //[[self tabBarItem] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor grayColor], UITextAttributeTextColor, nil]  forState:UIControlStateNormal];
     
     totHomeEntryViewController *aHomeView = [[totHomeEntryViewController alloc] initWithNibName:@"HomeView" bundle:nil];
     self.homeEntryViewController = aHomeView;

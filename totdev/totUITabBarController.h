@@ -7,12 +7,21 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "totHomeRootController.h"
+#import "totActivityRootController.h"
+#import "totReviewRootController.h"
+#import "totSettingRootController.h"
 
 @class totCameraViewController;
 @class albumViewController;
 @class totPhotoView;
 
 @interface totUITabBarController : UITabBarController {
+    totHomeRootController* homeController;
+    totActivityRootController* activityController;
+    totReviewRootController* reviewController;
+    totSettingRootController* settingController;
+
     totCameraViewController *cameraView;
     albumViewController *albumView;
     totPhotoView *photoView;

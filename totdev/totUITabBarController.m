@@ -17,11 +17,18 @@
 @synthesize albumView;
 @synthesize photoView;
 
+- (id)init {
+    self = [super init];
+    NSLog(@"%@", @"totUITabBarController init");
+    return self;
+}
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        NSLog(@"%@", @"totUITabBarController initWithNibName");
     }
     return self;
 }
@@ -56,8 +63,15 @@
     [self.tabBar setBackgroundImage:[UIImage imageNamed:@"tab_background"]];
     //[self.tabBar setSelectionIndicatorImage:nil];
     //[self.tabBar setTintColor:[UIColor clearColor]];
-
     
+    // set up tabs
+    homeController = [[totHomeRootController alloc] init];
+    activityController = [[totActivityRootController alloc] init];
+    reviewController = [[totReviewRootController alloc] init];
+    settingController = [[totSettingRootController alloc] init];
+    NSArray* tabs = [NSArray arrayWithObjects:homeController, activityController, reviewController, settingController, nil];
+    [self setViewControllers:tabs];
+
     totCameraViewController *aCameraView = [[totCameraViewController alloc] initWithNibName:@"CameraView" bundle:nil];
     self.cameraView = aCameraView;
     self.cameraView.view.frame = CGRectMake(0, 0, 0, 0);
@@ -85,6 +99,11 @@
     // e.g. self.myOutlet = nil;
     [cameraView release];
     [albumView release];
+    
+    [homeController release];
+    [activityController release];
+    [reviewController release];
+    [settingController release];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

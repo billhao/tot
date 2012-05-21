@@ -15,6 +15,10 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        // customize the tab bar item
+        self.tabBarItem.title = @"Settings";
+        [[self tabBarItem] setFinishedSelectedImage:[UIImage imageNamed:@"setting_selected"] withFinishedUnselectedImage:[UIImage imageNamed:@"setting"]];
+        [[self tabBarItem] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor grayColor], UITextAttributeTextColor, nil] forState:UIControlStateSelected];
     }
     return self;
 }
@@ -40,10 +44,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
- // customize the tab bar item
- [[self tabBarItem] setFinishedSelectedImage:[UIImage imageNamed:@"setting_selected"] withFinishedUnselectedImage:[UIImage imageNamed:@"setting"]];
- [[self tabBarItem] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor grayColor], UITextAttributeTextColor, nil] forState:UIControlStateSelected];
  
 }
 
