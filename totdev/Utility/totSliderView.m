@@ -65,32 +65,41 @@
 //}
 
 - (void)setContentArray:(NSArray *)images {  
-    if( contentArray )
+    if( contentArray ) {
         [contentArray release];
-    contentArray = [[NSMutableArray alloc] initWithArray:images];
+        contentArray = nil;
+    }
     
-    if( marginArray )
+    if( marginArray ) {
         [marginArray release];
-    marginArray  = [[NSMutableArray alloc] init];
+        marginArray = nil;
+    }
     
-    if( isIconArray )
+    if( isIconArray ) {
         [isIconArray release];
-    isIconArray  = [[NSMutableArray alloc] init];
+        isIconArray = nil;
+    }
     
-    if( labelArray )
+    if( labelArray ) {
         [labelArray release];
-    labelArray = [[NSMutableArray alloc] init]; //containing UILabel
+        labelArray = nil;
+    }
     
-    if( buttonArray )
+    if( buttonArray ) {
         [buttonArray release];
-    buttonArray = [[NSMutableArray alloc] init];
+        buttonArray = nil;
+    }
+    
+    contentArray = [[NSMutableArray alloc] initWithArray:images];
+    marginArray  = [[NSMutableArray alloc] init];
+    isIconArray  = [[NSMutableArray alloc] init];
+    labelArray   = [[NSMutableArray alloc] init];
+    buttonArray  = [[NSMutableArray alloc] init];
     
     for( int i = 0; i < [contentArray count]; i++ ) {
         [marginArray addObject:[NSNumber numberWithBool:NO]];
         [isIconArray addObject:[NSNumber numberWithBool:YES]];
-        
     }
-    
 }
 
 - (void)setMarginArray:(NSArray *)margins {
@@ -109,13 +118,13 @@
 }
 
 - (void)clearButtonLabels{
-    for(int i=0; i<[labelArray count]; i++){
+    for(int i=0; i<[labelArray count]; i++) {
         ((UILabel*)[labelArray objectAtIndex:i]).text = @"";
     }
 }
 
 - (void)clearButtonBGColor{
-    for(int i=0; i<[contentArray count]; i++){
+    for(int i=0; i<[contentArray count]; i++) {
         ((UIButton*)[buttonArray objectAtIndex:i]).backgroundColor = [UIColor clearColor];
     }
 }
@@ -146,7 +155,10 @@
 }
 
 - (void)getWithPosition:(int)page {    
-    if (!contentArray)  contentArray = [[NSMutableArray alloc] init]; 
+    if (!contentArray) {
+        printf("Must set content array before using totSliderView\n");
+        exit(1);
+    }
         
     int totalPageNumbers = 
         ceil((double)[contentArray count]/numOfRows/3);
@@ -190,9 +202,7 @@
                 [imageButton addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
                 [imageButton setTag:i*numOfRows*3+j+1];
                 [subview addSubview:(UIView *)imageButton];
-                
                 [buttonArray addObject:imageButton];
-                
                 [imageButton release];
             } else {
                 UIImageView *bckground = [[UIImageView alloc] initWithFrame:CGRectMake(xPos, yPos, BUTTON_WIDTH, BUTTON_HEIGHT)];
@@ -218,22 +228,16 @@
             
             //add blank label
             UILabel *myLabel = [[UILabel alloc] initWithFrame:CGRectMake(xPos, yPos, BUTTON_WIDTH, BUTTON_HEIGHT)];
-            
             myLabel.backgroundColor = [UIColor clearColor]; // [UIColor brownColor];
             myLabel.font = [UIFont fontWithName:@"Arial" size: 14.0];
-            
             myLabel.shadowColor = [UIColor yellowColor];
             myLabel.shadowOffset = CGSizeMake(1,1);
             myLabel.textColor = [UIColor blueColor];
-            
             myLabel.textAlignment = UITextAlignmentCenter; 
             myLabel.text = @"";//init blank
-            
             myLabel.userInteractionEnabled = NO;//user can point through
-            
             [subview addSubview:myLabel];
             [labelArray addObject:myLabel];
-            
             [myLabel release];
         }
         
@@ -257,9 +261,19 @@
     scrollView.delegate = self;
 }
 
+- (void)_cleanSubviewsIn:(UIView*)v {
+    for(UIView *subview in [v subviews]) {
+        [self _cleanSubviewsIn:subview];
+        [subview removeFromSuperview];
+        [subview release];
+    }
+}
+
 - (void)cleanScrollView {
     for(UIView *subview in [scrollView subviews]) {
+        //[self _cleanSubviewsIn:subview];
         [subview removeFromSuperview];
+        //[subview release];
     }
 }
 
@@ -293,14 +307,14 @@
 }
 
 - (void)dealloc {  
-    [contentArray release];
-    [marginArray release];
-    [isIconArray release];
+    if(contentArray)[contentArray release];
+    if(marginArray) [marginArray release];
+    if(isIconArray) [isIconArray release];
+    if(labelArray)  [labelArray release];
+    if(buttonArray) [buttonArray release];
+    
     [pageControl release];
     [scrollView release];
-    [labelArray release];
-    [buttonArray release];
-     
     [super dealloc];  
 }  
 
