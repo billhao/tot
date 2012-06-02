@@ -201,6 +201,8 @@
             [mBackground setImage:[UIImage imageNamed:@"gesture_bg.png"]];
             break;
         default:
+            printf("Hasn't implemented yet\n");
+            return;
             break;
     }
     

@@ -7,8 +7,11 @@
 //
 
 #import "totReviewRootController.h"
+#import "totReviewTableViewController.h"
 
 @implementation totReviewRootController
+
+@synthesize tableViewController;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -40,11 +43,34 @@
 }
 */
 
+- (void)viewWillAppear:(BOOL)animated {
+    if(tableViewController) {
+        NSMutableArray *dat = [[NSMutableArray alloc] init];
+        [dat addObject:@"entity1"];
+        [dat addObject:@"entity2"];
+        [dat addObject:@"entity3"];
+        [dat addObject:@"entity4"];
+        [dat addObject:@"entity5"];
+        [dat addObject:@"entity1"];
+        [dat addObject:@"entity2"];
+        [dat addObject:@"entity3"];
+        [dat addObject:@"entity4"];
+        [dat addObject:@"entity5"];
+        [tableViewController setData:dat];
+        [dat release];
+    }
+}
+
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
+    totReviewTableViewController *aTableView = 
+        [[totReviewTableViewController alloc] initWithNibName:@"ReviewTableView" bundle:nil];
+    self.tableViewController = aTableView;
+    [self.view addSubview:tableViewController.view];
+    [aTableView release];
 }
 
 - (void)viewDidUnload
@@ -53,6 +79,7 @@
 
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
+    [tableViewController release];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
