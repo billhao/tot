@@ -21,25 +21,24 @@
     [model resetDB];
     
     // add an event
-    [model addEvent:0 event:@"emotion/sadness" datetimeString:@"2011-10-1 6:05:0" value:@"file path" ];
+    //[model addEvent:0 event:@"emotion/sadness" datetimeString:@"2011-10-1 6:05:0" value:@"file path" ];
     
     // get a list of events containing "emotion"
-    NSString* event = [[NSString alloc] initWithString:@"emotion"];
+    NSString* event = @"emotion";
     // return from getEvent is an array of totEvent object
     // a totEvent represents a single event
     NSMutableArray *events = [model getEvent:0 event:event];
-    for (totEvent* e in events) {
-        NSLog(@"Return from db: %@", [e toString]);        
-    }
-    [event release];
+
+    [totModel printEvents:events];
+
     [model release];
 }
 
 -(BOOL) test {
-    totEvent* e = [[totEvent alloc] init];
-    [e setTimeFromText:@"2011-10-2 5:0:0"];
-    NSLog(@"%@", [e getTimeText]);
-    NSLog(@"%@", [e toString]);
+//    totEvent* e = [[totEvent alloc] init];
+//    [e setTimeFromText:@"2011-10-2 5:0:0"];
+//    NSLog(@"%@", [e getTimeText]);
+//    NSLog(@"%@", [e toString]);
     
 
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
@@ -47,10 +46,17 @@
     // return from getEvent is an array of totEvent object
     // a totEvent represents a single event
     NSMutableArray *events = [model getEvent:0 event:@"emotion" limit:1];
-    for (totEvent* e in events) {
-        NSLog(@"Return from db: %@", [e toString]);        
-    }
+    [totModel printEvents:events];
 
+    events = [model getEvent:0 event:@"basic/height"];
+    [totModel printEvents:events];
+    
+    events = [model getEvent:0 startDate:[totEvent dateFromString:@"2012-7-1 0:0:0"] endDate:[totEvent dateFromString:@"2012-10-03 0:0:0"]];
+    [totModel printEvents:events];
+
+    events = [model getEvent:0 event:@"basic/language" startDate:[totEvent dateFromString:@"2012-7-1 0:0:0"] endDate:[totEvent dateFromString:@"2012-10-03 0:0:0"]];
+    [totModel printEvents:events];
+    
     return FALSE;
 }
 @end

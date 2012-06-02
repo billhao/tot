@@ -24,8 +24,32 @@
 
 // get a list of events that contain the string in name
 - (NSMutableArray *) getEvent:(int)baby_id event:(NSString*)event;
+// get a list of events in a time period
+- (NSMutableArray *) getEvent:(int)baby_id startDate:(NSDate*)start endDate:(NSDate*)end;
+// get a list of events in a time period and contain the string in name
+- (NSMutableArray *) getEvent:(int)baby_id event:(NSString*)event startDate:(NSDate*)start endDate:(NSDate*)end;
 // return only limited events
 - (NSMutableArray *) getEvent:(int)baby_id event:(NSString*)event limit:(int) limit;
+// get events with all sorts of parameters
+- (NSMutableArray *) getEvent:(int)baby_id event:(NSString*)event limit:(int)limit startDate:(NSDate*)start endDate:(NSDate*)end;
+
+- (int) getEventCount:(int)baby_id event:(NSString*)event;
+- (BOOL) deleteEvents:(int)baby_id event:(NSString*)event;
+
+// add a system-wide preference, such as accounts
+- (BOOL) addPreferenceNoBaby:(NSString*)pref_name value:(NSString*)value;
+// add a preference specific to a baby or an account
+- (BOOL) addPreference:(int)baby_id preference:(NSString*)pref_name value:(NSString*)value;
+
+// get a system-wide preference, such as accounts
+- (NSString*) getPreferenceNoBaby:(NSString*)pref_name;
+// get a preference specific to a baby or an account
+- (NSString*) getPreference:(int)baby_id preference:(NSString*)pref_name;
+
+// add a system-wide preference, such as accounts
+- (BOOL) updatePreferenceNoBaby:(NSString*)pref_name value:(NSString*)value;
+// add a preference specific to a baby or an account
+- (BOOL) updatePreference:(int)baby_id preference:(NSString*)pref_name value:(NSString*)value;
 
 // utility functions below
 
@@ -35,6 +59,9 @@
 
 // reset the db to factory mode, clear all the records
 - (void) resetDB;
+
+// print events to log
++ (void) printEvents:(NSMutableArray*)events;
 
 
 @end

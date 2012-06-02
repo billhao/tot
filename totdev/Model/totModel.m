@@ -1,13 +1,12 @@
 //
 //  totModel.m
-//  totdev
+//  see test_Model.m for usage examples
 //
 //  Created by Hao on 4/21/12.
-//  Copyright (c) 2012 USC. All rights reserved.
-//
 
 #import "totModel.h"
 #import "totEvent.h"
+#import "totEventName.h"
 
 @implementation totModel
 
@@ -122,11 +121,76 @@
     }
 }
 
-- (NSMutableArray *) getEvent :(int)baby_id event:(NSString*)event {
-    return [self getEvent:baby_id event:event limit:-1]; // call the same function with no limit
+// add a system-wide preference, such as accounts
+- (BOOL) addPreferenceNoBaby:(NSString*)pref_name value:(NSString*)value {
+    return [self addPreference:PREFERENCE_NO_BABY preference:pref_name value:value];
 }
 
-- (NSMutableArray *) getEvent:(int)baby_id event:(NSString*)event limit:(int) limit {
+// add a preference specific to a baby or an account
+- (BOOL) addPreference:(int)baby_id preference:(NSString*)pref_name value:(NSString*)value {
+    NSString* pref = [NSString stringWithFormat:@"Pref/%@", pref_name];
+    return [self addEvent:baby_id event:pref datetime:[NSDate date] value:value];
+}
+
+// pref_name is something like "Account/billhao@gmail.com"
+- (NSString*) getPreferenceNoBaby:(NSString*)pref_name {
+    return [self getPreference:PREFERENCE_NO_BABY preference:pref_name];
+}
+
+- (NSString*) getPreference:(int)baby_id preference:(NSString*)pref_name {
+    NSString* pref = [NSString stringWithFormat:@"Pref/%@", pref_name];
+    NSMutableArray* array = [self getEvent:baby_id event:pref limit:1];
+    if( array.count == 1 ) {
+        totEvent* e = [array objectAtIndex:0];
+        return e.value;
+    }
+    else
+        return nil;
+}
+
+// add a system-wide preference, such as accounts
+- (BOOL) updatePreferenceNoBaby:(NSString*)pref_name value:(NSString*)value {
+    return [self updatePreference:PREFERENCE_NO_BABY preference:pref_name value:value];
+}
+
+// add a preference specific to a baby or an account
+- (BOOL) updatePreference:(int)baby_id preference:(NSString*)pref_name value:(NSString*)value {
+    // remove key if it exists
+    NSString* pref = [NSString stringWithFormat:@"Pref/%@", pref_name];
+    int cnt = [self getEventCount:baby_id event:pref];
+    if( cnt < 0 )
+        return FALSE;
+    else if( cnt > 0 ) {
+        // remove keys
+        BOOL re = [self deleteEvents:baby_id event:pref];
+        if( !re ) return FALSE;
+    }
+    
+    // add preference
+    return [self addPreference:baby_id preference:pref_name value:value];
+}
+
+// get events with name
+- (NSMutableArray *) getEvent :(int)baby_id event:(NSString*)event {
+    return [self getEvent:baby_id event:event limit:-1 startDate:nil endDate:nil]; // call the same function with no limit
+}
+
+// get limited # of events with name
+- (NSMutableArray *) getEvent:(int)baby_id event:(NSString*)event limit:(int)limit {
+    return [self getEvent:baby_id event:event limit:limit startDate:nil endDate:nil];
+}
+
+// get all events in a time period
+- (NSMutableArray *) getEvent:(int)baby_id startDate:(NSDate*)start endDate:(NSDate*)end {
+    return [self getEvent:baby_id event:nil limit:-1 startDate:start endDate:end]; // call with a nil event
+}
+
+// get all events in a time period and contain the string in name
+- (NSMutableArray *) getEvent:(int)baby_id event:(NSString*)event startDate:(NSDate*)start endDate:(NSDate*)end {
+    return [self getEvent:baby_id event:event limit:-1 startDate:start endDate:end];
+}
+
+- (NSMutableArray *) getEvent:(int)baby_id event:(NSString*)event limit:(int)limit startDate:(NSDate*)start endDate:(NSDate*)end {
     NSMutableArray *events = [[[NSMutableArray alloc] init] autorelease];
     sqlite3_stmt *stmt = nil;
     @try {
@@ -135,16 +199,72 @@
             return events;
         }
         
-        NSString* searchname = [NSString stringWithFormat:@"%%%@%%", event];
+        NSString* searchname = nil;
+        if( event!=nil ) searchname = [NSString stringWithFormat:@"%%%@%%", event];
         //NSLog(@"%@", searchname);
-        const char *sql = "SELECT event.event_id, event.time, event.name, event.value FROM event WHERE name LIKE ? ORDER BY event.time DESC LIMIT ?";
-        if(sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) != SQLITE_OK) {
+        NSString* sql_main = @"SELECT event.event_id, event.time, event.name, event.value FROM event %@ ORDER BY datetime(event.time) DESC %@";
+        NSString* sql_condition;
+        if( event!=nil ) {
+            if( start!=nil && end!=nil ) {
+                sql_condition = @"WHERE name LIKE ? AND datetime(time) >= ? AND datetime(time) < ?";
+            }
+            else if( start!=nil ) {
+                sql_condition = @"WHERE name LIKE ? AND datetime(time) >= ?";
+            }
+            else if( end!=nil ) {
+                sql_condition = @"WHERE name LIKE ? AND datetime(time) < ?";
+            }
+            else {
+                sql_condition = @"WHERE name LIKE ?";
+            }
+        }
+        else {
+            if( start!=nil && end!=nil ) {
+                sql_condition = @"WHERE datetime(time) >= ? AND datetime(time) < ?";
+            }
+            else if( start!=nil ) {
+                sql_condition = @"WHERE datetime(time) >= ?";
+            }
+            else if( end!=nil ) {
+                sql_condition = @"WHERE datetime(time) < ?";
+            }
+            else {
+                sql_condition = @"";
+            }
+        }
+        NSString* sql_limit = @"";
+        if( limit != -1 ) {
+            sql_limit = @"LIMIT ?";
+        }
+        NSString* sql = [NSString stringWithFormat:sql_main, sql_condition, sql_limit];
+        //NSLog(@"[db] SQL=%@", sql);
+        
+        const char *sqlz = [sql cStringUsingEncoding:NSASCIIStringEncoding];
+        if(sqlite3_prepare_v2(db, sqlz, -1, &stmt, NULL) != SQLITE_OK) {
             NSLog(@"[db] Problem with prepare statement");
             return events;
         }
-        int ret = sqlite3_bind_text(stmt, 1, [searchname UTF8String], -1, SQLITE_TRANSIENT);
-        NSLog(@"[db] getEvent bind_text %d", ret);
-        sqlite3_bind_int(stmt, 2, limit);
+        int param_cnt = 0;
+        if( event != nil ) {
+            param_cnt++;
+            int ret = sqlite3_bind_text(stmt, param_cnt, [searchname UTF8String], -1, SQLITE_TRANSIENT);
+            if( ret!=SQLITE_OK ) NSLog(@"[db] getEvent bind_text %d", ret);
+        }
+        if( start != nil ) {
+            param_cnt++;
+            int ret = sqlite3_bind_text(stmt, param_cnt, [[totEvent formatTime:start] UTF8String], -1, SQLITE_TRANSIENT);
+            if( ret!=SQLITE_OK ) NSLog(@"[db] getEvent bind_text %d", ret);
+        }
+        if( end != nil ) {
+            param_cnt++;
+            int ret = sqlite3_bind_text(stmt, param_cnt, [[totEvent formatTime:end] UTF8String], -1, SQLITE_TRANSIENT);
+            if( ret!=SQLITE_OK ) NSLog(@"[db] getEvent bind_text %d", ret);
+        }
+        if( limit != -1 ) {
+            param_cnt++;
+            int ret = sqlite3_bind_int(stmt, param_cnt, limit);
+            if( ret!=SQLITE_OK ) NSLog(@"[db] getEvent bind_int %d", ret);
+        }
         
         while (sqlite3_step(stmt)==SQLITE_ROW) {
             int i = sqlite3_column_int(stmt, 0);
@@ -173,9 +293,87 @@
     }
 }
 
+- (int) getEventCount:(int)baby_id event:(NSString*)event {
+    int cnt = -1;
+    sqlite3_stmt *stmt = nil;
+    @try {
+        if (db == nil) {
+            NSLog(@"Can't open db");
+            return cnt;
+        }
+        
+        NSString* searchname = [NSString stringWithFormat:@"%%%@%%", event];
+        const char *sql = "SELECT count(*) FROM event WHERE name LIKE ?";
+        if(sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) != SQLITE_OK) {
+            NSLog(@"[db] Problem with prepare statement");
+            return cnt;
+        }
+        int ret = sqlite3_bind_text(stmt, 1, [searchname UTF8String], -1, SQLITE_TRANSIENT);
+        if( ret!=SQLITE_OK ) NSLog(@"[db] getEvent bind_text %d", ret);
+        
+        if (sqlite3_step(stmt)==SQLITE_ROW) {
+            cnt = sqlite3_column_int(stmt, 0);
+        }
+    }
+    @catch (NSException *exception) {
+        NSLog(@"[db] An exception occured: %@", [exception reason]);
+    }
+    @finally {
+        if( stmt != nil ) sqlite3_finalize(stmt);
+        return cnt;
+    }
+}
+
+- (BOOL) deleteEvents:(int)baby_id event:(NSString*)event {
+    BOOL re = FALSE;
+    sqlite3_stmt *stmt = nil;
+    @try {
+        if (db == nil) {
+            NSLog(@"Can't open db");
+            return re;
+        }
+        
+        NSString* searchname = [NSString stringWithFormat:@"%%%@%%", event];
+        const char *sql = "DELETE FROM event WHERE name LIKE ?";
+        if(sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) != SQLITE_OK) {
+            NSLog(@"[db] Problem with prepare statement");
+            return re;
+        }
+        int ret = sqlite3_bind_text(stmt, 1, [searchname UTF8String], -1, SQLITE_TRANSIENT);
+        if( ret!=SQLITE_OK ) NSLog(@"[db] getEvent bind_text %d", ret);
+        
+        if (sqlite3_step(stmt)!=SQLITE_OK) {
+            return FALSE;
+        }
+    }
+    @catch (NSException *exception) {
+        NSLog(@"[db] An exception occured: %@", [exception reason]);
+    }
+    @finally {
+        if( stmt != nil ) sqlite3_finalize(stmt);
+        return TRUE;
+    }
+}
+
 - (void) resetDB {
     // simply copy the db
     [self CopyDbToDocumentsFolder];
 }
 
++ (void) printEvents:(NSMutableArray*)events {
+    if( events == nil ) {
+        NSLog(@"[printEvents] events is nil");
+        return;
+    }
+    if( [events count] == 0 ) {
+        NSLog(@"[printEvents] No events to print");
+        return;
+    }
+    NSLog(@"[printEvents] %d events", [events count]);
+    NSLog(@"--------");
+    for (totEvent* e in events) {
+        NSLog(@"%@", [e toString]);
+    }
+    NSLog(@"--------\n");
+}
 @end

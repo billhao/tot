@@ -27,4 +27,8 @@
 // return the event as a string
 -(NSString*) toString;
 
+// helper functions to convert between date and string
++(NSDate*) dateFromString:(NSString*)datetime;
++(NSString*) formatTime:(NSDate*)datetime;
+
 @end

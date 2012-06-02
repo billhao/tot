@@ -30,6 +30,26 @@
     return formattedDateString;
 }
 
++(NSString*) formatTime:(NSDate*)datetime {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    
+    NSString *formattedDateString = [dateFormatter stringFromDate:datetime];
+    [dateFormatter release];
+    
+    return formattedDateString;
+}
+
++(NSDate*) dateFromString:(NSString*)datetime {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    
+    NSDate *date = [dateFormatter dateFromString:datetime];
+    [dateFormatter release];
+    
+    return date;
+}
+
 -(NSDate*) setTimeFromText:(NSString*)dt {
     struct tm  t;
     const char *formatString = "%Y-%m-%d %H:%M:%S";
