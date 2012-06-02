@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface totReviewRootController : UIViewController
+@class totReviewTableViewController;
+
+@interface totReviewRootController : UIViewController {
+    totReviewTableViewController *tableViewController;
+}
+
+@property (nonatomic, retain) totReviewTableViewController *tableViewController;
 
 @end

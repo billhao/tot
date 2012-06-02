@@ -65,6 +65,8 @@
 		EF238826153E19E800B9C8BD /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF238824153E19E700B9C8BD /* MediaPlayer.framework */; };
 		EF238827153E19E800B9C8BD /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF238825153E19E800B9C8BD /* MobileCoreServices.framework */; };
 		EF238829153E1A0D00B9C8BD /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF238828153E1A0C00B9C8BD /* QuartzCore.framework */; };
+		EF2BEA00157480080002F763 /* totReviewTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2BE9FF157480080002F763 /* totReviewTableViewController.m */; };
+		EF2BEA031574820D0002F763 /* ReviewTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF2BEA021574820D0002F763 /* ReviewTableView.xib */; };
 		EF4CEE5915563E2400109BCC /* totLanguageInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF4CEE5815563E2400109BCC /* totLanguageInputViewController.m */; };
 		EF5FBB59154E6A0A00CBBA27 /* totPhotoView.m in Sources */ = {isa = PBXBuildFile; fileRef = EF5FBB58154E6A0900CBBA27 /* totPhotoView.m */; };
 		EF5FBB5C154E7B8E00CBBA27 /* PhotoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF5FBB5B154E7B8E00CBBA27 /* PhotoView.xib */; };
@@ -217,6 +219,9 @@
 		EF238824153E19E700B9C8BD /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		EF238825153E19E800B9C8BD /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		EF238828153E1A0C00B9C8BD /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		EF2BE9FE157480080002F763 /* totReviewTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totReviewTableViewController.h; path = Review/totReviewTableViewController.h; sourceTree = "<group>"; };
+		EF2BE9FF157480080002F763 /* totReviewTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totReviewTableViewController.m; path = Review/totReviewTableViewController.m; sourceTree = "<group>"; };
+		EF2BEA021574820D0002F763 /* ReviewTableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReviewTableView.xib; sourceTree = "<group>"; };
 		EF4CEE5715563E2400109BCC /* totLanguageInputViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totLanguageInputViewController.h; path = Home/totLanguageInputViewController.h; sourceTree = "<group>"; };
 		EF4CEE5815563E2400109BCC /* totLanguageInputViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totLanguageInputViewController.m; path = Home/totLanguageInputViewController.m; sourceTree = "<group>"; };
 		EF5FBB57154E6A0900CBBA27 /* totPhotoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totPhotoView.h; path = Utility/totPhotoView.h; sourceTree = "<group>"; };
@@ -504,6 +509,7 @@
 				1572880215575B31005771DB /* homeFeedingView.xib */,
 				3F454D2C1555A84700AC66EE /* homeHeightViewController.xib */,
 				EF168A6D156856E500FDFBD6 /* homeDiaperView.xib */,
+				EF2BEA021574820D0002F763 /* ReviewTableView.xib */,
 			);
 			name = resources;
 			sourceTree = "<group>";
@@ -556,6 +562,8 @@
 			children = (
 				EF62839C15366DCD004031D6 /* totReviewRootController.h */,
 				EF62839D15366DCD004031D6 /* totReviewRootController.m */,
+				EF2BE9FE157480080002F763 /* totReviewTableViewController.h */,
+				EF2BE9FF157480080002F763 /* totReviewTableViewController.m */,
 			);
 			name = Review;
 			sourceTree = "<group>";
@@ -812,6 +820,7 @@
 				3F3FF85315699AA4004E4584 /* review_selected@2x.png in Resources */,
 				3F3FF85415699AA4004E4584 /* setting_selected@2x.png in Resources */,
 				3F186A5E1569CCEC00FC9E2C /* home_background@2x.png in Resources */,
+				EF2BEA031574820D0002F763 /* ReviewTableView.xib in Resources */,
 				3F2216D615717273000E86F3 /* Logo@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -855,6 +864,7 @@
 				EF4CEE5915563E2400109BCC /* totLanguageInputViewController.m in Sources */,
 				15414FF91556F99600C3C828 /* totHomeFeedingViewController.m in Sources */,
 				EF168A721568571500FDFBD6 /* totHomeDiaperViewController.m in Sources */,
+				EF2BEA00157480080002F763 /* totReviewTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
