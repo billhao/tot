@@ -71,7 +71,7 @@
     [aFeedView release];
     
     totHomeHeightViewController *aHeightView = 
-        [[totHomeHeightViewController alloc] initWithNibName:@"totHomeHeightViewController" bundle:nil];
+        [[totHomeHeightViewController alloc] initWithNibName:@"homeHeightViewController" bundle:nil];
     self.homeHeightViewController = aHeightView;
     self.homeHeightViewController.homeRootController = self;
     [aHeightView release];

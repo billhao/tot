@@ -11,6 +11,7 @@
 		15414FF91556F99600C3C828 /* totHomeFeedingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15414FF81556F99600C3C828 /* totHomeFeedingViewController.m */; };
 		1572880315575B31005771DB /* homeFeedingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1572880215575B31005771DB /* homeFeedingView.xib */; };
 		3F186A5E1569CCEC00FC9E2C /* home_background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F186A5D1569CCEC00FC9E2C /* home_background@2x.png */; };
+		3F2216D615717273000E86F3 /* Logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FA1764F157171BF00408366 /* Logo@2x.png */; };
 		3F3F1F1A15698C050025F029 /* tab_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F3F1F1915698C050025F029 /* tab_background.png */; };
 		3F3FF8431569912F004E4584 /* tab_selected_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F3FF8421569912F004E4584 /* tab_selected_background.png */; };
 		3F3FF84615699650004E4584 /* home@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F3FF84515699650004E4584 /* home@2x.png */; };
@@ -158,9 +159,10 @@
 		3F3FF85115699AA4004E4584 /* setting_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "setting_selected@2x.png"; path = "Resources/Tab/setting_selected@2x.png"; sourceTree = "<group>"; };
 		3F454D2A1555A84700AC66EE /* totHomeHeightViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totHomeHeightViewController.h; path = Home/totHomeHeightViewController.h; sourceTree = "<group>"; };
 		3F454D2B1555A84700AC66EE /* totHomeHeightViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totHomeHeightViewController.m; path = Home/totHomeHeightViewController.m; sourceTree = "<group>"; };
-		3F454D2C1555A84700AC66EE /* homeHeightViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = homeHeightViewController.xib; path = totdev/Home/homeHeightViewController.xib; sourceTree = "<group>"; };
+		3F454D2C1555A84700AC66EE /* homeHeightViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = homeHeightViewController.xib; path = Resources/homeHeightViewController.xib; sourceTree = "<group>"; };
 		3F454D301555B1B200AC66EE /* STHorizontalPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STHorizontalPicker.h; sourceTree = "<group>"; };
 		3F454D311555B1B200AC66EE /* STHorizontalPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STHorizontalPicker.m; sourceTree = "<group>"; };
+		3FA1764F157171BF00408366 /* Logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Logo@2x.png"; sourceTree = "<group>"; };
 		3FC1B6FB1543680300295447 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		3FC1B6FF1543689500295447 /* totdb.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = totdb.sqlite; sourceTree = "<group>"; };
 		3FC1B7041543841800295447 /* totModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totModel.h; path = totdev/Model/totModel.h; sourceTree = "<group>"; };
@@ -493,6 +495,7 @@
 		EF62838C153667BD004031D6 /* resources */ = {
 			isa = PBXGroup;
 			children = (
+				3FA1764F157171BF00408366 /* Logo@2x.png */,
 				EFBE580A1565A8FC003433D6 /* Logo.png */,
 				EF6283A215366DF1004031D6 /* Image */,
 				EF62838D15366833004031D6 /* MainWindow.xib */,
@@ -818,6 +821,7 @@
 				3F3FF85415699AA4004E4584 /* setting_selected@2x.png in Resources */,
 				3F186A5E1569CCEC00FC9E2C /* home_background@2x.png in Resources */,
 				EF2BEA031574820D0002F763 /* ReviewTableView.xib in Resources */,
+				3F2216D615717273000E86F3 /* Logo@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -883,6 +887,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -890,9 +895,10 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				SDKROOT = iphoneos;
+				PROVISIONING_PROFILE = "";
+				SDKROOT = iphoneos5.0;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = "Ad hoc";
@@ -900,12 +906,14 @@
 		3F454D341555C96700AC66EE /* Ad hoc */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				"CODE_SIGN_ENTITLEMENTS[sdk=*]" = "";
+				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "totdev/totdev-Prefix.pch";
 				INFOPLIST_FILE = "totdev/totdev-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = "Ad hoc";
@@ -915,6 +923,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -929,8 +938,9 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
-				SDKROOT = iphoneos;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				PROVISIONING_PROFILE = "";
+				SDKROOT = iphoneos5.0;
 			};
 			name = Debug;
 		};
@@ -939,6 +949,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -946,9 +957,10 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				SDKROOT = iphoneos;
+				PROVISIONING_PROFILE = "";
+				SDKROOT = iphoneos5.0;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -956,11 +968,13 @@
 		EF62838A1536674C004031D6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "totdev/totdev-Prefix.pch";
 				INFOPLIST_FILE = "totdev/totdev-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -968,11 +982,13 @@
 		EF62838B1536674C004031D6 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "totdev/totdev-Prefix.pch";
 				INFOPLIST_FILE = "totdev/totdev-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
