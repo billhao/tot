@@ -12,6 +12,9 @@
 		1572880315575B31005771DB /* homeFeedingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1572880215575B31005771DB /* homeFeedingView.xib */; };
 		3F186A5E1569CCEC00FC9E2C /* home_background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F186A5D1569CCEC00FC9E2C /* home_background@2x.png */; };
 		3F2216D615717273000E86F3 /* Logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FA1764F157171BF00408366 /* Logo@2x.png */; };
+		3F2216DE1571758F000E86F3 /* totLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F2216DC1571758F000E86F3 /* totLoginController.m */; };
+		3F2216DF1571758F000E86F3 /* totLoginController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F2216DD1571758F000E86F3 /* totLoginController.xib */; };
+		3F2216E61571763A000E86F3 /* STHorizontalPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F2216E51571763A000E86F3 /* STHorizontalPicker.m */; };
 		3F3F1F1A15698C050025F029 /* tab_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F3F1F1915698C050025F029 /* tab_background.png */; };
 		3F3FF8431569912F004E4584 /* tab_selected_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F3FF8421569912F004E4584 /* tab_selected_background.png */; };
 		3F3FF84615699650004E4584 /* home@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F3FF84515699650004E4584 /* home@2x.png */; };
@@ -24,9 +27,8 @@
 		3F3FF85415699AA4004E4584 /* setting_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F3FF85115699AA4004E4584 /* setting_selected@2x.png */; };
 		3F454D2D1555A84700AC66EE /* totHomeHeightViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F454D2B1555A84700AC66EE /* totHomeHeightViewController.m */; };
 		3F454D2E1555A84700AC66EE /* homeHeightViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F454D2C1555A84700AC66EE /* homeHeightViewController.xib */; };
-		3F454D321555B1B200AC66EE /* STHorizontalPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F454D311555B1B200AC66EE /* STHorizontalPicker.m */; };
+		3F7CDB5D157ABDCE009CD3D7 /* totdb.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 3F7CDB5C157ABDCE009CD3D7 /* totdb.sqlite */; };
 		3FC1B6FC1543680300295447 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FC1B6FB1543680300295447 /* libsqlite3.dylib */; };
-		3FC1B7001543689500295447 /* totdb.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 3FC1B6FF1543689500295447 /* totdb.sqlite */; };
 		3FC1B7061543841800295447 /* totModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FC1B7051543841800295447 /* totModel.m */; };
 		3FC1B7091544F19700295447 /* totEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FC1B7081544F19600295447 /* totEvent.m */; };
 		3FE9B5F7154A303100199AAF /* test_Model.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FE9B5F6154A303100199AAF /* test_Model.m */; };
@@ -147,6 +149,11 @@
 		15414FF81556F99600C3C828 /* totHomeFeedingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totHomeFeedingViewController.m; path = Home/totHomeFeedingViewController.m; sourceTree = "<group>"; };
 		1572880215575B31005771DB /* homeFeedingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = homeFeedingView.xib; sourceTree = "<group>"; };
 		3F186A5D1569CCEC00FC9E2C /* home_background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "home_background@2x.png"; path = "Resources/Home/home_background@2x.png"; sourceTree = "<group>"; };
+		3F2216DB1571758F000E86F3 /* totLoginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = totLoginController.h; sourceTree = "<group>"; };
+		3F2216DC1571758F000E86F3 /* totLoginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = totLoginController.m; sourceTree = "<group>"; };
+		3F2216DD1571758F000E86F3 /* totLoginController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = totLoginController.xib; path = totdev/totLoginController.xib; sourceTree = "<group>"; };
+		3F2216E41571763A000E86F3 /* STHorizontalPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = STHorizontalPicker.h; path = Utility/STHorizontalPicker.h; sourceTree = "<group>"; };
+		3F2216E51571763A000E86F3 /* STHorizontalPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = STHorizontalPicker.m; path = Utility/STHorizontalPicker.m; sourceTree = "<group>"; };
 		3F3F1F1915698C050025F029 /* tab_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tab_background.png; path = Resources/Tab/tab_background.png; sourceTree = "<group>"; };
 		3F3FF8421569912F004E4584 /* tab_selected_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tab_selected_background.png; path = Resources/Tab/tab_selected_background.png; sourceTree = "<group>"; };
 		3F3FF84515699650004E4584 /* home@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "home@2x.png"; path = "Resources/Tab/home@2x.png"; sourceTree = "<group>"; };
@@ -160,11 +167,9 @@
 		3F454D2A1555A84700AC66EE /* totHomeHeightViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totHomeHeightViewController.h; path = Home/totHomeHeightViewController.h; sourceTree = "<group>"; };
 		3F454D2B1555A84700AC66EE /* totHomeHeightViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totHomeHeightViewController.m; path = Home/totHomeHeightViewController.m; sourceTree = "<group>"; };
 		3F454D2C1555A84700AC66EE /* homeHeightViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = homeHeightViewController.xib; path = Resources/homeHeightViewController.xib; sourceTree = "<group>"; };
-		3F454D301555B1B200AC66EE /* STHorizontalPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STHorizontalPicker.h; sourceTree = "<group>"; };
-		3F454D311555B1B200AC66EE /* STHorizontalPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STHorizontalPicker.m; sourceTree = "<group>"; };
+		3F7CDB5C157ABDCE009CD3D7 /* totdb.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = totdb.sqlite; sourceTree = "<group>"; };
 		3FA1764F157171BF00408366 /* Logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Logo@2x.png"; sourceTree = "<group>"; };
 		3FC1B6FB1543680300295447 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
-		3FC1B6FF1543689500295447 /* totdb.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = totdb.sqlite; sourceTree = "<group>"; };
 		3FC1B7041543841800295447 /* totModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totModel.h; path = totdev/Model/totModel.h; sourceTree = "<group>"; };
 		3FC1B7051543841800295447 /* totModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totModel.m; path = totdev/Model/totModel.m; sourceTree = "<group>"; };
 		3FC1B7071544F19600295447 /* totEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totEvent.h; path = totdev/Model/totEvent.h; sourceTree = "<group>"; };
@@ -430,12 +435,12 @@
 		EF6283661536674B004031D6 = {
 			isa = PBXGroup;
 			children = (
+				3F7CDB5C157ABDCE009CD3D7 /* totdb.sqlite */,
 				3FE9B5F4154A2FCF00199AAF /* Tests */,
 				EF62838C153667BD004031D6 /* resources */,
 				EF62837B1536674B004031D6 /* totdev */,
 				EF6283741536674B004031D6 /* Frameworks */,
 				EF6283721536674B004031D6 /* Products */,
-				3FC1B6FF1543689500295447 /* totdb.sqlite */,
 			);
 			sourceTree = "<group>";
 		};
@@ -466,6 +471,7 @@
 		EF62837B1536674B004031D6 /* totdev */ = {
 			isa = PBXGroup;
 			children = (
+				EF62837C1536674C004031D6 /* Supporting Files */,
 				3FC1B6FE1543681900295447 /* Model */,
 				EF97E7C1153B43DD0037E52D /* Util */,
 				EF62839515366D7A004031D6 /* Setting */,
@@ -476,7 +482,8 @@
 				EF6283851536674C004031D6 /* AppDelegate.m */,
 				EF62838F1536685F004031D6 /* totUITabBarController.h */,
 				EF6283901536685F004031D6 /* totUITabBarController.m */,
-				EF62837C1536674C004031D6 /* Supporting Files */,
+				3F2216DB1571758F000E86F3 /* totLoginController.h */,
+				3F2216DC1571758F000E86F3 /* totLoginController.m */,
 			);
 			path = totdev;
 			sourceTree = "<group>";
@@ -510,6 +517,7 @@
 				3F454D2C1555A84700AC66EE /* homeHeightViewController.xib */,
 				EF168A6D156856E500FDFBD6 /* homeDiaperView.xib */,
 				EF2BEA021574820D0002F763 /* ReviewTableView.xib */,
+				3F2216DD1571758F000E86F3 /* totLoginController.xib */,
 			);
 			name = resources;
 			sourceTree = "<group>";
@@ -617,8 +625,8 @@
 		EF97E7C1153B43DD0037E52D /* Util */ = {
 			isa = PBXGroup;
 			children = (
-				3F454D301555B1B200AC66EE /* STHorizontalPicker.h */,
-				3F454D311555B1B200AC66EE /* STHorizontalPicker.m */,
+				3F2216E41571763A000E86F3 /* STHorizontalPicker.h */,
+				3F2216E51571763A000E86F3 /* STHorizontalPicker.m */,
 				CEDB78B7155107C300805CC8 /* totImageCache.h */,
 				CEDB78B8155107C300805CC8 /* totImageCache.m */,
 				CE5C09F8154CCFDB00D41114 /* moviePlayerViewController.h */,
@@ -741,7 +749,6 @@
 				EF2387F9153BC56E00B9C8BD /* CameraView.xib in Resources */,
 				EF2387FE153BC64A00B9C8BD /* ActivityInfoView.xib in Resources */,
 				EF238803153BC6EB00B9C8BD /* ActivityAlbumView.xib in Resources */,
-				3FC1B7001543689500295447 /* totdb.sqlite in Resources */,
 				EF5FBB5C154E7B8E00CBBA27 /* PhotoView.xib in Resources */,
 				EFB259FE15505D6C00C4984A /* camera.png in Resources */,
 				EFB259FF15505D6C00C4984A /* margin.png in Resources */,
@@ -822,6 +829,8 @@
 				3F186A5E1569CCEC00FC9E2C /* home_background@2x.png in Resources */,
 				EF2BEA031574820D0002F763 /* ReviewTableView.xib in Resources */,
 				3F2216D615717273000E86F3 /* Logo@2x.png in Resources */,
+				3F2216DF1571758F000E86F3 /* totLoginController.xib in Resources */,
+				3F7CDB5D157ABDCE009CD3D7 /* totdb.sqlite in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -860,11 +869,12 @@
 				EF0D6BD21555A7700027F012 /* totHomeSleepingView.m in Sources */,
 				EF0D6BEA1555CCD00027F012 /* totTimerController.m in Sources */,
 				3F454D2D1555A84700AC66EE /* totHomeHeightViewController.m in Sources */,
-				3F454D321555B1B200AC66EE /* STHorizontalPicker.m in Sources */,
 				EF4CEE5915563E2400109BCC /* totLanguageInputViewController.m in Sources */,
 				15414FF91556F99600C3C828 /* totHomeFeedingViewController.m in Sources */,
 				EF168A721568571500FDFBD6 /* totHomeDiaperViewController.m in Sources */,
 				EF2BEA00157480080002F763 /* totReviewTableViewController.m in Sources */,
+				3F2216DE1571758F000E86F3 /* totLoginController.m in Sources */,
+				3F2216E61571763A000E86F3 /* STHorizontalPicker.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
