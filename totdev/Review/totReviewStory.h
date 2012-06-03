@@ -14,7 +14,7 @@
     NSDate *when;
     NSMutableDictionary *content;
     NSString *comment;
-    int height;
+    int height; // must be set by programmer.
 }
 
 - (id) init;
