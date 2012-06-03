@@ -37,7 +37,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
+
     // set up events
     [mLogin addTarget:self action:@selector(LoginButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [mNewuser addTarget:self action:@selector(NewUserButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
@@ -51,6 +51,17 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    // set email and clear password
+    NSString* lastlogin = [model getPreferenceNoBaby:PREFERENCE_LAST_LOGGED_IN];
+    if( lastlogin==nil )
+        mEmail.text = @"";
+    else {
+        mEmail.text = lastlogin;
+    }
+    mPwd.text = @"";
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -132,6 +143,7 @@
 // set the logged in flag in db
 - (void)setLoggedIn:(NSString*)email {
     [model updatePreferenceNoBaby:PREFERENCE_LOGGED_IN value:email];
+    [model updatePreferenceNoBaby:PREFERENCE_LAST_LOGGED_IN value:email];
 }
 
 - (void)showHomeView {

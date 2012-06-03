@@ -170,6 +170,12 @@
     return [self addPreference:baby_id preference:pref_name value:value];
 }
 
+// delete a preference
+- (void) deletePreferenceNoBaby:(NSString*)pref_name {
+    NSString* pref = [NSString stringWithFormat:@"Pref/%@", pref_name];
+    [self deleteEvents:PREFERENCE_NO_BABY event:pref];
+}
+
 // get events with name
 - (NSMutableArray *) getEvent :(int)baby_id event:(NSString*)event {
     return [self getEvent:baby_id event:event limit:-1 startDate:nil endDate:nil]; // call the same function with no limit

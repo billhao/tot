@@ -70,14 +70,24 @@
         // get active baby id
         mBabyId = 1;
     }
-    else
-    {
-        loginController = [[totLoginController alloc] initWithNibName:@"totLoginController" bundle:nil];
-        [self.window addSubview:loginController.view];
-        [self.window makeKeyAndVisible];
+    else {
+        [self showLoginView];
     }
     
     return YES;
+}
+
+- (void)showLoginView {
+    // remove all other sub views
+    for (UIView* view in self.window.subviews) {
+        [view removeFromSuperview];
+    }
+
+    // show login
+    if( loginController == nil )
+        loginController = [[totLoginController alloc] initWithNibName:@"totLoginController" bundle:nil];
+    [self.window addSubview:loginController.view];
+    [self.window makeKeyAndVisible];
 }
 
 - (void)showHomeView {

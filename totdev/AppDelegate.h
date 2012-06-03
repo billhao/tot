@@ -31,6 +31,7 @@
 @property (assign, nonatomic) int mBabyId;
 
 - (totModel*) getDataModel;
+- (void)showLoginView;
 - (void)showHomeView;
 - (NSString*) isLoggedIn;
 

@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "totSettingEntryViewController.h"
 
-@interface totSettingRootController : UIViewController
+@interface totSettingRootController : UIViewController {
+    totSettingEntryViewController* mEntryView;
+}
+
+@property (nonatomic, retain) totSettingEntryViewController* mEntryView;
 
 @end
