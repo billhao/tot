@@ -69,6 +69,8 @@
 		EF238829153E1A0D00B9C8BD /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF238828153E1A0C00B9C8BD /* QuartzCore.framework */; };
 		EF2BEA00157480080002F763 /* totReviewTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2BE9FF157480080002F763 /* totReviewTableViewController.m */; };
 		EF2BEA031574820D0002F763 /* ReviewTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF2BEA021574820D0002F763 /* ReviewTableView.xib */; };
+		EF4C5860157B3C9900D41C89 /* totReviewStory.m in Sources */ = {isa = PBXBuildFile; fileRef = EF4C585F157B3C9900D41C89 /* totReviewStory.m */; };
+		EF4C5863157B3D6000D41C89 /* totReviewStoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = EF4C5862157B3D6000D41C89 /* totReviewStoryView.m */; };
 		EF4CEE5915563E2400109BCC /* totLanguageInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF4CEE5815563E2400109BCC /* totLanguageInputViewController.m */; };
 		EF5FBB59154E6A0A00CBBA27 /* totPhotoView.m in Sources */ = {isa = PBXBuildFile; fileRef = EF5FBB58154E6A0900CBBA27 /* totPhotoView.m */; };
 		EF5FBB5C154E7B8E00CBBA27 /* PhotoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF5FBB5B154E7B8E00CBBA27 /* PhotoView.xib */; };
@@ -227,6 +229,10 @@
 		EF2BE9FE157480080002F763 /* totReviewTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totReviewTableViewController.h; path = Review/totReviewTableViewController.h; sourceTree = "<group>"; };
 		EF2BE9FF157480080002F763 /* totReviewTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totReviewTableViewController.m; path = Review/totReviewTableViewController.m; sourceTree = "<group>"; };
 		EF2BEA021574820D0002F763 /* ReviewTableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReviewTableView.xib; sourceTree = "<group>"; };
+		EF4C585E157B3C9900D41C89 /* totReviewStory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totReviewStory.h; path = Review/totReviewStory.h; sourceTree = "<group>"; };
+		EF4C585F157B3C9900D41C89 /* totReviewStory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totReviewStory.m; path = Review/totReviewStory.m; sourceTree = "<group>"; };
+		EF4C5861157B3D6000D41C89 /* totReviewStoryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totReviewStoryView.h; path = Review/totReviewStoryView.h; sourceTree = "<group>"; };
+		EF4C5862157B3D6000D41C89 /* totReviewStoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totReviewStoryView.m; path = Review/totReviewStoryView.m; sourceTree = "<group>"; };
 		EF4CEE5715563E2400109BCC /* totLanguageInputViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totLanguageInputViewController.h; path = Home/totLanguageInputViewController.h; sourceTree = "<group>"; };
 		EF4CEE5815563E2400109BCC /* totLanguageInputViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totLanguageInputViewController.m; path = Home/totLanguageInputViewController.m; sourceTree = "<group>"; };
 		EF5FBB57154E6A0900CBBA27 /* totPhotoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totPhotoView.h; path = Utility/totPhotoView.h; sourceTree = "<group>"; };
@@ -572,6 +578,10 @@
 				EF62839D15366DCD004031D6 /* totReviewRootController.m */,
 				EF2BE9FE157480080002F763 /* totReviewTableViewController.h */,
 				EF2BE9FF157480080002F763 /* totReviewTableViewController.m */,
+				EF4C585E157B3C9900D41C89 /* totReviewStory.h */,
+				EF4C585F157B3C9900D41C89 /* totReviewStory.m */,
+				EF4C5861157B3D6000D41C89 /* totReviewStoryView.h */,
+				EF4C5862157B3D6000D41C89 /* totReviewStoryView.m */,
 			);
 			name = Review;
 			sourceTree = "<group>";
@@ -875,6 +885,8 @@
 				EF2BEA00157480080002F763 /* totReviewTableViewController.m in Sources */,
 				3F2216DE1571758F000E86F3 /* totLoginController.m in Sources */,
 				3F2216E61571763A000E86F3 /* STHorizontalPicker.m in Sources */,
+				EF4C5860157B3C9900D41C89 /* totReviewStory.m in Sources */,
+				EF4C5863157B3D6000D41C89 /* totReviewStoryView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

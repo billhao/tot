@@ -10,7 +10,9 @@
 
 @interface totReviewTableViewController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
     IBOutlet UITableView *mReviewTable;
-    NSMutableArray *mData;
+    NSMutableArray *mData; //mData contains a list of cell views
+    
+    UIView *mLoadingCell; //mLoadingCell is a UIView containing the loading icon
 }
 
 @property (nonatomic, retain) IBOutlet UITableView *mReviewTable;

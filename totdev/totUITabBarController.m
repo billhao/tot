@@ -56,13 +56,13 @@
     [super viewDidLoad];
     
     // set tab bar property
-//    [self.tabBar1 setBackgroundImage:nil];
-//    // set bg color
-//    [self.tabBar1 setBackgroundColor:[[UIColor alloc] initWithRed:0.98 green:0.973 blue:0.969 alpha:1]];
-//    [self.tabBar1 setBackgroundColor:[[UIColor alloc] initWithRed:1.0 green:0.0 blue:0.0 alpha:1]];
+    // [self.tabBar1 setBackgroundImage:nil];
+    // set bg color
+    // [self.tabBar1 setBackgroundColor:[[UIColor alloc] initWithRed:0.98 green:0.973 blue:0.969 alpha:1]];
+    // [self.tabBar1 setBackgroundColor:[[UIColor alloc] initWithRed:1.0 green:0.0 blue:0.0 alpha:1]];
     [self.tabBar setBackgroundImage:[UIImage imageNamed:@"tab_background"]];
-    //[self.tabBar setSelectionIndicatorImage:nil];
-    //[self.tabBar setTintColor:[UIColor clearColor]];
+    // [self.tabBar setSelectionIndicatorImage:nil];
+    // [self.tabBar setTintColor:[UIColor clearColor]];
     
     // set up tabs
     homeController = [[totHomeRootController alloc] init];

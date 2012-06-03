@@ -7,6 +7,10 @@
 //
 
 #import "totReviewTableViewController.h"
+#import "totReviewStory.h"
+#import "totReviewStoryView.h"
+
+#define TABLE_CELL_WIDTH 280
 
 @implementation totReviewTableViewController
 
@@ -34,13 +38,19 @@
     [mData removeAllObjects];
     
     for (int i=0; i<[dat count]; i++) {
-        [mData addObject:[dat objectAtIndex:i]];
+        totReviewStory* story = (totReviewStory*)[dat objectAtIndex:i];
+        totReviewStoryView *view = [[totReviewStoryView alloc] initWithFrame:CGRectMake(
+                                                                                        (320-TABLE_CELL_WIDTH)/2, 0, TABLE_CELL_WIDTH, story.height)];
+        [view setReviewStory:story];
+        [mData addObject:view];
+        [view release];
     }
 }
 
 #pragma mark - UITableView delegate
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 50;
+    totReviewStoryView* view = (totReviewStoryView*)[mData objectAtIndex:indexPath.row];
+    return view.height + 10;
 }
 
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {
@@ -64,7 +74,9 @@
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier] autorelease];
     }
-    cell.textLabel.text = [mData objectAtIndex:indexPath.row];
+    
+    // cell.textLabel.text = [mData objectAtIndex:indexPath.row];
+    [cell.contentView addSubview:[mData objectAtIndex:indexPath.row]];
     
     return cell;
 }
@@ -79,22 +91,22 @@ static bool once = YES;
     float y = offset.y + bounds.size.height - inset.bottom;
     float h = size.height;
     
-    NSLog(@"offset: %f", offset.y);   
-    NSLog(@"content.height: %f", size.height);   
-    NSLog(@"bounds.height: %f", bounds.size.height);   
-    NSLog(@"inset.top: %f", inset.top);   
-    NSLog(@"inset.bottom: %f", inset.bottom);   
-    NSLog(@"pos: %f of %f", y, h);
-    printf("=====\n");
+    // NSLog(@"offset: %f", offset.y);   
+    // NSLog(@"content.height: %f", size.height);   
+    // NSLog(@"bounds.height: %f", bounds.size.height);   
+    // NSLog(@"inset.top: %f", inset.top);   
+    // NSLog(@"inset.bottom: %f", inset.bottom);   
+    // NSLog(@"pos: %f of %f", y, h);
+    // printf("=====\n");
     
     float reload_distance = 10;
     if(y > h + reload_distance) {
         NSLog(@"load more rows");
         
         if (once) {
-            [mData addObject:@"loading"];
-            [mReviewTable reloadData];
-            once = NO;
+            // [mData addObject:@"loading"];
+            // [mReviewTable reloadData];
+            // once = NO;
         }
     }
 }
@@ -113,7 +125,7 @@ static bool once = YES;
 {
     [super viewDidLoad];
     
-    mReviewTable.separatorStyle = UITableViewCellSeparatorStyleNone;
+    mReviewTable.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     mReviewTable.backgroundColor = [UIColor clearColor];
 }
 

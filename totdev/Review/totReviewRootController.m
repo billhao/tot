@@ -8,6 +8,7 @@
 
 #import "totReviewRootController.h"
 #import "totReviewTableViewController.h"
+#import "totReviewStory.h"
 
 @implementation totReviewRootController
 
@@ -46,16 +47,16 @@
 - (void)viewWillAppear:(BOOL)animated {
     if(tableViewController) {
         NSMutableArray *dat = [[NSMutableArray alloc] init];
-        [dat addObject:@"entity1"];
-        [dat addObject:@"entity2"];
-        [dat addObject:@"entity3"];
-        [dat addObject:@"entity4"];
-        [dat addObject:@"entity5"];
-        [dat addObject:@"entity1"];
-        [dat addObject:@"entity2"];
-        [dat addObject:@"entity3"];
-        [dat addObject:@"entity4"];
-        [dat addObject:@"entity5"];
+        
+        for (int i = 0; i < 5; i++) {
+            // query info from db    
+            totReviewStory *story = [[totReviewStory alloc] init];
+            story.height = 160; // we need set the height by ourselves.
+            story.who = [NSString stringWithString:@"Leo"];
+            [dat addObject:story];
+            [story release];
+        }
+        
         [tableViewController setData:dat];
         [dat release];
     }
