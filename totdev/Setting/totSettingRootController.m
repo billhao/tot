@@ -7,8 +7,10 @@
 //
 
 #import "totSettingRootController.h"
-
+#
 @implementation totSettingRootController
+
+@synthesize mEntryView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -44,7 +46,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
- 
+    
+    // add the entry view
+    mEntryView = [[totSettingEntryViewController alloc] initWithNibName:@"SettingEntryView" bundle:nil];
+    [self.view addSubview:mEntryView.view];
 }
 
 - (void)viewDidUnload

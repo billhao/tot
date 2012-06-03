@@ -51,6 +51,9 @@
 // add a preference specific to a baby or an account
 - (BOOL) updatePreference:(int)baby_id preference:(NSString*)pref_name value:(NSString*)value;
 
+// delete a preference
+- (void) deletePreferenceNoBaby:(NSString*)pref_name;
+
 // utility functions below
 
 // copy empty tables with structure to document folder

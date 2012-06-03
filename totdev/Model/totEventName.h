@@ -13,7 +13,8 @@
 static int       PREFERENCE_NO_BABY     = 0;
 
 // preference keys
-static NSString *PREFERENCE_LOGGED_IN   = @"logged_in";
+static NSString *PREFERENCE_LOGGED_IN   = @"logged_in"; // who is currently logged in
+static NSString *PREFERENCE_LAST_LOGGED_IN   = @"last_logged_in"; // the last logged in user
 static NSString *PREFERENCE_ACTIVE_BABY_ID = @"active_baby_id";
 
 // basic
