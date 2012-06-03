@@ -10,7 +10,7 @@
 #import <Foundation/Foundation.h>
 #import "totHomeRootController.h"
 #import "../Utility/totSliderView.h"
-#import "../STHorizontalPicker.h"
+#import "../Utility/STHorizontalPicker.h"
 #import "../Model/totModel.h"
 #import "totTimerController.h"
 #import "../Utility/totNavigationBar.h"

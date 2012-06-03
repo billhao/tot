@@ -57,7 +57,7 @@
     [super viewDidLoad];
 
     // customize the tab bar item
-    NSLog(@"%@", @"home didload");
+    NSLog(@"%@", @"home root didload");
     
     totHomeEntryViewController *aHomeView = [[totHomeEntryViewController alloc] initWithNibName:@"HomeView" bundle:nil];
     self.homeEntryViewController = aHomeView;

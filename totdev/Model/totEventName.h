@@ -9,6 +9,13 @@
 #ifndef totdev_totEventName_h
 #define totdev_totEventName_h
 
+// for preferences not associated with a baby
+static int       PREFERENCE_NO_BABY     = 0;
+
+// preference keys
+static NSString *PREFERENCE_LOGGED_IN   = @"logged_in";
+static NSString *PREFERENCE_ACTIVE_BABY_ID = @"active_baby_id";
+
 // basic
 static NSString *EVENT_BASIC_HEIGHT     = @"basic/height";
 static NSString *EVENT_BASIC_WEIGHT     = @"basic/weight";

@@ -9,12 +9,14 @@
 #import <UIKit/UIKit.h>
 #import "Model/totModel.h"
 #import "totImageCache.h"
+#import "totLoginController.h"
 
 @class totUITabBarController;
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate> {
     UIWindow *window;
 	IBOutlet totUITabBarController *rootController;
+	totLoginController    *loginController;
     
     // global
     totImageCache *mCache;
@@ -24,9 +26,12 @@
 
 @property (retain, nonatomic) totImageCache *mCache;
 @property (retain, nonatomic) IBOutlet totUITabBarController *rootController;
+@property (retain, nonatomic) totLoginController *loginController;
 @property (strong, nonatomic) IBOutlet UIWindow *window;
 @property (assign, nonatomic) int mBabyId;
 
 - (totModel*) getDataModel;
+- (void)showHomeView;
+- (NSString*) isLoggedIn;
 
 @end

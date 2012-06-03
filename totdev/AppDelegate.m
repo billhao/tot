@@ -10,16 +10,22 @@
 #import "totUITabBarController.h"
 
 #import "test_Model.h"
+#import "totEventName.h"
 
 @implementation AppDelegate
 
 @synthesize window = _window;
-@synthesize rootController;
+@synthesize rootController, loginController;
 @synthesize mBabyId;
 @synthesize mCache;
 
+- (void)alloc {
+    loginController = nil;
+}
+
 - (void)dealloc
 {
+    if(loginController!=nil) [loginController release];
     [rootController release];
     [_window release];
     [super dealloc];
@@ -29,6 +35,11 @@
     return mTotData;
 }
 
+// get current logged in account, return nil if none
+- (NSString*) isLoggedIn {
+    return [mTotData getPreferenceNoBaby:PREFERENCE_LOGGED_IN];
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
@@ -36,8 +47,8 @@
     
     //self.window.backgroundColor = [UIColor whiteColor];
     
-    // for now, set babyID
-    mBabyId = 1;
+    // default baby id
+    mBabyId = PREFERENCE_NO_BABY;
     
     // initialize the image cache
     mCache = [[totImageCache alloc] init];
@@ -50,11 +61,31 @@
 //    BOOL re = [test test];
 //    if( !re ) return FALSE;
     
-    [self.window addSubview:rootController.view];
-    
-    [self.window makeKeyAndVisible];
+    // if logged in then show home view, otherwise show login view
+    NSString* email = [self isLoggedIn];
+    BOOL loggedin = (email!=nil);
+    if( loggedin ) {
+        [self showHomeView];
+        
+        // get active baby id
+        mBabyId = 1;
+    }
+    else
+    {
+        loginController = [[totLoginController alloc] initWithNibName:@"totLoginController" bundle:nil];
+        [self.window addSubview:loginController.view];
+        [self.window makeKeyAndVisible];
+    }
     
     return YES;
+}
+
+- (void)showHomeView {
+    // remove login view first if exists
+    
+    [self.window addSubview:rootController.view];    
+    [self.window makeKeyAndVisible];
+    [loginController.view removeFromSuperview];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
