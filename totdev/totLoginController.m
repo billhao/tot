@@ -12,6 +12,8 @@
 
 @implementation totLoginController
 
+@synthesize newuser;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -19,6 +21,8 @@
         // Custom initialization
         AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
         model = [appDelegate getDataModel];
+        mBaby_id = -1;
+        newuser = FALSE;
     }
     return self;
 }
@@ -37,7 +41,12 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-
+    if( newuser ) {
+        mLogin.hidden = TRUE;
+    }
+    else {
+        //mNewuser.hidden = TRUE;
+    }
     // set up events
     [mLogin addTarget:self action:@selector(LoginButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [mNewuser addTarget:self action:@selector(NewUserButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
@@ -178,6 +187,10 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
     return TRUE;
+}
+
+- (void)setBabyIDforNewUser:(int)newbaby_id {
+    mBaby_id = newbaby_id;
 }
 
 @end

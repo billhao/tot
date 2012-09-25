@@ -63,6 +63,7 @@
 }
 
 -(void)dealloc {
+    [super dealloc];
     //[datetime release];
     [name release];
     [value release];

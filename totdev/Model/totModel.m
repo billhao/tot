@@ -68,6 +68,8 @@
     
     [fileMgr removeItemAtPath:copydbpath error:&err];
     
+    //NSLog(@"DB path = %@", copydbpath);
+    
     if(![fileMgr copyItemAtPath:dbpath toPath:copydbpath error:&err]) {
         NSLog(@"Unable to copy database.");
     }
@@ -135,6 +137,11 @@
 // pref_name is something like "Account/billhao@gmail.com"
 - (NSString*) getPreferenceNoBaby:(NSString*)pref_name {
     return [self getPreference:PREFERENCE_NO_BABY preference:pref_name];
+}
+
+- (int) getPreferenceNoBabyCount:(NSString*)pref_name {
+    NSString* pref = [NSString stringWithFormat:@"Pref/%@", pref_name];
+    return [self getEventCount:PREFERENCE_NO_BABY event:pref];
 }
 
 - (NSString*) getPreference:(int)baby_id preference:(NSString*)pref_name {
@@ -382,4 +389,41 @@
     }
     NSLog(@"--------\n");
 }
+
+// get next baby id for creating a new baby profile
+// TODO return first id if error occurs, this behavior probably should be changed
+- (int) getNextBabyID {
+    int nextid = PREFERENCE_NO_BABY + 1;
+    sqlite3_stmt *stmt = nil;
+    @try {
+        if (db == nil) {
+            NSLog(@"Can't open db");
+            return nextid;
+        }
+        
+        const char *sql = "SELECT MAX(baby_id) FROM event";
+        if(sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) != SQLITE_OK) {
+            NSLog(@"[db] Problem with prepare statement");
+            return nextid;
+        }
+        if (sqlite3_step(stmt)==SQLITE_ROW) {
+            nextid = sqlite3_column_int(stmt, 0)+1;
+        }
+    }
+    @catch (NSException *exception) {
+        NSLog(@"[db] An exception occured: %@", [exception reason]);
+    }
+    @finally {
+        if( stmt != nil ) sqlite3_finalize(stmt);
+        return nextid;
+    }
+}
+
+// get # accounts
+- (int) getAccountCount {
+    int cnt = 0;
+    cnt = [self getEventCount:PREFERENCE_NO_BABY event:@"Account/"];
+    return [self getPreferenceNoBabyCount:@"Account"];
+}
+
 @end

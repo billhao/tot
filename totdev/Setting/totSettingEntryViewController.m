@@ -52,7 +52,7 @@
 
     // show log in
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-    [appDelegate showLoginView];
+    [appDelegate showLoginView:nil];
     //[self presentViewController:appDelegate.loginController animated:TRUE completion:nil];
 }
 

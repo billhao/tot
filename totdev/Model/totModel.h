@@ -45,6 +45,7 @@
 - (NSString*) getPreferenceNoBaby:(NSString*)pref_name;
 // get a preference specific to a baby or an account
 - (NSString*) getPreference:(int)baby_id preference:(NSString*)pref_name;
+- (int) getPreferenceNoBabyCount:(NSString*)pref_name;
 
 // add a system-wide preference, such as accounts
 - (BOOL) updatePreferenceNoBaby:(NSString*)pref_name value:(NSString*)value;
@@ -53,6 +54,12 @@
 
 // delete a preference
 - (void) deletePreferenceNoBaby:(NSString*)pref_name;
+
+// get next baby id for creating a new baby profile
+- (int) getNextBabyID;
+
+// get # accounts
+- (int) getAccountCount;
 
 // utility functions below
 

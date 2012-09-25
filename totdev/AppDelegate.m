@@ -15,7 +15,7 @@
 @implementation AppDelegate
 
 @synthesize window = _window;
-@synthesize rootController, loginController;
+@synthesize rootController, loginController, newbabyController;
 @synthesize mBabyId;
 @synthesize mCache;
 
@@ -56,28 +56,53 @@
     // initialize database
     mTotData = [[totModel alloc] init];
     
+    // get # accounts in db
+    int account = [mTotData getAccountCount];
+
     // general method to test a code snippet, which could be just empty
 //    test_Model* test = [[test_Model alloc] init];
 //    BOOL re = [test test];
 //    if( !re ) return FALSE;
     
-    // if logged in then show home view, otherwise show login view
-    NSString* email = [self isLoggedIn];
-    BOOL loggedin = (email!=nil);
-    if( loggedin ) {
-        [self showHomeView];
-        
-        // get active baby id
-        mBabyId = 1;
+    // output some system information
+    NSLog(@"App data path = %@", [mTotData GetDocumentDirectory]);
+    NSLog(@"# Acc = %d", account);
+
+    if( account == 0 ) {
+        // show new baby view if no account exists
+        [self showNewBabyView];
     }
     else {
-        [self showLoginView];
+        // if logged in then show home view, otherwise show login view
+        NSString* email = [self isLoggedIn];
+        BOOL loggedin = (email!=nil);
+        if( loggedin ) {
+            [self showHomeView];
+            
+            // TODO get active baby id
+            mBabyId = 1;
+        }
+        else {
+            [self showLoginView:-1];
+        }
     }
-    
     return YES;
 }
 
-- (void)showLoginView {
+- (void)showNewBabyView {
+    // remove all other sub views
+    for (UIView* view in self.window.subviews) {
+        [view removeFromSuperview];
+    }
+    
+    // show new baby
+    if( newbabyController == nil )
+        newbabyController = [[totNewBabyController alloc] initWithNibName:@"totNewBabyController" bundle:nil];
+    [self.window addSubview:newbabyController.view];
+    [self.window makeKeyAndVisible];
+}
+
+- (void)showLoginView:(int)baby_id {
     // remove all other sub views
     for (UIView* view in self.window.subviews) {
         [view removeFromSuperview];
@@ -86,6 +111,12 @@
     // show login
     if( loginController == nil )
         loginController = [[totLoginController alloc] initWithNibName:@"totLoginController" bundle:nil];
+    if( baby_id == -1 )
+        loginController.newuser = FALSE;
+    else {
+        [loginController setBabyIDforNewUser:baby_id];
+        loginController.newuser = TRUE;
+    }
     [self.window addSubview:loginController.view];
     [self.window makeKeyAndVisible];
 }

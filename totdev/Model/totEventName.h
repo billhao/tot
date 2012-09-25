@@ -17,6 +17,11 @@ static NSString *PREFERENCE_LOGGED_IN   = @"logged_in"; // who is currently logg
 static NSString *PREFERENCE_LAST_LOGGED_IN   = @"last_logged_in"; // the last logged in user
 static NSString *PREFERENCE_ACTIVE_BABY_ID = @"active_baby_id";
 
+// baby information
+static NSString *INFO_NAME              = @"info/name";
+static NSString *INFO_BIRTHDAY          = @"info/birthday";
+static NSString *INFO_SEX               = @"info/sex";
+
 // basic
 static NSString *EVENT_BASIC_HEIGHT     = @"basic/height";
 static NSString *EVENT_BASIC_WEIGHT     = @"basic/weight";

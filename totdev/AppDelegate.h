@@ -10,6 +10,7 @@
 #import "Model/totModel.h"
 #import "totImageCache.h"
 #import "totLoginController.h"
+#import "totNewBabyController.h"
 
 @class totUITabBarController;
 
@@ -27,11 +28,12 @@
 @property (retain, nonatomic) totImageCache *mCache;
 @property (retain, nonatomic) IBOutlet totUITabBarController *rootController;
 @property (retain, nonatomic) totLoginController *loginController;
+@property (retain, nonatomic) totNewBabyController *newbabyController;
 @property (strong, nonatomic) IBOutlet UIWindow *window;
 @property (assign, nonatomic) int mBabyId;
 
 - (totModel*) getDataModel;
-- (void)showLoginView;
+- (void)showLoginView:(int)baby_id;
 - (void)showHomeView;
 - (NSString*) isLoggedIn;
 
