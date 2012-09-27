@@ -46,7 +46,11 @@
     // Override point for customization after application launch.
     
     //self.window.backgroundColor = [UIColor whiteColor];
-    
+    return [self showFirstView];
+}
+
+// determine the first view (new baby, login or homepage) and show it
+- (BOOL)showFirstView {
     // default baby id
     mBabyId = PREFERENCE_NO_BABY;
     
@@ -96,21 +100,23 @@
     }
     
     // show new baby
-    if( newbabyController == nil )
-        newbabyController = [[totNewBabyController alloc] initWithNibName:@"totNewBabyController" bundle:nil];
+    newbabyController = [[totNewBabyController alloc] initWithNibName:@"totNewBabyController" bundle:nil];
     [self.window addSubview:newbabyController.view];
     [self.window makeKeyAndVisible];
 }
 
 - (void)showLoginView:(int)baby_id {
-    // remove all other sub views
+    // remove newbabycontroller and all other sub views
+    if( newbabyController != nil ) {
+        [newbabyController release];
+        newbabyController = nil;
+    }
     for (UIView* view in self.window.subviews) {
         [view removeFromSuperview];
     }
 
     // show login
-    if( loginController == nil )
-        loginController = [[totLoginController alloc] initWithNibName:@"totLoginController" bundle:nil];
+    loginController = [[totLoginController alloc] initWithNibName:@"totLoginController" bundle:nil];
     if( baby_id == -1 )
         loginController.newuser = FALSE;
     else {
@@ -123,10 +129,13 @@
 
 - (void)showHomeView {
     // remove login view first if exists
+    if( loginController != nil ) {
+        [loginController release];
+        loginController = nil;
+    }
     
     [self.window addSubview:rootController.view];    
     [self.window makeKeyAndVisible];
-    [loginController.view removeFromSuperview];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

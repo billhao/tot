@@ -67,7 +67,9 @@
 - (void) CopyDbToDocumentsFolder;
 - (NSString *) GetDocumentDirectory;
 
-// reset the db to factory mode, clear all the records
+// clear all records in the database
+- (BOOL) clearDB;
+// reset the database for factory mode, which may contains some records for development/testing
 - (void) resetDB;
 
 // print events to log

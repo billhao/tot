@@ -368,6 +368,36 @@
     }
 }
 
+// clear all records in the database
+- (BOOL) clearDB {
+    BOOL re = FALSE;
+    sqlite3_stmt *stmt = nil;
+    @try {
+        if (db == nil) {
+            NSLog(@"Can't open db");
+            return re;
+        }
+        
+        const char *sql = "DELETE FROM event";
+        if(sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) != SQLITE_OK) {
+            NSLog(@"[db] Problem with prepare statement");
+            return re;
+        }
+        
+        if (sqlite3_step(stmt)!=SQLITE_OK) {
+            return FALSE;
+        }
+    }
+    @catch (NSException *exception) {
+        NSLog(@"[db] An exception occured: %@", [exception reason]);
+    }
+    @finally {
+        if( stmt != nil ) sqlite3_finalize(stmt);
+        return TRUE;
+    }
+}
+
+// reset the database for factory mode, which may contains some records for development/testing
 - (void) resetDB {
     // simply copy the db
     [self CopyDbToDocumentsFolder];

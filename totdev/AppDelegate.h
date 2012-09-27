@@ -33,6 +33,10 @@
 @property (assign, nonatomic) int mBabyId;
 
 - (totModel*) getDataModel;
+
+// determine the first view (new baby, login or homepage) and show it
+- (BOOL)showFirstView;
+
 - (void)showLoginView:(int)baby_id;
 - (void)showHomeView;
 - (NSString*) isLoggedIn;

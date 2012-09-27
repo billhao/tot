@@ -37,6 +37,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    [mClearDBButton addTarget:self action:@selector(ClearDBButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [mSignOutButton addTarget:self action:@selector(SignOutButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
 }
 
@@ -47,12 +48,17 @@
     // e.g. self.myOutlet = nil;
 }
 
+- (void)ClearDBButtonClicked: (UIButton *)button {
+    [model clearDB];
+    NSLog(@"%@", @"[settings] clearing database");
+}
+
 - (void)SignOutButtonClicked: (UIButton *)button {
     [model deletePreferenceNoBaby:PREFERENCE_LOGGED_IN];
 
     // show log in
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-    [appDelegate showLoginView:nil];
+    [appDelegate showFirstView];
     //[self presentViewController:appDelegate.loginController animated:TRUE completion:nil];
 }
 
