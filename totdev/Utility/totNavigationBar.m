@@ -114,6 +114,7 @@
     [mBackground release];
     [mLeftButton release];
     [mRightButton release];
+    [super dealloc];
 }
 
 @end

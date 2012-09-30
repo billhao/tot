@@ -49,10 +49,7 @@
     int tag = btn.tag;
     switch (tag) {
         case kBasicSleep:
-            if( mHomeSleepingView.mIsSleeping )
-                [mHomeSleepingView stopSleeping];
-            else
-                [mHomeSleepingView startSleeping];
+            [mHomeSleepingView trigger];
             break;
         case kBasicLanguage:
             [mLanguageInputView Display];
@@ -111,8 +108,6 @@
     // create subview
     mHomeSleepingView.mParentView = self.view;
     [self.view addSubview:mHomeSleepingView];
-    [mHomeSleepingView addTimeDisplayLabel];
-    
     [self.view addSubview:mLanguageInputView.view];
 }
 

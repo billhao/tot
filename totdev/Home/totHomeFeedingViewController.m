@@ -210,7 +210,7 @@
             
             summary = [NSString stringWithFormat:@"%@\n%@",summary,temp ];
             
-            NSString* quantity = [NSString stringWithFormat:@"%.1f", picker_quantity];
+            NSString* quantity = [NSString stringWithFormat:@"%.1f", picker_quantity.currentValue];
             
             // food list needs renew
             [mTotModel addEvent:baby_id event:EVENT_FEEDING_MILK datetime:date value:quantity];

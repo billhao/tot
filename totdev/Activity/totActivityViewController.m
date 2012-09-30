@@ -187,8 +187,8 @@
     NSMutableArray *isIcon = [[NSMutableArray alloc] init];
     
     self.mCurrentActivityID = [message objectForKey:@"activity"];
-    NSMutableArray *images = [message objectForKey:@"images"];
-    NSMutableArray *margin = [message objectForKey:@"margin"];
+    NSMutableArray *images  = [message objectForKey:@"images"];
+    NSMutableArray *margin  = [message objectForKey:@"margin"];
     
     switch ( [mCurrentActivityID intValue] ) {
         case kActivityEmotion:
@@ -207,6 +207,7 @@
     }
     
     for( int i = 0; i < [images count]; i++ ) {
+        // get the file extension.
         NSArray *tokens = [[images objectAtIndex:i] componentsSeparatedByString:@"."];
         NSString *ext = [tokens lastObject];
         

@@ -114,7 +114,7 @@
     
     NSString *activity = [NSString stringWithUTF8String: ACTIVITY_NAMES[[mCurrentActivityID intValue]]];
     NSString *memb_str = [NSString stringWithUTF8String: ACTIVITY_MEMBERS[[mCurrentActivityID intValue]]];
-    NSArray *member = [memb_str componentsSeparatedByString:@","];
+    NSArray  *member = [memb_str componentsSeparatedByString:@","];
     NSString *the_member = [member objectAtIndex:tag];
     
     sprintf(mEventName, "%s/%s", [activity UTF8String], [the_member UTF8String]);
@@ -195,7 +195,7 @@
     // display the slider view
     NSMutableArray *images = [[NSMutableArray alloc] init];
     NSMutableArray *margin = [[NSMutableArray alloc] init];
-    NSMutableArray *icon = [[NSMutableArray alloc] init];
+    NSMutableArray *icon   = [[NSMutableArray alloc] init];
     
     for( int i=0; i<[member count]; i++ ) {
         [images addObject:[UIImage imageNamed:[[member objectAtIndex:i] stringByAppendingString:@".png"]]];

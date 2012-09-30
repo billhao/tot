@@ -8,39 +8,36 @@
 
 #import <UIKit/UIKit.h>
 #import "totTimerController.h"
+#import "../Utility/totImageView.h"
 
-
-@interface totHomeSleepingView : UIView <totTimerControllerDelegate> {
+@interface totHomeSleepingView : UIView <totTimerControllerDelegate, totImageViewDelegate> {
     UIView *mParentView;
-    
-    totTimerController *mClock;
-    int mWidth, mHeight;
-    bool mIsSleeping;
-    
-    UIButton *mClockBtn, *mConfirmButton;
-    UIImageView *mBackground, *mDisplayBackground;
-    UILabel *mTimeLabel, *mDisplayLabel;
-    
     NSTimer *mSleepTimer;
     
-    int _year, _month, _day;
-    int _hour, _minute, _second, _ap;
+    totTimerController *mClock;
+    int mWidth, mHeight, mState;
+    int mYear, mMonth, mDay,
+        mHour, mMinute, mSecond, mAp;
+    BOOL mUseTimePicker;
+    // UI
+    UIImageView *mReadyToSleepBckgrnd;
+    UIImageView *mSleepingBckgrnd;
+    UIButton *mCancelButton;
+    UIButton *mEditButton;
+    UIButton *mLabelBckgrnd;
+    UIButton *mTimeLabel;
 }
 
-@property (nonatomic, readonly) bool mIsSleeping;
 @property (nonatomic, assign) UIView *mParentView;
 
 - (id)initWithFrame:(CGRect)frame;
-- (void)addTimeDisplayLabel;
-- (void)startSleeping;
-- (void)stopSleeping;
+- (void)trigger;
 
-- (void)animationFinished:(NSString*)animationID finished:(NSNumber*)finished context:(void*)context;
-- (void)calculateDisplayedTime:(int)gap;
-- (void)handleTime;
-- (void)makeNoView;
-- (void)makeFullView;
-- (void)makeDisplayLabelView;
-- (void)removeDisplayLabelView;
+- (void)showNotSleepView;
+- (void)showSleepingView;
+- (void)clearNotSleepView;
+- (void)clearSleepingView;
+
+- (void)findCurrentTime;
 
 @end

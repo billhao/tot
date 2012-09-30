@@ -52,7 +52,7 @@
             // query info from db    
             totReviewStory *story = [[totReviewStory alloc] init];
             story.height = 160; // we need set the height by ourselves.
-            story.who = [NSString stringWithString:@"Leo"];
+            story.who = @"Leo";
             [dat addObject:story];
             [story release];
         }

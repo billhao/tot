@@ -31,6 +31,7 @@
     [type release];
     [content release];
     [comment release];
+    [super dealloc];
 }
 
 @end
