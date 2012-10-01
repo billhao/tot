@@ -86,8 +86,10 @@
     NSTimeInterval interval = [today timeIntervalSince1970];
     NSString *filename = [[NSString alloc] initWithFormat:@"%d.jpg", (int)interval];
 
+    printf("save photo into %s\n", [filename UTF8String]);
     [self saveImage:photo intoFile:filename];
     
+    printf("add the image into cache\n");
     AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
     [delegate.mCache addImage:photo WithKey:filename];
     
@@ -97,6 +99,7 @@
     [mMessage setObject:self.mCurrentActivityID forKey:@"activity"];
     [filename release];
     
+    printf("enter the info view\n");
     [activityRootController switchTo:kActivityInfoView withContextInfo:mMessage];
 }
 
@@ -179,7 +182,6 @@
     // message contains two objects:
     // images => MSMutableArray, each element is a path to the image
     // margin => MSMutableArray, each element is a yes or no
-
     [mSliderView cleanScrollView];
     
     NSMutableArray *activityMemberImages = [[NSMutableArray alloc] init];
@@ -300,8 +302,5 @@
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
-
-
-
 
 @end

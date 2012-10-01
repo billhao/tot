@@ -83,7 +83,6 @@
         [textView resignFirstResponder];
         return NO;
     }
-    
     return YES;
 }
 
@@ -165,10 +164,21 @@
 
 // receive parameters passed by other module for initialization or customization
 - (void)receiveMessage: (NSMutableDictionary*)message {
+    mState = [NSDictionary dictionaryWithDictionary:message];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    printf("View Did Appear\n");
+    [super viewDidAppear:animated];
+    [self updateInterface];
+}
+
+- (void)updateInterface {
     [mSliderView cleanScrollView];
+    printf("clear slider view in info view\n");
     
-    NSString *videoFilename = [message objectForKey:@"storedVideo"];
-    NSString *filename = [message objectForKey:@"storedImage"];
+    NSString *videoFilename = [mState objectForKey:@"storedVideo"];
+    NSString *filename = [mState objectForKey:@"storedImage"];
     
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentDirectory = [paths objectAtIndex:0];
@@ -183,12 +193,13 @@
         mIsVideo = NO;
     }
     
-    self.mCurrentActivityID = [message objectForKey:@"activity"];
+    self.mCurrentActivityID = [mState objectForKey:@"activity"];
     NSString *memb_str = [NSString stringWithUTF8String:ACTIVITY_MEMBERS[[self.mCurrentActivityID intValue]]];
     NSArray  *member = [memb_str componentsSeparatedByString:@","];
     
     // insert the image
     //[mThumbnail setImage:[UIImage imageWithContentsOfFile:imagePath]];
+    printf("query the image from application cache\n");
     AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
     [mThumbnail setImage:[delegate.mCache getImageWithKey:filename]];
     

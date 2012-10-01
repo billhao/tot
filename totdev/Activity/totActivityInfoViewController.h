@@ -22,6 +22,8 @@
     totSliderView *mSliderView;
     UIImageView *mThumbnail;
     NSNumber* mCurrentActivityID;
+    NSDictionary* mState;
+    
     char mEventName[256], mImagePath[256], mVideoPath[256];
     bool mIsVideo;
     totModel *mTotModel;

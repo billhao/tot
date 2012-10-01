@@ -57,7 +57,8 @@
     
     NSLog(@"%@", @"activity didload");
 
-    totActivityEntryViewController *anEntryView = [[totActivityEntryViewController alloc] initWithNibName:@"ActivityEntryView" bundle:nil];
+    totActivityEntryViewController *anEntryView = [[totActivityEntryViewController alloc] initWithNibName:@"ActivityEntryView"
+                                                                                                   bundle:nil];
     self.activityEntryViewController = anEntryView;
     self.activityEntryViewController.activityRootController = self;
     [anEntryView release];
@@ -67,12 +68,14 @@
     self.activityViewController.activityRootController = self;
     [activityView release];
     
-    totActivityInfoViewController *activityInfoView = [[totActivityInfoViewController alloc] initWithNibName:@"ActivityInfoView" bundle:nil];
+    totActivityInfoViewController *activityInfoView = [[totActivityInfoViewController alloc] initWithNibName:@"ActivityInfoView"
+                                                                                                      bundle:nil];
     self.activityInfoViewController = activityInfoView;
     self.activityInfoViewController.activityRootController = self;
     [activityInfoView release];
     
-    totActivityAlbumViewController *activityAlbumView = [[totActivityAlbumViewController alloc] initWithNibName:@"ActivityAlbumView" bundle:nil];
+    totActivityAlbumViewController *activityAlbumView = [[totActivityAlbumViewController alloc] initWithNibName:@"ActivityAlbumView"
+                                                                                                         bundle:nil];
     self.activityAlbumViewController = activityAlbumView;
     self.activityAlbumViewController.activityRootController = self;
     [activityAlbumView release];
@@ -132,25 +135,38 @@
     nextView = [self getViewByIndex:viewIndex];
     
     // info contains the data structure which needs to be passed into next view
-    switch (viewIndex) {
-        case kActivityEntryView:
-            break;
-        case kActivityView:
-            [activityViewController receiveMessage:info];
-            break;
-        case kActivityAlbumView:
-            [activityAlbumViewController receiveMessage:info];
-            break;
-        case kActivityInfoView:
-            [activityInfoViewController receiveMessage:info];
-            break;
-        default:
-            break;
+    if (viewIndex == kActivityView) {
+        [activityViewController receiveMessage:info];
+    } else if (viewIndex == kActivityAlbumView) {
+        [activityAlbumViewController receiveMessage:info];
+    } else if (viewIndex == kActivityInfoView) {
+        [activityInfoViewController receiveMessage:info];
     }
     
+    printf("start the transition animation\n");
     [UIView beginAnimations:@"swipe" context:nil];
-	[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-	[UIView setAnimationDuration:0.5f];
+	[UIView setAnimationDuration:1.25f];
+    [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+    
+    if (mCurrentViewIndex == kActivityEntryView) {
+        [activityEntryViewController viewWillDisappear:YES];
+    } else if (mCurrentViewIndex == kActivityView) {
+        [activityViewController viewWillDisappear:YES];
+    } else if (mCurrentViewIndex == kActivityAlbumView) {
+        [activityAlbumViewController viewWillDisappear:YES];
+    } else if (mCurrentViewIndex == kActivityInfoView) {
+        [activityInfoViewController viewWillDisappear:YES];
+    }
+    
+    if (viewIndex == kActivityEntryView) {
+        [activityEntryViewController viewWillAppear:YES];
+    } else if (viewIndex == kActivityView) {
+        [activityViewController viewWillAppear:YES];
+    } else if (viewIndex == kActivityAlbumView) {
+        [activityAlbumViewController viewWillAppear:YES];
+    } else if (viewIndex == kActivityInfoView) {
+        [activityInfoViewController viewWillAppear:YES];
+    }
     
     if( currentX < nextX ) {
         currentView.view.frame = CGRectMake(-SCREEN_W, 0, SCREEN_W, SCREEN_H);
@@ -160,7 +176,28 @@
     nextView.view.frame = CGRectMake(0, 0, SCREEN_W, SCREEN_H);
     mCurrentViewIndex = viewIndex;
     
+    if (mCurrentViewIndex == kActivityEntryView) {
+        [activityEntryViewController viewDidDisappear:YES];
+    } else if (mCurrentViewIndex == kActivityView) {
+        [activityViewController viewDidDisappear:YES];
+    } else if (mCurrentViewIndex == kActivityAlbumView) {
+        [activityAlbumViewController viewDidDisappear:YES];
+    } else if (mCurrentViewIndex == kActivityInfoView) {
+        [activityInfoViewController viewDidDisappear:YES];
+    }
+    
+    if (viewIndex == kActivityEntryView) {
+        [activityEntryViewController viewDidAppear:YES];
+    } else if (viewIndex == kActivityView) {
+        [activityViewController viewDidAppear:YES];
+    } else if (viewIndex == kActivityAlbumView) {
+        [activityAlbumViewController viewDidAppear:YES];
+    } else if (viewIndex == kActivityInfoView) {
+        [activityInfoViewController viewDidAppear:YES];
+    }
+    
     [UIView commitAnimations];
+    printf("commit the transition\n");
 }
 
 - (void)switchTo:(int)viewIndex {
