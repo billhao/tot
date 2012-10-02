@@ -29,9 +29,11 @@
 // get a list of events in a time period and contain the string in name
 - (NSMutableArray *) getEvent:(int)baby_id event:(NSString*)event startDate:(NSDate*)start endDate:(NSDate*)end;
 // return only limited events
-- (NSMutableArray *) getEvent:(int)baby_id event:(NSString*)event limit:(int) limit;
-// get events with all sorts of parameters
-- (NSMutableArray *) getEvent:(int)baby_id event:(NSString*)event limit:(int)limit startDate:(NSDate*)start endDate:(NSDate*)end;
+- (NSMutableArray *) getEvent:(int)baby_id event:(NSString*)event limit:(int)limit;
+// return only limited events at offset (offset starts at 1)
+- (NSMutableArray *) getEvent:(int)baby_id event:(NSString*)event limit:(int)limit offset:(int)offset;
+// get events with all sorts of parameters (offset starts at 1)
+- (NSMutableArray *) getEvent:(int)baby_id event:(NSString*)event limit:(int)limit offset:(int)offset startDate:(NSDate*)start endDate:(NSDate*)end;
 
 - (int) getEventCount:(int)baby_id event:(NSString*)event;
 - (BOOL) deleteEvents:(int)baby_id event:(NSString*)event;

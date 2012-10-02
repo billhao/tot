@@ -185,25 +185,30 @@
 
 // get events with name
 - (NSMutableArray *) getEvent :(int)baby_id event:(NSString*)event {
-    return [self getEvent:baby_id event:event limit:-1 startDate:nil endDate:nil]; // call the same function with no limit
+    return [self getEvent:baby_id event:event limit:0 offset:0 startDate:nil endDate:nil]; // call the same function with no limit
 }
 
 // get limited # of events with name
 - (NSMutableArray *) getEvent:(int)baby_id event:(NSString*)event limit:(int)limit {
-    return [self getEvent:baby_id event:event limit:limit startDate:nil endDate:nil];
+    return [self getEvent:baby_id event:event limit:limit offset:0 startDate:nil endDate:nil];
+}
+
+// get limited # of events at offset with name
+- (NSMutableArray *) getEvent:(int)baby_id event:(NSString*)event limit:(int)limit offset:(int)offset {
+    return [self getEvent:baby_id event:event limit:limit offset:offset startDate:nil endDate:nil];
 }
 
 // get all events in a time period
 - (NSMutableArray *) getEvent:(int)baby_id startDate:(NSDate*)start endDate:(NSDate*)end {
-    return [self getEvent:baby_id event:nil limit:-1 startDate:start endDate:end]; // call with a nil event
+    return [self getEvent:baby_id event:nil limit:0 offset:0 startDate:start endDate:end]; // call with a nil event
 }
 
 // get all events in a time period and contain the string in name
 - (NSMutableArray *) getEvent:(int)baby_id event:(NSString*)event startDate:(NSDate*)start endDate:(NSDate*)end {
-    return [self getEvent:baby_id event:event limit:-1 startDate:start endDate:end];
+    return [self getEvent:baby_id event:event limit:0 offset:0 startDate:start endDate:end];
 }
 
-- (NSMutableArray *) getEvent:(int)baby_id event:(NSString*)event limit:(int)limit startDate:(NSDate*)start endDate:(NSDate*)end {
+- (NSMutableArray *) getEvent:(int)baby_id event:(NSString*)event limit:(int)limit offset:(int)offset startDate:(NSDate*)start endDate:(NSDate*)end {
     NSMutableArray *events = [[[NSMutableArray alloc] init] autorelease];
     sqlite3_stmt *stmt = nil;
     @try {
@@ -246,9 +251,13 @@
             }
         }
         NSString* sql_limit = @"";
-        if( limit != -1 ) {
-            sql_limit = @"LIMIT ?";
+        if( limit > 0 ) {
+            if( offset > 0 )
+                sql_limit = @"LIMIT ?,?";
+            else
+                sql_limit = @"LIMIT ?";
         }
+        
         NSString* sql = [NSString stringWithFormat:sql_main, sql_condition, sql_limit];
         //NSLog(@"[db] SQL=%@", sql);
         
@@ -273,7 +282,12 @@
             int ret = sqlite3_bind_text(stmt, param_cnt, [[totEvent formatTime:end] UTF8String], -1, SQLITE_TRANSIENT);
             if( ret!=SQLITE_OK ) NSLog(@"[db] getEvent bind_text %d", ret);
         }
-        if( limit != -1 ) {
+        if( limit > 0 ) {
+            if( offset > 0 ) {
+                param_cnt++;
+                int ret = sqlite3_bind_int(stmt, param_cnt, offset);
+                if( ret!=SQLITE_OK ) NSLog(@"[db] getEvent bind_int %d", ret);
+            }
             param_cnt++;
             int ret = sqlite3_bind_int(stmt, param_cnt, limit);
             if( ret!=SQLITE_OK ) NSLog(@"[db] getEvent bind_int %d", ret);
