@@ -38,6 +38,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     NSLog(@"%@", @"new baby view did load");
+    
+    //set background
+    self.view.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"newbaby.png"]];
+    
     // set up events
     [mExistingAccount addTarget:self action:@selector(ExistingAccountButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [mBoy addTarget:self action:@selector(BoyButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
@@ -51,6 +55,11 @@
     [self createInputAccessoryView];
     mBDay.inputView = mPicker;
     mBDay.inputAccessoryView = inputAccView;
+}
+
+-(void)viewWillAppear:(BOOL)animated {
+    NSLog(@"will appear");
+    NSLog(@"h=%f w=%f", self.view.frame.size.height, self.view.frame.size.width);
 }
 
 - (void)viewDidUnload

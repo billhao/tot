@@ -27,6 +27,7 @@
 		3F454D2D1555A84700AC66EE /* totHomeHeightViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F454D2B1555A84700AC66EE /* totHomeHeightViewController.m */; };
 		3F454D2E1555A84700AC66EE /* homeHeightViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F454D2C1555A84700AC66EE /* homeHeightViewController.xib */; };
 		3F7CDB5D157ABDCE009CD3D7 /* totdb.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 3F7CDB5C157ABDCE009CD3D7 /* totdb.sqlite */; };
+		3FBD5E04161AC75600C1D964 /* newbaby.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FBD5E03161AC75600C1D964 /* newbaby.png */; };
 		3FC1B6FC1543680300295447 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FC1B6FB1543680300295447 /* libsqlite3.dylib */; };
 		3FC1B7061543841800295447 /* totModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FC1B7051543841800295447 /* totModel.m */; };
 		3FC1B7091544F19700295447 /* totEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FC1B7081544F19600295447 /* totEvent.m */; };
@@ -180,6 +181,7 @@
 		3F454D2B1555A84700AC66EE /* totHomeHeightViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totHomeHeightViewController.m; path = Home/totHomeHeightViewController.m; sourceTree = "<group>"; };
 		3F454D2C1555A84700AC66EE /* homeHeightViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = homeHeightViewController.xib; path = Resources/homeHeightViewController.xib; sourceTree = "<group>"; };
 		3F7CDB5C157ABDCE009CD3D7 /* totdb.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = totdb.sqlite; sourceTree = "<group>"; };
+		3FBD5E03161AC75600C1D964 /* newbaby.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = newbaby.png; path = Resources/Login/newbaby.png; sourceTree = "<group>"; };
 		3FC1B6FB1543680300295447 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		3FC1B7041543841800295447 /* totModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totModel.h; path = totdev/Model/totModel.h; sourceTree = "<group>"; };
 		3FC1B7051543841800295447 /* totModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totModel.m; path = totdev/Model/totModel.m; sourceTree = "<group>"; };
@@ -395,6 +397,14 @@
 				EFD8402B1550FAA600F75B69 /* motor_skill_walk.png */,
 			);
 			name = View;
+			sourceTree = "<group>";
+		};
+		3FBD5DFB161AC23200C1D964 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				3FBD5E03161AC75600C1D964 /* newbaby.png */,
+			);
+			name = Login;
 			sourceTree = "<group>";
 		};
 		3FC1B6FE1543681900295447 /* Model */ = {
@@ -637,6 +647,7 @@
 		EF6283A215366DF1004031D6 /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				3FBD5DFB161AC23200C1D964 /* Login */,
 				EF043C3B154DE2D600975BCD /* Utility */,
 				EF2387F0153BC3AC00B9C8BD /* Activity */,
 				EF97E7C3153B49F30037E52D /* Home */,
@@ -891,6 +902,7 @@
 				8E920F8C161903D700725971 /* icons-close.png in Resources */,
 				8E920F8D161903D700725971 /* icons-sleep-edit.png in Resources */,
 				8E920F8E161903D700725971 /* icons-sleep-start.png in Resources */,
+				3FBD5E04161AC75600C1D964 /* newbaby.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
