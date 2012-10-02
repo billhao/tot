@@ -194,6 +194,11 @@
 }
 
 // get limited # of events at offset with name
+- (NSMutableArray *) getEvent:(int)baby_id limit:(int)limit offset:(int)offset {
+    return [self getEvent:baby_id event:nil limit:limit offset:offset startDate:nil endDate:nil];
+}
+
+// get limited # of events at offset with name
 - (NSMutableArray *) getEvent:(int)baby_id event:(NSString*)event limit:(int)limit offset:(int)offset {
     return [self getEvent:baby_id event:event limit:limit offset:offset startDate:nil endDate:nil];
 }

@@ -31,6 +31,8 @@
 // return only limited events
 - (NSMutableArray *) getEvent:(int)baby_id event:(NSString*)event limit:(int)limit;
 // return only limited events at offset (offset starts at 1)
+- (NSMutableArray *) getEvent:(int)baby_id limit:(int)limit offset:(int)offset;
+// return only limited events at offset (offset starts at 1)
 - (NSMutableArray *) getEvent:(int)baby_id event:(NSString*)event limit:(int)limit offset:(int)offset;
 // get events with all sorts of parameters (offset starts at 1)
 - (NSMutableArray *) getEvent:(int)baby_id event:(NSString*)event limit:(int)limit offset:(int)offset startDate:(NSDate*)start endDate:(NSDate*)end;
