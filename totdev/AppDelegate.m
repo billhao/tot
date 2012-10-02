@@ -101,6 +101,7 @@
     
     // show new baby
     newbabyController = [[totNewBabyController alloc] initWithNibName:@"totNewBabyController" bundle:nil];
+    newbabyController.view.frame = CGRectMake(0, 20, newbabyController.view.frame.size.width, newbabyController.view.frame.size.height);
     [self.window addSubview:newbabyController.view];
     [self.window makeKeyAndVisible];
 }

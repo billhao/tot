@@ -60,6 +60,7 @@
 -(void)viewWillAppear:(BOOL)animated {
     NSLog(@"will appear");
     NSLog(@"h=%f w=%f", self.view.frame.size.height, self.view.frame.size.width);
+    NSLog(@"x=%f y=%f", self.view.frame.origin.x, self.view.frame.origin.y);
 }
 
 - (void)viewDidUnload
