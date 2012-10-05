@@ -20,7 +20,7 @@
 }
 
 // create new user or login
-@property (nonatomic) BOOL newuser;
+@property (nonatomic) BOOL newuser; // whether shown as create new user page or login page, this is set before current view is shown
 
 - (IBAction) backgroundTap:(id) sender;
 

@@ -41,12 +41,6 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    if( newuser ) {
-        mLogin.hidden = TRUE;
-    }
-    else {
-        //mNewuser.hidden = TRUE;
-    }
     // set up events
     [mLogin addTarget:self action:@selector(LoginButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [mNewuser addTarget:self action:@selector(NewUserButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
@@ -62,7 +56,22 @@
     // e.g. self.myOutlet = nil;
 }
 
-- (void)viewDidAppear:(BOOL)animated {
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    NSLog(@"[Login]new user mode=%d", newuser);
+    
+    if( newuser ) {
+        mLogin.hidden = TRUE;
+        //set background
+        self.view.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"registration.png"]];
+    }
+    else {
+        mNewuser.hidden = FALSE;
+        //set background
+        self.view.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"login.png"]];
+    }
+
     // set email and clear password
     NSString* lastlogin = [model getPreferenceNoBaby:PREFERENCE_LAST_LOGGED_IN];
     if( lastlogin==nil )

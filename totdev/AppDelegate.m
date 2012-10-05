@@ -118,6 +118,7 @@
 
     // show login
     loginController = [[totLoginController alloc] initWithNibName:@"totLoginController" bundle:nil];
+    loginController.view.frame = CGRectMake(0, 20, loginController.view.frame.size.width, loginController.view.frame.size.height);
     if( baby_id == -1 )
         loginController.newuser = FALSE;
     else {
