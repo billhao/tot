@@ -10,8 +10,7 @@
 #import "totModel.h"
 
 @interface totLoginController : UIViewController <UITextFieldDelegate> {
-    IBOutlet UITextField* mEmail;
-    IBOutlet UITextField* mPwd;
+    IBOutlet UITextField *mEmail, *mPwd, *mCurrentControl;
     IBOutlet UIButton*    mLogin;
     IBOutlet UIButton*    mNewuser;
     IBOutlet UIButton*    mPrivacy;
@@ -22,6 +21,8 @@
 
 // create new user or login
 @property (nonatomic) BOOL newuser;
+
+- (IBAction) backgroundTap:(id) sender;
 
 - (BOOL)checkEmail;
 - (BOOL)checkPwd;

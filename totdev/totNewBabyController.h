@@ -9,11 +9,12 @@
 #import <UIKit/UIKit.h>
 
 @interface totNewBabyController : UIViewController <UITextFieldDelegate, UIPickerViewDelegate> {
-    IBOutlet UITextField *mName, *mBDay;
+    IBOutlet UITextField *mName, *mBDay, *mCurrentControl;
     IBOutlet UIButton *mBoy, *mGirl, *mSave, *mExistingAccount;
     IBOutlet UIDatePicker *mPicker;
     UIView *inputAccView;
     UIButton *btnDone;
+    UIImage *mBoySelected, *mGirlSelected;
     
     enum SEX {
         NA,          // N/A
@@ -32,8 +33,9 @@
 - (void)GirlButtonClicked: (UIButton *)button;
 - (void)SaveButtonClicked: (UIButton *)button;
 - (void)changeDateInLabel:(id)sender;
+- (void)pickerDoneClicked: (UIButton *)button;
 - (IBAction) backgroundTap:(id) sender;
-- (void)createInputAccessoryView;
+- (UIView*)createInputAccessoryView;
 - (void)doneTyping;
 
 @end

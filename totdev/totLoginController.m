@@ -189,8 +189,27 @@
     return TRUE;
 }
 
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    mCurrentControl = textField;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    mCurrentControl = nil;
+}
+
 - (void)setBabyIDforNewUser:(int)newbaby_id {
     mBaby_id = newbaby_id;
 }
+
+// dismiss the keyboard when tapping on background
+- (IBAction) backgroundTap:(id) sender{
+    if( mCurrentControl == mEmail ) {
+        [mEmail resignFirstResponder];
+    }
+    else if( mCurrentControl == mPwd ) {
+        [mPwd resignFirstResponder];
+    }
+}
+
 
 @end

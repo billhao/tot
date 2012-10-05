@@ -23,6 +23,7 @@
         // Custom initialization
         sex = NA;
         bday = nil;
+        mCurrentControl = nil;
     }
     return self;
 }
@@ -49,18 +50,23 @@
     [mSave addTarget:self action:@selector(SaveButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [mName setDelegate:self];
     [mBDay addTarget:self action:@selector(BDayButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [mBDay setDelegate:self];
     
     mPicker.date = [NSDate date];
 	//[mPicker addTarget:self action:@selector(changeDateInLabel:) forControlEvents:UIControlEventValueChanged];
-    [self createInputAccessoryView];
+    inputAccView = [self createInputAccessoryView];
     mBDay.inputView = mPicker;
     mBDay.inputAccessoryView = inputAccView;
+    
+    // load images for boy and girl selected
+    mBoySelected = [UIImage imageNamed:@"boySelected.png"];
+    mGirlSelected = [UIImage imageNamed:@"girlSelected.png"];
 }
 
 -(void)viewWillAppear:(BOOL)animated {
-    NSLog(@"will appear");
-    NSLog(@"h=%f w=%f", self.view.frame.size.height, self.view.frame.size.width);
-    NSLog(@"x=%f y=%f", self.view.frame.origin.x, self.view.frame.origin.y);
+//    NSLog(@"will appear");
+//    NSLog(@"h=%f w=%f", self.view.frame.size.height, self.view.frame.size.width);
+//    NSLog(@"x=%f y=%f", self.view.frame.origin.x, self.view.frame.origin.y);
 }
 
 - (void)viewDidUnload
@@ -68,6 +74,8 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
+    [mBoySelected release];
+    [mGirlSelected release];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -80,14 +88,14 @@
 
 - (void)BoyButtonClicked: (UIButton *)button {
     sex = MALE;
-    mGirl.selected = FALSE;
-    mBoy.selected = TRUE;
+    [mBoy setImage:mBoySelected forState:UIControlStateNormal];
+    [mGirl setImage:nil forState:UIControlStateNormal];
 }
 
 - (void)GirlButtonClicked: (UIButton *)button {
     sex = FEMALE;
-    mBoy.selected = FALSE;
-    mGirl.selected = TRUE;
+    [mBoy setImage:nil forState:UIControlStateNormal];
+    [mGirl setImage:mGirlSelected forState:UIControlStateNormal];
 }
 
 - (void)BDayButtonClicked: (UIControl *)ctrl {
@@ -143,6 +151,11 @@
     [appDelegate showLoginView:baby_id];
 }
 
+- (void)pickerDoneClicked: (UIButton *)button {
+    [mBDay resignFirstResponder];
+    [self changeDateInLabel:nil];
+}
+
 - (void)changeDateInLabel:(id)sender {
     NSDateFormatter *df = [[NSDateFormatter alloc] init];
     [df setDateFormat:@"MMM d, yyyy h:mma"];
@@ -152,42 +165,58 @@
     bday = [mPicker.date copy];
 }
 
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    mCurrentControl = textField;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    mCurrentControl = nil;
+}
+
+// dismiss the keyboard when tapping on background
+- (IBAction) backgroundTap:(id) sender{
+    if( mCurrentControl == mName ) {
+        // hide keyboard for name
+        [mName resignFirstResponder];
+    }
+    else if( mCurrentControl == mBDay ) {
+        // hide date picker
+        [self pickerDoneClicked:nil];
+    }
+}
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
     return TRUE;
 }
 
-- (IBAction) backgroundTap:(id) sender{
-    // hide keyboard for name
-    [mName resignFirstResponder];
-    // hide date picker
-    CGRect frame = mPicker.frame;
-    mPicker.frame = CGRectMake(0, 1800, frame.size.width, frame.size.height);
-}
-
-- (void)createInputAccessoryView{
-    inputAccView = [[UIView alloc] initWithFrame:CGRectMake(10.0, 0.0, 310.0, 60.0)];
+- (UIView*)createInputAccessoryView{
+    // create a done view + done button, attach to it a doneClicked action, and place it in a toolbar as an accessory input view...
+    // Prepare done button
+    UIToolbar* keyboardDoneButtonView	= [[UIToolbar alloc] init];
+    keyboardDoneButtonView.barStyle		= UIBarStyleBlack;
+    keyboardDoneButtonView.translucent	= YES;
+    keyboardDoneButtonView.tintColor	= nil;
+    [keyboardDoneButtonView sizeToFit];
     
-    [inputAccView setBackgroundColor:[UIColor lightGrayColor]];
+    UIBarButtonItem* doneButton    = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleBordered  target:self action:@selector(pickerDoneClicked:)];
     
-    [inputAccView setAlpha: 0.7];
+    // I put the spacers in to push the doneButton to the right side of the picker view
+    UIBarButtonItem *spacer1    = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+                                                                                target:nil action:nil];
+    // I put the spacers in to push the doneButton to the right side of the picker view
+    UIBarButtonItem *spacer    = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+                                                                               target:nil action:nil];
     
-    btnDone = [UIButton buttonWithType:UIButtonTypeCustom];
-    [btnDone setFrame:CGRectMake(240.0, 10.0f, 80.0f, 40.0f)];
-    [btnDone setTitle:@"Done" forState:UIControlStateNormal];
-    [btnDone setBackgroundColor:[UIColor blackColor]];
-    [btnDone setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [btnDone addTarget:self action:@selector(doneTyping) forControlEvents:UIControlEventTouchUpInside];
+    [keyboardDoneButtonView setItems:[NSArray arrayWithObjects:spacer, spacer1, doneButton, nil]];
     
-    [inputAccView addSubview:btnDone];
+    return keyboardDoneButtonView;
 }
 
 - (void)doneTyping{
     // hide date picker
 //    CGRect frame = mPicker.frame;
 //    mPicker.frame = CGRectMake(0, 1800, frame.size.width, frame.size.height);
-    [mBDay resignFirstResponder];
-    [self changeDateInLabel:nil];
 }
 
 @end
