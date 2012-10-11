@@ -15,8 +15,8 @@
 
 @synthesize mHomeRootController;
 
-static NSString *DIAPER_WET = @"wet";
-static NSString *DIAPER_SOLID = @"solid";
+static NSString *DIAPER_WET      = @"wet";
+static NSString *DIAPER_SOLID    = @"solid";
 static NSString *DIAPER_WETSOLID = @"wetsolid";
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil

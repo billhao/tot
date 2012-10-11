@@ -83,8 +83,8 @@
                 [margin addObject:[NSNumber numberWithBool:NO]];
                 break;
             case 1:
-                [totActivityUtility extractFromEvent:[queryResult objectAtIndex:0] 
-                        intoImageArray:images];
+                [totActivityUtility extractFromEvent:[queryResult objectAtIndex:0]
+                                      intoImageArray:images];
                 [margin addObject:[NSNumber numberWithBool:NO]];
                 break;
             default:

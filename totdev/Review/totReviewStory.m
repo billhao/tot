@@ -10,12 +10,12 @@
 
 @implementation totReviewStory
 
-@synthesize who;
-@synthesize type;
-@synthesize when;
-@synthesize content;
-@synthesize comment;
-@synthesize height;
+@synthesize mEventType;
+@synthesize mWhen;
+@synthesize mContent;
+@synthesize mComment;
+@synthesize mRawContent;
+@synthesize mBabyId;
 
 - (id) init {
     self = [super init];
@@ -26,11 +26,11 @@
 }
 
 - (void) dealloc {
-    [who release];
-    [when release];
-    [type release];
-    [content release];
-    [comment release];
+    [mEventType release];
+    [mWhen release];
+    [mContent release];
+    [mComment release];
+    [mRawContent release];
     [super dealloc];
 }
 

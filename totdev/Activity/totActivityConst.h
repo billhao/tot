@@ -23,7 +23,8 @@ const static const char *ACTIVITY_NAMES [] = {
 const static const char *ACTIVITY_MEMBERS [] = { // the name should correspond to the image file name
     "", // eye contact
     "", // vision attention
-    "motor_skill_stand,motor_skill_walk,motor_skill_run,motor_skill_dance,motor_skill_jump,motor_skill_cruise,motor_skill_crawl,motor_skill_sit,motor_skill_roll_over,motor_skill_kick_leg,motor_skill_lift_neck",  // motorskill
+    "motor_skill_stand,motor_skill_walk,motor_skill_run,motor_skill_dance,motor_skill_jump,motor_skill_cruise," \
+    "motor_skill_crawl,motor_skill_sit,motor_skill_roll_over,motor_skill_kick_leg,motor_skill_lift_neck", // motor skill
     "emotion_happy,emotion_sad,emotion_surprise,emotion_angry,emotion_disgust,emotion_fear", // emotion
     "", // chew
     "gesture_point,gesture_clap,gesture_wave,gesture_suck_thumb,gesture_suck_toe", // gesture

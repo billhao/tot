@@ -128,6 +128,14 @@
 		3FE9B5FA154A313700199AAF /* totSliderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FE9B5F9154A313700199AAF /* totSliderView.m */; };
 		8E4D50E41614CC3A00890621 /* boy.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8E4D50E21614CC3A00890621 /* boy.jpg */; };
 		8E4D50E51614CC3A00890621 /* girl.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8E4D50E31614CC3A00890621 /* girl.jpg */; };
+		8E632EBD16268CD900072D89 /* totHomeDiaperView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E632EBC16268CD900072D89 /* totHomeDiaperView.m */; };
+		8E632EC716268DF400072D89 /* background-diaper.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E632EC016268DF400072D89 /* background-diaper.png */; };
+		8E632EC816268DF400072D89 /* icons-diaper-solid.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E632EC116268DF400072D89 /* icons-diaper-solid.png */; };
+		8E632EC916268DF400072D89 /* icons-diaper-wet.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E632EC216268DF400072D89 /* icons-diaper-wet.png */; };
+		8E632ECA16268DF400072D89 /* icons-diaper-wetandsolid.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E632EC316268DF400072D89 /* icons-diaper-wetandsolid.png */; };
+		8E632ECB16268DF400072D89 /* icons-history.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E632EC416268DF400072D89 /* icons-history.png */; };
+		8E632ECC16268DF400072D89 /* icons-ok.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E632EC516268DF400072D89 /* icons-ok.png */; };
+		8E632ECD16268DF400072D89 /* icons-share.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E632EC616268DF400072D89 /* icons-share.png */; };
 		8E920F8A161903D700725971 /* backgrounds-sleepduring.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E920F85161903D600725971 /* backgrounds-sleepduring.png */; };
 		8E920F8B161903D700725971 /* backgrounds-sleepstart.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E920F86161903D700725971 /* backgrounds-sleepstart.png */; };
 		8E920F8C161903D700725971 /* icons-close.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E920F87161903D700725971 /* icons-close.png */; };
@@ -377,6 +385,15 @@
 		3FE9B5F9154A313700199AAF /* totSliderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totSliderView.m; path = Utility/totSliderView.m; sourceTree = "<group>"; };
 		8E4D50E21614CC3A00890621 /* boy.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = boy.jpg; path = Resources/Home/boy.jpg; sourceTree = "<group>"; };
 		8E4D50E31614CC3A00890621 /* girl.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = girl.jpg; path = Resources/Home/girl.jpg; sourceTree = "<group>"; };
+		8E632EBB16268CD900072D89 /* totHomeDiaperView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totHomeDiaperView.h; path = Home/totHomeDiaperView.h; sourceTree = "<group>"; };
+		8E632EBC16268CD900072D89 /* totHomeDiaperView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totHomeDiaperView.m; path = Home/totHomeDiaperView.m; sourceTree = "<group>"; };
+		8E632EC016268DF400072D89 /* background-diaper.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "background-diaper.png"; path = "Resources/Home/background-diaper.png"; sourceTree = "<group>"; };
+		8E632EC116268DF400072D89 /* icons-diaper-solid.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icons-diaper-solid.png"; path = "Resources/Home/icons-diaper-solid.png"; sourceTree = "<group>"; };
+		8E632EC216268DF400072D89 /* icons-diaper-wet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icons-diaper-wet.png"; path = "Resources/Home/icons-diaper-wet.png"; sourceTree = "<group>"; };
+		8E632EC316268DF400072D89 /* icons-diaper-wetandsolid.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icons-diaper-wetandsolid.png"; path = "Resources/Home/icons-diaper-wetandsolid.png"; sourceTree = "<group>"; };
+		8E632EC416268DF400072D89 /* icons-history.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icons-history.png"; path = "Resources/Home/icons-history.png"; sourceTree = "<group>"; };
+		8E632EC516268DF400072D89 /* icons-ok.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icons-ok.png"; path = "Resources/Home/icons-ok.png"; sourceTree = "<group>"; };
+		8E632EC616268DF400072D89 /* icons-share.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icons-share.png"; path = "Resources/Home/icons-share.png"; sourceTree = "<group>"; };
 		8E920F85161903D600725971 /* backgrounds-sleepduring.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "backgrounds-sleepduring.png"; path = "Resources/Home/backgrounds-sleepduring.png"; sourceTree = "<group>"; };
 		8E920F86161903D700725971 /* backgrounds-sleepstart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "backgrounds-sleepstart.png"; path = "Resources/Home/backgrounds-sleepstart.png"; sourceTree = "<group>"; };
 		8E920F87161903D700725971 /* icons-close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icons-close.png"; path = "Resources/Home/icons-close.png"; sourceTree = "<group>"; };
@@ -731,6 +748,20 @@
 			name = Sleep;
 			sourceTree = "<group>";
 		};
+		8E632EBF16268D8500072D89 /* Diaper */ = {
+			isa = PBXGroup;
+			children = (
+				8E632EC016268DF400072D89 /* background-diaper.png */,
+				8E632EC116268DF400072D89 /* icons-diaper-solid.png */,
+				8E632EC216268DF400072D89 /* icons-diaper-wet.png */,
+				8E632EC316268DF400072D89 /* icons-diaper-wetandsolid.png */,
+				8E632EC416268DF400072D89 /* icons-history.png */,
+				8E632EC516268DF400072D89 /* icons-ok.png */,
+				8E632EC616268DF400072D89 /* icons-share.png */,
+			);
+			name = Diaper;
+			sourceTree = "<group>";
+		};
 		EF043C3B154DE2D600975BCD /* Utility */ = {
 			isa = PBXGroup;
 			children = (
@@ -868,6 +899,8 @@
 		EF62839215366D62004031D6 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				8E632EBB16268CD900072D89 /* totHomeDiaperView.h */,
+				8E632EBC16268CD900072D89 /* totHomeDiaperView.m */,
 				EF4CEE5715563E2400109BCC /* totLanguageInputViewController.h */,
 				EF4CEE5815563E2400109BCC /* totLanguageInputViewController.m */,
 				EF62839615366D9A004031D6 /* totHomeRootController.h */,
@@ -1002,6 +1035,7 @@
 		EF97E7C3153B49F30037E52D /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				8E632EBF16268D8500072D89 /* Diaper */,
 				24B567B916264B16008D8E53 /* feeding */,
 				8E4D50E71616593900890621 /* Sleep */,
 				8E4D50E21614CC3A00890621 /* boy.jpg */,
@@ -1331,6 +1365,7 @@
 				EF4C5863157B3D6000D41C89 /* totReviewStoryView.m in Sources */,
 				3FCA8975157AE42600B087D7 /* totSettingEntryViewController.m in Sources */,
 				3FE62AF815E8A6E50079CE54 /* totNewBabyController.m in Sources */,
+				8E632EBD16268CD900072D89 /* totHomeDiaperView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

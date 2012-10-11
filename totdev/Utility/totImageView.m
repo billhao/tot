@@ -8,13 +8,17 @@
 
 #import "totImageView.h"
 
+#define DEFAULT_TAG -1
+
 @implementation totImageView
 
 @synthesize delegate;
+@synthesize mTag;
 
 - (id)initWithFrame:(CGRect)frame {
     if( self = [super initWithFrame:frame] ) {
         self.userInteractionEnabled = YES;
+        self.mTag = DEFAULT_TAG;
     }
     return self;
 }
@@ -36,6 +40,8 @@
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
     if( [delegate respondsToSelector:@selector(touchesEndedDelegate:withEvent:)] ) {
         [delegate touchesEndedDelegate:touches withEvent:event];
+    } else if ( [delegate respondsToSelector:@selector(touchesEndedDelegate:withEvent:from:)] ) {
+        [delegate touchesEndedDelegate:touches withEvent:event from:mTag];
     }
 }
 
