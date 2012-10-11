@@ -111,7 +111,7 @@
     // navigationBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
     //[self.view addSubview:navigationBar];
     mNavigationBar= [[totNavigationBar alloc] initWithFrame:CGRectMake(0, 0, 320, 40)];
-    [mNavigationBar setLeftButtonTitle:@"Back"];
+    [mNavigationBar setLeftButtonImg:@"return.png"];
     [mNavigationBar setNavigationBarTitle:@"Height & Weight" andColor:[UIColor blackColor]];
     [mNavigationBar setBackgroundColor:[UIColor whiteColor]];
     [mNavigationBar setDelegate:self];

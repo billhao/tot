@@ -20,7 +20,6 @@
 
 @synthesize activityRootController;
 @synthesize mSliderView;
-@synthesize mCurrentActivityID;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -86,20 +85,16 @@
     NSTimeInterval interval = [today timeIntervalSince1970];
     NSString *filename = [[NSString alloc] initWithFormat:@"%d.jpg", (int)interval];
 
-    printf("save photo into %s\n", [filename UTF8String]);
+    // Save the image file and add it to cache.
     [self saveImage:photo intoFile:filename];
-    
-    printf("add the image into cache\n");
     AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
     [delegate.mCache addImage:photo WithKey:filename];
     
-    if( [mMessage objectForKey:@"storedVideo"] )
-        [mMessage removeObjectForKey:@"storedVideo"];
+    [mMessage removeAllObjects];
     [mMessage setObject:filename forKey:@"storedImage"];
-    [mMessage setObject:self.mCurrentActivityID forKey:@"activity"];
+    [mMessage setObject:[NSNumber numberWithInt:mCurrentActivityID] forKey:@"activity"];
     [filename release];
     
-    printf("enter the info view\n");
     [activityRootController switchTo:kActivityInfoView withContextInfo:mMessage];
 }
 
@@ -115,14 +110,11 @@
 - (void) cameraView:(id)cameraView didFinishSavingThumbnail:(UIImage*)thumbnail {
     NSString *videoFilename = [mMessage objectForKey:@"storedVideo"];
     NSString *thumbFilename = [videoFilename stringByAppendingString:@".jpg"];
-    
-    [self saveImage:thumbnail intoFile:thumbFilename];
-    
+    [self saveImage:thumbnail intoFile:thumbFilename];  // save the thumbnail.
     AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
     [delegate.mCache addImage:thumbnail WithKey:thumbFilename];
-    
     [mMessage setObject:thumbFilename forKey:@"storedImage"];
-    [mMessage setObject:self.mCurrentActivityID forKey:@"activity"];
+    [mMessage setObject:[NSNumber numberWithInt:mCurrentActivityID] forKey:@"activity"];
     
     [activityRootController switchTo:kActivityInfoView withContextInfo:mMessage];
 }
@@ -130,42 +122,33 @@
 #pragma totSliderView delegate
 - (void)buttonPressed: (id)sender {
     UIButton *btn = (UIButton*)sender;
-    int tag = [btn tag];
-    tag = tag - 1;
+    int tag = [btn tag] - 1;
     
-    NSString *activity = [NSString stringWithUTF8String: ACTIVITY_NAMES[[mCurrentActivityID intValue]]];
-    NSString *memb_str = [NSString stringWithUTF8String: ACTIVITY_MEMBERS[[mCurrentActivityID intValue]]];
-    NSArray *member = [memb_str componentsSeparatedByString:@","];
-    NSString *the_member = [member objectAtIndex:tag];
-    
+    NSString * memb_str = [NSString stringWithUTF8String: ACTIVITY_MEMBERS[mCurrentActivityID]];
+    NSArray  * members  = [memb_str componentsSeparatedByString:@","];
+
     int currentBabyId = [totActivityUtility getCurrentBabyID];
-    
-    char query[256] = {0};
-    sprintf(query, "%s/%s", [activity UTF8String], [the_member UTF8String] );
-    
-    NSMutableArray *queryResult = [mTotModel getEvent:currentBabyId event:[NSString stringWithUTF8String:query]];
-    NSMutableArray *images = [[NSMutableArray alloc] init];
-    
-    int querySize = [queryResult count];
-    if( querySize != 0 ) {
-        for( int i = 0; i < querySize; i++ ) {
-            [totActivityUtility extractFromEvent:[queryResult objectAtIndex:i] 
-                                  intoImageArray:images];
-        }
-        
-        AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-        [appDelegate.rootController.albumView MakeFullView:images];
-        
-        //NSMutableDictionary *msg = [[NSMutableDictionary alloc] init];
-        //[msg setObject:images forKey:@"images"];
-        //[activityRootController switchTo:kActivityAlbumView withContextInfo:msg];
-        //[msg release];
+    NSString * query = nil;
+    if ([members count] < 2) {  // split empty string => [""]
+        query = [NSString stringWithFormat:@"%s", ACTIVITY_NAMES[mCurrentActivityID]];
+    } else {
+        query = [NSString stringWithFormat:@"%s/%s", ACTIVITY_NAMES[mCurrentActivityID], [[members objectAtIndex:tag] UTF8String]];
     }
-    
+    NSMutableArray * query_result = [mTotModel getEvent:currentBabyId event:query];
+    int result_size = [query_result count];
+    if (result_size == 0)
+        return;
+      
+    NSMutableArray *images = [[NSMutableArray alloc] init];
+    for( int i = 0; i < result_size; i++ ) {
+        [totActivityUtility extractFromEvent:[query_result objectAtIndex:i] intoImageArray:images];
+    }
+    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    [appDelegate.rootController.albumView MakeFullView:images];
     [images release];
 }
 
-
+// launch camera
 - (void) launchCamera:(id)sender {
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
     [appDelegate.rootController.cameraView setDelegate:self];
@@ -178,21 +161,30 @@
     [appDelegate.rootController.cameraView launchVideoCamera];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self updateInterface];
+}
+
 - (void)receiveMessage: (NSMutableDictionary*)message {
-    // message contains two objects:
+    mState = [NSDictionary dictionaryWithDictionary:message];
+}
+
+- (void)updateInterface {
+    // mState contains two objects:
     // images => MSMutableArray, each element is a path to the image
     // margin => MSMutableArray, each element is a yes or no
     [mSliderView cleanScrollView];
     
-    NSMutableArray *activityMemberImages = [[NSMutableArray alloc] init];
-    NSMutableArray *activityMemberMargin = [[NSMutableArray alloc] init];
-    NSMutableArray *isIcon = [[NSMutableArray alloc] init];
+    NSMutableArray * activityMemberImages = [[NSMutableArray alloc] init];
+    NSMutableArray * activityMemberMargin = [[NSMutableArray alloc] init];
+    NSMutableArray * isIcon = [[NSMutableArray alloc] init];
     
-    self.mCurrentActivityID = [message objectForKey:@"activity"];
-    NSMutableArray *images  = [message objectForKey:@"images"];
-    NSMutableArray *margin  = [message objectForKey:@"margin"];
+    mCurrentActivityID  = [[mState objectForKey:@"activity"] intValue];
+    NSMutableArray * images  = [mState objectForKey:@"images"];
+    NSMutableArray * margin  = [mState objectForKey:@"margin"];
     
-    switch ( [mCurrentActivityID intValue] ) {
+    switch ( mCurrentActivityID ) {
         case kActivityEmotion:
             [mBackground setImage:[UIImage imageNamed:@"emotion_bg.png"]];
             break;
@@ -202,16 +194,14 @@
         case kActivityGesture:
             [mBackground setImage:[UIImage imageNamed:@"gesture_bg.png"]];
             break;
-        default:
-            printf("Hasn't implemented yet\n");
-            return;
+        default:  // for now, use gesture background as default background
+            [mBackground setImage:[UIImage imageNamed:@"gesture_bg.png"]];
             break;
     }
     
     for( int i = 0; i < [images count]; i++ ) {
-        // get the file extension.
-        NSArray *tokens = [[images objectAtIndex:i] componentsSeparatedByString:@"."];
-        NSString *ext = [tokens lastObject];
+        NSArray * tokens = [[images objectAtIndex:i] componentsSeparatedByString:@"."];
+        NSString * ext = [tokens lastObject];
         
         AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
         UIImage *cachedImg = [delegate.mCache getImageWithKey:[images objectAtIndex:i]];
@@ -244,10 +234,6 @@
     [activityRootController switchTo:kActivityEntryView];
 }
 
-- (void)navRightButtonPressed:(id)sender {
-    printf("Test right button\n");
-}
-
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -259,9 +245,8 @@
     // create navigation bar
     mNavigationBar = [[totNavigationBar alloc] initWithFrame:CGRectMake(0, 0, 320, 40)];
     [mNavigationBar setDelegate:self];
-    [mNavigationBar setLeftButtonTitle:@"Back"];
-    [mNavigationBar setRightButtonTitle:@"Test"];
-    [mNavigationBar setBackgroundColor:[UIColor grayColor]];
+    [mNavigationBar setLeftButtonImg:@"return.png"];
+    [mNavigationBar setBackgroundColor:[UIColor whiteColor]];
     [mNavigationBar setAlpha:0.5];
     [self.view addSubview:mNavigationBar];
     
@@ -290,10 +275,9 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
+    [mMessage release];
     [mBackground release];
     [mSliderView release];
-    [mCurrentActivityID release];
-    [mMessage release];
     [mNavigationBar release];
 }
 

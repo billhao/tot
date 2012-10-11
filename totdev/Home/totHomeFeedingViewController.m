@@ -170,8 +170,7 @@
     //navigationBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
     //[self.view addSubview:navigationBar];
     mNavigationBar= [[totNavigationBar alloc] initWithFrame:CGRectMake(0, 0, 320, 40)];
-    [mNavigationBar setLeftButtonTitle:@"Back"];
-    [mNavigationBar setNavigationBarTitle:@"time" andColor:[UIColor darkGrayColor]];
+    [mNavigationBar setLeftButtonImg:@"return.png"];
     [mNavigationBar setBackgroundColor:[UIColor whiteColor]];
     [mNavigationBar setDelegate:self];
     [self.view addSubview:mNavigationBar];
@@ -195,8 +194,6 @@
     [mOKButton setTitle:@"OK" forState:UIControlStateNormal];
     [self.view addSubview:mOKButton];
     
-
-
     mDatetime = [UIButton buttonWithType:UIButtonTypeCustom];
     mDatetime.frame = CGRectMake(10, 347, 130, 40);
     [mDatetime setTitle:[totUtility nowTimeString] forState:UIControlStateNormal];
@@ -230,8 +227,6 @@
     for (int i=0; i<DEFAULT_MENU ; i++) {
         quantityList[i]=0;    
     }
-
-
 }
 
 
@@ -258,7 +253,6 @@
         }
         
     }
-    
     
     [mSummary setTitle:summary forState:UIControlStateNormal];
     [self.view bringSubviewToFront:mSummary];

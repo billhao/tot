@@ -143,9 +143,8 @@
         [activityInfoViewController receiveMessage:info];
     }
     
-    printf("start the transition animation\n");
     [UIView beginAnimations:@"swipe" context:nil];
-	[UIView setAnimationDuration:1.25f];
+	[UIView setAnimationDuration:1.0f];
     [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
     
     if (mCurrentViewIndex == kActivityEntryView) {
@@ -197,7 +196,6 @@
     }
     
     [UIView commitAnimations];
-    printf("commit the transition\n");
 }
 
 - (void)switchTo:(int)viewIndex {

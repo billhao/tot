@@ -13,8 +13,10 @@
 
 @interface totActivityAlbumViewController : UIViewController {
     totActivityRootController *activityRootController;
+    
     UIScrollView *mScrollView;
     moviePlayerViewController *myMoviePlayerView;
+    
     NSMutableArray *mPaths;
 }
 

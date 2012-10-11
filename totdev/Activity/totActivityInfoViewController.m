@@ -18,7 +18,6 @@
 
 @synthesize activityRootController;
 @synthesize mActivityDesc;
-@synthesize mCurrentActivityID;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -41,7 +40,7 @@
 
 - (void)backToActivityView {
     NSMutableDictionary *message = [[NSMutableDictionary alloc] init];
-    [activityRootController.activityEntryViewController prepareMessage:message for:[mCurrentActivityID intValue]];
+    [activityRootController.activityEntryViewController prepareMessage:message for:mCurrentActivityID];
     [activityRootController switchTo:kActivityView withContextInfo:message];
     [message release];
 }
@@ -58,22 +57,17 @@
 #pragma mark - UITextView delegates
 // called when the keyboard appears
 - (BOOL)textViewShouldBeginEditing:(UITextView *)textView {
-    //printf("textViewShouldBeginEditing\n");
     return YES;
 }
 
-- (void)textViewDidBeginEditing:(UITextView *)textView {
-    //printf("textViewDidBeginEditing\n");
-}
+- (void)textViewDidBeginEditing:(UITextView *)textView {}
 
 // called when the keyboard disappears
 - (BOOL)textViewShouldEndEditing:(UITextView *)textView {
-    //printf("textViewShouldEndEditing\n");
     return YES;
 }
 
 - (void)textViewDidEndEditing:(UITextView *)textView {
-    //printf("textViewDidEndEditing\n");
     printf("%s\n", [textView.text UTF8String]);
 }
 
@@ -87,9 +81,7 @@
 }
 
 // whenever the user types the keyboard
-//- (void)textViewDidChange:(UITextView *)textView {
-//    printf("textViewDidChange\n");
-//}
+- (void)textViewDidChange:(UITextView *)textView {}
 
 #pragma mark - UITouch delegates
 
@@ -108,17 +100,20 @@
 #pragma mark - totSliderView delegate
 - (void)buttonPressed:(id)sender {
     UIButton *btn = (UIButton*)sender;
-    int tag = [btn tag];
-    tag = tag - 1; // index starts from 0
+    int tag = [btn tag] - 1; // index starts from 0
     
-    NSString *activity = [NSString stringWithUTF8String: ACTIVITY_NAMES[[mCurrentActivityID intValue]]];
-    NSString *memb_str = [NSString stringWithUTF8String: ACTIVITY_MEMBERS[[mCurrentActivityID intValue]]];
-    NSArray  *member = [memb_str componentsSeparatedByString:@","];
-    NSString *the_member = [member objectAtIndex:tag];
+    NSString * activity = [NSString stringWithUTF8String: ACTIVITY_NAMES[mCurrentActivityID]];
+    NSString * memb_str = [NSString stringWithUTF8String: ACTIVITY_MEMBERS[mCurrentActivityID]];
+    NSArray  * members  = [memb_str componentsSeparatedByString:@","];
     
-    sprintf(mEventName, "%s/%s", [activity UTF8String], [the_member UTF8String]);
-    printf("Event name: %s\n", mEventName);
-    
+    if ([members count] < 2) {
+        sprintf(mEventName, "%s", [activity UTF8String]);
+    } else {
+        NSString * the_member = [members objectAtIndex:tag];
+        sprintf(mEventName, "%s/%s", [activity UTF8String], [the_member UTF8String]);
+    }
+    NSLog(@"Event name: %s", mEventName);
+
     // pop up alertView, confirm to save to db
     UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"" 
                                                       message:@"Press OK to Save" 
@@ -133,11 +128,10 @@
     NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
     if( [title isEqualToString:@"OK"] ) {
         //save to db
-        
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-        NSDate *now = [NSDate date];
-        NSString *formattedDateString = [dateFormatter stringFromDate:now];
+        NSDate * now = [NSDate date];
+        NSString * formattedDateString = [dateFormatter stringFromDate:now];
         [dateFormatter release];
         
         char data[256]={0};
@@ -148,9 +142,8 @@
             sprintf(data, "%s;desc=%s", data, [mActivityDesc.text UTF8String]);
         
         printf("insert to db: %s\n", data);
-        
         [mTotModel addEvent:[totActivityUtility getCurrentBabyID] 
-                      event:[NSString stringWithUTF8String:mEventName] 
+                      event:[NSString stringWithUTF8String:mEventName]
                    datetimeString:formattedDateString 
                       value:[NSString stringWithUTF8String:data]];
         
@@ -168,34 +161,29 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-    printf("View Did Appear\n");
     [super viewDidAppear:animated];
     [self updateInterface];
 }
 
 - (void)updateInterface {
-    [mSliderView cleanScrollView];
-    printf("clear slider view in info view\n");
+    NSString * videoFilename = [mState objectForKey:@"storedVideo"];
+    NSString * filename = [mState objectForKey:@"storedImage"];
+    NSArray  * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString * documentDirectory = [paths objectAtIndex:0];
     
-    NSString *videoFilename = [mState objectForKey:@"storedVideo"];
-    NSString *filename = [mState objectForKey:@"storedImage"];
-    
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentDirectory = [paths objectAtIndex:0];
-    
-    NSString *imagePath = [documentDirectory stringByAppendingPathComponent:filename];
-    sprintf(mImagePath, "%s", [imagePath UTF8String]);
+    NSString * temp = [NSString stringWithString:[documentDirectory stringByAppendingPathComponent:filename]];
+    sprintf(mImagePath, "%s", [temp UTF8String]);
     if( videoFilename ) {
-        NSString *videoPath = [documentDirectory stringByAppendingPathComponent:videoFilename];
-        sprintf(mVideoPath, "%s", [videoPath UTF8String]);
+        temp = [NSString stringWithString:[documentDirectory stringByAppendingPathComponent:videoFilename]];
+        sprintf(mVideoPath, "%s", [temp UTF8String]);
         mIsVideo = YES;
     } else {
         mIsVideo = NO;
     }
     
-    self.mCurrentActivityID = [mState objectForKey:@"activity"];
-    NSString *memb_str = [NSString stringWithUTF8String:ACTIVITY_MEMBERS[[self.mCurrentActivityID intValue]]];
-    NSArray  *member = [memb_str componentsSeparatedByString:@","];
+    mCurrentActivityID  = [[mState objectForKey:@"activity"] intValue];
+    NSString * memb_str = [NSString stringWithUTF8String:ACTIVITY_MEMBERS[mCurrentActivityID]];
+    NSArray  * members  = [memb_str componentsSeparatedByString:@","];
     
     // insert the image
     //[mThumbnail setImage:[UIImage imageWithContentsOfFile:imagePath]];
@@ -204,14 +192,22 @@
     [mThumbnail setImage:[delegate.mCache getImageWithKey:filename]];
     
     // display the slider view
-    NSMutableArray *images = [[NSMutableArray alloc] init];
-    NSMutableArray *margin = [[NSMutableArray alloc] init];
-    NSMutableArray *icon   = [[NSMutableArray alloc] init];
+    [mSliderView cleanScrollView];
+    NSMutableArray * images = [[NSMutableArray alloc] init];
+    NSMutableArray * margin = [[NSMutableArray alloc] init];
+    NSMutableArray * icon   = [[NSMutableArray alloc] init];
     
-    for( int i=0; i<[member count]; i++ ) {
-        [images addObject:[UIImage imageNamed:[[member objectAtIndex:i] stringByAppendingString:@".png"]]];
+    if ([members count] < 2) {
+        NSString * activityName = [NSString stringWithUTF8String:ACTIVITY_NAMES[mCurrentActivityID]];
+        [images addObject:[UIImage imageNamed:[activityName stringByAppendingString:@".png"]]];
         [margin addObject:[NSNumber numberWithBool:NO]];
         [icon addObject:[NSNumber numberWithBool:YES]];
+    } else {
+        for( int i=0; i<[members count]; i++ ) {
+            [images addObject:[UIImage imageNamed:[[members objectAtIndex:i] stringByAppendingString:@".png"]]];
+            [margin addObject:[NSNumber numberWithBool:NO]];
+            [icon addObject:[NSNumber numberWithBool:YES]];
+        }
     }
     
     [mSliderView setContentArray:images];
@@ -247,8 +243,8 @@
     // add navigation bar
     mNavigationBar = [[totNavigationBar alloc] initWithFrame:CGRectMake(0, 0, 320, 40)];
     [mNavigationBar setDelegate:self];
-    [mNavigationBar setLeftButtonTitle:@"Back"];
-    [mNavigationBar setBackgroundColor:[UIColor grayColor]];
+    [mNavigationBar setLeftButtonImg:@"return.png"];
+    [mNavigationBar setBackgroundColor:[UIColor whiteColor]];
     [mNavigationBar setAlpha:0.5];
     [self.view addSubview:mNavigationBar];
     
@@ -263,7 +259,6 @@
     
     // create the slider view
     mSliderView = [[totSliderView alloc] initWithFrame:CGRectMake(25, 180, 270, 260)];
-    //mSliderView = [[totSliderView alloc] initWithFrame:CGRectMake(0, 151, 320, 260)];
     [mSliderView setDelegate:self];
     [mSliderView enablePageControlOnBottom];
     [self.view addSubview:mSliderView];
@@ -277,7 +272,6 @@
     [mNavigationBar release];
     [mSliderView release];
     [mThumbnail release];
-    [mCurrentActivityID release];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

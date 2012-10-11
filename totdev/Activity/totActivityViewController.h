@@ -17,12 +17,13 @@
 @class totSliderView;
 
 @interface totActivityViewController : UIViewController <CameraViewDelegate, totSliderViewDelegate, totNavigationBarDelegate> {
-    totActivityRootController *activityRootController;
-    totSliderView *mSliderView;
-    totNavigationBar *mNavigationBar;
+    totActivityRootController * activityRootController;
+    totSliderView * mSliderView;
+    totNavigationBar * mNavigationBar;
     
-    NSNumber *mCurrentActivityID;    
-    NSMutableDictionary *mMessage;
+    int mCurrentActivityID;
+    NSMutableDictionary * mMessage;
+    NSDictionary * mState;
     
     totModel *mTotModel;
     
@@ -31,11 +32,11 @@
 
 @property (nonatomic, assign) totActivityRootController *activityRootController;
 @property (nonatomic, retain) totSliderView *mSliderView;
-@property (nonatomic, retain) NSNumber *mCurrentActivityID;
 
 // receive parameters passed by other module for initialization or customization
 - (void)receiveMessage: (NSMutableDictionary*)message;
 - (void)launchCamera:(id)sender;
 - (void)launchVideo:(id)sender;
+- (void)updateInterface;
 
 @end

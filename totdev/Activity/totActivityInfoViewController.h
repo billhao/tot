@@ -15,23 +15,26 @@
 @class totSliderView;
 
 @interface totActivityInfoViewController : UIViewController <UITextViewDelegate, totSliderViewDelegate, UIAlertViewDelegate, totNavigationBarDelegate> {
-
-    totNavigationBar *mNavigationBar;
     totActivityRootController *activityRootController;
-    IBOutlet UITextView *mActivityDesc;
-    totSliderView *mSliderView;
-    UIImageView *mThumbnail;
-    NSNumber* mCurrentActivityID;
-    NSDictionary* mState;
+    totNavigationBar * mNavigationBar;
+    IBOutlet UITextView * mActivityDesc;
+    totSliderView * mSliderView;
+    UIImageView * mThumbnail;
     
-    char mEventName[256], mImagePath[256], mVideoPath[256];
-    bool mIsVideo;
+    NSDictionary * mState;
+    
+    char mEventName[256];
+    char mImagePath[256];
+    char mVideoPath[256];
+
     totModel *mTotModel;
+    
+    int mCurrentActivityID;
+    bool mIsVideo;
 }
 
 @property (nonatomic, assign) totActivityRootController *activityRootController;
 @property (nonatomic, retain) IBOutlet UITextView *mActivityDesc;
-@property (nonatomic, retain) NSNumber *mCurrentActivityID;
 
 // receive parameters passed by other module for initialization or customization
 - (void)receiveMessage: (NSMutableDictionary*)message;

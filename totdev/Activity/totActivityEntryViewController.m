@@ -27,7 +27,7 @@
             [mActivityNames addObject:[NSString stringWithUTF8String:ACTIVITY_NAMES[i]]];
         }
         
-        // mapping from activity to its child items
+        // mapping from button tag to activity name
         mActivityMembers = [[NSMutableDictionary alloc] init];
         for( int i=0; i<8; i++ ) {
             [mActivityMembers setObject:[NSString stringWithUTF8String:ACTIVITY_MEMBERS[i]] 
@@ -59,39 +59,50 @@
 */
 
 - (void)prepareMessage:(NSMutableDictionary*)message for:(int)activity{
-    char query[256] = {0};
-    NSString *type_str = [mActivityNames objectAtIndex:activity];
-    NSString *memb_str = [mActivityMembers objectForKey:[NSNumber numberWithInt:activity]];
-    NSArray  *members  = [memb_str componentsSeparatedByString:@","];
+    NSString * type_str = [mActivityNames objectAtIndex:activity];
+    NSString * memb_str = [mActivityMembers objectForKey:[NSNumber numberWithInt:activity]];
+    NSArray  * members  = [memb_str componentsSeparatedByString:@","];
     
-    NSMutableArray *images = [[NSMutableArray alloc] init];
-    NSMutableArray *margin = [[NSMutableArray alloc] init];
+    NSMutableArray * images = [[NSMutableArray alloc] init];
+    NSMutableArray * margin = [[NSMutableArray alloc] init];
     
     int currentBabyId = [totActivityUtility getCurrentBabyID];
     
-    for( int i=0; i<[members count]; i++ ) {
-        const char* c_str_type = [type_str UTF8String];
-        const char* c_str_memb = [[members objectAtIndex:i] UTF8String];
-        sprintf(query, "%s/%s", c_str_type, c_str_memb);
-        
-        NSMutableArray *queryResult = [mTotModel getEvent:currentBabyId event:[NSString stringWithUTF8String:query]];
-        
-        int querySize = [queryResult count];
-        switch(querySize) {
+    // split empty string => [""]
+    if ([members count] < 2) {  // If this activity does not have child items
+        NSMutableArray * query_result = [mTotModel getEvent:currentBabyId event:type_str];
+        int result_size = [query_result count];
+        switch (result_size) {
             case 0:
-                [images addObject:[[members objectAtIndex:i] stringByAppendingString:@".png"]];
-                [margin addObject:[NSNumber numberWithBool:NO]];
                 break;
             case 1:
-                [totActivityUtility extractFromEvent:[queryResult objectAtIndex:0]
-                                      intoImageArray:images];
+                [totActivityUtility extractFromEvent:[query_result objectAtIndex:0] intoImageArray:images];
                 [margin addObject:[NSNumber numberWithBool:NO]];
                 break;
             default:
-                [totActivityUtility extractFromEvent:[queryResult objectAtIndex:0] 
-                        intoImageArray:images];
+                [totActivityUtility extractFromEvent:[query_result objectAtIndex:0] intoImageArray:images];
                 [margin addObject:[NSNumber numberWithBool:YES]];
                 break;
+        }
+    } else {
+        for( int i=0; i<[members count]; ++i ) {
+            NSString * query = [NSString stringWithFormat:@"%s/%s", [type_str UTF8String], [[members objectAtIndex:i] UTF8String]];
+            NSMutableArray *query_result = [mTotModel getEvent:currentBabyId event:query];
+            int result_size = [query_result count];
+            switch(result_size) {
+                case 0:
+                    [images addObject:[[members objectAtIndex:i] stringByAppendingString:@".png"]];
+                    [margin addObject:[NSNumber numberWithBool:NO]];
+                    break;
+                case 1:
+                    [totActivityUtility extractFromEvent:[query_result objectAtIndex:0] intoImageArray:images];
+                    [margin addObject:[NSNumber numberWithBool:NO]];
+                    break;
+                default:
+                    [totActivityUtility extractFromEvent:[query_result objectAtIndex:0] intoImageArray:images];
+                    [margin addObject:[NSNumber numberWithBool:YES]];
+                    break;
+            }
         }
     }
     

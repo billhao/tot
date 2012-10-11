@@ -135,6 +135,7 @@
 		8E920F8C161903D700725971 /* icons-close.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E920F87161903D700725971 /* icons-close.png */; };
 		8E920F8D161903D700725971 /* icons-sleep-edit.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E920F88161903D700725971 /* icons-sleep-edit.png */; };
 		8E920F8E161903D700725971 /* icons-sleep-start.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E920F89161903D700725971 /* icons-sleep-start.png */; };
+		8EFC1F8816277E9D003CF0FE /* return.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EFC1F8716277E9D003CF0FE /* return.png */; };
 		CE5C09FC154CCFDB00D41114 /* moviePlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5C09F9154CCFDB00D41114 /* moviePlayerViewController.m */; };
 		CE5C09FD154CCFDB00D41114 /* totAlbumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5C09FB154CCFDB00D41114 /* totAlbumViewController.m */; };
 		CEDB78B9155107C300805CC8 /* totImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDB78B8155107C300805CC8 /* totImageCache.m */; };
@@ -394,6 +395,7 @@
 		8E920F87161903D700725971 /* icons-close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icons-close.png"; path = "Resources/Home/icons-close.png"; sourceTree = "<group>"; };
 		8E920F88161903D700725971 /* icons-sleep-edit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icons-sleep-edit.png"; path = "Resources/Home/icons-sleep-edit.png"; sourceTree = "<group>"; };
 		8E920F89161903D700725971 /* icons-sleep-start.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icons-sleep-start.png"; path = "Resources/Home/icons-sleep-start.png"; sourceTree = "<group>"; };
+		8EFC1F8716277E9D003CF0FE /* return.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = return.png; path = Resources/Utility/return.png; sourceTree = "<group>"; };
 		CE5C09F8154CCFDB00D41114 /* moviePlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = moviePlayerViewController.h; path = Utility/moviePlayerViewController.h; sourceTree = "<group>"; };
 		CE5C09F9154CCFDB00D41114 /* moviePlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = moviePlayerViewController.m; path = Utility/moviePlayerViewController.m; sourceTree = "<group>"; };
 		CE5C09FA154CCFDB00D41114 /* totAlbumViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totAlbumViewController.h; path = Utility/totAlbumViewController.h; sourceTree = "<group>"; };
@@ -761,6 +763,7 @@
 		EF043C3B154DE2D600975BCD /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				8EFC1F8716277E9D003CF0FE /* return.png */,
 				EFB259F815505D6C00C4984A /* camera.png */,
 				EFB259F915505D6C00C4984A /* margin.png */,
 				EFB259FA15505D6C00C4984A /* movie_thumbnail-01.png */,
@@ -1314,6 +1317,7 @@
 				243630DE162742820097B17D /* feedinggrey-whiterice.png in Resources */,
 				243630E1162742960097B17D /* feeding-01.png in Resources */,
 				243630E2162742960097B17D /* feeding-blank.png in Resources */,
+				8EFC1F8816277E9D003CF0FE /* return.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
