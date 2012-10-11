@@ -60,6 +60,10 @@
 
 - (void)loadEvents {
     NSArray * events = [mModel getEvent:mCurrentBabyId limit:LIMIT offset:mOffset];
+    
+    // If no more events available
+    if ([events count] == 0) return;
+    
     for (int i = 0; i < [events count]; ++i) {
         totEvent * anEvent = (totEvent*)[events objectAtIndex:i];
         printf("%s\n", [[anEvent toString] UTF8String]);
