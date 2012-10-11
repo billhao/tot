@@ -25,6 +25,7 @@
     
     //layout setting
     int btnPerRow; //default is 3
+    int btnPerCol; //default is 2
     // int btnWidth; //auto-computed based on btuPerRow and the width
     int btnHeight; // if left blank, by default height = width
     
@@ -44,18 +45,20 @@
 }  
 
 @property (nonatomic, retain) id <totSliderViewDelegate> delegate;
-@property (nonatomic, assign) int numOfRows;
 
-/// returns width of the scollview  
-//- (int)getScrollViewWidth;  
+/// returns the entirewidth of the scollview
+- (int)getScrollViewWidth;
 
 /// set Position by yOrigin (xOrigin is always 0
 /// and size is fixed
 //- (void)setPosition:(int)yOrigin;
 
 /// set scroll view lay out: buttons per row
-// buttons per column = 2
-//- (void)setLayout:(int)btnPerRow;
+// buttons per row = 3 by default; buttons per col = 2 by default
+- (void)setBtnPerRow:(int)btnPerRow;
+- (void)setBtnperCol:(int)btnPerCol;
+// buttons height
+- (void)setBtnHeight:(int)bthHeight;
 
 ///set margin
 -(void)setMarginArray:(NSArray *)margins;

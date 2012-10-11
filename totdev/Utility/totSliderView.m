@@ -15,7 +15,8 @@
 
 #define DEFAULT_WIDTH       270
 #define DEFAULT_HEIGHT      280 
-#define DEFAULT_NUMOFROWS   2
+#define DEFAULT_BTNPERROW   3
+#define DEFAULT_BTNPERCOL   2
 
 // layout parameters
 //#define LEFT_MARGIN         10
@@ -28,7 +29,6 @@
 @implementation totSliderView
 
 @synthesize delegate;
-@synthesize numOfRows;
 
 - (id)initWithFrame:(CGRect)frame {
     if( self = [super initWithFrame:frame] ) {
@@ -38,8 +38,11 @@
         scrollWidth   = frame.size.width;
         scrollHeight  = frame.size.height;
         scrollYOrigin = frame.origin.y;
-        numOfRows     = DEFAULT_NUMOFROWS;
-        
+        if(!btnPerRow)
+            btnPerRow = DEFAULT_BTNPERROW;
+        if(!btnPerCol)
+            btnPerCol = DEFAULT_BTNPERCOL;
+
         scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, scrollWidth, scrollHeight)];
         pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
         
@@ -51,7 +54,9 @@
 
 - (int)getScrollViewWidth {  
     int num = [contentArray count];
-    int pagenum = num / 6 + ((num%6)==0 ? 0 : 1);
+    int numPerPage = btnPerRow * btnPerCol;
+    
+    int pagenum = num / numPerPage + ((num%numPerPage)==0 ? 0 : 1);
     return (pagenum * scrollWidth);  
 }  
 
@@ -60,9 +65,22 @@
 //    scrollYOrigin = yOrigin;
 //}
 
-//-(void)setLayout:(int)noOfRows{
-//    numOfRows = noOfRows;
-//}
+-(void)setBtnPerRow:(int)buttonPerRow {
+    btnPerRow = buttonPerRow;
+}
+
+//xxxxxxxxxx for col and height
+
+
+
+
+
+
+
+
+
+
+
 
 - (void)setContentArray:(NSArray *)images {  
     if( contentArray ) {
