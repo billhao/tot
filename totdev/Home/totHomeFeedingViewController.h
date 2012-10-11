@@ -19,8 +19,15 @@
 
 @interface totHomeFeedingViewController : UIViewController<STHorizontalPickerDelegate,totSliderViewDelegate,totNavigationBarDelegate,totTimerControllerDelegate> {
     totHomeRootController *homeRootController;
-    totSliderView *mSliderView;
-    //UINavigationBar *navigationBar;
+    
+    // according to current design, we need 3 slider views
+    //   1 for recently used; 1 for categories; 1 for food chosen
+
+    //totSliderView *mSliderView;
+    totSliderView *mRecentlyUsedSlider;
+    totSliderView *mCategoriesSlider;
+    totSliderView *mFoodChosenSlider;
+
     totNavigationBar *mNavigationBar;
     
     UIButton *mOKButton;
@@ -46,12 +53,11 @@
 }
 
 @property (nonatomic, assign) totHomeRootController *homeRootController;
-@property (nonatomic, retain) totSliderView *mSliderView;
+//@property (nonatomic, retain) totSliderView *mSliderView;
+@property (nonatomic, retain) totSliderView *mRecentlyUsedSlider;
+@property (nonatomic, retain) totSliderView *mCategoriesSlider;
+@property (nonatomic, retain) totSliderView *mFoodChosenSlider;
 @property (nonatomic, retain) NSNumber *mCurrentFoodID;
-//@property (nonatomic, retain) UINavigationBar* navigationBar;
-//@property (nonatomic, retain) UIButton* mOKButton;
-//@property (nonatomic, retain) UIButton* mDatetime;
-//@property (nonatomic, retain) UIButton* mSummary;
 
 
 // receive parameters passed by other module for initialization or customization

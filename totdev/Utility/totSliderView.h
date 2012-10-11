@@ -23,6 +23,11 @@
     int scrollWidth, scrollHeight, scrollYOrigin, numOfRows;
     UIColor *bcgColor;
     
+    //layout setting
+    int btnPerRow; //default is 3
+    // int btnWidth; //auto-computed based on btuPerRow and the width
+    int btnHeight; // if left blank, by default height = width
+    
     NSMutableArray *contentArray; 
     NSMutableArray *marginArray;
     NSMutableArray *isIconArray;

@@ -17,12 +17,10 @@
 @implementation totHomeFeedingViewController
 
 @synthesize homeRootController;
-@synthesize mSliderView;
+@synthesize mRecentlyUsedSlider;
+@synthesize mCategoriesSlider;
+@synthesize mFoodChosenSlider;
 @synthesize mCurrentFoodID;
-//@synthesize navigationBar;
-//@synthesize mOKButton;
-//@synthesize mDatetime;
-//@synthesize mSummary;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -54,7 +52,7 @@
     //[temp release];
     
     //need to expose an API in 
-    [mSliderView setButton:buttonSelected andWithValue:picker_quantity.currentValue];
+    [mFoodChosenSlider setButton:buttonSelected andWithValue:picker_quantity.currentValue];
 
     quantityList[buttonSelected] =picker_quantity.currentValue;    
 }
@@ -79,19 +77,16 @@
     buttonSelected = tag;
         
     //reset all button bacground color;
-    [mSliderView clearButtonBGColor];
+    [mFoodChosenSlider clearButtonBGColor];
     ((UIButton *)sender).backgroundColor = [UIColor redColor];
 
 }
 
 - (void) navLeftButtonPressed:(id)sender{
-    
     [homeRootController switchTo:kHomeViewEntryView withContextInfo:nil];
-    
     
     //need to do clean up
     //xxxxxxxxxx
-    
 }
 
 
@@ -102,27 +97,25 @@
     [super viewDidLoad];
     
     // create the slider view
-    mSliderView = [[totSliderView alloc] initWithFrame:CGRectMake(25, 45, 270, 300)];
-    [mSliderView setDelegate:self];
-    //[mSliderView enablePageControlOnTop];
-    [mSliderView enablePageControlOnBottom];
+    mCategoriesSlider = [[totSliderView alloc] initWithFrame:CGRectMake(10, 150, 300, 130)];
+    [mCategoriesSlider setDelegate:self];
+    //[mCategoriesSlider enablePageControlOnBottom]; no page control dot
     
     //load image
-    NSMutableArray *foodImages = [[NSMutableArray alloc] init];
-    [foodImages addObject:[UIImage imageNamed:@"emotion_angry.png"]];
-    [foodImages addObject:[UIImage imageNamed:@"gesture_salut.png"]];
-    [foodImages addObject:[UIImage imageNamed:@"gesture_wave.png"]];
-    [foodImages addObject:[UIImage imageNamed:@"motor_skill_crawl.png"]];
-    [foodImages addObject:[UIImage imageNamed:@"motor_skill_jump.png"]];
-    [foodImages addObject:[UIImage imageNamed:@"gesture_suck_toe.png"]];
-    [foodImages addObject:[UIImage imageNamed:@"gesture_point.png"]];
-    [foodImages addObject:[UIImage imageNamed:@"emotion_happy.png"]];
-    [mSliderView setContentArray:foodImages];
-    [foodImages release];
-    
-    [mSliderView getWithPositionMemoryIdentifier:@"homeFeedingView"];
+    NSMutableArray *categoriesImages = [[NSMutableArray alloc] init];
+    [categoriesImages addObject:[UIImage imageNamed:@"feedingcategories-cereal"]];
+    [categoriesImages addObject:[UIImage imageNamed:@"feedingcategories-dairy.png"]];
+    [categoriesImages addObject:[UIImage imageNamed:@"feedingcategories-fruit.png"]];
+    [categoriesImages addObject:[UIImage imageNamed:@"feedingcategories-juice.png"]];
+    [categoriesImages addObject:[UIImage imageNamed:@"feedingcategories-meat.png"]];
+    [categoriesImages addObject:[UIImage imageNamed:@"feedingcategories-vege.png"]];
 
-    [self.view addSubview:mSliderView];
+    [mCategoriesSlider setContentArray:categoriesImages];
+    [categoriesImages release];
+    
+    [mCategoriesSlider getWithPositionMemoryIdentifier:@"feedingCategories"];
+
+    [self.view addSubview:mCategoriesSlider];
     
     buttonSelected = 0;
     
@@ -131,8 +124,8 @@
     //[self.view addSubview:navigationBar];
     mNavigationBar= [[totNavigationBar alloc] initWithFrame:CGRectMake(0, 0, 320, 40)];
     [mNavigationBar setLeftButtonTitle:@"Back"];
-    [mNavigationBar setNavigationBarTitle:@"Feeding" andColor:[UIColor darkGrayColor]];
-    [mNavigationBar setBackgroundColor:[UIColor yellowColor]];
+    [mNavigationBar setNavigationBarTitle:@"time" andColor:[UIColor darkGrayColor]];
+    [mNavigationBar setBackgroundColor:[UIColor whiteColor]];
     [mNavigationBar setDelegate:self];
     [self.view addSubview:mNavigationBar];
     
@@ -290,11 +283,9 @@
 {
     [super viewDidUnload];
     // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
-    //[mBackground release];
-    [mSliderView release];
-    //[mMessage release];
-    //[navigationBar release];
+    [mRecentlyUsedSlider release];
+    [mFoodChosenSlider release];
+    [mCategoriesSlider release];
     [picker_quantity release];
     //[mOKButton release];
     //[mDatetime release];
@@ -319,8 +310,8 @@
     picker_quantity.hidden = YES;
     
     //reset quantiy on buttons
-    [mSliderView clearButtonLabels];
-    [mSliderView clearButtonBGColor];
+    [mCategoriesSlider clearButtonLabels];
+    [mCategoriesSlider clearButtonBGColor];
     
     //clear quantityList
     for(int i=0;i<DEFAULT_MENU;i++){

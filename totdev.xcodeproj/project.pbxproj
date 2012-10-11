@@ -94,6 +94,7 @@
 		24B5686216264BBC008D8E53 /* feeding-ricewhite.png in Resources */ = {isa = PBXBuildFile; fileRef = 24B5683B16264BBC008D8E53 /* feeding-ricewhite.png */; };
 		24B5686316264BBC008D8E53 /* feeding-sweet potato.png in Resources */ = {isa = PBXBuildFile; fileRef = 24B5683C16264BBC008D8E53 /* feeding-sweet potato.png */; };
 		24B5686416264BBC008D8E53 /* feeding-watermelon.png in Resources */ = {isa = PBXBuildFile; fileRef = 24B5683D16264BBC008D8E53 /* feeding-watermelon.png */; };
+		24B5686616264F89008D8E53 /* feeding-blank.png in Resources */ = {isa = PBXBuildFile; fileRef = 24B5686516264F89008D8E53 /* feeding-blank.png */; };
 		3F186A5E1569CCEC00FC9E2C /* home_background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F186A5D1569CCEC00FC9E2C /* home_background@2x.png */; };
 		3F2216DE1571758F000E86F3 /* totLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F2216DC1571758F000E86F3 /* totLoginController.m */; };
 		3F2216DF1571758F000E86F3 /* totLoginController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F2216DD1571758F000E86F3 /* totLoginController.xib */; };
@@ -333,6 +334,7 @@
 		24B5683B16264BBC008D8E53 /* feeding-ricewhite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "feeding-ricewhite.png"; sourceTree = "<group>"; };
 		24B5683C16264BBC008D8E53 /* feeding-sweet potato.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "feeding-sweet potato.png"; sourceTree = "<group>"; };
 		24B5683D16264BBC008D8E53 /* feeding-watermelon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "feeding-watermelon.png"; sourceTree = "<group>"; };
+		24B5686516264F89008D8E53 /* feeding-blank.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "feeding-blank.png"; sourceTree = "<group>"; };
 		3F186A5D1569CCEC00FC9E2C /* home_background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "home_background@2x.png"; path = "Resources/Home/home_background@2x.png"; sourceTree = "<group>"; };
 		3F2216DB1571758F000E86F3 /* totLoginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = totLoginController.h; sourceTree = "<group>"; };
 		3F2216DC1571758F000E86F3 /* totLoginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = totLoginController.m; sourceTree = "<group>"; };
@@ -578,6 +580,7 @@
 		24B567B916264B16008D8E53 /* feeding */ = {
 			isa = PBXGroup;
 			children = (
+				24B5686516264F89008D8E53 /* feeding-blank.png */,
 				24B567BD16264B6A008D8E53 /* feedingcategories-cereal.png */,
 				24B567BE16264B6A008D8E53 /* feedingcategories-dairy.png */,
 				24B567BF16264B6A008D8E53 /* feedingcategories-fruit.png */,
@@ -1279,6 +1282,7 @@
 				24B5686216264BBC008D8E53 /* feeding-ricewhite.png in Resources */,
 				24B5686316264BBC008D8E53 /* feeding-sweet potato.png in Resources */,
 				24B5686416264BBC008D8E53 /* feeding-watermelon.png in Resources */,
+				24B5686616264F89008D8E53 /* feeding-blank.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
