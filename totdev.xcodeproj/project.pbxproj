@@ -10,6 +10,92 @@
 		15414FDF154CCB8900C3C828 /* totUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 15414FDE154CCB8800C3C828 /* totUtility.m */; };
 		15414FF91556F99600C3C828 /* totHomeFeedingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 15414FF81556F99600C3C828 /* totHomeFeedingViewController.m */; };
 		1572880315575B31005771DB /* homeFeedingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1572880215575B31005771DB /* homeFeedingView.xib */; };
+		2436303B1627420F0097B17D /* feedingcategories-cereal.png in Resources */ = {isa = PBXBuildFile; fileRef = 243630351627420F0097B17D /* feedingcategories-cereal.png */; };
+		2436303C1627420F0097B17D /* feedingcategories-dairy.png in Resources */ = {isa = PBXBuildFile; fileRef = 243630361627420F0097B17D /* feedingcategories-dairy.png */; };
+		2436303D1627420F0097B17D /* feedingcategories-fruit.png in Resources */ = {isa = PBXBuildFile; fileRef = 243630371627420F0097B17D /* feedingcategories-fruit.png */; };
+		2436303E1627420F0097B17D /* feedingcategories-juice.png in Resources */ = {isa = PBXBuildFile; fileRef = 243630381627420F0097B17D /* feedingcategories-juice.png */; };
+		2436303F1627420F0097B17D /* feedingcategories-meat.png in Resources */ = {isa = PBXBuildFile; fileRef = 243630391627420F0097B17D /* feedingcategories-meat.png */; };
+		243630401627420F0097B17D /* feedingcategories-vege.png in Resources */ = {isa = PBXBuildFile; fileRef = 2436303A1627420F0097B17D /* feedingcategories-vege.png */; };
+		2436306A1627425E0097B17D /* feeding-apple.png in Resources */ = {isa = PBXBuildFile; fileRef = 243630431627425E0097B17D /* feeding-apple.png */; };
+		2436306B1627425E0097B17D /* feeding-apricot.png in Resources */ = {isa = PBXBuildFile; fileRef = 243630441627425E0097B17D /* feeding-apricot.png */; };
+		2436306C1627425E0097B17D /* feeding-artichoke.png in Resources */ = {isa = PBXBuildFile; fileRef = 243630451627425E0097B17D /* feeding-artichoke.png */; };
+		2436306D1627425E0097B17D /* feeding-asparagus.png in Resources */ = {isa = PBXBuildFile; fileRef = 243630461627425E0097B17D /* feeding-asparagus.png */; };
+		2436306E1627425E0097B17D /* feeding-avocado.png in Resources */ = {isa = PBXBuildFile; fileRef = 243630471627425E0097B17D /* feeding-avocado.png */; };
+		2436306F1627425E0097B17D /* feeding-banana.png in Resources */ = {isa = PBXBuildFile; fileRef = 243630481627425E0097B17D /* feeding-banana.png */; };
+		243630701627425E0097B17D /* feeding-beets.png in Resources */ = {isa = PBXBuildFile; fileRef = 243630491627425E0097B17D /* feeding-beets.png */; };
+		243630711627425E0097B17D /* feeding-blueberry.png in Resources */ = {isa = PBXBuildFile; fileRef = 2436304A1627425E0097B17D /* feeding-blueberry.png */; };
+		243630721627425E0097B17D /* feeding-bread.png in Resources */ = {isa = PBXBuildFile; fileRef = 2436304B1627425E0097B17D /* feeding-bread.png */; };
+		243630731627425E0097B17D /* feeding-broccoli.png in Resources */ = {isa = PBXBuildFile; fileRef = 2436304C1627425E0097B17D /* feeding-broccoli.png */; };
+		243630741627425E0097B17D /* feeding-brussel sprout.png in Resources */ = {isa = PBXBuildFile; fileRef = 2436304D1627425E0097B17D /* feeding-brussel sprout.png */; };
+		243630751627425E0097B17D /* feeding-califlower.png in Resources */ = {isa = PBXBuildFile; fileRef = 2436304E1627425E0097B17D /* feeding-califlower.png */; };
+		243630761627425E0097B17D /* feeding-carrot.png in Resources */ = {isa = PBXBuildFile; fileRef = 2436304F1627425E0097B17D /* feeding-carrot.png */; };
+		243630771627425E0097B17D /* feeding-cheerios.png in Resources */ = {isa = PBXBuildFile; fileRef = 243630501627425E0097B17D /* feeding-cheerios.png */; };
+		243630781627425E0097B17D /* feeding-cheese.png in Resources */ = {isa = PBXBuildFile; fileRef = 243630511627425E0097B17D /* feeding-cheese.png */; };
+		243630791627425E0097B17D /* feeding-cucumber.png in Resources */ = {isa = PBXBuildFile; fileRef = 243630521627425E0097B17D /* feeding-cucumber.png */; };
+		2436307A1627425E0097B17D /* feeding-dry beans.png in Resources */ = {isa = PBXBuildFile; fileRef = 243630531627425E0097B17D /* feeding-dry beans.png */; };
+		2436307B1627425E0097B17D /* feeding-eggplant.png in Resources */ = {isa = PBXBuildFile; fileRef = 243630541627425E0097B17D /* feeding-eggplant.png */; };
+		2436307C1627425E0097B17D /* feeding-fish.png in Resources */ = {isa = PBXBuildFile; fileRef = 243630551627425E0097B17D /* feeding-fish.png */; };
+		2436307D1627425E0097B17D /* feeding-grape.png in Resources */ = {isa = PBXBuildFile; fileRef = 243630561627425E0097B17D /* feeding-grape.png */; };
+		2436307E1627425E0097B17D /* feeding-kiwi.png in Resources */ = {isa = PBXBuildFile; fileRef = 243630571627425E0097B17D /* feeding-kiwi.png */; };
+		2436307F1627425E0097B17D /* feeding-lima beans.png in Resources */ = {isa = PBXBuildFile; fileRef = 243630581627425E0097B17D /* feeding-lima beans.png */; };
+		243630801627425E0097B17D /* feeding-mango.png in Resources */ = {isa = PBXBuildFile; fileRef = 243630591627425E0097B17D /* feeding-mango.png */; };
+		243630811627425E0097B17D /* feeding-oatmeal.png in Resources */ = {isa = PBXBuildFile; fileRef = 2436305A1627425E0097B17D /* feeding-oatmeal.png */; };
+		243630821627425E0097B17D /* feeding-onion.png in Resources */ = {isa = PBXBuildFile; fileRef = 2436305B1627425E0097B17D /* feeding-onion.png */; };
+		243630831627425E0097B17D /* feeding-orange.png in Resources */ = {isa = PBXBuildFile; fileRef = 2436305C1627425E0097B17D /* feeding-orange.png */; };
+		243630841627425E0097B17D /* feeding-papaya.png in Resources */ = {isa = PBXBuildFile; fileRef = 2436305D1627425E0097B17D /* feeding-papaya.png */; };
+		243630851627425E0097B17D /* feeding-pasta.png in Resources */ = {isa = PBXBuildFile; fileRef = 2436305E1627425E0097B17D /* feeding-pasta.png */; };
+		243630861627425E0097B17D /* feeding-peach.png in Resources */ = {isa = PBXBuildFile; fileRef = 2436305F1627425E0097B17D /* feeding-peach.png */; };
+		243630871627425E0097B17D /* feeding-pear.png in Resources */ = {isa = PBXBuildFile; fileRef = 243630601627425E0097B17D /* feeding-pear.png */; };
+		243630881627425E0097B17D /* feeding-peas.png in Resources */ = {isa = PBXBuildFile; fileRef = 243630611627425E0097B17D /* feeding-peas.png */; };
+		243630891627425E0097B17D /* feeding-pineapple.png in Resources */ = {isa = PBXBuildFile; fileRef = 243630621627425E0097B17D /* feeding-pineapple.png */; };
+		2436308A1627425E0097B17D /* feeding-plum.png in Resources */ = {isa = PBXBuildFile; fileRef = 243630631627425E0097B17D /* feeding-plum.png */; };
+		2436308B1627425E0097B17D /* feeding-potato.png in Resources */ = {isa = PBXBuildFile; fileRef = 243630641627425E0097B17D /* feeding-potato.png */; };
+		2436308C1627425E0097B17D /* feeding-pumpkin.png in Resources */ = {isa = PBXBuildFile; fileRef = 243630651627425E0097B17D /* feeding-pumpkin.png */; };
+		2436308D1627425E0097B17D /* feeding-ricebrown.png in Resources */ = {isa = PBXBuildFile; fileRef = 243630661627425E0097B17D /* feeding-ricebrown.png */; };
+		2436308E1627425E0097B17D /* feeding-ricewhite.png in Resources */ = {isa = PBXBuildFile; fileRef = 243630671627425E0097B17D /* feeding-ricewhite.png */; };
+		2436308F1627425E0097B17D /* feeding-sweet potato.png in Resources */ = {isa = PBXBuildFile; fileRef = 243630681627425E0097B17D /* feeding-sweet potato.png */; };
+		243630901627425E0097B17D /* feeding-watermelon.png in Resources */ = {isa = PBXBuildFile; fileRef = 243630691627425E0097B17D /* feeding-watermelon.png */; };
+		24363092162742700097B17D /* feedinggrey-avocado.png in Resources */ = {isa = PBXBuildFile; fileRef = 24363091162742700097B17D /* feedinggrey-avocado.png */; };
+		243630B9162742820097B17D /* feedinggrey-apple.png in Resources */ = {isa = PBXBuildFile; fileRef = 24363093162742820097B17D /* feedinggrey-apple.png */; };
+		243630BA162742820097B17D /* feedinggrey-apricot.png in Resources */ = {isa = PBXBuildFile; fileRef = 24363094162742820097B17D /* feedinggrey-apricot.png */; };
+		243630BB162742820097B17D /* feedinggrey-artichoke.png in Resources */ = {isa = PBXBuildFile; fileRef = 24363095162742820097B17D /* feedinggrey-artichoke.png */; };
+		243630BC162742820097B17D /* feedinggrey-asparagus.png in Resources */ = {isa = PBXBuildFile; fileRef = 24363096162742820097B17D /* feedinggrey-asparagus.png */; };
+		243630BD162742820097B17D /* feedinggrey-banana.png in Resources */ = {isa = PBXBuildFile; fileRef = 24363097162742820097B17D /* feedinggrey-banana.png */; };
+		243630BE162742820097B17D /* feedinggrey-beet.png in Resources */ = {isa = PBXBuildFile; fileRef = 24363098162742820097B17D /* feedinggrey-beet.png */; };
+		243630BF162742820097B17D /* feedinggrey-blueberry.png in Resources */ = {isa = PBXBuildFile; fileRef = 24363099162742820097B17D /* feedinggrey-blueberry.png */; };
+		243630C0162742820097B17D /* feedinggrey-bread.png in Resources */ = {isa = PBXBuildFile; fileRef = 2436309A162742820097B17D /* feedinggrey-bread.png */; };
+		243630C1162742820097B17D /* feedinggrey-broccoli.png in Resources */ = {isa = PBXBuildFile; fileRef = 2436309B162742820097B17D /* feedinggrey-broccoli.png */; };
+		243630C2162742820097B17D /* feedinggrey-brownrice.png in Resources */ = {isa = PBXBuildFile; fileRef = 2436309C162742820097B17D /* feedinggrey-brownrice.png */; };
+		243630C3162742820097B17D /* feedinggrey-brussel sprout.png in Resources */ = {isa = PBXBuildFile; fileRef = 2436309D162742820097B17D /* feedinggrey-brussel sprout.png */; };
+		243630C4162742820097B17D /* feedinggrey-califlower.png in Resources */ = {isa = PBXBuildFile; fileRef = 2436309E162742820097B17D /* feedinggrey-califlower.png */; };
+		243630C5162742820097B17D /* feedinggrey-carrot.png in Resources */ = {isa = PBXBuildFile; fileRef = 2436309F162742820097B17D /* feedinggrey-carrot.png */; };
+		243630C6162742820097B17D /* feedinggrey-cheerios.png in Resources */ = {isa = PBXBuildFile; fileRef = 243630A0162742820097B17D /* feedinggrey-cheerios.png */; };
+		243630C7162742820097B17D /* feedinggrey-cheese.png in Resources */ = {isa = PBXBuildFile; fileRef = 243630A1162742820097B17D /* feedinggrey-cheese.png */; };
+		243630C8162742820097B17D /* feedinggrey-cucumber.png in Resources */ = {isa = PBXBuildFile; fileRef = 243630A2162742820097B17D /* feedinggrey-cucumber.png */; };
+		243630C9162742820097B17D /* feedinggrey-drybean.png in Resources */ = {isa = PBXBuildFile; fileRef = 243630A3162742820097B17D /* feedinggrey-drybean.png */; };
+		243630CA162742820097B17D /* feedinggrey-eggplant.png in Resources */ = {isa = PBXBuildFile; fileRef = 243630A4162742820097B17D /* feedinggrey-eggplant.png */; };
+		243630CB162742820097B17D /* feedinggrey-fish.png in Resources */ = {isa = PBXBuildFile; fileRef = 243630A5162742820097B17D /* feedinggrey-fish.png */; };
+		243630CC162742820097B17D /* feedinggrey-grape.png in Resources */ = {isa = PBXBuildFile; fileRef = 243630A6162742820097B17D /* feedinggrey-grape.png */; };
+		243630CD162742820097B17D /* feedinggrey-green pea.png in Resources */ = {isa = PBXBuildFile; fileRef = 243630A7162742820097B17D /* feedinggrey-green pea.png */; };
+		243630CE162742820097B17D /* feedinggrey-kiwi.png in Resources */ = {isa = PBXBuildFile; fileRef = 243630A8162742820097B17D /* feedinggrey-kiwi.png */; };
+		243630CF162742820097B17D /* feedinggrey-lima bean.png in Resources */ = {isa = PBXBuildFile; fileRef = 243630A9162742820097B17D /* feedinggrey-lima bean.png */; };
+		243630D0162742820097B17D /* feedinggrey-mango.png in Resources */ = {isa = PBXBuildFile; fileRef = 243630AA162742820097B17D /* feedinggrey-mango.png */; };
+		243630D1162742820097B17D /* feedinggrey-oatmeal.png in Resources */ = {isa = PBXBuildFile; fileRef = 243630AB162742820097B17D /* feedinggrey-oatmeal.png */; };
+		243630D2162742820097B17D /* feedinggrey-onion.png in Resources */ = {isa = PBXBuildFile; fileRef = 243630AC162742820097B17D /* feedinggrey-onion.png */; };
+		243630D3162742820097B17D /* feedinggrey-orange.png in Resources */ = {isa = PBXBuildFile; fileRef = 243630AD162742820097B17D /* feedinggrey-orange.png */; };
+		243630D4162742820097B17D /* feedinggrey-papaya.png in Resources */ = {isa = PBXBuildFile; fileRef = 243630AE162742820097B17D /* feedinggrey-papaya.png */; };
+		243630D5162742820097B17D /* feedinggrey-pasta.png in Resources */ = {isa = PBXBuildFile; fileRef = 243630AF162742820097B17D /* feedinggrey-pasta.png */; };
+		243630D6162742820097B17D /* feedinggrey-peach.png in Resources */ = {isa = PBXBuildFile; fileRef = 243630B0162742820097B17D /* feedinggrey-peach.png */; };
+		243630D7162742820097B17D /* feedinggrey-pear.png in Resources */ = {isa = PBXBuildFile; fileRef = 243630B1162742820097B17D /* feedinggrey-pear.png */; };
+		243630D8162742820097B17D /* feedinggrey-pineapple.png in Resources */ = {isa = PBXBuildFile; fileRef = 243630B2162742820097B17D /* feedinggrey-pineapple.png */; };
+		243630D9162742820097B17D /* feedinggrey-plum.png in Resources */ = {isa = PBXBuildFile; fileRef = 243630B3162742820097B17D /* feedinggrey-plum.png */; };
+		243630DA162742820097B17D /* feedinggrey-potato.png in Resources */ = {isa = PBXBuildFile; fileRef = 243630B4162742820097B17D /* feedinggrey-potato.png */; };
+		243630DB162742820097B17D /* feedinggrey-pumpkin.png in Resources */ = {isa = PBXBuildFile; fileRef = 243630B5162742820097B17D /* feedinggrey-pumpkin.png */; };
+		243630DC162742820097B17D /* feedinggrey-sweetpotato.png in Resources */ = {isa = PBXBuildFile; fileRef = 243630B6162742820097B17D /* feedinggrey-sweetpotato.png */; };
+		243630DD162742820097B17D /* feedinggrey-watermelon.png in Resources */ = {isa = PBXBuildFile; fileRef = 243630B7162742820097B17D /* feedinggrey-watermelon.png */; };
+		243630DE162742820097B17D /* feedinggrey-whiterice.png in Resources */ = {isa = PBXBuildFile; fileRef = 243630B8162742820097B17D /* feedinggrey-whiterice.png */; };
+		243630E1162742960097B17D /* feeding-01.png in Resources */ = {isa = PBXBuildFile; fileRef = 243630DF162742960097B17D /* feeding-01.png */; };
+		243630E2162742960097B17D /* feeding-blank.png in Resources */ = {isa = PBXBuildFile; fileRef = 243630E0162742960097B17D /* feeding-blank.png */; };
 		3F186A5E1569CCEC00FC9E2C /* home_background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F186A5D1569CCEC00FC9E2C /* home_background@2x.png */; };
 		3F2216DE1571758F000E86F3 /* totLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F2216DC1571758F000E86F3 /* totLoginController.m */; };
 		3F2216DF1571758F000E86F3 /* totLoginController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F2216DD1571758F000E86F3 /* totLoginController.xib */; };
@@ -166,6 +252,92 @@
 		15414FF71556F99600C3C828 /* totHomeFeedingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totHomeFeedingViewController.h; path = Home/totHomeFeedingViewController.h; sourceTree = "<group>"; };
 		15414FF81556F99600C3C828 /* totHomeFeedingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totHomeFeedingViewController.m; path = Home/totHomeFeedingViewController.m; sourceTree = "<group>"; };
 		1572880215575B31005771DB /* homeFeedingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = homeFeedingView.xib; sourceTree = "<group>"; };
+		243630351627420F0097B17D /* feedingcategories-cereal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feedingcategories-cereal.png"; path = "Resources/Home/feeding/categories icons/feedingcategories-cereal.png"; sourceTree = "<group>"; };
+		243630361627420F0097B17D /* feedingcategories-dairy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feedingcategories-dairy.png"; path = "Resources/Home/feeding/categories icons/feedingcategories-dairy.png"; sourceTree = "<group>"; };
+		243630371627420F0097B17D /* feedingcategories-fruit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feedingcategories-fruit.png"; path = "Resources/Home/feeding/categories icons/feedingcategories-fruit.png"; sourceTree = "<group>"; };
+		243630381627420F0097B17D /* feedingcategories-juice.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feedingcategories-juice.png"; path = "Resources/Home/feeding/categories icons/feedingcategories-juice.png"; sourceTree = "<group>"; };
+		243630391627420F0097B17D /* feedingcategories-meat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feedingcategories-meat.png"; path = "Resources/Home/feeding/categories icons/feedingcategories-meat.png"; sourceTree = "<group>"; };
+		2436303A1627420F0097B17D /* feedingcategories-vege.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feedingcategories-vege.png"; path = "Resources/Home/feeding/categories icons/feedingcategories-vege.png"; sourceTree = "<group>"; };
+		243630431627425E0097B17D /* feeding-apple.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feeding-apple.png"; path = "Resources/Home/feeding/foodicons/feeding-apple.png"; sourceTree = "<group>"; };
+		243630441627425E0097B17D /* feeding-apricot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feeding-apricot.png"; path = "Resources/Home/feeding/foodicons/feeding-apricot.png"; sourceTree = "<group>"; };
+		243630451627425E0097B17D /* feeding-artichoke.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feeding-artichoke.png"; path = "Resources/Home/feeding/foodicons/feeding-artichoke.png"; sourceTree = "<group>"; };
+		243630461627425E0097B17D /* feeding-asparagus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feeding-asparagus.png"; path = "Resources/Home/feeding/foodicons/feeding-asparagus.png"; sourceTree = "<group>"; };
+		243630471627425E0097B17D /* feeding-avocado.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feeding-avocado.png"; path = "Resources/Home/feeding/foodicons/feeding-avocado.png"; sourceTree = "<group>"; };
+		243630481627425E0097B17D /* feeding-banana.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feeding-banana.png"; path = "Resources/Home/feeding/foodicons/feeding-banana.png"; sourceTree = "<group>"; };
+		243630491627425E0097B17D /* feeding-beets.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feeding-beets.png"; path = "Resources/Home/feeding/foodicons/feeding-beets.png"; sourceTree = "<group>"; };
+		2436304A1627425E0097B17D /* feeding-blueberry.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feeding-blueberry.png"; path = "Resources/Home/feeding/foodicons/feeding-blueberry.png"; sourceTree = "<group>"; };
+		2436304B1627425E0097B17D /* feeding-bread.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feeding-bread.png"; path = "Resources/Home/feeding/foodicons/feeding-bread.png"; sourceTree = "<group>"; };
+		2436304C1627425E0097B17D /* feeding-broccoli.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feeding-broccoli.png"; path = "Resources/Home/feeding/foodicons/feeding-broccoli.png"; sourceTree = "<group>"; };
+		2436304D1627425E0097B17D /* feeding-brussel sprout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feeding-brussel sprout.png"; path = "Resources/Home/feeding/foodicons/feeding-brussel sprout.png"; sourceTree = "<group>"; };
+		2436304E1627425E0097B17D /* feeding-califlower.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feeding-califlower.png"; path = "Resources/Home/feeding/foodicons/feeding-califlower.png"; sourceTree = "<group>"; };
+		2436304F1627425E0097B17D /* feeding-carrot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feeding-carrot.png"; path = "Resources/Home/feeding/foodicons/feeding-carrot.png"; sourceTree = "<group>"; };
+		243630501627425E0097B17D /* feeding-cheerios.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feeding-cheerios.png"; path = "Resources/Home/feeding/foodicons/feeding-cheerios.png"; sourceTree = "<group>"; };
+		243630511627425E0097B17D /* feeding-cheese.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feeding-cheese.png"; path = "Resources/Home/feeding/foodicons/feeding-cheese.png"; sourceTree = "<group>"; };
+		243630521627425E0097B17D /* feeding-cucumber.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feeding-cucumber.png"; path = "Resources/Home/feeding/foodicons/feeding-cucumber.png"; sourceTree = "<group>"; };
+		243630531627425E0097B17D /* feeding-dry beans.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feeding-dry beans.png"; path = "Resources/Home/feeding/foodicons/feeding-dry beans.png"; sourceTree = "<group>"; };
+		243630541627425E0097B17D /* feeding-eggplant.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feeding-eggplant.png"; path = "Resources/Home/feeding/foodicons/feeding-eggplant.png"; sourceTree = "<group>"; };
+		243630551627425E0097B17D /* feeding-fish.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feeding-fish.png"; path = "Resources/Home/feeding/foodicons/feeding-fish.png"; sourceTree = "<group>"; };
+		243630561627425E0097B17D /* feeding-grape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feeding-grape.png"; path = "Resources/Home/feeding/foodicons/feeding-grape.png"; sourceTree = "<group>"; };
+		243630571627425E0097B17D /* feeding-kiwi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feeding-kiwi.png"; path = "Resources/Home/feeding/foodicons/feeding-kiwi.png"; sourceTree = "<group>"; };
+		243630581627425E0097B17D /* feeding-lima beans.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feeding-lima beans.png"; path = "Resources/Home/feeding/foodicons/feeding-lima beans.png"; sourceTree = "<group>"; };
+		243630591627425E0097B17D /* feeding-mango.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feeding-mango.png"; path = "Resources/Home/feeding/foodicons/feeding-mango.png"; sourceTree = "<group>"; };
+		2436305A1627425E0097B17D /* feeding-oatmeal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feeding-oatmeal.png"; path = "Resources/Home/feeding/foodicons/feeding-oatmeal.png"; sourceTree = "<group>"; };
+		2436305B1627425E0097B17D /* feeding-onion.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feeding-onion.png"; path = "Resources/Home/feeding/foodicons/feeding-onion.png"; sourceTree = "<group>"; };
+		2436305C1627425E0097B17D /* feeding-orange.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feeding-orange.png"; path = "Resources/Home/feeding/foodicons/feeding-orange.png"; sourceTree = "<group>"; };
+		2436305D1627425E0097B17D /* feeding-papaya.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feeding-papaya.png"; path = "Resources/Home/feeding/foodicons/feeding-papaya.png"; sourceTree = "<group>"; };
+		2436305E1627425E0097B17D /* feeding-pasta.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feeding-pasta.png"; path = "Resources/Home/feeding/foodicons/feeding-pasta.png"; sourceTree = "<group>"; };
+		2436305F1627425E0097B17D /* feeding-peach.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feeding-peach.png"; path = "Resources/Home/feeding/foodicons/feeding-peach.png"; sourceTree = "<group>"; };
+		243630601627425E0097B17D /* feeding-pear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feeding-pear.png"; path = "Resources/Home/feeding/foodicons/feeding-pear.png"; sourceTree = "<group>"; };
+		243630611627425E0097B17D /* feeding-peas.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feeding-peas.png"; path = "Resources/Home/feeding/foodicons/feeding-peas.png"; sourceTree = "<group>"; };
+		243630621627425E0097B17D /* feeding-pineapple.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feeding-pineapple.png"; path = "Resources/Home/feeding/foodicons/feeding-pineapple.png"; sourceTree = "<group>"; };
+		243630631627425E0097B17D /* feeding-plum.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feeding-plum.png"; path = "Resources/Home/feeding/foodicons/feeding-plum.png"; sourceTree = "<group>"; };
+		243630641627425E0097B17D /* feeding-potato.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feeding-potato.png"; path = "Resources/Home/feeding/foodicons/feeding-potato.png"; sourceTree = "<group>"; };
+		243630651627425E0097B17D /* feeding-pumpkin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feeding-pumpkin.png"; path = "Resources/Home/feeding/foodicons/feeding-pumpkin.png"; sourceTree = "<group>"; };
+		243630661627425E0097B17D /* feeding-ricebrown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feeding-ricebrown.png"; path = "Resources/Home/feeding/foodicons/feeding-ricebrown.png"; sourceTree = "<group>"; };
+		243630671627425E0097B17D /* feeding-ricewhite.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feeding-ricewhite.png"; path = "Resources/Home/feeding/foodicons/feeding-ricewhite.png"; sourceTree = "<group>"; };
+		243630681627425E0097B17D /* feeding-sweet potato.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feeding-sweet potato.png"; path = "Resources/Home/feeding/foodicons/feeding-sweet potato.png"; sourceTree = "<group>"; };
+		243630691627425E0097B17D /* feeding-watermelon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feeding-watermelon.png"; path = "Resources/Home/feeding/foodicons/feeding-watermelon.png"; sourceTree = "<group>"; };
+		24363091162742700097B17D /* feedinggrey-avocado.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feedinggrey-avocado.png"; path = "Resources/Home/feeding/foodicons grey/feedinggrey-avocado.png"; sourceTree = "<group>"; };
+		24363093162742820097B17D /* feedinggrey-apple.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feedinggrey-apple.png"; path = "Resources/Home/feeding/foodicons grey/feedinggrey-apple.png"; sourceTree = "<group>"; };
+		24363094162742820097B17D /* feedinggrey-apricot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feedinggrey-apricot.png"; path = "Resources/Home/feeding/foodicons grey/feedinggrey-apricot.png"; sourceTree = "<group>"; };
+		24363095162742820097B17D /* feedinggrey-artichoke.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feedinggrey-artichoke.png"; path = "Resources/Home/feeding/foodicons grey/feedinggrey-artichoke.png"; sourceTree = "<group>"; };
+		24363096162742820097B17D /* feedinggrey-asparagus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feedinggrey-asparagus.png"; path = "Resources/Home/feeding/foodicons grey/feedinggrey-asparagus.png"; sourceTree = "<group>"; };
+		24363097162742820097B17D /* feedinggrey-banana.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feedinggrey-banana.png"; path = "Resources/Home/feeding/foodicons grey/feedinggrey-banana.png"; sourceTree = "<group>"; };
+		24363098162742820097B17D /* feedinggrey-beet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feedinggrey-beet.png"; path = "Resources/Home/feeding/foodicons grey/feedinggrey-beet.png"; sourceTree = "<group>"; };
+		24363099162742820097B17D /* feedinggrey-blueberry.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feedinggrey-blueberry.png"; path = "Resources/Home/feeding/foodicons grey/feedinggrey-blueberry.png"; sourceTree = "<group>"; };
+		2436309A162742820097B17D /* feedinggrey-bread.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feedinggrey-bread.png"; path = "Resources/Home/feeding/foodicons grey/feedinggrey-bread.png"; sourceTree = "<group>"; };
+		2436309B162742820097B17D /* feedinggrey-broccoli.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feedinggrey-broccoli.png"; path = "Resources/Home/feeding/foodicons grey/feedinggrey-broccoli.png"; sourceTree = "<group>"; };
+		2436309C162742820097B17D /* feedinggrey-brownrice.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feedinggrey-brownrice.png"; path = "Resources/Home/feeding/foodicons grey/feedinggrey-brownrice.png"; sourceTree = "<group>"; };
+		2436309D162742820097B17D /* feedinggrey-brussel sprout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feedinggrey-brussel sprout.png"; path = "Resources/Home/feeding/foodicons grey/feedinggrey-brussel sprout.png"; sourceTree = "<group>"; };
+		2436309E162742820097B17D /* feedinggrey-califlower.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feedinggrey-califlower.png"; path = "Resources/Home/feeding/foodicons grey/feedinggrey-califlower.png"; sourceTree = "<group>"; };
+		2436309F162742820097B17D /* feedinggrey-carrot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feedinggrey-carrot.png"; path = "Resources/Home/feeding/foodicons grey/feedinggrey-carrot.png"; sourceTree = "<group>"; };
+		243630A0162742820097B17D /* feedinggrey-cheerios.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feedinggrey-cheerios.png"; path = "Resources/Home/feeding/foodicons grey/feedinggrey-cheerios.png"; sourceTree = "<group>"; };
+		243630A1162742820097B17D /* feedinggrey-cheese.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feedinggrey-cheese.png"; path = "Resources/Home/feeding/foodicons grey/feedinggrey-cheese.png"; sourceTree = "<group>"; };
+		243630A2162742820097B17D /* feedinggrey-cucumber.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feedinggrey-cucumber.png"; path = "Resources/Home/feeding/foodicons grey/feedinggrey-cucumber.png"; sourceTree = "<group>"; };
+		243630A3162742820097B17D /* feedinggrey-drybean.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feedinggrey-drybean.png"; path = "Resources/Home/feeding/foodicons grey/feedinggrey-drybean.png"; sourceTree = "<group>"; };
+		243630A4162742820097B17D /* feedinggrey-eggplant.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feedinggrey-eggplant.png"; path = "Resources/Home/feeding/foodicons grey/feedinggrey-eggplant.png"; sourceTree = "<group>"; };
+		243630A5162742820097B17D /* feedinggrey-fish.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feedinggrey-fish.png"; path = "Resources/Home/feeding/foodicons grey/feedinggrey-fish.png"; sourceTree = "<group>"; };
+		243630A6162742820097B17D /* feedinggrey-grape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feedinggrey-grape.png"; path = "Resources/Home/feeding/foodicons grey/feedinggrey-grape.png"; sourceTree = "<group>"; };
+		243630A7162742820097B17D /* feedinggrey-green pea.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feedinggrey-green pea.png"; path = "Resources/Home/feeding/foodicons grey/feedinggrey-green pea.png"; sourceTree = "<group>"; };
+		243630A8162742820097B17D /* feedinggrey-kiwi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feedinggrey-kiwi.png"; path = "Resources/Home/feeding/foodicons grey/feedinggrey-kiwi.png"; sourceTree = "<group>"; };
+		243630A9162742820097B17D /* feedinggrey-lima bean.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feedinggrey-lima bean.png"; path = "Resources/Home/feeding/foodicons grey/feedinggrey-lima bean.png"; sourceTree = "<group>"; };
+		243630AA162742820097B17D /* feedinggrey-mango.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feedinggrey-mango.png"; path = "Resources/Home/feeding/foodicons grey/feedinggrey-mango.png"; sourceTree = "<group>"; };
+		243630AB162742820097B17D /* feedinggrey-oatmeal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feedinggrey-oatmeal.png"; path = "Resources/Home/feeding/foodicons grey/feedinggrey-oatmeal.png"; sourceTree = "<group>"; };
+		243630AC162742820097B17D /* feedinggrey-onion.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feedinggrey-onion.png"; path = "Resources/Home/feeding/foodicons grey/feedinggrey-onion.png"; sourceTree = "<group>"; };
+		243630AD162742820097B17D /* feedinggrey-orange.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feedinggrey-orange.png"; path = "Resources/Home/feeding/foodicons grey/feedinggrey-orange.png"; sourceTree = "<group>"; };
+		243630AE162742820097B17D /* feedinggrey-papaya.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feedinggrey-papaya.png"; path = "Resources/Home/feeding/foodicons grey/feedinggrey-papaya.png"; sourceTree = "<group>"; };
+		243630AF162742820097B17D /* feedinggrey-pasta.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feedinggrey-pasta.png"; path = "Resources/Home/feeding/foodicons grey/feedinggrey-pasta.png"; sourceTree = "<group>"; };
+		243630B0162742820097B17D /* feedinggrey-peach.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feedinggrey-peach.png"; path = "Resources/Home/feeding/foodicons grey/feedinggrey-peach.png"; sourceTree = "<group>"; };
+		243630B1162742820097B17D /* feedinggrey-pear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feedinggrey-pear.png"; path = "Resources/Home/feeding/foodicons grey/feedinggrey-pear.png"; sourceTree = "<group>"; };
+		243630B2162742820097B17D /* feedinggrey-pineapple.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feedinggrey-pineapple.png"; path = "Resources/Home/feeding/foodicons grey/feedinggrey-pineapple.png"; sourceTree = "<group>"; };
+		243630B3162742820097B17D /* feedinggrey-plum.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feedinggrey-plum.png"; path = "Resources/Home/feeding/foodicons grey/feedinggrey-plum.png"; sourceTree = "<group>"; };
+		243630B4162742820097B17D /* feedinggrey-potato.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feedinggrey-potato.png"; path = "Resources/Home/feeding/foodicons grey/feedinggrey-potato.png"; sourceTree = "<group>"; };
+		243630B5162742820097B17D /* feedinggrey-pumpkin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feedinggrey-pumpkin.png"; path = "Resources/Home/feeding/foodicons grey/feedinggrey-pumpkin.png"; sourceTree = "<group>"; };
+		243630B6162742820097B17D /* feedinggrey-sweetpotato.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feedinggrey-sweetpotato.png"; path = "Resources/Home/feeding/foodicons grey/feedinggrey-sweetpotato.png"; sourceTree = "<group>"; };
+		243630B7162742820097B17D /* feedinggrey-watermelon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feedinggrey-watermelon.png"; path = "Resources/Home/feeding/foodicons grey/feedinggrey-watermelon.png"; sourceTree = "<group>"; };
+		243630B8162742820097B17D /* feedinggrey-whiterice.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feedinggrey-whiterice.png"; path = "Resources/Home/feeding/foodicons grey/feedinggrey-whiterice.png"; sourceTree = "<group>"; };
+		243630DF162742960097B17D /* feeding-01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feeding-01.png"; path = "Resources/Home/feeding/feeding-01.png"; sourceTree = "<group>"; };
+		243630E0162742960097B17D /* feeding-blank.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feeding-blank.png"; path = "Resources/Home/feeding/feeding-blank.png"; sourceTree = "<group>"; };
 		3F186A5D1569CCEC00FC9E2C /* home_background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "home_background@2x.png"; path = "Resources/Home/home_background@2x.png"; sourceTree = "<group>"; };
 		3F2216DB1571758F000E86F3 /* totLoginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = totLoginController.h; sourceTree = "<group>"; };
 		3F2216DC1571758F000E86F3 /* totLoginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = totLoginController.m; sourceTree = "<group>"; };
@@ -415,6 +587,115 @@
 				EFD8402B1550FAA600F75B69 /* motor_skill_walk.png */,
 			);
 			name = View;
+			sourceTree = "<group>";
+		};
+		24363034162741C70097B17D /* feeding */ = {
+			isa = PBXGroup;
+			children = (
+				243630DF162742960097B17D /* feeding-01.png */,
+				243630E0162742960097B17D /* feeding-blank.png */,
+				243630421627421E0097B17D /* foodicons_gray */,
+				24363041162742160097B17D /* foodicons_color */,
+				243630351627420F0097B17D /* feedingcategories-cereal.png */,
+				243630361627420F0097B17D /* feedingcategories-dairy.png */,
+				243630371627420F0097B17D /* feedingcategories-fruit.png */,
+				243630381627420F0097B17D /* feedingcategories-juice.png */,
+				243630391627420F0097B17D /* feedingcategories-meat.png */,
+				2436303A1627420F0097B17D /* feedingcategories-vege.png */,
+			);
+			name = feeding;
+			sourceTree = "<group>";
+		};
+		24363041162742160097B17D /* foodicons_color */ = {
+			isa = PBXGroup;
+			children = (
+				243630431627425E0097B17D /* feeding-apple.png */,
+				243630441627425E0097B17D /* feeding-apricot.png */,
+				243630451627425E0097B17D /* feeding-artichoke.png */,
+				243630461627425E0097B17D /* feeding-asparagus.png */,
+				243630471627425E0097B17D /* feeding-avocado.png */,
+				243630481627425E0097B17D /* feeding-banana.png */,
+				243630491627425E0097B17D /* feeding-beets.png */,
+				2436304A1627425E0097B17D /* feeding-blueberry.png */,
+				2436304B1627425E0097B17D /* feeding-bread.png */,
+				2436304C1627425E0097B17D /* feeding-broccoli.png */,
+				2436304D1627425E0097B17D /* feeding-brussel sprout.png */,
+				2436304E1627425E0097B17D /* feeding-califlower.png */,
+				2436304F1627425E0097B17D /* feeding-carrot.png */,
+				243630501627425E0097B17D /* feeding-cheerios.png */,
+				243630511627425E0097B17D /* feeding-cheese.png */,
+				243630521627425E0097B17D /* feeding-cucumber.png */,
+				243630531627425E0097B17D /* feeding-dry beans.png */,
+				243630541627425E0097B17D /* feeding-eggplant.png */,
+				243630551627425E0097B17D /* feeding-fish.png */,
+				243630561627425E0097B17D /* feeding-grape.png */,
+				243630571627425E0097B17D /* feeding-kiwi.png */,
+				243630581627425E0097B17D /* feeding-lima beans.png */,
+				243630591627425E0097B17D /* feeding-mango.png */,
+				2436305A1627425E0097B17D /* feeding-oatmeal.png */,
+				2436305B1627425E0097B17D /* feeding-onion.png */,
+				2436305C1627425E0097B17D /* feeding-orange.png */,
+				2436305D1627425E0097B17D /* feeding-papaya.png */,
+				2436305E1627425E0097B17D /* feeding-pasta.png */,
+				2436305F1627425E0097B17D /* feeding-peach.png */,
+				243630601627425E0097B17D /* feeding-pear.png */,
+				243630611627425E0097B17D /* feeding-peas.png */,
+				243630621627425E0097B17D /* feeding-pineapple.png */,
+				243630631627425E0097B17D /* feeding-plum.png */,
+				243630641627425E0097B17D /* feeding-potato.png */,
+				243630651627425E0097B17D /* feeding-pumpkin.png */,
+				243630661627425E0097B17D /* feeding-ricebrown.png */,
+				243630671627425E0097B17D /* feeding-ricewhite.png */,
+				243630681627425E0097B17D /* feeding-sweet potato.png */,
+				243630691627425E0097B17D /* feeding-watermelon.png */,
+			);
+			name = foodicons_color;
+			sourceTree = "<group>";
+		};
+		243630421627421E0097B17D /* foodicons_gray */ = {
+			isa = PBXGroup;
+			children = (
+				24363093162742820097B17D /* feedinggrey-apple.png */,
+				24363094162742820097B17D /* feedinggrey-apricot.png */,
+				24363095162742820097B17D /* feedinggrey-artichoke.png */,
+				24363096162742820097B17D /* feedinggrey-asparagus.png */,
+				24363097162742820097B17D /* feedinggrey-banana.png */,
+				24363098162742820097B17D /* feedinggrey-beet.png */,
+				24363099162742820097B17D /* feedinggrey-blueberry.png */,
+				2436309A162742820097B17D /* feedinggrey-bread.png */,
+				2436309B162742820097B17D /* feedinggrey-broccoli.png */,
+				2436309C162742820097B17D /* feedinggrey-brownrice.png */,
+				2436309D162742820097B17D /* feedinggrey-brussel sprout.png */,
+				2436309E162742820097B17D /* feedinggrey-califlower.png */,
+				2436309F162742820097B17D /* feedinggrey-carrot.png */,
+				243630A0162742820097B17D /* feedinggrey-cheerios.png */,
+				243630A1162742820097B17D /* feedinggrey-cheese.png */,
+				243630A2162742820097B17D /* feedinggrey-cucumber.png */,
+				243630A3162742820097B17D /* feedinggrey-drybean.png */,
+				243630A4162742820097B17D /* feedinggrey-eggplant.png */,
+				243630A5162742820097B17D /* feedinggrey-fish.png */,
+				243630A6162742820097B17D /* feedinggrey-grape.png */,
+				243630A7162742820097B17D /* feedinggrey-green pea.png */,
+				243630A8162742820097B17D /* feedinggrey-kiwi.png */,
+				243630A9162742820097B17D /* feedinggrey-lima bean.png */,
+				243630AA162742820097B17D /* feedinggrey-mango.png */,
+				243630AB162742820097B17D /* feedinggrey-oatmeal.png */,
+				243630AC162742820097B17D /* feedinggrey-onion.png */,
+				243630AD162742820097B17D /* feedinggrey-orange.png */,
+				243630AE162742820097B17D /* feedinggrey-papaya.png */,
+				243630AF162742820097B17D /* feedinggrey-pasta.png */,
+				243630B0162742820097B17D /* feedinggrey-peach.png */,
+				243630B1162742820097B17D /* feedinggrey-pear.png */,
+				243630B2162742820097B17D /* feedinggrey-pineapple.png */,
+				243630B3162742820097B17D /* feedinggrey-plum.png */,
+				243630B4162742820097B17D /* feedinggrey-potato.png */,
+				243630B5162742820097B17D /* feedinggrey-pumpkin.png */,
+				243630B6162742820097B17D /* feedinggrey-sweetpotato.png */,
+				243630B7162742820097B17D /* feedinggrey-watermelon.png */,
+				243630B8162742820097B17D /* feedinggrey-whiterice.png */,
+				24363091162742700097B17D /* feedinggrey-avocado.png */,
+			);
+			name = foodicons_gray;
 			sourceTree = "<group>";
 		};
 		3FBD5DFB161AC23200C1D964 /* Login */ = {
@@ -750,6 +1031,7 @@
 		EF97E7C3153B49F30037E52D /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				24363034162741C70097B17D /* feeding */,
 				8E632EBF16268D8500072D89 /* Diaper */,
 				8E4D50E71616593900890621 /* Sleep */,
 				8E4D50E21614CC3A00890621 /* boy.jpg */,
@@ -946,6 +1228,92 @@
 				3F619B6E161E962200BDE897 /* girlSelected.png in Resources */,
 				3F619B72161EA46F00BDE897 /* login.png in Resources */,
 				3F619B73161EA46F00BDE897 /* registration.png in Resources */,
+				2436303B1627420F0097B17D /* feedingcategories-cereal.png in Resources */,
+				2436303C1627420F0097B17D /* feedingcategories-dairy.png in Resources */,
+				2436303D1627420F0097B17D /* feedingcategories-fruit.png in Resources */,
+				2436303E1627420F0097B17D /* feedingcategories-juice.png in Resources */,
+				2436303F1627420F0097B17D /* feedingcategories-meat.png in Resources */,
+				243630401627420F0097B17D /* feedingcategories-vege.png in Resources */,
+				2436306A1627425E0097B17D /* feeding-apple.png in Resources */,
+				2436306B1627425E0097B17D /* feeding-apricot.png in Resources */,
+				2436306C1627425E0097B17D /* feeding-artichoke.png in Resources */,
+				2436306D1627425E0097B17D /* feeding-asparagus.png in Resources */,
+				2436306E1627425E0097B17D /* feeding-avocado.png in Resources */,
+				2436306F1627425E0097B17D /* feeding-banana.png in Resources */,
+				243630701627425E0097B17D /* feeding-beets.png in Resources */,
+				243630711627425E0097B17D /* feeding-blueberry.png in Resources */,
+				243630721627425E0097B17D /* feeding-bread.png in Resources */,
+				243630731627425E0097B17D /* feeding-broccoli.png in Resources */,
+				243630741627425E0097B17D /* feeding-brussel sprout.png in Resources */,
+				243630751627425E0097B17D /* feeding-califlower.png in Resources */,
+				243630761627425E0097B17D /* feeding-carrot.png in Resources */,
+				243630771627425E0097B17D /* feeding-cheerios.png in Resources */,
+				243630781627425E0097B17D /* feeding-cheese.png in Resources */,
+				243630791627425E0097B17D /* feeding-cucumber.png in Resources */,
+				2436307A1627425E0097B17D /* feeding-dry beans.png in Resources */,
+				2436307B1627425E0097B17D /* feeding-eggplant.png in Resources */,
+				2436307C1627425E0097B17D /* feeding-fish.png in Resources */,
+				2436307D1627425E0097B17D /* feeding-grape.png in Resources */,
+				2436307E1627425E0097B17D /* feeding-kiwi.png in Resources */,
+				2436307F1627425E0097B17D /* feeding-lima beans.png in Resources */,
+				243630801627425E0097B17D /* feeding-mango.png in Resources */,
+				243630811627425E0097B17D /* feeding-oatmeal.png in Resources */,
+				243630821627425E0097B17D /* feeding-onion.png in Resources */,
+				243630831627425E0097B17D /* feeding-orange.png in Resources */,
+				243630841627425E0097B17D /* feeding-papaya.png in Resources */,
+				243630851627425E0097B17D /* feeding-pasta.png in Resources */,
+				243630861627425E0097B17D /* feeding-peach.png in Resources */,
+				243630871627425E0097B17D /* feeding-pear.png in Resources */,
+				243630881627425E0097B17D /* feeding-peas.png in Resources */,
+				243630891627425E0097B17D /* feeding-pineapple.png in Resources */,
+				2436308A1627425E0097B17D /* feeding-plum.png in Resources */,
+				2436308B1627425E0097B17D /* feeding-potato.png in Resources */,
+				2436308C1627425E0097B17D /* feeding-pumpkin.png in Resources */,
+				2436308D1627425E0097B17D /* feeding-ricebrown.png in Resources */,
+				2436308E1627425E0097B17D /* feeding-ricewhite.png in Resources */,
+				2436308F1627425E0097B17D /* feeding-sweet potato.png in Resources */,
+				243630901627425E0097B17D /* feeding-watermelon.png in Resources */,
+				24363092162742700097B17D /* feedinggrey-avocado.png in Resources */,
+				243630B9162742820097B17D /* feedinggrey-apple.png in Resources */,
+				243630BA162742820097B17D /* feedinggrey-apricot.png in Resources */,
+				243630BB162742820097B17D /* feedinggrey-artichoke.png in Resources */,
+				243630BC162742820097B17D /* feedinggrey-asparagus.png in Resources */,
+				243630BD162742820097B17D /* feedinggrey-banana.png in Resources */,
+				243630BE162742820097B17D /* feedinggrey-beet.png in Resources */,
+				243630BF162742820097B17D /* feedinggrey-blueberry.png in Resources */,
+				243630C0162742820097B17D /* feedinggrey-bread.png in Resources */,
+				243630C1162742820097B17D /* feedinggrey-broccoli.png in Resources */,
+				243630C2162742820097B17D /* feedinggrey-brownrice.png in Resources */,
+				243630C3162742820097B17D /* feedinggrey-brussel sprout.png in Resources */,
+				243630C4162742820097B17D /* feedinggrey-califlower.png in Resources */,
+				243630C5162742820097B17D /* feedinggrey-carrot.png in Resources */,
+				243630C6162742820097B17D /* feedinggrey-cheerios.png in Resources */,
+				243630C7162742820097B17D /* feedinggrey-cheese.png in Resources */,
+				243630C8162742820097B17D /* feedinggrey-cucumber.png in Resources */,
+				243630C9162742820097B17D /* feedinggrey-drybean.png in Resources */,
+				243630CA162742820097B17D /* feedinggrey-eggplant.png in Resources */,
+				243630CB162742820097B17D /* feedinggrey-fish.png in Resources */,
+				243630CC162742820097B17D /* feedinggrey-grape.png in Resources */,
+				243630CD162742820097B17D /* feedinggrey-green pea.png in Resources */,
+				243630CE162742820097B17D /* feedinggrey-kiwi.png in Resources */,
+				243630CF162742820097B17D /* feedinggrey-lima bean.png in Resources */,
+				243630D0162742820097B17D /* feedinggrey-mango.png in Resources */,
+				243630D1162742820097B17D /* feedinggrey-oatmeal.png in Resources */,
+				243630D2162742820097B17D /* feedinggrey-onion.png in Resources */,
+				243630D3162742820097B17D /* feedinggrey-orange.png in Resources */,
+				243630D4162742820097B17D /* feedinggrey-papaya.png in Resources */,
+				243630D5162742820097B17D /* feedinggrey-pasta.png in Resources */,
+				243630D6162742820097B17D /* feedinggrey-peach.png in Resources */,
+				243630D7162742820097B17D /* feedinggrey-pear.png in Resources */,
+				243630D8162742820097B17D /* feedinggrey-pineapple.png in Resources */,
+				243630D9162742820097B17D /* feedinggrey-plum.png in Resources */,
+				243630DA162742820097B17D /* feedinggrey-potato.png in Resources */,
+				243630DB162742820097B17D /* feedinggrey-pumpkin.png in Resources */,
+				243630DC162742820097B17D /* feedinggrey-sweetpotato.png in Resources */,
+				243630DD162742820097B17D /* feedinggrey-watermelon.png in Resources */,
+				243630DE162742820097B17D /* feedinggrey-whiterice.png in Resources */,
+				243630E1162742960097B17D /* feeding-01.png in Resources */,
+				243630E2162742960097B17D /* feeding-blank.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
