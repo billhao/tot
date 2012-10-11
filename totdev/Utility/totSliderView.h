@@ -20,14 +20,16 @@
     UIScrollView *scrollView;  
     UIPageControl *pageControl;
     
-    int scrollWidth, scrollHeight, scrollYOrigin, numOfRows;
+    int scrollWidth, scrollHeight, scrollYOrigin;
     UIColor *bcgColor;
     
     //layout setting
-    int btnPerRow; //default is 3
-    int btnPerCol; //default is 2
+    int btnPerRow; //default is 3 (a.k.a numOfCol)
+    int btnPerCol; //default is 2 (a.k.a numOfRow)
     // int btnWidth; //auto-computed based on btuPerRow and the width
     int btnHeight; // if left blank, by default height = width
+    int vMarginBetweenBtn; // if left blank, by default is 0
+    int hMarginBetweenBtn; // if left blank, by default is 0
     
     NSMutableArray *contentArray; 
     NSMutableArray *marginArray;
@@ -55,10 +57,12 @@
 
 /// set scroll view lay out: buttons per row
 // buttons per row = 3 by default; buttons per col = 2 by default
-- (void)setBtnPerRow:(int)btnPerRow;
-- (void)setBtnperCol:(int)btnPerCol;
+- (void)setBtnPerRow:(int)buttonPerRow;
+- (void)setBtnPerCol:(int)buttonPerCol;
 // buttons height
-- (void)setBtnHeight:(int)bthHeight;
+- (void)setBtnHeight:(int)buttonHeight;
+- (void)setvMarginBetweenBtn:(int)vMargin;
+- (void)sethMarginBetweenBtn:(int)hMargin;
 
 ///set margin
 -(void)setMarginArray:(NSArray *)margins;

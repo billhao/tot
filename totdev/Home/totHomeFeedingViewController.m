@@ -11,6 +11,8 @@
 #import "totEventName.h"
 #import "totEvent.h"
 #import "../Utility/totUtility.h"
+#import "../Utility/totImageView.h"
+
 
 #define DEFAULT_QUANTITY 2.3 //magic number
 
@@ -96,9 +98,22 @@
 {
     [super viewDidLoad];
     
-    // create the slider view
-    mCategoriesSlider = [[totSliderView alloc] initWithFrame:CGRectMake(10, 150, 300, 130)];
+    // create background
+    totImageView *background = [[totImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
+    [background imageFilePath:@"feeding-blank.png"];
+    [self.view addSubview:background];
+    [background release];
+    
+    
+    
+    // create categories slider view
+    mCategoriesSlider = [[totSliderView alloc] initWithFrame:CGRectMake(38, 170, 244, 120)];
     [mCategoriesSlider setDelegate:self];
+    [mCategoriesSlider setBtnPerCol:2];
+    [mCategoriesSlider setBtnPerRow:3];
+    [mCategoriesSlider setvMarginBetweenBtn:12];
+    [mCategoriesSlider sethMarginBetweenBtn:12];
+    [mCategoriesSlider setBtnHeight:33];
     //[mCategoriesSlider enablePageControlOnBottom]; no page control dot
     
     //load image
@@ -118,6 +133,38 @@
     [self.view addSubview:mCategoriesSlider];
     
     buttonSelected = 0;
+
+    
+    // create recently used slider view
+    mRecentlyUsedSlider = [[totSliderView alloc] initWithFrame:CGRectMake(38, 95, 244, 60)];
+    [mRecentlyUsedSlider setDelegate:self];
+    [mRecentlyUsedSlider setBtnPerCol:1];
+    [mRecentlyUsedSlider setBtnPerRow:4];
+    [mRecentlyUsedSlider setvMarginBetweenBtn:0];
+    [mRecentlyUsedSlider sethMarginBetweenBtn:0];
+    //[mRecentlyUsedSlider setBtnHeight:40];
+    
+    //load image
+    NSMutableArray *recentlyUsedImages = [[NSMutableArray alloc] init];
+   // [recentlyUsedImages addObject:[UIImage imageNamed:@"feedingcategories-cereal"]];
+    [recentlyUsedImages addObject:[UIImage imageNamed:@"feeding-apple.png"]];
+    [recentlyUsedImages addObject:[UIImage imageNamed:@"feeding-blueberry.png"]];
+    [recentlyUsedImages addObject:[UIImage imageNamed:@"feeding-papaya.png"]];
+    [recentlyUsedImages addObject:[UIImage imageNamed:@"feeding-kiwi.png"]];
+    [recentlyUsedImages addObject:[UIImage imageNamed:@"feeding-mango.png"]];
+    [recentlyUsedImages addObject:[UIImage imageNamed:@"feeding-bread.png"]];
+    [recentlyUsedImages addObject:[UIImage imageNamed:@"feeding-banana.png"]];
+    [recentlyUsedImages addObject:[UIImage imageNamed:@"feeding-ricewhite.png"]];
+    [recentlyUsedImages addObject:[UIImage imageNamed:@"feeding-cheerios.png"]];
+    [recentlyUsedImages addObject:[UIImage imageNamed:@"feeding-peas.png"]];
+ 
+    
+    [mRecentlyUsedSlider setContentArray:recentlyUsedImages];
+    [recentlyUsedImages release];
+    
+    [mRecentlyUsedSlider getWithPositionMemoryIdentifier:@"feedingRecentlyUsed"];
+    
+    [self.view addSubview:mRecentlyUsedSlider];
     
     //create title navigation bar
     //navigationBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];

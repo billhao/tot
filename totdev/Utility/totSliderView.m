@@ -10,9 +10,11 @@
 #import "totImageView.h"
 #import "../Utility/totUtility.h"
 
+
 #define totGUIScrollViewImagePageIdentifier         @"totGUIScrollViewImagePageIdentifier"  
 #define totGUIScrollViewImageDefaultPageIdentifier  @"Default"  
 
+#define MAX_BTNPERPAGE      20
 #define DEFAULT_WIDTH       270
 #define DEFAULT_HEIGHT      280 
 #define DEFAULT_BTNPERROW   3
@@ -42,7 +44,11 @@
             btnPerRow = DEFAULT_BTNPERROW;
         if(!btnPerCol)
             btnPerCol = DEFAULT_BTNPERCOL;
-
+        if(!vMarginBetweenBtn)
+            vMarginBetweenBtn = 0;
+        if(!hMarginBetweenBtn)
+            hMarginBetweenBtn = 0;
+        
         scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, scrollWidth, scrollHeight)];
         pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
         
@@ -69,44 +75,33 @@
     btnPerRow = buttonPerRow;
 }
 
-//xxxxxxxxxx for col and height
+-(void)setBtnPerCol:(int)buttonPerCol {
+    btnPerCol = buttonPerCol;
+}
 
+-(void)setBtnHeight:(int)buttonHeight {
+    btnHeight = buttonHeight;
+}
 
+-(void)setvMarginBetweenBtn:(int)vMargin {
+    vMarginBetweenBtn = vMargin;
+}
 
-
-
-
-
-
-
-
-
+-(void)sethMarginBetweenBtn:(int)hMargin {
+    hMarginBetweenBtn = hMargin;
+}
 
 - (void)setContentArray:(NSArray *)images {  
     if( contentArray ) {
-        [contentArray release];
-        contentArray = nil;
-    }
-    
+        [contentArray release]; contentArray = nil;}
     if( marginArray ) {
-        [marginArray release];
-        marginArray = nil;
-    }
-    
+        [marginArray release];  marginArray = nil; }
     if( isIconArray ) {
-        [isIconArray release];
-        isIconArray = nil;
-    }
-    
+        [isIconArray release]; isIconArray = nil; }
     if( labelArray ) {
-        [labelArray release];
-        labelArray = nil;
-    }
-    
+        [labelArray release];  labelArray = nil;  }
     if( buttonArray ) {
-        [buttonArray release];
-        buttonArray = nil;
-    }
+        [buttonArray release]; buttonArray = nil; }
     
     contentArray = [[NSMutableArray alloc] initWithArray:images];
     marginArray  = [[NSMutableArray alloc] init];
@@ -127,11 +122,8 @@
 }
 
 - (void)setButton:(int)idx andWithValue:(float)value{
-    //add new view on button
-    
     //deside label position
     NSString *value_string = [NSString stringWithFormat:@"%.1f %@", value,@"oz" ];
-    
     ((UILabel*)[labelArray objectAtIndex:idx]).text = value_string;
 }
 
@@ -177,12 +169,13 @@
         printf("Must set content array before using totSliderView\n");
         exit(1);
     }
-        
+    
+    int btnPerPage = btnPerRow * btnPerCol;
+    
     int totalPageNumbers = 
-        ceil((double)[contentArray count]/numOfRows/3);
+        ceil((double)[contentArray count]/ btnPerPage);
 
-    if (page-1 > totalPageNumbers) 
-        page = 0;
+    if (page-1 > totalPageNumbers) page = 0; //reset page
     
     [self cleanScrollView];
     
@@ -194,42 +187,59 @@
     scrollView.pagingEnabled = YES;  
     scrollView.showsHorizontalScrollIndicator = NO;
 
+    
+    //decide layout
+    int xx[MAX_BTNPERPAGE], yy[MAX_BTNPERPAGE]; //the maximum buttons one page can hold
+    int btnWidth;
+    btnWidth = floor( (scrollWidth - (btnPerRow + 1) * vMarginBetweenBtn) / btnPerRow );
+    if (!btnHeight)
+        btnHeight = btnWidth;
+    
+    for (int i = 0; i<btnPerCol; i++){
+        for(int j = 0; j<btnPerRow; j++){
+            xx[j + btnPerRow * i] =
+                vMarginBetweenBtn * (j + 1) + j*btnWidth;
+            yy[j + btnPerRow*i] =
+                hMarginBetweenBtn * (i + 1) + i*btnHeight;
+        }
+    }
+
     //load button here: //plus blank label here
     for (int i = 0; i < totalPageNumbers; i++) {
-        UIView *subview = [[UIView alloc] initWithFrame:CGRectMake(i*scrollWidth, 5, scrollWidth, scrollHeight)];
+        UIView *subview = [[UIView alloc] initWithFrame:CGRectMake(i*scrollWidth, 0, scrollWidth, scrollHeight)];
         
-        int remainButtons = 0;
-        if([contentArray count] >= (i+1)*numOfRows*3)
-            remainButtons = numOfRows*3;
+        int btnToRender = 0;
+        if([contentArray count] >= (i+1)*btnPerPage)
+            btnToRender = btnPerPage;
         else
-            remainButtons = [contentArray count]- i*numOfRows*3;
+            btnToRender = [contentArray count]- i*btnPerPage; //render the remaining buttons
         
-        int xx[6] = {7, 97, 187, 7, 97, 187};
-        int yy[6] = {5, 5, 5, 100, 100, 100};
+        //int xx[6] = {7, 97, 187, 7, 97, 187}; //should be auto computed
+        //int yy[6] = {5, 5, 5, 100, 100, 100};
         
-        for (int j = 0; j<remainButtons; j++){
+        for (int j = 0; j<btnToRender; j++){
             //int xPos = LEFT_MARGIN+(BUTTON_WIDTH+HORI_INTERVAL)*(j%3);
             //int yPos = TOP_MARGIN+(BUTTON_HEIGHT+VERTI_INTERVAL)*(j/3);
             int xPos = xx[j];
             int yPos = yy[j];
             
-            if( [[isIconArray objectAtIndex:i*numOfRows*3+j] boolValue] ) {
-                UIButton *imageButton = [[UIButton alloc] initWithFrame:CGRectMake(xPos, yPos, BUTTON_WIDTH, BUTTON_HEIGHT)];
-                UIImage  *origImage   = [contentArray objectAtIndex:i*numOfRows*3+j];
+            if( [[isIconArray objectAtIndex:i*btnPerPage+j] boolValue] ) {
+                UIButton *imageButton = [[UIButton alloc] initWithFrame:CGRectMake(xPos, yPos, btnWidth, btnHeight)];
+                UIImage  *origImage   = [contentArray objectAtIndex:i*btnPerPage+j];
                 [imageButton setImage:origImage forState:UIControlStateNormal];
                 [imageButton addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
-                [imageButton setTag:i*numOfRows*3+j+1];
+                [imageButton setTag:i*btnPerPage+j+1];
                 [subview addSubview:(UIView *)imageButton];
                 [buttonArray addObject:imageButton];
                 [imageButton release];
             } else {
-                UIImageView *bckground = [[UIImageView alloc] initWithFrame:CGRectMake(xPos, yPos, BUTTON_WIDTH, BUTTON_HEIGHT)];
-                UIButton *imageButton = [[UIButton alloc] initWithFrame:CGRectMake(xPos, yPos, BUTTON_WIDTH, BUTTON_WIDTH)];
-                UIImage *origImage = [contentArray objectAtIndex:i*numOfRows*3+j];
-                UIImage *squareImage = [totUtility squareCropImage:origImage];
-                [imageButton setImage:squareImage forState:UIControlStateNormal];
+                UIImageView *bckground = [[UIImageView alloc] initWithFrame:CGRectMake(xPos, yPos, btnWidth, btnHeight)];
+                UIButton *imageButton = [[UIButton alloc] initWithFrame:CGRectMake(xPos, yPos, btnWidth, btnHeight)];
+                UIImage *origImage = [contentArray objectAtIndex:i*btnPerPage+j];
+                //UIImage *squareImage = [totUtility squareCropImage:origImage];
+                [imageButton setImage:origImage forState:UIControlStateNormal];
                 [imageButton addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
-                [imageButton setTag:i*numOfRows*3+j+1];
+                [imageButton setTag:i*btnPerPage+j+1];
                 [subview addSubview:imageButton];
                 [subview addSubview:bckground];
                 [imageButton release];
@@ -237,15 +247,15 @@
             }
             
             // margin
-            if ([[marginArray objectAtIndex:i*numOfRows*3+j] boolValue]){
-                UIImageView *margin = [[UIImageView alloc] initWithFrame:CGRectMake(xPos,yPos,BUTTON_WIDTH+4,BUTTON_WIDTH+4)];
+            if ([[marginArray objectAtIndex:i*btnPerPage+j] boolValue]){
+                UIImageView *margin = [[UIImageView alloc] initWithFrame:CGRectMake(xPos,yPos,btnWidth+4,btnHeight+4)];
                 margin.image=[UIImage imageNamed:@"margin.png"];
                 [subview addSubview:margin];
                 [margin release];
             }
             
             //add blank label
-            UILabel *myLabel = [[UILabel alloc] initWithFrame:CGRectMake(xPos, yPos, BUTTON_WIDTH, BUTTON_HEIGHT)];
+            UILabel *myLabel = [[UILabel alloc] initWithFrame:CGRectMake(xPos, yPos, btnWidth, btnHeight)];
             myLabel.backgroundColor = [UIColor clearColor]; // [UIColor brownColor];
             myLabel.font = [UIFont fontWithName:@"Arial" size: 14.0];
             myLabel.shadowColor = [UIColor yellowColor];
@@ -275,7 +285,6 @@
         pageControl.currentPage = page;
     }
 
-    //if (pageControlEnabledTop || pageControlEnabledBottom || rememberPosition) 
     scrollView.delegate = self;
 }
 
@@ -297,12 +306,7 @@
 
 - (void)get {  
     [self getWithPosition:0];  
-}  
-
-//- (UIScrollView *)getWithPositionMemory:(NSString *)identifier {  
-//    [self enablePositionMemory:identifier];  
-//    return [self getWithPosition:[[[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"%@%@", totGUIScrollViewImagePageIdentifier, positionIdentifier]] intValue]];  
-//}  
+}
 
 - (void)getWithPositionMemoryIdentifier:(NSString *)identifier {  
     [self enablePositionMemoryWithIdentifier:identifier];  
@@ -335,6 +339,5 @@
     [scrollView release];
     [super dealloc];  
 }  
-
 
 @end  
