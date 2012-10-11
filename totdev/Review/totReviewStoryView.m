@@ -33,20 +33,9 @@
     }
     
     UILabel *headline = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, width, 40)];
-    [headline setText:story.who];
+    [headline setText:story.mRawContent];
     [self addSubview:headline];
     [headline release];
-    
-    UIImageView *attachment1 = [[UIImageView alloc] initWithFrame:CGRectMake(0, 50, width/2, 120)];
-    UIImageView *attachment2 = [[UIImageView alloc] initWithFrame:CGRectMake(width/2, 50, width/2, 120)];
-    UIImage *img1 = [UIImage imageNamed:@"gesture.png"];
-    UIImage *img2 = [UIImage imageNamed:@"imitation.png"];
-    [attachment1 setImage:img1];
-    [attachment2 setImage:img2];
-    [self addSubview:attachment1];
-    [self addSubview:attachment2];
-    [attachment1 release];
-    [attachment2 release];
 }
 
 - (void)setReviewStory:(totReviewStory *)story {

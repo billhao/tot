@@ -11,6 +11,7 @@
 @class totHomeSleepingView;
 @class totLanguageInputViewController;
 @class totHomeRootController;
+@class totHomeDiaperView;
 
 enum {
     kBasicLanguage=0,
@@ -26,6 +27,7 @@ enum {
 @interface totHomeEntryViewController : UIViewController {
     totHomeSleepingView *mHomeSleepingView;
     totLanguageInputViewController *mLanguageInputView;
+    totHomeDiaperView *mHomeDiaperView;
     totHomeRootController *homeRootController;
 }
 

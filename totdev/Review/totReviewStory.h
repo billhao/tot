@@ -9,21 +9,21 @@
 #import <Foundation/Foundation.h>
 
 @interface totReviewStory : NSObject {
-    NSString *who;
-    NSString *type;
-    NSDate *when;
-    NSMutableDictionary *content;
-    NSString *comment;
-    int height; // must be set by programmer.
+    int mBabyId;
+    NSString * mEventType;
+    NSDate   * mWhen;
+    NSMutableDictionary * mContent;
+    NSString * mComment;
+    NSString * mRawContent;
 }
 
 - (id) init;
 
-@property (nonatomic, retain) NSString *who;
-@property (nonatomic, retain) NSString *type;
-@property (nonatomic, retain) NSDate *when;
-@property (nonatomic, retain) NSMutableDictionary *content;
-@property (nonatomic, retain) NSString *comment;
-@property (nonatomic, assign) int height;
+@property (nonatomic, retain) NSString * mEventType;
+@property (nonatomic, retain) NSDate * mWhen;
+@property (nonatomic, retain) NSMutableDictionary * mContent;
+@property (nonatomic, retain) NSString * mComment;
+@property (nonatomic, retain) NSString * mRawContent;
+@property (nonatomic, assign) int mBabyId;
 
 @end

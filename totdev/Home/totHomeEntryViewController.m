@@ -10,6 +10,7 @@
 #import "totHomeSleepingView.h"
 #import "totLanguageInputViewController.h"
 #import "totHomeRootController.h"
+#import "totHomeDiaperView.h"
 #import "../Utility/totImageView.h"
 
 @implementation totHomeEntryViewController
@@ -22,6 +23,7 @@
     if (self) {
         // Custom initialization
         mHomeSleepingView = [[totHomeSleepingView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
+        mHomeDiaperView = [[totHomeDiaperView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
         mLanguageInputView = [[totLanguageInputViewController alloc] init];
     }
     return self;
@@ -63,7 +65,8 @@
             [homeRootController switchTo:kHomeViewHeightView withContextInfo:nil];
             break;
         case kBasicDiaper:
-            [homeRootController switchTo:kHomeViewDiaperView withContextInfo:nil];
+            // [homeRootController switchTo:kHomeViewDiaperView withContextInfo:nil];
+            [mHomeDiaperView showDiaperView];
             break;
         default:
             break;
@@ -109,6 +112,7 @@
     mHomeSleepingView.mParentView = self.view;
     [self.view addSubview:mHomeSleepingView];
     [self.view addSubview:mLanguageInputView.view];
+    [self.view addSubview:mHomeDiaperView];
 }
 
 - (void)viewDidUnload
@@ -119,6 +123,7 @@
     
     [mHomeSleepingView release];
     [mLanguageInputView release];
+    [mHomeDiaperView release];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

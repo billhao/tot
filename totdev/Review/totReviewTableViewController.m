@@ -10,7 +10,9 @@
 #import "totReviewStory.h"
 #import "totReviewStoryView.h"
 
-#define TABLE_CELL_WIDTH 280
+#define TABLE_CELL_WIDTH          280
+#define TABLE_CELL_DEFAULT_HEIGHT 50
+#define TABLE_CELL_START_X        (320-TABLE_CELL_WIDTH)/2
 
 @implementation totReviewTableViewController
 
@@ -34,13 +36,29 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
+- (void)setRootController:(totReviewRootController *)parent {
+    mRootController = parent;
+}
+
 - (void)setData:(NSArray *)dat {
     [mData removeAllObjects];
-    
+    [self appendData:dat];
+}
+
+- (void)appendData:(NSArray *)dat {
     for (int i=0; i<[dat count]; i++) {
         totReviewStory* story = (totReviewStory*)[dat objectAtIndex:i];
-        totReviewStoryView *view = [[totReviewStoryView alloc] initWithFrame:CGRectMake(
-                                                                                        (320-TABLE_CELL_WIDTH)/2, 0, TABLE_CELL_WIDTH, story.height)];
+        
+        // have to set the height of each cell manually.
+        NSArray * tokens = [story.mEventType componentsSeparatedByString:@"/"];
+        int cellHeight = TABLE_CELL_DEFAULT_HEIGHT;
+        if ([[tokens objectAtIndex:0] isEqualToString:@"basic"])
+            cellHeight = 100;
+        
+        // constructs the detailed cell view.
+        totReviewStoryView *view = [[totReviewStoryView alloc] initWithFrame:CGRectMake(TABLE_CELL_START_X, 0,
+                                                                                        TABLE_CELL_WIDTH,
+                                                                                        cellHeight)];
         [view setReviewStory:story];
         [mData addObject:view];
         [view release];
@@ -75,13 +93,11 @@
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier] autorelease];
     }
     
-    // cell.textLabel.text = [mData objectAtIndex:indexPath.row];
     [cell.contentView addSubview:[mData objectAtIndex:indexPath.row]];
     
     return cell;
 }
 
-static bool once = YES;
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     CGPoint offset = scrollView.contentOffset;
     CGRect bounds = scrollView.bounds;
@@ -101,13 +117,8 @@ static bool once = YES;
     
     float reload_distance = 10;
     if(y > h + reload_distance) {
-        NSLog(@"load more rows");
-        
-        if (once) {
-            // [mData addObject:@"loading"];
-            // [mReviewTable reloadData];
-            // once = NO;
-        }
+        [mRootController loadEvents];
+        [mReviewTable reloadData];
     }
 }
 

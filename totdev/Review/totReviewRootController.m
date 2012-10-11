@@ -6,13 +6,20 @@
 //  Copyright (c) 2012 USC. All rights reserved.
 //
 
+#import "AppDelegate.h"
 #import "totReviewRootController.h"
 #import "totReviewTableViewController.h"
 #import "totReviewStory.h"
+#import "../Model/totEvent.h"
+
+#define LIMIT 10
 
 @implementation totReviewRootController
 
 @synthesize tableViewController;
+@synthesize mModel;
+@synthesize mOffset;
+@synthesize mCurrentBabyId;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -21,8 +28,15 @@
         // Custom initialization
         // customize the tab bar item
         self.tabBarItem.title = @"Review";
-        [[self tabBarItem] setFinishedSelectedImage:[UIImage imageNamed:@"review_selected"] withFinishedUnselectedImage:[UIImage imageNamed:@"review"]];
-        [[self tabBarItem] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor grayColor], UITextAttributeTextColor, nil] forState:UIControlStateSelected];
+        [[self tabBarItem] setFinishedSelectedImage:[UIImage imageNamed:@"review_selected"]
+                        withFinishedUnselectedImage:[UIImage imageNamed:@"review"]];
+        [[self tabBarItem] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor grayColor],
+                                                   UITextAttributeTextColor, nil] forState:UIControlStateSelected];
+        
+        AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+        mModel = [appDelegate getDataModel];
+        mCurrentBabyId = appDelegate.mBabyId;
+        mOffset = 0;
     }
     return self;
 }
@@ -44,21 +58,38 @@
 }
 */
 
+- (void)loadEvents {
+    NSArray * events = [mModel getEvent:mCurrentBabyId limit:LIMIT offset:mOffset];
+    for (int i = 0; i < [events count]; ++i) {
+        totEvent * anEvent = (totEvent*)[events objectAtIndex:i];
+        printf("%s\n", [[anEvent toString] UTF8String]);
+    }
+    
+    mOffset += [events count];
+    
+    NSMutableArray *dat = [[NSMutableArray alloc] init];
+    
+    for (int i = 0; i < [events count]; ++i) {
+        // parse the results from db
+        totReviewStory *story = [[totReviewStory alloc] init];
+        
+        totEvent * anEvent = (totEvent*)[events objectAtIndex:i];
+        story.mEventType = anEvent.name;
+        story.mRawContent = anEvent.value;
+        story.mWhen = anEvent.datetime;
+        story.mBabyId = anEvent.baby_id;
+        [dat addObject:story];
+        
+        [story release];
+    }
+    [tableViewController appendData:dat];
+    
+    [dat release];
+}
+
 - (void)viewWillAppear:(BOOL)animated {
     if(tableViewController) {
-        NSMutableArray *dat = [[NSMutableArray alloc] init];
-        
-        for (int i = 0; i < 5; i++) {
-            // query info from db    
-            totReviewStory *story = [[totReviewStory alloc] init];
-            story.height = 160; // we need set the height by ourselves.
-            story.who = @"Leo";
-            [dat addObject:story];
-            [story release];
-        }
-        
-        [tableViewController setData:dat];
-        [dat release];
+        [self loadEvents];
     }
 }
 
@@ -70,6 +101,7 @@
     totReviewTableViewController *aTableView = 
         [[totReviewTableViewController alloc] initWithNibName:@"ReviewTableView" bundle:nil];
     self.tableViewController = aTableView;
+    [self.tableViewController setRootController:self];
     [self.view addSubview:tableViewController.view];
     [aTableView release];
 }
