@@ -57,13 +57,13 @@
     self.view.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:.5];
     
     // Add the message cloud into m_topView
-    UIImageView *aImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 20, 320, 180)];
-    aImgView.image = [UIImage imageNamed:@"message_cloud.png"];
+    UIImageView *aImgView = [[UIImageView alloc] initWithFrame:CGRectMake(14.4, 30, 291.2, 250)];
+    aImgView.image = [UIImage imageNamed:@"icons-language.png"];
     [self.view addSubview:aImgView];
     [aImgView release];
     
     // Construct m_textField
-    UITextView *aTxtView = [[UITextView alloc] initWithFrame:CGRectMake(80, 56, 170, 80)];
+    UITextView *aTxtView = [[UITextView alloc] initWithFrame:CGRectMake(35, 45, 250, 150)];
     [aTxtView  setFont: [UIFont fontWithName:@"ArialMT" size:22]];
     aTxtView.editable = YES;
     aTxtView.delegate = self;
@@ -74,9 +74,9 @@
     [self.view addSubview:m_textView];
     
     // Construct m_confirmButton
-    UIButton *aBtn = [[UIButton alloc] initWithFrame:CGRectMake(80, 210, 55, 37)];
+    UIButton *aBtn = [[UIButton alloc] initWithFrame:CGRectMake(50, 210, 60, 45)];
     aBtn.backgroundColor = [UIColor clearColor];
-    [aBtn setBackgroundImage: [UIImage imageNamed:@"message_cloud_revised-02.png"] forState:UIControlStateNormal];
+    [aBtn setBackgroundImage: [UIImage imageNamed:@"icons-ok.png"] forState:UIControlStateNormal];
     [aBtn addTarget:self action:@selector(ConfirmButtonClicked) forControlEvents:UIControlEventTouchUpInside];
     self.m_confirmButton = aBtn;
     [self.view addSubview:m_confirmButton];
@@ -84,17 +84,17 @@
     
     // Construct history button
     UIButton *bBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    bBtn.frame = CGRectMake(120, 240, 75, 45);
+    bBtn.frame = CGRectMake(130, 210, 60, 45);
     bBtn.backgroundColor = [UIColor clearColor];
-    [bBtn setBackgroundImage: [UIImage imageNamed:@"message_cloud_revised-03.png"] forState:UIControlStateNormal];
+    [bBtn setBackgroundImage: [UIImage imageNamed:@"icons-history.png"] forState:UIControlStateNormal];
     [bBtn addTarget:self action:@selector(ConfirmButtonClicked) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:bBtn];
     
     // Construct share button
     UIButton *cBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    cBtn.frame = CGRectMake(160, 280, 115, 65);
+    cBtn.frame = CGRectMake(210, 210, 60, 45);
     cBtn.backgroundColor = [UIColor clearColor];
-    [cBtn setBackgroundImage: [UIImage imageNamed:@"message_cloud_revised-04.png"] forState:UIControlStateNormal];
+    [cBtn setBackgroundImage: [UIImage imageNamed:@"icons-share.png"] forState:UIControlStateNormal];
     [cBtn addTarget:self action:@selector(ConfirmButtonClicked) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:cBtn];
     
