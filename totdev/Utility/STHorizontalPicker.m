@@ -102,7 +102,7 @@ const float POINTER_HEIGHT = 7.0f;
         self.scrollView.layer.cornerRadius = 8.0f;
         self.scrollView.layer.borderWidth = 1.0f;
         self.scrollView.layer.borderColor = borderColor.CGColor ? borderColor.CGColor : [UIColor grayColor].CGColor;
-        self.scrollView.backgroundColor = [UIColor colorWithRed:0.95 green:0.95 blue:0.95 alpha:1.0];
+        //self.scrollView.backgroundColor = [UIColor colorWithRed:0.95 green:0.95 blue:0.95 alpha:1.0];
         self.scrollView.showsVerticalScrollIndicator = NO;
         self.scrollView.showsHorizontalScrollIndicator = NO;        
         self.scrollView.pagingEnabled = NO;
@@ -111,25 +111,42 @@ const float POINTER_HEIGHT = 7.0f;
         self.scrollViewMarkerContainerView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, contentWidth, self.frame.size.height)];
         self.scrollViewMarkerLayerArray = [NSMutableArray arrayWithCapacity:steps];
         
+        NSLog(@"w=%f h=%f", contentWidth, self.frame.size.height);
+        // add bg layer
+        CALayer* bgLayer = [CALayer layer];
+        bgLayer.contentsScale = scale;
+        bgLayer.frame = CGRectIntegral(CGRectMake(leftPadding, 0, 400, self.frame.size.height));
+        //bgLayer.position = CGPointMake(.0f, .0f);
+        //bgLayer.bounds = CGRectMake(.0f, .0f, 121.0f, 31.0f);
+        NSString* imageFileName = [[[NSBundle mainBundle] resourcePath]         stringByAppendingPathComponent:@"ruler_bg.png"];
+        CGDataProviderRef dataProvider = CGDataProviderCreateWithFilename([imageFileName UTF8String]);
+        CGImageRef ruler_bg = CGImageCreateWithPNGDataProvider(dataProvider, NULL, NO, kCGRenderingIntentDefault);
+        UIImage* img = [UIImage imageNamed:@"ruler_bg.png"];
+        ruler_bg = img.CGImage;
+        bgLayer.contents = (id)ruler_bg;
+        [self.scrollViewMarkerLayerArray addObject:bgLayer];
+        [self.scrollViewMarkerContainerView.layer addSublayer:bgLayer];
+        
+        // add text layer
         fontSize = 16.0;
         
-        for (int i = 0; i <= steps; i++) {
-            CATextLayer *textLayer = [CATextLayer layer];
-            textLayer.contentsScale = scale;
-            textLayer.frame = CGRectIntegral(CGRectMake(leftPadding + i * DISTANCE_BETWEEN_ITEMS, self.frame.size.height/2 - self.fontSize / 2 + 1, TEXT_LAYER_WIDTH, 40));
-            textLayer.foregroundColor = [UIColor blackColor].CGColor;
-            textLayer.alignmentMode = kCAAlignmentCenter;
-            textLayer.fontSize = self.fontSize;
-            
-            textLayer.string = [NSString stringWithFormat:@"%.1f", (float) i + 1];
-            [self.scrollViewMarkerLayerArray addObject:textLayer];
-            [self.scrollViewMarkerContainerView.layer addSublayer:textLayer];
-        }
+//        for (int i = 0; i <= steps; i++) {
+//            CATextLayer *textLayer = [CATextLayer layer];
+//            textLayer.contentsScale = scale;
+//            textLayer.frame = CGRectIntegral(CGRectMake(leftPadding + i * DISTANCE_BETWEEN_ITEMS, self.frame.size.height/2 - self.fontSize / 2 + 1, TEXT_LAYER_WIDTH, 40));
+//            textLayer.foregroundColor = [UIColor blackColor].CGColor;
+//            textLayer.alignmentMode = kCAAlignmentCenter;
+//            textLayer.fontSize = self.fontSize;
+//            
+//            textLayer.string = [NSString stringWithFormat:@"%.1f", (float) i + 1];
+//            [self.scrollViewMarkerLayerArray addObject:textLayer];
+//            [self.scrollViewMarkerContainerView.layer addSublayer:textLayer];
+//        }
         
-        [self.scrollView addSubview:self.scrollViewMarkerContainerView];        
+        [self.scrollView addSubview:self.scrollViewMarkerContainerView];
         [self addSubview:self.scrollView];
         [self snapToMarkerAnimated:NO];
-
+        
         CAGradientLayer *dropshadowLayer = [CAGradientLayer layer];
         dropshadowLayer.contentsScale = scale;
         dropshadowLayer.cornerRadius = 8.0f;
@@ -152,7 +169,7 @@ const float POINTER_HEIGHT = 7.0f;
                                 (id)[[UIColor colorWithRed:0.25f green:0.25f blue:0.25f alpha:0.55] CGColor],
                                 (id)[[UIColor colorWithRed:0.05f green:0.05f blue:0.05f alpha:0.75] CGColor], nil];
         
-        [self.layer insertSublayer:dropshadowLayer above:self.scrollView.layer];
+        //[self.layer insertSublayer:dropshadowLayer above:self.scrollView.layer];
         
         CAGradientLayer *gradientLayer = [CAGradientLayer layer];
         gradientLayer.contentsScale = scale;
@@ -175,7 +192,7 @@ const float POINTER_HEIGHT = 7.0f;
                                 (id)[[UIColor colorWithRed:1.0f green:1.0f blue:1.0f alpha:0.1] CGColor], 
                                 (id)[[UIColor colorWithRed:0.25f green:0.25f blue:0.25f alpha:0.8] CGColor],
                                 (id)[[UIColor colorWithRed:0.05f green:0.05f blue:0.05f alpha:0.95] CGColor], nil];
-        [self.layer insertSublayer:gradientLayer above:dropshadowLayer];
+        //[self.layer insertSublayer:gradientLayer above:dropshadowLayer];
         
         self.pointerLayer = [CALayer layer];
         [self.pointerLayer setValue:[NSNumber numberWithFloat:[borderColor red]] forKey:@"borderRed"];
@@ -187,7 +204,7 @@ const float POINTER_HEIGHT = 7.0f;
         self.pointerLayer.frame = CGRectMake(0.0f, 0.0f, self.frame.size.width, self.frame.size.height);
         pointerLayerDelegate = [[STPointerLayerDelegate alloc] init];
         self.pointerLayer.delegate = pointerLayerDelegate;
-        [self.layer insertSublayer:self.pointerLayer above:gradientLayer];
+        //[self.layer insertSublayer:self.pointerLayer above:gradientLayer];
         [self.pointerLayer setNeedsDisplay];
     }
     return self;
@@ -243,6 +260,8 @@ const float POINTER_HEIGHT = 7.0f;
 }
 
 - (void)setupMarkers {
+    return;
+    NSLog(@"setupMarkers");
     [self removeAllMarkers];
     
     // Calculate the new size of the content
@@ -271,6 +290,7 @@ const float POINTER_HEIGHT = 7.0f;
 }
 
 - (void)setupMarkers2 {
+    NSLog(@"setupMarkers2");
     [self removeAllMarkers];
     
     steps = values.count;
