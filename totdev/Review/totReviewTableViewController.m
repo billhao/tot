@@ -48,12 +48,11 @@
 - (void)appendData:(NSArray *)dat {
     for (int i=0; i<[dat count]; i++) {
         totReviewStory* story = (totReviewStory*)[dat objectAtIndex:i];
+        if (![story isVisibleStory])
+            continue;
         
         // have to set the height of each cell manually.
-        NSArray * tokens = [story.mEventType componentsSeparatedByString:@"/"];
-        int cellHeight = TABLE_CELL_DEFAULT_HEIGHT;
-        if ([[tokens objectAtIndex:0] isEqualToString:@"basic"])
-            cellHeight = 100;
+        int cellHeight = [story storyViewHeight];
         
         // constructs the detailed cell view.
         totReviewStoryView *view = [[totReviewStoryView alloc] initWithFrame:CGRectMake(TABLE_CELL_START_X, 0,
