@@ -20,8 +20,8 @@
         mHour, mMinute, mSecond, mAp;
     BOOL mUseTimePicker;
     // UI
-    UIImageView *mReadyToSleepBckgrnd;
-    UIImageView *mSleepingBckgrnd;
+    totImageView *mReadyToSleepBckgrnd;
+    totImageView *mSleepingBckgrnd;
     UIButton *mCancelButton;
     UIButton *mEditButton;
     UIButton *mLabelBckgrnd;
