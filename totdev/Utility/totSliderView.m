@@ -49,6 +49,9 @@
         if(!hMarginBetweenBtn)
             hMarginBetweenBtn = 0;
         
+        if(!tagOffset)
+            tagOffset = 0;
+        
         scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, scrollWidth, scrollHeight)];
         pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
         
@@ -125,6 +128,10 @@
     //deside label position
     NSString *value_string = [NSString stringWithFormat:@"%.1f %@", value,@"oz" ];
     ((UILabel*)[labelArray objectAtIndex:idx]).text = value_string;
+}
+
+- (void)setTagOffset:(int)tag_offset{
+    tagOffset = tag_offset;
 }
 
 - (void)clearButtonLabels{
@@ -228,7 +235,7 @@
                 UIImage  *origImage   = [contentArray objectAtIndex:i*btnPerPage+j];
                 [imageButton setImage:origImage forState:UIControlStateNormal];
                 [imageButton addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
-                [imageButton setTag:i*btnPerPage+j+1];
+                [imageButton setTag:i*btnPerPage+j+1+tagOffset];
                 [subview addSubview:(UIView *)imageButton];
                 [buttonArray addObject:imageButton];
                 [imageButton release];
@@ -239,7 +246,7 @@
                 //UIImage *squareImage = [totUtility squareCropImage:origImage];
                 [imageButton setImage:origImage forState:UIControlStateNormal];
                 [imageButton addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
-                [imageButton setTag:i*btnPerPage+j+1];
+                [imageButton setTag:i*btnPerPage+j+1+tagOffset];
                 [subview addSubview:imageButton];
                 [subview addSubview:bckground];
                 [imageButton release];

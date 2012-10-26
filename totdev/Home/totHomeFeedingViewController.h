@@ -34,6 +34,12 @@
     UIButton *mDatetime;
     UIButton *mSummary;
     
+    //for fodd imput
+    UIView *mChooseFoodView;
+    totSliderView *mChooseFoodSlider; // note the difference between foodChosen and chooseFood
+    UIButton *mChooseFoodOKButton;
+    STHorizontalPicker* picker_quantity;
+    
     //NSMutableDictionary *mMessage;
     
     NSNumber *mCurrentFoodID;    
@@ -41,7 +47,6 @@
     
     //UIImageView *mBackground;
     
-    STHorizontalPicker* picker_quantity;
     
     // for date picker
     totTimerController *mClock;
@@ -57,6 +62,7 @@
 @property (nonatomic, retain) totSliderView *mRecentlyUsedSlider;
 @property (nonatomic, retain) totSliderView *mCategoriesSlider;
 @property (nonatomic, retain) totSliderView *mFoodChosenSlider;
+@property (nonatomic, retain) totSliderView *mChooseFoodSlider;
 @property (nonatomic, retain) NSNumber *mCurrentFoodID;
 
 

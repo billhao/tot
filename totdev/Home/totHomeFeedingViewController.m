@@ -23,6 +23,7 @@
 @synthesize mCategoriesSlider;
 @synthesize mFoodChosenSlider;
 @synthesize mCurrentFoodID;
+@synthesize mChooseFoodSlider;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -73,14 +74,75 @@
     int tag = [btn tag];
     tag = tag - 1;
     
-    picker_quantity.hidden = NO;
-    [picker_quantity setValue:DEFAULT_QUANTITY];
-    
-    buttonSelected = tag;
+    if(tag >= 0 && tag <1000){ //category
+        // show a new panel with food slider and picker and ok button
+        mChooseFoodView = [[UIView alloc] initWithFrame: CGRectMake(0, 100, 320, 260)];
+        [mChooseFoodView setBackgroundColor:[UIColor grayColor]];
+        [self.view addSubview:mChooseFoodView];
         
-    //reset all button bacground color;
-    [mFoodChosenSlider clearButtonBGColor];
-    ((UIButton *)sender).backgroundColor = [UIColor redColor];
+        mChooseFoodOKButton = [UIButton buttonWithType:UIButtonTypeCustom];;
+        mChooseFoodOKButton.frame = CGRectMake(20, 200, 280, 40);
+        [mChooseFoodOKButton setTitle:@"ok" forState:UIControlStateNormal];
+        [mChooseFoodOKButton setTitleColor:[UIColor magentaColor] forState:UIControlStateNormal];
+        [mChooseFoodOKButton setBackgroundColor:[UIColor whiteColor]];
+        [mChooseFoodView addSubview:mChooseFoodOKButton];
+        [mChooseFoodOKButton addTarget:self action:@selector(ChooseFoodOKButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+        
+        mChooseFoodSlider = [[totSliderView alloc] initWithFrame:CGRectMake(20, 10, 280, 160)];
+        [mChooseFoodSlider setDelegate:self];
+        [mChooseFoodSlider setBtnPerCol:2];
+        [mChooseFoodSlider setBtnPerRow:4];
+        [mChooseFoodSlider setvMarginBetweenBtn:0];
+        [mChooseFoodSlider sethMarginBetweenBtn:0];
+        [mChooseFoodSlider setTagOffset:2000];
+        
+        //load image
+        NSMutableArray *foodImages = [[NSMutableArray alloc] init];
+        // [recentlyUsedImages addObject:[UIImage imageNamed:@"feedingcategories-cereal"]];
+        [foodImages addObject:[UIImage imageNamed:@"feeding-apple.png"]];
+        [foodImages addObject:[UIImage imageNamed:@"feeding-blueberry.png"]];
+        [foodImages addObject:[UIImage imageNamed:@"feeding-papaya.png"]];
+        [foodImages addObject:[UIImage imageNamed:@"feeding-kiwi.png"]];
+        [foodImages addObject:[UIImage imageNamed:@"feeding-mango.png"]];
+        [foodImages addObject:[UIImage imageNamed:@"feeding-bread.png"]];
+        [foodImages addObject:[UIImage imageNamed:@"feeding-banana.png"]];
+        [foodImages addObject:[UIImage imageNamed:@"feeding-ricewhite.png"]];
+        [foodImages addObject:[UIImage imageNamed:@"feeding-cheerios.png"]];
+        [foodImages addObject:[UIImage imageNamed:@"feeding-peas.png"]];
+        
+        [mChooseFoodSlider setContentArray:foodImages];
+        [foodImages release];
+        [mChooseFoodSlider getWithPositionMemoryIdentifier:@"chooseFood"];
+        [mChooseFoodView addSubview:mChooseFoodSlider];
+        
+        picker_quantity = [[STHorizontalPicker alloc] initWithFrame:CGRectMake(20, 170, 280, 31)];
+        picker_quantity.name = @"picker_weight";
+        [picker_quantity setMinimumValue:0.0];
+        [picker_quantity setMaximumValue:6.0];
+        [picker_quantity setSteps:60];
+        [picker_quantity setDelegate:self];
+        [picker_quantity setValue:DEFAULT_QUANTITY];
+        //diable picker quantity
+        picker_quantity.hidden =YES;
+        
+        [mChooseFoodView addSubview:picker_quantity];
+        
+        for (int i=0; i<DEFAULT_MENU ; i++) {
+            quantityList[i]=0;
+        }
+    }
+    
+    
+    if(tag>=2000 & tag < 3000){
+        picker_quantity.hidden = NO;
+        [picker_quantity setValue:DEFAULT_QUANTITY];
+    
+        buttonSelected = tag;
+        
+        //reset all button bacground color;
+        [mFoodChosenSlider clearButtonBGColor];
+        ((UIButton *)sender).backgroundColor = [UIColor redColor];
+    }
 
 }
 
@@ -97,7 +159,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+        
     // create background
     totImageView *background = [[totImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
     [background imageFilePath:@"feeding-blank.png"];
@@ -112,6 +174,7 @@
     [mCategoriesSlider setvMarginBetweenBtn:12];
     [mCategoriesSlider sethMarginBetweenBtn:12];
     [mCategoriesSlider setBtnHeight:33];
+    [mCategoriesSlider setTagOffset:0];
     //[mCategoriesSlider enablePageControlOnBottom]; no page control dot
     
     //load image
@@ -139,7 +202,7 @@
     [mRecentlyUsedSlider setBtnPerRow:4];
     [mRecentlyUsedSlider setvMarginBetweenBtn:0];
     [mRecentlyUsedSlider sethMarginBetweenBtn:0];
-    //[mRecentlyUsedSlider setBtnHeight:40];
+    [mRecentlyUsedSlider setTagOffset:1000];
     
     //load image
     NSMutableArray *recentlyUsedImages = [[NSMutableArray alloc] init];
@@ -218,8 +281,8 @@
     [mFoodChosenSlider setBtnPerRow:4];
     [mFoodChosenSlider setvMarginBetweenBtn:0];
     [mFoodChosenSlider sethMarginBetweenBtn:0];
-    //[mRecentlyUsedSlider setBtnHeight:40];
-     
+    [mFoodChosenSlider setTagOffset:3000];
+    
     //load image
     NSMutableArray *foodChosenImages = [[NSMutableArray alloc] init];
     [foodChosenImages addObject:[UIImage imageNamed:@"feedinggrey-apple.png"]];
@@ -281,6 +344,13 @@
     }
     [event release];
     
+    
+}
+
+
+- (void)ChooseFoodOKButtonClicked: (UIButton *)button {
+
+    [mChooseFoodView release ];
     
 }
 
