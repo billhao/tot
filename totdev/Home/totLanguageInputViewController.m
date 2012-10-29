@@ -64,7 +64,7 @@
     
     // Construct m_textField
     UITextView *aTxtView = [[UITextView alloc] initWithFrame:CGRectMake(35, 45, 250, 150)];
-    [aTxtView  setFont: [UIFont fontWithName:@"ArialMT" size:22]];
+    [aTxtView  setFont: [UIFont fontWithName:@"ArialMT" size:30]];
     aTxtView.editable = YES;
     aTxtView.delegate = self;
     aTxtView.textAlignment = UITextAlignmentLeft;

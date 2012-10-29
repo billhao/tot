@@ -565,7 +565,7 @@
 		248E355B1639F30E00142AE3 /* icons-diaper-wet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icons-diaper-wet.png"; sourceTree = "<group>"; };
 		248E355C1639F30E00142AE3 /* icons-diaper-wetandsolid.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icons-diaper-wetandsolid.png"; sourceTree = "<group>"; };
 		248E355D1639F30E00142AE3 /* icons-history.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icons-history.png"; sourceTree = "<group>"; };
-		248E355E1639F30E00142AE3 /* icons-language.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icons-language.png"; sourceTree = "<group>"; };
+		248E355E1639F30E00142AE3 /* icons-language.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icons-language.png"; path = "Resources/Home/icons-language.png"; sourceTree = "<group>"; };
 		248E355F1639F30E00142AE3 /* icons-ok.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icons-ok.png"; sourceTree = "<group>"; };
 		248E35601639F30E00142AE3 /* icons-share.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icons-share.png"; sourceTree = "<group>"; };
 		248E35611639F30E00142AE3 /* icons-sleep-edit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icons-sleep-edit.png"; sourceTree = "<group>"; };
@@ -965,7 +965,6 @@
 				248E355B1639F30E00142AE3 /* icons-diaper-wet.png */,
 				248E355C1639F30E00142AE3 /* icons-diaper-wetandsolid.png */,
 				248E355D1639F30E00142AE3 /* icons-history.png */,
-				248E355E1639F30E00142AE3 /* icons-language.png */,
 				248E355F1639F30E00142AE3 /* icons-ok.png */,
 				248E35601639F30E00142AE3 /* icons-share.png */,
 				248E35611639F30E00142AE3 /* icons-sleep-edit.png */,
@@ -1479,6 +1478,7 @@
 		EFFB60981558493D006C4C80 /* Language */ = {
 			isa = PBXGroup;
 			children = (
+				248E355E1639F30E00142AE3 /* icons-language.png */,
 				EFFB60A315584A8B006C4C80 /* done-01.png */,
 				EFFB609915584974006C4C80 /* message_cloud_revised-01.png */,
 				EFFB609A15584974006C4C80 /* message_cloud_revised-02.png */,
