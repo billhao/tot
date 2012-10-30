@@ -86,10 +86,11 @@
 }
 
 - (UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *identifier = @"review_table_row";
+    NSString *identifier = [NSString stringWithFormat:@"cell_%i", indexPath.row];
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier] autorelease];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     
     [cell.contentView addSubview:[mData objectAtIndex:indexPath.row]];
