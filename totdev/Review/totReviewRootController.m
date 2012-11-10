@@ -77,6 +77,7 @@
         story.mRawContent = anEvent.value;
         story.mWhen = anEvent.datetime;
         story.mBabyId = anEvent.baby_id;
+        story.mEventId = anEvent.event_id;
         [dat addObject:story];
         [story release];
     }

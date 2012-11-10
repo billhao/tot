@@ -10,6 +10,7 @@
 
 @interface totReviewStory : NSObject {
     int mBabyId;
+    int mEventId;
     NSString * mEventType;
     NSDate   * mWhen;
     NSMutableDictionary * mContent;
@@ -27,5 +28,6 @@
 @property (nonatomic, retain) NSString * mComment;
 @property (nonatomic, retain) NSString * mRawContent;
 @property (nonatomic, assign) int mBabyId;
+@property (nonatomic, assign) int mEventId;
 
 @end

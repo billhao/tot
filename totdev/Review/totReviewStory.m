@@ -18,6 +18,7 @@
 @synthesize mComment;
 @synthesize mRawContent;
 @synthesize mBabyId;
+@synthesize mEventId;
 
 - (id) init {
     self = [super init];
@@ -39,6 +40,15 @@
     
     NSString * category = [tokens objectAtIndex:0];
     if ([categories containsObject:category]) {
+        //if ([category isEqualToString:@"basic"]) {
+        //    NSString * subcategory = [tokens objectAtIndex:1];
+        //    if ([subcategory isEqualToString:@"sleep"]) {
+        //        if ([mRawContent isEqualToString:@"start"]) {
+        //            printf("invisible\n");
+        //            return visible;
+        //        }
+        //    }
+        //}
         visible = YES;
         printf("visible\n");
     } else {
