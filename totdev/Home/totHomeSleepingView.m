@@ -56,15 +56,25 @@
         [mClock setMode:kTime];
         [mClock setDelegate:self];
         [self addSubview:mClock.view];
-        
-        mReadyToSleepBckgrnd = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
-        mReadyToSleepBckgrnd.image = [UIImage imageNamed:@"backgrounds-sleepstart.png"];
-        mSleepingBckgrnd = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
-        mSleepingBckgrnd.image = [UIImage imageNamed:@"backgrounds-sleepduring.png"];
-        
+
+        mReadyToSleepBckgrnd = [[totImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
+        mSleepingBckgrnd = [[totImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
+        [mReadyToSleepBckgrnd imageFilePath:@"backgrounds-sleepstart.png"];
+        [mReadyToSleepBckgrnd setDelegate:self];
+        [mSleepingBckgrnd imageFilePath:@"backgrounds-sleepduring.png"];
+        [mSleepingBckgrnd setDelegate:self];
+
         [self setBackgroundColor:[UIColor clearColor]];
     }
     return self;
+}
+
+#pragma mark - totImageView delegate
+- (void)touchesEndedDelegate:(NSSet *)touches withEvent:(UIEvent *)event {
+    if (mState == NOT_SLEEP)
+        [self clearNotSleepView];
+    else if (mState == SLEEPING)
+        [self clearSleepingView];
 }
 
 // get the current time
@@ -109,7 +119,7 @@
     [UIView beginAnimations:@"showPicker" context:nil];
 	[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
 	[UIView setAnimationDuration:0.5f];
-    mClock.view.frame = CGRectMake((mWidth-mClock.mWidth)/2, mHeight-mClock.mHeight-60, mClock.mWidth, mClock.mHeight);
+        mClock.view.frame = CGRectMake((mWidth-mClock.mWidth)/2, mHeight-mClock.mHeight-60, mClock.mWidth, mClock.mHeight);
     [UIView commitAnimations];
 }
 
@@ -119,7 +129,7 @@
 	[UIView setAnimationDelegate:self];
     [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
 	[UIView setAnimationDuration:0.5f];
-    mClock.view.frame = CGRectMake((mWidth-mClock.mWidth)/2, mHeight, mClock.mWidth, mClock.mHeight);
+        mClock.view.frame = CGRectMake((mWidth-mClock.mWidth)/2, mHeight, mClock.mWidth, mClock.mHeight);
     [UIView commitAnimations];
 }
 
@@ -177,12 +187,12 @@
 - (void)showSleepingView {
     [self insertSubview:mSleepingBckgrnd belowSubview:mClock.view];
     
-    mCancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [mCancelButton setTag:BUTTON_CLOSE];
-    [mCancelButton setFrame:CGRectMake(270, 40, 45, 45)];
-    [mCancelButton setImage:[UIImage imageNamed:@"icons-close.png"] forState:UIControlStateNormal];
-    [mCancelButton addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
-    [self addSubview:mCancelButton];
+    //mCancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    //[mCancelButton setTag:BUTTON_CLOSE];
+    //[mCancelButton setFrame:CGRectMake(270, 40, 45, 45)];
+    //[mCancelButton setImage:[UIImage imageNamed:@"icons-close.png"] forState:UIControlStateNormal];
+    //[mCancelButton addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    //[self addSubview:mCancelButton];
     
     mEditButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [mEditButton setTag:BUTTON_EDIT];
@@ -212,12 +222,12 @@
 - (void)showNotSleepView {
     [self insertSubview:mReadyToSleepBckgrnd belowSubview:mClock.view];
     
-    mCancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [mCancelButton setTag:BUTTON_CLOSE];
-    [mCancelButton setFrame:CGRectMake(270, 40, 45, 45)];
-    [mCancelButton setImage:[UIImage imageNamed:@"icons-close.png"] forState:UIControlStateNormal];
-    [mCancelButton addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
-    [self addSubview:mCancelButton];
+    //mCancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    //[mCancelButton setTag:BUTTON_CLOSE];
+    //[mCancelButton setFrame:CGRectMake(270, 40, 45, 45)];
+    //[mCancelButton setImage:[UIImage imageNamed:@"icons-close.png"] forState:UIControlStateNormal];
+    //[mCancelButton addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    //[self addSubview:mCancelButton];
 
     mEditButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [mEditButton setTag:BUTTON_EDIT];

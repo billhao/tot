@@ -19,10 +19,60 @@
     if (self) {
         // Initialization code
         [self setBackgroundColor:[UIColor grayColor]];
+        
         height = frame.size.height;
         width  = frame.size.width;
     }
     return self;
+}
+
+// get the type icon file name
+- (NSString*)getTypeIcon:(totReviewStory*)story {
+    NSArray* tokens = [story.mEventType componentsSeparatedByString:@"/"];
+    NSString* category = [tokens objectAtIndex:0];
+    if ([category isEqualToString:@"basic"]) {
+        return [NSString stringWithFormat:@"%s.png", [[tokens objectAtIndex:1] UTF8String]];
+    } else if ([category isEqualToString:@"eye_contact"]) {
+        return @"eye_contact.png";
+    } else if ([category isEqualToString:@"vision_attention"]) {
+        return @"vision_attention.png";
+    } else if ([category isEqualToString:@"chew"]) {
+        return @"chew.png";
+    } else if ([category isEqualToString:@"mirror_test"]) {
+        return @"mirror_test.png";
+    } else if ([category isEqualToString:@"imitation"]) {
+        return @"imitation.png";
+    } else if ([category isEqualToString:@"motor_skill"]) {
+        return [NSString stringWithFormat:@"%s.png", [[tokens objectAtIndex:1] UTF8String]];
+    } else if ([category isEqualToString:@"emotion"]) {
+        return [NSString stringWithFormat:@"%s.png", [[tokens objectAtIndex:1] UTF8String]];
+    } else if ([category isEqualToString:@"gesture"]) {
+        return [NSString stringWithFormat:@"%s.png", [[tokens objectAtIndex:1] UTF8String]];
+    } else {
+        printf("Has not implemented yet.\n");
+        return nil;
+    }
+}
+
+// get the story description
+- (NSString*)getStoryDescription:(totReviewStory*)story {
+    NSString* desc = nil;
+    NSArray* tokens = [story.mEventType componentsSeparatedByString:@"/"];
+    NSString* category = [tokens objectAtIndex:0];
+    if ([category isEqualToString:@"basic"]) {
+        NSString* subcategory = [tokens objectAtIndex:1];
+        if ([subcategory isEqualToString:@"diaper"]) {
+            NSString* rawValue = story.mRawContent;
+            desc = [NSString stringWithFormat:@"%s", [rawValue UTF8String]];
+        }
+    }
+    return desc;
+}
+
+// get time description
+- (NSString*)getStoryTime:(totReviewStory*)story {
+    NSString* time = nil;
+    return time;
 }
 
 // generate story view
@@ -32,10 +82,15 @@
         exit(1);
     }
     
-    UILabel *headline = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, width, 40)];
-    [headline setText:story.mRawContent];
-    [self addSubview:headline];
-    [headline release];
+    NSString *icon_filename = [self getTypeIcon:story];
+    if (icon_filename) {
+        UIImageView * icon = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
+        [icon setImage:[UIImage imageNamed:icon_filename]];
+        [self addSubview:icon];
+        [icon release];
+    }
+    
+    
 }
 
 - (void)setReviewStory:(totReviewStory *)story {

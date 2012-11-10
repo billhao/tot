@@ -45,8 +45,8 @@
     
     // set up events
     [mExistingAccount addTarget:self action:@selector(ExistingAccountButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
-    [mBoy addTarget:self action:@selector(BoyButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
-    [mGirl addTarget:self action:@selector(GirlButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [mBoy addTarget:self action:@selector(BoyButtonClicked:) forControlEvents:UIControlEventTouchDown];
+    [mGirl addTarget:self action:@selector(GirlButtonClicked:) forControlEvents:UIControlEventTouchDown];
     [mSave addTarget:self action:@selector(SaveButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [mName setDelegate:self];
     [mBDay addTarget:self action:@selector(BDayButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
@@ -57,10 +57,6 @@
     inputAccView = [self createInputAccessoryView];
     mBDay.inputView = mPicker;
     mBDay.inputAccessoryView = inputAccView;
-    
-    // load images for boy and girl selected
-    mBoySelected = [UIImage imageNamed:@"boySelected.png"];
-    mGirlSelected = [UIImage imageNamed:@"girlSelected.png"];
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -88,14 +84,14 @@
 
 - (void)BoyButtonClicked: (UIButton *)button {
     sex = MALE;
-    [mBoy setImage:mBoySelected forState:UIControlStateNormal];
-    [mGirl setImage:nil forState:UIControlStateNormal];
+    [mBoyImg setHighlighted:TRUE];
+    [mGirlImg setHighlighted:FALSE];
 }
 
 - (void)GirlButtonClicked: (UIButton *)button {
     sex = FEMALE;
-    [mBoy setImage:nil forState:UIControlStateNormal];
-    [mGirl setImage:mGirlSelected forState:UIControlStateNormal];
+    [mBoyImg setHighlighted:FALSE];
+    [mGirlImg setHighlighted:TRUE];
 }
 
 - (void)BDayButtonClicked: (UIControl *)ctrl {

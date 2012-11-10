@@ -31,6 +31,8 @@
     int vMarginBetweenBtn; // if left blank, by default is 0
     int hMarginBetweenBtn; // if left blank, by default is 0
     
+    int tagOffset; // default 0: for food category, 1000: for recently used, 2000: for chooseFood, 3000: for foodChosen
+    
     NSMutableArray *contentArray; 
     NSMutableArray *marginArray;
     NSMutableArray *isIconArray;
@@ -78,6 +80,10 @@
 
 /// set a value of a button
 - (void)setButton:(int)idx andWithValue:(float)value;
+
+/// set a value of a tagOffset: 0 1000 2000 3000
+- (void)setTagOffset:(int)tagOffset;
+
 
 /// clear all labels on all buttons
 - (void)clearButtonLabels;

@@ -64,11 +64,6 @@
     // If no more events available
     if ([events count] == 0) return;
     
-    for (int i = 0; i < [events count]; ++i) {
-        totEvent * anEvent = (totEvent*)[events objectAtIndex:i];
-        printf("%s\n", [[anEvent toString] UTF8String]);
-    }
-    
     mOffset += [events count];
     
     NSMutableArray *dat = [[NSMutableArray alloc] init];
@@ -83,7 +78,6 @@
         story.mWhen = anEvent.datetime;
         story.mBabyId = anEvent.baby_id;
         [dat addObject:story];
-        
         [story release];
     }
     [tableViewController appendData:dat];

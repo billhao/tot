@@ -63,13 +63,15 @@
     
     if( newuser ) {
         mLogin.hidden = TRUE;
+        mNewuser.frame = CGRectMake(47, mNewuser.frame.origin.y, mNewuser.frame.size.width, mNewuser.frame.size.height);
         //set background
-        self.view.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"registration.png"]];
+        self.view.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"registration"]];
     }
     else {
         mNewuser.hidden = FALSE;
+        
         //set background
-        self.view.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"login.png"]];
+        self.view.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"login"]];
     }
 
     // set email and clear password
@@ -103,6 +105,7 @@
     
     if( (pwd_db!=nil) && ([pwd compare:pwd_db]==NSOrderedSame) ) {
         // if yes and pwd matches, go to home view
+        [self backgroundTap:nil]; // dismiss keyboard
         [self setLoggedIn:email];
         [self showHomeView];
     }
@@ -128,6 +131,7 @@
         // if no, add email and pwd to db, go to home view
         BOOL re = [model addPreferenceNoBaby:account_pref value:pwd];
         if( re ) {
+            [self backgroundTap:nil]; // dismiss keyboard
             [self setLoggedIn:email];
             [self showHomeView];
         }
@@ -139,6 +143,7 @@
     }
     else if( [pwd compare:pwd_db]==NSOrderedSame ) {
         // if yes and pwd matches, go to home view
+        [self backgroundTap:nil]; // dismiss keyboard
         [self setLoggedIn:email];
         [self showHomeView];
     }

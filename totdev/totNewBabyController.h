@@ -11,6 +11,7 @@
 @interface totNewBabyController : UIViewController <UITextFieldDelegate, UIPickerViewDelegate> {
     IBOutlet UITextField *mName, *mBDay, *mCurrentControl;
     IBOutlet UIButton *mBoy, *mGirl, *mSave, *mExistingAccount;
+    IBOutlet UIImageView *mBoyImg, *mGirlImg;
     IBOutlet UIDatePicker *mPicker;
     UIView *inputAccView;
     UIButton *btnDone;
