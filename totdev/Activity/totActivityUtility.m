@@ -14,7 +14,7 @@
 
 + (int)getCurrentBabyID {
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-    return appDelegate.mBabyId;
+    return appDelegate.baby.babyID; //TODO should always use baby instead of babyID
 }
 
 

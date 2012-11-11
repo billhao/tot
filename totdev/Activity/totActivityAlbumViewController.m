@@ -131,7 +131,7 @@
     int tag = [sender tag];
     
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-    [appDelegate.rootController.photoView addImages:mPaths startWith:tag];
+    [appDelegate.mainTabController.photoView addImages:mPaths startWith:tag];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

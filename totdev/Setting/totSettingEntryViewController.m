@@ -58,6 +58,10 @@
 
     // show log in
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    // clear current baby and user information
+    [appDelegate setBaby:nil];
+    [appDelegate setUser:nil];
+    // show login view
     [appDelegate showFirstView];
     //[self presentViewController:appDelegate.loginController animated:TRUE completion:nil];
 }

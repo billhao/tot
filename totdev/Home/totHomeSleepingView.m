@@ -38,7 +38,7 @@
 
         AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
         totModel *model = [delegate getDataModel];
-        NSMutableArray *sleepRecords = [model getEvent:delegate.mBabyId event:EVENT_BASIC_SLEEP];
+        NSMutableArray *sleepRecords = [model getEvent:delegate.baby.babyID event:EVENT_BASIC_SLEEP];
         if( [sleepRecords count] > 0 ) {
             totEvent *evt = [sleepRecords objectAtIndex:0];
             if( [evt.value isEqualToString:@"start"] ) {
@@ -144,10 +144,10 @@
     
     if (isStart) {
         printf("baby starts sleeping\n");
-        [model addEvent:delegate.mBabyId event:EVENT_BASIC_SLEEP datetimeString:[NSString stringWithUTF8String:now] value:@"start"];
+        [model addEvent:delegate.baby.babyID event:EVENT_BASIC_SLEEP datetimeString:[NSString stringWithUTF8String:now] value:@"start"];
     } else {
         printf("baby wakes up\n");
-        [model addEvent:delegate.mBabyId event:EVENT_BASIC_SLEEP datetimeString:[NSString stringWithUTF8String:now] value:@"end"];
+        [model addEvent:delegate.baby.babyID event:EVENT_BASIC_SLEEP datetimeString:[NSString stringWithUTF8String:now] value:@"end"];
     }
 }
 

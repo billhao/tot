@@ -146,7 +146,7 @@
 
 - (NSString*) getPreference:(int)baby_id preference:(NSString*)pref_name {
     NSString* pref = [NSString stringWithFormat:@"Pref/%@", pref_name];
-    NSMutableArray* array = [self getEvent:baby_id event:pref limit:1];
+    NSMutableArray* array = [self getItem:baby_id name:pref limit:-1 offset:-1 startDate:nil endDate:nil];
     if( array.count == 1 ) {
         totEvent* e = [array objectAtIndex:0];
         return e.value;
@@ -223,7 +223,7 @@
         }
         
         NSString* searchname = nil;
-        if( event!=nil ) searchname = [NSString stringWithFormat:@"%%%@%%", event];
+        if( event!=nil ) searchname = [NSString stringWithFormat:@"%@%%", event];
         //NSLog(@"%@", searchname);
         NSString* sql_main = @"SELECT event.event_id, event.time, event.name, event.value FROM event %@ ORDER BY datetime(event.time) DESC %@";
         NSString* sql_condition;
@@ -273,6 +273,119 @@
         }
         int param_cnt = 0;
         if( event != nil ) {
+            param_cnt++;
+            int ret = sqlite3_bind_text(stmt, param_cnt, [searchname UTF8String], -1, SQLITE_TRANSIENT);
+            if( ret!=SQLITE_OK ) NSLog(@"[db] getEvent bind_text %d", ret);
+        }
+        if( start != nil ) {
+            param_cnt++;
+            int ret = sqlite3_bind_text(stmt, param_cnt, [[totEvent formatTime:start] UTF8String], -1, SQLITE_TRANSIENT);
+            if( ret!=SQLITE_OK ) NSLog(@"[db] getEvent bind_text %d", ret);
+        }
+        if( end != nil ) {
+            param_cnt++;
+            int ret = sqlite3_bind_text(stmt, param_cnt, [[totEvent formatTime:end] UTF8String], -1, SQLITE_TRANSIENT);
+            if( ret!=SQLITE_OK ) NSLog(@"[db] getEvent bind_text %d", ret);
+        }
+        if( limit > 0 ) {
+            if( offset > 0 ) {
+                param_cnt++;
+                int ret = sqlite3_bind_int(stmt, param_cnt, offset);
+                if( ret!=SQLITE_OK ) NSLog(@"[db] getEvent bind_int %d", ret);
+            }
+            param_cnt++;
+            int ret = sqlite3_bind_int(stmt, param_cnt, limit);
+            if( ret!=SQLITE_OK ) NSLog(@"[db] getEvent bind_int %d", ret);
+        }
+        
+        while (sqlite3_step(stmt)==SQLITE_ROW) {
+            int i = sqlite3_column_int(stmt, 0);
+            NSString *time  = [NSString stringWithUTF8String:(char *) sqlite3_column_text(stmt, 1)];
+            NSString *name  = [NSString stringWithUTF8String:(char *) sqlite3_column_text(stmt, 2)];
+            NSString *value = [NSString stringWithUTF8String:(char *) sqlite3_column_text(stmt, 3)];
+            //NSLog(@"[db] record, %d, %@", i, value);
+            
+            totEvent *e = [[totEvent alloc] init];
+            e.event_id = i;
+            e.baby_id = baby_id;
+            e.name = name;
+            e.value = value;
+            //NSLog(@"%@", time);
+            [e setTimeFromText:time];
+            [events addObject:e];
+            [e release];
+        }
+    }
+    @catch (NSException *exception) {
+        NSLog(@"[db] An exception occured: %@", [exception reason]);
+    }
+    @finally {
+        if( stmt != nil ) sqlite3_finalize(stmt);
+        return events;
+    }
+}
+
+// this is copied from getEvent, the difference is that this function return exact matches, not LIKE
+- (NSMutableArray *) getItem:(int)baby_id name:(NSString*)name limit:(int)limit offset:(int)offset startDate:(NSDate*)start endDate:(NSDate*)end {
+    NSMutableArray *events = [[[NSMutableArray alloc] init] autorelease];
+    sqlite3_stmt *stmt = nil;
+    @try {
+        if (db == nil) {
+            NSLog(@"Can't open db");
+            return events;
+        }
+        
+        NSString* searchname = nil;
+        if( name!=nil ) searchname = [NSString stringWithFormat:@"%@", name];
+        //NSLog(@"%@", searchname);
+        NSString* sql_main = @"SELECT event.event_id, event.time, event.name, event.value FROM event %@ ORDER BY datetime(event.time) DESC %@";
+        NSString* sql_condition;
+        if( name!=nil ) {
+            if( start!=nil && end!=nil ) {
+                sql_condition = @"WHERE name == ? AND datetime(time) >= ? AND datetime(time) < ?";
+            }
+            else if( start!=nil ) {
+                sql_condition = @"WHERE name == ? AND datetime(time) >= ?";
+            }
+            else if( end!=nil ) {
+                sql_condition = @"WHERE name == ? AND datetime(time) < ?";
+            }
+            else {
+                sql_condition = @"WHERE name == ?";
+            }
+        }
+        else {
+            if( start!=nil && end!=nil ) {
+                sql_condition = @"WHERE datetime(time) >= ? AND datetime(time) < ?";
+            }
+            else if( start!=nil ) {
+                sql_condition = @"WHERE datetime(time) >= ?";
+            }
+            else if( end!=nil ) {
+                sql_condition = @"WHERE datetime(time) < ?";
+            }
+            else {
+                sql_condition = @"";
+            }
+        }
+        NSString* sql_limit = @"";
+        if( limit > 0 ) {
+            if( offset > 0 )
+                sql_limit = @"LIMIT ?,?";
+            else
+                sql_limit = @"LIMIT ?";
+        }
+        
+        NSString* sql = [NSString stringWithFormat:sql_main, sql_condition, sql_limit];
+        //NSLog(@"[db] SQL=%@", sql);
+        
+        const char *sqlz = [sql cStringUsingEncoding:NSASCIIStringEncoding];
+        if(sqlite3_prepare_v2(db, sqlz, -1, &stmt, NULL) != SQLITE_OK) {
+            NSLog(@"[db] Problem with prepare statement");
+            return events;
+        }
+        int param_cnt = 0;
+        if( name != nil ) {
             param_cnt++;
             int ret = sqlite3_bind_text(stmt, param_cnt, [searchname UTF8String], -1, SQLITE_TRANSIENT);
             if( ret!=SQLITE_OK ) NSLog(@"[db] getEvent bind_text %d", ret);

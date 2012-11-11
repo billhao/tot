@@ -106,7 +106,7 @@ static NSString *DIAPER_WETSOLID = @"wetsolid";
     
     AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
     totModel *model = [delegate getDataModel];
-    [model addEvent:delegate.mBabyId 
+    [model addEvent:delegate.baby.babyID
               event:EVENT_BASIC_DIAPER 
      datetimeString:[NSString stringWithUTF8String:format_time_str] 
               value:DIAPER_WET];

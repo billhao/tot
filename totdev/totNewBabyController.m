@@ -31,7 +31,7 @@
 - (void)showLoginView {
     // go to home view
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-    [appDelegate showLoginView:-1];
+    [appDelegate showLoginView];
 }
 
 - (void)viewDidLoad
@@ -41,12 +41,12 @@
     NSLog(@"%@", @"new baby view did load");
     
     //set background
-    self.view.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"newbaby.png"]];
+    self.view.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"bg_newbaby.png"]];
     
     // set up events
     [mExistingAccount addTarget:self action:@selector(ExistingAccountButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
-    [mBoy addTarget:self action:@selector(BoyButtonClicked:) forControlEvents:UIControlEventTouchDown];
-    [mGirl addTarget:self action:@selector(GirlButtonClicked:) forControlEvents:UIControlEventTouchDown];
+    [mBoy addTarget:self action:@selector(BoyButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [mGirl addTarget:self action:@selector(GirlButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [mSave addTarget:self action:@selector(SaveButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [mName setDelegate:self];
     [mBDay addTarget:self action:@selector(BDayButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
@@ -120,31 +120,13 @@
     NSLog(@"%d", sex);
     NSLog(@"%@", bday);
     
-    // format sex
-    NSString* str_sex = @"";
-    if( sex == MALE )
-        str_sex = @"MALE";
-    else if( sex == FEMALE )
-        str_sex = @"FEMALE";
-
-    // format bday
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-    NSString* str_bday = [dateFormatter stringFromDate:bday];
-    [dateFormatter release];
 
     // save baby info to db
-    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-    totModel* model = [appDelegate getDataModel];
-    int baby_id = [model getNextBabyID];
-    NSLog(@"next id = %d", baby_id);
-    [model addPreference:baby_id preference:INFO_NAME value:name];
-    [model addPreference:baby_id preference:INFO_SEX value:str_sex];
-    [model addPreference:baby_id preference:INFO_BIRTHDAY value:str_bday];
-    //[name release];
+    totBaby* baby = [totBaby newBaby:name sex:sex birthday:bday];
     
     // go to create account page
-    [appDelegate showLoginView:baby_id];
+    [[self getAppDelegate] setBaby:baby];
+    [[self getAppDelegate] showLoginView];
 }
 
 - (void)pickerDoneClicked: (UIButton *)button {
@@ -213,6 +195,10 @@
     // hide date picker
 //    CGRect frame = mPicker.frame;
 //    mPicker.frame = CGRectMake(0, 1800, frame.size.width, frame.size.height);
+}
+
+-(AppDelegate*) getAppDelegate {
+    return [[UIApplication sharedApplication] delegate];
 }
 
 @end

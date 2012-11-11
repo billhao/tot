@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AppDelegate.h"
 #import "totModel.h"
+
+@class AppDelegate;
 
 @interface totLoginController : UIViewController <UITextFieldDelegate> {
     IBOutlet UITextField *mEmail, *mPwd, *mCurrentControl;
@@ -16,7 +19,6 @@
     IBOutlet UIButton*    mPrivacy;
 
     totModel* model;
-    int mBaby_id; // baby id for new user
 }
 
 // create new user or login
@@ -32,6 +34,6 @@
 
 - (void)showAlert:(NSString*)text; // show a message box
 
-- (void)setBabyIDforNewUser:(int)newbaby_id;
+- (AppDelegate*) getAppDelegate;
 
 @end

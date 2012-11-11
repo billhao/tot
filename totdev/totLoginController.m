@@ -21,7 +21,6 @@
         // Custom initialization
         AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
         model = [appDelegate getDataModel];
-        mBaby_id = -1;
         newuser = FALSE;
     }
     return self;
@@ -65,13 +64,13 @@
         mLogin.hidden = TRUE;
         mNewuser.frame = CGRectMake(47, mNewuser.frame.origin.y, mNewuser.frame.size.width, mNewuser.frame.size.height);
         //set background
-        self.view.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"registration"]];
+        self.view.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"bg_registration"]];
     }
     else {
         mNewuser.hidden = FALSE;
         
         //set background
-        self.view.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"login"]];
+        self.view.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"bg_login"]];
     }
 
     // set email and clear password
@@ -104,6 +103,9 @@
     NSString* pwd_db = [model getPreferenceNoBaby:account_pref];
     
     if( (pwd_db!=nil) && ([pwd compare:pwd_db]==NSOrderedSame) ) {
+        totUser* user = [[totUser alloc] initWithID:email];
+        [[self getAppDelegate] setUser:user];
+        [user release];
         // if yes and pwd matches, go to home view
         [self backgroundTap:nil]; // dismiss keyboard
         [self setLoggedIn:email];
@@ -129,8 +131,9 @@
     
     if( pwd_db == nil ) {
         // if no, add email and pwd to db, go to home view
-        BOOL re = [model addPreferenceNoBaby:account_pref value:pwd];
-        if( re ) {
+        totUser* user =[totUser newUser:email password:pwd];
+        if( user != nil ) {
+            [[self getAppDelegate] setUser:user];
             [self backgroundTap:nil]; // dismiss keyboard
             [self setLoggedIn:email];
             [self showHomeView];
@@ -140,8 +143,12 @@
             [self showAlert:@"Fail to add user"];
             return;
         }
+        [user release];
     }
     else if( [pwd compare:pwd_db]==NSOrderedSame ) {
+        totUser* user = [[totUser alloc] initWithID:email];
+        [[self getAppDelegate] setUser:user];
+        [user release];
         // if yes and pwd matches, go to home view
         [self backgroundTap:nil]; // dismiss keyboard
         [self setLoggedIn:email];
@@ -211,10 +218,6 @@
     mCurrentControl = nil;
 }
 
-- (void)setBabyIDforNewUser:(int)newbaby_id {
-    mBaby_id = newbaby_id;
-}
-
 // dismiss the keyboard when tapping on background
 - (IBAction) backgroundTap:(id) sender{
     if( mCurrentControl == mEmail ) {
@@ -225,5 +228,8 @@
     }
 }
 
+-(AppDelegate*) getAppDelegate {
+    return [[UIApplication sharedApplication] delegate];
+}
 
 @end

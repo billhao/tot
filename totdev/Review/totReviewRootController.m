@@ -35,7 +35,7 @@
         
         AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
         mModel = [appDelegate getDataModel];
-        mCurrentBabyId = appDelegate.mBabyId;
+        mCurrentBabyId = appDelegate.baby.babyID; //TODO should always use baby instead of babyID
         mOffset = 0;
     }
     return self;

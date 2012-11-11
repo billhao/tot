@@ -36,6 +36,8 @@
 - (NSMutableArray *) getEvent:(int)baby_id event:(NSString*)event limit:(int)limit offset:(int)offset;
 // get events with all sorts of parameters (offset starts at 1)
 - (NSMutableArray *) getEvent:(int)baby_id event:(NSString*)event limit:(int)limit offset:(int)offset startDate:(NSDate*)start endDate:(NSDate*)end;
+// this is copied from getEvent, the difference is that this function return exact matches, not LIKE
+- (NSMutableArray *) getItem:(int)baby_id name:(NSString*)name limit:(int)limit offset:(int)offset startDate:(NSDate*)start endDate:(NSDate*)end;
 
 - (int) getEventCount:(int)baby_id event:(NSString*)event;
 - (BOOL) deleteEvents:(int)baby_id event:(NSString*)event;

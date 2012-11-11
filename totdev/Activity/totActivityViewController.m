@@ -144,21 +144,21 @@
         [totActivityUtility extractFromEvent:[query_result objectAtIndex:i] intoImageArray:images];
     }
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-    [appDelegate.rootController.albumView MakeFullView:images];
+    [appDelegate.mainTabController.albumView MakeFullView:images];
     [images release];
 }
 
 // launch camera
 - (void) launchCamera:(id)sender {
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-    [appDelegate.rootController.cameraView setDelegate:self];
-    [appDelegate.rootController.cameraView launchPhotoCamera];
+    [appDelegate.mainTabController.cameraView setDelegate:self];
+    [appDelegate.mainTabController.cameraView launchPhotoCamera];
 }
 
 - (void) launchVideo:(id)sender {
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-    [appDelegate.rootController.cameraView setDelegate:self];
-    [appDelegate.rootController.cameraView launchVideoCamera];
+    [appDelegate.mainTabController.cameraView setDelegate:self];
+    [appDelegate.mainTabController.cameraView launchVideoCamera];
 }
 
 - (void)viewDidAppear:(BOOL)animated {

@@ -8,36 +8,38 @@
 
 #import <UIKit/UIKit.h>
 #import "Model/totModel.h"
+#import "Model/totBaby.h"
+#import "Model/totUser.h"
 #import "totImageCache.h"
 #import "totLoginController.h"
 #import "totNewBabyController.h"
+#import "totLoginNavigationController.h"
 
 @class totUITabBarController;
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate> {
-    UIWindow *window;
-	IBOutlet totUITabBarController *rootController;
-	totLoginController    *loginController;
+    //UIWindow *window;
+    totLoginNavigationController *loginNavigationController;
+    totUITabBarController* mainTabController;
     
     // global
     totImageCache *mCache;
     totModel *mTotData;
-    int mBabyId;
+    totBaby* baby;
+    totUser* user;
 }
-
+@property (retain, nonatomic) totUITabBarController* mainTabController;
 @property (retain, nonatomic) totImageCache *mCache;
-@property (retain, nonatomic) IBOutlet totUITabBarController *rootController;
-@property (retain, nonatomic) totLoginController *loginController;
-@property (retain, nonatomic) totNewBabyController *newbabyController;
-@property (strong, nonatomic) IBOutlet UIWindow *window;
-@property (assign, nonatomic) int mBabyId;
+@property (strong, nonatomic) UIWindow *window;
+@property (retain, nonatomic) totBaby* baby;
+@property (retain, nonatomic) totUser* user;
 
 - (totModel*) getDataModel;
 
 // determine the first view (new baby, login or homepage) and show it
 - (BOOL)showFirstView;
 
-- (void)showLoginView:(int)baby_id;
+- (void)showLoginView;
 - (void)showHomeView;
 - (NSString*) isLoggedIn;
 

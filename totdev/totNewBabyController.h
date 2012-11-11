@@ -7,6 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AppDelegate.h"
+#import "Model/totBaby.h"
+
+@class AppDelegate;
 
 @interface totNewBabyController : UIViewController <UITextFieldDelegate, UIPickerViewDelegate> {
     IBOutlet UITextField *mName, *mBDay, *mCurrentControl;
@@ -17,14 +21,8 @@
     UIButton *btnDone;
     UIImage *mBoySelected, *mGirlSelected;
     
-    enum SEX {
-        NA,          // N/A
-        MALE,
-        FEMALE
-    } sex;
+    enum SEX sex;
     NSDate* bday;
-    
-    
 }
 
 - (void)showLoginView;
@@ -38,5 +36,7 @@
 - (IBAction) backgroundTap:(id) sender;
 - (UIView*)createInputAccessoryView;
 - (void)doneTyping;
+
+- (AppDelegate*) getAppDelegate;
 
 @end

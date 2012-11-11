@@ -214,17 +214,17 @@
     AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
     totModel *model = [delegate getDataModel];
     if (selection == SELECTION_WET) {
-        [model addEvent:delegate.mBabyId
+        [model addEvent:delegate.baby.babyID
                   event:EVENT_BASIC_DIAPER
          datetimeString:now
                   value:@"wet"];
     } else if (selection == SELECTION_SOLID) {
-        [model addEvent:delegate.mBabyId
+        [model addEvent:delegate.baby.babyID
                   event:EVENT_BASIC_DIAPER
          datetimeString:now
                   value:@"solid"];
     } else if (selection == SELECTION_WETSOLID) {
-        [model addEvent:delegate.mBabyId
+        [model addEvent:delegate.baby.babyID
                   event:EVENT_BASIC_DIAPER
          datetimeString:now
                   value:@"wetsolid"];

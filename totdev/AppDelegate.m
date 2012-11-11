@@ -14,19 +14,19 @@
 
 @implementation AppDelegate
 
-@synthesize window = _window;
-@synthesize rootController, loginController, newbabyController;
-@synthesize mBabyId;
+@synthesize mainTabController;
+//@synthesize window;
 @synthesize mCache;
+@synthesize baby, user;
 
 - (void)alloc {
-    loginController = nil;
+    loginNavigationController = nil;
+    baby = nil;
+    user = nil;
 }
 
 - (void)dealloc
 {
-    if(loginController!=nil) [loginController release];
-    [rootController release];
     [_window release];
     [super dealloc];
 }
@@ -42,26 +42,31 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
+    self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     // Override point for customization after application launch.
-    
-    //self.window.backgroundColor = [UIColor whiteColor];
-    return [self showFirstView];
+    // init navigation controller for login, registration and new baby
+    loginNavigationController = [[totLoginNavigationController alloc] initWithRootViewController:nil];
+    loginNavigationController.navigationBarHidden = TRUE;
+    self.window.rootViewController = loginNavigationController;
+    [self showFirstView];
+    [self.window makeKeyAndVisible];
+    return YES;
 }
 
 // determine the first view (new baby, login or homepage) and show it
 - (BOOL)showFirstView {
-    // default baby id
-    mBabyId = PREFERENCE_NO_BABY;
-    
     // initialize the image cache
     mCache = [[totImageCache alloc] init];
     
     // initialize database
     mTotData = [[totModel alloc] init];
     
+    // add reference to db
+    [totUser setModel:mTotData];
+    [totBaby setModel:mTotData];
+    
     // get # accounts in db
-    int account = [mTotData getAccountCount];
+    int account = [totUser getTotalAccountCount];
 
     // general method to test a code snippet, which could be just empty
 //    test_Model* test = [[test_Model alloc] init];
@@ -84,60 +89,47 @@
             [self showHomeView];
             
             // TODO get active baby id
-            mBabyId = 1;
+            // baby.babyID = ??
         }
         else {
-            [self showLoginView:-1];
+            [self showLoginView];
         }
     }
     return YES;
 }
 
 - (void)showNewBabyView {
-    // remove all other sub views
-    for (UIView* view in self.window.subviews) {
-        [view removeFromSuperview];
-    }
-    
+    // remove all previous views
+    [loginNavigationController setViewControllers:nil];
     // show new baby
-    newbabyController = [[totNewBabyController alloc] initWithNibName:@"totNewBabyController" bundle:nil];
+    totNewBabyController* newbabyController = [[totNewBabyController alloc] initWithNibName:@"totNewBabyController" bundle:nil];
     newbabyController.view.frame = CGRectMake(0, 20, newbabyController.view.frame.size.width, newbabyController.view.frame.size.height);
-    [self.window addSubview:newbabyController.view];
-    [self.window makeKeyAndVisible];
+    [loginNavigationController pushViewController:newbabyController animated:TRUE];
+    [newbabyController release];
 }
 
-- (void)showLoginView:(int)baby_id {
-    // remove newbabycontroller and all other sub views
-    if( newbabyController != nil ) {
-        [newbabyController release];
-        newbabyController = nil;
-    }
-    for (UIView* view in self.window.subviews) {
-        [view removeFromSuperview];
-    }
-
+- (void)showLoginView {
+    // remove all previous views
+    [loginNavigationController setViewControllers:nil];
     // show login
-    loginController = [[totLoginController alloc] initWithNibName:@"totLoginController" bundle:nil];
+    totLoginController* loginController = [[totLoginController alloc] initWithNibName:@"totLoginController" bundle:nil];
     loginController.view.frame = CGRectMake(0, 20, loginController.view.frame.size.width, loginController.view.frame.size.height);
-    if( baby_id == -1 )
+    if( baby==nil || baby.babyID == -1 )
         loginController.newuser = FALSE;
     else {
-        [loginController setBabyIDforNewUser:baby_id];
         loginController.newuser = TRUE;
     }
-    [self.window addSubview:loginController.view];
-    [self.window makeKeyAndVisible];
+    [loginNavigationController pushViewController:loginController animated:TRUE];
+    [loginController release];
 }
 
 - (void)showHomeView {
-    // remove login view first if exists
-    if( loginController != nil ) {
-        [loginController release];
-        loginController = nil;
-    }
-    
-    [self.window addSubview:rootController.view];    
-    [self.window makeKeyAndVisible];
+    // remove all previous views
+    [loginNavigationController setViewControllers:nil];
+    // show home view
+    mainTabController = [[totUITabBarController alloc] initWithNibName:@"MainWindow" bundle:nil];
+    mainTabController.view.frame = CGRectMake(0, 20, mainTabController.view.frame.size.width, mainTabController.view.frame.size.height);
+    [loginNavigationController pushViewController:mainTabController animated:TRUE];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
@@ -177,8 +169,11 @@
      Save data if appropriate.
      See also applicationDidEnterBackground:.
      */
+    if( loginNavigationController != nil ) [loginNavigationController release];
     [mTotData release];
     [mCache release];
+    if( baby != nil ) [baby release];
+    if( user != nil ) [user release];
 }
 
 @end
