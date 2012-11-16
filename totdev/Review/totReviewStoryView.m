@@ -255,11 +255,16 @@
         
     }
     
-    else if ([category isEqualToString:@"emotion"] || [category isEqualToString:@"motor_skill"] || [category isEqualToString:@"gesture"]) {
-        NSString* subcategory = [tokens objectAtIndex:1];
-        printf("subcategory: %s\n", [subcategory UTF8String]);
+    else if ([category isEqualToString:@"emotion"] || [category isEqualToString:@"motor_skill"] ||
+             [category isEqualToString:@"gesture"] || [category isEqualToString:@"eye_contact"] ||
+             [category isEqualToString:@"vision_attention"] || [category isEqualToString:@"chew"] ||
+             [category isEqualToString:@"mirror_test"] || [category isEqualToString:@"imitation"]) {
+        if ([tokens count] > 1) {
+            NSString* subcategory = [tokens objectAtIndex:1];
+            printf("subcategory: %s\n", [subcategory UTF8String]);
+        }
 
-        UIImageView* img = [[UIImageView alloc] initWithFrame:CGRectMake(padding, padding, 40, 60)];
+        UIButton* img = [[UIButton alloc] initWithFrame:CGRectMake(padding, padding, 40, 60)];
         NSArray* tokens = [story.mRawContent componentsSeparatedByString:@";"];
         NSString* imgPath = nil;
         NSString* comment = nil;
@@ -276,9 +281,9 @@
                 comment = [NSString stringWithString:val];
             }
         }
-        img.layer.cornerRadius = 2.0;
+        img.layer.cornerRadius = 3.0;
         img.layer.masksToBounds = YES;
-        img.image = [UIImage imageWithContentsOfFile:imgPath];
+        [img setImage:[UIImage imageWithContentsOfFile:imgPath] forState:UIControlStateNormal];
         [parent addSubview:img];
         [img release];
     }
