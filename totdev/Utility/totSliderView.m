@@ -6,6 +6,7 @@
 //  Copyright (c) 2012 USC. All rights reserved.
 //
 
+#import <QuartzCore/QuartzCore.h>
 #import "totSliderView.h"
 #import "totImageView.h"
 #import "../Utility/totUtility.h"
@@ -242,6 +243,8 @@
             } else {
                 UIImageView *bckground = [[UIImageView alloc] initWithFrame:CGRectMake(xPos, yPos, btnWidth, btnHeight)];
                 UIButton *imageButton = [[UIButton alloc] initWithFrame:CGRectMake(xPos, yPos, btnWidth, btnHeight)];
+                imageButton.layer.cornerRadius = 6.0;
+                imageButton.layer.masksToBounds = YES;
                 UIImage *origImage = [contentArray objectAtIndex:i*btnPerPage+j];
                 //UIImage *squareImage = [totUtility squareCropImage:origImage];
                 [imageButton setImage:origImage forState:UIControlStateNormal];

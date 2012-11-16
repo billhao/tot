@@ -8,7 +8,7 @@
 
 #import "totReviewStory.h"
 
-#define TABLE_CELL_DEFAULT_HEIGHT 100
+#define TABLE_CELL_DEFAULT_HEIGHT 120
 
 @implementation totReviewStory
 
@@ -40,15 +40,6 @@
     
     NSString * category = [tokens objectAtIndex:0];
     if ([categories containsObject:category]) {
-        //if ([category isEqualToString:@"basic"]) {
-        //    NSString * subcategory = [tokens objectAtIndex:1];
-        //    if ([subcategory isEqualToString:@"sleep"]) {
-        //        if ([mRawContent isEqualToString:@"start"]) {
-        //            printf("invisible\n");
-        //            return visible;
-        //        }
-        //    }
-        //}
         visible = YES;
         printf("visible\n");
     } else {

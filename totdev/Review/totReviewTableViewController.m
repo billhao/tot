@@ -11,7 +11,7 @@
 #import "totReviewStoryView.h"
 
 #define TABLE_CELL_WIDTH          280
-#define TABLE_CELL_DEFAULT_HEIGHT 50
+#define TABLE_CELL_DEFAULT_HEIGHT 100
 #define TABLE_CELL_START_X        (320-TABLE_CELL_WIDTH)/2
 
 @implementation totReviewTableViewController
@@ -136,8 +136,8 @@
 {
     [super viewDidLoad];
     
-    mReviewTable.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-    mReviewTable.backgroundColor = [UIColor clearColor];
+    mReviewTable.separatorStyle = UITableViewCellSeparatorStyleNone;
+    mReviewTable.backgroundColor = [UIColor colorWithRed:0.8 green:0.8 blue:0.8 alpha:1.0];
 }
 
 - (void)viewDidUnload
