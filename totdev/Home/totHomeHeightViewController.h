@@ -24,6 +24,7 @@
     IBOutlet UIButton    *mDatetime;
     IBOutlet UIButton    *mDatetimeImage;
     IBOutlet UIButton    *mSummary;
+    IBOutlet UILabel     *mSelectedValue;
     
     totModel* model;
     

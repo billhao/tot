@@ -16,12 +16,13 @@
 
 #import "STHorizontalPicker.h"
 
-const int DISTANCE_BETWEEN_ITEMS = 60;
-const int TEXT_LAYER_WIDTH = 40;
-const int NUMBER_OF_ITEMS = 15;
+const float DISTANCE_BETWEEN_ITEMS = 7.95;
+const int TEXT_LAYER_WIDTH = 20; // so the beginning and end of the ruler each has 10px more for text/label.
+//const int NUMBER_OF_ITEMS = 15;
 const float FONT_SIZE = 16.0f;
 const float POINTER_WIDTH = 10.0f;
 const float POINTER_HEIGHT = 7.0f;
+const int ARROW_POSITION = 39; // position of the arrow that indicates current value, it is relative to left of scrollview
 
 //================================
 // UIColor category
@@ -82,11 +83,11 @@ const float POINTER_HEIGHT = 7.0f;
 {
     self = [super initWithFrame:frame];
     if (self) {        
-        steps = 15;
+        steps = 120;
         
-        float leftPadding = self.frame.size.width/2;
-        float rightPadding = leftPadding;
-        float contentWidth = leftPadding + (steps * DISTANCE_BETWEEN_ITEMS) + rightPadding + TEXT_LAYER_WIDTH / 2;
+        float leftPadding = ARROW_POSITION - TEXT_LAYER_WIDTH/2; //self.frame.size.width/2;
+        float rightPadding = self.frame.size.width - leftPadding + TEXT_LAYER_WIDTH;
+        float contentWidth = leftPadding + (steps * DISTANCE_BETWEEN_ITEMS) + rightPadding;
         
         scale = [[UIScreen mainScreen] scale];
         
@@ -99,8 +100,8 @@ const float POINTER_HEIGHT = 7.0f;
         
         self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.frame.size.width, self.frame.size.height)];
         self.scrollView.contentSize = CGSizeMake(contentWidth, self.frame.size.height);
-        self.scrollView.layer.cornerRadius = 8.0f;
-        self.scrollView.layer.borderWidth = 1.0f;
+        //self.scrollView.layer.cornerRadius = 0f;
+        self.scrollView.layer.borderWidth = 0;
         self.scrollView.layer.borderColor = borderColor.CGColor ? borderColor.CGColor : [UIColor grayColor].CGColor;
         //self.scrollView.backgroundColor = [UIColor colorWithRed:0.95 green:0.95 blue:0.95 alpha:1.0];
         self.scrollView.showsVerticalScrollIndicator = NO;
@@ -111,22 +112,35 @@ const float POINTER_HEIGHT = 7.0f;
         self.scrollViewMarkerContainerView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, contentWidth, self.frame.size.height)];
         self.scrollViewMarkerLayerArray = [NSMutableArray arrayWithCapacity:steps];
         
-        NSLog(@"w=%f h=%f", contentWidth, self.frame.size.height);
         // add bg layer
         CALayer* bgLayer = [CALayer layer];
         bgLayer.contentsScale = scale;
-        bgLayer.frame = CGRectIntegral(CGRectMake(leftPadding, 0, 400, self.frame.size.height));
+        
         //bgLayer.position = CGPointMake(.0f, .0f);
         //bgLayer.bounds = CGRectMake(.0f, .0f, 121.0f, 31.0f);
-        NSString* imageFileName = [[[NSBundle mainBundle] resourcePath]         stringByAppendingPathComponent:@"ruler_bg.png"];
-        CGDataProviderRef dataProvider = CGDataProviderCreateWithFilename([imageFileName UTF8String]);
-        CGImageRef ruler_bg = CGImageCreateWithPNGDataProvider(dataProvider, NULL, NO, kCGRenderingIntentDefault);
-        UIImage* img = [UIImage imageNamed:@"ruler_bg.png"];
-        ruler_bg = img.CGImage;
+//        NSString* imageFileName = [[[NSBundle mainBundle] resourcePath]         stringByAppendingPathComponent:@"ruler_bg"];
+//        CGDataProviderRef dataProvider = CGDataProviderCreateWithFilename([imageFileName UTF8String]);
+//        CGImageRef ruler_bg = CGImageCreateWithPNGDataProvider(dataProvider, NULL, NO, kCGRenderingIntentDefault);
+        UIImage* img = [UIImage imageNamed:@"ruler_height"];
+        CGImageRef ruler_bg = img.CGImage;
+        bgLayer.frame = CGRectIntegral(CGRectMake(leftPadding, 0, img.size.width, img.size.height));
         bgLayer.contents = (id)ruler_bg;
         [self.scrollViewMarkerLayerArray addObject:bgLayer];
         [self.scrollViewMarkerContainerView.layer addSublayer:bgLayer];
         
+        //self.scrollViewMarkerContainerView.layer.borderWidth = 1.0f;
+//        NSLog(@"x=%f y=%f w=%f h=%f", self.frame.origin.x, self.frame.origin.y, self.frame.size.width, self.frame.size.height);
+//        NSLog(@"scrollViewMarkerContainerView frame %@", NSStringFromCGRect(scrollViewMarkerContainerView.frame));
+//        NSLog(@"bglayer frame %@", NSStringFromCGRect(bgLayer.frame));
+
+        // add padding layer
+//        CALayer* paddingLayer = [CALayer layer];
+//        paddingLayer.contentsScale = scale;
+//        paddingLayer.frame = CGRectMake(contentWidth-rightPadding, bgLayer.frame.origin.y, rightPadding, bgLayer.frame.size.height);
+//        //paddingLayer.borderWidth = 1.0f;
+//        [self.scrollViewMarkerContainerView.layer addSublayer:paddingLayer];
+        
+
         // add text layer
         fontSize = 16.0;
         
@@ -230,7 +244,7 @@ const float POINTER_HEIGHT = 7.0f;
     
     CGFloat offSet = offset / itemWidth;
     NSUInteger target = (NSUInteger)(offSet + 0.35f);
-    target = target > steps ? steps - 1 : target;
+    target = target > steps ? steps : target;
     CGFloat newValue = target * (maximumValue - minimumValue) / steps + minimumValue;
     
     currentValue = newValue;
@@ -246,8 +260,9 @@ const float POINTER_HEIGHT = 7.0f;
         CGFloat newPosition = 0.0f;
         CGFloat offSet = position / itemWidth;
         NSUInteger target = (NSUInteger)(offSet + 0.35f);
-        target = target > steps ? steps - 1 : target;
-        newPosition = target * itemWidth + TEXT_LAYER_WIDTH / 2;
+        target = target > steps ? steps : target;
+        newPosition = target * itemWidth;
+        NSLog(@"HPICKER set to newposition %f", newPosition);
         [self.scrollView setContentOffset:CGPointMake(newPosition, 0.0f) animated:animated];
     }
 }
@@ -399,7 +414,7 @@ const float POINTER_HEIGHT = 7.0f;
     currentValue = value;
     
     CGFloat itemWidth = (float) DISTANCE_BETWEEN_ITEMS;
-    CGFloat xValue = (newValue - minimumValue) / ((maximumValue-minimumValue) / steps) * itemWidth + TEXT_LAYER_WIDTH / 2;
+    CGFloat xValue = (newValue - minimumValue) / ((maximumValue-minimumValue) / steps) * itemWidth;
         
     [self.scrollView setContentOffset:CGPointMake(xValue, 0.0f) animated:NO];
 }

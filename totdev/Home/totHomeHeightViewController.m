@@ -50,8 +50,16 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    // add bg
+    UIImage* img = [UIImage imageNamed:@"weight_bg"];
+    UIImageView* bgview = [[UIImageView alloc] initWithImage:img];
+    bgview.frame = CGRectMake(0, 0, img.size.width, img.size.height);
+    [self.view addSubview:bgview];
+    [self.view sendSubviewToBack:bgview];
+
     // height scroll bar
-    picker_height = [[STHorizontalPicker alloc] initWithFrame:mHeightPlaceHolder.frame];
+    picker_height = [[STHorizontalPicker alloc] initWithFrame:CGRectMake(66, 169, 190, 40)];
     picker_height.name = @"picker_height";
 //    NSMutableArray* heights = [NSMutableArray arrayWithObjects:
 //                                                             @"1'4\"", @"1'5\"", @"1'6\"", @"1'7\"", @"1'8\"", @"1'9\"", @"1'10\"", @"1'11\"",
@@ -60,35 +68,35 @@
 //                               @"4'1\"", @"4'2\"", @"4'3\"", @"4'4\"", @"4'5\"", @"4'6\"", @"4'7\"", @"4'8\"", @"4'9\"", @"4'10\"", @"4'11\"",
 //                               nil];
 //    [picker_height setValues:heights];
-    [picker_height setMinimumValue:16.0];
-    [picker_height setMaximumValue:80.0];
-    [picker_height setSteps:640];
-    [picker_height setValue:16.0];
+    [picker_height setMinimumValue:18.0];
+    [picker_height setMaximumValue:48.0];
+    [picker_height setSteps:120];
+    //[picker_height setValue:20.0];
     [picker_height setDelegate:self];
     [self.view addSubview:picker_height];
     [picker_height release];
     
     // weight scroll bar
-    picker_weight = [[STHorizontalPicker alloc] initWithFrame:mWeightPlaceHolder.frame];
-    picker_weight.name = @"picker_weight";
-    [picker_weight setMinimumValue:4.0];
-    [picker_weight setMaximumValue:40.0];
-    [picker_weight setSteps:360];
-    [picker_weight setDelegate:self];
-    [picker_weight setValue:4.0];
-    [self.view addSubview:picker_weight];
-    [picker_weight release];
+//    picker_weight = [[STHorizontalPicker alloc] initWithFrame:mWeightPlaceHolder.frame];
+//    picker_weight.name = @"picker_weight";
+//    [picker_weight setMinimumValue:4.0];
+//    [picker_weight setMaximumValue:40.0];
+//    [picker_weight setSteps:360];
+//    [picker_weight setDelegate:self];
+//    [picker_weight setValue:4.0];
+//    [self.view addSubview:picker_weight];
+//    [picker_weight release];
     
     // head circumference scroll bar
-    picker_head = [[STHorizontalPicker alloc] initWithFrame:mHeadPlaceHolder.frame];
-    picker_head.name = @"picker_head";
-    [picker_head setMinimumValue:10.0];
-    [picker_head setMaximumValue:24.0];
-    [picker_head setSteps:140];
-    [picker_head setDelegate:self];
-    [picker_head setValue:10.0];
-    [self.view addSubview:picker_head];
-    [picker_head release];
+//    picker_head = [[STHorizontalPicker alloc] initWithFrame:mHeadPlaceHolder.frame];
+//    picker_head.name = @"picker_head";
+//    [picker_head setMinimumValue:10.0];
+//    [picker_head setMaximumValue:24.0];
+//    [picker_head setSteps:140];
+//    [picker_head setDelegate:self];
+//    [picker_head setValue:10.0];
+//    [self.view addSubview:picker_head];
+//    [picker_head release];
 
     [mDatetime setTitle:[self getCurrentDate] forState:UIControlStateNormal];
     
@@ -110,12 +118,12 @@
     //create title navigation bar
     // navigationBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
     //[self.view addSubview:navigationBar];
-    mNavigationBar= [[totNavigationBar alloc] initWithFrame:CGRectMake(0, 0, 320, 40)];
-    [mNavigationBar setLeftButtonImg:@"return.png"];
-    [mNavigationBar setNavigationBarTitle:@"Height & Weight" andColor:[UIColor blackColor]];
-    [mNavigationBar setBackgroundColor:[UIColor whiteColor]];
-    [mNavigationBar setDelegate:self];
-    [self.view addSubview:mNavigationBar];
+//    mNavigationBar= [[totNavigationBar alloc] initWithFrame:CGRectMake(0, 0, 320, 40)];
+//    [mNavigationBar setLeftButtonImg:@"return.png"];
+//    [mNavigationBar setNavigationBarTitle:@"Height & Weight" andColor:[UIColor blackColor]];
+//    [mNavigationBar setBackgroundColor:[UIColor whiteColor]];
+//    [mNavigationBar setDelegate:self];
+//    [self.view addSubview:mNavigationBar];
 }
 
 - (NSString*)getCurrentDate {
@@ -127,6 +135,7 @@
 
 - (void)pickerView:(STHorizontalPicker *)picker didSelectValue:(CGFloat)value{
     NSLog(@"didSelectValue %f", value);
+    mSelectedValue.text = [NSString stringWithFormat:@"%.2f inches",value];
 }
 
 
@@ -182,6 +191,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     NSLog(@"%@", @"[height] viewWillAppear");
+//    self.view.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"weight_bg"]];
     [mSummary removeFromSuperview];
 }
 

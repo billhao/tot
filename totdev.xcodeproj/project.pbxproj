@@ -132,6 +132,14 @@
 		3F277105164EDFF900DF84EF /* bg_registration.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F2770FF164EDFF900DF84EF /* bg_registration.png */; };
 		3F277106164EDFF900DF84EF /* bg_registration@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F277100164EDFF900DF84EF /* bg_registration@2x.png */; };
 		3F277109164F6F6100DF84EF /* totLoginNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F277108164F6F6100DF84EF /* totLoginNavigationController.m */; };
+		3F27718C1650B4FA00DF84EF /* ruler_hc.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F2771861650B4FA00DF84EF /* ruler_hc.png */; };
+		3F27718D1650B4FA00DF84EF /* ruler_hc@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F2771871650B4FA00DF84EF /* ruler_hc@2x.png */; };
+		3F27718E1650B4FA00DF84EF /* ruler_height.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F2771881650B4FA00DF84EF /* ruler_height.png */; };
+		3F27718F1650B4FA00DF84EF /* ruler_height@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F2771891650B4FA00DF84EF /* ruler_height@2x.png */; };
+		3F2771901650B4FA00DF84EF /* ruler_weight.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F27718A1650B4FA00DF84EF /* ruler_weight.png */; };
+		3F2771911650B4FA00DF84EF /* ruler_weight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F27718B1650B4FA00DF84EF /* ruler_weight@2x.png */; };
+		3F2772591658C12300DF84EF /* weight_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F2772571658C12300DF84EF /* weight_bg.png */; };
+		3F27725A1658C12300DF84EF /* weight_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F2772581658C12300DF84EF /* weight_bg@2x.png */; };
 		3F3F1F1A15698C050025F029 /* tab_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F3F1F1915698C050025F029 /* tab_background.png */; };
 		3F3FF8431569912F004E4584 /* tab_selected_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F3FF8421569912F004E4584 /* tab_selected_background.png */; };
 		3F3FF84615699650004E4584 /* home@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F3FF84515699650004E4584 /* home@2x.png */; };
@@ -145,7 +153,6 @@
 		3F454D2D1555A84700AC66EE /* totHomeHeightViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F454D2B1555A84700AC66EE /* totHomeHeightViewController.m */; };
 		3F454D2E1555A84700AC66EE /* homeHeightViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F454D2C1555A84700AC66EE /* homeHeightViewController.xib */; };
 		3F7CDB5D157ABDCE009CD3D7 /* totdb.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 3F7CDB5C157ABDCE009CD3D7 /* totdb.sqlite */; };
-		3FB31B7C162E868C0063DAC6 /* ruler_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FB31B7B162E868C0063DAC6 /* ruler_bg.png */; };
 		3FB31B801638ECEC0063DAC6 /* background-diaper.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FB31B7F1638ECEC0063DAC6 /* background-diaper.png */; };
 		3FB31B841638ED610063DAC6 /* icons-diaper-solid.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FB31B811638ED600063DAC6 /* icons-diaper-solid.png */; };
 		3FB31B851638ED610063DAC6 /* icons-diaper-wet.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FB31B821638ED610063DAC6 /* icons-diaper-wet.png */; };
@@ -425,6 +432,14 @@
 		3F277100164EDFF900DF84EF /* bg_registration@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "bg_registration@2x.png"; path = "Resources/Login/bg_registration@2x.png"; sourceTree = "<group>"; };
 		3F277107164F6F6000DF84EF /* totLoginNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = totLoginNavigationController.h; sourceTree = "<group>"; };
 		3F277108164F6F6100DF84EF /* totLoginNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = totLoginNavigationController.m; sourceTree = "<group>"; };
+		3F2771861650B4FA00DF84EF /* ruler_hc.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ruler_hc.png; path = Resources/Utility/Ruler/ruler_hc.png; sourceTree = "<group>"; };
+		3F2771871650B4FA00DF84EF /* ruler_hc@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ruler_hc@2x.png"; path = "Resources/Utility/Ruler/ruler_hc@2x.png"; sourceTree = "<group>"; };
+		3F2771881650B4FA00DF84EF /* ruler_height.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ruler_height.png; path = Resources/Utility/Ruler/ruler_height.png; sourceTree = "<group>"; };
+		3F2771891650B4FA00DF84EF /* ruler_height@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ruler_height@2x.png"; path = "Resources/Utility/Ruler/ruler_height@2x.png"; sourceTree = "<group>"; };
+		3F27718A1650B4FA00DF84EF /* ruler_weight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ruler_weight.png; path = Resources/Utility/Ruler/ruler_weight.png; sourceTree = "<group>"; };
+		3F27718B1650B4FA00DF84EF /* ruler_weight@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ruler_weight@2x.png"; path = "Resources/Utility/Ruler/ruler_weight@2x.png"; sourceTree = "<group>"; };
+		3F2772571658C12300DF84EF /* weight_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = weight_bg.png; path = Resources/Home/Height/weight_bg.png; sourceTree = "<group>"; };
+		3F2772581658C12300DF84EF /* weight_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "weight_bg@2x.png"; path = "Resources/Home/Height/weight_bg@2x.png"; sourceTree = "<group>"; };
 		3F3F1F1915698C050025F029 /* tab_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tab_background.png; path = Resources/Tab/tab_background.png; sourceTree = "<group>"; };
 		3F3FF8421569912F004E4584 /* tab_selected_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tab_selected_background.png; path = Resources/Tab/tab_selected_background.png; sourceTree = "<group>"; };
 		3F3FF84515699650004E4584 /* home@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "home@2x.png"; path = "Resources/Tab/home@2x.png"; sourceTree = "<group>"; };
@@ -439,7 +454,6 @@
 		3F454D2B1555A84700AC66EE /* totHomeHeightViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totHomeHeightViewController.m; path = Home/totHomeHeightViewController.m; sourceTree = "<group>"; };
 		3F454D2C1555A84700AC66EE /* homeHeightViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = homeHeightViewController.xib; path = Resources/homeHeightViewController.xib; sourceTree = "<group>"; };
 		3F7CDB5C157ABDCE009CD3D7 /* totdb.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = totdb.sqlite; sourceTree = "<group>"; };
-		3FB31B7B162E868C0063DAC6 /* ruler_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ruler_bg.png; path = Resources/Home/ruler_bg.png; sourceTree = "<group>"; };
 		3FB31B7F1638ECEC0063DAC6 /* background-diaper.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "background-diaper.png"; path = "Resources/Home/background-diaper.png"; sourceTree = "<group>"; };
 		3FB31B811638ED600063DAC6 /* icons-diaper-solid.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icons-diaper-solid.png"; path = "Resources/Home/icons-diaper-solid.png"; sourceTree = "<group>"; };
 		3FB31B821638ED610063DAC6 /* icons-diaper-wet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icons-diaper-wet.png"; path = "Resources/Home/icons-diaper-wet.png"; sourceTree = "<group>"; };
@@ -786,10 +800,24 @@
 			name = foodicons_gray;
 			sourceTree = "<group>";
 		};
-		3FB31B79162E86720063DAC6 /* Height */ = {
+		3F2771851650B38E00DF84EF /* Ruler */ = {
 			isa = PBXGroup;
 			children = (
-				3FB31B7B162E868C0063DAC6 /* ruler_bg.png */,
+				3F2771861650B4FA00DF84EF /* ruler_hc.png */,
+				3F2771871650B4FA00DF84EF /* ruler_hc@2x.png */,
+				3F2771881650B4FA00DF84EF /* ruler_height.png */,
+				3F2771891650B4FA00DF84EF /* ruler_height@2x.png */,
+				3F27718A1650B4FA00DF84EF /* ruler_weight.png */,
+				3F27718B1650B4FA00DF84EF /* ruler_weight@2x.png */,
+			);
+			name = Ruler;
+			sourceTree = "<group>";
+		};
+		3F2772541658C0C200DF84EF /* Height */ = {
+			isa = PBXGroup;
+			children = (
+				3F2772571658C12300DF84EF /* weight_bg.png */,
+				3F2772581658C12300DF84EF /* weight_bg@2x.png */,
 			);
 			name = Height;
 			sourceTree = "<group>";
@@ -885,6 +913,7 @@
 		EF043C3B154DE2D600975BCD /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				3F2771851650B38E00DF84EF /* Ruler */,
 				8EFC1F8716277E9D003CF0FE /* return.png */,
 				EFB259F815505D6C00C4984A /* camera.png */,
 				EFB259F915505D6C00C4984A /* margin.png */,
@@ -1168,7 +1197,7 @@
 		EF97E7C3153B49F30037E52D /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				3FB31B79162E86720063DAC6 /* Height */,
+				3F2772541658C0C200DF84EF /* Height */,
 				24363034162741C70097B17D /* feeding */,
 				8E632EBF16268D8500072D89 /* Diaper */,
 				8E4D50E71616593900890621 /* Sleep */,
@@ -1449,7 +1478,6 @@
 				243630E1162742960097B17D /* feeding-01.png in Resources */,
 				243630E2162742960097B17D /* feeding-blank.png in Resources */,
 				8EFC1F8816277E9D003CF0FE /* return.png in Resources */,
-				3FB31B7C162E868C0063DAC6 /* ruler_bg.png in Resources */,
 				3FB31B801638ECEC0063DAC6 /* background-diaper.png in Resources */,
 				3FB31B841638ED610063DAC6 /* icons-diaper-solid.png in Resources */,
 				3FB31B851638ED610063DAC6 /* icons-diaper-wet.png in Resources */,
@@ -1494,6 +1522,14 @@
 				3F277104164EDFF900DF84EF /* bg_newbaby@2x.png in Resources */,
 				3F277105164EDFF900DF84EF /* bg_registration.png in Resources */,
 				3F277106164EDFF900DF84EF /* bg_registration@2x.png in Resources */,
+				3F27718C1650B4FA00DF84EF /* ruler_hc.png in Resources */,
+				3F27718D1650B4FA00DF84EF /* ruler_hc@2x.png in Resources */,
+				3F27718E1650B4FA00DF84EF /* ruler_height.png in Resources */,
+				3F27718F1650B4FA00DF84EF /* ruler_height@2x.png in Resources */,
+				3F2771901650B4FA00DF84EF /* ruler_weight.png in Resources */,
+				3F2771911650B4FA00DF84EF /* ruler_weight@2x.png in Resources */,
+				3F2772591658C12300DF84EF /* weight_bg.png in Resources */,
+				3F27725A1658C12300DF84EF /* weight_bg@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
