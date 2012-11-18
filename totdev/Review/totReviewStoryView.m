@@ -6,6 +6,7 @@
 //  Copyright (c) 2012 USC. All rights reserved.
 //
 
+#import <QuartzCore/QuartzCore.h>
 #import "totReviewStoryView.h"
 #import "AppDelegate.h"
 #import "totReviewLineChart.h"
@@ -81,19 +82,24 @@
         
         if ([subcategory isEqualToString:@"diaper"]) {
             desc = [NSString stringWithFormat:@"has a %s diaper", [rawValue UTF8String]];
-        } else if ([subcategory isEqualToString:@"language"]) {
-            desc = [NSString stringWithFormat:@"said %s", [rawValue UTF8String]];
-        } else if ([subcategory isEqualToString:@"sleep"]) {
+        }
+        else if ([subcategory isEqualToString:@"language"]) {
+            desc = [NSString stringWithUTF8String:[rawValue UTF8String]];
+        }
+        else if ([subcategory isEqualToString:@"sleep"]) {
             if ([rawValue isEqualToString:@"end"]) {
                 desc = @"woke up";
             } else if ([rawValue isEqualToString:@"start"]) {
                 desc = @"fell asleep";
             }
-        } else if ([subcategory isEqualToString:@"height"]) {
+        }
+        else if ([subcategory isEqualToString:@"height"]) {
             desc = [NSString stringWithFormat:@"is %s now", [rawValue UTF8String]];
-        } else if ([subcategory isEqualToString:@"weight"]) {
+        }
+        else if ([subcategory isEqualToString:@"weight"]) {
             desc = [NSString stringWithFormat:@"is %s now", [rawValue UTF8String]];
-        } else if ([subcategory isEqualToString:@"head"]) {
+        }
+        else if ([subcategory isEqualToString:@"head"]) {
             desc = [NSString stringWithFormat:@"is %s now", [rawValue UTF8String]];
         }
     } else if ([category isEqualToString:@"eye_contact"]) {
@@ -209,55 +215,64 @@
 }
 
 // construct the context info
-- (void)buildContextInfo:(totReviewStory*)story {
-    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+- (void)buildContextInfo:(totReviewStory*)story withFrame:(CGRect)frame withinParent:(UIView*)parent {
+    AppDelegate* appDelegate = [[UIApplication sharedApplication] delegate];
     totModel* database = [appDelegate getDataModel];
     
     NSArray* tokens = [story.mEventType componentsSeparatedByString:@"/"];
     NSString* category = [tokens objectAtIndex:0];
     
+    int padding = 10;
     if ([category isEqualToString:@"basic"]) {
         NSString* subcategory = [tokens objectAtIndex:1];
+        
         if ([subcategory isEqualToString:@"height"]) {
-            NSArray * events = [database getEvent:appDelegate.baby.babyID event:story.mEventType];
+            NSArray* events = [database getEvent:appDelegate.baby.babyID event:story.mEventType];
+
+            totEvent* currEvt = [events objectAtIndex:0];
+            totEvent* prevEvt = [events objectAtIndex:1];
+            float incr = [currEvt.value floatValue] - [prevEvt.value floatValue];
             
-            int size = ([events count] > 3) ? 3 : [events count];
-            NSMutableArray * values = [[NSMutableArray alloc] init];
-            NSMutableArray * timestamps = [[NSMutableArray alloc] init];
-            for (int i = 0; i < size; ++i) {
-                totEvent * evt = [events objectAtIndex:i];
-                [values addObject:evt.value];
-                [timestamps addObject:evt.datetime];
-                //printf("%s %s\n", [evt.value UTF8String], [[evt.datetime descriptionWithLocale:@"yyyy-MM-dd HH:mm:ss"] UTF8String]);
-            }
-            
-            totReviewLineChart * context = [[totReviewLineChart alloc] initWithFrame:CGRectMake(40, 30, 250, 60)];
-            [context setValues:values];
-            [context setTimestamps:timestamps];
-            [self addSubview:context];
-            
-            [context release];
-            [timestamps release];
-            [values release];
-        } else if ([subcategory isEqualToString:@"language"]) {
-            NSArray * events = [database getEvent:appDelegate.baby.babyID event:story.mEventType];
-            NSString * desc = [NSString stringWithFormat:@"has known %d words", [events count]];
-            UILabel * context = [[UILabel alloc] initWithFrame:CGRectMake(40, 40, 200, 30)];
-            context.text = desc;
-            [context setFont:[UIFont fontWithName:@"verdana" size:13]];
-            [self addSubview:context];
+            UILabel* context = [[UILabel alloc] initWithFrame:CGRectMake(padding, padding, frame.size.width-padding, frame.size.height-padding)];
+            context.backgroundColor = [UIColor clearColor];
+            context.text = [NSString stringWithFormat:@"%f taller than last time", incr];
+            [context setFont:[UIFont fontWithName:@"Noteworthy-Light" size:12]];
+            [parent addSubview:context];
             [context release];
         }
-    } else if ([category isEqualToString:@"emotion"]) {
-        UIImageView * img = [[UIImageView alloc] initWithFrame:CGRectMake(40, 30, 40, 60)];
-        NSArray  * tokens = [story.mRawContent componentsSeparatedByString:@";"];
-        NSString * imgPath = nil;
-        NSString * comment = nil;
+        
+        else if ([subcategory isEqualToString:@"language"]) {
+            NSArray* events = [database getEvent:appDelegate.baby.babyID event:story.mEventType];
+            NSString* desc = [NSString stringWithFormat:@"has known %d words", [events count]];
+            
+            UILabel* context = [[UILabel alloc] initWithFrame:CGRectMake(padding, padding, frame.size.width-padding, frame.size.height-padding)];
+            context.text = desc;
+            context.backgroundColor = [UIColor clearColor];
+            [context setFont:[UIFont fontWithName:@"Noteworthy-Light" size:12]];
+            [parent addSubview:context];
+            [context release];
+        }
+        
+    }
+    
+    else if ([category isEqualToString:@"emotion"] || [category isEqualToString:@"motor_skill"] ||
+             [category isEqualToString:@"gesture"] || [category isEqualToString:@"eye_contact"] ||
+             [category isEqualToString:@"vision_attention"] || [category isEqualToString:@"chew"] ||
+             [category isEqualToString:@"mirror_test"] || [category isEqualToString:@"imitation"]) {
+        if ([tokens count] > 1) {
+            NSString* subcategory = [tokens objectAtIndex:1];
+            printf("subcategory: %s\n", [subcategory UTF8String]);
+        }
+
+        UIButton* img = [[UIButton alloc] initWithFrame:CGRectMake(padding, padding, 40, 60)];
+        NSArray* tokens = [story.mRawContent componentsSeparatedByString:@";"];
+        NSString* imgPath = nil;
+        NSString* comment = nil;
         BOOL isVideo = NO;
         for (int i = 0; i < [tokens count]; ++i) {
-            NSArray * comps = [[tokens objectAtIndex:i] componentsSeparatedByString:@"="];
-            NSString * key = [comps objectAtIndex:0];
-            NSString * val = [comps objectAtIndex:1];
+            NSArray* comps = [[tokens objectAtIndex:i] componentsSeparatedByString:@"="];
+            NSString* key = [comps objectAtIndex:0];
+            NSString* val = [comps objectAtIndex:1];
             if ([key isEqualToString:@"image"]) {
                 imgPath = [NSString stringWithString:val];
             } else if ([key isEqualToString:@"video"]) {
@@ -266,8 +281,10 @@
                 comment = [NSString stringWithString:val];
             }
         }
-        img.image = [UIImage imageNamed:imgPath];
-        [self addSubview:img];
+        img.layer.cornerRadius = 3.0;
+        img.layer.masksToBounds = YES;
+        [img setImage:[UIImage imageWithContentsOfFile:imgPath] forState:UIControlStateNormal];
+        [parent addSubview:img];
         [img release];
     }
 }
@@ -289,26 +306,31 @@
     
     NSString *description = [self getStoryDescription:story];
     if (description) {
-        UILabel *storyDesc = [[UILabel alloc] initWithFrame:CGRectMake(50, 0, 200, 30)];
+        UILabel *storyDesc = [[UILabel alloc] initWithFrame:CGRectMake(50, 0, 220, 20)];
         storyDesc.backgroundColor = [UIColor clearColor];
         storyDesc.text = description;
-        [storyDesc setFont:[UIFont fontWithName:@"verdana" size:13]];
+        [storyDesc setFont:[UIFont fontWithName:@"Noteworthy-Light" size:13]];
         [self addSubview:storyDesc];
         [storyDesc release];
     }
     
     NSString *time_description = [self getStoryTime:story];
     if (time_description) {
-        UILabel *timeDesc = [[UILabel alloc] initWithFrame:CGRectMake(50, height - 10, 200, 20)];
+        UILabel *timeDesc = [[UILabel alloc] initWithFrame:CGRectMake(50, 20, 220, 20)];
         timeDesc.backgroundColor = [UIColor clearColor];
         timeDesc.text = time_description;
-        [timeDesc setFont:[UIFont fontWithName:@"verdana" size:12]];
+        timeDesc.textColor = [UIColor colorWithRed:0.8 green:0.8 blue:0.8 alpha:1.0];
+        [timeDesc setFont:[UIFont fontWithName:@"Noteworthy-Light" size:10]];
         [self addSubview:timeDesc];
         [timeDesc release];
     }
     
-    // todo: construct the context info.
-    [self buildContextInfo:story];
+    // construct the context info.
+    UIView *context = [[UIView alloc] initWithFrame:CGRectMake(0, 45, 280, 80)];
+    context.backgroundColor = [UIColor colorWithRed:216/255.0 green:220/255.0 blue:237/255.0 alpha:1.0];
+    [self buildContextInfo:story withFrame:CGRectMake(0, 0, 280, 80) withinParent:context];
+    [self addSubview:context];
+    [context release];
 }
 
 - (void)setReviewStory:(totReviewStory *)story {
