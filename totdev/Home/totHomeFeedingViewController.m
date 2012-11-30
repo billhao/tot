@@ -70,6 +70,46 @@
     quantityList[buttonSelected] =picker_quantity.currentValue;
 }
 
+- (void)createChooseFoodPanel{
+    
+    mChooseFoodOKButton = [UIButton buttonWithType:UIButtonTypeCustom];;
+    mChooseFoodOKButton.frame = CGRectMake(20, 200, 280, 40);
+    [mChooseFoodOKButton setTitle:@"ok" forState:UIControlStateNormal];
+    [mChooseFoodOKButton setTitleColor:[UIColor magentaColor] forState:UIControlStateNormal];
+    [mChooseFoodOKButton setBackgroundColor:[UIColor whiteColor]];
+    [mChooseFoodView addSubview:mChooseFoodOKButton];
+    [mChooseFoodOKButton addTarget:self action:@selector(ChooseFoodOKButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    
+    mChooseFoodSlider = [[totSliderView alloc] initWithFrame:CGRectMake(20, 10, 280, 160)];
+    [mChooseFoodSlider setDelegate:self];
+    [mChooseFoodSlider setBtnPerCol:2];
+    [mChooseFoodSlider setBtnPerRow:4];
+    [mChooseFoodSlider setvMarginBetweenBtn:0];
+    [mChooseFoodSlider sethMarginBetweenBtn:0];
+    [mChooseFoodSlider setTagOffset:BUTTON_CHOOSEFOOD_MIN];
+    
+    //load image
+    NSMutableArray *foodImages = [[NSMutableArray alloc] init];
+    // [recentlyUsedImages addObject:[UIImage imageNamed:@"feedingcategories-cereal"]];
+    // should use plist file to load
+    [foodImages addObject:[UIImage imageNamed:@"feeding-apple.png"]];
+    [foodImages addObject:[UIImage imageNamed:@"feeding-blueberry.png"]];
+    [foodImages addObject:[UIImage imageNamed:@"feeding-papaya.png"]];
+    [foodImages addObject:[UIImage imageNamed:@"feeding-kiwi.png"]];
+    [foodImages addObject:[UIImage imageNamed:@"feeding-mango.png"]];
+    [foodImages addObject:[UIImage imageNamed:@"feeding-bread.png"]];
+    [foodImages addObject:[UIImage imageNamed:@"feeding-banana.png"]];
+    [foodImages addObject:[UIImage imageNamed:@"feeding-ricewhite.png"]];
+    [foodImages addObject:[UIImage imageNamed:@"feeding-cheerios.png"]];
+    [foodImages addObject:[UIImage imageNamed:@"feeding-peas.png"]];
+    
+    [mChooseFoodSlider setContentArray:foodImages];
+    [foodImages release];
+    [mChooseFoodSlider getWithPositionMemoryIdentifier:@"chooseFood"];
+    
+    
+}
+
 - (void)buttonPressed: (id)sender {
     UIButton *btn = (UIButton*)sender;
     int tag = [btn tag];
@@ -81,40 +121,13 @@
         [mChooseFoodView setBackgroundColor:[UIColor grayColor]];
         [self.view addSubview:mChooseFoodView];
         
-        mChooseFoodOKButton = [UIButton buttonWithType:UIButtonTypeCustom];;
-        mChooseFoodOKButton.frame = CGRectMake(20, 200, 280, 40);
-        [mChooseFoodOKButton setTitle:@"ok" forState:UIControlStateNormal];
-        [mChooseFoodOKButton setTitleColor:[UIColor magentaColor] forState:UIControlStateNormal];
-        [mChooseFoodOKButton setBackgroundColor:[UIColor whiteColor]];
-        [mChooseFoodView addSubview:mChooseFoodOKButton];
-        [mChooseFoodOKButton addTarget:self action:@selector(ChooseFoodOKButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
-        
-        mChooseFoodSlider = [[totSliderView alloc] initWithFrame:CGRectMake(20, 10, 280, 160)];
-        [mChooseFoodSlider setDelegate:self];
-        [mChooseFoodSlider setBtnPerCol:2];
-        [mChooseFoodSlider setBtnPerRow:4];
-        [mChooseFoodSlider setvMarginBetweenBtn:0];
-        [mChooseFoodSlider sethMarginBetweenBtn:0];
-        [mChooseFoodSlider setTagOffset:BUTTON_CHOOSEFOOD_MIN];
-        
-        //load image
-        NSMutableArray *foodImages = [[NSMutableArray alloc] init];
-        // [recentlyUsedImages addObject:[UIImage imageNamed:@"feedingcategories-cereal"]];
-        // should use plist file to load
-        [foodImages addObject:[UIImage imageNamed:@"feeding-apple.png"]];
-        [foodImages addObject:[UIImage imageNamed:@"feeding-blueberry.png"]];
-        [foodImages addObject:[UIImage imageNamed:@"feeding-papaya.png"]];
-        [foodImages addObject:[UIImage imageNamed:@"feeding-kiwi.png"]];
-        [foodImages addObject:[UIImage imageNamed:@"feeding-mango.png"]];
-        [foodImages addObject:[UIImage imageNamed:@"feeding-bread.png"]];
-        [foodImages addObject:[UIImage imageNamed:@"feeding-banana.png"]];
-        [foodImages addObject:[UIImage imageNamed:@"feeding-ricewhite.png"]];
-        [foodImages addObject:[UIImage imageNamed:@"feeding-cheerios.png"]];
-        [foodImages addObject:[UIImage imageNamed:@"feeding-peas.png"]];
-        
-        [mChooseFoodSlider setContentArray:foodImages];
-        [foodImages release];
-        [mChooseFoodSlider getWithPositionMemoryIdentifier:@"chooseFood"];
+        //background
+        totImageView* popUpBackground = [[totImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 260)];
+        [popUpBackground imageFilePath:@"feeding-popup.png"];
+        [mChooseFoodView addSubview:popUpBackground];
+        [popUpBackground release];
+
+        [self createChooseFoodPanel];
         [mChooseFoodView addSubview:mChooseFoodSlider];
         
         picker_quantity = [[STHorizontalPicker alloc] initWithFrame:CGRectMake(20, 170, 280, 31)];
