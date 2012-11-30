@@ -13,8 +13,17 @@
 #import "../Utility/totUtility.h"
 #import "../Utility/totImageView.h"
 
-
 #define DEFAULT_QUANTITY 2.3 //magic number
+
+//macro to discriminate different buttons pressed
+#define BUTTON_CATEGORY_MIN 0
+#define BUTTON_CATEGORY_MAX 999
+#define BUTTON_RECENTLYCHOSEN_MIN 1000
+#define BUTTON_RECENTLYCHOSEN_MAX 1999
+#define BUTTON_CHOOSEFOOD_MIN 2000
+#define BUTTON_CHOOSEFOOD_MAX 2999
+#define BUTTON_FOODCHOSEN_MIN 3000
+#define BUTTON_FOODCHOSEN_MAX 3999
 
 @implementation totHomeFeedingViewController
 
@@ -25,25 +34,26 @@
 @synthesize mCurrentFoodID;
 @synthesize mChooseFoodSlider;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
+#pragma mark - init and aux
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
         AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
         mTotModel = [appDelegate getDataModel];
-
     }
     return self;
 }
 
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning{
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
     
     // Release any cached data, images, etc that aren't in use.
 }
+
+#pragma mark - component response
 
 - (void)pickerView:(STHorizontalPicker *)picker didSelectValue:(CGFloat)value {
     NSLog(@"didSelectValue %f", value);
@@ -54,27 +64,18 @@
     //[mOKButton setTitle:temp forState:UIControlStateNormal];
     //[temp release];
     
-    //need to expose an API in 
+    //need to expose an API in
     [mFoodChosenSlider setButton:buttonSelected andWithValue:picker_quantity.currentValue];
-
-    quantityList[buttonSelected] =picker_quantity.currentValue;    
+    
+    quantityList[buttonSelected] =picker_quantity.currentValue;
 }
-
-#pragma mark - View lifecycle
-
-/*
-// Implement loadView to create a view hierarchy programmatically, without using a nib.
-- (void)loadView
-{
-}
-*/
 
 - (void)buttonPressed: (id)sender {
     UIButton *btn = (UIButton*)sender;
     int tag = [btn tag];
-    tag = tag - 1;
+    tag -= 1;
     
-    if(tag >= 0 && tag <1000){ //category
+    if(tag >= BUTTON_CATEGORY_MIN && tag <= BUTTON_CATEGORY_MAX){ //category
         // show a new panel with food slider and picker and ok button
         mChooseFoodView = [[UIView alloc] initWithFrame: CGRectMake(0, 100, 320, 260)];
         [mChooseFoodView setBackgroundColor:[UIColor grayColor]];
@@ -94,7 +95,7 @@
         [mChooseFoodSlider setBtnPerRow:4];
         [mChooseFoodSlider setvMarginBetweenBtn:0];
         [mChooseFoodSlider sethMarginBetweenBtn:0];
-        [mChooseFoodSlider setTagOffset:2000];
+        [mChooseFoodSlider setTagOffset:BUTTON_CHOOSEFOOD_MIN];
         
         //load image
         NSMutableArray *foodImages = [[NSMutableArray alloc] init];
@@ -130,20 +131,34 @@
         for (int i=0; i<DEFAULT_MENU ; i++) {
             quantityList[i]=0;
         }
+        
+        return; //tag segmentations are mutually exclusive
     }
     
+    if(tag >= BUTTON_RECENTLYCHOSEN_MIN && tag <= BUTTON_RECENTLYCHOSEN_MAX){
+        
+        
+        return;
+    }
     
-    if(tag>=2000 & tag < 3000){
+    if(tag >= BUTTON_CHOOSEFOOD_MIN & tag <= BUTTON_CHOOSEFOOD_MAX){
         picker_quantity.hidden = NO;
         [picker_quantity setValue:DEFAULT_QUANTITY];
-    
+        
         buttonSelected = tag;
         
         //reset all button bacground color;
         [mFoodChosenSlider clearButtonBGColor];
         ((UIButton *)sender).backgroundColor = [UIColor redColor];
+        
+        return;
     }
-
+    
+    if(tag >= BUTTON_FOODCHOSEN_MIN && tag <= BUTTON_FOODCHOSEN_MAX){
+        
+        
+        return;
+    }
 }
 
 - (void) navLeftButtonPressed:(id)sender{
@@ -153,7 +168,55 @@
     //xxxxxxxxxx
 }
 
+- (void)OKButtonClicked: (UIButton *)button {
+    NSLog(@"%@", @"[feeding] ok button clicked");
+    int baby_id = 0;
+    NSDate* date = [NSDate date];
+    
+    NSString* summary = [NSString stringWithFormat:@"**%@", mDatetime.titleLabel.text ];
+    NSLog(@"%@", summary);
+    
+    
+    for(int i = 0; i < DEFAULT_MENU; i++){
+        if(quantityList[i]>0){
+            NSString* temp = [NSString stringWithFormat:@"%@-%d:\t%.1f %@", @"food",i, quantityList[i],@"oz" ];
+            
+            summary = [NSString stringWithFormat:@"%@\n%@",summary,temp ];
+            
+            NSString* quantity = [NSString stringWithFormat:@"%.1f", picker_quantity.currentValue];
+            
+            // food list needs renew
+            [mTotModel addEvent:baby_id event:EVENT_FEEDING_MILK datetime:date value:quantity];
+            NSLog(@"%@",summary);
+        }
+        
+    }
+    
+    [mSummary setTitle:summary forState:UIControlStateNormal];
+    [self.view bringSubviewToFront:mSummary];
+    [mSummary setHidden:false];
+    
+    // get a list of events containing "emotion"
+    NSString* event = [[NSString alloc] initWithString:@"fedding"];
+    // return from getEvent is an array of totEvent object
+    // a totEvent represents a single event
+    NSMutableArray *events = [mTotModel getEvent:0 event:event];
+    for (totEvent* e in events) {
+        NSLog(@"Return from db: %@", [e toString]);
+    }
+    [event release];
+}
 
+
+- (void)ChooseFoodOKButtonClicked: (UIButton *)button {
+    [mChooseFoodView release ];
+}
+
+-(void)SummaryButtonClicked:(UIButton *)button{
+    [homeRootController switchTo:kHomeViewEntryView withContextInfo:nil];
+}
+
+#pragma mark - View lifecycle
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
@@ -161,7 +224,7 @@
     [super viewDidLoad];
         
     // create background
-    totImageView *background = [[totImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
+    totImageView* background = [[totImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
     [background imageFilePath:@"feeding-blank.png"];
     [self.view addSubview:background];
     [background release];
@@ -174,7 +237,7 @@
     [mCategoriesSlider setvMarginBetweenBtn:12];
     [mCategoriesSlider sethMarginBetweenBtn:12];
     [mCategoriesSlider setBtnHeight:33];
-    [mCategoriesSlider setTagOffset:0];
+    [mCategoriesSlider setTagOffset:BUTTON_CATEGORY_MIN];
     //[mCategoriesSlider enablePageControlOnBottom]; no page control dot
     
     //load image
@@ -202,7 +265,7 @@
     [mRecentlyUsedSlider setBtnPerRow:4];
     [mRecentlyUsedSlider setvMarginBetweenBtn:0];
     [mRecentlyUsedSlider sethMarginBetweenBtn:0];
-    [mRecentlyUsedSlider setTagOffset:1000];
+    [mRecentlyUsedSlider setTagOffset:BUTTON_RECENTLYCHOSEN_MIN];
     
     //load image
     NSMutableArray *recentlyUsedImages = [[NSMutableArray alloc] init];
@@ -281,7 +344,7 @@
     [mFoodChosenSlider setBtnPerRow:4];
     [mFoodChosenSlider setvMarginBetweenBtn:0];
     [mFoodChosenSlider sethMarginBetweenBtn:0];
-    [mFoodChosenSlider setTagOffset:3000];
+    [mFoodChosenSlider setTagOffset:BUTTON_FOODCHOSEN_MIN];
     
     //load image
     NSMutableArray *foodChosenImages = [[NSMutableArray alloc] init];
@@ -306,58 +369,8 @@
 }
 
 
-- (void)OKButtonClicked: (UIButton *)button {
-    NSLog(@"%@", @"[feeding] ok button clicked");
-    int baby_id = 0;
-    NSDate* date = [NSDate date];
-    
-    NSString* summary = [NSString stringWithFormat:@"**%@", mDatetime.titleLabel.text ];
-    NSLog(@"%@", summary);
 
-
-    for(int i=0;i<DEFAULT_MENU;i++){
-        if(quantityList[i]>0){
-            NSString* temp = [NSString stringWithFormat:@"%@-%d:\t%.1f %@", @"food",i, quantityList[i],@"oz" ];
-            
-            summary = [NSString stringWithFormat:@"%@\n%@",summary,temp ];
-            
-            NSString* quantity = [NSString stringWithFormat:@"%.1f", picker_quantity.currentValue];
-            
-            // food list needs renew
-            [mTotModel addEvent:baby_id event:EVENT_FEEDING_MILK datetime:date value:quantity];
-            NSLog(@"%@",summary);
-        }
-        
-    }
-    
-    [mSummary setTitle:summary forState:UIControlStateNormal];
-    [self.view bringSubviewToFront:mSummary];
-    [mSummary setHidden:false];
-    
-    // get a list of events containing "emotion"
-    NSString* event = [[NSString alloc] initWithString:@"fedding"];
-    // return from getEvent is an array of totEvent object
-    // a totEvent represents a single event
-    NSMutableArray *events = [mTotModel getEvent:0 event:event];
-    for (totEvent* e in events) {
-        NSLog(@"Return from db: %@", [e toString]);        
-    }
-    [event release];
-    
-    
-}
-
-
-- (void)ChooseFoodOKButtonClicked: (UIButton *)button {
-
-    [mChooseFoodView release ];
-    
-}
-
--(void)SummaryButtonClicked:(UIButton *)button{
-    [homeRootController switchTo:kHomeViewEntryView withContextInfo:nil];
-}
-
+#pragma mark - totTimerControllerDelegate
 
 - (void)showTimePicker {
     [UIView beginAnimations:@"swipe" context:nil];
@@ -381,7 +394,6 @@
     [UIView commitAnimations];
 }
 
-#pragma mark - totTimerControllerDelegate
 -(void)saveCurrentTime:(NSString*)time {
     NSLog(@"%@", time);
     NSString *formattedTime;
@@ -403,6 +415,8 @@
     [self hideTimePicker];
 }
 
+
+#pragma mark - clean up
 - (void)viewDidUnload
 {
     [super viewDidUnload];

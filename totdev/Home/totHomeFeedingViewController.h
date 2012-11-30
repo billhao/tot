@@ -18,52 +18,51 @@
 #define DEFAULT_MENU 8
 
 @interface totHomeFeedingViewController : UIViewController<STHorizontalPickerDelegate,totSliderViewDelegate,totNavigationBarDelegate,totTimerControllerDelegate> {
-    totHomeRootController *homeRootController;
+    totHomeRootController* homeRootController;
     
     // according to current design, we need 3 slider views
     //   1 for recently used; 1 for categories; 1 for food chosen
+    // plus one for food menu in pop ups
 
-    //totSliderView *mSliderView;
-    totSliderView *mRecentlyUsedSlider;
-    totSliderView *mCategoriesSlider;
-    totSliderView *mFoodChosenSlider;
-
-    totNavigationBar *mNavigationBar;
+    totSliderView* mRecentlyUsedSlider;
+    totSliderView* mCategoriesSlider;
+    totSliderView* mFoodChosenSlider;
     
-    UIButton *mOKButton;
-    UIButton *mDatetime;
-    UIButton *mSummary;
+    totNavigationBar* mNavigationBar;
+    
+    UIButton* mOKButton;
+    UIButton* mDatetime;
+    UIButton* mSummary;
     
     //for fodd imput
-    UIView *mChooseFoodView;
-    totSliderView *mChooseFoodSlider; // note the difference between foodChosen and chooseFood
-    UIButton *mChooseFoodOKButton;
+    UIView* mChooseFoodView;
+    totSliderView* mChooseFoodSlider; // note the difference between foodChosen and chooseFood
+    UIButton* mChooseFoodOKButton;
     STHorizontalPicker* picker_quantity;
     
     //NSMutableDictionary *mMessage;
     
-    NSNumber *mCurrentFoodID;    
-    totModel *mTotModel;
+    NSNumber* mCurrentFoodID;
+    totModel* mTotModel;
     
     //UIImageView *mBackground;
     
     
     // for date picker
-    totTimerController *mClock;
+    totTimerController* mClock;
     int mWidth, mHeight;
     
     int buttonSelected;
-    float quantityList[8]; 
-
+    float quantityList[8];
 }
 
-@property (nonatomic, assign) totHomeRootController *homeRootController;
-//@property (nonatomic, retain) totSliderView *mSliderView;
-@property (nonatomic, retain) totSliderView *mRecentlyUsedSlider;
-@property (nonatomic, retain) totSliderView *mCategoriesSlider;
-@property (nonatomic, retain) totSliderView *mFoodChosenSlider;
-@property (nonatomic, retain) totSliderView *mChooseFoodSlider;
-@property (nonatomic, retain) NSNumber *mCurrentFoodID;
+@property (nonatomic, assign) totHomeRootController* homeRootController;
+@property (nonatomic, retain) totSliderView* mRecentlyUsedSlider;
+@property (nonatomic, retain) totSliderView* mCategoriesSlider;
+@property (nonatomic, retain) totSliderView* mFoodChosenSlider;
+@property (nonatomic, retain) totSliderView* mChooseFoodSlider;
+
+@property (nonatomic, assign) NSNumber* mCurrentFoodID;
 
 
 // receive parameters passed by other module for initialization or customization
