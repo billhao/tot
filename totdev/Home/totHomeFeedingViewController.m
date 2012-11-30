@@ -18,8 +18,8 @@
 //macro to discriminate different buttons pressed
 #define BUTTON_CATEGORY_MIN 0
 #define BUTTON_CATEGORY_MAX 999
-#define BUTTON_RECENTLYCHOSEN_MIN 1000
-#define BUTTON_RECENTLYCHOSEN_MAX 1999
+#define BUTTON_RECENTLYUSED_MIN 1000
+#define BUTTON_RECENTLYUSED_MAX 1999
 #define BUTTON_CHOOSEFOOD_MIN 2000
 #define BUTTON_CHOOSEFOOD_MAX 2999
 #define BUTTON_FOODCHOSEN_MIN 3000
@@ -100,6 +100,7 @@
         //load image
         NSMutableArray *foodImages = [[NSMutableArray alloc] init];
         // [recentlyUsedImages addObject:[UIImage imageNamed:@"feedingcategories-cereal"]];
+        // should use plist file to load
         [foodImages addObject:[UIImage imageNamed:@"feeding-apple.png"]];
         [foodImages addObject:[UIImage imageNamed:@"feeding-blueberry.png"]];
         [foodImages addObject:[UIImage imageNamed:@"feeding-papaya.png"]];
@@ -135,7 +136,7 @@
         return; //tag segmentations are mutually exclusive
     }
     
-    if(tag >= BUTTON_RECENTLYCHOSEN_MIN && tag <= BUTTON_RECENTLYCHOSEN_MAX){
+    if(tag >= BUTTON_RECENTLYUSED_MIN && tag <= BUTTON_RECENTLYUSED_MAX){
         
         
         return;
@@ -217,19 +218,7 @@
 }
 
 #pragma mark - View lifecycle
-
-// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-        
-    // create background
-    totImageView* background = [[totImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
-    [background imageFilePath:@"feeding-blank.png"];
-    [self.view addSubview:background];
-    [background release];
-    
-    // create categories slider view
+-(void)createCategoryPanel{
     mCategoriesSlider = [[totSliderView alloc] initWithFrame:CGRectMake(38, 170, 244, 120)];
     [mCategoriesSlider setDelegate:self];
     [mCategoriesSlider setBtnPerCol:2];
@@ -248,28 +237,26 @@
     [categoriesImages addObject:[UIImage imageNamed:@"feedingcategories-juice.png"]];
     [categoriesImages addObject:[UIImage imageNamed:@"feedingcategories-meat.png"]];
     [categoriesImages addObject:[UIImage imageNamed:@"feedingcategories-vege.png"]];
-
+    
     [mCategoriesSlider setContentArray:categoriesImages];
     [categoriesImages release];
     
     [mCategoriesSlider getWithPositionMemoryIdentifier:@"feedingCategories"];
+}
 
-    [self.view addSubview:mCategoriesSlider];
+-(void)createRecentlyUsedPanel{
     
-    buttonSelected = 0;
-    
-    // create recently used slider view
     mRecentlyUsedSlider = [[totSliderView alloc] initWithFrame:CGRectMake(38, 95, 244, 60)];
     [mRecentlyUsedSlider setDelegate:self];
     [mRecentlyUsedSlider setBtnPerCol:1];
     [mRecentlyUsedSlider setBtnPerRow:4];
     [mRecentlyUsedSlider setvMarginBetweenBtn:0];
     [mRecentlyUsedSlider sethMarginBetweenBtn:0];
-    [mRecentlyUsedSlider setTagOffset:BUTTON_RECENTLYCHOSEN_MIN];
+    [mRecentlyUsedSlider setTagOffset:BUTTON_RECENTLYUSED_MIN];
     
     //load image
     NSMutableArray *recentlyUsedImages = [[NSMutableArray alloc] init];
-   // [recentlyUsedImages addObject:[UIImage imageNamed:@"feedingcategories-cereal"]];
+    // [recentlyUsedImages addObject:[UIImage imageNamed:@"feedingcategories-cereal"]];
     [recentlyUsedImages addObject:[UIImage imageNamed:@"feeding-apple.png"]];
     [recentlyUsedImages addObject:[UIImage imageNamed:@"feeding-blueberry.png"]];
     [recentlyUsedImages addObject:[UIImage imageNamed:@"feeding-papaya.png"]];
@@ -280,14 +267,68 @@
     [recentlyUsedImages addObject:[UIImage imageNamed:@"feeding-ricewhite.png"]];
     [recentlyUsedImages addObject:[UIImage imageNamed:@"feeding-cheerios.png"]];
     [recentlyUsedImages addObject:[UIImage imageNamed:@"feeding-peas.png"]];
- 
+    
     
     [mRecentlyUsedSlider setContentArray:recentlyUsedImages];
     [recentlyUsedImages release];
     
     [mRecentlyUsedSlider getWithPositionMemoryIdentifier:@"feedingRecentlyUsed"];
     
+}
+
+- (void)createFoodChosenPanel{
+    
+    mFoodChosenSlider = [[totSliderView alloc] initWithFrame:CGRectMake(38, 285, 244, 60)];
+    [mFoodChosenSlider setDelegate:self];
+    [mFoodChosenSlider setBtnPerCol:1];
+    [mFoodChosenSlider setBtnPerRow:4];
+    [mFoodChosenSlider setvMarginBetweenBtn:0];
+    [mFoodChosenSlider sethMarginBetweenBtn:0];
+    [mFoodChosenSlider setTagOffset:BUTTON_FOODCHOSEN_MIN];
+    
+    //load image
+    NSMutableArray *foodChosenImages = [[NSMutableArray alloc] init];
+    [foodChosenImages addObject:[UIImage imageNamed:@"feedinggrey-apple.png"]];
+    [foodChosenImages addObject:[UIImage imageNamed:@"feedinggrey-blueberry.png"]];
+    
+    [foodChosenImages addObject:[UIImage imageNamed:@"feedinggrey-papaya.png"]];
+    [foodChosenImages addObject:[UIImage imageNamed:@"feedinggrey-kiwi.png"]];
+    [foodChosenImages addObject:[UIImage imageNamed:@"feedinggrey-mango.png"]];
+    [foodChosenImages addObject:[UIImage imageNamed:@"feedinggrey-bread.png"]];
+    [foodChosenImages addObject:[UIImage imageNamed:@"feedinggrey-banana.png"]];
+    [foodChosenImages addObject:[UIImage imageNamed:@"feedinggrey-whiterice.png"]];
+    [foodChosenImages addObject:[UIImage imageNamed:@"feedinggrey-cheerios.png"]];
+    [foodChosenImages addObject:[UIImage imageNamed:@"feedinggrey-pear.png"]];
+    
+    [mFoodChosenSlider setContentArray:foodChosenImages];
+    [foodChosenImages release];
+    [mFoodChosenSlider getWithPositionMemoryIdentifier:@"feedingFoodChosen"];
+}
+// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+        
+    // create background
+    totImageView* background = [[totImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
+    [background imageFilePath:@"feeding-blank.png"];
+    [self.view addSubview:background];
+    [background release];
+    
+    // create categories slider view
+    [self createCategoryPanel];
+    [self.view addSubview:mCategoriesSlider];
+    
+    buttonSelected = 0;
+    
+    // create recently used slider view
+    [self createRecentlyUsedPanel];
     [self.view addSubview:mRecentlyUsedSlider];
+    
+    //add a chosen list slider
+    [self createFoodChosenPanel];
+    [self.view addSubview:mFoodChosenSlider];
+    
     
     //create title navigation bar
     //navigationBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
@@ -299,7 +340,6 @@
     [self.view addSubview:mNavigationBar];
     
     //create ok button from icons
-
     mOKButton = [UIButton buttonWithType:UIButtonTypeCustom];;
     mOKButton.frame = CGRectMake(220, 360, 40, 40);
     [mOKButton setImage:[UIImage imageNamed:@"icons-ok.png"] forState:UIControlStateNormal];
@@ -335,39 +375,8 @@
     [self.view addSubview:mSummary];
     [mSummary addTarget:self action:@selector(SummaryButtonClicked:) forControlEvents: UIControlEventTouchUpInside];
     
-    
-    //add a chosen list slider
-    // create recently used slider view
-    mFoodChosenSlider = [[totSliderView alloc] initWithFrame:CGRectMake(38, 285, 244, 60)];
-    [mFoodChosenSlider setDelegate:self];
-    [mFoodChosenSlider setBtnPerCol:1];
-    [mFoodChosenSlider setBtnPerRow:4];
-    [mFoodChosenSlider setvMarginBetweenBtn:0];
-    [mFoodChosenSlider sethMarginBetweenBtn:0];
-    [mFoodChosenSlider setTagOffset:BUTTON_FOODCHOSEN_MIN];
-    
-    //load image
-    NSMutableArray *foodChosenImages = [[NSMutableArray alloc] init];
-    [foodChosenImages addObject:[UIImage imageNamed:@"feedinggrey-apple.png"]];
-    [foodChosenImages addObject:[UIImage imageNamed:@"feedinggrey-blueberry.png"]];
-    
-    [foodChosenImages addObject:[UIImage imageNamed:@"feedinggrey-papaya.png"]];
-    [foodChosenImages addObject:[UIImage imageNamed:@"feedinggrey-kiwi.png"]];
-    [foodChosenImages addObject:[UIImage imageNamed:@"feedinggrey-mango.png"]];
-    [foodChosenImages addObject:[UIImage imageNamed:@"feedinggrey-bread.png"]];
-    [foodChosenImages addObject:[UIImage imageNamed:@"feedinggrey-banana.png"]];
-    [foodChosenImages addObject:[UIImage imageNamed:@"feedinggrey-whiterice.png"]];
-    [foodChosenImages addObject:[UIImage imageNamed:@"feedinggrey-cheerios.png"]];
-    [foodChosenImages addObject:[UIImage imageNamed:@"feedinggrey-pear.png"]];
-    
-    [mFoodChosenSlider setContentArray:foodChosenImages];
-    [foodChosenImages release];
-    [mFoodChosenSlider getWithPositionMemoryIdentifier:@"feedingFoodChosen"];
-    [self.view addSubview:mFoodChosenSlider];
-     
 
 }
-
 
 
 #pragma mark - totTimerControllerDelegate
