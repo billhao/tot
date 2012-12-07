@@ -73,7 +73,7 @@
 - (void)createChooseFoodPanel{
     
     mChooseFoodOKButton = [UIButton buttonWithType:UIButtonTypeCustom];;
-    mChooseFoodOKButton.frame = CGRectMake(20, 200, 280, 40);
+    mChooseFoodOKButton.frame = CGRectMake(40, 200, 240, 40);
     [mChooseFoodOKButton setTitle:@"ok" forState:UIControlStateNormal];
     [mChooseFoodOKButton setTitleColor:[UIColor magentaColor] forState:UIControlStateNormal];
     [mChooseFoodOKButton setBackgroundColor:[UIColor whiteColor]];
@@ -118,7 +118,9 @@
     if(tag >= BUTTON_CATEGORY_MIN && tag <= BUTTON_CATEGORY_MAX){ //category
         // show a new panel with food slider and picker and ok button
         mChooseFoodView = [[UIView alloc] initWithFrame: CGRectMake(0, 100, 320, 260)];
-        [mChooseFoodView setBackgroundColor:[UIColor grayColor]];
+        //[mChooseFoodView setBackgroundColor:[UIColor grayColor]];
+        mChooseFoodView.backgroundColor = [UIColor clearColor];
+        mChooseFoodView.alpha = 1.0;
         [self.view addSubview:mChooseFoodView];
         
         //background
