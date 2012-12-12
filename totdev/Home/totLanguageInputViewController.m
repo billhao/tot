@@ -57,24 +57,27 @@
     self.view.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:.5];
     
     // Add the message cloud into m_topView
-    UIImageView *aImgView = [[UIImageView alloc] initWithFrame:CGRectMake(14.4, 30, 291.2, 250)];
+    UIImageView *aImgView = [[UIImageView alloc] initWithFrame:CGRectMake(14.4, 8, 291.2, 250)];
     aImgView.image = [UIImage imageNamed:@"icons-language.png"];
     [self.view addSubview:aImgView];
     [aImgView release];
     
     // Construct m_textField
-    UITextView *aTxtView = [[UITextView alloc] initWithFrame:CGRectMake(35, 45, 250, 150)];
+    UITextView *aTxtView = [[UITextView alloc] initWithFrame:CGRectMake(35, 25, 250, 150)];
     [aTxtView  setFont: [UIFont fontWithName:@"ArialMT" size:30]];
     aTxtView.editable = YES;
     aTxtView.delegate = self;
     aTxtView.textAlignment = UITextAlignmentLeft;
     aTxtView.backgroundColor = [UIColor clearColor];
+    NSString* defaultTxt = @"what did the baby say?"; // define default text   
+    aTxtView.text = defaultTxt;  // set default text
+    aTxtView.textColor = [UIColor lightGrayColor]; // set color for default text
     self.m_textView = aTxtView;
     [aTxtView release];
     [self.view addSubview:m_textView];
     
     // Construct m_confirmButton
-    UIButton *aBtn = [[UIButton alloc] initWithFrame:CGRectMake(50, 210, 60, 45)];
+    UIButton *aBtn = [[UIButton alloc] initWithFrame:CGRectMake(50, 185, 60, 45)];
     aBtn.backgroundColor = [UIColor clearColor];
     [aBtn setBackgroundImage: [UIImage imageNamed:@"icons-ok.png"] forState:UIControlStateNormal];
     [aBtn addTarget:self action:@selector(ConfirmButtonClicked) forControlEvents:UIControlEventTouchUpInside];
@@ -84,7 +87,7 @@
     
     // Construct history button
     UIButton *bBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    bBtn.frame = CGRectMake(130, 210, 60, 45);
+    bBtn.frame = CGRectMake(130, 185, 60, 45);
     bBtn.backgroundColor = [UIColor clearColor];
     [bBtn setBackgroundImage: [UIImage imageNamed:@"icons-history.png"] forState:UIControlStateNormal];
     [bBtn addTarget:self action:@selector(ConfirmButtonClicked) forControlEvents:UIControlEventTouchUpInside];
@@ -92,7 +95,7 @@
     
     // Construct share button
     UIButton *cBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    cBtn.frame = CGRectMake(210, 210, 60, 45);
+    cBtn.frame = CGRectMake(210, 185, 60, 45);
     cBtn.backgroundColor = [UIColor clearColor];
     [cBtn setBackgroundImage: [UIImage imageNamed:@"icons-share.png"] forState:UIControlStateNormal];
     [cBtn addTarget:self action:@selector(ConfirmButtonClicked) forControlEvents:UIControlEventTouchUpInside];
@@ -107,7 +110,12 @@
 
 - (void)Display
 {
+    /* Display m_textView and set default text */
     m_textView.hidden = NO;
+    NSString* defaultTxt = @"what did the baby say?"; // define default text
+    m_textView.text = defaultTxt;
+    m_textView.textColor = [UIColor lightGrayColor];
+    /* Display confirm button */
     m_confirmButton.hidden = NO;
     self.view.hidden = NO;
 }
@@ -216,6 +224,17 @@
     if( [text isEqualToString:@"\n"] ) {
         [textView resignFirstResponder];
         return NO;
+    }
+    
+    return YES;
+}
+
+////
+- (BOOL) textViewShouldBeginEditing:(UITextView *)textView
+{
+    if (self.m_textView.textColor == [UIColor lightGrayColor]) {
+        self.m_textView.text = @"";
+        self.m_textView.textColor = [UIColor blackColor];
     }
     
     return YES;

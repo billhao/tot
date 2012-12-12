@@ -15,7 +15,7 @@
 @implementation AppDelegate
 
 @synthesize mainTabController;
-//@synthesize window;
+@synthesize window;
 @synthesize mCache;
 @synthesize baby, user;
 
@@ -27,7 +27,7 @@
 
 - (void)dealloc
 {
-    [_window release];
+    [window release];
     [super dealloc];
 }
 

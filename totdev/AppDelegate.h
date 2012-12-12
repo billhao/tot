@@ -18,7 +18,7 @@
 @class totUITabBarController;
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate> {
-    //UIWindow *window;
+    UIWindow *window;
     totLoginNavigationController *loginNavigationController;
     totUITabBarController* mainTabController;
     
