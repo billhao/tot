@@ -179,14 +179,14 @@
         */
         // Display a confirmation message
         UITextView *confirmTxtView = [[UITextView alloc] initWithFrame:CGRectMake(35, 45, 210, 150)];
-        [confirmTxtView  setFont: [UIFont fontWithName:@"ArialMT" size:25]];
+        [confirmTxtView  setFont: [UIFont fontWithName:@"TrebuchetMS" size:25]];
         confirmTxtView.editable = NO;
         confirmTxtView.delegate = self;
         confirmTxtView.textAlignment = UITextAlignmentCenter;
         confirmTxtView.backgroundColor = [UIColor clearColor];
         NSString* defaultTxt = @"Bravo! Tom has learnd 15 workds this week^o^"; // define default text   
         confirmTxtView.text = defaultTxt;  // set default text
-        confirmTxtView.textColor = [UIColor orangeColor]; // set color for default text
+        confirmTxtView.textColor = [UIColor darkGrayColor]; // set color for default text
         confirmTxtView.tag = 99;
         [self.view addSubview:confirmTxtView];
         [confirmTxtView release];
