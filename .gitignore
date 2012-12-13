@@ -1,3 +1,3 @@
 .DS_Store
-totdev.xcodeproj/project.xcworkspace/xcuserdata/hao.xcuserdatad/
-totdev.xcodeproj/xcuserdata/hao.xcuserdatad/
+totdev.xcodeproj/project.xcworkspace/xcuserdata/*.xcuserdatad/
+totdev.xcodeproj/xcuserdata/*.xcuserdatad/
