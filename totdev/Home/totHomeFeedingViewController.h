@@ -71,6 +71,7 @@
 - (void)pickerView:(STHorizontalPicker *)picker didSelectValue:(CGFloat)value;
 - (void)OKButtonClicked: (UIButton *)button;
 - (void)SummaryButtonClicked: (UIButton *)button;
+- (void)backButtonClicked: (UIButton *)button;
 
 
 @end

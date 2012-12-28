@@ -89,19 +89,59 @@
     [mChooseFoodSlider setTagOffset:BUTTON_CHOOSEFOOD_MIN];
     
     //load image
-    NSMutableArray *foodImages = [[NSMutableArray alloc] init];
+    //NSMutableArray *foodImages = [[NSMutableArray alloc] init];
     // [recentlyUsedImages addObject:[UIImage imageNamed:@"feedingcategories-cereal"]];
     // should use plist file to load
-    [foodImages addObject:[UIImage imageNamed:@"feeding-apple.png"]];
-    [foodImages addObject:[UIImage imageNamed:@"feeding-blueberry.png"]];
-    [foodImages addObject:[UIImage imageNamed:@"feeding-papaya.png"]];
-    [foodImages addObject:[UIImage imageNamed:@"feeding-kiwi.png"]];
-    [foodImages addObject:[UIImage imageNamed:@"feeding-mango.png"]];
-    [foodImages addObject:[UIImage imageNamed:@"feeding-bread.png"]];
-    [foodImages addObject:[UIImage imageNamed:@"feeding-banana.png"]];
-    [foodImages addObject:[UIImage imageNamed:@"feeding-ricewhite.png"]];
-    [foodImages addObject:[UIImage imageNamed:@"feeding-cheerios.png"]];
-    [foodImages addObject:[UIImage imageNamed:@"feeding-peas.png"]];
+    //[foodImages addObject:[UIImage imageNamed:@"feeding-apple.png"]];
+    NSMutableDictionary *foodImages = [NSMutableDictionary dictionaryWithCapacity:1];
+    [foodImages setObject:[UIImage imageNamed:@"feeding-apple.png"] forKey:@"fruit"];    
+    [foodImages setObject:[UIImage imageNamed:@"feeding-apricot.png"] forKey:@"fruit"];
+    [foodImages setObject:[UIImage imageNamed:@"feeding-artichoke.png"] forKey:@"vegetable"];
+    [foodImages setObject:[UIImage imageNamed:@"feeding-asparagus.png"] forKey:@"vegetable"];
+    [foodImages setObject:[UIImage imageNamed:@"feeding-avocado.png"] forKey:@"fruit"];
+    [foodImages setObject:[UIImage imageNamed:@"feeding-banana.png"] forKey:@"fruit"];
+    [foodImages setObject:[UIImage imageNamed:@"feeding-beets.png"] forKey:@"vegetable"];
+    [foodImages setObject:[UIImage imageNamed:@"feeding-blueberry.png"] forKey:@"fruit"];
+    [foodImages setObject:[UIImage imageNamed:@"feeding-bread.png"] forKey:@"cereal"];
+    [foodImages setObject:[UIImage imageNamed:@"feeding-broccoli.png"] forKey:@"vegetable"];
+    [foodImages setObject:[UIImage imageNamed:@"feeding-brussel sprout.png"] forKey:@"vegetable"];
+    [foodImages setObject:[UIImage imageNamed:@"feeding-califlower.png"] forKey:@"vegetable"];
+    [foodImages setObject:[UIImage imageNamed:@"feeding-carrot.png"] forKey:@"vegetable"];
+    [foodImages setObject:[UIImage imageNamed:@"feeding-cheerios.png"] forKey:@"cereal"];
+    [foodImages setObject:[UIImage imageNamed:@"feeding-cheese.png"] forKey:@"dairy"];
+    [foodImages setObject:[UIImage imageNamed:@"feeding-cucumber.png"] forKey:@"vegetable"];
+    [foodImages setObject:[UIImage imageNamed:@"feeding-dry beans.png"] forKey:@"cereal"];
+    [foodImages setObject:[UIImage imageNamed:@"feeding-eggplant.png"] forKey:@"vegetable"];
+    [foodImages setObject:[UIImage imageNamed:@"feeding-fish.png"] forKey:@"meat"];
+    [foodImages setObject:[UIImage imageNamed:@"feeding-grape.png"] forKey:@"fruit"];
+    [foodImages setObject:[UIImage imageNamed:@"feeding-kiwi.png"] forKey:@"fruit"];
+    [foodImages setObject:[UIImage imageNamed:@"feeding-lima beans.png"] forKey:@"cereal"];
+    [foodImages setObject:[UIImage imageNamed:@"feeding-mango.png"] forKey:@""];
+    [foodImages setObject:[UIImage imageNamed:@"feeding-milk.png"] forKey:@""];
+    [foodImages setObject:[UIImage imageNamed:@"feeding-oatmeal.png"] forKey:@""];
+    [foodImages setObject:[UIImage imageNamed:@"feeding-onion.png"] forKey:@""];
+    [foodImages setObject:[UIImage imageNamed:@"feeding-orange juice.png"] forKey:@""];
+    [foodImages setObject:[UIImage imageNamed:@"feeding-orange.png"] forKey:@""];
+    [foodImages setObject:[UIImage imageNamed:@"feeding-papaya.png"] forKey:@""];
+    [foodImages setObject:[UIImage imageNamed:@"feeding-pasta.png"] forKey:@""];
+    [foodImages setObject:[UIImage imageNamed:@"feeding-peach.png"] forKey:@""];
+    [foodImages setObject:[UIImage imageNamed:@"feeding-pear.png"] forKey:@""];
+    [foodImages setObject:[UIImage imageNamed:@"feeding-peas.png"] forKey:@""];
+    [foodImages setObject:[UIImage imageNamed:@"feeding-pineapple.png"] forKey:@""];
+    [foodImages setObject:[UIImage imageNamed:@"feeding-plum.png"] forKey:@""];
+    [foodImages setObject:[UIImage imageNamed:@"feeding-potato.png"] forKey:@""];
+    [foodImages setObject:[UIImage imageNamed:@"feeding-pumpkin.png"] forKey:@""];
+    [foodImages setObject:[UIImage imageNamed:@"feeding-ricebrown.png"] forKey:@""];
+    [foodImages setObject:[UIImage imageNamed:@"feeding-ricewhite.png"] forKey:@""];
+    [foodImages setObject:[UIImage imageNamed:@"feeding-sweet potato.png"] forKey:@""];
+    [foodImages setObject:[UIImage imageNamed:@"feeding-watermelon.png"] forKey:@""];
+
+
+    
+    
+    
+    
+    
     
     [mChooseFoodSlider setContentArray:foodImages];
     [foodImages release];
@@ -181,6 +221,10 @@
 //- (void) navLeftButtonPressed:(id)sender{
 //    [homeRootController switchTo:kHomeViewEntryView withContextInfo:nil];
 //}
+
+- (void) backButtonClicked:(UIButton *)button {
+    [homeRootController switchTo:kHomeViewEntryView withContextInfo:nil];
+}
 
 - (void)OKButtonClicked: (UIButton *)button {
     NSLog(@"%@", @"[feeding] ok button clicked");
@@ -302,16 +346,7 @@
     //load image
     NSMutableArray *foodChosenImages = [[NSMutableArray alloc] init];
     [foodChosenImages addObject:[UIImage imageNamed:@"feedinggrey-apple.png"]];
-    [foodChosenImages addObject:[UIImage imageNamed:@"feedinggrey-blueberry.png"]];
-    
-    [foodChosenImages addObject:[UIImage imageNamed:@"feedinggrey-papaya.png"]];
-    [foodChosenImages addObject:[UIImage imageNamed:@"feedinggrey-kiwi.png"]];
-    [foodChosenImages addObject:[UIImage imageNamed:@"feedinggrey-mango.png"]];
-    [foodChosenImages addObject:[UIImage imageNamed:@"feedinggrey-bread.png"]];
-    [foodChosenImages addObject:[UIImage imageNamed:@"feedinggrey-banana.png"]];
-    [foodChosenImages addObject:[UIImage imageNamed:@"feedinggrey-whiterice.png"]];
-    [foodChosenImages addObject:[UIImage imageNamed:@"feedinggrey-cheerios.png"]];
-    [foodChosenImages addObject:[UIImage imageNamed:@"feedinggrey-pear.png"]];
+xxxxxxxxxxxxx
     
     [mFoodChosenSlider setContentArray:foodChosenImages];
     [foodChosenImages release];
@@ -353,12 +388,15 @@
     [mNavigationBar setDelegate:self];
     [self.view addSubview:mNavigationBar];
      */
-    mBackButton = [[UIButton alloc] initWithFrame:CGRectMake(185, 0, 175, 185)];
+    mBackButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    mBackButton.frame = CGRectMake(233, 0, 87, 72);
+    [mBackButton setImage:[UIImage imageNamed:@"feeding-back.png"] forState:UIControlStateNormal];
+    [self.view addSubview:mBackButton];
+    [mBackButton addTarget:self action:@selector(backButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
 
     
-    
     //create ok button from icons
-    mOKButton = [UIButton buttonWithType:UIButtonTypeCustom];;
+    mOKButton = [UIButton buttonWithType:UIButtonTypeCustom];
     mOKButton.frame = CGRectMake(220, 360, 40, 40);
     [mOKButton setImage:[UIImage imageNamed:@"icons-ok.png"] forState:UIControlStateNormal];
     [self.view addSubview:mOKButton];
@@ -457,6 +495,7 @@
     //[mSummary release];
     [mClock release];
     //[mNavigationBar release];
+    //[mBackButton release];
 }
 
 
