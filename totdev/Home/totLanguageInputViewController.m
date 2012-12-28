@@ -77,7 +77,7 @@
     [self.view addSubview:m_textView];
     
     // Construct m_confirmButton
-    UIButton *aBtn = [[UIButton alloc] initWithFrame:CGRectMake(30, 180, 60, 45)];
+    UIButton *aBtn = [[UIButton alloc] initWithFrame:CGRectMake(65, 180, 60, 45)];
     aBtn.backgroundColor = [UIColor clearColor];
     [aBtn setBackgroundImage: [UIImage imageNamed:@"icons-ok.png"] forState:UIControlStateNormal];
     [aBtn addTarget:self action:@selector(ConfirmButtonClicked) forControlEvents:UIControlEventTouchUpInside];
@@ -87,12 +87,13 @@
     
     // Construct history button
     UIButton *bBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    bBtn.frame = CGRectMake(100, 180, 60, 45);
+    bBtn.frame = CGRectMake(140, 180, 60, 45);
     bBtn.backgroundColor = [UIColor clearColor];
     [bBtn setBackgroundImage: [UIImage imageNamed:@"icons-history.png"] forState:UIControlStateNormal];
     [bBtn addTarget:self action:@selector(ConfirmButtonClicked) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:bBtn];
     
+    /*
     // Construct share button
     UIButton *cBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     cBtn.frame = CGRectMake(180, 180, 60, 45);
@@ -100,6 +101,7 @@
     [cBtn setBackgroundImage: [UIImage imageNamed:@"icons-share.png"] forState:UIControlStateNormal];
     [cBtn addTarget:self action:@selector(ConfirmButtonClicked) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:cBtn];
+    */
     
     // Construct close button
     UIButton *dBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -113,12 +115,11 @@
     m_textView.hidden = YES;
     m_confirmButton.hidden = YES;
     self.view.hidden = YES;
-
 }
 
 - (void)Display
 {
-    /* Display m_textView and set default text */
+    /* Init and display m_textView */
     m_textView.hidden = NO;
     NSString* defaultTxt = @"what did the baby say?"; // define default text
     m_textView.text = defaultTxt;
@@ -130,18 +131,16 @@
 
 - (void)MakeNoView
 {
-    // Remove the Done image added in ConfirmButtonClicked
+    /* Remove the confirmation message added in ConfirmButtonClicked */
     for (UIView *subview in [self.view subviews]) {
         if (subview.tag == 99) {
             [subview removeFromSuperview];
         }
     }
-    
-    // Clear text in m_textView
+    /* Clear text in m_textView */
     m_textView.text = @"";
     m_textView.textColor = [UIColor lightGrayColor];  // make sure next time the default text can be removed once the m_textView is touched
-    
-    // Hide views
+    /* Hide views */
     m_textView.hidden = YES;
     m_confirmButton.hidden = YES;
     self.view.hidden = YES;
@@ -184,7 +183,7 @@
         confirmTxtView.delegate = self;
         confirmTxtView.textAlignment = UITextAlignmentCenter;
         confirmTxtView.backgroundColor = [UIColor clearColor];
-        NSString* defaultTxt = @"Bravo! Tom has learnd 15 workds this week^o^"; // define default text   
+        NSString* defaultTxt = @"Bravo! Tom has learnd 15 words this week^o^"; // define default text   
         confirmTxtView.text = defaultTxt;  // set default text
         confirmTxtView.textColor = [UIColor darkGrayColor]; // set color for default text
         confirmTxtView.tag = 99;
@@ -202,7 +201,6 @@
     } else {
         /* Hide keyboard */
         [self.m_textView resignFirstResponder];
-
         [self MakeNoView];
     }
 }
@@ -267,9 +265,12 @@
 ////
 - (void) CloseButtonClicked
 {
-    //[self MakeNoView];
-    // Clear text in m_textView
+    // Clear text in m_textView and Reset textColor so that textViewShouldBeginEditing can correctly function
     m_textView.text = @"";
+    m_textView.textColor = [UIColor lightGrayColor];
+    
+    //// hide keyboard
+    [self.m_textView resignFirstResponder];
     
     // Hide views
     m_textView.hidden = YES;
