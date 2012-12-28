@@ -10,6 +10,8 @@
 #import "AppDelegate.h"
 #import "../Model/totEventName.h"
 
+#define HORIZ_DISPLACEMENT 0
+
 @implementation totLanguageInputViewController
 
 @synthesize m_textView;
@@ -63,7 +65,7 @@
     [aImgView release];
     
     // Construct m_textField
-    UITextView *aTxtView = [[UITextView alloc] initWithFrame:CGRectMake(20, 25, 225, 150)];
+    UITextView *aTxtView = [[UITextView alloc] initWithFrame:CGRectMake(20+HORIZ_DISPLACEMENT, 25, 225, 150)];
     [aTxtView  setFont: [UIFont fontWithName:@"ArialMT" size:30]];
     aTxtView.editable = YES;
     aTxtView.delegate = self;
@@ -77,7 +79,7 @@
     [self.view addSubview:m_textView];
     
     // Construct m_confirmButton
-    UIButton *aBtn = [[UIButton alloc] initWithFrame:CGRectMake(65, 180, 60, 45)];
+    UIButton *aBtn = [[UIButton alloc] initWithFrame:CGRectMake(65+HORIZ_DISPLACEMENT, 180, 60, 45)];
     aBtn.backgroundColor = [UIColor clearColor];
     [aBtn setBackgroundImage: [UIImage imageNamed:@"icons-ok.png"] forState:UIControlStateNormal];
     [aBtn addTarget:self action:@selector(ConfirmButtonClicked) forControlEvents:UIControlEventTouchUpInside];
@@ -87,7 +89,7 @@
     
     // Construct history button
     UIButton *bBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    bBtn.frame = CGRectMake(140, 180, 60, 45);
+    bBtn.frame = CGRectMake(140+HORIZ_DISPLACEMENT, 180, 60, 45);
     bBtn.backgroundColor = [UIColor clearColor];
     [bBtn setBackgroundImage: [UIImage imageNamed:@"icons-history.png"] forState:UIControlStateNormal];
     [bBtn addTarget:self action:@selector(ConfirmButtonClicked) forControlEvents:UIControlEventTouchUpInside];
@@ -105,7 +107,7 @@
     
     // Construct close button
     UIButton *dBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    dBtn.frame = CGRectMake(215, 10, 32, 31);
+    dBtn.frame = CGRectMake(215+HORIZ_DISPLACEMENT, 10, 32, 31);
     dBtn.backgroundColor = [UIColor clearColor];
     [dBtn setBackgroundImage: [UIImage imageNamed:@"icons-close.png"] forState:UIControlStateNormal];
     [dBtn addTarget:self action:@selector(CloseButtonClicked) forControlEvents:UIControlEventTouchUpInside];
@@ -133,7 +135,7 @@
 {
     /* Remove the confirmation message added in ConfirmButtonClicked */
     for (UIView *subview in [self.view subviews]) {
-        if (subview.tag == 99) {
+        if (subview.tag == 99 || subview.tag == 98) {
             [subview removeFromSuperview];
         }
     }
@@ -177,7 +179,7 @@
         [aImgView release];
         */
         // Display a confirmation message
-        UITextView *confirmTxtView = [[UITextView alloc] initWithFrame:CGRectMake(35, 45, 210, 150)];
+        UITextView *confirmTxtView = [[UITextView alloc] initWithFrame:CGRectMake(30+HORIZ_DISPLACEMENT, 30, 210, 150)];
         [confirmTxtView  setFont: [UIFont fontWithName:@"TrebuchetMS" size:25]];
         confirmTxtView.editable = NO;
         confirmTxtView.delegate = self;
@@ -189,14 +191,21 @@
         confirmTxtView.tag = 99;
         [self.view addSubview:confirmTxtView];
         [confirmTxtView release];
-        
+        // Construct share button
+        UIButton *shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        shareBtn.frame = CGRectMake(110, 130, 60, 45);
+        shareBtn.backgroundColor = [UIColor clearColor];
+        shareBtn.tag = 98;
+        [shareBtn setBackgroundImage: [UIImage imageNamed:@"icons-share.png"] forState:UIControlStateNormal];
+        [shareBtn addTarget:self action:@selector(ConfirmButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:shareBtn];
         
         /* Set timer to call MakeNoView */
-        [NSTimer scheduledTimerWithTimeInterval:1.8f
+        /*[NSTimer scheduledTimerWithTimeInterval:2.0f
                                          target:self
                                        selector:@selector(MakeNoView)
                                        userInfo:nil
-                                        repeats:NO];
+                                        repeats:NO];*/
         [dateFormatter release];
     } else {
         /* Hide keyboard */
@@ -276,6 +285,8 @@
     m_textView.hidden = YES;
     m_confirmButton.hidden = YES;
     self.view.hidden = YES;
+    
+    [self MakeNoView];
 }
 
 @end
