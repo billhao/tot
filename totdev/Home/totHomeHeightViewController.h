@@ -21,10 +21,17 @@
     IBOutlet UITextField *mWeightPlaceHolder;
     IBOutlet UITextField *mHeadPlaceHolder;
     IBOutlet UIButton    *mOKButton;
+    IBOutlet UIButton    *mCloseButton;
     IBOutlet UIButton    *mDatetime;
     IBOutlet UIButton    *mDatetimeImage;
     IBOutlet UIButton    *mSummary;
     IBOutlet UILabel     *mSelectedValue;
+    IBOutlet UIButton    *mLabel0Button; // the top button
+    IBOutlet UIButton    *mLabel1Button;
+    IBOutlet UIButton    *mLabel2Button;
+    IBOutlet UILabel     *mLabel0;
+    IBOutlet UILabel     *mLabel1;
+    IBOutlet UILabel     *mLabel2;
     
     totModel* model;
     
@@ -39,13 +46,21 @@
     bool mStart;
 
     totNavigationBar *mNavigationBar;
+
+    // arrays to save info for three measures
+    NSMutableArray* all_imgs;
+    NSMutableArray* all_numbers;
+    NSMutableArray* all_rulers;
 }
 
 @property (nonatomic, assign) totHomeRootController *homeRootController;
 
 - (void)pickerView:(STHorizontalPicker *)picker didSelectValue:(CGFloat)value;
 - (void)OKButtonClicked: (UIButton *)button;
+- (void)CloseButtonClicked: (UIButton *)button;
 - (void)DatetimeClicked: (UIButton *)button;
+- (void)LabelButtonClicked: (UIButton *)button;
+- (void)setContent:(int)i button:(UIButton*)button label:(UILabel*)label; // set the content of a component (height/weight/hc)
 
 // for date picker
 - (void)showTimePicker;

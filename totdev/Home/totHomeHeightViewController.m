@@ -51,6 +51,17 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    // 0 - height
+    // 1 - weight
+    // 2 - hc
+    all_imgs    = [[NSMutableArray alloc] initWithObjects: [UIImage imageNamed:@"text_height"], [UIImage imageNamed:@"text_weight"], [UIImage imageNamed:@"text_hc"], nil];
+    all_numbers = [[NSMutableArray alloc] initWithObjects: @"", @"", @"", nil];
+    all_rulers  = [[NSMutableArray alloc] initWithObjects: [UIImage imageNamed:@"ruler_height"], [UIImage imageNamed:@"ruler_weight"], [UIImage imageNamed:@"ruler_hc"], nil];
+
+    [self setContent:0 button:mLabel0Button label:mLabel0];
+    [self setContent:1 button:mLabel1Button label:mLabel1];
+    [self setContent:2 button:mLabel2Button label:mLabel2];
+    
     // add bg
     UIImage* img = [UIImage imageNamed:@"weight_bg"];
     UIImageView* bgview = [[UIImageView alloc] initWithImage:img];
@@ -98,13 +109,28 @@
 //    [self.view addSubview:picker_head];
 //    [picker_head release];
 
+    // set appearances for date
+    UIFont* font1 = [UIFont fontWithName:@"Roboto-Regular" size:16.0];
     [mDatetime setTitle:[self getCurrentDate] forState:UIControlStateNormal];
+    [mDatetime.titleLabel setFont:font1];
+    [mDatetime setTitleColor:[UIColor colorWithRed:147.0/255 green:149.0/255 blue:152.0/255 alpha:1] forState:UIControlStateNormal];
+    [mDatetime setTitleColor:[UIColor colorWithRed:147.0/255 green:149.0/255 blue:152.0/255 alpha:1] forState:UIControlStateHighlighted];
     
+    [mLabel0 setFont:font1];
+    [mLabel1 setFont:font1];
+    [mLabel2 setFont:font1];
+    [mLabel0 setTextColor:[UIColor colorWithRed:128.0/255 green:130.0/255 blue:133.0/255 alpha:1]];
+    [mLabel1 setTextColor:[UIColor colorWithRed:128.0/255 green:130.0/255 blue:133.0/255 alpha:1]];
+    [mLabel2 setTextColor:[UIColor colorWithRed:128.0/255 green:130.0/255 blue:133.0/255 alpha:1]];
+
     // set up events
     [mOKButton addTarget:self action:@selector(OKButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [mCloseButton addTarget:self action:@selector(CloseButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [mDatetime addTarget:self action:@selector(DatetimeClicked:) forControlEvents:UIControlEventTouchUpInside];
     [mDatetimeImage addTarget:self action:@selector(DatetimeClicked:) forControlEvents:UIControlEventTouchUpInside];
     [mSummary addTarget:self action:@selector(SummaryClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [mLabel1Button addTarget:self action:@selector(LabelButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [mLabel2Button addTarget:self action:@selector(LabelButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
 
     // set up date picker
     mWidth = self.view.frame.size.width;
@@ -136,6 +162,11 @@
 - (void)pickerView:(STHorizontalPicker *)picker didSelectValue:(CGFloat)value{
     NSLog(@"didSelectValue %f", value);
     mSelectedValue.text = [NSString stringWithFormat:@"%.2f inches",value];
+    
+    // save new value to the array so it will switch when user changes to a different measure (height/weight/hc)
+    int i = mLabel0Button.tag; // get current/top item
+    NSLog(@"item = %d", i);
+    [all_numbers replaceObjectAtIndex:i withObject:[NSString stringWithFormat:@"%.2f inches",value]];
 }
 
 
@@ -144,9 +175,9 @@
     NSLog(@"%@", @"[basic][height] ok button clicked");
     int baby_id = 0;
     NSDate* date = [NSDate date];
-    NSString* height = [[NSString alloc] initWithFormat:@"%.2f", picker_height.currentValue];
-    NSString* weight = [[NSString alloc] initWithFormat:@"%.2f", picker_weight.currentValue];
-    NSString* head   = [[NSString alloc] initWithFormat:@"%.2f", picker_head.currentValue];
+    NSString* height = all_numbers[0];
+    NSString* weight = all_numbers[1];
+    NSString* head   = all_numbers[2];
     [model addEvent:baby_id event:EVENT_BASIC_HEIGHT datetime:date value:height];
     [model addEvent:baby_id event:EVENT_BASIC_WEIGHT datetime:date value:weight];
     [model addEvent:baby_id event:EVENT_BASIC_HEAD datetime:date value:head];
@@ -170,6 +201,10 @@
     [head release];
     [weight release];
     [height release];
+}
+
+- (void)CloseButtonClicked: (UIButton *)button {
+    [homeRootController switchTo:kHomeViewEntryView withContextInfo:nil];
 }
 
 // click on summary, return to home
@@ -219,6 +254,29 @@
     [UIView commitAnimations];
 }
 
+// when user click on one of the two labels at the bottom, switch it with the current/top label
+- (void)LabelButtonClicked: (UIButton *)button {    
+    // switch buttons
+    UILabel* label;
+    if( button == mLabel1Button )
+        label = mLabel1;
+    else if( button == mLabel2Button )
+        label = mLabel2;
+
+    int a = mLabel0Button.tag;
+    int b = button.tag;
+    [self setContent:b button:mLabel0Button label:mLabel0];
+    [self setContent:a button:button label:label];
+
+    // reload picker
+}
+
+- (void)setContent:(int)i button:(UIButton*)button label:(UILabel*)label {
+    button.tag = i;
+    [button setImage:all_imgs[i] forState:UIControlStateNormal];
+    label.text = all_numbers[i];
+}
+
 #pragma mark - totTimerControllerDelegate
 -(void)saveCurrentTime:(NSString*)time {
     NSLog(@"%@", time);
@@ -237,6 +295,9 @@
     // e.g. self.myOutlet = nil;
     [mClock release];
     [mNavigationBar release];
+    [all_imgs release];
+    [all_numbers release];
+    [all_rulers release];
     //[picker_head release];
     //[picker_height release];
     //[picker_weight release];
