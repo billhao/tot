@@ -86,19 +86,29 @@
         mBackground = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
         mBackground.image = [UIImage imageNamed:@"background-diaper.png"];
         
-        mSelectionWet = [[totImageView alloc] initWithFrame:CGRectMake(45, 200, 128, 35)];
-        mSelectionSolid = [[totImageView alloc] initWithFrame:CGRectMake(35, 240, 160, 36)];
-        mSelectionWetSolid = [[totImageView alloc] initWithFrame:CGRectMake(45, 280, 240, 40)];
+        mSelectionWetBox = [[totImageView alloc] initWithFrame:CGRectMake(45, 210, 25, 25)];
+        mSelectionWet = [[totImageView alloc] initWithFrame:CGRectMake(80, 205, 200, 30)];
+        
+        mSelectionSolidBox = [[totImageView alloc] initWithFrame:CGRectMake(45, 250, 25, 25)];
+        mSelectionSolid = [[totImageView alloc] initWithFrame:CGRectMake(80, 245, 200, 30)];
+
+        mSelectionWetSolidBox = [[totImageView alloc] initWithFrame:CGRectMake(45, 290, 25, 25)];
+        mSelectionWetSolid = [[totImageView alloc] initWithFrame:CGRectMake(80, 285, 200, 30)];
+        
+
         mSelectionWet.mTag = SELECTION_WET;
         mSelectionSolid.mTag = SELECTION_SOLID;
         mSelectionWetSolid.mTag = SELECTION_WETSOLID;
         
-        [mSelectionWet imageFilePath:@"icons-diaper-wet.png"];
+        [mSelectionWet imageFilePath:@"icons-diaper-wet_new.jpg"];
         [mSelectionWet setDelegate:self];
-        [mSelectionSolid imageFilePath:@"icons-diaper-solid.png"];
+        [mSelectionSolid imageFilePath:@"icons-diaper-solid_new.jpg"];
         [mSelectionSolid setDelegate:self];
-        [mSelectionWetSolid imageFilePath:@"icons-diaper-wetandsolid.png"];
+        [mSelectionWetSolid imageFilePath:@"icons-diaper-wetandsolid_new.jpg"];
         [mSelectionWetSolid setDelegate:self];
+        [mSelectionWetBox imageFilePath:@"icons-checkbox.png"];
+        [mSelectionSolidBox imageFilePath:@"icons-checkbox.png"];
+        [mSelectionWetSolidBox imageFilePath:@"icons-checkbox.png"];
 
         mClock = [[totTimerController alloc] init];
         mClock.view.frame = CGRectMake((frame.size.width-mClock.mWidth)/2, frame.size.height, mClock.mWidth, mClock.mHeight);
@@ -133,9 +143,10 @@
     
     mTimeLabel = [UIButton buttonWithType:UIButtonTypeCustom];
     [mTimeLabel setTag:BUTTON_TIME];
-    [mTimeLabel setFrame:CGRectMake(40, 155, 200, 40)];
+    [mTimeLabel setFrame:CGRectMake(60, 155, 200, 40)];
     [mTimeLabel setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [mTimeLabel setTitle:timeDesc forState:UIControlStateNormal];
+    [mTimeLabel.titleLabel setFont:[UIFont fontWithName:@"Roboto-Regular" size:20.0]];
     [mTimeLabel addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:mTimeLabel];
     
@@ -143,6 +154,9 @@
     [self addSubview:mSelectionWet];
     [self addSubview:mSelectionSolid];
     [self addSubview:mSelectionWetSolid];
+    [self addSubview:mSelectionWetBox];
+    [self addSubview:mSelectionWetSolidBox];
+    [self addSubview:mSelectionSolidBox];
     [self addSubview:mSelectedIcon];
     
     // Control section

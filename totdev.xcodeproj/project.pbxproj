@@ -160,9 +160,6 @@
 		3F454D2E1555A84700AC66EE /* homeHeightViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F454D2C1555A84700AC66EE /* homeHeightViewController.xib */; };
 		3F7CDB5D157ABDCE009CD3D7 /* totdb.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 3F7CDB5C157ABDCE009CD3D7 /* totdb.sqlite */; };
 		3FB31B801638ECEC0063DAC6 /* background-diaper.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FB31B7F1638ECEC0063DAC6 /* background-diaper.png */; };
-		3FB31B841638ED610063DAC6 /* icons-diaper-solid.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FB31B811638ED600063DAC6 /* icons-diaper-solid.png */; };
-		3FB31B851638ED610063DAC6 /* icons-diaper-wet.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FB31B821638ED610063DAC6 /* icons-diaper-wet.png */; };
-		3FB31B861638ED610063DAC6 /* icons-diaper-wetandsolid.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FB31B831638ED610063DAC6 /* icons-diaper-wetandsolid.png */; };
 		3FB31B8A1638ED770063DAC6 /* icons-history.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FB31B871638ED770063DAC6 /* icons-history.png */; };
 		3FB31B8B1638ED770063DAC6 /* icons-ok.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FB31B881638ED770063DAC6 /* icons-ok.png */; };
 		3FB31B8C1638ED770063DAC6 /* icons-share.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FB31B891638ED770063DAC6 /* icons-share.png */; };
@@ -186,6 +183,10 @@
 		3FE62AF915E8A6E50079CE54 /* totNewBabyController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FE62AF715E8A6E50079CE54 /* totNewBabyController.xib */; };
 		3FE9B5F7154A303100199AAF /* test_Model.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FE9B5F6154A303100199AAF /* test_Model.m */; };
 		3FE9B5FA154A313700199AAF /* totSliderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FE9B5F9154A313700199AAF /* totSliderView.m */; };
+		8E3AE8D1168D531E00E4CFAE /* icons-checkbox.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E3AE8CD168D531E00E4CFAE /* icons-checkbox.png */; };
+		8E3AE8D2168D531E00E4CFAE /* icons-diaper-solid_new.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8E3AE8CE168D531E00E4CFAE /* icons-diaper-solid_new.jpg */; };
+		8E3AE8D3168D531E00E4CFAE /* icons-diaper-wet_new.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8E3AE8CF168D531E00E4CFAE /* icons-diaper-wet_new.jpg */; };
+		8E3AE8D4168D531E00E4CFAE /* icons-diaper-wetandsolid_new.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8E3AE8D0168D531E00E4CFAE /* icons-diaper-wetandsolid_new.jpg */; };
 		8E4D50E41614CC3A00890621 /* boy.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8E4D50E21614CC3A00890621 /* boy.jpg */; };
 		8E4D50E51614CC3A00890621 /* girl.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8E4D50E31614CC3A00890621 /* girl.jpg */; };
 		8E5F1208163F3A170040036D /* totReviewLineChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E5F1207163F3A170040036D /* totReviewLineChart.m */; };
@@ -465,9 +466,6 @@
 		3F454D2C1555A84700AC66EE /* homeHeightViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = homeHeightViewController.xib; path = Resources/homeHeightViewController.xib; sourceTree = "<group>"; };
 		3F7CDB5C157ABDCE009CD3D7 /* totdb.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = totdb.sqlite; sourceTree = "<group>"; };
 		3FB31B7F1638ECEC0063DAC6 /* background-diaper.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "background-diaper.png"; path = "Resources/Home/background-diaper.png"; sourceTree = "<group>"; };
-		3FB31B811638ED600063DAC6 /* icons-diaper-solid.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icons-diaper-solid.png"; path = "Resources/Home/icons-diaper-solid.png"; sourceTree = "<group>"; };
-		3FB31B821638ED610063DAC6 /* icons-diaper-wet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icons-diaper-wet.png"; path = "Resources/Home/icons-diaper-wet.png"; sourceTree = "<group>"; };
-		3FB31B831638ED610063DAC6 /* icons-diaper-wetandsolid.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icons-diaper-wetandsolid.png"; path = "Resources/Home/icons-diaper-wetandsolid.png"; sourceTree = "<group>"; };
 		3FB31B871638ED770063DAC6 /* icons-history.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icons-history.png"; path = "Resources/Home/icons-history.png"; sourceTree = "<group>"; };
 		3FB31B881638ED770063DAC6 /* icons-ok.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icons-ok.png"; path = "Resources/Home/icons-ok.png"; sourceTree = "<group>"; };
 		3FB31B891638ED770063DAC6 /* icons-share.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icons-share.png"; path = "Resources/Home/icons-share.png"; sourceTree = "<group>"; };
@@ -498,6 +496,10 @@
 		3FE9B5F6154A303100199AAF /* test_Model.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = test_Model.m; path = Tests/test_Model.m; sourceTree = "<group>"; };
 		3FE9B5F8154A313700199AAF /* totSliderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totSliderView.h; path = Utility/totSliderView.h; sourceTree = "<group>"; };
 		3FE9B5F9154A313700199AAF /* totSliderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totSliderView.m; path = Utility/totSliderView.m; sourceTree = "<group>"; };
+		8E3AE8CD168D531E00E4CFAE /* icons-checkbox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icons-checkbox.png"; path = "Resources/Home/icons-checkbox.png"; sourceTree = "<group>"; };
+		8E3AE8CE168D531E00E4CFAE /* icons-diaper-solid_new.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "icons-diaper-solid_new.jpg"; path = "Resources/Home/icons-diaper-solid_new.jpg"; sourceTree = "<group>"; };
+		8E3AE8CF168D531E00E4CFAE /* icons-diaper-wet_new.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "icons-diaper-wet_new.jpg"; path = "Resources/Home/icons-diaper-wet_new.jpg"; sourceTree = "<group>"; };
+		8E3AE8D0168D531E00E4CFAE /* icons-diaper-wetandsolid_new.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "icons-diaper-wetandsolid_new.jpg"; path = "Resources/Home/icons-diaper-wetandsolid_new.jpg"; sourceTree = "<group>"; };
 		8E4D50E21614CC3A00890621 /* boy.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = boy.jpg; path = Resources/Home/boy.jpg; sourceTree = "<group>"; };
 		8E4D50E31614CC3A00890621 /* girl.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = girl.jpg; path = Resources/Home/girl.jpg; sourceTree = "<group>"; };
 		8E5F1206163F3A170040036D /* totReviewLineChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totReviewLineChart.h; path = Review/totReviewLineChart.h; sourceTree = "<group>"; };
@@ -925,12 +927,13 @@
 		8E632EBF16268D8500072D89 /* Diaper */ = {
 			isa = PBXGroup;
 			children = (
+				8E3AE8CD168D531E00E4CFAE /* icons-checkbox.png */,
+				8E3AE8CE168D531E00E4CFAE /* icons-diaper-solid_new.jpg */,
+				8E3AE8CF168D531E00E4CFAE /* icons-diaper-wet_new.jpg */,
+				8E3AE8D0168D531E00E4CFAE /* icons-diaper-wetandsolid_new.jpg */,
 				3FB31B871638ED770063DAC6 /* icons-history.png */,
 				3FB31B881638ED770063DAC6 /* icons-ok.png */,
 				3FB31B891638ED770063DAC6 /* icons-share.png */,
-				3FB31B811638ED600063DAC6 /* icons-diaper-solid.png */,
-				3FB31B821638ED610063DAC6 /* icons-diaper-wet.png */,
-				3FB31B831638ED610063DAC6 /* icons-diaper-wetandsolid.png */,
 				3FB31B7F1638ECEC0063DAC6 /* background-diaper.png */,
 			);
 			name = Diaper;
@@ -1496,9 +1499,6 @@
 				243630E2162742960097B17D /* feeding-blank.png in Resources */,
 				8EFC1F8816277E9D003CF0FE /* return.png in Resources */,
 				3FB31B801638ECEC0063DAC6 /* background-diaper.png in Resources */,
-				3FB31B841638ED610063DAC6 /* icons-diaper-solid.png in Resources */,
-				3FB31B851638ED610063DAC6 /* icons-diaper-wet.png in Resources */,
-				3FB31B861638ED610063DAC6 /* icons-diaper-wetandsolid.png in Resources */,
 				3FB31B8A1638ED770063DAC6 /* icons-history.png in Resources */,
 				3FB31B8B1638ED770063DAC6 /* icons-ok.png in Resources */,
 				3FB31B8C1638ED770063DAC6 /* icons-share.png in Resources */,
@@ -1553,6 +1553,10 @@
 				3FD29CA1168D3C0500978B51 /* Roboto-Bold.ttf in Resources */,
 				3FD29CA2168D3C0500978B51 /* Roboto-Italic.ttf in Resources */,
 				3FD29CA3168D3C0500978B51 /* Roboto-Regular.ttf in Resources */,
+				8E3AE8D1168D531E00E4CFAE /* icons-checkbox.png in Resources */,
+				8E3AE8D2168D531E00E4CFAE /* icons-diaper-solid_new.jpg in Resources */,
+				8E3AE8D3168D531E00E4CFAE /* icons-diaper-wet_new.jpg in Resources */,
+				8E3AE8D4168D531E00E4CFAE /* icons-diaper-wetandsolid_new.jpg in Resources */,
 				2453E21C168D3F95001820B6 /* feeding-back.png in Resources */,
 				2453E223168D4EA5001820B6 /* feeding-milk.png in Resources */,
 				2453E226168D4EBE001820B6 /* feedinggrey-milk.png in Resources */,
