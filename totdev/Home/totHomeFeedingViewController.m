@@ -353,6 +353,9 @@
     [mNavigationBar setDelegate:self];
     [self.view addSubview:mNavigationBar];
      */
+    mBackButton = [[UIButton alloc] initWithFrame:CGRectMake(185, 0, 175, 185)];
+
+    
     
     //create ok button from icons
     mOKButton = [UIButton buttonWithType:UIButtonTypeCustom];;

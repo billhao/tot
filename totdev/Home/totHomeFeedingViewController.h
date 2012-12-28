@@ -29,6 +29,7 @@
     totSliderView* mFoodChosenSlider;
     
     //totNavigationBar* mNavigationBar;
+    UIButton* mBackButton;
     
     UIButton* mOKButton;
     UIButton* mDatetime;
