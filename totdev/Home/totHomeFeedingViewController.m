@@ -89,19 +89,257 @@
     [mChooseFoodSlider setTagOffset:BUTTON_CHOOSEFOOD_MIN];
     
     //load image
-    NSMutableArray *foodImages = [[NSMutableArray alloc] init];
+    //NSMutableArray *foodImages = [[NSMutableArray alloc] init];
     // [recentlyUsedImages addObject:[UIImage imageNamed:@"feedingcategories-cereal"]];
     // should use plist file to load
-    [foodImages addObject:[UIImage imageNamed:@"feeding-apple.png"]];
-    [foodImages addObject:[UIImage imageNamed:@"feeding-blueberry.png"]];
-    [foodImages addObject:[UIImage imageNamed:@"feeding-papaya.png"]];
-    [foodImages addObject:[UIImage imageNamed:@"feeding-kiwi.png"]];
-    [foodImages addObject:[UIImage imageNamed:@"feeding-mango.png"]];
-    [foodImages addObject:[UIImage imageNamed:@"feeding-bread.png"]];
-    [foodImages addObject:[UIImage imageNamed:@"feeding-banana.png"]];
-    [foodImages addObject:[UIImage imageNamed:@"feeding-ricewhite.png"]];
-    [foodImages addObject:[UIImage imageNamed:@"feeding-cheerios.png"]];
-    [foodImages addObject:[UIImage imageNamed:@"feeding-peas.png"]];
+    //[foodImages addObject:[UIImage imageNamed:@"feeding-apple.png"]];
+    //NSMutableDictionary *foodImages = [NSMutableDictionary dictionaryWithCapacity:1];
+    NSMutableArray *foodImages = [[NSMutableArray alloc] init];
+    
+    NSMutableDictionary *foodItem = [[NSMutableDictionary alloc] init];
+    [foodItem setObject:[UIImage imageNamed:@"feeding-apple.png"] forKey:@"file"];
+    [foodItem setObject:@"apple" forKey:@"name"];
+    [foodItem setObject:@"fruit" forKey:@"category"];
+    [foodImages addObject:foodItem];
+    [foodItem setObject:[UIImage imageNamed:@"feeding-apricot.png"] forKey:@"file"];
+    [foodItem setObject:@"apricot" forKey:@"name"];
+    [foodItem setObject:@"fruit" forKey:@"category"];
+
+    
+    [foodImages setObject:[UIImage imageNamed:@"feeding-apricot.png"] forKey:@"fruit"];
+    [foodImages setObject:[UIImage imageNamed:@"feeding-artichoke.png"] forKey:@"vegetable"];
+    [foodImages addObject:foodItem];
+    [foodItem setObject:[UIImage imageNamed:@"feeding-"] forKey:@"file"];
+    [foodItem setObject:@"" forKey:@"name"];
+    [foodItem setObject:@"" forKey:@"category"];
+    [foodImages addObject:foodItem];
+    [foodImages setObject:[UIImage imageNamed:@"feeding-asparagus.png"] forKey:@"vegetable"];
+    [foodImages addObject:foodItem];
+    [foodItem setObject:[UIImage imageNamed:@"feeding-"] forKey:@"file"];
+    [foodItem setObject:@"" forKey:@"name"];
+    [foodItem setObject:@"" forKey:@"category"];
+    [foodImages addObject:foodItem];
+    [foodImages setObject:[UIImage imageNamed:@"feeding-avocado.png"] forKey:@"fruit"];
+    [foodImages addObject:foodItem];
+    [foodItem setObject:[UIImage imageNamed:@"feeding-"] forKey:@"file"];
+    [foodItem setObject:@"" forKey:@"name"];
+    [foodItem setObject:@"" forKey:@"category"];
+    [foodImages addObject:foodItem];
+    [foodImages setObject:[UIImage imageNamed:@"feeding-banana.png"] forKey:@"fruit"];
+    [foodImages addObject:foodItem];
+    [foodItem setObject:[UIImage imageNamed:@"feeding-"] forKey:@"file"];
+    [foodItem setObject:@"" forKey:@"name"];
+    [foodItem setObject:@"" forKey:@"category"];
+    [foodImages addObject:foodItem];
+    [foodImages setObject:[UIImage imageNamed:@"feeding-beets.png"] forKey:@"vegetable"];
+    [foodImages addObject:foodItem];
+    [foodItem setObject:[UIImage imageNamed:@"feeding-"] forKey:@"file"];
+    [foodItem setObject:@"" forKey:@"name"];
+    [foodItem setObject:@"" forKey:@"category"];
+    [foodImages addObject:foodItem];
+    [foodImages setObject:[UIImage imageNamed:@"feeding-blueberry.png"] forKey:@"fruit"];
+    [foodImages addObject:foodItem];
+    [foodItem setObject:[UIImage imageNamed:@"feeding-"] forKey:@"file"];
+    [foodItem setObject:@"" forKey:@"name"];
+    [foodItem setObject:@"" forKey:@"category"];
+    [foodImages addObject:foodItem];
+    [foodImages setObject:[UIImage imageNamed:@"feeding-bread.png"] forKey:@"cereal"];
+    [foodImages addObject:foodItem];
+    [foodItem setObject:[UIImage imageNamed:@"feeding-"] forKey:@"file"];
+    [foodItem setObject:@"" forKey:@"name"];
+    [foodItem setObject:@"" forKey:@"category"];
+    [foodImages addObject:foodItem];
+    [foodImages setObject:[UIImage imageNamed:@"feeding-broccoli.png"] forKey:@"vegetable"];
+    [foodImages addObject:foodItem];
+    [foodItem setObject:[UIImage imageNamed:@"feeding-"] forKey:@"file"];
+    [foodItem setObject:@"" forKey:@"name"];
+    [foodItem setObject:@"" forKey:@"category"];
+    [foodImages addObject:foodItem];
+    [foodImages setObject:[UIImage imageNamed:@"feeding-brussel sprout.png"] forKey:@"vegetable"];
+    [foodImages addObject:foodItem];
+    [foodItem setObject:[UIImage imageNamed:@"feeding-"] forKey:@"file"];
+    [foodItem setObject:@"" forKey:@"name"];
+    [foodItem setObject:@"" forKey:@"category"];
+    [foodImages addObject:foodItem];
+    [foodImages setObject:[UIImage imageNamed:@"feeding-califlower.png"] forKey:@"vegetable"];
+    [foodImages addObject:foodItem];
+    [foodItem setObject:[UIImage imageNamed:@"feeding-"] forKey:@"file"];
+    [foodItem setObject:@"" forKey:@"name"];
+    [foodItem setObject:@"" forKey:@"category"];
+    [foodImages addObject:foodItem];
+    [foodImages setObject:[UIImage imageNamed:@"feeding-carrot.png"] forKey:@"vegetable"];
+    [foodImages addObject:foodItem];
+    [foodItem setObject:[UIImage imageNamed:@"feeding-"] forKey:@"file"];
+    [foodItem setObject:@"" forKey:@"name"];
+    [foodItem setObject:@"" forKey:@"category"];
+    [foodImages addObject:foodItem];
+    [foodImages setObject:[UIImage imageNamed:@"feeding-cheerios.png"] forKey:@"cereal"];
+    [foodImages addObject:foodItem];
+    [foodItem setObject:[UIImage imageNamed:@"feeding-"] forKey:@"file"];
+    [foodItem setObject:@"" forKey:@"name"];
+    [foodItem setObject:@"" forKey:@"category"];
+    [foodImages addObject:foodItem];
+    [foodImages setObject:[UIImage imageNamed:@"feeding-cheese.png"] forKey:@"dairy"];
+    [foodImages addObject:foodItem];
+    [foodItem setObject:[UIImage imageNamed:@"feeding-"] forKey:@"file"];
+    [foodItem setObject:@"" forKey:@"name"];
+    [foodItem setObject:@"" forKey:@"category"];
+    [foodImages addObject:foodItem];
+    [foodImages setObject:[UIImage imageNamed:@"feeding-cucumber.png"] forKey:@"vegetable"];
+    [foodImages addObject:foodItem];
+    [foodItem setObject:[UIImage imageNamed:@"feeding-"] forKey:@"file"];
+    [foodItem setObject:@"" forKey:@"name"];
+    [foodItem setObject:@"" forKey:@"category"];
+    [foodImages addObject:foodItem];
+    [foodImages setObject:[UIImage imageNamed:@"feeding-dry beans.png"] forKey:@"cereal"];
+    [foodImages addObject:foodItem];
+    [foodItem setObject:[UIImage imageNamed:@"feeding-"] forKey:@"file"];
+    [foodItem setObject:@"" forKey:@"name"];
+    [foodItem setObject:@"" forKey:@"category"];
+    [foodImages addObject:foodItem];
+    [foodImages setObject:[UIImage imageNamed:@"feeding-eggplant.png"] forKey:@"vegetable"];
+    [foodImages addObject:foodItem];
+    [foodItem setObject:[UIImage imageNamed:@"feeding-"] forKey:@"file"];
+    [foodItem setObject:@"" forKey:@"name"];
+    [foodItem setObject:@"" forKey:@"category"];
+    [foodImages addObject:foodItem];
+    [foodImages setObject:[UIImage imageNamed:@"feeding-fish.png"] forKey:@"meat"];
+    [foodImages addObject:foodItem];
+    [foodItem setObject:[UIImage imageNamed:@"feeding-"] forKey:@"file"];
+    [foodItem setObject:@"" forKey:@"name"];
+    [foodItem setObject:@"" forKey:@"category"];
+    [foodImages addObject:foodItem];
+    [foodImages setObject:[UIImage imageNamed:@"feeding-grape.png"] forKey:@"fruit"];
+    [foodImages addObject:foodItem];
+    [foodItem setObject:[UIImage imageNamed:@"feeding-"] forKey:@"file"];
+    [foodItem setObject:@"" forKey:@"name"];
+    [foodItem setObject:@"" forKey:@"category"];
+    [foodImages addObject:foodItem];
+    [foodImages setObject:[UIImage imageNamed:@"feeding-kiwi.png"] forKey:@"fruit"];
+    [foodImages addObject:foodItem];
+    [foodItem setObject:[UIImage imageNamed:@"feeding-"] forKey:@"file"];
+    [foodItem setObject:@"" forKey:@"name"];
+    [foodItem setObject:@"" forKey:@"category"];
+    [foodImages addObject:foodItem];
+    [foodImages setObject:[UIImage imageNamed:@"feeding-lima beans.png"] forKey:@"cereal"];
+    [foodImages addObject:foodItem];
+    [foodItem setObject:[UIImage imageNamed:@"feeding-"] forKey:@"file"];
+    [foodItem setObject:@"" forKey:@"name"];
+    [foodItem setObject:@"" forKey:@"category"];
+    [foodImages addObject:foodItem];
+    [foodImages setObject:[UIImage imageNamed:@"feeding-mango.png"] forKey:@"fruit"];
+    [foodImages addObject:foodItem];
+    [foodItem setObject:[UIImage imageNamed:@"feeding-"] forKey:@"file"];
+    [foodItem setObject:@"" forKey:@"name"];
+    [foodItem setObject:@"" forKey:@"category"];
+    [foodImages addObject:foodItem];
+    [foodImages setObject:[UIImage imageNamed:@"feeding-milk.png"] forKey:@"dairy"];
+    [foodImages addObject:foodItem];
+    [foodItem setObject:[UIImage imageNamed:@"feeding-"] forKey:@"file"];
+    [foodItem setObject:@"" forKey:@"name"];
+    [foodItem setObject:@"" forKey:@"category"];
+    [foodImages addObject:foodItem];
+    [foodImages setObject:[UIImage imageNamed:@"feeding-oatmeal.png"] forKey:@"cereal"];
+    [foodImages addObject:foodItem];
+    [foodItem setObject:[UIImage imageNamed:@"feeding-"] forKey:@"file"];
+    [foodItem setObject:@"" forKey:@"name"];
+    [foodItem setObject:@"" forKey:@"category"];
+    [foodImages addObject:foodItem];
+    [foodImages setObject:[UIImage imageNamed:@"feeding-onion.png"] forKey:@"vegetable"];
+    [foodImages addObject:foodItem];
+    [foodItem setObject:[UIImage imageNamed:@"feeding-"] forKey:@"file"];
+    [foodItem setObject:@"" forKey:@"name"];
+    [foodItem setObject:@"" forKey:@"category"];
+    [foodImages addObject:foodItem];
+    [foodImages setObject:[UIImage imageNamed:@"feeding-orange juice.png"] forKey:@"juice"];
+    [foodImages addObject:foodItem];
+    [foodItem setObject:[UIImage imageNamed:@"feeding-"] forKey:@"file"];
+    [foodItem setObject:@"" forKey:@"name"];
+    [foodItem setObject:@"" forKey:@"category"];
+    [foodImages addObject:foodItem];
+    [foodImages setObject:[UIImage imageNamed:@"feeding-orange.png"] forKey:@"fruit"];
+    [foodImages addObject:foodItem];
+    [foodItem setObject:[UIImage imageNamed:@"feeding-"] forKey:@"file"];
+    [foodItem setObject:@"" forKey:@"name"];
+    [foodItem setObject:@"" forKey:@"category"];
+    [foodImages addObject:foodItem];
+    [foodImages setObject:[UIImage imageNamed:@"feeding-papaya.png"] forKey:@"fruit"];
+    [foodImages addObject:foodItem];
+    [foodItem setObject:[UIImage imageNamed:@"feeding-"] forKey:@"file"];
+    [foodItem setObject:@"" forKey:@"name"];
+    [foodItem setObject:@"" forKey:@"category"];
+    [foodImages addObject:foodItem];
+    [foodImages setObject:[UIImage imageNamed:@"feeding-pasta.png"] forKey:@"cereal"];
+    [foodImages addObject:foodItem];
+    [foodItem setObject:[UIImage imageNamed:@"feeding-"] forKey:@"file"];
+    [foodItem setObject:@"" forKey:@"name"];
+    [foodItem setObject:@"" forKey:@"category"];
+    [foodImages addObject:foodItem];
+    [foodImages setObject:[UIImage imageNamed:@"feeding-peach.png"] forKey:@"fruit"];
+    [foodImages addObject:foodItem];
+    [foodItem setObject:[UIImage imageNamed:@"feeding-"] forKey:@"file"];
+    [foodItem setObject:@"" forKey:@"name"];
+    [foodItem setObject:@"" forKey:@"category"];
+    [foodImages addObject:foodItem];
+    [foodImages setObject:[UIImage imageNamed:@"feeding-pear.png"] forKey:@"fruit"];
+    [foodImages addObject:foodItem];
+    [foodItem setObject:[UIImage imageNamed:@"feeding-"] forKey:@"file"];
+    [foodItem setObject:@"" forKey:@"name"];
+    [foodItem setObject:@"" forKey:@"category"];
+    [foodImages addObject:foodItem];
+    [foodImages setObject:[UIImage imageNamed:@"feeding-peas.png"] forKey:@"cereal"];
+    [foodImages addObject:foodItem];
+    [foodItem setObject:[UIImage imageNamed:@"feeding-"] forKey:@"file"];
+    [foodItem setObject:@"" forKey:@"name"];
+    [foodItem setObject:@"" forKey:@"category"];
+    [foodImages addObject:foodItem];
+    [foodImages setObject:[UIImage imageNamed:@"feeding-pineapple.png"] forKey:@"fruit"];
+    [foodImages addObject:foodItem];
+    [foodItem setObject:[UIImage imageNamed:@"feeding-"] forKey:@"file"];
+    [foodItem setObject:@"" forKey:@"name"];
+    [foodItem setObject:@"" forKey:@"category"];
+    [foodImages addObject:foodItem];
+    [foodImages setObject:[UIImage imageNamed:@"feeding-plum.png"] forKey:@"fruit"];
+    [foodImages addObject:foodItem];
+    [foodItem setObject:[UIImage imageNamed:@"feeding-"] forKey:@"file"];
+    [foodItem setObject:@"" forKey:@"name"];
+    [foodItem setObject:@"" forKey:@"category"];
+    [foodImages addObject:foodItem];
+    [foodImages setObject:[UIImage imageNamed:@"feeding-potato.png"] forKey:@"cereal"];
+    [foodImages addObject:foodItem];
+    [foodItem setObject:[UIImage imageNamed:@"feeding-"] forKey:@"file"];
+    [foodItem setObject:@"" forKey:@"name"];
+    [foodItem setObject:@"" forKey:@"category"];
+    [foodImages addObject:foodItem];
+    [foodImages setObject:[UIImage imageNamed:@"feeding-pumpkin.png"] forKey:@"vegetable"];
+    [foodImages addObject:foodItem];
+    [foodItem setObject:[UIImage imageNamed:@"feeding-"] forKey:@"file"];
+    [foodItem setObject:@"" forKey:@"name"];
+    [foodItem setObject:@"" forKey:@"category"];
+    [foodImages addObject:foodItem];
+    [foodImages setObject:[UIImage imageNamed:@"feeding-ricebrown.png"] forKey:@"cereal"];
+    [foodImages addObject:foodItem];
+    [foodItem setObject:[UIImage imageNamed:@"feeding-"] forKey:@"file"];
+    [foodItem setObject:@"" forKey:@"name"];
+    [foodItem setObject:@"" forKey:@"category"];
+    [foodImages addObject:foodItem];
+    [foodImages setObject:[UIImage imageNamed:@"feeding-ricewhite.png"] forKey:@"cereal"];
+    [foodImages addObject:foodItem];
+    [foodItem setObject:[UIImage imageNamed:@"feeding-"] forKey:@"file"];
+    [foodItem setObject:@"" forKey:@"name"];
+    [foodItem setObject:@"" forKey:@"category"];
+    [foodImages addObject:foodItem];
+    [foodImages setObject:[UIImage imageNamed:@"feeding-sweet potato.png"] forKey:@"cereal"];
+    [foodImages addObject:foodItem];
+    [foodItem setObject:[UIImage imageNamed:@"feeding-"] forKey:@"file"];
+    [foodItem setObject:@"" forKey:@"name"];
+    [foodItem setObject:@"" forKey:@"category"];
+    [foodImages addObject:foodItem];
+    [foodImages setObject:[UIImage imageNamed:@"feeding-watermelon.png"] forKey:@"fruit"];
+  
+    [foodItem release];
+
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"category == %@", @"fruit"];
     
     [mChooseFoodSlider setContentArray:foodImages];
     [foodImages release];
@@ -172,16 +410,18 @@
     
     if(tag >= BUTTON_FOODCHOSEN_MIN && tag <= BUTTON_FOODCHOSEN_MAX){
         
+        [homeRootController switchTo:kHomeViewEntryView withContextInfo:nil];
         
         return;
     }
 }
 
-- (void) navLeftButtonPressed:(id)sender{
+//- (void) navLeftButtonPressed:(id)sender{
+//    [homeRootController switchTo:kHomeViewEntryView withContextInfo:nil];
+//}
+
+- (void) backButtonClicked:(UIButton *)button {
     [homeRootController switchTo:kHomeViewEntryView withContextInfo:nil];
-    
-    //need to do clean up
-    //xxxxxxxxxx
 }
 
 - (void)OKButtonClicked: (UIButton *)button {
@@ -304,16 +544,7 @@
     //load image
     NSMutableArray *foodChosenImages = [[NSMutableArray alloc] init];
     [foodChosenImages addObject:[UIImage imageNamed:@"feedinggrey-apple.png"]];
-    [foodChosenImages addObject:[UIImage imageNamed:@"feedinggrey-blueberry.png"]];
-    
-    [foodChosenImages addObject:[UIImage imageNamed:@"feedinggrey-papaya.png"]];
-    [foodChosenImages addObject:[UIImage imageNamed:@"feedinggrey-kiwi.png"]];
-    [foodChosenImages addObject:[UIImage imageNamed:@"feedinggrey-mango.png"]];
-    [foodChosenImages addObject:[UIImage imageNamed:@"feedinggrey-bread.png"]];
-    [foodChosenImages addObject:[UIImage imageNamed:@"feedinggrey-banana.png"]];
-    [foodChosenImages addObject:[UIImage imageNamed:@"feedinggrey-whiterice.png"]];
-    [foodChosenImages addObject:[UIImage imageNamed:@"feedinggrey-cheerios.png"]];
-    [foodChosenImages addObject:[UIImage imageNamed:@"feedinggrey-pear.png"]];
+    //xxxxxxxxxxxxx
     
     [mFoodChosenSlider setContentArray:foodChosenImages];
     [foodChosenImages release];
@@ -348,14 +579,22 @@
     //create title navigation bar
     //navigationBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
     //[self.view addSubview:navigationBar];
+    /*
     mNavigationBar= [[totNavigationBar alloc] initWithFrame:CGRectMake(0, 0, 320, 40)];
     [mNavigationBar setLeftButtonImg:@"return.png"];
     [mNavigationBar setBackgroundColor:[UIColor whiteColor]];
     [mNavigationBar setDelegate:self];
     [self.view addSubview:mNavigationBar];
+     */
+    mBackButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    mBackButton.frame = CGRectMake(233, 0, 87, 72);
+    [mBackButton setImage:[UIImage imageNamed:@"feeding-back.png"] forState:UIControlStateNormal];
+    [self.view addSubview:mBackButton];
+    [mBackButton addTarget:self action:@selector(backButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+
     
     //create ok button from icons
-    mOKButton = [UIButton buttonWithType:UIButtonTypeCustom];;
+    mOKButton = [UIButton buttonWithType:UIButtonTypeCustom];
     mOKButton.frame = CGRectMake(220, 360, 40, 40);
     [mOKButton setImage:[UIImage imageNamed:@"icons-ok.png"] forState:UIControlStateNormal];
     [self.view addSubview:mOKButton];
@@ -453,7 +692,8 @@
     //[mDatetime release];
     //[mSummary release];
     [mClock release];
-    [mNavigationBar release];
+    //[mNavigationBar release];
+    //[mBackButton release];
 }
 
 

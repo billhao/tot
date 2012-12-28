@@ -88,7 +88,7 @@
     int buttonW[8] = {117, 120, 102, 67, 112, 85, 90, 65};
     int buttonH[8] = {127, 97, 275, 87, 90, 87, 92, 75};
     int buttonX[8] = {7, 200, 5, 240, 112, 225, 225, 132};
-    int buttonY[8] = {22, 45, 150, 142, 247, 230, 318, 85};
+    int buttonY[8] = {22, 45, 150, 142, 238, 230, 318, 85};
     const char *buttonName[8] = {
         "language.png", 
         "sleep.png", 

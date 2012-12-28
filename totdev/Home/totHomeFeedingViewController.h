@@ -28,7 +28,8 @@
     totSliderView* mCategoriesSlider;
     totSliderView* mFoodChosenSlider;
     
-    totNavigationBar* mNavigationBar;
+    //totNavigationBar* mNavigationBar;
+    UIButton* mBackButton;
     
     UIButton* mOKButton;
     UIButton* mDatetime;
@@ -70,6 +71,7 @@
 - (void)pickerView:(STHorizontalPicker *)picker didSelectValue:(CGFloat)value;
 - (void)OKButtonClicked: (UIButton *)button;
 - (void)SummaryButtonClicked: (UIButton *)button;
+- (void)backButtonClicked: (UIButton *)button;
 
 
 @end

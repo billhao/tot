@@ -97,6 +97,11 @@
 		243630E1162742960097B17D /* feeding-01.png in Resources */ = {isa = PBXBuildFile; fileRef = 243630DF162742960097B17D /* feeding-01.png */; };
 		243630E2162742960097B17D /* feeding-blank.png in Resources */ = {isa = PBXBuildFile; fileRef = 243630E0162742960097B17D /* feeding-blank.png */; };
 		24433B4B166840D000C27389 /* feeding-popup.png in Resources */ = {isa = PBXBuildFile; fileRef = 24433B4A166840D000C27389 /* feeding-popup.png */; };
+		2453E21C168D3F95001820B6 /* feeding-back.png in Resources */ = {isa = PBXBuildFile; fileRef = 2453E21B168D3F95001820B6 /* feeding-back.png */; };
+		2453E223168D4EA5001820B6 /* feeding-milk.png in Resources */ = {isa = PBXBuildFile; fileRef = 2453E222168D4EA5001820B6 /* feeding-milk.png */; };
+		2453E226168D4EBE001820B6 /* feedinggrey-milk.png in Resources */ = {isa = PBXBuildFile; fileRef = 2453E225168D4EBE001820B6 /* feedinggrey-milk.png */; };
+		2453E228168D5044001820B6 /* feeding-orange juice.png in Resources */ = {isa = PBXBuildFile; fileRef = 2453E227168D5044001820B6 /* feeding-orange juice.png */; };
+		2453E22A168D5051001820B6 /* feedinggrey-orange juice.png in Resources */ = {isa = PBXBuildFile; fileRef = 2453E229168D5051001820B6 /* feedinggrey-orange juice.png */; };
 		3F186A5E1569CCEC00FC9E2C /* home_background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F186A5D1569CCEC00FC9E2C /* home_background@2x.png */; };
 		3F2216DE1571758F000E86F3 /* totLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F2216DC1571758F000E86F3 /* totLoginController.m */; };
 		3F2216DF1571758F000E86F3 /* totLoginController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F2216DD1571758F000E86F3 /* totLoginController.xib */; };
@@ -155,9 +160,6 @@
 		3F454D2E1555A84700AC66EE /* homeHeightViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F454D2C1555A84700AC66EE /* homeHeightViewController.xib */; };
 		3F7CDB5D157ABDCE009CD3D7 /* totdb.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 3F7CDB5C157ABDCE009CD3D7 /* totdb.sqlite */; };
 		3FB31B801638ECEC0063DAC6 /* background-diaper.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FB31B7F1638ECEC0063DAC6 /* background-diaper.png */; };
-		3FB31B841638ED610063DAC6 /* icons-diaper-solid.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FB31B811638ED600063DAC6 /* icons-diaper-solid.png */; };
-		3FB31B851638ED610063DAC6 /* icons-diaper-wet.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FB31B821638ED610063DAC6 /* icons-diaper-wet.png */; };
-		3FB31B861638ED610063DAC6 /* icons-diaper-wetandsolid.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FB31B831638ED610063DAC6 /* icons-diaper-wetandsolid.png */; };
 		3FB31B8A1638ED770063DAC6 /* icons-history.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FB31B871638ED770063DAC6 /* icons-history.png */; };
 		3FB31B8B1638ED770063DAC6 /* icons-ok.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FB31B881638ED770063DAC6 /* icons-ok.png */; };
 		3FB31B8C1638ED770063DAC6 /* icons-share.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FB31B891638ED770063DAC6 /* icons-share.png */; };
@@ -188,6 +190,10 @@
 		3FE62AF915E8A6E50079CE54 /* totNewBabyController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FE62AF715E8A6E50079CE54 /* totNewBabyController.xib */; };
 		3FE9B5F7154A303100199AAF /* test_Model.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FE9B5F6154A303100199AAF /* test_Model.m */; };
 		3FE9B5FA154A313700199AAF /* totSliderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FE9B5F9154A313700199AAF /* totSliderView.m */; };
+		8E3AE8D1168D531E00E4CFAE /* icons-checkbox.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E3AE8CD168D531E00E4CFAE /* icons-checkbox.png */; };
+		8E3AE8D2168D531E00E4CFAE /* icons-diaper-solid_new.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8E3AE8CE168D531E00E4CFAE /* icons-diaper-solid_new.jpg */; };
+		8E3AE8D3168D531E00E4CFAE /* icons-diaper-wet_new.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8E3AE8CF168D531E00E4CFAE /* icons-diaper-wet_new.jpg */; };
+		8E3AE8D4168D531E00E4CFAE /* icons-diaper-wetandsolid_new.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8E3AE8D0168D531E00E4CFAE /* icons-diaper-wetandsolid_new.jpg */; };
 		8E4D50E41614CC3A00890621 /* boy.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8E4D50E21614CC3A00890621 /* boy.jpg */; };
 		8E4D50E51614CC3A00890621 /* girl.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8E4D50E31614CC3A00890621 /* girl.jpg */; };
 		8E5F1208163F3A170040036D /* totReviewLineChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E5F1207163F3A170040036D /* totReviewLineChart.m */; };
@@ -398,6 +404,11 @@
 		243630DF162742960097B17D /* feeding-01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feeding-01.png"; path = "Resources/Home/feeding/feeding-01.png"; sourceTree = "<group>"; };
 		243630E0162742960097B17D /* feeding-blank.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feeding-blank.png"; path = "Resources/Home/feeding/feeding-blank.png"; sourceTree = "<group>"; };
 		24433B4A166840D000C27389 /* feeding-popup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feeding-popup.png"; path = "Resources/Home/feeding/feeding-popup.png"; sourceTree = "<group>"; };
+		2453E21B168D3F95001820B6 /* feeding-back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feeding-back.png"; path = "Resources/Home/feeding/feeding-back.png"; sourceTree = "<group>"; };
+		2453E222168D4EA5001820B6 /* feeding-milk.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feeding-milk.png"; path = "Resources/Home/feeding/foodicons/feeding-milk.png"; sourceTree = "<group>"; };
+		2453E225168D4EBE001820B6 /* feedinggrey-milk.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feedinggrey-milk.png"; path = "Resources/Home/feeding/foodicons grey/feedinggrey-milk.png"; sourceTree = "<group>"; };
+		2453E227168D5044001820B6 /* feeding-orange juice.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feeding-orange juice.png"; path = "Resources/Home/feeding/foodicons/feeding-orange juice.png"; sourceTree = "<group>"; };
+		2453E229168D5051001820B6 /* feedinggrey-orange juice.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feedinggrey-orange juice.png"; path = "Resources/Home/feeding/foodicons grey/feedinggrey-orange juice.png"; sourceTree = "<group>"; };
 		3F186A5D1569CCEC00FC9E2C /* home_background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "home_background@2x.png"; path = "Resources/Home/home_background@2x.png"; sourceTree = "<group>"; };
 		3F2216DB1571758F000E86F3 /* totLoginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = totLoginController.h; sourceTree = "<group>"; };
 		3F2216DC1571758F000E86F3 /* totLoginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = totLoginController.m; sourceTree = "<group>"; };
@@ -462,9 +473,6 @@
 		3F454D2C1555A84700AC66EE /* homeHeightViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = homeHeightViewController.xib; path = Resources/homeHeightViewController.xib; sourceTree = "<group>"; };
 		3F7CDB5C157ABDCE009CD3D7 /* totdb.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = totdb.sqlite; sourceTree = "<group>"; };
 		3FB31B7F1638ECEC0063DAC6 /* background-diaper.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "background-diaper.png"; path = "Resources/Home/background-diaper.png"; sourceTree = "<group>"; };
-		3FB31B811638ED600063DAC6 /* icons-diaper-solid.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icons-diaper-solid.png"; path = "Resources/Home/icons-diaper-solid.png"; sourceTree = "<group>"; };
-		3FB31B821638ED610063DAC6 /* icons-diaper-wet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icons-diaper-wet.png"; path = "Resources/Home/icons-diaper-wet.png"; sourceTree = "<group>"; };
-		3FB31B831638ED610063DAC6 /* icons-diaper-wetandsolid.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icons-diaper-wetandsolid.png"; path = "Resources/Home/icons-diaper-wetandsolid.png"; sourceTree = "<group>"; };
 		3FB31B871638ED770063DAC6 /* icons-history.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icons-history.png"; path = "Resources/Home/icons-history.png"; sourceTree = "<group>"; };
 		3FB31B881638ED770063DAC6 /* icons-ok.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icons-ok.png"; path = "Resources/Home/icons-ok.png"; sourceTree = "<group>"; };
 		3FB31B891638ED770063DAC6 /* icons-share.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icons-share.png"; path = "Resources/Home/icons-share.png"; sourceTree = "<group>"; };
@@ -501,6 +509,10 @@
 		3FE9B5F6154A303100199AAF /* test_Model.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = test_Model.m; path = Tests/test_Model.m; sourceTree = "<group>"; };
 		3FE9B5F8154A313700199AAF /* totSliderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totSliderView.h; path = Utility/totSliderView.h; sourceTree = "<group>"; };
 		3FE9B5F9154A313700199AAF /* totSliderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totSliderView.m; path = Utility/totSliderView.m; sourceTree = "<group>"; };
+		8E3AE8CD168D531E00E4CFAE /* icons-checkbox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icons-checkbox.png"; path = "Resources/Home/icons-checkbox.png"; sourceTree = "<group>"; };
+		8E3AE8CE168D531E00E4CFAE /* icons-diaper-solid_new.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "icons-diaper-solid_new.jpg"; path = "Resources/Home/icons-diaper-solid_new.jpg"; sourceTree = "<group>"; };
+		8E3AE8CF168D531E00E4CFAE /* icons-diaper-wet_new.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "icons-diaper-wet_new.jpg"; path = "Resources/Home/icons-diaper-wet_new.jpg"; sourceTree = "<group>"; };
+		8E3AE8D0168D531E00E4CFAE /* icons-diaper-wetandsolid_new.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "icons-diaper-wetandsolid_new.jpg"; path = "Resources/Home/icons-diaper-wetandsolid_new.jpg"; sourceTree = "<group>"; };
 		8E4D50E21614CC3A00890621 /* boy.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = boy.jpg; path = Resources/Home/boy.jpg; sourceTree = "<group>"; };
 		8E4D50E31614CC3A00890621 /* girl.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = girl.jpg; path = Resources/Home/girl.jpg; sourceTree = "<group>"; };
 		8E5F1206163F3A170040036D /* totReviewLineChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totReviewLineChart.h; path = Review/totReviewLineChart.h; sourceTree = "<group>"; };
@@ -707,6 +719,7 @@
 		24363034162741C70097B17D /* feeding */ = {
 			isa = PBXGroup;
 			children = (
+				2453E21B168D3F95001820B6 /* feeding-back.png */,
 				24433B4A166840D000C27389 /* feeding-popup.png */,
 				243630DF162742960097B17D /* feeding-01.png */,
 				243630E0162742960097B17D /* feeding-blank.png */,
@@ -725,6 +738,8 @@
 		24363041162742160097B17D /* foodicons_color */ = {
 			isa = PBXGroup;
 			children = (
+				2453E227168D5044001820B6 /* feeding-orange juice.png */,
+				2453E222168D4EA5001820B6 /* feeding-milk.png */,
 				243630431627425E0097B17D /* feeding-apple.png */,
 				243630441627425E0097B17D /* feeding-apricot.png */,
 				243630451627425E0097B17D /* feeding-artichoke.png */,
@@ -771,6 +786,8 @@
 		243630421627421E0097B17D /* foodicons_gray */ = {
 			isa = PBXGroup;
 			children = (
+				2453E229168D5051001820B6 /* feedinggrey-orange juice.png */,
+				2453E225168D4EBE001820B6 /* feedinggrey-milk.png */,
 				24363093162742820097B17D /* feedinggrey-apple.png */,
 				24363094162742820097B17D /* feedinggrey-apricot.png */,
 				24363095162742820097B17D /* feedinggrey-artichoke.png */,
@@ -929,12 +946,13 @@
 		8E632EBF16268D8500072D89 /* Diaper */ = {
 			isa = PBXGroup;
 			children = (
+				8E3AE8CD168D531E00E4CFAE /* icons-checkbox.png */,
+				8E3AE8CE168D531E00E4CFAE /* icons-diaper-solid_new.jpg */,
+				8E3AE8CF168D531E00E4CFAE /* icons-diaper-wet_new.jpg */,
+				8E3AE8D0168D531E00E4CFAE /* icons-diaper-wetandsolid_new.jpg */,
 				3FB31B871638ED770063DAC6 /* icons-history.png */,
 				3FB31B881638ED770063DAC6 /* icons-ok.png */,
 				3FB31B891638ED770063DAC6 /* icons-share.png */,
-				3FB31B811638ED600063DAC6 /* icons-diaper-solid.png */,
-				3FB31B821638ED610063DAC6 /* icons-diaper-wet.png */,
-				3FB31B831638ED610063DAC6 /* icons-diaper-wetandsolid.png */,
 				3FB31B7F1638ECEC0063DAC6 /* background-diaper.png */,
 			);
 			name = Diaper;
@@ -1500,9 +1518,6 @@
 				243630E2162742960097B17D /* feeding-blank.png in Resources */,
 				8EFC1F8816277E9D003CF0FE /* return.png in Resources */,
 				3FB31B801638ECEC0063DAC6 /* background-diaper.png in Resources */,
-				3FB31B841638ED610063DAC6 /* icons-diaper-solid.png in Resources */,
-				3FB31B851638ED610063DAC6 /* icons-diaper-wet.png in Resources */,
-				3FB31B861638ED610063DAC6 /* icons-diaper-wetandsolid.png in Resources */,
 				3FB31B8A1638ED770063DAC6 /* icons-history.png in Resources */,
 				3FB31B8B1638ED770063DAC6 /* icons-ok.png in Resources */,
 				3FB31B8C1638ED770063DAC6 /* icons-share.png in Resources */,
