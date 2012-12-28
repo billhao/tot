@@ -140,6 +140,7 @@
     
     // Clear text in m_textView
     m_textView.text = @"";
+    m_textView.textColor = [UIColor lightGrayColor];  // make sure next time the default text can be removed once the m_textView is touched
     
     // Hide views
     m_textView.hidden = YES;
@@ -150,7 +151,7 @@
 - (void)ConfirmButtonClicked
 {
     /* Save text into database */
-    if(m_textView.hasText == YES) {
+    if(m_textView.hasText == YES && m_textView.textColor != [UIColor lightGrayColor]) {
         /* Get current date */
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
