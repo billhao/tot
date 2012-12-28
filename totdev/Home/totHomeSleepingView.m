@@ -63,10 +63,42 @@
         [mReadyToSleepBckgrnd setDelegate:self];
         [mSleepingBckgrnd imageFilePath:@"backgrounds-sleepduring.png"];
         [mSleepingBckgrnd setDelegate:self];
-
+        
         [self setBackgroundColor:[UIColor clearColor]];
     }
     return self;
+}
+
+- (void)timerHandler {
+    static bool timer_show_up = false;
+    if (mState == NOT_SLEEP) {
+        timer_show_up = false;
+        return;
+    }
+    
+    if (timer_show_up) {
+        // retrieve from db the starting time
+        AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+        totModel *model = [delegate getDataModel];
+
+        NSDate *now = [NSDate date];
+
+        NSArray *events = [model getEvent:delegate.baby.babyID event:EVENT_BASIC_SLEEP limit:1];
+        totEvent *event = (totEvent*)[events objectAtIndex:0];
+        NSDate *event_date = event.datetime;
+
+        NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+        NSDateComponents *components = [calendar components:NSHourCalendarUnit | NSMinuteCalendarUnit
+                                                   fromDate:event_date
+                                                     toDate:now
+                                                    options:0];
+        NSString *duration = [NSString stringWithFormat:@"Zzz %d min", components.hour*60+components.minute];
+        [mTimeLabel setTitle:duration forState:UIControlStateNormal];
+        [calendar release];
+    } else {
+        [mTimeLabel setTitle:@"Awake" forState:UIControlStateNormal];
+    }
+    timer_show_up = !timer_show_up;
 }
 
 #pragma mark - totImageView delegate
@@ -178,6 +210,7 @@
             if (!mUseTimePicker)
                 [self findCurrentTime];
             [self saveTimeToDatabase:NO];
+            [mSleepTimer invalidate];
             break;
         default:
             break;
@@ -185,6 +218,13 @@
 }
 
 - (void)showSleepingView {
+    // add timer
+    mSleepTimer = [NSTimer scheduledTimerWithTimeInterval:2
+                                                   target:self
+                                                 selector:@selector(timerHandler)
+                                                 userInfo:nil
+                                                  repeats:YES];
+    
     [self insertSubview:mSleepingBckgrnd belowSubview:mClock.view];
     
     //mCancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -204,8 +244,9 @@
     mTimeLabel = [UIButton buttonWithType:UIButtonTypeCustom];
     [mTimeLabel setTag:BUTTON_END];
     [mTimeLabel setTitle:@"Awake" forState:UIControlStateNormal];
+    [mTimeLabel.titleLabel setFont:[UIFont fontWithName:@"Roboto-Regular" size:14.0]];
     [mTimeLabel setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [mTimeLabel setFrame:CGRectMake(210, 50, 70, 50)];
+    [mTimeLabel setFrame:CGRectMake(215, 50, 70, 50)];
     [mTimeLabel addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self insertSubview:mTimeLabel aboveSubview:mSleepingBckgrnd];
     
@@ -216,10 +257,20 @@
     [mSleepingBckgrnd removeFromSuperview];
     [mTimeLabel removeFromSuperview];
     [mCancelButton removeFromSuperview];
+    
+    [mSleepTimer invalidate];
+    
     self.hidden = YES;
 }
 
 - (void)showNotSleepView {
+    // add timer
+    mSleepTimer = [NSTimer scheduledTimerWithTimeInterval:2
+                                                   target:self
+                                                 selector:@selector(timerHandler)
+                                                 userInfo:nil
+                                                  repeats:YES];
+    
     [self insertSubview:mReadyToSleepBckgrnd belowSubview:mClock.view];
     
     //mCancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -251,6 +302,9 @@
     [mCancelButton removeFromSuperview];
     [mEditButton removeFromSuperview];
     [mLabelBckgrnd removeFromSuperview];
+    
+    [mSleepTimer invalidate];
+    
     self.hidden = YES;
 }
 
