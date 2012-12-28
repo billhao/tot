@@ -170,6 +170,7 @@
 		3FD29CA1168D3C0500978B51 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3FD29C9E168D3C0500978B51 /* Roboto-Bold.ttf */; };
 		3FD29CA2168D3C0500978B51 /* Roboto-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3FD29C9F168D3C0500978B51 /* Roboto-Italic.ttf */; };
 		3FD29CA3168D3C0500978B51 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3FD29CA0168D3C0500978B51 /* Roboto-Regular.ttf */; };
+		3FD29CAC168D3F0E00978B51 /* backgrounds-language.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FD29CAB168D3F0E00978B51 /* backgrounds-language.png */; };
 		3FE55A26164BA050008F02DD /* activity_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FE55A1E164BA050008F02DD /* activity_selected.png */; };
 		3FE55A27164BA050008F02DD /* activity.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FE55A1F164BA050008F02DD /* activity.png */; };
 		3FE55A28164BA050008F02DD /* home_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FE55A20164BA050008F02DD /* home_selected.png */; };
@@ -474,6 +475,7 @@
 		3FD29C9E168D3C0500978B51 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Bold.ttf"; path = "Resources/Fonts/Roboto-Bold.ttf"; sourceTree = "<group>"; };
 		3FD29C9F168D3C0500978B51 /* Roboto-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Italic.ttf"; path = "Resources/Fonts/Roboto-Italic.ttf"; sourceTree = "<group>"; };
 		3FD29CA0168D3C0500978B51 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Regular.ttf"; path = "Resources/Fonts/Roboto-Regular.ttf"; sourceTree = "<group>"; };
+		3FD29CAB168D3F0E00978B51 /* backgrounds-language.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "backgrounds-language.png"; sourceTree = "<group>"; };
 		3FE55A1E164BA050008F02DD /* activity_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = activity_selected.png; path = Resources/Tab/activity_selected.png; sourceTree = "<group>"; };
 		3FE55A1F164BA050008F02DD /* activity.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = activity.png; path = Resources/Tab/activity.png; sourceTree = "<group>"; };
 		3FE55A20164BA050008F02DD /* home_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = home_selected.png; path = Resources/Tab/home_selected.png; sourceTree = "<group>"; };
@@ -509,7 +511,6 @@
 		CE5C09FB154CCFDB00D41114 /* totAlbumViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totAlbumViewController.m; path = Utility/totAlbumViewController.m; sourceTree = "<group>"; };
 		CEDB78B7155107C300805CC8 /* totImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = totImageCache.h; sourceTree = "<group>"; };
 		CEDB78B8155107C300805CC8 /* totImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = totImageCache.m; sourceTree = "<group>"; };
-		CEF81123167997D30017BE82 /* backgrounds-language.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "backgrounds-language.png"; sourceTree = "<group>"; };
 		EF0D6BD01555A7700027F012 /* totHomeSleepingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totHomeSleepingView.h; path = Home/totHomeSleepingView.h; sourceTree = "<group>"; };
 		EF0D6BD11555A7700027F012 /* totHomeSleepingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totHomeSleepingView.m; path = Home/totHomeSleepingView.m; sourceTree = "<group>"; };
 		EF0D6BD41555AE930027F012 /* diaper.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = diaper.png; path = Resources/Home/diaper.png; sourceTree = "<group>"; };
@@ -1246,7 +1247,7 @@
 		EFFB60981558493D006C4C80 /* Language */ = {
 			isa = PBXGroup;
 			children = (
-				CEF81123167997D30017BE82 /* backgrounds-language.png */,
+				3FD29CAB168D3F0E00978B51 /* backgrounds-language.png */,
 				8EC7A8331655A19A0022AC93 /* done-01.png */,
 				8EC7A8311655A1430022AC93 /* icons-language.png */,
 			);
