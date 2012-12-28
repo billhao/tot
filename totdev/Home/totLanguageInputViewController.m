@@ -191,6 +191,7 @@
         [self.view addSubview:confirmTxtView];
         [confirmTxtView release];
         
+        
         /* Set timer to call MakeNoView */
         [NSTimer scheduledTimerWithTimeInterval:1.8f
                                          target:self
