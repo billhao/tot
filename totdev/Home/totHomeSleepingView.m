@@ -246,7 +246,7 @@
     [mTimeLabel setTitle:@"Awake" forState:UIControlStateNormal];
     [mTimeLabel.titleLabel setFont:[UIFont fontWithName:@"Roboto-Regular" size:14.0]];
     [mTimeLabel setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [mTimeLabel setFrame:CGRectMake(215, 50, 70, 50)];
+    [mTimeLabel setFrame:CGRectMake(200, 50, 120, 50)];
     [mTimeLabel addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self insertSubview:mTimeLabel aboveSubview:mSleepingBckgrnd];
     

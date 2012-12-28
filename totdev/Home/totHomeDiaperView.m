@@ -86,22 +86,29 @@
         mBackground = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
         mBackground.image = [UIImage imageNamed:@"background-diaper.png"];
         
-        mSelectionWet = [[totImageView alloc] initWithFrame:CGRectMake(80, 200, 128, 35)];
-        mSelectionSolid = [[totImageView alloc] initWithFrame:CGRectMake(36, 240, 158, 38)];
-        mSelectionWetSolid = [[totImageView alloc] initWithFrame:CGRectMake(45, 282, 248, 39)];
-        mSelectionWetBox = [[totImageView alloc] initWithFrame:CGRectMake(45, 200, 32, 32)];
+        mSelectionWetBox = [[totImageView alloc] initWithFrame:CGRectMake(45, 210, 25, 25)];
+        mSelectionWet = [[totImageView alloc] initWithFrame:CGRectMake(80, 205, 200, 30)];
+        
+        mSelectionSolidBox = [[totImageView alloc] initWithFrame:CGRectMake(45, 250, 25, 25)];
+        mSelectionSolid = [[totImageView alloc] initWithFrame:CGRectMake(80, 245, 200, 30)];
+
+        mSelectionWetSolidBox = [[totImageView alloc] initWithFrame:CGRectMake(45, 290, 25, 25)];
+        mSelectionWetSolid = [[totImageView alloc] initWithFrame:CGRectMake(80, 285, 200, 30)];
+        
 
         mSelectionWet.mTag = SELECTION_WET;
         mSelectionSolid.mTag = SELECTION_SOLID;
         mSelectionWetSolid.mTag = SELECTION_WETSOLID;
         
-        [mSelectionWet imageFilePath:@"icons-diaper-wet_new.png"];
+        [mSelectionWet imageFilePath:@"icons-diaper-wet_new.jpg"];
         [mSelectionWet setDelegate:self];
-        [mSelectionSolid imageFilePath:@"icons-diaper-solid_new.png"];
+        [mSelectionSolid imageFilePath:@"icons-diaper-solid_new.jpg"];
         [mSelectionSolid setDelegate:self];
-        [mSelectionWetSolid imageFilePath:@"icons-diaper-wetandsolid_new.png"];
+        [mSelectionWetSolid imageFilePath:@"icons-diaper-wetandsolid_new.jpg"];
         [mSelectionWetSolid setDelegate:self];
         [mSelectionWetBox imageFilePath:@"icons-checkbox.png"];
+        [mSelectionSolidBox imageFilePath:@"icons-checkbox.png"];
+        [mSelectionWetSolidBox imageFilePath:@"icons-checkbox.png"];
 
         mClock = [[totTimerController alloc] init];
         mClock.view.frame = CGRectMake((frame.size.width-mClock.mWidth)/2, frame.size.height, mClock.mWidth, mClock.mHeight);
@@ -148,6 +155,8 @@
     [self addSubview:mSelectionSolid];
     [self addSubview:mSelectionWetSolid];
     [self addSubview:mSelectionWetBox];
+    [self addSubview:mSelectionWetSolidBox];
+    [self addSubview:mSelectionSolidBox];
     [self addSubview:mSelectedIcon];
     
     // Control section

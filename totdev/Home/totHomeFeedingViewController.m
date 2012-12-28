@@ -172,17 +172,15 @@
     
     if(tag >= BUTTON_FOODCHOSEN_MIN && tag <= BUTTON_FOODCHOSEN_MAX){
         
+        [homeRootController switchTo:kHomeViewEntryView withContextInfo:nil];
         
         return;
     }
 }
 
-- (void) navLeftButtonPressed:(id)sender{
-    [homeRootController switchTo:kHomeViewEntryView withContextInfo:nil];
-    
-    //need to do clean up
-    //xxxxxxxxxx
-}
+//- (void) navLeftButtonPressed:(id)sender{
+//    [homeRootController switchTo:kHomeViewEntryView withContextInfo:nil];
+//}
 
 - (void)OKButtonClicked: (UIButton *)button {
     NSLog(@"%@", @"[feeding] ok button clicked");
@@ -348,11 +346,16 @@
     //create title navigation bar
     //navigationBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
     //[self.view addSubview:navigationBar];
+    /*
     mNavigationBar= [[totNavigationBar alloc] initWithFrame:CGRectMake(0, 0, 320, 40)];
     [mNavigationBar setLeftButtonImg:@"return.png"];
     [mNavigationBar setBackgroundColor:[UIColor whiteColor]];
     [mNavigationBar setDelegate:self];
     [self.view addSubview:mNavigationBar];
+     */
+    mBackButton = [[UIButton alloc] initWithFrame:CGRectMake(185, 0, 175, 185)];
+
+    
     
     //create ok button from icons
     mOKButton = [UIButton buttonWithType:UIButtonTypeCustom];;
@@ -453,7 +456,7 @@
     //[mDatetime release];
     //[mSummary release];
     [mClock release];
-    [mNavigationBar release];
+    //[mNavigationBar release];
 }
 
 

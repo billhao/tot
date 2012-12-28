@@ -31,7 +31,10 @@
     totImageView * mSelectionWet;
     totImageView * mSelectionSolid;
     totImageView * mSelectionWetSolid;
+
     totImageView * mSelectionWetBox;
+    totImageView * mSelectionSolidBox;
+    totImageView * mSelectionWetSolidBox;
     
     UIButton * mControlShare;
     UIButton * mControlHistory;
