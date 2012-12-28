@@ -57,13 +57,14 @@
     self.view.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:.5];
     
     // Add the message cloud into m_topView
-    UIImageView *aImgView = [[UIImageView alloc] initWithFrame:CGRectMake(14.4, 8, 291.2, 250)];
-    aImgView.image = [UIImage imageNamed:@"icons-language.png"];
+    //UIImageView *aImgView = [[UIImageView alloc] initWithFrame:CGRectMake(14.4, 8, 291.2, 250)];
+    UIImageView *aImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 482)];
+    aImgView.image = [UIImage imageNamed:@"backgrounds-language.png"];
     [self.view addSubview:aImgView];
     [aImgView release];
     
     // Construct m_textField
-    UITextView *aTxtView = [[UITextView alloc] initWithFrame:CGRectMake(35, 25, 250, 150)];
+    UITextView *aTxtView = [[UITextView alloc] initWithFrame:CGRectMake(20, 25, 225, 150)];
     [aTxtView  setFont: [UIFont fontWithName:@"ArialMT" size:30]];
     aTxtView.editable = YES;
     aTxtView.delegate = self;
@@ -77,7 +78,7 @@
     [self.view addSubview:m_textView];
     
     // Construct m_confirmButton
-    UIButton *aBtn = [[UIButton alloc] initWithFrame:CGRectMake(50, 185, 60, 45)];
+    UIButton *aBtn = [[UIButton alloc] initWithFrame:CGRectMake(30, 180, 60, 45)];
     aBtn.backgroundColor = [UIColor clearColor];
     [aBtn setBackgroundImage: [UIImage imageNamed:@"icons-ok.png"] forState:UIControlStateNormal];
     [aBtn addTarget:self action:@selector(ConfirmButtonClicked) forControlEvents:UIControlEventTouchUpInside];
@@ -87,7 +88,7 @@
     
     // Construct history button
     UIButton *bBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    bBtn.frame = CGRectMake(130, 185, 60, 45);
+    bBtn.frame = CGRectMake(100, 180, 60, 45);
     bBtn.backgroundColor = [UIColor clearColor];
     [bBtn setBackgroundImage: [UIImage imageNamed:@"icons-history.png"] forState:UIControlStateNormal];
     [bBtn addTarget:self action:@selector(ConfirmButtonClicked) forControlEvents:UIControlEventTouchUpInside];
@@ -95,11 +96,19 @@
     
     // Construct share button
     UIButton *cBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    cBtn.frame = CGRectMake(210, 185, 60, 45);
+    cBtn.frame = CGRectMake(180, 180, 60, 45);
     cBtn.backgroundColor = [UIColor clearColor];
     [cBtn setBackgroundImage: [UIImage imageNamed:@"icons-share.png"] forState:UIControlStateNormal];
     [cBtn addTarget:self action:@selector(ConfirmButtonClicked) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:cBtn];
+    
+    // Construct close button
+    UIButton *dBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    dBtn.frame = CGRectMake(215, 10, 32, 31);
+    dBtn.backgroundColor = [UIColor clearColor];
+    [dBtn setBackgroundImage: [UIImage imageNamed:@"icons-close.png"] forState:UIControlStateNormal];
+    [dBtn addTarget:self action:@selector(CloseButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:dBtn];
     
     //Initially hide all the views
     m_textView.hidden = YES;
@@ -162,11 +171,26 @@
         [self.m_textView resignFirstResponder];
         
         /* Add Done image */
-        UIImageView *aImgView = [[UIImageView alloc] initWithFrame:CGRectMake(80, 56, 170, 80)];
+        /*UIImageView *aImgView = [[UIImageView alloc] initWithFrame:CGRectMake(80, 56, 170, 80)];
         aImgView.image = [UIImage imageNamed:@"done-01.png"];
         aImgView.tag = 99;
         [self.view addSubview:aImgView];
         [aImgView release];
+        */
+        // Display a confirmation message
+        UITextView *confirmTxtView = [[UITextView alloc] initWithFrame:CGRectMake(35, 45, 210, 150)];
+        [confirmTxtView  setFont: [UIFont fontWithName:@"TrebuchetMS" size:25]];
+        confirmTxtView.editable = NO;
+        confirmTxtView.delegate = self;
+        confirmTxtView.textAlignment = UITextAlignmentCenter;
+        confirmTxtView.backgroundColor = [UIColor clearColor];
+        NSString* defaultTxt = @"Bravo! Tom has learnd 15 workds this week^o^"; // define default text   
+        confirmTxtView.text = defaultTxt;  // set default text
+        confirmTxtView.textColor = [UIColor darkGrayColor]; // set color for default text
+        confirmTxtView.tag = 99;
+        [self.view addSubview:confirmTxtView];
+        [confirmTxtView release];
+        
         
         /* Set timer to call MakeNoView */
         [NSTimer scheduledTimerWithTimeInterval:1.8f
@@ -229,7 +253,7 @@
     return YES;
 }
 
-////
+//// define the action when the textview is selected for editing
 - (BOOL) textViewShouldBeginEditing:(UITextView *)textView
 {
     if (self.m_textView.textColor == [UIColor lightGrayColor]) {
@@ -238,6 +262,19 @@
     }
     
     return YES;
+}
+
+////
+- (void) CloseButtonClicked
+{
+    //[self MakeNoView];
+    // Clear text in m_textView
+    m_textView.text = @"";
+    
+    // Hide views
+    m_textView.hidden = YES;
+    m_confirmButton.hidden = YES;
+    self.view.hidden = YES;
 }
 
 @end

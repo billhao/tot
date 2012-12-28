@@ -196,6 +196,7 @@
 		CE5C09FC154CCFDB00D41114 /* moviePlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5C09F9154CCFDB00D41114 /* moviePlayerViewController.m */; };
 		CE5C09FD154CCFDB00D41114 /* totAlbumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5C09FB154CCFDB00D41114 /* totAlbumViewController.m */; };
 		CEDB78B9155107C300805CC8 /* totImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDB78B8155107C300805CC8 /* totImageCache.m */; };
+		CEF81124167997D30017BE82 /* backgrounds-language.png in Resources */ = {isa = PBXBuildFile; fileRef = CEF81123167997D30017BE82 /* backgrounds-language.png */; };
 		EF0D6BD21555A7700027F012 /* totHomeSleepingView.m in Sources */ = {isa = PBXBuildFile; fileRef = EF0D6BD11555A7700027F012 /* totHomeSleepingView.m */; };
 		EF0D6BDD1555AE930027F012 /* diaper.png in Resources */ = {isa = PBXBuildFile; fileRef = EF0D6BD41555AE930027F012 /* diaper.png */; };
 		EF0D6BDE1555AE930027F012 /* food.png in Resources */ = {isa = PBXBuildFile; fileRef = EF0D6BD51555AE930027F012 /* food.png */; };
@@ -507,6 +508,7 @@
 		CE5C09FB154CCFDB00D41114 /* totAlbumViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totAlbumViewController.m; path = Utility/totAlbumViewController.m; sourceTree = "<group>"; };
 		CEDB78B7155107C300805CC8 /* totImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = totImageCache.h; sourceTree = "<group>"; };
 		CEDB78B8155107C300805CC8 /* totImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = totImageCache.m; sourceTree = "<group>"; };
+		CEF81123167997D30017BE82 /* backgrounds-language.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "backgrounds-language.png"; sourceTree = "<group>"; };
 		EF0D6BD01555A7700027F012 /* totHomeSleepingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totHomeSleepingView.h; path = Home/totHomeSleepingView.h; sourceTree = "<group>"; };
 		EF0D6BD11555A7700027F012 /* totHomeSleepingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totHomeSleepingView.m; path = Home/totHomeSleepingView.m; sourceTree = "<group>"; };
 		EF0D6BD41555AE930027F012 /* diaper.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = diaper.png; path = Resources/Home/diaper.png; sourceTree = "<group>"; };
@@ -1242,6 +1244,7 @@
 		EFFB60981558493D006C4C80 /* Language */ = {
 			isa = PBXGroup;
 			children = (
+				CEF81123167997D30017BE82 /* backgrounds-language.png */,
 				8EC7A8331655A19A0022AC93 /* done-01.png */,
 				8EC7A8311655A1430022AC93 /* icons-language.png */,
 			);
