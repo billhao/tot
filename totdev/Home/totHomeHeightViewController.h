@@ -50,10 +50,12 @@
     // arrays to save info for three measures
     NSMutableArray* all_imgs;
     NSMutableArray* all_numbers;
-    NSMutableArray* all_rulers;
+    NSMutableArray* all_pickers;
+    
 }
 
 @property (nonatomic, assign) totHomeRootController *homeRootController;
+@property (nonatomic, assign) int initialPicker; // the id in all_pickers for the picker to show when view first appears
 
 - (void)pickerView:(STHorizontalPicker *)picker didSelectValue:(CGFloat)value;
 - (void)OKButtonClicked: (UIButton *)button;
@@ -61,6 +63,7 @@
 - (void)DatetimeClicked: (UIButton *)button;
 - (void)LabelButtonClicked: (UIButton *)button;
 - (void)setContent:(int)i button:(UIButton*)button label:(UILabel*)label; // set the content of a component (height/weight/hc)
+- (void)loadPicker:(int)i currentPicker:(int)currentPicker;
 
 // for date picker
 - (void)showTimePicker;

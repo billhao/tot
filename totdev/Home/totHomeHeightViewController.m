@@ -14,7 +14,7 @@
 
 @implementation totHomeHeightViewController
 
-@synthesize homeRootController;
+@synthesize homeRootController, initialPicker;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -26,6 +26,8 @@
         picker_height = nil;
         picker_weight = nil;
         picker_head = nil;
+        all_numbers = nil;
+        initialPicker = 0;
         
 //        mClockBtn = [UIButton buttonWithType:UIButtonTypeCustom];
 //        mClockBtn.frame = CGRectMake(100, 100, 25, 25);
@@ -45,22 +47,11 @@
 }
 
 #pragma mark - View lifecycle
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
-    // 0 - height
-    // 1 - weight
-    // 2 - hc
-    all_imgs    = [[NSMutableArray alloc] initWithObjects: [UIImage imageNamed:@"text_height"], [UIImage imageNamed:@"text_weight"], [UIImage imageNamed:@"text_hc"], nil];
-    all_numbers = [[NSMutableArray alloc] initWithObjects: @"", @"", @"", nil];
-    all_rulers  = [[NSMutableArray alloc] initWithObjects: [UIImage imageNamed:@"ruler_height"], [UIImage imageNamed:@"ruler_weight"], [UIImage imageNamed:@"ruler_hc"], nil];
-
-    [self setContent:0 button:mLabel0Button label:mLabel0];
-    [self setContent:1 button:mLabel1Button label:mLabel1];
-    [self setContent:2 button:mLabel2Button label:mLabel2];
+    NSLog(@"%@", @"[height] viewDidLoad");
     
     // add bg
     UIImage* img = [UIImage imageNamed:@"weight_bg"];
@@ -69,46 +60,28 @@
     [self.view addSubview:bgview];
     [self.view sendSubviewToBack:bgview];
 
-    // height scroll bar
-    picker_height = [[STHorizontalPicker alloc] initWithFrame:CGRectMake(66, 169, 190, 40)];
-    picker_height.name = @"picker_height";
-//    NSMutableArray* heights = [NSMutableArray arrayWithObjects:
-//                                                             @"1'4\"", @"1'5\"", @"1'6\"", @"1'7\"", @"1'8\"", @"1'9\"", @"1'10\"", @"1'11\"",
-//                               @"2'1\"", @"2'2\"", @"2'3\"", @"2'4\"", @"2'5\"", @"2'6\"", @"2'7\"", @"2'8\"", @"2'9\"", @"2'10\"", @"2'11\"",
-//                               @"3'1\"", @"3'2\"", @"3'3\"", @"3'4\"", @"3'5\"", @"3'6\"", @"3'7\"", @"3'8\"", @"3'9\"", @"3'10\"", @"3'11\"",
-//                               @"4'1\"", @"4'2\"", @"4'3\"", @"4'4\"", @"4'5\"", @"4'6\"", @"4'7\"", @"4'8\"", @"4'9\"", @"4'10\"", @"4'11\"",
-//                               nil];
-//    [picker_height setValues:heights];
-    [picker_height setMinimumValue:18.0];
-    [picker_height setMaximumValue:48.0];
-    [picker_height setSteps:120];
-    //[picker_height setValue:20.0];
+    // height picker
+    picker_height = [STHorizontalPicker getPickerForHeight:CGRectMake(66, 169, 190, 40)];
     [picker_height setDelegate:self];
-    [self.view addSubview:picker_height];
-    [picker_height release];
-    
-    // weight scroll bar
-//    picker_weight = [[STHorizontalPicker alloc] initWithFrame:mWeightPlaceHolder.frame];
-//    picker_weight.name = @"picker_weight";
-//    [picker_weight setMinimumValue:4.0];
-//    [picker_weight setMaximumValue:40.0];
-//    [picker_weight setSteps:360];
-//    [picker_weight setDelegate:self];
-//    [picker_weight setValue:4.0];
-//    [self.view addSubview:picker_weight];
-//    [picker_weight release];
-    
-    // head circumference scroll bar
-//    picker_head = [[STHorizontalPicker alloc] initWithFrame:mHeadPlaceHolder.frame];
-//    picker_head.name = @"picker_head";
-//    [picker_head setMinimumValue:10.0];
-//    [picker_head setMaximumValue:24.0];
-//    [picker_head setSteps:140];
-//    [picker_head setDelegate:self];
-//    [picker_head setValue:10.0];
-//    [self.view addSubview:picker_head];
-//    [picker_head release];
 
+    // weight picker
+    picker_weight = [STHorizontalPicker getPickerForWeight:CGRectMake(66, 169, 190, 40)];
+    [picker_weight setDelegate:self];
+    
+    // head circumference picker
+    picker_head = [STHorizontalPicker getPickerForHeadC:CGRectMake(66, 169, 190, 40)];
+    [picker_head setDelegate:self];
+    
+    // 0 - height
+    // 1 - weight
+    // 2 - hc
+    all_imgs    = [[NSMutableArray alloc] initWithObjects: [UIImage imageNamed:@"text_height"], [UIImage imageNamed:@"text_weight"], [UIImage imageNamed:@"text_hc"], nil];
+    // save the pickers
+    all_pickers = [[NSMutableArray alloc] initWithObjects: picker_height, picker_weight, picker_head, nil];
+    [picker_height release];
+    [picker_weight release];
+    [picker_head release];
+    
     // set appearances for date
     UIFont* font1 = [UIFont fontWithName:@"Roboto-Regular" size:16.0];
     [mDatetime setTitle:[self getCurrentDate] forState:UIControlStateNormal];
@@ -152,6 +125,39 @@
 //    [self.view addSubview:mNavigationBar];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [self resetView];
+}
+
+- (void)resetView {
+    //    self.view.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"weight_bg"]];
+    // remove the summary view
+    [mSummary removeFromSuperview];
+    
+    // reset all values
+    all_numbers = [[NSMutableArray alloc] initWithObjects: @"", @"", @"", nil];
+    
+    [self loadPicker:initialPicker currentPicker:-1];
+    
+    // set picker position to last measurement in db
+    
+    // assign labels and buttons
+    int a, b;
+    if( initialPicker == 0 ) {
+        a = 1; b = 2;
+    }
+    else if( initialPicker == 1 ) {
+        a = 0; b = 2;
+    }
+    else if( initialPicker == 2 ) {
+        a = 0; b = 1;
+    }
+    
+    [self setContent:initialPicker button:mLabel0Button label:mLabel0];
+    [self setContent:a button:mLabel1Button label:mLabel1];
+    [self setContent:b button:mLabel2Button label:mLabel2];
+}
+
 - (NSString*)getCurrentDate {
     NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
     [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
@@ -161,12 +167,18 @@
 
 - (void)pickerView:(STHorizontalPicker *)picker didSelectValue:(CGFloat)value{
     NSLog(@"didSelectValue %f", value);
-    mSelectedValue.text = [NSString stringWithFormat:@"%.2f inches",value];
-    
     // save new value to the array so it will switch when user changes to a different measure (height/weight/hc)
     int i = mLabel0Button.tag; // get current/top item
-    NSLog(@"item = %d", i);
-    [all_numbers replaceObjectAtIndex:i withObject:[NSString stringWithFormat:@"%.2f inches",value]];
+    //NSLog(@"picker = %d", i);
+    NSString* str;
+    if( i==0 || i==2 )
+        // height or head
+        str = [NSString stringWithFormat:@"%.2f inches",value];
+    else if( i== 1 )
+        // weight
+        str = [NSString stringWithFormat:@"%.2f pound",value];
+    [all_numbers replaceObjectAtIndex:i withObject:str];
+    mSelectedValue.text = str;
 }
 
 
@@ -224,12 +236,6 @@
     
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    NSLog(@"%@", @"[height] viewWillAppear");
-//    self.view.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"weight_bg"]];
-    [mSummary removeFromSuperview];
-}
-
 - (void)showTimePicker {
     //mClockBtn.hidden = YES;
     //[self.view setBackgroundColor:[UIColor blackColor]];
@@ -269,12 +275,21 @@
     [self setContent:a button:button label:label];
 
     // reload picker
+    [self loadPicker:b currentPicker:a];
 }
 
 - (void)setContent:(int)i button:(UIButton*)button label:(UILabel*)label {
     button.tag = i;
     [button setImage:all_imgs[i] forState:UIControlStateNormal];
     label.text = all_numbers[i];
+}
+
+- (void)loadPicker:(int)i currentPicker:(int)currentPicker {
+    for( int i=0; i<=2; i++ )
+    //if( currentPicker >= 0 )
+        [all_pickers[i] removeFromSuperview];
+    [self.view addSubview:all_pickers[i]];
+    [self.view sendSubviewToBack:all_pickers[i]];
 }
 
 #pragma mark - totTimerControllerDelegate
@@ -290,6 +305,7 @@
 
 - (void)viewDidUnload
 {
+    NSLog(@"[height] viewDidUnload");
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -297,7 +313,7 @@
     [mNavigationBar release];
     [all_imgs release];
     [all_numbers release];
-    [all_rulers release];
+    [all_pickers release];
     //[picker_head release];
     //[picker_height release];
     //[picker_weight release];

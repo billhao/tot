@@ -16,13 +16,13 @@
 
 #import "STHorizontalPicker.h"
 
-const float DISTANCE_BETWEEN_ITEMS = 7.95;
+//const float DISTANCE_BETWEEN_ITEMS = 7.95;
 const int TEXT_LAYER_WIDTH = 20; // so the beginning and end of the ruler each has 10px more for text/label.
 //const int NUMBER_OF_ITEMS = 15;
 const float FONT_SIZE = 16.0f;
 const float POINTER_WIDTH = 10.0f;
 const float POINTER_HEIGHT = 7.0f;
-const int ARROW_POSITION = 39; // position of the arrow that indicates current value, it is relative to left of scrollview
+const int ARROW_POSITION = 76;//39; // position of the arrow that indicates current value, it is relative to left of scrollview
 
 //================================
 // UIColor category
@@ -77,17 +77,46 @@ const int ARROW_POSITION = 39; // position of the arrow that indicates current v
     
 @implementation STHorizontalPicker
 
-@synthesize scrollView, scrollViewMarkerContainerView, scrollViewMarkerLayerArray, name, pointerLayer, currentValue;
+@synthesize scrollView, scrollViewMarkerContainerView, scrollViewMarkerLayerArray, name, pointerLayer, currentValue, distanceBetweenItems;
 
-- (id)initWithFrame:(CGRect)frame
++ (STHorizontalPicker*) getPickerForHeight:(CGRect)frame {
+    STHorizontalPicker* picker = [[STHorizontalPicker alloc] initWithFrame:frame rulerImageName:@"ruler_height" distanceBetweenItems:7.95 steps:120];
+    picker.name = @"picker_height";
+    picker.minimumValue = 18.0;
+    picker.maximumValue = 48.0;
+    picker.steps = 120;
+    picker.distanceBetweenItems = 7.95;
+    return picker;
+}
++ (STHorizontalPicker*) getPickerForWeight:(CGRect)frame {
+    STHorizontalPicker* picker = [[STHorizontalPicker alloc] initWithFrame:frame rulerImageName:@"ruler_weight" distanceBetweenItems:4.4514 steps:370];
+    picker.name = @"picker_weight";
+    picker.minimumValue = 5.0;
+    picker.maximumValue = 42.0;
+    picker.steps = 370;
+    picker.distanceBetweenItems = 4.4730;
+    return picker;
+}
++ (STHorizontalPicker*) getPickerForHeadC:(CGRect)frame {
+    STHorizontalPicker* picker = [[STHorizontalPicker alloc] initWithFrame:frame rulerImageName:@"ruler_hc" distanceBetweenItems:7.7083 steps:48];
+    picker.name = @"picker_hc";
+    picker.minimumValue = 12.0;
+    picker.maximumValue = 24.0;
+    picker.steps = 48;
+    picker.distanceBetweenItems = 7.7083;
+    return picker;
+}
+
+- (id)initWithFrame:(CGRect)frame rulerImageName:(NSString*)rulerImageName distanceBetweenItems:(float)distance steps:(int)_steps
 {
     self = [super initWithFrame:frame];
-    if (self) {        
-        steps = 120;
-        
+    if (self) {
+        distanceBetweenItems = distance;
+        steps = _steps;
+
         float leftPadding = ARROW_POSITION - TEXT_LAYER_WIDTH/2; //self.frame.size.width/2;
         float rightPadding = self.frame.size.width - leftPadding + TEXT_LAYER_WIDTH;
-        float contentWidth = leftPadding + (steps * DISTANCE_BETWEEN_ITEMS) + rightPadding;
+        float contentWidth = leftPadding + (steps * distanceBetweenItems) + rightPadding;
         
         scale = [[UIScreen mainScreen] scale];
         
@@ -121,7 +150,7 @@ const int ARROW_POSITION = 39; // position of the arrow that indicates current v
 //        NSString* imageFileName = [[[NSBundle mainBundle] resourcePath]         stringByAppendingPathComponent:@"ruler_bg"];
 //        CGDataProviderRef dataProvider = CGDataProviderCreateWithFilename([imageFileName UTF8String]);
 //        CGImageRef ruler_bg = CGImageCreateWithPNGDataProvider(dataProvider, NULL, NO, kCGRenderingIntentDefault);
-        UIImage* img = [UIImage imageNamed:@"ruler_height"];
+        UIImage* img = [UIImage imageNamed:rulerImageName];
         CGImageRef ruler_bg = img.CGImage;
         bgLayer.frame = CGRectIntegral(CGRectMake(leftPadding, 0, img.size.width, img.size.height));
         bgLayer.contents = (id)ruler_bg;
@@ -240,7 +269,7 @@ const int ARROW_POSITION = 39; // position of the arrow that indicates current v
 
 - (void)callDelegateWithNewValueFromOffset:(CGFloat)offset {
 
-    CGFloat itemWidth = (float) DISTANCE_BETWEEN_ITEMS;
+    CGFloat itemWidth = (float) distanceBetweenItems;
     
     CGFloat offSet = offset / itemWidth;
     NSUInteger target = (NSUInteger)(offSet + 0.35f);
@@ -253,7 +282,7 @@ const int ARROW_POSITION = 39; // position of the arrow that indicates current v
 }
 
 - (void)snapToMarkerAnimated:(BOOL)animated {
-    CGFloat itemWidth = (float)DISTANCE_BETWEEN_ITEMS;
+    CGFloat itemWidth = (float)distanceBetweenItems;
     CGFloat position = [self.scrollView contentOffset].x;
 
     if (position < self.scrollViewMarkerContainerView.frame.size.width - self.frame.size.width / 2) {
@@ -282,7 +311,7 @@ const int ARROW_POSITION = 39; // position of the arrow that indicates current v
     // Calculate the new size of the content
     float leftPadding = self.frame.size.width / 2;
     float rightPadding = leftPadding;
-    float contentWidth = leftPadding + (steps * DISTANCE_BETWEEN_ITEMS) + rightPadding + TEXT_LAYER_WIDTH / 2;
+    float contentWidth = leftPadding + (steps * distanceBetweenItems) + rightPadding + TEXT_LAYER_WIDTH / 2;
     self.scrollView.contentSize = CGSizeMake(contentWidth, self.frame.size.height);
     
     // Set the size of the marker container view
@@ -293,7 +322,7 @@ const int ARROW_POSITION = 39; // position of the arrow that indicates current v
     for (int i = 0; i <= steps; i++) {
         CATextLayer *textLayer = [CATextLayer layer];
         textLayer.contentsScale = scale;
-        textLayer.frame = CGRectIntegral(CGRectMake(leftPadding + i*DISTANCE_BETWEEN_ITEMS, self.frame.size.height / 2 - fontSize / 2 + 1, TEXT_LAYER_WIDTH, 40));
+        textLayer.frame = CGRectIntegral(CGRectMake(leftPadding + i*distanceBetweenItems, self.frame.size.height / 2 - fontSize / 2 + 1, TEXT_LAYER_WIDTH, 40));
         textLayer.foregroundColor = [UIColor blackColor].CGColor;
         textLayer.alignmentMode = kCAAlignmentCenter;
         textLayer.fontSize = fontSize;
@@ -312,7 +341,7 @@ const int ARROW_POSITION = 39; // position of the arrow that indicates current v
     // Calculate the new size of the content
     float leftPadding = self.frame.size.width / 2;
     float rightPadding = leftPadding;
-    float contentWidth = leftPadding + (steps * DISTANCE_BETWEEN_ITEMS) + rightPadding + TEXT_LAYER_WIDTH / 2;
+    float contentWidth = leftPadding + (steps * distanceBetweenItems) + rightPadding + TEXT_LAYER_WIDTH / 2;
     self.scrollView.contentSize = CGSizeMake(contentWidth, self.frame.size.height);
     
     // Set the size of the marker container view
@@ -325,7 +354,7 @@ const int ARROW_POSITION = 39; // position of the arrow that indicates current v
     //for (int i = 0; i < steps; i++) {
         CATextLayer *textLayer = [CATextLayer layer];
         textLayer.contentsScale = scale;
-        textLayer.frame = CGRectIntegral(CGRectMake(leftPadding + i*DISTANCE_BETWEEN_ITEMS, self.frame.size.height / 2 - fontSize / 2 + 1, TEXT_LAYER_WIDTH, 40));
+        textLayer.frame = CGRectIntegral(CGRectMake(leftPadding + i*distanceBetweenItems, self.frame.size.height / 2 - fontSize / 2 + 1, TEXT_LAYER_WIDTH, 40));
         textLayer.foregroundColor = [UIColor blackColor].CGColor;
         textLayer.alignmentMode = kCAAlignmentCenter;
         textLayer.fontSize = fontSize;
@@ -413,7 +442,7 @@ const int ARROW_POSITION = 39; // position of the arrow that indicates current v
     
     currentValue = value;
     
-    CGFloat itemWidth = (float) DISTANCE_BETWEEN_ITEMS;
+    CGFloat itemWidth = (float) distanceBetweenItems;
     CGFloat xValue = (newValue - minimumValue) / ((maximumValue-minimumValue) / steps) * itemWidth;
         
     [self.scrollView setContentOffset:CGPointMake(xValue, 0.0f) animated:NO];

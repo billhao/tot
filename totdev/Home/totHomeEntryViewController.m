@@ -60,9 +60,16 @@
             [homeRootController switchTo:kHomeViewFeedView withContextInfo:nil];
             break;
         case kBasicHeight:
+            // tell the height view which measurement is on the top
+            [homeRootController switchTo:kHomeViewHeightView withContextInfo:0];
+            break;
         case kBasicWeight:
+            // tell the height view which measurement is on the top
+            [homeRootController switchTo:kHomeViewHeightView withContextInfo:(NSMutableDictionary*)1];
+            break;
         case kBasicHead:
-            [homeRootController switchTo:kHomeViewHeightView withContextInfo:nil];
+            // tell the height view which measurement is on the top
+            [homeRootController switchTo:kHomeViewHeightView withContextInfo:(NSMutableDictionary*)2];
             break;
         case kBasicDiaper:
             // [homeRootController switchTo:kHomeViewDiaperView withContextInfo:nil];

@@ -15,8 +15,8 @@
 @class totHomeDiaperViewController;
 
 enum {
-    kHomeViewEntryView = 0,
-    kHomeViewFeedView = 1,
+    kHomeViewEntryView  = 0,
+    kHomeViewFeedView   = 1,
     kHomeViewHeightView = 2,
     kHomeViewDiaperView = 3
 };
