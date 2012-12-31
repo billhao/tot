@@ -114,6 +114,22 @@
     [mClock setDelegate:self];
     [self.view addSubview:mClock.view];
 
+    // set appearances for the summary view
+    mSummary.frame = CGRectMake(35, 100, 250, 100);
+    mSummary.backgroundColor = [UIColor whiteColor];
+    mSummary.layer.borderColor = [UIColor blackColor].CGColor;
+    mSummary.layer.borderWidth = 0.5f;
+    mSummary.layer.cornerRadius = 10.0f;
+    UIFont* font2 = [UIFont fontWithName:@"Roboto-Regular" size:14.0];
+    [mSummary.titleLabel setFont:font2];
+    [mSummary setTitleColor:[UIColor colorWithRed:147.0/255 green:149.0/255 blue:152.0/255 alpha:1] forState:UIControlStateNormal];
+    [mSummary setTitleColor:[UIColor colorWithRed:147.0/255 green:149.0/255 blue:152.0/255 alpha:1] forState:UIControlStateHighlighted];
+    [mSummary setTitleColor:[UIColor colorWithRed:147.0/255 green:149.0/255 blue:152.0/255 alpha:1] forState:UIControlStateSelected];
+    
+    cover = [[UIButton buttonWithType:UIButtonTypeCustom] retain];
+    cover.frame = CGRectMake(0, 0, 320, 480);
+    cover.backgroundColor = [UIColor clearColor];
+
     //create title navigation bar
     // navigationBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
     //[self.view addSubview:navigationBar];
@@ -132,6 +148,7 @@
 - (void)resetView {
     //    self.view.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"weight_bg"]];
     // remove the summary view
+    [cover removeFromSuperview];
     [mSummary removeFromSuperview];
     
     // reset all values
@@ -181,24 +198,44 @@
     mSelectedValue.text = str;
 }
 
-
 // save all the numbers to db
 - (void)OKButtonClicked: (UIButton *)button {
     NSLog(@"%@", @"[basic][height] ok button clicked");
+
+    NSString* babyName = @"Tom";
+    NSString* summary = [NSString stringWithFormat:@"On %@, %@ ", mDatetime.titleLabel.text, babyName];
+
+    int n = 0; // # of items user edited
     int baby_id = 0;
     NSDate* date = [NSDate date];
-    NSString* height = all_numbers[0];
-    NSString* weight = all_numbers[1];
-    NSString* head   = all_numbers[2];
-    [model addEvent:baby_id event:EVENT_BASIC_HEIGHT datetime:date value:height];
-    [model addEvent:baby_id event:EVENT_BASIC_WEIGHT datetime:date value:weight];
-    [model addEvent:baby_id event:EVENT_BASIC_HEAD datetime:date value:head];
+    if( all_numbers[0] != @"" ) {
+        NSString* height = all_numbers[0];
+        [model addEvent:baby_id event:EVENT_BASIC_HEIGHT datetime:date value:height];
+        summary = [summary stringByAppendingFormat:@"is %@ high", height];
+        n++;
+    }
+    if( all_numbers[1] != @"" ) {
+        NSString* weight = all_numbers[1];
+        [model addEvent:baby_id event:EVENT_BASIC_WEIGHT datetime:date value:weight];
+        if( n > 0 ) summary = [summary stringByAppendingString:@", "];
+        summary = [summary stringByAppendingFormat:@"weighs %@", weight];
+        n++;
+    }
+    if( all_numbers[2] != @"" ) {
+        NSString* head   = all_numbers[2];
+        [model addEvent:baby_id event:EVENT_BASIC_HEAD datetime:date value:head];
+        if( n > 0 ) summary = [summary stringByAppendingString:@" and "];
+        summary = [summary stringByAppendingFormat:@"has %@ of head circumference", head];
+        n++;
+    }
+    if( n == 0 ) return;
     
-    NSString* summary = [NSString stringWithFormat:@"%@\nHeight %@\nWeight %@\nHead Circumference %@", @"today", height, weight, head ];
+    // show cover and summary views
     [mSummary setTitle:summary forState:UIControlStateNormal];
+    [self.view addSubview:cover];
+    [self.view bringSubviewToFront:cover];
     [self.view addSubview:mSummary];
     [self.view bringSubviewToFront:mSummary];
-    //[mSummary setHidden:false];
 
     // get a list of events containing "emotion"
     NSString* event = [[NSString alloc] initWithString:@"basic"];
@@ -209,10 +246,6 @@
         //NSLog(@"Return from db: %@", [e toString]);        
     }
     [event release];
-    
-    [head release];
-    [weight release];
-    [height release];
 }
 
 - (void)CloseButtonClicked: (UIButton *)button {
@@ -231,7 +264,6 @@
 }
 
 - (void) navLeftButtonPressed:(id)sender{
-    
     [homeRootController switchTo:kHomeViewEntryView withContextInfo:nil];
     
 }
@@ -314,6 +346,7 @@
     [all_imgs release];
     [all_numbers release];
     [all_pickers release];
+    [cover release];
     //[picker_head release];
     //[picker_height release];
     //[picker_weight release];

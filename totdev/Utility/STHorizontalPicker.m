@@ -126,6 +126,7 @@ const int ARROW_POSITION = 76;//39; // position of the arrow that indicates curr
         
         // Ensures that the corners are transparent
         self.backgroundColor = [UIColor clearColor];
+        self.backgroundColor = [UIColor whiteColor];
         
         self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.frame.size.width, self.frame.size.height)];
         self.scrollView.contentSize = CGSizeMake(contentWidth, self.frame.size.height);
