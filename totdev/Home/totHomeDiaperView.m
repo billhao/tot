@@ -144,7 +144,7 @@
     mTimeLabel = [UIButton buttonWithType:UIButtonTypeCustom];
     [mTimeLabel setTag:BUTTON_TIME];
     [mTimeLabel setFrame:CGRectMake(60, 155, 200, 40)];
-    [mTimeLabel setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [mTimeLabel setTitleColor:[UIColor colorWithRed:128.0/255 green:130.0/255 blue:133.0/255 alpha:1] forState:UIControlStateNormal];
     [mTimeLabel setTitle:timeDesc forState:UIControlStateNormal];
     [mTimeLabel.titleLabel setFont:[UIFont fontWithName:@"Roboto-Regular" size:20.0]];
     [mTimeLabel addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
