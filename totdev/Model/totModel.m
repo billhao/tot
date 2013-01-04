@@ -310,7 +310,7 @@
             e.baby_id = baby_id;
             e.name = name;
             e.value = value;
-            //NSLog(@"%@", time);
+            //NSLog(@"model setTimeFromText %@", time);
             [e setTimeFromText:time];
             [events addObject:e];
             [e release];
@@ -423,7 +423,7 @@
             e.baby_id = baby_id;
             e.name = name;
             e.value = value;
-            //NSLog(@"%@", time);
+            //NSLog(@"model setTimeFromText %@", time);
             [e setTimeFromText:time];
             [events addObject:e];
             [e release];
