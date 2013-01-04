@@ -8,6 +8,7 @@
 
 #import "totAlbumViewController.h"
 #import "moviePlayerViewController.h"
+#import "totImageView.h"
 
 @implementation albumViewController
 
@@ -78,14 +79,21 @@
     //self.myTitleBarView = aTitleBarView;
     //[aTitleBarView release];
     
+    //self.view.backgroundColor = [UIColor whiteColor];
+    totImageView *bckgrnd = [[totImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
+    [bckgrnd imageFilePath:@"albumBackground.png"];
+    [self.view addSubview:bckgrnd];
+    [bckgrnd release];
+    
     totNavigationBar *aTitleBarView = [[totNavigationBar alloc] initWithFrame:CGRectMake(0, 20, 320, 40)];
     self.myTitleBarView = aTitleBarView;
     [aTitleBarView release];
+
     [myTitleBarView setDelegate:self];
-    [myTitleBarView setBackgroundColor:[UIColor blueColor]];
-    [myTitleBarView setAlpha:0.8];
-    [myTitleBarView setLeftButtonTitle:@"Back"];
-    [myTitleBarView setRightButtonTitle:@"Play"];
+    [myTitleBarView setBackgroundColor:[UIColor whiteColor]];
+    [myTitleBarView setAlpha:0.5];
+    [myTitleBarView setLeftButtonImg:@"return.png"];
+    [myTitleBarView setRightButtonImg:@"video.png"];
     [myTitleBarView hideRightButton];
     [myTitleBarView setNavigationBarTitle:@"Photo" andColor:[UIColor blackColor]];
     [self.view addSubview:self.myTitleBarView];
@@ -109,7 +117,6 @@
     self.myFullSizeImageScrollView.hidden = YES;
     self.view.frame = CGRectMake(0, 0, 320, 480);
     self.view.hidden = YES;
-    self.view.backgroundColor = [UIColor blackColor];
     
     myMoviePlayerView = [[moviePlayerViewController alloc] init];
 }
@@ -331,7 +338,11 @@
     myFullSizeImageScrollView.scrollsToTop = NO;
     myFullSizeImageScrollView.bounces = YES;
     myFullSizeImageScrollView.directionalLockEnabled = YES;
-    myFullSizeImageScrollView.backgroundColor = [UIColor blackColor];
+    //myFullSizeImageScrollView.backgroundColor = [UIColor whiteColor];
+    totImageView *bckgrnd = [[totImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
+    [bckgrnd imageFilePath:@"albumBackground.png"];
+    [myFullSizeImageScrollView addSubview:bckgrnd];
+    [bckgrnd release];
     
     // Add content to myFullSizeImageScrollView
     myTitleBarView.hidden = YES;

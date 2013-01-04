@@ -58,7 +58,7 @@
 }
 */
 
-- (void)loadEvents {
+- (void)loadEvents: (BOOL)refresh {
     NSArray * events = [mModel getEvent:mCurrentBabyId limit:LIMIT offset:mOffset];
     
     // If no more events available
@@ -81,14 +81,18 @@
         [dat addObject:story];
         [story release];
     }
-    [tableViewController appendData:dat];
+    if (refresh)
+        [tableViewController setData:dat];
+    else
+        [tableViewController appendData:dat];
     
     [dat release];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     if(tableViewController) {
-        [self loadEvents];
+        mOffset = 0;
+        [self loadEvents:YES];
     }
 }
 

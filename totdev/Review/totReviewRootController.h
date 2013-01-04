@@ -23,6 +23,6 @@
 @property (nonatomic, assign) int mOffset;
 @property (nonatomic, assign) int mCurrentBabyId;
 
-- (void) loadEvents;
+- (void) loadEvents:(BOOL)refresh;
 
 @end

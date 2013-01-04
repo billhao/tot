@@ -206,11 +206,11 @@
             break;
         case BUTTON_END:
             mState = NOT_SLEEP;
+            //[mSleepTimer invalidate];
             [self clearSleepingView];
             if (!mUseTimePicker)
                 [self findCurrentTime];
             [self saveTimeToDatabase:NO];
-            [mSleepTimer invalidate];
             break;
         default:
             break;
