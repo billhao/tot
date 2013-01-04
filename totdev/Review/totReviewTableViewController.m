@@ -117,7 +117,7 @@
     
     float reload_distance = 10;
     if(y > h + reload_distance) {
-        [mRootController loadEvents];
+        [mRootController loadEvents:NO];
         [mReviewTable reloadData];
     }
 }

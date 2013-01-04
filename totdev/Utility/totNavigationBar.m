@@ -55,7 +55,7 @@
     label.textAlignment = UITextAlignmentCenter;
     label.textColor = clr;
     label.backgroundColor = [UIColor clearColor];
-    [label setFont:[UIFont fontWithName:@"Helvetica-Bold" size:18.0]];
+    [label setFont:[UIFont fontWithName:@"Roboto-Bold" size:18.0]];
     [self addSubview:label];
     [label release];
 }
