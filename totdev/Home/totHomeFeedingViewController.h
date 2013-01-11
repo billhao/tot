@@ -47,7 +47,7 @@
     totModel* mTotModel;
     
     //UIImageView *mBackground;
-    
+    NSString *categoryChosen;
     
     // for date picker
     totTimerController* mClock;
