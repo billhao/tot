@@ -53,7 +53,7 @@
     totTimerController* mClock;
     int mWidth, mHeight;
     
-    int buttonSelected;
+    int foodSelected;
     float quantityList[8];
 }
 

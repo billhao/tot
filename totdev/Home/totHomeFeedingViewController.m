@@ -13,7 +13,7 @@
 #import "../Utility/totUtility.h"
 #import "../Utility/totImageView.h"
 
-#define DEFAULT_QUANTITY 2.3 //magic number
+#define DEFAULT_QUANTITY  2//magic number
 
 //macro to discriminate different buttons pressed
 #define BUTTON_CATEGORY_MIN 0
@@ -42,6 +42,8 @@
         // Custom initialization
         AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
         mTotModel = [appDelegate getDataModel];
+        
+        picker_quantity = nil;
     }
     return self;
 }
@@ -65,9 +67,9 @@
     //[temp release];
     
     //need to expose an API in
-    [mFoodChosenSlider setButton:buttonSelected andWithValue:picker_quantity.currentValue];
+    [mChooseFoodSlider setButton:foodSelected andWithValue:picker_quantity.currentValue];
     
-    quantityList[buttonSelected] =picker_quantity.currentValue;
+    quantityList[foodSelected] =picker_quantity.currentValue;
 }
 
 - (void)createChooseFoodPanel{
@@ -402,6 +404,11 @@
         [self createChooseFoodPanel];
         [mChooseFoodView addSubview:mChooseFoodSlider];
         
+        picker_quantity = [STHorizontalPicker getPickerForFood:CGRectMake(20, 170, 190, 40)];
+        [picker_quantity setDelegate:self];
+        picker_quantity.hidden =YES;
+        [mChooseFoodView addSubview:picker_quantity];
+
         /*
         picker_quantity = [[STHorizontalPicker alloc] initWithFrame:CGRectMake(20, 170, 280, 31)];
         picker_quantity.name = @"picker_weight";
@@ -429,10 +436,10 @@
     }
     
     if(tag >= BUTTON_CHOOSEFOOD_MIN & tag <= BUTTON_CHOOSEFOOD_MAX){
-        // picker_quantity.hidden = NO;
-        // [picker_quantity setValue:DEFAULT_QUANTITY];
+         picker_quantity.hidden = NO;
+         [picker_quantity setValue:DEFAULT_QUANTITY];
         
-        buttonSelected = tag;
+        foodSelected = tag;
         
         //reset all button bacground color;
         [mChooseFoodSlider clearButtonBGColor];
@@ -863,7 +870,7 @@
     [self createCategoryPanel];
     [self.view addSubview:mCategoriesSlider];
     
-    buttonSelected = 0;
+    foodSelected = 0;
     
     // create recently used slider view
     [self createRecentlyUsedPanel];
