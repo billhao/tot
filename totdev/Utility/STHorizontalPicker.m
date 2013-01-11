@@ -97,6 +97,7 @@ const int ARROW_POSITION = 76;//39; // position of the arrow that indicates curr
     picker.distanceBetweenItems = 4.4730;
     return picker;
 }
+
 + (STHorizontalPicker*) getPickerForHeadC:(CGRect)frame {
     STHorizontalPicker* picker = [[STHorizontalPicker alloc] initWithFrame:frame rulerImageName:@"ruler_hc" distanceBetweenItems:7.7083 steps:48];
     picker.name = @"picker_hc";
@@ -106,6 +107,18 @@ const int ARROW_POSITION = 76;//39; // position of the arrow that indicates curr
     picker.distanceBetweenItems = 7.7083;
     return picker;
 }
+
++ (STHorizontalPicker*) getPickerForFood:(CGRect)frame {
+    STHorizontalPicker* picker = [[STHorizontalPicker alloc] initWithFrame:frame rulerImageName:@"ruler_food" distanceBetweenItems:7.7083 steps:49];
+    picker.name = @"picker_food";
+    picker.minimumValue = 0.5;
+    picker.maximumValue = 25;
+    picker.steps = 49;
+    picker.distanceBetweenItems = 7.7083;
+    return picker;
+}
+
+
 
 - (id)initWithFrame:(CGRect)frame rulerImageName:(NSString*)rulerImageName distanceBetweenItems:(float)distance steps:(int)_steps
 {

@@ -47,13 +47,13 @@
     totModel* mTotModel;
     
     //UIImageView *mBackground;
-    
+    NSString *categoryChosen;
     
     // for date picker
     totTimerController* mClock;
     int mWidth, mHeight;
     
-    int buttonSelected;
+    int foodSelected;
     float quantityList[8];
 }
 
