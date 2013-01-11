@@ -23,6 +23,6 @@
 @property (nonatomic, assign) int mOffset;
 @property (nonatomic, assign) int mCurrentBabyId;
 
-- (void) loadEvents:(BOOL)refresh;
+- (void) loadEvents:(BOOL)refresh ofType:(NSString*) type;
 
 @end

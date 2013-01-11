@@ -10,6 +10,7 @@
 #import "totReviewRootController.h"
 #import "totReviewTableViewController.h"
 #import "totReviewStory.h"
+#import "totReviewFilterView.h"
 #import "../Model/totEvent.h"
 
 #define LIMIT 10
@@ -58,8 +59,12 @@
 }
 */
 
-- (void)loadEvents: (BOOL)refresh {
-    NSArray * events = [mModel getEvent:mCurrentBabyId limit:LIMIT offset:mOffset];
+- (void)loadEvents:(BOOL)refresh ofType:(NSString*)type {
+    NSArray * events = nil;
+    if (type == nil)
+        events = [mModel getEvent:mCurrentBabyId limit:LIMIT offset:mOffset];
+    else
+        events = [mModel getEvent:mCurrentBabyId event:type limit:LIMIT offset:mOffset];
     
     // If no more events available
     if ([events count] == 0) return;
@@ -92,7 +97,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     if(tableViewController) {
         mOffset = 0;
-        [self loadEvents:YES];
+        [self loadEvents:YES ofType:nil];
     }
 }
 
@@ -107,6 +112,10 @@
     [self.tableViewController setRootController:self];
     [self.view addSubview:tableViewController.view];
     [aTableView release];
+    
+    totReviewFilterView *filterView = [[totReviewFilterView alloc] initWithFrame:CGRectMake(0, -200, 320, 240)];
+    [self.view addSubview:filterView];
+    [filterView release];
 }
 
 - (void)viewDidUnload
