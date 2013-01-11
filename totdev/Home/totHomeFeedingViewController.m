@@ -542,8 +542,8 @@
     [foodItem setObject:@"fruit" forKey:@"category"];
     [foodImages addObject:foodItem];
     
-    [foodItem setObject:[UIImage imageNamed:@"feeding-beets.png"] forKey:@"file"];
-    [foodItem setObject:@"beets" forKey:@"name"];
+    [foodItem setObject:[UIImage imageNamed:@"feeding-beet.png"] forKey:@"file"];
+    [foodItem setObject:@"beet" forKey:@"name"];
     [foodItem setObject:@"vegetable" forKey:@"category"];
     [foodImages addObject:foodItem];
     
@@ -592,8 +592,8 @@
     [foodItem setObject:@"vegetable" forKey:@"category"];
     [foodImages addObject:foodItem];
     
-    [foodItem setObject:[UIImage imageNamed:@"feeding-dry beans.png"] forKey:@"file"];
-    [foodItem setObject:@"dry beans" forKey:@"name"];
+    [foodItem setObject:[UIImage imageNamed:@"feeding-drybean.png"] forKey:@"file"];
+    [foodItem setObject:@"dry bean" forKey:@"name"];
     [foodItem setObject:@"cereal" forKey:@"category"];
     [foodImages addObject:foodItem];
     
