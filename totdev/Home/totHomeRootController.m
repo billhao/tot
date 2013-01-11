@@ -143,7 +143,12 @@
         case kHomeViewFeedView:
             break;
         case kHomeViewHeightView:
+        {
+            // tell the height view which measurement is on the top
+            int i = (int)info;
+            [(totHomeHeightViewController*)nextView setInitialPicker:i];
             break;
+        }
         case kHomeViewDiaperView:
             break;
         default:

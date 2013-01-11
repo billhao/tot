@@ -51,10 +51,7 @@
 }
 
 -(NSDate*) setTimeFromText:(NSString*)dt {
-    struct tm  t;
-    const char *formatString = "%Y-%m-%d %H:%M:%S";
-    strptime_l([dt UTF8String], formatString, &t, NULL);
-    datetime = [NSDate dateWithTimeIntervalSince1970: mktime(&t)];
+    datetime = [totEvent dateFromString:dt];
     return datetime;
 }
 

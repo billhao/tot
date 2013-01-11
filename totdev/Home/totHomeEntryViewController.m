@@ -60,9 +60,16 @@
             [homeRootController switchTo:kHomeViewFeedView withContextInfo:nil];
             break;
         case kBasicHeight:
+            // tell the height view which measurement is on the top
+            [homeRootController switchTo:kHomeViewHeightView withContextInfo:0];
+            break;
         case kBasicWeight:
+            // tell the height view which measurement is on the top
+            [homeRootController switchTo:kHomeViewHeightView withContextInfo:(NSMutableDictionary*)1];
+            break;
         case kBasicHead:
-            [homeRootController switchTo:kHomeViewHeightView withContextInfo:nil];
+            // tell the height view which measurement is on the top
+            [homeRootController switchTo:kHomeViewHeightView withContextInfo:(NSMutableDictionary*)2];
             break;
         case kBasicDiaper:
             // [homeRootController switchTo:kHomeViewDiaperView withContextInfo:nil];
@@ -88,7 +95,7 @@
     int buttonW[8] = {117, 120, 102, 67, 112, 85, 90, 65};
     int buttonH[8] = {127, 97, 275, 87, 90, 87, 92, 75};
     int buttonX[8] = {7, 200, 5, 240, 112, 225, 225, 132};
-    int buttonY[8] = {22, 45, 150, 142, 238, 230, 318, 85};
+    int buttonY[8] = {22, 45, 150, 142, 246, 230, 318, 85};
     const char *buttonName[8] = {
         "language.png", 
         "sleep.png", 

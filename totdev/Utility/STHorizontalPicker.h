@@ -64,6 +64,8 @@
     
     NSUInteger steps;
     
+    float distanceBetweenItems;
+
     CGFloat minimumValue;
     CGFloat maximumValue;
     
@@ -80,8 +82,15 @@
     CGFloat currentValue;
 }
 
++ (STHorizontalPicker*) getPickerForHeight:(CGRect)frame;
++ (STHorizontalPicker*) getPickerForWeight:(CGRect)frame;
++ (STHorizontalPicker*) getPickerForHeadC:(CGRect)frame;
+
 @property (nonatomic, retain) NSString *name;
 @property (nonatomic, assign) CGFloat currentValue;
+@property (nonatomic, assign) float distanceBetweenItems;
+
+- (id)initWithFrame:(CGRect)frame rulerImageName:(NSString*)rulerImageName distanceBetweenItems:(float)distanceBetweenItems steps:(int)steps;
 
 - (NSMutableArray*)values;
 - (void)setValues:(NSMutableArray *)newValues;
