@@ -22,7 +22,7 @@
 		2436306D1627425E0097B17D /* feeding-asparagus.png in Resources */ = {isa = PBXBuildFile; fileRef = 243630461627425E0097B17D /* feeding-asparagus.png */; };
 		2436306E1627425E0097B17D /* feeding-avocado.png in Resources */ = {isa = PBXBuildFile; fileRef = 243630471627425E0097B17D /* feeding-avocado.png */; };
 		2436306F1627425E0097B17D /* feeding-banana.png in Resources */ = {isa = PBXBuildFile; fileRef = 243630481627425E0097B17D /* feeding-banana.png */; };
-		243630701627425E0097B17D /* feeding-beets.png in Resources */ = {isa = PBXBuildFile; fileRef = 243630491627425E0097B17D /* feeding-beets.png */; };
+		243630701627425E0097B17D /* feeding-beet.png in Resources */ = {isa = PBXBuildFile; fileRef = 243630491627425E0097B17D /* feeding-beet.png */; };
 		243630711627425E0097B17D /* feeding-blueberry.png in Resources */ = {isa = PBXBuildFile; fileRef = 2436304A1627425E0097B17D /* feeding-blueberry.png */; };
 		243630721627425E0097B17D /* feeding-bread.png in Resources */ = {isa = PBXBuildFile; fileRef = 2436304B1627425E0097B17D /* feeding-bread.png */; };
 		243630731627425E0097B17D /* feeding-broccoli.png in Resources */ = {isa = PBXBuildFile; fileRef = 2436304C1627425E0097B17D /* feeding-broccoli.png */; };
@@ -322,7 +322,7 @@
 		243630461627425E0097B17D /* feeding-asparagus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feeding-asparagus.png"; path = "Resources/Home/feeding/foodicons/feeding-asparagus.png"; sourceTree = "<group>"; };
 		243630471627425E0097B17D /* feeding-avocado.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feeding-avocado.png"; path = "Resources/Home/feeding/foodicons/feeding-avocado.png"; sourceTree = "<group>"; };
 		243630481627425E0097B17D /* feeding-banana.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feeding-banana.png"; path = "Resources/Home/feeding/foodicons/feeding-banana.png"; sourceTree = "<group>"; };
-		243630491627425E0097B17D /* feeding-beets.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feeding-beets.png"; path = "Resources/Home/feeding/foodicons/feeding-beets.png"; sourceTree = "<group>"; };
+		243630491627425E0097B17D /* feeding-beet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feeding-beet.png"; path = "Resources/Home/feeding/foodicons/feeding-beet.png"; sourceTree = "<group>"; };
 		2436304A1627425E0097B17D /* feeding-blueberry.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feeding-blueberry.png"; path = "Resources/Home/feeding/foodicons/feeding-blueberry.png"; sourceTree = "<group>"; };
 		2436304B1627425E0097B17D /* feeding-bread.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feeding-bread.png"; path = "Resources/Home/feeding/foodicons/feeding-bread.png"; sourceTree = "<group>"; };
 		2436304C1627425E0097B17D /* feeding-broccoli.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feeding-broccoli.png"; path = "Resources/Home/feeding/foodicons/feeding-broccoli.png"; sourceTree = "<group>"; };
@@ -733,7 +733,7 @@
 				243630461627425E0097B17D /* feeding-asparagus.png */,
 				243630471627425E0097B17D /* feeding-avocado.png */,
 				243630481627425E0097B17D /* feeding-banana.png */,
-				243630491627425E0097B17D /* feeding-beets.png */,
+				243630491627425E0097B17D /* feeding-beet.png */,
 				2436304A1627425E0097B17D /* feeding-blueberry.png */,
 				2436304B1627425E0097B17D /* feeding-bread.png */,
 				2436304C1627425E0097B17D /* feeding-broccoli.png */,
@@ -1423,7 +1423,7 @@
 				2436306D1627425E0097B17D /* feeding-asparagus.png in Resources */,
 				2436306E1627425E0097B17D /* feeding-avocado.png in Resources */,
 				2436306F1627425E0097B17D /* feeding-banana.png in Resources */,
-				243630701627425E0097B17D /* feeding-beets.png in Resources */,
+				243630701627425E0097B17D /* feeding-beet.png in Resources */,
 				243630711627425E0097B17D /* feeding-blueberry.png in Resources */,
 				243630721627425E0097B17D /* feeding-bread.png in Resources */,
 				243630731627425E0097B17D /* feeding-broccoli.png in Resources */,
