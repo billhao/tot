@@ -37,7 +37,7 @@
 		2436307C1627425E0097B17D /* feeding-fish.png in Resources */ = {isa = PBXBuildFile; fileRef = 243630551627425E0097B17D /* feeding-fish.png */; };
 		2436307D1627425E0097B17D /* feeding-grape.png in Resources */ = {isa = PBXBuildFile; fileRef = 243630561627425E0097B17D /* feeding-grape.png */; };
 		2436307E1627425E0097B17D /* feeding-kiwi.png in Resources */ = {isa = PBXBuildFile; fileRef = 243630571627425E0097B17D /* feeding-kiwi.png */; };
-		2436307F1627425E0097B17D /* feeding-lima beans.png in Resources */ = {isa = PBXBuildFile; fileRef = 243630581627425E0097B17D /* feeding-lima beans.png */; };
+		2436307F1627425E0097B17D /* feeding-lima bean.png in Resources */ = {isa = PBXBuildFile; fileRef = 243630581627425E0097B17D /* feeding-lima bean.png */; };
 		243630801627425E0097B17D /* feeding-mango.png in Resources */ = {isa = PBXBuildFile; fileRef = 243630591627425E0097B17D /* feeding-mango.png */; };
 		243630811627425E0097B17D /* feeding-oatmeal.png in Resources */ = {isa = PBXBuildFile; fileRef = 2436305A1627425E0097B17D /* feeding-oatmeal.png */; };
 		243630821627425E0097B17D /* feeding-onion.png in Resources */ = {isa = PBXBuildFile; fileRef = 2436305B1627425E0097B17D /* feeding-onion.png */; };
@@ -345,7 +345,7 @@
 		243630551627425E0097B17D /* feeding-fish.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feeding-fish.png"; path = "Resources/Home/feeding/foodicons/feeding-fish.png"; sourceTree = "<group>"; };
 		243630561627425E0097B17D /* feeding-grape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feeding-grape.png"; path = "Resources/Home/feeding/foodicons/feeding-grape.png"; sourceTree = "<group>"; };
 		243630571627425E0097B17D /* feeding-kiwi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feeding-kiwi.png"; path = "Resources/Home/feeding/foodicons/feeding-kiwi.png"; sourceTree = "<group>"; };
-		243630581627425E0097B17D /* feeding-lima beans.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feeding-lima beans.png"; path = "Resources/Home/feeding/foodicons/feeding-lima beans.png"; sourceTree = "<group>"; };
+		243630581627425E0097B17D /* feeding-lima bean.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feeding-lima bean.png"; path = "Resources/Home/feeding/foodicons/feeding-lima bean.png"; sourceTree = "<group>"; };
 		243630591627425E0097B17D /* feeding-mango.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feeding-mango.png"; path = "Resources/Home/feeding/foodicons/feeding-mango.png"; sourceTree = "<group>"; };
 		2436305A1627425E0097B17D /* feeding-oatmeal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feeding-oatmeal.png"; path = "Resources/Home/feeding/foodicons/feeding-oatmeal.png"; sourceTree = "<group>"; };
 		2436305B1627425E0097B17D /* feeding-onion.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "feeding-onion.png"; path = "Resources/Home/feeding/foodicons/feeding-onion.png"; sourceTree = "<group>"; };
@@ -763,7 +763,7 @@
 				243630551627425E0097B17D /* feeding-fish.png */,
 				243630561627425E0097B17D /* feeding-grape.png */,
 				243630571627425E0097B17D /* feeding-kiwi.png */,
-				243630581627425E0097B17D /* feeding-lima beans.png */,
+				243630581627425E0097B17D /* feeding-lima bean.png */,
 				243630591627425E0097B17D /* feeding-mango.png */,
 				2436305A1627425E0097B17D /* feeding-oatmeal.png */,
 				2436305B1627425E0097B17D /* feeding-onion.png */,
@@ -1460,7 +1460,7 @@
 				2436307C1627425E0097B17D /* feeding-fish.png in Resources */,
 				2436307D1627425E0097B17D /* feeding-grape.png in Resources */,
 				2436307E1627425E0097B17D /* feeding-kiwi.png in Resources */,
-				2436307F1627425E0097B17D /* feeding-lima beans.png in Resources */,
+				2436307F1627425E0097B17D /* feeding-lima bean.png in Resources */,
 				243630801627425E0097B17D /* feeding-mango.png in Resources */,
 				243630811627425E0097B17D /* feeding-oatmeal.png in Resources */,
 				243630821627425E0097B17D /* feeding-onion.png in Resources */,
