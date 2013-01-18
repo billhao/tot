@@ -21,6 +21,7 @@
 - (id) init;
 - (int) storyViewHeight;
 - (BOOL) isVisibleStory;
+- (BOOL) hasContext;
 
 @property (nonatomic, retain) NSString * mEventType;
 @property (nonatomic, retain) NSDate * mWhen;

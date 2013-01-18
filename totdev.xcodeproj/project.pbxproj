@@ -194,6 +194,7 @@
 		8E3AE8D2168D531E00E4CFAE /* icons-diaper-solid_new.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8E3AE8CE168D531E00E4CFAE /* icons-diaper-solid_new.jpg */; };
 		8E3AE8D3168D531E00E4CFAE /* icons-diaper-wet_new.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8E3AE8CF168D531E00E4CFAE /* icons-diaper-wet_new.jpg */; };
 		8E3AE8D4168D531E00E4CFAE /* icons-diaper-wetandsolid_new.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8E3AE8D0168D531E00E4CFAE /* icons-diaper-wetandsolid_new.jpg */; };
+		8E451D8F169FCB48003D1438 /* totReviewFilterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E451D8E169FCB48003D1438 /* totReviewFilterView.m */; };
 		8E4D50E41614CC3A00890621 /* boy.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8E4D50E21614CC3A00890621 /* boy.jpg */; };
 		8E4D50E51614CC3A00890621 /* girl.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8E4D50E31614CC3A00890621 /* girl.jpg */; };
 		8E5F1208163F3A170040036D /* totReviewLineChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E5F1207163F3A170040036D /* totReviewLineChart.m */; };
@@ -514,6 +515,8 @@
 		8E3AE8CE168D531E00E4CFAE /* icons-diaper-solid_new.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "icons-diaper-solid_new.jpg"; path = "Resources/Home/icons-diaper-solid_new.jpg"; sourceTree = "<group>"; };
 		8E3AE8CF168D531E00E4CFAE /* icons-diaper-wet_new.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "icons-diaper-wet_new.jpg"; path = "Resources/Home/icons-diaper-wet_new.jpg"; sourceTree = "<group>"; };
 		8E3AE8D0168D531E00E4CFAE /* icons-diaper-wetandsolid_new.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "icons-diaper-wetandsolid_new.jpg"; path = "Resources/Home/icons-diaper-wetandsolid_new.jpg"; sourceTree = "<group>"; };
+		8E451D8D169FCB48003D1438 /* totReviewFilterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totReviewFilterView.h; path = Review/totReviewFilterView.h; sourceTree = "<group>"; };
+		8E451D8E169FCB48003D1438 /* totReviewFilterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totReviewFilterView.m; path = Review/totReviewFilterView.m; sourceTree = "<group>"; };
 		8E4D50E21614CC3A00890621 /* boy.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = boy.jpg; path = Resources/Home/boy.jpg; sourceTree = "<group>"; };
 		8E4D50E31614CC3A00890621 /* girl.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = girl.jpg; path = Resources/Home/girl.jpg; sourceTree = "<group>"; };
 		8E5F1206163F3A170040036D /* totReviewLineChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totReviewLineChart.h; path = Review/totReviewLineChart.h; sourceTree = "<group>"; };
@@ -1158,6 +1161,8 @@
 				EF4C5862157B3D6000D41C89 /* totReviewStoryView.m */,
 				8E5F1206163F3A170040036D /* totReviewLineChart.h */,
 				8E5F1207163F3A170040036D /* totReviewLineChart.m */,
+				8E451D8D169FCB48003D1438 /* totReviewFilterView.h */,
+				8E451D8E169FCB48003D1438 /* totReviewFilterView.m */,
 			);
 			name = Review;
 			sourceTree = "<group>";
@@ -1645,6 +1650,7 @@
 				3F2770F3164E327900DF84EF /* totBaby.m in Sources */,
 				3F2770F6164E328C00DF84EF /* totUser.m in Sources */,
 				3F277109164F6F6100DF84EF /* totLoginNavigationController.m in Sources */,
+				8E451D8F169FCB48003D1438 /* totReviewFilterView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

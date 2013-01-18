@@ -110,7 +110,8 @@
     
 	[self dismissModalViewControllerAnimated:YES];
     
-    [self performSelector:@selector(showStatusBar) withObject:nil afterDelay:0];
+    //[self performSelector:@selector(showStatusBar) withObject:nil afterDelay:0];
+    [[UIApplication sharedApplication] setStatusBarHidden:NO];
     
     [mp release];
 }

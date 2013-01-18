@@ -35,21 +35,37 @@
     NSArray * tokens = [mEventType componentsSeparatedByString:@"/"];
     printf("%s ", [mEventType UTF8String]);
     for (int i = 0; i < [tokens count]; ++i) {
-        printf("%s ", [[tokens objectAtIndex:i] UTF8String]);
+        printf("%s\n", [[tokens objectAtIndex:i] UTF8String]);
     }
     
     NSString * category = [tokens objectAtIndex:0];
     if ([categories containsObject:category]) {
         visible = YES;
-        printf("visible\n");
+        //printf("visible\n");
     } else {
-        printf("invisible\n");
+        //printf("invisible\n");
     }
     return visible;
 }
 
+- (BOOL) hasContext {
+    if ([mEventType isEqualToString:@"basic/sleep"]) {
+        if ([mRawContent isEqualToString:@"start"]) {
+            return NO;
+        }
+    }
+    return YES;
+}
+
 - (int) storyViewHeight {
     int cellHeight = TABLE_CELL_DEFAULT_HEIGHT;
+    
+    if ([mEventType isEqualToString:@"basic/sleep"]) {
+        if ([mRawContent isEqualToString:@"start"]) {
+            return 40;
+        }
+    }
+    
     return cellHeight;
 }
 

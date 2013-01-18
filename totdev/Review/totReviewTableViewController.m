@@ -107,7 +107,7 @@
     float y = offset.y + bounds.size.height - inset.bottom;
     float h = size.height;
     
-    // NSLog(@"offset: %f", offset.y);   
+    // NSLog(@"offset: %f", offset.y);
     // NSLog(@"content.height: %f", size.height);   
     // NSLog(@"bounds.height: %f", bounds.size.height);   
     // NSLog(@"inset.top: %f", inset.top);   
@@ -117,7 +117,7 @@
     
     float reload_distance = 10;
     if(y > h + reload_distance) {
-        [mRootController loadEvents:NO];
+        [mRootController loadEvents:NO ofType:nil];
         [mReviewTable reloadData];
     }
 }
