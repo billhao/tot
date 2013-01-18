@@ -404,23 +404,13 @@
         [self createChooseFoodPanel];
         [mChooseFoodView addSubview:mChooseFoodSlider];
         
+        
+        
+        //xxxxxxxxxxxxxxx picker image in  or USE a popup textbox
         picker_quantity = [STHorizontalPicker getPickerForFood:CGRectMake(20, 170, 190, 40)];
         [picker_quantity setDelegate:self];
         picker_quantity.hidden =YES;
         [mChooseFoodView addSubview:picker_quantity];
-
-        /*
-        picker_quantity = [[STHorizontalPicker alloc] initWithFrame:CGRectMake(20, 170, 280, 31)];
-        picker_quantity.name = @"picker_weight";
-        [picker_quantity setMinimumValue:0.0];
-        [picker_quantity setMaximumValue:6.0];
-        [picker_quantity setSteps:60];
-        [picker_quantity setDelegate:self];
-        [picker_quantity setValue:DEFAULT_QUANTITY];
-        //diable picker quantity
-        picker_quantity.hidden =YES;
-        [mChooseFoodView addSubview:picker_quantity];
-         */
         
         for (int i=0; i<DEFAULT_MENU ; i++) {
             quantityList[i]=0;
