@@ -37,6 +37,13 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
+- (void)setTypeName:(NSString *)t {
+    if (t == nil)
+        mCurrentType = nil;
+    else
+        mCurrentType = [NSString stringWithString:t];
+}
+
 - (void)setRootController:(totReviewRootController *)parent {
     mRootController = parent;
 }
@@ -44,6 +51,11 @@
 - (void)setData:(NSArray *)dat {
     [mData removeAllObjects];
     [self appendData:dat];
+}
+
+- (void)emptyData {
+    [mData removeAllObjects];
+    [mReviewTable reloadData];
 }
 
 - (void)appendData:(NSArray *)dat {
@@ -63,6 +75,7 @@
         [mData addObject:view];
         [view release];
     }
+    [mReviewTable reloadData];
 }
 
 #pragma mark - UITableView delegate
@@ -119,7 +132,6 @@
     float reload_distance = 10;
     if(y > h + reload_distance) {
         [mRootController loadEvents:NO ofType:mCurrentType];
-        [mReviewTable reloadData];
     }
 }
 

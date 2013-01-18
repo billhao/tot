@@ -65,13 +65,21 @@
     
     if (refresh) mOffset = 0;
     
-    if (type == nil)
+    if (type == nil) {
         events = [mModel getEvent:mCurrentBabyId limit:LIMIT offset:mOffset];
-    else
+        [tableViewController setTypeName:type];
+    } else {
         events = [mModel getEvent:mCurrentBabyId event:type limit:LIMIT offset:mOffset];
+        [tableViewController setTypeName:type];
+    }
     
     // If no more events available
-    if ([events count] == 0) return;
+    if ([events count] == 0) {
+        if (refresh) {
+            [tableViewController emptyData];
+        }
+        return;
+    }
     
     mOffset += [events count];
     

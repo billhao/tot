@@ -24,6 +24,7 @@
 - (void)setTypeName:(NSString*)t;
 - (void)setData:(NSArray*)dat;
 - (void)appendData:(NSArray*)dat;
+- (void)emptyData;
 - (void)setRootController:(totReviewRootController*)parent;
 
 @end
