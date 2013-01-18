@@ -10,6 +10,7 @@
 #import "totReviewRootController.h"
 #import "totReviewTableViewController.h"
 #import "totReviewStory.h"
+#import "totReviewFilterOpenerView.h"
 #import "totReviewFilterView.h"
 #import "../Model/totEvent.h"
 
@@ -61,6 +62,9 @@
 
 - (void)loadEvents:(BOOL)refresh ofType:(NSString*)type {
     NSArray * events = nil;
+    
+    if (refresh) mOffset = 0;
+    
     if (type == nil)
         events = [mModel getEvent:mCurrentBabyId limit:LIMIT offset:mOffset];
     else
@@ -113,9 +117,18 @@
     [self.view addSubview:tableViewController.view];
     [aTableView release];
     
-    totReviewFilterView *filterView = [[totReviewFilterView alloc] initWithFrame:CGRectMake(0, -200, 320, 240)];
-    [self.view addSubview:filterView];
-    [filterView release];
+    totReviewFilterView* filter = [[totReviewFilterView alloc] initWithFrame:CGRectMake(0, -200, 320, 200)];
+    totReviewFilterOpenerView *filterOpener = [[totReviewFilterOpenerView alloc] initWithFrame:CGRectMake(240, -20, 30, 70)];
+
+    filter.opener = filterOpener;
+    filter.parentController = self;
+    [self.view addSubview:filter];
+    
+    filterOpener.filter = filter;
+    [self.view insertSubview:filterOpener belowSubview:filter];
+
+    [filterOpener release];
+    [filter release];
 }
 
 - (void)viewDidUnload

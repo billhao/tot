@@ -24,6 +24,7 @@
     if (self) {
         // Custom initialization
         mData = [[NSMutableArray alloc] init];
+        mCurrentType = nil;
     }
     return self;
 }
@@ -117,7 +118,7 @@
     
     float reload_distance = 10;
     if(y > h + reload_distance) {
-        [mRootController loadEvents:NO ofType:nil];
+        [mRootController loadEvents:NO ofType:mCurrentType];
         [mReviewTable reloadData];
     }
 }
