@@ -33,6 +33,8 @@
 @synthesize mFoodChosenSlider;
 @synthesize mCurrentFoodID;
 @synthesize mChooseFoodSlider;
+@synthesize text_quantity;
+
 
 #pragma mark - init and aux
 
@@ -43,7 +45,7 @@
         AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
         mTotModel = [appDelegate getDataModel];
         
-        picker_quantity = nil;
+        //picker_quantity = nil;
     }
     return self;
 }
@@ -57,6 +59,7 @@
 
 #pragma mark - component response
 
+/*
 - (void)pickerView:(STHorizontalPicker *)picker didSelectValue:(CGFloat)value {
     NSLog(@"didSelectValue %f", value);
     // change the associate number on buttons
@@ -71,17 +74,31 @@
     
     quantityList[foodSelected] =picker_quantity.currentValue;
 }
-
+*/
+ 
 - (void)createChooseFoodPanel{
     
     mChooseFoodOKButton = [UIButton buttonWithType:UIButtonTypeCustom];;
-    mChooseFoodOKButton.frame = CGRectMake(40, 200, 240, 40);
+    mChooseFoodOKButton.frame = CGRectMake(140, 200, 170, 40);
     [mChooseFoodOKButton setTitle:@"ok" forState:UIControlStateNormal];
     [mChooseFoodOKButton setTitleColor:[UIColor magentaColor] forState:UIControlStateNormal];
     [mChooseFoodOKButton setBackgroundColor:[UIColor whiteColor]];
     [mChooseFoodView addSubview:mChooseFoodOKButton];
     [mChooseFoodOKButton addTarget:self action:@selector(ChooseFoodOKButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     
+    text_quantity = [[UITextField alloc] initWithFrame:CGRectMake(30, 200, 110, 40)];
+    text_quantity.borderStyle = UITextBorderStyleRoundedRect;
+    text_quantity.textColor = [UIColor blackColor];
+    text_quantity.font = [UIFont systemFontOfSize:17.0];
+    text_quantity.placeholder = @"Quantity?";
+    text_quantity.backgroundColor = [UIColor clearColor];
+    text_quantity.keyboardType = UIKeyboardTypeDecimalPad;
+    text_quantity.returnKeyType = UIReturnKeyDone;
+    text_quantity.clearButtonMode = UITextFieldViewModeWhileEditing;
+    [mChooseFoodView addSubview:text_quantity];
+    text_quantity.delegate = self;
+    [text_quantity setHidden:true];
+
     mChooseFoodSlider = [[totSliderView alloc] initWithFrame:CGRectMake(20, 10, 280, 160)];
     [mChooseFoodSlider setDelegate:self];
     [mChooseFoodSlider setBtnPerCol:2];
@@ -354,17 +371,26 @@
     
     [mChooseFoodSlider setContentArray:foodImages];
     
-    /*
+    
     [foodItem release];//adding food items to list done
     [food release];
     [foodImages release];
     [filteredFood release];
-    */
+    
     
     [mChooseFoodSlider getWithPositionMemoryIdentifier:@"chooseFood"];
     
     
 }
+
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    
+    return YES;
+}
+
 
 - (void)buttonPressed: (id)sender {
     UIButton *btn = (UIButton*)sender;
@@ -373,7 +399,8 @@
     
     if(tag >= BUTTON_CATEGORY_MIN && tag <= BUTTON_CATEGORY_MAX){ //category
         // show a new panel with food slider and picker and ok button
-        mChooseFoodView = [[UIView alloc] initWithFrame: CGRectMake(0, 100, 320, 260)];
+//        mChooseFoodView = [[UIView alloc] initWithFrame: CGRectMake(0, 100, 320, 260)];
+        mChooseFoodView = [[UIView alloc] initWithFrame: CGRectMake(0, 0, 320, 260)];
         //[mChooseFoodView setBackgroundColor:[UIColor grayColor]];
         mChooseFoodView.backgroundColor = [UIColor clearColor];
         mChooseFoodView.alpha = 1.0;
@@ -404,23 +431,15 @@
         [self createChooseFoodPanel];
         [mChooseFoodView addSubview:mChooseFoodSlider];
         
+        
+        
+        //xxxxxxxxxxxxxxx picker image in  or USE a popup textbox
+        /*
         picker_quantity = [STHorizontalPicker getPickerForFood:CGRectMake(20, 170, 190, 40)];
         [picker_quantity setDelegate:self];
         picker_quantity.hidden =YES;
         [mChooseFoodView addSubview:picker_quantity];
-
-        /*
-        picker_quantity = [[STHorizontalPicker alloc] initWithFrame:CGRectMake(20, 170, 280, 31)];
-        picker_quantity.name = @"picker_weight";
-        [picker_quantity setMinimumValue:0.0];
-        [picker_quantity setMaximumValue:6.0];
-        [picker_quantity setSteps:60];
-        [picker_quantity setDelegate:self];
-        [picker_quantity setValue:DEFAULT_QUANTITY];
-        //diable picker quantity
-        picker_quantity.hidden =YES;
-        [mChooseFoodView addSubview:picker_quantity];
-         */
+        */
         
         for (int i=0; i<DEFAULT_MENU ; i++) {
             quantityList[i]=0;
@@ -436,14 +455,18 @@
     }
     
     if(tag >= BUTTON_CHOOSEFOOD_MIN & tag <= BUTTON_CHOOSEFOOD_MAX){
-         picker_quantity.hidden = NO;
-         [picker_quantity setValue:DEFAULT_QUANTITY];
+         //picker_quantity.hidden = NO;
+         //[picker_quantity setValue:DEFAULT_QUANTITY];
         
         foodSelected = tag;
         
         //reset all button bacground color;
         [mChooseFoodSlider clearButtonBGColor];
         ((UIButton *)sender).backgroundColor = [UIColor redColor];
+        
+        //show input box
+        text_quantity.placeholder = @"Quantity?";
+        [text_quantity setHidden:false];
         
         return;
     }
@@ -479,7 +502,8 @@
             
             summary = [NSString stringWithFormat:@"%@\n%@",summary,temp ];
             
-            NSString* quantity = [NSString stringWithFormat:@"%.1f", picker_quantity.currentValue];
+            // NSString* quantity = [NSString stringWithFormat:@"%.1f", picker_quantity.currentValue];
+            NSString* quantity = @"0";
             
             // food list needs renew
             [mTotModel addEvent:baby_id event:EVENT_FEEDING_MILK datetime:date value:quantity];
@@ -505,6 +529,22 @@
 
 
 - (void)ChooseFoodOKButtonClicked: (UIButton *)button {
+    // xxxxxxxx get quantity input
+    double q;
+    [text_quantity resignFirstResponder];
+    
+    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+    if ([formatter numberFromString:text_quantity.text] != nil){
+        q = [text_quantity.text doubleValue];
+    }
+    else{
+        q = 0;
+        
+        
+    }
+    [formatter release];
+    
+    
     
     for (UIView *subview in [mChooseFoodView subviews])
             [subview removeFromSuperview];
@@ -855,6 +895,7 @@
     
     [mFoodChosenSlider getWithPositionMemoryIdentifier:@"feedingFoodChosen"];
 }
+
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
@@ -994,7 +1035,7 @@
     [mRecentlyUsedSlider release];
     [mFoodChosenSlider release];
     [mCategoriesSlider release];
-    [picker_quantity release];
+//    [picker_quantity release];
     //[mOKButton release];
     //[mDatetime release];
     //[mSummary release];
@@ -1015,8 +1056,8 @@
     [mClock setCurrentTime];
     
     //reset quantity on picker
-    [picker_quantity setValue:DEFAULT_QUANTITY];
-    picker_quantity.hidden = YES;
+    //[picker_quantity setValue:DEFAULT_QUANTITY];
+    //picker_quantity.hidden = YES;
     
     //reset quantiy on buttons
     [mCategoriesSlider clearButtonLabels];
