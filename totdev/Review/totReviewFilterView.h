@@ -2,20 +2,23 @@
 //  totReviewFilterView.h
 //  totdev
 //
-//  Created by Lixing Huang on 1/10/13.
+//  Created by Lixing Huang on 1/17/13.
 //  Copyright (c) 2013 USC. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
-#define FOLD       0
-#define EXPANDED   1
+@class totReviewFilterOpenerView;
+@class totReviewRootController;
 
 @interface totReviewFilterView : UIView {
-    float mPrevTouchY;
-    float mCurrTouchY;
-    float mBeginTouchY;
-    int mStatus;
+    totReviewFilterOpenerView *opener;
+    totReviewRootController *parentController;
 }
+
+@property (nonatomic, retain) totReviewFilterOpenerView *opener;
+@property (nonatomic, assign) totReviewRootController *parentController;
+
+- (void) buttonPressed : (id)sender;
 
 @end
