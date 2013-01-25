@@ -40,6 +40,9 @@
     UIButton* mChooseFoodOKButton;
     // STHorizontalPicker* picker_quantity; //no more picker! use an associative textfield
     UITextField *text_quantity;
+    NSMutableArray *inventory;
+    NSMutableArray *inventoryGrey;
+    
     
     NSNumber* mCurrentFoodID;
     totModel* mTotModel;
@@ -54,7 +57,9 @@
     int mWidth, mHeight;
     
     int foodSelected;
+    
     float quantityList[8];
+    NSMutableArray *foodChosenList;
 }
 
 @property (nonatomic, assign) totHomeRootController* homeRootController;

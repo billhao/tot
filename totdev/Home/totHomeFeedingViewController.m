@@ -58,330 +58,7 @@
 }
 
 #pragma mark - component response
-
-/*
-- (void)pickerView:(STHorizontalPicker *)picker didSelectValue:(CGFloat)value {
-    NSLog(@"didSelectValue %f", value);
-    // change the associate number on buttons
-    
-    //testing
-    //NSString *temp =[[NSString alloc] initWithFormat:@"%.1f", picker_quantity.currentValue];
-    //[mOKButton setTitle:temp forState:UIControlStateNormal];
-    //[temp release];
-    
-    //need to expose an API in
-    [mChooseFoodSlider setButton:foodSelected andWithValue:picker_quantity.currentValue];
-    
-    quantityList[foodSelected] =picker_quantity.currentValue;
-}
-*/
  
-- (void)createChooseFoodPanel{
-    
-    mChooseFoodOKButton = [UIButton buttonWithType:UIButtonTypeCustom];;
-    mChooseFoodOKButton.frame = CGRectMake(140, 200, 170, 40);
-    [mChooseFoodOKButton setTitle:@"ok" forState:UIControlStateNormal];
-    [mChooseFoodOKButton setTitleColor:[UIColor magentaColor] forState:UIControlStateNormal];
-    [mChooseFoodOKButton setBackgroundColor:[UIColor whiteColor]];
-    [mChooseFoodView addSubview:mChooseFoodOKButton];
-    [mChooseFoodOKButton addTarget:self action:@selector(ChooseFoodOKButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
-    
-    text_quantity = [[UITextField alloc] initWithFrame:CGRectMake(30, 200, 110, 40)];
-    text_quantity.borderStyle = UITextBorderStyleRoundedRect;
-    text_quantity.textColor = [UIColor blackColor];
-    text_quantity.font = [UIFont systemFontOfSize:17.0];
-    text_quantity.placeholder = @"Quantity?";
-    text_quantity.backgroundColor = [UIColor clearColor];
-    text_quantity.keyboardType = UIKeyboardTypeDecimalPad;
-    text_quantity.returnKeyType = UIReturnKeyDone;
-    text_quantity.clearButtonMode = UITextFieldViewModeWhileEditing;
-    [mChooseFoodView addSubview:text_quantity];
-    text_quantity.delegate = self;
-    [text_quantity setHidden:true];
-
-    mChooseFoodSlider = [[totSliderView alloc] initWithFrame:CGRectMake(20, 10, 280, 160)];
-    [mChooseFoodSlider setDelegate:self];
-    [mChooseFoodSlider setBtnPerCol:2];
-    [mChooseFoodSlider setBtnPerRow:4];
-    [mChooseFoodSlider setvMarginBetweenBtn:0];
-    [mChooseFoodSlider sethMarginBetweenBtn:0];
-    [mChooseFoodSlider setTagOffset:BUTTON_CHOOSEFOOD_MIN];
-    
-    //load image
-    //NSMutableArray *foodImages = [[NSMutableArray alloc] init];
-    // [recentlyUsedImages addObject:[UIImage imageNamed:@"feedingcategories-cereal"]];
-    // should use plist file to load
-    //[foodImages addObject:[UIImage imageNamed:@"feeding-apple.png"]];
-    //NSMutableDictionary *foodImages = [NSMutableDictionary dictionaryWithCapacity:1];
-    NSMutableArray *food = [[NSMutableArray alloc] init];
-    
-    NSMutableDictionary *foodItem = [[NSMutableDictionary alloc] init];
-    [foodItem setObject:[UIImage imageNamed:@"feeding-apple.png"] forKey:@"file"];
-    [foodItem setObject:@"apple" forKey:@"name"];
-    [foodItem setObject:@"fruit" forKey:@"category"];
-    [food addObject:foodItem];
-
-    foodItem = [[NSMutableDictionary alloc] init];
-    [foodItem setObject:[UIImage imageNamed:@"feeding-apricot.png"] forKey:@"file"];
-    [foodItem setObject:@"apricot" forKey:@"name"];
-    [foodItem setObject:@"fruit" forKey:@"category"];
-    [food addObject:foodItem];
-
-    foodItem = [[NSMutableDictionary alloc] init];
-    [foodItem setObject:[UIImage imageNamed:@"feeding-artichoke.png"] forKey:@"file"];
-    [foodItem setObject:@"artichoke" forKey:@"name"];
-    [foodItem setObject:@"vegetable" forKey:@"category"];
-    [food addObject:foodItem];
-    
-    foodItem = [[NSMutableDictionary alloc] init];
-    [foodItem setObject:[UIImage imageNamed:@"feeding-asparagus.png"] forKey:@"file"];
-    [foodItem setObject:@"asparagus" forKey:@"name"];
-    [foodItem setObject:@"vegetable" forKey:@"category"];
-    [food addObject:foodItem];
-
-    foodItem = [[NSMutableDictionary alloc] init];
-    [foodItem setObject:[UIImage imageNamed:@"feeding-avocado.png"] forKey:@"file"];
-    [foodItem setObject:@"avocado" forKey:@"name"];
-    [foodItem setObject:@"fruit" forKey:@"category"];
-    [food addObject:foodItem];
-
-    foodItem = [[NSMutableDictionary alloc] init];
-    [foodItem setObject:[UIImage imageNamed:@"feeding-banana.png"] forKey:@"file"];
-    [foodItem setObject:@"banana" forKey:@"name"];
-    [foodItem setObject:@"fruit" forKey:@"category"];
-    [food addObject:foodItem];
-    
-    foodItem = [[NSMutableDictionary alloc] init];
-    [foodItem setObject:[UIImage imageNamed:@"feeding-beet.png"] forKey:@"file"];
-    [foodItem setObject:@"beet" forKey:@"name"];
-    [foodItem setObject:@"vegetable" forKey:@"category"];
-    [food addObject:foodItem];
-
-    foodItem = [[NSMutableDictionary alloc] init];
-    [foodItem setObject:[UIImage imageNamed:@"feeding-blueberry.png"] forKey:@"file"];
-    [foodItem setObject:@"blueberry" forKey:@"name"];
-    [foodItem setObject:@"fruit" forKey:@"category"];
-    [food addObject:foodItem];
-    
-    foodItem = [[NSMutableDictionary alloc] init];
-    [foodItem setObject:[UIImage imageNamed:@"feeding-bread.png"] forKey:@"file"];
-    [foodItem setObject:@"bread" forKey:@"name"];
-    [foodItem setObject:@"cereal" forKey:@"category"];
-    [food addObject:foodItem];
-
-    foodItem = [[NSMutableDictionary alloc] init];
-    [foodItem setObject:[UIImage imageNamed:@"feeding-broccoli.png"] forKey:@"file"];
-    [foodItem setObject:@"broccoli" forKey:@"name"];
-    [foodItem setObject:@"vegetable" forKey:@"category"];
-    [food addObject:foodItem];
-
-    foodItem = [[NSMutableDictionary alloc] init];
-    [foodItem setObject:[UIImage imageNamed:@"feeding-brussel sprout.png"] forKey:@"file"];
-    [foodItem setObject:@"brussel sprout" forKey:@"name"];
-    [foodItem setObject:@"vegetable" forKey:@"category"];
-    [food addObject:foodItem];
-    
-    foodItem = [[NSMutableDictionary alloc] init];
-    [foodItem setObject:[UIImage imageNamed:@"feeding-califlower.png"] forKey:@"file"];
-    [foodItem setObject:@"califlower" forKey:@"name"];
-    [foodItem setObject:@"vegetable" forKey:@"category"];
-    [food addObject:foodItem];
-    
-    foodItem = [[NSMutableDictionary alloc] init];
-    [foodItem setObject:[UIImage imageNamed:@"feeding-carrot.png"] forKey:@"file"];
-    [foodItem setObject:@"carrot" forKey:@"name"];
-    [foodItem setObject:@"vegetable" forKey:@"category"];
-    [food addObject:foodItem];
-    
-    foodItem = [[NSMutableDictionary alloc] init];
-    [foodItem setObject:[UIImage imageNamed:@"feeding-cheerios.png"] forKey:@"file"];
-    [foodItem setObject:@"cheerios" forKey:@"name"];
-    [foodItem setObject:@"cereal" forKey:@"category"];
-    [food addObject:foodItem];
-    
-    foodItem = [[NSMutableDictionary alloc] init];
-    [foodItem setObject:[UIImage imageNamed:@"feeding-cheese.png"] forKey:@"file"];
-    [foodItem setObject:@"cheese" forKey:@"name"];
-    [foodItem setObject:@"dairy" forKey:@"category"];
-    [food addObject:foodItem];
-    
-    foodItem = [[NSMutableDictionary alloc] init];
-    [foodItem setObject:[UIImage imageNamed:@"feeding-cucumber.png"] forKey:@"file"];
-    [foodItem setObject:@"cucumber" forKey:@"name"];
-    [foodItem setObject:@"vegetable" forKey:@"category"];
-    [food addObject:foodItem];
-    
-    foodItem = [[NSMutableDictionary alloc] init];
-    [foodItem setObject:[UIImage imageNamed:@"feeding-dry bean.png"] forKey:@"file"];
-    [foodItem setObject:@"dry bean" forKey:@"name"];
-    [foodItem setObject:@"cereal" forKey:@"category"];
-    [food addObject:foodItem];
-    
-    foodItem = [[NSMutableDictionary alloc] init];
-    [foodItem setObject:[UIImage imageNamed:@"feeding-eggplant.png"] forKey:@"file"];
-    [foodItem setObject:@"eggplant" forKey:@"name"];
-    [foodItem setObject:@"vegetable" forKey:@"category"];
-    [food addObject:foodItem];
-    
-    foodItem = [[NSMutableDictionary alloc] init];
-    [foodItem setObject:[UIImage imageNamed:@"feeding-fish.png"] forKey:@"file"];
-    [foodItem setObject:@"fish" forKey:@"name"];
-    [foodItem setObject:@"meat" forKey:@"category"];
-    [food addObject:foodItem];
-    
-    foodItem = [[NSMutableDictionary alloc] init];
-    [foodItem setObject:[UIImage imageNamed:@"feeding-grape.png"] forKey:@"file"];
-    [foodItem setObject:@"grape" forKey:@"name"];
-    [foodItem setObject:@"fruit" forKey:@"category"];
-    [food addObject:foodItem];
-    
-    foodItem = [[NSMutableDictionary alloc] init];
-    [foodItem setObject:[UIImage imageNamed:@"feeding-kiwi.png"] forKey:@"file"];
-    [foodItem setObject:@"kiwi" forKey:@"name"];
-    [foodItem setObject:@"fruit" forKey:@"category"];
-    [food addObject:foodItem];
-    
-    foodItem = [[NSMutableDictionary alloc] init];
-    [foodItem setObject:[UIImage imageNamed:@"feeding-lima bean.png"] forKey:@"file"];
-    [foodItem setObject:@"lima bean" forKey:@"name"];
-    [foodItem setObject:@"cereal" forKey:@"category"];
-    [food addObject:foodItem];
-    
-    foodItem = [[NSMutableDictionary alloc] init];
-    [foodItem setObject:[UIImage imageNamed:@"feeding-mango.png"] forKey:@"file"];
-    [foodItem setObject:@"mango" forKey:@"name"];
-    [foodItem setObject:@"fruit" forKey:@"category"];
-    [food addObject:foodItem];
-    
-    foodItem = [[NSMutableDictionary alloc] init];
-    [foodItem setObject:[UIImage imageNamed:@"feeding-milk.png"] forKey:@"file"];
-    [foodItem setObject:@"milk" forKey:@"name"];
-    [foodItem setObject:@"dairy" forKey:@"category"];
-    [food addObject:foodItem];
-    
-    foodItem = [[NSMutableDictionary alloc] init];
-    [foodItem setObject:[UIImage imageNamed:@"feeding-oatmeal.png"] forKey:@"file"];
-    [foodItem setObject:@"oatmeal" forKey:@"name"];
-    [foodItem setObject:@"cereal" forKey:@"category"];
-    [food addObject:foodItem];
-    
-    foodItem = [[NSMutableDictionary alloc] init];
-    [foodItem setObject:[UIImage imageNamed:@"feeding-onion.png"] forKey:@"file"];
-    [foodItem setObject:@"onion" forKey:@"name"];
-    [foodItem setObject:@"vegetable" forKey:@"category"];
-    [food addObject:foodItem];
-    
-    foodItem = [[NSMutableDictionary alloc] init];
-    [foodItem setObject:[UIImage imageNamed:@"feeding-orange juice.png"] forKey:@"file"];
-    [foodItem setObject:@"orange juice" forKey:@"name"];
-    [foodItem setObject:@"juice" forKey:@"category"];
-    [food addObject:foodItem];
-    
-    foodItem = [[NSMutableDictionary alloc] init];
-    [foodItem setObject:[UIImage imageNamed:@"feeding-orange.png"] forKey:@"file"];
-    [foodItem setObject:@"orange" forKey:@"name"];
-    [foodItem setObject:@"fruit" forKey:@"category"];
-    [food addObject:foodItem];
-    
-    foodItem = [[NSMutableDictionary alloc] init];
-    [foodItem setObject:[UIImage imageNamed:@"feeding-papaya.png"] forKey:@"file"];
-    [foodItem setObject:@"papaya" forKey:@"name"];
-    [foodItem setObject:@"fruit" forKey:@"category"];
-    [food addObject:foodItem];
-    
-    foodItem = [[NSMutableDictionary alloc] init];
-    [foodItem setObject:[UIImage imageNamed:@"feeding-pasta.png"] forKey:@"file"];
-    [foodItem setObject:@"pasta" forKey:@"name"];
-    [foodItem setObject:@"cereal" forKey:@"category"];
-    [food addObject:foodItem];
-    
-    foodItem = [[NSMutableDictionary alloc] init];
-    [foodItem setObject:[UIImage imageNamed:@"feeding-peach.png"] forKey:@"file"];
-    [foodItem setObject:@"peach" forKey:@"name"];
-    [foodItem setObject:@"fruit" forKey:@"category"];
-    [food addObject:foodItem];
-    
-    foodItem = [[NSMutableDictionary alloc] init];
-    [foodItem setObject:[UIImage imageNamed:@"feeding-pear.png"] forKey:@"file"];
-    [foodItem setObject:@"pear" forKey:@"name"];
-    [foodItem setObject:@"fruit" forKey:@"category"];
-    [food addObject:foodItem];
-    
-    foodItem = [[NSMutableDictionary alloc] init];
-    [foodItem setObject:[UIImage imageNamed:@"feeding-green pea.png"] forKey:@"file"];
-    [foodItem setObject:@"green pea" forKey:@"name"];
-    [foodItem setObject:@"cereal" forKey:@"category"];
-    [food addObject:foodItem];
-    
-    foodItem = [[NSMutableDictionary alloc] init];
-    [foodItem setObject:[UIImage imageNamed:@"feeding-pineapple.png"] forKey:@"file"];
-    [foodItem setObject:@"pineapple" forKey:@"name"];
-    [foodItem setObject:@"fruit" forKey:@"category"];
-    [food addObject:foodItem];
-    
-    foodItem = [[NSMutableDictionary alloc] init];
-    [foodItem setObject:[UIImage imageNamed:@"feeding-plum.png"] forKey:@"file"];
-    [foodItem setObject:@"plum" forKey:@"name"];
-    [foodItem setObject:@"fruit" forKey:@"category"];
-    [food addObject:foodItem];
-    
-    foodItem = [[NSMutableDictionary alloc] init];
-    [foodItem setObject:[UIImage imageNamed:@"feeding-potato.png"] forKey:@"file"];
-    [foodItem setObject:@"potato" forKey:@"name"];
-    [foodItem setObject:@"cereal" forKey:@"category"];
-    [food addObject:foodItem];
-    
-    foodItem = [[NSMutableDictionary alloc] init];
-    [foodItem setObject:[UIImage imageNamed:@"feeding-pumpkin.png"] forKey:@"file"];
-    [foodItem setObject:@"pumpkin" forKey:@"name"];
-    [foodItem setObject:@"vegetable" forKey:@"category"];
-    [food addObject:foodItem];
-    
-    foodItem = [[NSMutableDictionary alloc] init];
-    [foodItem setObject:[UIImage imageNamed:@"feeding-rice brown.png"] forKey:@"file"];
-    [foodItem setObject:@"brown rice" forKey:@"name"];
-    [foodItem setObject:@"cereal" forKey:@"category"];
-    [food addObject:foodItem];
-    
-    foodItem = [[NSMutableDictionary alloc] init];
-    [foodItem setObject:[UIImage imageNamed:@"feeding-rice white.png"] forKey:@"file"];
-    [foodItem setObject:@"white rice" forKey:@"name"];
-    [foodItem setObject:@"cereal" forKey:@"category"];
-    [food addObject:foodItem];
-    
-    foodItem = [[NSMutableDictionary alloc] init];
-    [foodItem setObject:[UIImage imageNamed:@"feeding-sweet potato.png"] forKey:@"file"];
-    [foodItem setObject:@"sweet potato" forKey:@"name"];
-    [foodItem setObject:@"cereal" forKey:@"category"];
-    [food addObject:foodItem];
-    
-    foodItem = [[NSMutableDictionary alloc] init];
-    [foodItem setObject:[UIImage imageNamed:@"feeding-watermelon.png"] forKey:@"file"];
-    [foodItem setObject:@"watermelon" forKey:@"name"];
-    [foodItem setObject:@"fruit" forKey:@"category"];
-    [food addObject:foodItem];
-    
-    //xxxxxxxxxx
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"category == %@", categoryChosen];
-    NSArray *filteredFood = [food filteredArrayUsingPredicate:predicate];
-    
-    NSMutableArray *foodImages = [[NSMutableArray alloc] init];
-    for(int i=0; i< [filteredFood count]; i++)
-        [foodImages addObject:filteredFood[i][@"file"]];
-    
-    [mChooseFoodSlider setContentArray:foodImages];
-    
-    
-    [foodItem release];//adding food items to list done
-    [food release];
-    [foodImages release];
-    [filteredFood release];
-    
-    
-    [mChooseFoodSlider getWithPositionMemoryIdentifier:@"chooseFood"];
-    
-    
-}
 
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
@@ -440,10 +117,11 @@
         picker_quantity.hidden =YES;
         [mChooseFoodView addSubview:picker_quantity];
         */
-        
+        /* not commit yet
         for (int i=0; i<DEFAULT_MENU ; i++) {
             quantityList[i]=0;
         }
+        */
         
         return; //tag segmentations are mutually exclusive
     }
@@ -467,6 +145,7 @@
         //show input box
         text_quantity.placeholder = @"Quantity?";
         [text_quantity setHidden:false];
+        
         
         return;
     }
@@ -536,15 +215,38 @@
     NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
     if ([formatter numberFromString:text_quantity.text] != nil){
         q = [text_quantity.text doubleValue];
+        
+        
+        //insert into a result queue
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        //xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+        // add to foodChosenList
+        
+        
+        
+
+        
     }
     else{
         q = 0;
         
-        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Wrong input value."
+                                                        message:@"Quantity must be numerical"
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+        [alert release];
     }
     [formatter release];
-    
-    
     
     for (UIView *subview in [mChooseFoodView subviews])
             [subview removeFromSuperview];
@@ -617,6 +319,57 @@
     
 }
 
+
+- (void)createChooseFoodPanel{
+    
+    mChooseFoodOKButton = [UIButton buttonWithType:UIButtonTypeCustom];;
+    mChooseFoodOKButton.frame = CGRectMake(140, 200, 170, 40);
+    [mChooseFoodOKButton setTitle:@"ok" forState:UIControlStateNormal];
+    [mChooseFoodOKButton setTitleColor:[UIColor magentaColor] forState:UIControlStateNormal];
+    [mChooseFoodOKButton setBackgroundColor:[UIColor whiteColor]];
+    [mChooseFoodView addSubview:mChooseFoodOKButton];
+    [mChooseFoodOKButton addTarget:self action:@selector(ChooseFoodOKButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    
+    text_quantity = [[UITextField alloc] initWithFrame:CGRectMake(30, 200, 110, 40)];
+    text_quantity.borderStyle = UITextBorderStyleRoundedRect;
+    text_quantity.textColor = [UIColor blackColor];
+    text_quantity.font = [UIFont fontWithName:@"Roboto-Regular" size:16];
+    text_quantity.placeholder = @"Quantity?";
+    text_quantity.backgroundColor = [UIColor clearColor];
+    text_quantity.keyboardType = UIKeyboardTypeDecimalPad;
+    text_quantity.returnKeyType = UIReturnKeyDone;
+    text_quantity.clearButtonMode = UITextFieldViewModeWhileEditing;
+    [mChooseFoodView addSubview:text_quantity];
+    text_quantity.delegate = self;
+    [text_quantity setHidden:true];
+    
+    mChooseFoodSlider = [[totSliderView alloc] initWithFrame:CGRectMake(20, 10, 280, 160)];
+    [mChooseFoodSlider setDelegate:self];
+    [mChooseFoodSlider setBtnPerCol:2];
+    [mChooseFoodSlider setBtnPerRow:4];
+    [mChooseFoodSlider setvMarginBetweenBtn:0];
+    [mChooseFoodSlider sethMarginBetweenBtn:0];
+    [mChooseFoodSlider setTagOffset:BUTTON_CHOOSEFOOD_MIN];
+    
+    
+    
+    //xxxxxxxxxx
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"category == %@", categoryChosen];
+    NSArray *filteredFood = [inventory filteredArrayUsingPredicate:predicate];
+    
+    NSMutableArray *foodImages = [[NSMutableArray alloc] init];
+    for(int i=0; i< [filteredFood count]; i++)
+        [foodImages addObject:filteredFood[i][@"file"]];
+    
+    [mChooseFoodSlider setContentArray:foodImages];
+    
+    [filteredFood release];
+    [foodImages release];
+    
+    
+    [mChooseFoodSlider getWithPositionMemoryIdentifier:@"chooseFood"];
+}
+
 - (void)createFoodChosenPanel{
     
     mFoodChosenSlider = [[totSliderView alloc] initWithFrame:CGRectMake(38, 285, 244, 60)];
@@ -628,279 +381,547 @@
     [mFoodChosenSlider setTagOffset:BUTTON_FOODCHOSEN_MIN];
     
     //load  grey-scale image
-    NSMutableArray *foodChosen = [[NSMutableArray alloc] init];
-    NSMutableDictionary *foodItem = [[NSMutableDictionary alloc] init];
-    
-    [foodItem setObject:[UIImage imageNamed:@"feedinggrey-apple.png"] forKey:@"file"];
-    [foodItem setObject:@"apple" forKey:@"name"];
-    [foodItem setObject:@"fruit" forKey:@"category"];
-    [foodChosen addObject:foodItem];
-    
-    foodItem = [[NSMutableDictionary alloc] init];
-    [foodItem setObject:[UIImage imageNamed:@"feedinggrey-apricot.png"] forKey:@"file"];
-    [foodItem setObject:@"apricot" forKey:@"name"];
-    [foodItem setObject:@"fruit" forKey:@"category"];
-    [foodChosen addObject:foodItem];
-    
-    foodItem = [[NSMutableDictionary alloc] init];
-    [foodItem setObject:[UIImage imageNamed:@"feedinggrey-artichoke.png"] forKey:@"file"];
-    [foodItem setObject:@"artichoke" forKey:@"name"];
-    [foodItem setObject:@"vegetable" forKey:@"category"];
-    [foodChosen addObject:foodItem];
-    
-    foodItem = [[NSMutableDictionary alloc] init];
-    [foodItem setObject:[UIImage imageNamed:@"feedinggrey-asparagus.png"] forKey:@"file"];
-    [foodItem setObject:@"asparagus" forKey:@"name"];
-    [foodItem setObject:@"vegetable" forKey:@"category"];
-    [foodChosen addObject:foodItem];
-    
-    foodItem = [[NSMutableDictionary alloc] init];
-    [foodItem setObject:[UIImage imageNamed:@"feedinggrey-avocado.png"] forKey:@"file"];
-    [foodItem setObject:@"avocado" forKey:@"name"];
-    [foodItem setObject:@"fruit" forKey:@"category"];
-    [foodChosen addObject:foodItem];
-    
-    foodItem = [[NSMutableDictionary alloc] init];
-    [foodItem setObject:[UIImage imageNamed:@"feedinggrey-banana.png"] forKey:@"file"];
-    [foodItem setObject:@"banana" forKey:@"name"];
-    [foodItem setObject:@"fruit" forKey:@"category"];
-    [foodChosen addObject:foodItem];
-    
-    foodItem = [[NSMutableDictionary alloc] init];
-    [foodItem setObject:[UIImage imageNamed:@"feedinggrey-beet.png"] forKey:@"file"];
-    [foodItem setObject:@"beet" forKey:@"name"];
-    [foodItem setObject:@"vegetable" forKey:@"category"];
-    [foodChosen addObject:foodItem];
-    
-    foodItem = [[NSMutableDictionary alloc] init];
-    [foodItem setObject:[UIImage imageNamed:@"feedinggrey-blueberry.png"] forKey:@"file"];
-    [foodItem setObject:@"blueberry" forKey:@"name"];
-    [foodItem setObject:@"fruit" forKey:@"category"];
-    [foodChosen addObject:foodItem];
-    
-    foodItem = [[NSMutableDictionary alloc] init];
-    [foodItem setObject:[UIImage imageNamed:@"feedinggrey-bread.png"] forKey:@"file"];
-    [foodItem setObject:@"bread" forKey:@"name"];
-    [foodItem setObject:@"cereal" forKey:@"category"];
-    [foodChosen addObject:foodItem];
-    
-    foodItem = [[NSMutableDictionary alloc] init];
-    [foodItem setObject:[UIImage imageNamed:@"feedinggrey-broccoli.png"] forKey:@"file"];
-    [foodItem setObject:@"broccoli" forKey:@"name"];
-    [foodItem setObject:@"vegetable" forKey:@"category"];
-    [foodChosen addObject:foodItem];
-    
-    foodItem = [[NSMutableDictionary alloc] init];
-    [foodItem setObject:[UIImage imageNamed:@"feedinggrey-brussel sprout.png"] forKey:@"file"];
-    [foodItem setObject:@"brussel sprout" forKey:@"name"];
-    [foodItem setObject:@"vegetable" forKey:@"category"];
-    [foodChosen addObject:foodItem];
-    
-    foodItem = [[NSMutableDictionary alloc] init];
-    [foodItem setObject:[UIImage imageNamed:@"feedinggrey-califlower.png"] forKey:@"file"];
-    [foodItem setObject:@"califlower" forKey:@"name"];
-    [foodItem setObject:@"vegetable" forKey:@"category"];
-    [foodChosen addObject:foodItem];
-    
-    foodItem = [[NSMutableDictionary alloc] init];
-    [foodItem setObject:[UIImage imageNamed:@"feedinggrey-carrot.png"] forKey:@"file"];
-    [foodItem setObject:@"carrot" forKey:@"name"];
-    [foodItem setObject:@"vegetable" forKey:@"category"];
-    [foodChosen addObject:foodItem];
-    
-    foodItem = [[NSMutableDictionary alloc] init];
-    [foodItem setObject:[UIImage imageNamed:@"feedinggrey-cheerios.png"] forKey:@"file"];
-    [foodItem setObject:@"cheerios" forKey:@"name"];
-    [foodItem setObject:@"cereal" forKey:@"category"];
-    [foodChosen addObject:foodItem];
-    
-    foodItem = [[NSMutableDictionary alloc] init];
-    [foodItem setObject:[UIImage imageNamed:@"feedinggrey-cheese.png"] forKey:@"file"];
-    [foodItem setObject:@"cheese" forKey:@"name"];
-    [foodItem setObject:@"dairy" forKey:@"category"];
-    [foodChosen addObject:foodItem];
-    
-    foodItem = [[NSMutableDictionary alloc] init];
-    [foodItem setObject:[UIImage imageNamed:@"feedinggrey-cucumber.png"] forKey:@"file"];
-    [foodItem setObject:@"cucumber" forKey:@"name"];
-    [foodItem setObject:@"vegetable" forKey:@"category"];
-    [foodChosen addObject:foodItem];
-    
-    foodItem = [[NSMutableDictionary alloc] init];
-    [foodItem setObject:[UIImage imageNamed:@"feedinggrey-dry bean.png"] forKey:@"file"];
-    [foodItem setObject:@"dry bean" forKey:@"name"];
-    [foodItem setObject:@"cereal" forKey:@"category"];
-    [foodChosen addObject:foodItem];
-    
-    foodItem = [[NSMutableDictionary alloc] init];
-    [foodItem setObject:[UIImage imageNamed:@"feedinggrey-eggplant.png"] forKey:@"file"];
-    [foodItem setObject:@"eggplant" forKey:@"name"];
-    [foodItem setObject:@"vegetable" forKey:@"category"];
-    [foodChosen addObject:foodItem];
-    
-    foodItem = [[NSMutableDictionary alloc] init];
-    [foodItem setObject:[UIImage imageNamed:@"feedinggrey-fish.png"] forKey:@"file"];
-    [foodItem setObject:@"fish" forKey:@"name"];
-    [foodItem setObject:@"meat" forKey:@"category"];
-    [foodChosen addObject:foodItem];
-    
-    foodItem = [[NSMutableDictionary alloc] init];
-    [foodItem setObject:[UIImage imageNamed:@"feedinggrey-grape.png"] forKey:@"file"];
-    [foodItem setObject:@"grape" forKey:@"name"];
-    [foodItem setObject:@"fruit" forKey:@"category"];
-    [foodChosen addObject:foodItem];
-    
-    foodItem = [[NSMutableDictionary alloc] init];
-    [foodItem setObject:[UIImage imageNamed:@"feedinggrey-kiwi.png"] forKey:@"file"];
-    [foodItem setObject:@"kiwi" forKey:@"name"];
-    [foodItem setObject:@"fruit" forKey:@"category"];
-    [foodChosen addObject:foodItem];
-    
-    foodItem = [[NSMutableDictionary alloc] init];
-    [foodItem setObject:[UIImage imageNamed:@"feedinggrey-lima bean.png"] forKey:@"file"];
-    [foodItem setObject:@"lima bean" forKey:@"name"];
-    [foodItem setObject:@"cereal" forKey:@"category"];
-    [foodChosen addObject:foodItem];
-    
-    foodItem = [[NSMutableDictionary alloc] init];
-    [foodItem setObject:[UIImage imageNamed:@"feedinggrey-mango.png"] forKey:@"file"];
-    [foodItem setObject:@"mango" forKey:@"name"];
-    [foodItem setObject:@"fruit" forKey:@"category"];
-    [foodChosen addObject:foodItem];
-    
-    foodItem = [[NSMutableDictionary alloc] init];
-    [foodItem setObject:[UIImage imageNamed:@"feedinggrey-milk.png"] forKey:@"file"];
-    [foodItem setObject:@"milk" forKey:@"name"];
-    [foodItem setObject:@"dairy" forKey:@"category"];
-    [foodChosen addObject:foodItem];
-    
-    foodItem = [[NSMutableDictionary alloc] init];
-    [foodItem setObject:[UIImage imageNamed:@"feedinggrey-oatmeal.png"] forKey:@"file"];
-    [foodItem setObject:@"oatmeal" forKey:@"name"];
-    [foodItem setObject:@"cereal" forKey:@"category"];
-    [foodChosen addObject:foodItem];
-    
-    foodItem = [[NSMutableDictionary alloc] init];
-    [foodItem setObject:[UIImage imageNamed:@"feedinggrey-onion.png"] forKey:@"file"];
-    [foodItem setObject:@"onion" forKey:@"name"];
-    [foodItem setObject:@"vegetable" forKey:@"category"];
-    [foodChosen addObject:foodItem];
-    
-    foodItem = [[NSMutableDictionary alloc] init];
-    [foodItem setObject:[UIImage imageNamed:@"feedinggrey-orange juice.png"] forKey:@"file"];
-    [foodItem setObject:@"orange juice" forKey:@"name"];
-    [foodItem setObject:@"juice" forKey:@"category"];
-    [foodChosen addObject:foodItem];
-    
-    foodItem = [[NSMutableDictionary alloc] init];
-    [foodItem setObject:[UIImage imageNamed:@"feedinggrey-orange.png"] forKey:@"file"];
-    [foodItem setObject:@"orange" forKey:@"name"];
-    [foodItem setObject:@"fruit" forKey:@"category"];
-    [foodChosen addObject:foodItem];
-    
-    foodItem = [[NSMutableDictionary alloc] init];
-    [foodItem setObject:[UIImage imageNamed:@"feedinggrey-papaya.png"] forKey:@"file"];
-    [foodItem setObject:@"papaya" forKey:@"name"];
-    [foodItem setObject:@"fruit" forKey:@"category"];
-    [foodChosen addObject:foodItem];
-    
-    foodItem = [[NSMutableDictionary alloc] init];
-    [foodItem setObject:[UIImage imageNamed:@"feedinggrey-pasta.png"] forKey:@"file"];
-    [foodItem setObject:@"pasta" forKey:@"name"];
-    [foodItem setObject:@"cereal" forKey:@"category"];
-    [foodChosen addObject:foodItem];
-    
-    foodItem = [[NSMutableDictionary alloc] init];
-    [foodItem setObject:[UIImage imageNamed:@"feedinggrey-peach.png"] forKey:@"file"];
-    [foodItem setObject:@"peach" forKey:@"name"];
-    [foodItem setObject:@"fruit" forKey:@"category"];
-    [foodChosen addObject:foodItem];
-    
-    foodItem = [[NSMutableDictionary alloc] init];
-    [foodItem setObject:[UIImage imageNamed:@"feedinggrey-pear.png"] forKey:@"file"];
-    [foodItem setObject:@"pear" forKey:@"name"];
-    [foodItem setObject:@"fruit" forKey:@"category"];
-    [foodChosen addObject:foodItem];
-    
-    foodItem = [[NSMutableDictionary alloc] init];
-    [foodItem setObject:[UIImage imageNamed:@"feedinggrey-green pea.png"] forKey:@"file"];
-    [foodItem setObject:@"green pea" forKey:@"name"];
-    [foodItem setObject:@"cereal" forKey:@"category"];
-    [foodChosen addObject:foodItem];
-    
-    foodItem = [[NSMutableDictionary alloc] init];
-    [foodItem setObject:[UIImage imageNamed:@"feedinggrey-pineapple.png"] forKey:@"file"];
-    [foodItem setObject:@"pineapple" forKey:@"name"];
-    [foodItem setObject:@"fruit" forKey:@"category"];
-    [foodChosen addObject:foodItem];
-    
-    foodItem = [[NSMutableDictionary alloc] init];
-    [foodItem setObject:[UIImage imageNamed:@"feedinggrey-plum.png"] forKey:@"file"];
-    [foodItem setObject:@"plum" forKey:@"name"];
-    [foodItem setObject:@"fruit" forKey:@"category"];
-    [foodChosen addObject:foodItem];
-    
-    foodItem = [[NSMutableDictionary alloc] init];
-    [foodItem setObject:[UIImage imageNamed:@"feedinggrey-potato.png"] forKey:@"file"];
-    [foodItem setObject:@"potato" forKey:@"name"];
-    [foodItem setObject:@"cereal" forKey:@"category"];
-    [foodChosen addObject:foodItem];
-    
-    foodItem = [[NSMutableDictionary alloc] init];
-    [foodItem setObject:[UIImage imageNamed:@"feedinggrey-pumpkin.png"] forKey:@"file"];
-    [foodItem setObject:@"pumpkin" forKey:@"name"];
-    [foodItem setObject:@"vegetable" forKey:@"category"];
-    [foodChosen addObject:foodItem];
-    
-    foodItem = [[NSMutableDictionary alloc] init];
-    [foodItem setObject:[UIImage imageNamed:@"feedinggrey-rice brown.png"] forKey:@"file"];
-    [foodItem setObject:@"brown rice" forKey:@"name"];
-    [foodItem setObject:@"cereal" forKey:@"category"];
-    [foodChosen addObject:foodItem];
-    
-    foodItem = [[NSMutableDictionary alloc] init];
-    [foodItem setObject:[UIImage imageNamed:@"feedinggrey-rice white.png"] forKey:@"file"];
-    [foodItem setObject:@"white rice" forKey:@"name"];
-    [foodItem setObject:@"cereal" forKey:@"category"];
-    [foodChosen addObject:foodItem];
-    
-    foodItem = [[NSMutableDictionary alloc] init];
-    [foodItem setObject:[UIImage imageNamed:@"feedinggrey-sweet potato.png"] forKey:@"file"];
-    [foodItem setObject:@"sweet potato" forKey:@"name"];
-    [foodItem setObject:@"cereal" forKey:@"category"];
-    [foodChosen addObject:foodItem];
-    
-    foodItem = [[NSMutableDictionary alloc] init];
-    [foodItem setObject:[UIImage imageNamed:@"feedinggrey-watermelon.png"] forKey:@"file"];
-    [foodItem setObject:@"watermelon" forKey:@"name"];
-    [foodItem setObject:@"fruit" forKey:@"category"];
-    [foodChosen addObject:foodItem];
     
     //set content array
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"category == %@", @"fruit"];
-    NSArray *filteredFoodChosen = [foodChosen filteredArrayUsingPredicate:predicate];
+    NSArray *filteredFoodChosen = [inventoryGrey filteredArrayUsingPredicate:predicate];
     
     NSMutableArray *foodChosenImages = [[NSMutableArray alloc] init];
     for(int i=0; i< [filteredFoodChosen count]; i++)
         [foodChosenImages addObject:filteredFoodChosen[i][@"file"]];
     
     [mFoodChosenSlider setContentArray:foodChosenImages];
-    
-    /*
-    [foodItem release];//adding food items to list done
-    [foodChosen release];
+
     [filteredFoodChosen release];
     [foodChosenImages release];
-     */
+    
     
     [mFoodChosenSlider getWithPositionMemoryIdentifier:@"feedingFoodChosen"];
+}
+
+- (void)addFoodToInventory
+{
+    //load image
+    //NSMutableArray *foodImages = [[NSMutableArray alloc] init];
+    // [recentlyUsedImages addObject:[UIImage imageNamed:@"feedingcategories-cereal"]];
+    // should use plist file to load
+    //[foodImages addObject:[UIImage imageNamed:@"feeding-apple.png"]];
+    //NSMutableDictionary *foodImages = [NSMutableDictionary dictionaryWithCapacity:1];
+    inventory = [[NSMutableArray alloc] init];
+    
+    NSMutableDictionary *foodItem = [[NSMutableDictionary alloc] init];
+    [foodItem setObject:[UIImage imageNamed:@"feeding-apple.png"] forKey:@"file"];
+    [foodItem setObject:@"apple" forKey:@"name"];
+    [foodItem setObject:@"fruit" forKey:@"category"];
+    [inventory addObject:foodItem];
+    
+    foodItem = [[NSMutableDictionary alloc] init];
+    [foodItem setObject:[UIImage imageNamed:@"feeding-apricot.png"] forKey:@"file"];
+    [foodItem setObject:@"apricot" forKey:@"name"];
+    [foodItem setObject:@"fruit" forKey:@"category"];
+    [inventory addObject:foodItem];
+    
+    foodItem = [[NSMutableDictionary alloc] init];
+    [foodItem setObject:[UIImage imageNamed:@"feeding-artichoke.png"] forKey:@"file"];
+    [foodItem setObject:@"artichoke" forKey:@"name"];
+    [foodItem setObject:@"vegetable" forKey:@"category"];
+    [inventory addObject:foodItem];
+    
+    foodItem = [[NSMutableDictionary alloc] init];
+    [foodItem setObject:[UIImage imageNamed:@"feeding-asparagus.png"] forKey:@"file"];
+    [foodItem setObject:@"asparagus" forKey:@"name"];
+    [foodItem setObject:@"vegetable" forKey:@"category"];
+    [inventory addObject:foodItem];
+    
+    foodItem = [[NSMutableDictionary alloc] init];
+    [foodItem setObject:[UIImage imageNamed:@"feeding-avocado.png"] forKey:@"file"];
+    [foodItem setObject:@"avocado" forKey:@"name"];
+    [foodItem setObject:@"fruit" forKey:@"category"];
+    [inventory addObject:foodItem];
+    
+    foodItem = [[NSMutableDictionary alloc] init];
+    [foodItem setObject:[UIImage imageNamed:@"feeding-banana.png"] forKey:@"file"];
+    [foodItem setObject:@"banana" forKey:@"name"];
+    [foodItem setObject:@"fruit" forKey:@"category"];
+    [inventory addObject:foodItem];
+    
+    foodItem = [[NSMutableDictionary alloc] init];
+    [foodItem setObject:[UIImage imageNamed:@"feeding-beet.png"] forKey:@"file"];
+    [foodItem setObject:@"beet" forKey:@"name"];
+    [foodItem setObject:@"vegetable" forKey:@"category"];
+    [inventory addObject:foodItem];
+    
+    foodItem = [[NSMutableDictionary alloc] init];
+    [foodItem setObject:[UIImage imageNamed:@"feeding-blueberry.png"] forKey:@"file"];
+    [foodItem setObject:@"blueberry" forKey:@"name"];
+    [foodItem setObject:@"fruit" forKey:@"category"];
+    [inventory addObject:foodItem];
+    
+    foodItem = [[NSMutableDictionary alloc] init];
+    [foodItem setObject:[UIImage imageNamed:@"feeding-bread.png"] forKey:@"file"];
+    [foodItem setObject:@"bread" forKey:@"name"];
+    [foodItem setObject:@"cereal" forKey:@"category"];
+    [inventory addObject:foodItem];
+    
+    foodItem = [[NSMutableDictionary alloc] init];
+    [foodItem setObject:[UIImage imageNamed:@"feeding-broccoli.png"] forKey:@"file"];
+    [foodItem setObject:@"broccoli" forKey:@"name"];
+    [foodItem setObject:@"vegetable" forKey:@"category"];
+    [inventory addObject:foodItem];
+    
+    foodItem = [[NSMutableDictionary alloc] init];
+    [foodItem setObject:[UIImage imageNamed:@"feeding-brussel sprout.png"] forKey:@"file"];
+    [foodItem setObject:@"brussel sprout" forKey:@"name"];
+    [foodItem setObject:@"vegetable" forKey:@"category"];
+    [inventory addObject:foodItem];
+
+    foodItem = [[NSMutableDictionary alloc] init];
+    [foodItem setObject:[UIImage imageNamed:@"feeding-califlower.png"] forKey:@"file"];
+    [foodItem setObject:@"califlower" forKey:@"name"];
+    [foodItem setObject:@"vegetable" forKey:@"category"];
+    [inventory addObject:foodItem];
+    
+    foodItem = [[NSMutableDictionary alloc] init];
+    [foodItem setObject:[UIImage imageNamed:@"feeding-carrot.png"] forKey:@"file"];
+    [foodItem setObject:@"carrot" forKey:@"name"];
+    [foodItem setObject:@"vegetable" forKey:@"category"];
+    [inventory addObject:foodItem];
+    
+    foodItem = [[NSMutableDictionary alloc] init];
+    [foodItem setObject:[UIImage imageNamed:@"feeding-cheerios.png"] forKey:@"file"];
+    [foodItem setObject:@"cheerios" forKey:@"name"];
+    [foodItem setObject:@"cereal" forKey:@"category"];
+    [inventory addObject:foodItem];
+    
+    foodItem = [[NSMutableDictionary alloc] init];
+    [foodItem setObject:[UIImage imageNamed:@"feeding-cheese.png"] forKey:@"file"];
+    [foodItem setObject:@"cheese" forKey:@"name"];
+    [foodItem setObject:@"dairy" forKey:@"category"];
+    [inventory addObject:foodItem];
+    
+    foodItem = [[NSMutableDictionary alloc] init];
+    [foodItem setObject:[UIImage imageNamed:@"feeding-cucumber.png"] forKey:@"file"];
+    [foodItem setObject:@"cucumber" forKey:@"name"];
+    [foodItem setObject:@"vegetable" forKey:@"category"];
+    [inventory addObject:foodItem];
+    
+    foodItem = [[NSMutableDictionary alloc] init];
+    [foodItem setObject:[UIImage imageNamed:@"feeding-dry bean.png"] forKey:@"file"];
+    [foodItem setObject:@"dry bean" forKey:@"name"];
+    [foodItem setObject:@"cereal" forKey:@"category"];
+    [inventory addObject:foodItem];
+    
+    foodItem = [[NSMutableDictionary alloc] init];
+    [foodItem setObject:[UIImage imageNamed:@"feeding-eggplant.png"] forKey:@"file"];
+    [foodItem setObject:@"eggplant" forKey:@"name"];
+    [foodItem setObject:@"vegetable" forKey:@"category"];
+    [inventory addObject:foodItem];
+    
+    foodItem = [[NSMutableDictionary alloc] init];
+    [foodItem setObject:[UIImage imageNamed:@"feeding-fish.png"] forKey:@"file"];
+    [foodItem setObject:@"fish" forKey:@"name"];
+    [foodItem setObject:@"meat" forKey:@"category"];
+    [inventory addObject:foodItem];
+    
+    foodItem = [[NSMutableDictionary alloc] init];
+    [foodItem setObject:[UIImage imageNamed:@"feeding-grape.png"] forKey:@"file"];
+    [foodItem setObject:@"grape" forKey:@"name"];
+    [foodItem setObject:@"fruit" forKey:@"category"];
+    [inventory addObject:foodItem];
+    
+    foodItem = [[NSMutableDictionary alloc] init];
+    [foodItem setObject:[UIImage imageNamed:@"feeding-kiwi.png"] forKey:@"file"];
+    [foodItem setObject:@"kiwi" forKey:@"name"];
+    [foodItem setObject:@"fruit" forKey:@"category"];
+    [inventory addObject:foodItem];
+    
+    foodItem = [[NSMutableDictionary alloc] init];
+    [foodItem setObject:[UIImage imageNamed:@"feeding-lima bean.png"] forKey:@"file"];
+    [foodItem setObject:@"lima bean" forKey:@"name"];
+    [foodItem setObject:@"cereal" forKey:@"category"];
+    [inventory addObject:foodItem];
+    
+    foodItem = [[NSMutableDictionary alloc] init];
+    [foodItem setObject:[UIImage imageNamed:@"feeding-mango.png"] forKey:@"file"];
+    [foodItem setObject:@"mango" forKey:@"name"];
+    [foodItem setObject:@"fruit" forKey:@"category"];
+    [inventory addObject:foodItem];
+    
+    foodItem = [[NSMutableDictionary alloc] init];
+    [foodItem setObject:[UIImage imageNamed:@"feeding-milk.png"] forKey:@"file"];
+    [foodItem setObject:@"milk" forKey:@"name"];
+    [foodItem setObject:@"dairy" forKey:@"category"];
+    [inventory addObject:foodItem];
+    
+    foodItem = [[NSMutableDictionary alloc] init];
+    [foodItem setObject:[UIImage imageNamed:@"feeding-oatmeal.png"] forKey:@"file"];
+    [foodItem setObject:@"oatmeal" forKey:@"name"];
+    [foodItem setObject:@"cereal" forKey:@"category"];
+    [inventory addObject:foodItem];
+    
+    foodItem = [[NSMutableDictionary alloc] init];
+    [foodItem setObject:[UIImage imageNamed:@"feeding-onion.png"] forKey:@"file"];
+    [foodItem setObject:@"onion" forKey:@"name"];
+    [foodItem setObject:@"vegetable" forKey:@"category"];
+    [inventory addObject:foodItem];
+    
+    foodItem = [[NSMutableDictionary alloc] init];
+    [foodItem setObject:[UIImage imageNamed:@"feeding-orange juice.png"] forKey:@"file"];
+    [foodItem setObject:@"orange juice" forKey:@"name"];
+    [foodItem setObject:@"juice" forKey:@"category"];
+    [inventory addObject:foodItem];
+    
+    foodItem = [[NSMutableDictionary alloc] init];
+    [foodItem setObject:[UIImage imageNamed:@"feeding-orange.png"] forKey:@"file"];
+    [foodItem setObject:@"orange" forKey:@"name"];
+    [foodItem setObject:@"fruit" forKey:@"category"];
+    [inventory addObject:foodItem];
+    
+    foodItem = [[NSMutableDictionary alloc] init];
+    [foodItem setObject:[UIImage imageNamed:@"feeding-papaya.png"] forKey:@"file"];
+    [foodItem setObject:@"papaya" forKey:@"name"];
+    [foodItem setObject:@"fruit" forKey:@"category"];
+    [inventory addObject:foodItem];
+    
+    foodItem = [[NSMutableDictionary alloc] init];
+    [foodItem setObject:[UIImage imageNamed:@"feeding-pasta.png"] forKey:@"file"];
+    [foodItem setObject:@"pasta" forKey:@"name"];
+    [foodItem setObject:@"cereal" forKey:@"category"];
+    [inventory addObject:foodItem];
+    
+    foodItem = [[NSMutableDictionary alloc] init];
+    [foodItem setObject:[UIImage imageNamed:@"feeding-peach.png"] forKey:@"file"];
+    [foodItem setObject:@"peach" forKey:@"name"];
+    [foodItem setObject:@"fruit" forKey:@"category"];
+    [inventory addObject:foodItem];
+    
+    foodItem = [[NSMutableDictionary alloc] init];
+    [foodItem setObject:[UIImage imageNamed:@"feeding-pear.png"] forKey:@"file"];
+    [foodItem setObject:@"pear" forKey:@"name"];
+    [foodItem setObject:@"fruit" forKey:@"category"];
+    [inventory addObject:foodItem];
+    
+    foodItem = [[NSMutableDictionary alloc] init];
+    [foodItem setObject:[UIImage imageNamed:@"feeding-green pea.png"] forKey:@"file"];
+    [foodItem setObject:@"green pea" forKey:@"name"];
+    [foodItem setObject:@"cereal" forKey:@"category"];
+    [inventory addObject:foodItem];
+    
+    foodItem = [[NSMutableDictionary alloc] init];
+    [foodItem setObject:[UIImage imageNamed:@"feeding-pineapple.png"] forKey:@"file"];
+    [foodItem setObject:@"pineapple" forKey:@"name"];
+    [foodItem setObject:@"fruit" forKey:@"category"];
+    [inventory addObject:foodItem];
+    
+    foodItem = [[NSMutableDictionary alloc] init];
+    [foodItem setObject:[UIImage imageNamed:@"feeding-plum.png"] forKey:@"file"];
+    [foodItem setObject:@"plum" forKey:@"name"];
+    [foodItem setObject:@"fruit" forKey:@"category"];
+    [inventory addObject:foodItem];
+    
+    foodItem = [[NSMutableDictionary alloc] init];
+    [foodItem setObject:[UIImage imageNamed:@"feeding-potato.png"] forKey:@"file"];
+    [foodItem setObject:@"potato" forKey:@"name"];
+    [foodItem setObject:@"cereal" forKey:@"category"];
+    [inventory addObject:foodItem];
+    
+    foodItem = [[NSMutableDictionary alloc] init];
+    [foodItem setObject:[UIImage imageNamed:@"feeding-pumpkin.png"] forKey:@"file"];
+    [foodItem setObject:@"pumpkin" forKey:@"name"];
+    [foodItem setObject:@"vegetable" forKey:@"category"];
+    [inventory addObject:foodItem];
+    
+    foodItem = [[NSMutableDictionary alloc] init];
+    [foodItem setObject:[UIImage imageNamed:@"feeding-rice brown.png"] forKey:@"file"];
+    [foodItem setObject:@"brown rice" forKey:@"name"];
+    [foodItem setObject:@"cereal" forKey:@"category"];
+    [inventory addObject:foodItem];
+    
+    foodItem = [[NSMutableDictionary alloc] init];
+    [foodItem setObject:[UIImage imageNamed:@"feeding-rice white.png"] forKey:@"file"];
+    [foodItem setObject:@"white rice" forKey:@"name"];
+    [foodItem setObject:@"cereal" forKey:@"category"];
+    [inventory addObject:foodItem];
+    
+    foodItem = [[NSMutableDictionary alloc] init];
+    [foodItem setObject:[UIImage imageNamed:@"feeding-sweet potato.png"] forKey:@"file"];
+    [foodItem setObject:@"sweet potato" forKey:@"name"];
+    [foodItem setObject:@"cereal" forKey:@"category"];
+    [inventory addObject:foodItem];
+    
+    foodItem = [[NSMutableDictionary alloc] init];
+    [foodItem setObject:[UIImage imageNamed:@"feeding-watermelon.png"] forKey:@"file"];
+    [foodItem setObject:@"watermelon" forKey:@"name"];
+    [foodItem setObject:@"fruit" forKey:@"category"];
+    [inventory addObject:foodItem];
+    
+    [foodItem release];//adding food items to list done    
+}
+
+- (void)addFoodToInventoryGrey
+{
+    inventoryGrey = [[NSMutableArray alloc] init];
+    NSMutableDictionary *foodItem = [[NSMutableDictionary alloc] init];
+    
+    [foodItem setObject:[UIImage imageNamed:@"feedinggrey-apple.png"] forKey:@"file"];
+    [foodItem setObject:@"apple" forKey:@"name"];
+    [foodItem setObject:@"fruit" forKey:@"category"];
+    [inventoryGrey  addObject:foodItem];
+    
+    foodItem = [[NSMutableDictionary alloc] init];
+    [foodItem setObject:[UIImage imageNamed:@"feedinggrey-apricot.png"] forKey:@"file"];
+    [foodItem setObject:@"apricot" forKey:@"name"];
+    [foodItem setObject:@"fruit" forKey:@"category"];
+    [inventoryGrey  addObject:foodItem];
+    
+    foodItem = [[NSMutableDictionary alloc] init];
+    [foodItem setObject:[UIImage imageNamed:@"feedinggrey-artichoke.png"] forKey:@"file"];
+    [foodItem setObject:@"artichoke" forKey:@"name"];
+    [foodItem setObject:@"vegetable" forKey:@"category"];
+    [inventoryGrey  addObject:foodItem];
+    
+    foodItem = [[NSMutableDictionary alloc] init];
+    [foodItem setObject:[UIImage imageNamed:@"feedinggrey-asparagus.png"] forKey:@"file"];
+    [foodItem setObject:@"asparagus" forKey:@"name"];
+    [foodItem setObject:@"vegetable" forKey:@"category"];
+    [inventoryGrey  addObject:foodItem];
+    
+    foodItem = [[NSMutableDictionary alloc] init];
+    [foodItem setObject:[UIImage imageNamed:@"feedinggrey-avocado.png"] forKey:@"file"];
+    [foodItem setObject:@"avocado" forKey:@"name"];
+    [foodItem setObject:@"fruit" forKey:@"category"];
+    [inventoryGrey  addObject:foodItem];
+    
+    foodItem = [[NSMutableDictionary alloc] init];
+    [foodItem setObject:[UIImage imageNamed:@"feedinggrey-banana.png"] forKey:@"file"];
+    [foodItem setObject:@"banana" forKey:@"name"];
+    [foodItem setObject:@"fruit" forKey:@"category"];
+    [inventoryGrey  addObject:foodItem];
+    
+    foodItem = [[NSMutableDictionary alloc] init];
+    [foodItem setObject:[UIImage imageNamed:@"feedinggrey-beet.png"] forKey:@"file"];
+    [foodItem setObject:@"beet" forKey:@"name"];
+    [foodItem setObject:@"vegetable" forKey:@"category"];
+    [inventoryGrey  addObject:foodItem];
+    
+    foodItem = [[NSMutableDictionary alloc] init];
+    [foodItem setObject:[UIImage imageNamed:@"feedinggrey-blueberry.png"] forKey:@"file"];
+    [foodItem setObject:@"blueberry" forKey:@"name"];
+    [foodItem setObject:@"fruit" forKey:@"category"];
+    [inventoryGrey  addObject:foodItem];
+    
+    foodItem = [[NSMutableDictionary alloc] init];
+    [foodItem setObject:[UIImage imageNamed:@"feedinggrey-bread.png"] forKey:@"file"];
+    [foodItem setObject:@"bread" forKey:@"name"];
+    [foodItem setObject:@"cereal" forKey:@"category"];
+    [inventoryGrey  addObject:foodItem];
+    
+    foodItem = [[NSMutableDictionary alloc] init];
+    [foodItem setObject:[UIImage imageNamed:@"feedinggrey-broccoli.png"] forKey:@"file"];
+    [foodItem setObject:@"broccoli" forKey:@"name"];
+    [foodItem setObject:@"vegetable" forKey:@"category"];
+    [inventoryGrey  addObject:foodItem];
+    
+    foodItem = [[NSMutableDictionary alloc] init];
+    [foodItem setObject:[UIImage imageNamed:@"feedinggrey-brussel sprout.png"] forKey:@"file"];
+    [foodItem setObject:@"brussel sprout" forKey:@"name"];
+    [foodItem setObject:@"vegetable" forKey:@"category"];
+    [inventoryGrey  addObject:foodItem];
+    
+    foodItem = [[NSMutableDictionary alloc] init];
+    [foodItem setObject:[UIImage imageNamed:@"feedinggrey-califlower.png"] forKey:@"file"];
+    [foodItem setObject:@"califlower" forKey:@"name"];
+    [foodItem setObject:@"vegetable" forKey:@"category"];
+    [inventoryGrey  addObject:foodItem];
+    
+    foodItem = [[NSMutableDictionary alloc] init];
+    [foodItem setObject:[UIImage imageNamed:@"feedinggrey-carrot.png"] forKey:@"file"];
+    [foodItem setObject:@"carrot" forKey:@"name"];
+    [foodItem setObject:@"vegetable" forKey:@"category"];
+    [inventoryGrey  addObject:foodItem];
+    
+    foodItem = [[NSMutableDictionary alloc] init];
+    [foodItem setObject:[UIImage imageNamed:@"feedinggrey-cheerios.png"] forKey:@"file"];
+    [foodItem setObject:@"cheerios" forKey:@"name"];
+    [foodItem setObject:@"cereal" forKey:@"category"];
+    [inventoryGrey  addObject:foodItem];
+    
+    foodItem = [[NSMutableDictionary alloc] init];
+    [foodItem setObject:[UIImage imageNamed:@"feedinggrey-cheese.png"] forKey:@"file"];
+    [foodItem setObject:@"cheese" forKey:@"name"];
+    [foodItem setObject:@"dairy" forKey:@"category"];
+    [inventoryGrey  addObject:foodItem];
+    
+    foodItem = [[NSMutableDictionary alloc] init];
+    [foodItem setObject:[UIImage imageNamed:@"feedinggrey-cucumber.png"] forKey:@"file"];
+    [foodItem setObject:@"cucumber" forKey:@"name"];
+    [foodItem setObject:@"vegetable" forKey:@"category"];
+    [inventoryGrey  addObject:foodItem];
+    
+    foodItem = [[NSMutableDictionary alloc] init];
+    [foodItem setObject:[UIImage imageNamed:@"feedinggrey-dry bean.png"] forKey:@"file"];
+    [foodItem setObject:@"dry bean" forKey:@"name"];
+    [foodItem setObject:@"cereal" forKey:@"category"];
+    [inventoryGrey  addObject:foodItem];
+    
+    foodItem = [[NSMutableDictionary alloc] init];
+    [foodItem setObject:[UIImage imageNamed:@"feedinggrey-eggplant.png"] forKey:@"file"];
+    [foodItem setObject:@"eggplant" forKey:@"name"];
+    [foodItem setObject:@"vegetable" forKey:@"category"];
+    [inventoryGrey  addObject:foodItem];
+    
+    foodItem = [[NSMutableDictionary alloc] init];
+    [foodItem setObject:[UIImage imageNamed:@"feedinggrey-fish.png"] forKey:@"file"];
+    [foodItem setObject:@"fish" forKey:@"name"];
+    [foodItem setObject:@"meat" forKey:@"category"];
+    [inventoryGrey  addObject:foodItem];
+    
+    foodItem = [[NSMutableDictionary alloc] init];
+    [foodItem setObject:[UIImage imageNamed:@"feedinggrey-grape.png"] forKey:@"file"];
+    [foodItem setObject:@"grape" forKey:@"name"];
+    [foodItem setObject:@"fruit" forKey:@"category"];
+    [inventoryGrey  addObject:foodItem];
+    
+    foodItem = [[NSMutableDictionary alloc] init];
+    [foodItem setObject:[UIImage imageNamed:@"feedinggrey-kiwi.png"] forKey:@"file"];
+    [foodItem setObject:@"kiwi" forKey:@"name"];
+    [foodItem setObject:@"fruit" forKey:@"category"];
+    [inventoryGrey  addObject:foodItem];
+    
+    foodItem = [[NSMutableDictionary alloc] init];
+    [foodItem setObject:[UIImage imageNamed:@"feedinggrey-lima bean.png"] forKey:@"file"];
+    [foodItem setObject:@"lima bean" forKey:@"name"];
+    [foodItem setObject:@"cereal" forKey:@"category"];
+    [inventoryGrey  addObject:foodItem];
+    
+    foodItem = [[NSMutableDictionary alloc] init];
+    [foodItem setObject:[UIImage imageNamed:@"feedinggrey-mango.png"] forKey:@"file"];
+    [foodItem setObject:@"mango" forKey:@"name"];
+    [foodItem setObject:@"fruit" forKey:@"category"];
+    [inventoryGrey  addObject:foodItem];
+    
+    foodItem = [[NSMutableDictionary alloc] init];
+    [foodItem setObject:[UIImage imageNamed:@"feedinggrey-milk.png"] forKey:@"file"];
+    [foodItem setObject:@"milk" forKey:@"name"];
+    [foodItem setObject:@"dairy" forKey:@"category"];
+    [inventoryGrey  addObject:foodItem];
+    
+    foodItem = [[NSMutableDictionary alloc] init];
+    [foodItem setObject:[UIImage imageNamed:@"feedinggrey-oatmeal.png"] forKey:@"file"];
+    [foodItem setObject:@"oatmeal" forKey:@"name"];
+    [foodItem setObject:@"cereal" forKey:@"category"];
+    [inventoryGrey  addObject:foodItem];
+    
+    foodItem = [[NSMutableDictionary alloc] init];
+    [foodItem setObject:[UIImage imageNamed:@"feedinggrey-onion.png"] forKey:@"file"];
+    [foodItem setObject:@"onion" forKey:@"name"];
+    [foodItem setObject:@"vegetable" forKey:@"category"];
+    [inventoryGrey  addObject:foodItem];
+    
+    foodItem = [[NSMutableDictionary alloc] init];
+    [foodItem setObject:[UIImage imageNamed:@"feedinggrey-orange juice.png"] forKey:@"file"];
+    [foodItem setObject:@"orange juice" forKey:@"name"];
+    [foodItem setObject:@"juice" forKey:@"category"];
+    [inventoryGrey  addObject:foodItem];
+    
+    foodItem = [[NSMutableDictionary alloc] init];
+    [foodItem setObject:[UIImage imageNamed:@"feedinggrey-orange.png"] forKey:@"file"];
+    [foodItem setObject:@"orange" forKey:@"name"];
+    [foodItem setObject:@"fruit" forKey:@"category"];
+    [inventoryGrey  addObject:foodItem];
+    
+    foodItem = [[NSMutableDictionary alloc] init];
+    [foodItem setObject:[UIImage imageNamed:@"feedinggrey-papaya.png"] forKey:@"file"];
+    [foodItem setObject:@"papaya" forKey:@"name"];
+    [foodItem setObject:@"fruit" forKey:@"category"];
+    [inventoryGrey  addObject:foodItem];
+    
+    foodItem = [[NSMutableDictionary alloc] init];
+    [foodItem setObject:[UIImage imageNamed:@"feedinggrey-pasta.png"] forKey:@"file"];
+    [foodItem setObject:@"pasta" forKey:@"name"];
+    [foodItem setObject:@"cereal" forKey:@"category"];
+    [inventoryGrey  addObject:foodItem];
+    
+    foodItem = [[NSMutableDictionary alloc] init];
+    [foodItem setObject:[UIImage imageNamed:@"feedinggrey-peach.png"] forKey:@"file"];
+    [foodItem setObject:@"peach" forKey:@"name"];
+    [foodItem setObject:@"fruit" forKey:@"category"];
+    [inventoryGrey  addObject:foodItem];
+    
+    foodItem = [[NSMutableDictionary alloc] init];
+    [foodItem setObject:[UIImage imageNamed:@"feedinggrey-pear.png"] forKey:@"file"];
+    [foodItem setObject:@"pear" forKey:@"name"];
+    [foodItem setObject:@"fruit" forKey:@"category"];
+    [inventoryGrey  addObject:foodItem];
+    
+    foodItem = [[NSMutableDictionary alloc] init];
+    [foodItem setObject:[UIImage imageNamed:@"feedinggrey-green pea.png"] forKey:@"file"];
+    [foodItem setObject:@"green pea" forKey:@"name"];
+    [foodItem setObject:@"cereal" forKey:@"category"];
+    [inventoryGrey  addObject:foodItem];
+    
+    foodItem = [[NSMutableDictionary alloc] init];
+    [foodItem setObject:[UIImage imageNamed:@"feedinggrey-pineapple.png"] forKey:@"file"];
+    [foodItem setObject:@"pineapple" forKey:@"name"];
+    [foodItem setObject:@"fruit" forKey:@"category"];
+    [inventoryGrey  addObject:foodItem];
+    
+    foodItem = [[NSMutableDictionary alloc] init];
+    [foodItem setObject:[UIImage imageNamed:@"feedinggrey-plum.png"] forKey:@"file"];
+    [foodItem setObject:@"plum" forKey:@"name"];
+    [foodItem setObject:@"fruit" forKey:@"category"];
+    [inventoryGrey  addObject:foodItem];
+    
+    foodItem = [[NSMutableDictionary alloc] init];
+    [foodItem setObject:[UIImage imageNamed:@"feedinggrey-potato.png"] forKey:@"file"];
+    [foodItem setObject:@"potato" forKey:@"name"];
+    [foodItem setObject:@"cereal" forKey:@"category"];
+    [inventoryGrey  addObject:foodItem];
+    
+    foodItem = [[NSMutableDictionary alloc] init];
+    [foodItem setObject:[UIImage imageNamed:@"feedinggrey-pumpkin.png"] forKey:@"file"];
+    [foodItem setObject:@"pumpkin" forKey:@"name"];
+    [foodItem setObject:@"vegetable" forKey:@"category"];
+    [inventoryGrey  addObject:foodItem];
+    
+    foodItem = [[NSMutableDictionary alloc] init];
+    [foodItem setObject:[UIImage imageNamed:@"feedinggrey-rice brown.png"] forKey:@"file"];
+    [foodItem setObject:@"brown rice" forKey:@"name"];
+    [foodItem setObject:@"cereal" forKey:@"category"];
+    [inventoryGrey  addObject:foodItem];
+    
+    foodItem = [[NSMutableDictionary alloc] init];
+    [foodItem setObject:[UIImage imageNamed:@"feedinggrey-rice white.png"] forKey:@"file"];
+    [foodItem setObject:@"white rice" forKey:@"name"];
+    [foodItem setObject:@"cereal" forKey:@"category"];
+    [inventoryGrey  addObject:foodItem];
+    
+    foodItem = [[NSMutableDictionary alloc] init];
+    [foodItem setObject:[UIImage imageNamed:@"feedinggrey-sweet potato.png"] forKey:@"file"];
+    [foodItem setObject:@"sweet potato" forKey:@"name"];
+    [foodItem setObject:@"cereal" forKey:@"category"];
+    [inventoryGrey  addObject:foodItem];
+    
+    foodItem = [[NSMutableDictionary alloc] init];
+    [foodItem setObject:[UIImage imageNamed:@"feedinggrey-watermelon.png"] forKey:@"file"];
+    [foodItem setObject:@"watermelon" forKey:@"name"];
+    [foodItem setObject:@"fruit" forKey:@"category"];
+    [inventoryGrey  addObject:foodItem];
+    
+    [foodItem release];//adding food items to list done
+
+
 }
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-        
+    
+    //food inventory
+    [self addFoodToInventory];
+    [self addFoodToInventoryGrey];
+    
     // create background
     totImageView* background = [[totImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
     [background imageFilePath:@"feeding-blank.png"];
@@ -951,11 +972,13 @@
     //date and time
     mDatetime = [UIButton buttonWithType:UIButtonTypeCustom];
     mDatetime.frame = CGRectMake(100, 40, 120, 30);
+    [mDatetime.titleLabel setFont:[UIFont fontWithName:@"Roboto-Regular" size:16.0]];
     [mDatetime setTitle:[totUtility nowTimeString] forState:UIControlStateNormal];
     [self.view addSubview:mDatetime];
     [mDatetime addTarget:self action:@selector(DatetimeClicked:) forControlEvents:UIControlEventTouchUpInside];
     [mDatetime setBackgroundColor:[UIColor whiteColor]];
-    [mDatetime setTitleColor:[UIColor magentaColor] forState:UIControlStateNormal];
+    [mDatetime setTitleColor:[UIColor colorWithRed:147.0/255 green:149.0/255 blue:152.0/255 alpha:1] forState:UIControlStateNormal];
+    [mDatetime setTitleColor:[UIColor colorWithRed:147.0/255 green:149.0/255 blue:152.0/255 alpha:1] forState:UIControlStateHighlighted];
     
     // set up date picker
     mWidth = self.view.frame.size.width;
@@ -976,8 +999,7 @@
     //mSummary.titleLabel.frame= mSummary.bounds;
     [self.view addSubview:mSummary];
     [mSummary addTarget:self action:@selector(SummaryButtonClicked:) forControlEvents: UIControlEventTouchUpInside];
-    
-
+    foodChosenList = [[NSMutableArray alloc]init];
 }
 
 
@@ -1067,7 +1089,7 @@
     for(int i=0;i<DEFAULT_MENU;i++){
         quantityList[i]=0;
     }
-
+    foodChosenList = [[NSMutableArray alloc]init]; // clear all
 }
 
 
