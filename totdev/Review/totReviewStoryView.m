@@ -35,6 +35,7 @@
 - (NSString*)getTypeIcon:(totReviewStory*)story {
     NSArray* tokens = [story.mEventType componentsSeparatedByString:@"/"];
     NSString* category = [tokens objectAtIndex:0];
+    
     if ([category isEqualToString:@"basic"]) {
         return [NSString stringWithFormat:@"%s.png", [[tokens objectAtIndex:1] UTF8String]];
     } else if ([category isEqualToString:@"eye_contact"]) {
@@ -60,19 +61,16 @@
 }
 
 // get the story description
-- (BOOL) isFirstOccurrence:(NSString*)event_type forBaby:(int)babyId inDatabase:(totModel*)db {
-    NSArray* events = [db getEvent:babyId event:event_type];
-    if ([events count] == 1) {
-        return YES;
-    } else {
-        return NO;
-    }
+- (BOOL) isFirstOccurrence:(totReviewStory*)story {
+    //AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    //totModel * database = [appDelegate getDataModel];
+    return NO;
 }
 - (NSString*)getStoryDescription:(totReviewStory*)story {
-    NSString* desc = nil;
-    NSArray* tokens = [story.mEventType componentsSeparatedByString:@"/"];
-    NSString* category = [tokens objectAtIndex:0];
-    NSString* rawValue = story.mRawContent;
+    NSString * desc = nil;
+    NSArray * tokens = [story.mEventType componentsSeparatedByString:@"/"];
+    NSString * category = [tokens objectAtIndex:0];
+    NSString * rawValue = story.mRawContent;
     
     totModel* database = global.model;
     
@@ -83,7 +81,7 @@
             desc = [NSString stringWithFormat:@"has a %s diaper", [rawValue UTF8String]];
         }
         else if ([subcategory isEqualToString:@"language"]) {
-            desc = [NSString stringWithUTF8String:[rawValue UTF8String]];
+            desc = [NSString stringWithFormat:@"just learnt %s", [rawValue UTF8String]];
         }
         else if ([subcategory isEqualToString:@"sleep"]) {
             if ([rawValue isEqualToString:@"end"]) {
@@ -93,13 +91,13 @@
             }
         }
         else if ([subcategory isEqualToString:@"height"]) {
-            desc = [NSString stringWithFormat:@"is %s now", [rawValue UTF8String]];
+            desc = [NSString stringWithFormat:@"is %s inches now", [rawValue UTF8String]];
         }
         else if ([subcategory isEqualToString:@"weight"]) {
-            desc = [NSString stringWithFormat:@"is %s now", [rawValue UTF8String]];
+            desc = [NSString stringWithFormat:@"is %s pounds now", [rawValue UTF8String]];
         }
         else if ([subcategory isEqualToString:@"head"]) {
-            desc = [NSString stringWithFormat:@"is %s now", [rawValue UTF8String]];
+            desc = [NSString stringWithFormat:@"is %s centimeters now", [rawValue UTF8String]];
         }
     } else if ([category isEqualToString:@"eye_contact"]) {
         if ([self isFirstOccurrence:category forBaby:global.baby.babyID inDatabase:database]) {
@@ -222,7 +220,13 @@
     
     int padding = 10;
     if ([category isEqualToString:@"basic"]) {
-        NSString* subcategory = [tokens objectAtIndex:1];
+        UILabel * context
+            = [[UILabel alloc] initWithFrame:CGRectMake(padding, padding, frame.size.width-padding, frame.size.height-padding)];
+        context.backgroundColor = [UIColor clearColor];
+        context.textColor = [UIColor colorWithRed:128.0/255 green:130.0/255 blue:133.0/255 alpha:1];
+        [context setFont:[UIFont fontWithName:@"Roboto-Regular" size:13]];
+        
+        NSString * subcategory = [tokens objectAtIndex:1];
         
         if ([subcategory isEqualToString:@"height"]) {
             NSArray* events = [database getEvent:global.baby.babyID event:story.mEventType];
@@ -231,32 +235,31 @@
             totEvent* prevEvt = [events objectAtIndex:1];
             float incr = [currEvt.value floatValue] - [prevEvt.value floatValue];
             
-            UILabel* context = [[UILabel alloc] initWithFrame:CGRectMake(padding, padding, frame.size.width-padding, frame.size.height-padding)];
-            context.backgroundColor = [UIColor clearColor];
             context.text = [NSString stringWithFormat:@"%f taller than last time", incr];
-            [context setFont:[UIFont fontWithName:@"Noteworthy-Light" size:12]];
-            [parent addSubview:context];
-            [context release];
         }
         
         else if ([subcategory isEqualToString:@"language"]) {
             NSArray* events = [database getEvent:global.baby.babyID event:story.mEventType];
             NSString* desc = [NSString stringWithFormat:@"has known %d words", [events count]];
             
-            UILabel* context = [[UILabel alloc] initWithFrame:CGRectMake(padding, padding, frame.size.width-padding, frame.size.height-padding)];
             context.text = desc;
-            context.backgroundColor = [UIColor clearColor];
-            [context setFont:[UIFont fontWithName:@"Noteworthy-Light" size:12]];
-            [parent addSubview:context];
-            [context release];
         }
         
+        else if ([subcategory isEqualToString:@"sleep"]) {
+            if ([story.mRawContent isEqualToString:@"end"]) {
+                // query db to get how long the baby had slept
+                context.text = @"Slept 100 minutes";
+            }
+        }
+        [parent addSubview:context];
+        [context release];
     }
     
     else if ([category isEqualToString:@"emotion"] || [category isEqualToString:@"motor_skill"] ||
              [category isEqualToString:@"gesture"] || [category isEqualToString:@"eye_contact"] ||
              [category isEqualToString:@"vision_attention"] || [category isEqualToString:@"chew"] ||
              [category isEqualToString:@"mirror_test"] || [category isEqualToString:@"imitation"]) {
+
         if ([tokens count] > 1) {
             NSString* subcategory = [tokens objectAtIndex:1];
             printf("subcategory: %s\n", [subcategory UTF8String]);
@@ -307,7 +310,7 @@
         UILabel *storyDesc = [[UILabel alloc] initWithFrame:CGRectMake(50, 0, 220, 20)];
         storyDesc.backgroundColor = [UIColor clearColor];
         storyDesc.text = description;
-        [storyDesc setFont:[UIFont fontWithName:@"Noteworthy-Light" size:13]];
+        [storyDesc setFont:[UIFont fontWithName:@"Roboto-Regular" size:13]];
         [self addSubview:storyDesc];
         [storyDesc release];
     }
@@ -318,17 +321,19 @@
         timeDesc.backgroundColor = [UIColor clearColor];
         timeDesc.text = time_description;
         timeDesc.textColor = [UIColor colorWithRed:0.8 green:0.8 blue:0.8 alpha:1.0];
-        [timeDesc setFont:[UIFont fontWithName:@"Noteworthy-Light" size:10]];
+        [timeDesc setFont:[UIFont fontWithName:@"Roboto-Regular" size:10]];
         [self addSubview:timeDesc];
         [timeDesc release];
     }
     
     // construct the context info.
-    UIView *context = [[UIView alloc] initWithFrame:CGRectMake(0, 45, 280, 80)];
-    context.backgroundColor = [UIColor colorWithRed:216/255.0 green:220/255.0 blue:237/255.0 alpha:1.0];
-    [self buildContextInfo:story withFrame:CGRectMake(0, 0, 280, 80) withinParent:context];
-    [self addSubview:context];
-    [context release];
+    if ([story hasContext]) {
+        UIView *context = [[UIView alloc] initWithFrame:CGRectMake(0, 45, 280, 80)];
+        context.backgroundColor = [UIColor colorWithRed:216/255.0 green:220/255.0 blue:237/255.0 alpha:1.0];
+        [self buildContextInfo:story withFrame:CGRectMake(0, 0, 280, 80) withinParent:context];
+        [self addSubview:context];
+        [context release];
+    }
 }
 
 - (void)setReviewStory:(totReviewStory *)story {

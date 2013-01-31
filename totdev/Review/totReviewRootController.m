@@ -10,6 +10,8 @@
 #import "totReviewRootController.h"
 #import "totReviewTableViewController.h"
 #import "totReviewStory.h"
+#import "totReviewFilterOpenerView.h"
+#import "totReviewFilterView.h"
 #import "../Model/totEvent.h"
 
 #define LIMIT 10
@@ -57,11 +59,26 @@
 }
 */
 
-- (void)loadEvents: (BOOL)refresh {
-    NSArray * events = [mModel getEvent:mCurrentBabyId limit:LIMIT offset:mOffset];
+- (void)loadEvents:(BOOL)refresh ofType:(NSString*)type {
+    NSArray * events = nil;
+    
+    if (refresh) mOffset = 0;
+    
+    if (type == nil) {
+        events = [mModel getEvent:mCurrentBabyId limit:LIMIT offset:mOffset];
+        [tableViewController setTypeName:type];
+    } else {
+        events = [mModel getEvent:mCurrentBabyId event:type limit:LIMIT offset:mOffset];
+        [tableViewController setTypeName:type];
+    }
     
     // If no more events available
-    if ([events count] == 0) return;
+    if ([events count] == 0) {
+        if (refresh) {
+            [tableViewController emptyData];
+        }
+        return;
+    }
     
     mOffset += [events count];
     
@@ -91,7 +108,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     if(tableViewController) {
         mOffset = 0;
-        [self loadEvents:YES];
+        [self loadEvents:YES ofType:nil];
     }
 }
 
@@ -106,6 +123,19 @@
     [self.tableViewController setRootController:self];
     [self.view addSubview:tableViewController.view];
     [aTableView release];
+    
+    totReviewFilterView* filter = [[totReviewFilterView alloc] initWithFrame:CGRectMake(0, -200, 320, 200)];
+    totReviewFilterOpenerView *filterOpener = [[totReviewFilterOpenerView alloc] initWithFrame:CGRectMake(240, -20, 30, 70)];
+
+    filter.opener = filterOpener;
+    filter.parentController = self;
+    [self.view addSubview:filter];
+    
+    filterOpener.filter = filter;
+    [self.view insertSubview:filterOpener belowSubview:filter];
+
+    [filterOpener release];
+    [filter release];
 }
 
 - (void)viewDidUnload

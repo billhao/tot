@@ -10,14 +10,14 @@
 #import <Foundation/Foundation.h>
 #import "totHomeRootController.h"
 #import "../Utility/totSliderView.h"
-#import "../Utility/STHorizontalPicker.h"
+//#import "../Utility/STHorizontalPicker.h"
 #import "../Model/totModel.h"
 #import "totTimerController.h"
 #import "../Utility/totNavigationBar.h"
 
 #define DEFAULT_MENU 8
 
-@interface totHomeFeedingViewController : UIViewController<STHorizontalPickerDelegate,totSliderViewDelegate,totNavigationBarDelegate,totTimerControllerDelegate> {
+@interface totHomeFeedingViewController : UIViewController<UITextFieldDelegate,totSliderViewDelegate,totNavigationBarDelegate,totTimerControllerDelegate> {
     totHomeRootController* homeRootController;
     
     // according to current design, we need 3 slider views
@@ -31,30 +31,35 @@
     //totNavigationBar* mNavigationBar;
     UIButton* mBackButton;
     
-    UIButton* mOKButton;
-    UIButton* mDatetime;
+    UIButton* mOKButton; // final submission
     UIButton* mSummary;
     
-    //for fodd imput
+    //for fodd input
     UIView* mChooseFoodView;
     totSliderView* mChooseFoodSlider; // note the difference between foodChosen and chooseFood
     UIButton* mChooseFoodOKButton;
-    STHorizontalPicker* picker_quantity;
+    // STHorizontalPicker* picker_quantity; //no more picker! use an associative textfield
+    UITextField *text_quantity;
+    NSMutableArray *inventory;
+    NSMutableArray *inventoryGrey;
     
-    //NSMutableDictionary *mMessage;
     
     NSNumber* mCurrentFoodID;
     totModel* mTotModel;
     
     //UIImageView *mBackground;
-    
+    NSString *categoryChosen;
     
     // for date picker
     totTimerController* mClock;
+    UIButton* mDatetime;
+
     int mWidth, mHeight;
     
-    int buttonSelected;
+    int foodSelected;
+    
     float quantityList[8];
+    NSMutableArray *foodChosenList;
 }
 
 @property (nonatomic, assign) totHomeRootController* homeRootController;
@@ -62,13 +67,14 @@
 @property (nonatomic, retain) totSliderView* mCategoriesSlider;
 @property (nonatomic, retain) totSliderView* mFoodChosenSlider;
 @property (nonatomic, retain) totSliderView* mChooseFoodSlider;
-
+@property (nonatomic, retain) UITextField* text_quantity;
 @property (nonatomic, assign) NSNumber* mCurrentFoodID;
+
 
 
 // receive parameters passed by other module for initialization or customization
 //- (void)receiveMessage: (NSMutableDictionary*)message;
-- (void)pickerView:(STHorizontalPicker *)picker didSelectValue:(CGFloat)value;
+//- (void)pickerView:(STHorizontalPicker *)picker didSelectValue:(CGFloat)value;
 - (void)OKButtonClicked: (UIButton *)button;
 - (void)SummaryButtonClicked: (UIButton *)button;
 - (void)backButtonClicked: (UIButton *)button;

@@ -96,6 +96,9 @@
 /*---------------------------------------------------------------------------
  * 
  *--------------------------------------------------------------------------*/
+- (void) showStatusBar {
+    [[UIApplication sharedApplication] setStatusBarHidden:NO];
+}
 - (void) moviePlayBackDidFinish:(NSNotification*)notification 
 {    
     [[UIApplication sharedApplication] setStatusBarHidden:YES];
@@ -106,6 +109,9 @@
                                                   object:nil];
     
 	[self dismissModalViewControllerAnimated:YES];
+    
+    //[self performSelector:@selector(showStatusBar) withObject:nil afterDelay:0];
+    [[UIApplication sharedApplication] setStatusBarHidden:NO];
     
     [mp release];
 }

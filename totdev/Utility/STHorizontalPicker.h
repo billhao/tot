@@ -85,6 +85,7 @@
 + (STHorizontalPicker*) getPickerForHeight:(CGRect)frame;
 + (STHorizontalPicker*) getPickerForWeight:(CGRect)frame;
 + (STHorizontalPicker*) getPickerForHeadC:(CGRect)frame;
++ (STHorizontalPicker*) getPickerForFood:(CGRect)frame;
 
 @property (nonatomic, retain) NSString *name;
 @property (nonatomic, assign) CGFloat currentValue;

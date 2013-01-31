@@ -24,6 +24,7 @@
     if (self) {
         // Custom initialization
         mData = [[NSMutableArray alloc] init];
+        mCurrentType = nil;
     }
     return self;
 }
@@ -36,6 +37,13 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
+- (void)setTypeName:(NSString *)t {
+    if (t == nil)
+        mCurrentType = nil;
+    else
+        mCurrentType = [NSString stringWithString:t];
+}
+
 - (void)setRootController:(totReviewRootController *)parent {
     mRootController = parent;
 }
@@ -43,6 +51,11 @@
 - (void)setData:(NSArray *)dat {
     [mData removeAllObjects];
     [self appendData:dat];
+}
+
+- (void)emptyData {
+    [mData removeAllObjects];
+    [mReviewTable reloadData];
 }
 
 - (void)appendData:(NSArray *)dat {
@@ -62,6 +75,7 @@
         [mData addObject:view];
         [view release];
     }
+    [mReviewTable reloadData];
 }
 
 #pragma mark - UITableView delegate
@@ -107,7 +121,7 @@
     float y = offset.y + bounds.size.height - inset.bottom;
     float h = size.height;
     
-    // NSLog(@"offset: %f", offset.y);   
+    // NSLog(@"offset: %f", offset.y);
     // NSLog(@"content.height: %f", size.height);   
     // NSLog(@"bounds.height: %f", bounds.size.height);   
     // NSLog(@"inset.top: %f", inset.top);   
@@ -117,8 +131,7 @@
     
     float reload_distance = 10;
     if(y > h + reload_distance) {
-        [mRootController loadEvents:NO];
-        [mReviewTable reloadData];
+        [mRootController loadEvents:NO ofType:mCurrentType];
     }
 }
 
