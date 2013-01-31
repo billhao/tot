@@ -72,8 +72,6 @@
     NSString * category = [tokens objectAtIndex:0];
     NSString * rawValue = story.mRawContent;
     
-    totModel* database = global.model;
-    
     if ([category isEqualToString:@"basic"]) {
         NSString* subcategory = [tokens objectAtIndex:1];
         
@@ -100,52 +98,52 @@
             desc = [NSString stringWithFormat:@"is %s centimeters now", [rawValue UTF8String]];
         }
     } else if ([category isEqualToString:@"eye_contact"]) {
-        if ([self isFirstOccurrence:category forBaby:global.baby.babyID inDatabase:database]) {
+        if ([self isFirstOccurrence:story]) {
             desc = @"first eye contact";
         } else {
             desc = @"has an eye contact";
         }
     } else if ([category isEqualToString:@"vision_attention"]) {
-        if ([self isFirstOccurrence:category forBaby:global.baby.babyID inDatabase:database]) {
+        if ([self isFirstOccurrence:story]) {
             desc = @"first vision attention";
         } else {
             desc = @"has a vision attention";
         }
     } else if ([category isEqualToString:@"chew"]) {
-        if ([self isFirstOccurrence:category forBaby:global.baby.babyID inDatabase:database]) {
+        if ([self isFirstOccurrence:story]) {
             desc = @"first chew";
         } else {
             desc = @"chewed";
         }
     } else if ([category isEqualToString:@"mirror_test"]) {
-        if ([self isFirstOccurrence:category forBaby:global.baby.babyID inDatabase:database]) {
+        if ([self isFirstOccurrence:story]) {
             desc = @"first mirror test";
         } else {
             desc = @"has a mirror test";
         }
     } else if ([category isEqualToString:@"imitation"]) {
-        if ([self isFirstOccurrence:category forBaby:global.baby.babyID inDatabase:database]) {
+        if ([self isFirstOccurrence:story]) {
             desc = @"first imitation";
         } else {
             desc = @"has an imitation";
         }
     } else if ([category isEqualToString:@"motor_skill"]) {
         NSString* subcategory = [tokens objectAtIndex:1];
-        if ([self isFirstOccurrence:story.mEventType forBaby:global.baby.babyID inDatabase:database]) {
+        if ([self isFirstOccurrence:story]) {
             desc = [NSString stringWithFormat:@"first %s", [subcategory UTF8String]];
         } else {
             desc = [NSString stringWithFormat:@"%s", [subcategory UTF8String]];
         }
     } else if ([category isEqualToString:@"emotion"]) {
         NSString* subcategory = [tokens objectAtIndex:1];
-        if ([self isFirstOccurrence:story.mEventType forBaby:global.baby.babyID inDatabase:database]) {
+        if ([self isFirstOccurrence:story]) {
             desc = [NSString stringWithFormat:@"first %s", [subcategory UTF8String]];
         } else {
             desc = [NSString stringWithFormat:@"%s", [subcategory UTF8String]];
         }
     } else if ([category isEqualToString:@"gesture"]) {
         NSString* subcategory = [tokens objectAtIndex:1];
-        if ([self isFirstOccurrence:story.mEventType forBaby:global.baby.babyID inDatabase:database]) {
+        if ([self isFirstOccurrence:story]) {
             desc = [NSString stringWithFormat:@"first %s", [subcategory UTF8String]];
         } else {
             desc = [NSString stringWithFormat:@"%s", [subcategory UTF8String]];

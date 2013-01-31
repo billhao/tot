@@ -15,7 +15,6 @@
 
 @implementation AppDelegate
 
-@synthesize mainTabController;
 @synthesize window;
 @synthesize mCache;
 
@@ -48,7 +47,7 @@
 
     // init navigation controller for login, registration and new baby
     
-    mainTabController = [[totUITabBarController alloc] initWithNibName:@"MainWindow" bundle:nil];
+    totUITabBarController* mainTabController = [[totUITabBarController alloc] initWithNibName:@"MainWindow" bundle:nil];
     mainTabController.view.frame = CGRectMake(0, 20, mainTabController.view.frame.size.width, mainTabController.view.frame.size.height);
 
     loginNavigationController = [[totLoginNavigationController alloc] initWithRootViewController:mainTabController];
@@ -89,7 +88,7 @@
             }
             [global.baby printBabyInfo];
 
-            [self showHomeView];
+            //[self showHomeView];
         }
         else {
             [self showLoginView];
@@ -128,7 +127,7 @@
     // remove all previous views
     [loginNavigationController setViewControllers:nil];
     // show home view
-    mainTabController = [[totUITabBarController alloc] initWithNibName:@"MainWindow" bundle:nil];
+    totUITabBarController* mainTabController = [[totUITabBarController alloc] initWithNibName:@"MainWindow" bundle:nil];
     mainTabController.view.frame = CGRectMake(0, 20, mainTabController.view.frame.size.width, mainTabController.view.frame.size.height);
     [loginNavigationController pushViewController:mainTabController animated:TRUE];
 }

@@ -18,7 +18,6 @@
 @interface AppDelegate : UIResponder <UIApplicationDelegate> {
     UIWindow *window;
     totLoginNavigationController *loginNavigationController;
-    totUITabBarController* mainTabController;
     
     // global
     totImageCache *mCache;

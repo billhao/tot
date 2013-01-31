@@ -1640,6 +1640,7 @@
 				3FD29CBD168D481D00978B51 /* text_weight.png in Resources */,
 				3FD29CBE168D481D00978B51 /* text_weight@2x.png in Resources */,
 				8EE2E5D216968643000197D3 /* albumBackground.png in Resources */,
+				8E46E50216A8F8CF00932B90 /* opener.png in Resources */,
 				3F1331AD169FB9C200A39F41 /* text_hc_grey@2x.png in Resources */,
 				3F1331AE169FB9C200A39F41 /* text_height_grey@2x.png in Resources */,
 				3F1331AF169FB9C200A39F41 /* text_weight_grey@2x.png in Resources */,
@@ -1704,6 +1705,8 @@
 				3F2770F6164E328C00DF84EF /* totUser.m in Sources */,
 				3F277109164F6F6100DF84EF /* totLoginNavigationController.m in Sources */,
 				3F1331A416968F7400A39F41 /* Global.m in Sources */,
+				8E451D8F169FCB48003D1438 /* totReviewFilterOpenerView.m in Sources */,
+				8E46E4FF16A8F35500932B90 /* totReviewFilterView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
