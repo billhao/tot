@@ -104,9 +104,8 @@ static NSString *DIAPER_WETSOLID = @"wetsolid";
     sprintf(format_time_str, "%04d-%02d-%02d %02d:%02d:%02d", _year, _month, _day, _hour, _minute, _second);
     printf("Diaper: %s\n", format_time_str);
     
-    AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
-    totModel *model = [delegate getDataModel];
-    [model addEvent:delegate.baby.babyID
+    totModel *model = global.model;
+    [model addEvent:global.baby.babyID
               event:EVENT_BASIC_DIAPER 
      datetimeString:[NSString stringWithUTF8String:format_time_str] 
               value:DIAPER_WET];

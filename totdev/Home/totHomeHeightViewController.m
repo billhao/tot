@@ -21,8 +21,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-        model = [appDelegate getDataModel];
+        model = global.model;
         picker_height = nil;
         picker_weight = nil;
         picker_head = nil;
@@ -76,6 +75,7 @@
     // 1 - weight
     // 2 - hc
     all_imgs    = [[NSMutableArray alloc] initWithObjects: [UIImage imageNamed:@"text_height"], [UIImage imageNamed:@"text_weight"], [UIImage imageNamed:@"text_hc"], nil];
+    all_imgs_grey    = [[NSMutableArray alloc] initWithObjects: [UIImage imageNamed:@"text_height_grey"], [UIImage imageNamed:@"text_weight_grey"], [UIImage imageNamed:@"text_hc_grey"], nil];
     // save the pickers
     all_pickers = [[NSMutableArray alloc] initWithObjects: picker_height, picker_weight, picker_head, nil];
     [picker_height release];
@@ -170,9 +170,9 @@
         a = 0; b = 1;
     }
     
-    [self setContent:initialPicker button:mLabel0Button label:mLabel0];
-    [self setContent:a button:mLabel1Button label:mLabel1];
-    [self setContent:b button:mLabel2Button label:mLabel2];
+    [self setContent:initialPicker button:mLabel0Button label:mLabel0 top:TRUE];
+    [self setContent:a button:mLabel1Button label:mLabel1 top:FALSE];
+    [self setContent:b button:mLabel2Button label:mLabel2 top:FALSE];
 }
 
 - (NSString*)getCurrentDate {
@@ -202,8 +202,7 @@
 - (void)OKButtonClicked: (UIButton *)button {
     NSLog(@"%@", @"[basic][height] ok button clicked");
 
-    NSString* babyName = @"Tom";
-    NSString* summary = [NSString stringWithFormat:@"On %@, %@ ", mDatetime.titleLabel.text, babyName];
+    NSString* summary = [NSString stringWithFormat:@"On %@, %@ ", mDatetime.titleLabel.text, global.baby.name];
 
     int n = 0; // # of items user edited
     int baby_id = 0;
@@ -303,25 +302,33 @@
 
     int a = mLabel0Button.tag;
     int b = button.tag;
-    [self setContent:b button:mLabel0Button label:mLabel0];
-    [self setContent:a button:button label:label];
+    [self setContent:b button:mLabel0Button label:mLabel0 top:TRUE];
+    [self setContent:a button:button label:label top:FALSE];
 
     // reload picker
     [self loadPicker:b currentPicker:a];
 }
 
-- (void)setContent:(int)i button:(UIButton*)button label:(UILabel*)label {
+// top: whether the text is on the top or one of the bottom two (in grey)
+- (void)setContent:(int)i button:(UIButton*)button label:(UILabel*)label top:(BOOL)top {
     button.tag = i;
-    [button setImage:all_imgs[i] forState:UIControlStateNormal];
-    label.text = all_numbers[i];
+    if( top ) {
+        [button setImage:[all_imgs objectAtIndex:i] forState:UIControlStateNormal];
+    }
+    else {
+        [button setImage:[all_imgs_grey objectAtIndex:i] forState:UIControlStateNormal];
+        [button setImage:[all_imgs_grey objectAtIndex:i] forState:UIControlStateHighlighted];
+        [button setImage:[all_imgs_grey objectAtIndex:i] forState:UIControlStateSelected];
+    }
+    label.text = [all_numbers objectAtIndex:i];
 }
 
 - (void)loadPicker:(int)i currentPicker:(int)currentPicker {
     for( int i=0; i<=2; i++ )
     //if( currentPicker >= 0 )
-        [all_pickers[i] removeFromSuperview];
-    [self.view addSubview:all_pickers[i]];
-    [self.view sendSubviewToBack:all_pickers[i]];
+    [[all_pickers objectAtIndex:i] removeFromSuperview];
+    [self.view addSubview:[all_pickers objectAtIndex:i]];
+    [self.view sendSubviewToBack:[all_pickers objectAtIndex:i]];
 }
 
 #pragma mark - totTimerControllerDelegate

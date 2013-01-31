@@ -10,25 +10,42 @@
 #import "totModel.h"
 #import "totEvent.h"
 #import "totEventName.h"
+#import "Global.h"
 
 @implementation totBaby
 
-@synthesize babyID;
+@synthesize babyID = _babyID, name = _name, sex = _sex, birthday = _birthday;
 
 // initializer
 //
 // init to an existing baby
 -(id) initWithID:(int)BabyID {
     if( self = [super init] ) {
-        babyID = BabyID;
+        _babyID = BabyID;
+        
+        // also get other basic info
+        // name
+        self.name = [global.model getPreference:_babyID preference:BABY_NAME];
+        
+        // sex
+        NSString* sex = [global.model getPreference:_babyID preference:BABY_SEX];
+        self.sex = NA;
+        if( [sex isEqualToString:@"MALE"] )
+            self.sex = MALE;
+        else if( [sex isEqualToString:@"FEMALE"] )
+            self.sex = FEMALE;
+        
+        // birthday
+        NSString* bday = [global.model getPreference:_babyID preference:BABY_BIRTHDAY];
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+        self.birthday = [dateFormatter dateFromString:bday];
     }
     return self;
 }
 
-static totModel* _model;
-
 +(void) setModel:(totModel*)model {
-    _model = model;
+    global.model = model;
 }
 
 // add a new baby
@@ -46,11 +63,11 @@ static totModel* _model;
     NSString* str_bday = [dateFormatter stringFromDate:bday];
     [dateFormatter release];
 
-    int baby_id = [_model getNextBabyID];
+    int baby_id = [global.model getNextBabyID];
     NSLog(@"next id = %d", baby_id);
-    [_model addPreference:baby_id preference:INFO_NAME value:name];
-    [_model addPreference:baby_id preference:INFO_SEX value:str_sex];
-    [_model addPreference:baby_id preference:INFO_BIRTHDAY value:str_bday];
+    [global.model addPreference:baby_id preference:BABY_NAME value:name];
+    [global.model addPreference:baby_id preference:BABY_SEX value:str_sex];
+    [global.model addPreference:baby_id preference:BABY_BIRTHDAY value:str_bday];
     
     return [[totBaby alloc] initWithID:baby_id];
 }
@@ -58,6 +75,24 @@ static totModel* _model;
 // get number of words produced by a baby to date
 - (int) getNumberofWordsToDate {
     return 1;
+}
+
+// print baby info to console
+-(void) printBabyInfo {
+    NSString* str_sex = @"N/A";
+    if( _sex == MALE )
+        str_sex = @"MALE";
+    else if( _sex == FEMALE )
+        str_sex = @"FEMALE";
+    
+    // format bday
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSString* str_bday = [dateFormatter stringFromDate:_birthday];
+    [dateFormatter release];
+    
+    NSString* output = [NSString stringWithFormat:@"Baby Info\nID = %d\nName = %@\nSex = %@\nBday = %@", _babyID, _name, str_sex, str_bday];
+    NSLog(@"%@", output);
 }
 
 @end

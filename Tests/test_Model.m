@@ -41,8 +41,7 @@
 //    NSLog(@"%@", [e toString]);
     
 
-    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-    totModel* model = [appDelegate getDataModel];
+    totModel* model = global.model;
     // return from getEvent is an array of totEvent object
     // a totEvent represents a single event
     NSMutableArray *events = [model getEvent:0 event:@"emotion" limit:1];

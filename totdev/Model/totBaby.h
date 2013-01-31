@@ -18,6 +18,9 @@
 }
 
 @property(nonatomic, assign) int babyID;         // baby id
+@property(nonatomic, retain) NSString* name;
+@property(nonatomic, assign) enum SEX sex;
+@property(nonatomic, retain) NSDate* birthday;
 
 // initializer
 -(id) initWithID:(int)babyID;    // init to an existing baby
@@ -31,5 +34,8 @@
 //
 // get number of words produced by a baby to date
 -(int) getNumberofWordsToDate;
+
+// print baby info to console
+-(void) printBabyInfo;
 
 @end

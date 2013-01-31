@@ -12,7 +12,6 @@
 @interface totSettingEntryViewController : UIViewController {
     IBOutlet UIButton* mSignOutButton;
     IBOutlet UIButton* mClearDBButton;
-    totModel* model;
 }
 
 @end

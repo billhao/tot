@@ -34,8 +34,7 @@
                                  forKey:[NSNumber numberWithInt:i]];
         }
         
-        AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-        mTotModel = [appDelegate getDataModel];
+        mTotModel = global.model;
     }
     return self;
 }

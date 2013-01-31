@@ -225,20 +225,19 @@
                       mYear, mMonth, mDay, mHour, mMinute, mSecond];
     printf("current time: %s selection: %d\n", [now UTF8String], selection);
     
-    AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
-    totModel *model = [delegate getDataModel];
+    totModel *model = global.model;
     if (selection == SELECTION_WET) {
-        [model addEvent:delegate.baby.babyID
+        [model addEvent:global.baby.babyID
                   event:EVENT_BASIC_DIAPER
          datetimeString:now
                   value:@"wet"];
     } else if (selection == SELECTION_SOLID) {
-        [model addEvent:delegate.baby.babyID
+        [model addEvent:global.baby.babyID
                   event:EVENT_BASIC_DIAPER
          datetimeString:now
                   value:@"solid"];
     } else if (selection == SELECTION_WETSOLID) {
-        [model addEvent:delegate.baby.babyID
+        [model addEvent:global.baby.babyID
                   event:EVENT_BASIC_DIAPER
          datetimeString:now
                   value:@"wetsolid"];

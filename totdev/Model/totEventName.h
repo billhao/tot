@@ -13,14 +13,21 @@
 const static int       PREFERENCE_NO_BABY     = 0;
 
 // preference keys
-static NSString *PREFERENCE_LOGGED_IN   = @"logged_in"; // who is currently logged in
-static NSString *PREFERENCE_LAST_LOGGED_IN = @"last_logged_in"; // the last logged in user
-static NSString *PREFERENCE_ACTIVE_BABY_ID = @"active_baby_id";
+static NSString *PREFERENCE_LOGGED_IN   = @"pref/logged_in"; // who is currently logged in
+static NSString *PREFERENCE_LAST_LOGGED_IN = @"pref/last_logged_in"; // the last logged in user
+static NSString *PREFERENCE_ACTIVE_BABY_ID = @"pref/active_baby_id";
+static NSString *PREFERENCE_ACCOUNT = @"pref/account/%@"; // user name -> password
+static NSString *PREFERENCE_ACCOUNT_QUERY = @"pref/account/"; // for query all accounts
+static NSString *PREFERENCE_DEFAULT_BABY = @"pref/defaultbaby/%@"; // default baby for a user
+
+// mapping from user to baby and from baby to user
+static NSString *PREFERENCE_USER_BABY = @"pref/user_baby/%@"; // user id -> baby id
+static NSString *PREFERENCE_BABY_USER = @"pref/baby_user/%@"; // baby id -> user id
 
 // baby information
-static NSString *INFO_NAME              = @"info/name";
-static NSString *INFO_BIRTHDAY          = @"info/birthday";
-static NSString *INFO_SEX               = @"info/sex";
+static NSString *BABY_NAME              = @"pref/baby/name";
+static NSString *BABY_BIRTHDAY          = @"pref/baby/birthday";
+static NSString *BABY_SEX               = @"pref/baby/sex";
 
 // basic
 static NSString *EVENT_BASIC_HEIGHT     = @"basic/height";

@@ -130,8 +130,7 @@
 
 // add a preference specific to a baby or an account
 - (BOOL) addPreference:(int)baby_id preference:(NSString*)pref_name value:(NSString*)value {
-    NSString* pref = [NSString stringWithFormat:@"Pref/%@", pref_name];
-    return [self addEvent:baby_id event:pref datetime:[NSDate date] value:value];
+    return [self addEvent:baby_id event:pref_name datetime:[NSDate date] value:value];
 }
 
 // pref_name is something like "Account/billhao@gmail.com"
@@ -140,13 +139,11 @@
 }
 
 - (int) getPreferenceNoBabyCount:(NSString*)pref_name {
-    NSString* pref = [NSString stringWithFormat:@"Pref/%@", pref_name];
-    return [self getEventCount:PREFERENCE_NO_BABY event:pref];
+    return [self getEventCount:PREFERENCE_NO_BABY event:pref_name];
 }
 
 - (NSString*) getPreference:(int)baby_id preference:(NSString*)pref_name {
-    NSString* pref = [NSString stringWithFormat:@"Pref/%@", pref_name];
-    NSMutableArray* array = [self getItem:baby_id name:pref limit:-1 offset:-1 startDate:nil endDate:nil];
+    NSMutableArray* array = [self getItem:baby_id name:pref_name limit:-1 offset:-1 startDate:nil endDate:nil];
     if( array.count == 1 ) {
         totEvent* e = [array objectAtIndex:0];
         return e.value;
@@ -163,13 +160,12 @@
 // add a preference specific to a baby or an account
 - (BOOL) updatePreference:(int)baby_id preference:(NSString*)pref_name value:(NSString*)value {
     // remove key if it exists
-    NSString* pref = [NSString stringWithFormat:@"Pref/%@", pref_name];
-    int cnt = [self getEventCount:baby_id event:pref];
+    int cnt = [self getEventCount:baby_id event:pref_name];
     if( cnt < 0 )
         return FALSE;
     else if( cnt > 0 ) {
         // remove keys
-        BOOL re = [self deleteEvents:baby_id event:pref];
+        BOOL re = [self deleteEvents:baby_id event:pref_name];
         if( !re ) return FALSE;
     }
     
@@ -179,8 +175,7 @@
 
 // delete a preference
 - (void) deletePreferenceNoBaby:(NSString*)pref_name {
-    NSString* pref = [NSString stringWithFormat:@"Pref/%@", pref_name];
-    [self deleteEvents:PREFERENCE_NO_BABY event:pref];
+    [self deleteEvents:PREFERENCE_NO_BABY event:pref_name];
 }
 
 // get events with name
@@ -584,8 +579,8 @@
 // get # accounts
 - (int) getAccountCount {
     int cnt = 0;
-    cnt = [self getEventCount:PREFERENCE_NO_BABY event:@"Account/"];
-    return [self getPreferenceNoBabyCount:@"Account"];
+    cnt = [self getEventCount:PREFERENCE_NO_BABY event:PREFERENCE_ACCOUNT_QUERY];
+    return [self getPreferenceNoBabyCount:PREFERENCE_ACCOUNT_QUERY];
 }
 
 @end

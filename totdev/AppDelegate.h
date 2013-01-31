@@ -7,9 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Model/totModel.h"
-#import "Model/totBaby.h"
-#import "Model/totUser.h"
+#import "Model/Global.h"
 #import "totImageCache.h"
 #import "totLoginController.h"
 #import "totNewBabyController.h"
@@ -24,17 +22,11 @@
     
     // global
     totImageCache *mCache;
-    totModel *mTotData;
-    totBaby* baby;
-    totUser* user;
+
 }
 @property (retain, nonatomic) totUITabBarController* mainTabController;
 @property (retain, nonatomic) totImageCache *mCache;
 @property (strong, nonatomic) UIWindow *window;
-@property (retain, nonatomic) totBaby* baby;
-@property (retain, nonatomic) totUser* user;
-
-- (totModel*) getDataModel;
 
 // determine the first view (new baby, login or homepage) and show it
 - (BOOL)showFirstView;

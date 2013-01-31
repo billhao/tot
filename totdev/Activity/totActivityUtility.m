@@ -13,8 +13,7 @@
 @implementation totActivityUtility
 
 + (int)getCurrentBabyID {
-    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-    return appDelegate.baby.babyID; //TODO should always use baby instead of babyID
+    return global.baby.babyID; //TODO should always use baby instead of babyID
 }
 
 

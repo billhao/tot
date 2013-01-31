@@ -125,7 +125,7 @@
     totBaby* baby = [totBaby newBaby:name sex:sex birthday:bday];
     
     // go to create account page
-    [[self getAppDelegate] setBaby:baby];
+    global.baby = baby;
     [[self getAppDelegate] showLoginView];
 }
 

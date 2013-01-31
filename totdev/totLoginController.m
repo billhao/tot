@@ -19,8 +19,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-        model = [appDelegate getDataModel];
+        model = global.model;
         newuser = FALSE;
     }
     return self;
@@ -99,13 +98,24 @@
     NSString* pwd = mPwd.text;
     
     // check if email exists
-    NSString* account_pref = [NSString stringWithFormat:@"Account/%@", email];
+    NSString* account_pref = [NSString stringWithFormat:PREFERENCE_ACCOUNT, email];
     NSString* pwd_db = [model getPreferenceNoBaby:account_pref];
     
     if( (pwd_db!=nil) && ([pwd compare:pwd_db]==NSOrderedSame) ) {
         totUser* user = [[totUser alloc] initWithID:email];
-        [[self getAppDelegate] setUser:user];
-        [user release];
+        global.user = user;
+        if( global.baby != nil ) {
+            // add new baby's id to this user
+            [user addBabyToUser:global.baby];
+            [user setDefaultBaby:global.baby];
+        }
+        else {
+            // check if baby is set. it may be nil after register. get the default baby for user if baby is not set.
+            global.baby = [global.user getDefaultBaby];
+        }
+        if( global.baby != nil )
+            [global.baby printBabyInfo];
+        
         // if yes and pwd matches, go to home view
         [self backgroundTap:nil]; // dismiss keyboard
         [self setLoggedIn:email];
@@ -126,14 +136,19 @@
     NSString* pwd = mPwd.text;
 
     // check if email exists
-    NSString* account_pref = [NSString stringWithFormat:@"Account/%@", email];
+    NSString* account_pref = [NSString stringWithFormat:PREFERENCE_ACCOUNT, email];
     NSString* pwd_db = [model getPreferenceNoBaby:account_pref];
     
     if( pwd_db == nil ) {
         // if no, add email and pwd to db, go to home view
         totUser* user =[totUser newUser:email password:pwd];
         if( user != nil ) {
-            [[self getAppDelegate] setUser:user];
+            global.user = user;
+            if( global.baby != nil ) {
+                // add new baby's id to this user
+                [user addBabyToUser:global.baby];
+                [user setDefaultBaby:global.baby];
+            }
             [self backgroundTap:nil]; // dismiss keyboard
             [self setLoggedIn:email];
             [self showHomeView];
@@ -147,8 +162,12 @@
     }
     else if( [pwd compare:pwd_db]==NSOrderedSame ) {
         totUser* user = [[totUser alloc] initWithID:email];
-        [[self getAppDelegate] setUser:user];
-        [user release];
+        global.user = user;
+        if( global.baby != nil ) {
+            // add new baby's id to this user
+            [user addBabyToUser:global.baby];
+            [user setDefaultBaby:global.baby];
+        }
         // if yes and pwd matches, go to home view
         [self backgroundTap:nil]; // dismiss keyboard
         [self setLoggedIn:email];

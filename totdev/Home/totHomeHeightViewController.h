@@ -51,6 +51,7 @@
 
     // arrays to save info for three measures
     NSMutableArray* all_imgs;
+    NSMutableArray* all_imgs_grey;
     NSMutableArray* all_numbers;
     NSMutableArray* all_pickers;
     
@@ -64,7 +65,7 @@
 - (void)CloseButtonClicked: (UIButton *)button;
 - (void)DatetimeClicked: (UIButton *)button;
 - (void)LabelButtonClicked: (UIButton *)button;
-- (void)setContent:(int)i button:(UIButton*)button label:(UILabel*)label; // set the content of a component (height/weight/hc)
+- (void)setContent:(int)i button:(UIButton*)button label:(UILabel*)label top:(BOOL)top; // set the content of a component (height/weight/hc)
 - (void)loadPicker:(int)i currentPicker:(int)currentPicker;
 
 // for date picker

@@ -17,8 +17,6 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-        model = [appDelegate getDataModel];
     }
     return self;
 }
@@ -49,18 +47,19 @@
 }
 
 - (void)ClearDBButtonClicked: (UIButton *)button {
-    [model clearDB];
+    [global.model clearDB];
     NSLog(@"%@", @"[settings] clearing database");
 }
 
 - (void)SignOutButtonClicked: (UIButton *)button {
-    [model deletePreferenceNoBaby:PREFERENCE_LOGGED_IN];
+    [global.model deletePreferenceNoBaby:PREFERENCE_LOGGED_IN];
 
     // show log in
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
     // clear current baby and user information
-    [appDelegate setBaby:nil];
-    [appDelegate setUser:nil];
+    global.baby = nil;
+    global.user = nil;
+
     // show login view
     [appDelegate showFirstView];
     //[self presentViewController:appDelegate.loginController animated:TRUE completion:nil];

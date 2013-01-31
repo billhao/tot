@@ -5,6 +5,7 @@
 
 #import <Foundation/Foundation.h>
 #import "totModel.h"
+#import "totBaby.h"
 
 @interface totUser : NSObject {
     NSString* email;
@@ -22,5 +23,17 @@
 
 // return total # user accounts in db
 +(int) getTotalAccountCount;
+
+// get the user that is logged in last time, this function is used at startup
++(totUser*) getLoggedInUser;
+
+// get the default baby for this user
+-(totBaby*) getDefaultBaby;
+
+// add baby id to this user
+-(BOOL) addBabyToUser:(totBaby*)baby;
+
+// set the default baby for this user
+-(void) setDefaultBaby:(totBaby*)baby;
 
 @end

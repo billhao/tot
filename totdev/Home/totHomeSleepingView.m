@@ -36,9 +36,8 @@
         mHeight= self.frame.size.height;
         mUseTimePicker = NO;
 
-        AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
-        totModel *model = [delegate getDataModel];
-        NSMutableArray *sleepRecords = [model getEvent:delegate.baby.babyID event:EVENT_BASIC_SLEEP];
+        totModel *model = global.model;
+        NSMutableArray *sleepRecords = [model getEvent:global.baby.babyID event:EVENT_BASIC_SLEEP];
         if( [sleepRecords count] > 0 ) {
             totEvent *evt = [sleepRecords objectAtIndex:0];
             if( [evt.value isEqualToString:@"start"] ) {
@@ -78,12 +77,11 @@
     
     if (timer_show_up) {
         // retrieve from db the starting time
-        AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
-        totModel *model = [delegate getDataModel];
+        totModel *model = global.model;
 
         NSDate *now = [NSDate date];
 
-        NSArray *events = [model getEvent:delegate.baby.babyID event:EVENT_BASIC_SLEEP limit:1];
+        NSArray *events = [model getEvent:global.baby.babyID event:EVENT_BASIC_SLEEP limit:1];
         totEvent *event = (totEvent*)[events objectAtIndex:0];
         NSDate *event_date = event.datetime;
 
@@ -171,15 +169,14 @@
     sprintf(now, "%04d-%02d-%02d %02d:%02d:%02d", mYear, mMonth, mDay, mHour, mMinute, mSecond);
     printf("current time: %s\n", now);
     
-    AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
-    totModel *model = [delegate getDataModel];
+    totModel *model = global.model;
     
     if (isStart) {
         printf("baby starts sleeping\n");
-        [model addEvent:delegate.baby.babyID event:EVENT_BASIC_SLEEP datetimeString:[NSString stringWithUTF8String:now] value:@"start"];
+        [model addEvent:global.baby.babyID event:EVENT_BASIC_SLEEP datetimeString:[NSString stringWithUTF8String:now] value:@"start"];
     } else {
         printf("baby wakes up\n");
-        [model addEvent:delegate.baby.babyID event:EVENT_BASIC_SLEEP datetimeString:[NSString stringWithUTF8String:now] value:@"end"];
+        [model addEvent:global.baby.babyID event:EVENT_BASIC_SLEEP datetimeString:[NSString stringWithUTF8String:now] value:@"end"];
     }
 }
 

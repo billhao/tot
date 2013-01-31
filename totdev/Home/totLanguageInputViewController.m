@@ -161,8 +161,7 @@
         /* Get input text */
         NSString* inputTxt = m_textView.text;
         /* Add to database */
-        AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-        totModel* totModel = [appDelegate getDataModel];
+        totModel* totModel = global.model;
         [totModel addEvent:0 event:EVENT_BASIC_LANGUAGE datetimeString:formattedDateString value:inputTxt ];
         
         /* Clear textview text */

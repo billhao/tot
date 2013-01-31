@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "totUITabBarController.h"
 
+#import "Model/Global.h"
 #import "test_Model.h"
 #import "totEventName.h"
 
@@ -17,12 +18,9 @@
 @synthesize mainTabController;
 @synthesize window;
 @synthesize mCache;
-@synthesize baby, user;
 
 - (void)alloc {
     loginNavigationController = nil;
-    baby = nil;
-    user = nil;
 }
 
 - (void)dealloc
@@ -31,21 +29,29 @@
     [super dealloc];
 }
 
-- (totModel*) getDataModel {
-    return mTotData;
-}
-
 // get current logged in account, return nil if none
 - (NSString*) isLoggedIn {
-    return [mTotData getPreferenceNoBaby:PREFERENCE_LOGGED_IN];
+    return [global.model getPreferenceNoBaby:PREFERENCE_LOGGED_IN];
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     // Override point for customization after application launch.
+    
+    // init the global variable before anything else
+    // the global variable provides access to instances of totBaby and totUser
+    global = [[[Global alloc] init] retain];
+    
+    // initialize the image cache
+    mCache = [[totImageCache alloc] init];
+
     // init navigation controller for login, registration and new baby
-    loginNavigationController = [[totLoginNavigationController alloc] initWithRootViewController:nil];
+    
+    mainTabController = [[totUITabBarController alloc] initWithNibName:@"MainWindow" bundle:nil];
+    mainTabController.view.frame = CGRectMake(0, 20, mainTabController.view.frame.size.width, mainTabController.view.frame.size.height);
+
+    loginNavigationController = [[totLoginNavigationController alloc] initWithRootViewController:mainTabController];
     loginNavigationController.navigationBarHidden = TRUE;
     self.window.rootViewController = loginNavigationController;
     [self showFirstView];
@@ -55,15 +61,6 @@
 
 // determine the first view (new baby, login or homepage) and show it
 - (BOOL)showFirstView {
-    // initialize the image cache
-    mCache = [[totImageCache alloc] init];
-    
-    // initialize database
-    mTotData = [[totModel alloc] init];
-    
-    // add reference to db
-    [totUser setModel:mTotData];
-    [totBaby setModel:mTotData];
     
     // get # accounts in db
     int account = [totUser getTotalAccountCount];
@@ -74,7 +71,7 @@
 //    if( !re ) return FALSE;
     
     // output some system information
-    NSLog(@"App data path = %@", [mTotData GetDocumentDirectory]);
+    NSLog(@"App data path = %@", [global.model GetDocumentDirectory]);
     NSLog(@"# Acc = %d", account);
 
     if( account == 0 ) {
@@ -83,18 +80,22 @@
     }
     else {
         // if logged in then show home view, otherwise show login view
-        NSString* email = [self isLoggedIn];
-        BOOL loggedin = (email!=nil);
-        if( loggedin ) {
+        totUser* user = [totUser getLoggedInUser];
+        if( user != nil ) {
+            global.user = user;
+            // check if baby is set. it may be nil after register. get the default baby for user if baby is not set.
+            if( global.baby == nil ) {
+                global.baby = [global.user getDefaultBaby];
+            }
+            [global.baby printBabyInfo];
+
             [self showHomeView];
-            
-            // TODO get active baby id
-            // baby.babyID = ??
         }
         else {
             [self showLoginView];
         }
     }
+    
     return YES;
 }
 
@@ -114,13 +115,13 @@
     // show login
     totLoginController* loginController = [[totLoginController alloc] initWithNibName:@"totLoginController" bundle:nil];
     loginController.view.frame = CGRectMake(0, 20, loginController.view.frame.size.width, loginController.view.frame.size.height);
-    if( baby==nil || baby.babyID == -1 )
+    if( global.baby==nil || global.baby.babyID == -1 )
         loginController.newuser = FALSE;
     else {
         loginController.newuser = TRUE;
     }
     [loginNavigationController pushViewController:loginController animated:TRUE];
-    [loginController release];
+    //[loginController release];
 }
 
 - (void)showHomeView {
@@ -170,10 +171,7 @@
      See also applicationDidEnterBackground:.
      */
     if( loginNavigationController != nil ) [loginNavigationController release];
-    [mTotData release];
     [mCache release];
-    if( baby != nil ) [baby release];
-    if( user != nil ) [user release];
 }
 
 @end

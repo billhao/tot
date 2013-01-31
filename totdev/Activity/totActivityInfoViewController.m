@@ -24,8 +24,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-        mTotModel = [appDelegate getDataModel];
+        mTotModel = global.model;
     }
     return self;
 }
