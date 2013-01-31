@@ -119,7 +119,7 @@ static NSString *DIAPER_WETSOLID = @"wetsolid";
 }
 
 #pragma mark - totTimerController delegate
--(void)saveCurrentTime:(NSString*)time {
+-(void)saveCurrentTime:(NSString*)time datetime:(NSDate*)datetime {
     int h = mClock.mCurrentHourIdx+1;
     int m = mClock.mCurrentMinuteIdx;
     int ap= mClock.mCurrentAmPm;

@@ -1024,7 +1024,7 @@
     [UIView commitAnimations];
 }
 
--(void)saveCurrentTime:(NSString*)time {
+-(void)saveCurrentTime:(NSString*)time datetime:(NSDate*)datetime {
     NSLog(@"%@", time);
     NSString *formattedTime;
     //need to parse time before display

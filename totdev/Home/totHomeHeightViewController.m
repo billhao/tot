@@ -14,7 +14,7 @@
 
 @implementation totHomeHeightViewController
 
-@synthesize homeRootController, initialPicker;
+@synthesize homeRootController, initialPicker, selectedDate=_selectedDate;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -84,7 +84,7 @@
     
     // set appearances for date
     UIFont* font1 = [UIFont fontWithName:@"Roboto-Regular" size:16.0];
-    [mDatetime setTitle:[self getCurrentDate] forState:UIControlStateNormal];
+    [self setDate:[NSDate date]];
     [mDatetime.titleLabel setFont:font1];
     [mDatetime setTitleColor:[UIColor colorWithRed:147.0/255 green:149.0/255 blue:152.0/255 alpha:1] forState:UIControlStateNormal];
     [mDatetime setTitleColor:[UIColor colorWithRed:147.0/255 green:149.0/255 blue:152.0/255 alpha:1] forState:UIControlStateHighlighted];
@@ -173,13 +173,16 @@
     [self setContent:initialPicker button:mLabel0Button label:mLabel0 top:TRUE];
     [self setContent:a button:mLabel1Button label:mLabel1 top:FALSE];
     [self setContent:b button:mLabel2Button label:mLabel2 top:FALSE];
+    
+    // reset date to today
+    [self setDate:[NSDate date]];    
 }
 
-- (NSString*)getCurrentDate {
+- (NSString*)getDateString:(NSDate*)date {
     NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
     [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
     [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
-    return [dateFormatter stringFromDate:[NSDate date]];
+    return [dateFormatter stringFromDate:date];
 }
 
 - (void)pickerView:(STHorizontalPicker *)picker didSelectValue:(CGFloat)value{
@@ -205,24 +208,22 @@
     NSString* summary = [NSString stringWithFormat:@"On %@, %@ ", mDatetime.titleLabel.text, global.baby.name];
 
     int n = 0; // # of items user edited
-    int baby_id = 0;
-    NSDate* date = [NSDate date];
     if( all_numbers[0] != @"" ) {
         NSString* height = all_numbers[0];
-        [model addEvent:baby_id event:EVENT_BASIC_HEIGHT datetime:date value:height];
+        [model addEvent:global.baby.babyID event:EVENT_BASIC_HEIGHT datetime:self.selectedDate value:height];
         summary = [summary stringByAppendingFormat:@"is %@ high", height];
         n++;
     }
     if( all_numbers[1] != @"" ) {
         NSString* weight = all_numbers[1];
-        [model addEvent:baby_id event:EVENT_BASIC_WEIGHT datetime:date value:weight];
+        [model addEvent:global.baby.babyID event:EVENT_BASIC_WEIGHT datetime:self.selectedDate value:weight];
         if( n > 0 ) summary = [summary stringByAppendingString:@", "];
         summary = [summary stringByAppendingFormat:@"weighs %@", weight];
         n++;
     }
     if( all_numbers[2] != @"" ) {
         NSString* head   = all_numbers[2];
-        [model addEvent:baby_id event:EVENT_BASIC_HEAD datetime:date value:head];
+        [model addEvent:global.baby.babyID event:EVENT_BASIC_HEAD datetime:self.selectedDate value:head];
         if( n > 0 ) summary = [summary stringByAppendingString:@" and "];
         summary = [summary stringByAppendingFormat:@"has %@ of head circumference", head];
         n++;
@@ -235,16 +236,6 @@
     [self.view bringSubviewToFront:cover];
     [self.view addSubview:mSummary];
     [self.view bringSubviewToFront:mSummary];
-
-    // get a list of events containing "emotion"
-    NSString* event = [[NSString alloc] initWithString:@"basic"];
-    // return from getEvent is an array of totEvent object
-    // a totEvent represents a single event
-    NSMutableArray *events = [model getEvent:0 event:event];
-    for (totEvent* e in events) {
-        //NSLog(@"Return from db: %@", [e toString]);        
-    }
-    [event release];
 }
 
 - (void)CloseButtonClicked: (UIButton *)button {
@@ -332,14 +323,20 @@
 }
 
 #pragma mark - totTimerControllerDelegate
--(void)saveCurrentTime:(NSString*)time {
+-(void)saveCurrentTime:(NSString*)time datetime:(NSDate*)datetime {
     NSLog(@"%@", time);
-    [mDatetime setTitle:time forState:UIControlStateNormal];
+    [self setDate:datetime];
     [self hideTimePicker];
 }
 
 -(void)cancelCurrentTime {
     [self hideTimePicker];
+}
+
+// set the text of the date label and save the date as selectedDate
+-(void)setDate:(NSDate*) date {
+    self.selectedDate = date;
+    [mDatetime setTitle:[self getDateString:date] forState:UIControlStateNormal];
 }
 
 - (void)viewDidUnload

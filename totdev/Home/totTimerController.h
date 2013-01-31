@@ -33,7 +33,7 @@ enum {
 @protocol totTimerControllerDelegate <NSObject>
 
 @optional
--(void)saveCurrentTime:(NSString*)time;
+-(void)saveCurrentTime:(NSString*)time datetime:(NSDate*)datetime;
 -(void)cancelCurrentTime;
 
 @end

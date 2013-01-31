@@ -194,27 +194,47 @@
     }
 }
 
+// hao edited, Jan 30, 2013
+// call delegate saveCurrentTime with date/time in both string and NSDate formats
 - (void)buttonPressed: (id)sender {
     UIButton *btn = (UIButton*)sender;
     int tag = btn.tag;
     if( tag == kButtonOK ) {
-        if( [delegate respondsToSelector:@selector(saveCurrentTime:)] ) {
+        if( [delegate respondsToSelector:@selector(saveCurrentTime:datetime:)] ) {
             NSString *time = nil;
+            NSDate* date = nil;
+            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
             if( mMode == kTime ) {
-                time = [[NSString alloc] initWithFormat:@"%s:%s:%s",
+                // prepare the string object for the delegate
+                time = [[NSString alloc] initWithFormat:@"%s:%s %s",
                         [[mHour objectAtIndex:mCurrentHourIdx] UTF8String],
                         [[mMinute objectAtIndex:mCurrentMinuteIdx] UTF8String],
                         [[mAmPm objectAtIndex:mCurrentAmPm] UTF8String]];
+                
+                // prepare the NSDate object for the delegate
+                // set the date to today because a NSDate object must have a date component
+                [dateFormatter setDateStyle:NSDateFormatterShortStyle];
+                [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
+                NSString* datetime = [NSString stringWithFormat:@"%@ %@", [dateFormatter stringFromDate:[NSDate date]], time];
+                [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
+                date = [dateFormatter dateFromString:datetime];
             } else {
+                // prepare the string object for the delegate
                 int m = [[mMonth objectAtIndex:mCurrentMonthIdx] intValue];
                 time = [[NSString alloc] initWithFormat:@"%s %s, %s",
                         [[totTimerController getMonthString:m] UTF8String],
                         [[mDay objectAtIndex:mCurrentDayIdx] UTF8String],
                         [[mYear objectAtIndex:mCurrentYearIdx] UTF8String]];
+
+                // prepare the NSDate object for the delegate
+                [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+                date = [dateFormatter dateFromString:time];
             }
-            
-            [delegate saveCurrentTime:time];
+
+            // call the delegate
+            [delegate saveCurrentTime:time datetime:date];
             [time release];
+            [dateFormatter release];
         }
     } else if( tag == kButtonCancel ) {
         if( [delegate respondsToSelector:@selector(cancelCurrentTime)] ) {
@@ -273,8 +293,14 @@
     self.view.userInteractionEnabled = YES;
     
     int buttonWidth = BUTTON_WIDTH, 
-        buttonHeight = BUTTON_HEIGHT;    
-    mAmPm = [[NSMutableArray alloc] init]; [mAmPm addObject:@"am"]; [mAmPm addObject:@"pm"];
+        buttonHeight = BUTTON_HEIGHT;
+    // use am pm symbol from current local
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
+    mAmPm = [[NSMutableArray alloc] init];
+    [mAmPm addObject:dateFormatter.AMSymbol];
+    [mAmPm addObject:dateFormatter.PMSymbol];
+    
     mHour = [[NSMutableArray alloc] init];
     for ( int i = 1; i <= 12; i++ ) 
         [mHour addObject:[NSString stringWithFormat:@"%d", i]];

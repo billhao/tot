@@ -46,7 +46,7 @@
     totTimerController *mClock;
     int mWidth, mHeight;
     bool mStart;
-
+    
     totNavigationBar *mNavigationBar;
 
     // arrays to save info for three measures
@@ -59,6 +59,8 @@
 
 @property (nonatomic, assign) totHomeRootController *homeRootController;
 @property (nonatomic, assign) int initialPicker; // the id in all_pickers for the picker to show when view first appears
+@property (nonatomic, retain) NSDate* selectedDate; // currently selected date, this will be used when saving an event to db. this should be a private property, not accessible outside of this class
+
 
 - (void)pickerView:(STHorizontalPicker *)picker didSelectValue:(CGFloat)value;
 - (void)OKButtonClicked: (UIButton *)button;
@@ -72,6 +74,6 @@
 - (void)showTimePicker;
 - (void)hideTimePicker;
 
-- (NSString*)getCurrentDate;
+- (NSString*)getDateString:(NSDate*)date;
 
 @end

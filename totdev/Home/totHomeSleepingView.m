@@ -323,7 +323,7 @@
 }
 
 #pragma mark - totTimerControllerDelegate
--(void)saveCurrentTime:(NSString*)time {
+-(void)saveCurrentTime:(NSString*)time datetime:(NSDate*)datetime {
     [self hideTimePicker];
     
     mAp     = mClock.mCurrentAmPm;
