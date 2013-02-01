@@ -38,6 +38,6 @@
 - (uint) CheckFileType: (NSString *)path;
 - (NSString *) GetVideoPath: (NSString *)path;
 - (void) PlayButtonClicked: (UIButton *)clickedButton;
-- (UIImage*) addImageToImage:(UIImage*)img:(UIImage*)img2;
+- (UIImage*) addImageToImage:(UIImage*)img :(UIImage*)img2;
 
 @end

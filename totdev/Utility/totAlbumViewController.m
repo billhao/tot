@@ -510,7 +510,7 @@
  *       - self.MakeFullView()
  * ===================================================
  */
--(UIImage*) addImageToImage:(UIImage*)img:(UIImage*)img2
+-(UIImage*) addImageToImage:(UIImage*)img :(UIImage*)img2
 {
     CGSize size = CGSizeMake(img.size.height, img.size.width);
     UIGraphicsBeginImageContext(size);

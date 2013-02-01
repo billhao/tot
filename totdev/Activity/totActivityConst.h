@@ -9,7 +9,7 @@
 #ifndef totdev_totActivityConst_h
 #define totdev_totActivityConst_h
 
-const static const char *ACTIVITY_NAMES [] = {
+const static char *ACTIVITY_NAMES [] = {
     "eye_contact",
     "vision_attention", 
     "motor_skill",
@@ -20,7 +20,7 @@ const static const char *ACTIVITY_NAMES [] = {
     "imitation"
 };
 
-const static const char *ACTIVITY_MEMBERS [] = { // the name should correspond to the image file name
+const static char *ACTIVITY_MEMBERS [] = { // the name should correspond to the image file name
     "", // eye contact
     "", // vision attention
     "motor_skill_stand,motor_skill_walk,motor_skill_run,motor_skill_dance,motor_skill_jump,motor_skill_cruise," \
