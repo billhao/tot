@@ -297,6 +297,7 @@
     //load image
     NSMutableArray *recentlyUsedImages = [[NSMutableArray alloc] init];
     // [recentlyUsedImages addObject:[UIImage imageNamed:@"feedingcategories-cereal"]];
+    // TODO: needs to double check if the UIImage is nil or not. if it is nil, there will be an exception and corrupted memory later. quite difficult to debug and find out. -hao
     [recentlyUsedImages addObject:[UIImage imageNamed:@"feeding-apple.png"]];
     [recentlyUsedImages addObject:[UIImage imageNamed:@"feeding-blueberry.png"]];
     [recentlyUsedImages addObject:[UIImage imageNamed:@"feeding-papaya.png"]];
@@ -304,9 +305,9 @@
     [recentlyUsedImages addObject:[UIImage imageNamed:@"feeding-mango.png"]];
     [recentlyUsedImages addObject:[UIImage imageNamed:@"feeding-bread.png"]];
     [recentlyUsedImages addObject:[UIImage imageNamed:@"feeding-banana.png"]];
-    [recentlyUsedImages addObject:[UIImage imageNamed:@"feeding-ricewhite.png"]];
+    [recentlyUsedImages addObject:[UIImage imageNamed:@"feeding-rice white.png"]];
     [recentlyUsedImages addObject:[UIImage imageNamed:@"feeding-cheerios.png"]];
-    [recentlyUsedImages addObject:[UIImage imageNamed:@"feeding-peas.png"]];
+    [recentlyUsedImages addObject:[UIImage imageNamed:@"feeding-green pea.png"]];
     
     
     [mRecentlyUsedSlider setContentArray:recentlyUsedImages];

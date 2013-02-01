@@ -1367,7 +1367,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0440;
-				ORGANIZATIONNAME = USC;
+				ORGANIZATIONNAME = tot;
 			};
 			buildConfigurationList = EF62836B1536674B004031D6 /* Build configuration list for PBXProject "totdev" */;
 			compatibilityVersion = "Xcode 3.2";
