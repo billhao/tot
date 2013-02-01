@@ -166,6 +166,7 @@
 		3F454D2D1555A84700AC66EE /* totHomeHeightViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F454D2B1555A84700AC66EE /* totHomeHeightViewController.m */; };
 		3F454D2E1555A84700AC66EE /* homeHeightViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F454D2C1555A84700AC66EE /* homeHeightViewController.xib */; };
 		3F7CDB5D157ABDCE009CD3D7 /* totdb.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 3F7CDB5C157ABDCE009CD3D7 /* totdb.sqlite */; };
+		3F81369A16BB9D100085432D /* Logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F81369916BB9D100085432D /* Logo@2x.png */; };
 		3FB31B801638ECEC0063DAC6 /* background-diaper.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FB31B7F1638ECEC0063DAC6 /* background-diaper.png */; };
 		3FB31B8A1638ED770063DAC6 /* icons-history.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FB31B871638ED770063DAC6 /* icons-history.png */; };
 		3FB31B8B1638ED770063DAC6 /* icons-ok.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FB31B881638ED770063DAC6 /* icons-ok.png */; };
@@ -197,7 +198,6 @@
 		3FE62AF915E8A6E50079CE54 /* totNewBabyController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FE62AF715E8A6E50079CE54 /* totNewBabyController.xib */; };
 		3FE9B5F7154A303100199AAF /* test_Model.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FE9B5F6154A303100199AAF /* test_Model.m */; };
 		3FE9B5FA154A313700199AAF /* totSliderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FE9B5F9154A313700199AAF /* totSliderView.m */; };
-		3FF2AA5316A8EE740023162E /* Logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FF2AA5216A8EE740023162E /* Logo@2x.png */; };
 		3FF2AA5616A8F8FE0023162E /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FF2AA5516A8F8FE0023162E /* Default-568h@2x.png */; };
 		8E3AE8D1168D531E00E4CFAE /* icons-checkbox.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E3AE8CD168D531E00E4CFAE /* icons-checkbox.png */; };
 		8E3AE8D2168D531E00E4CFAE /* icons-diaper-solid_new.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8E3AE8CE168D531E00E4CFAE /* icons-diaper-solid_new.jpg */; };
@@ -493,6 +493,7 @@
 		3F454D2B1555A84700AC66EE /* totHomeHeightViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totHomeHeightViewController.m; path = Home/totHomeHeightViewController.m; sourceTree = "<group>"; };
 		3F454D2C1555A84700AC66EE /* homeHeightViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = homeHeightViewController.xib; path = Resources/homeHeightViewController.xib; sourceTree = "<group>"; };
 		3F7CDB5C157ABDCE009CD3D7 /* totdb.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = totdb.sqlite; sourceTree = "<group>"; };
+		3F81369916BB9D100085432D /* Logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Logo@2x.png"; sourceTree = "<group>"; };
 		3FB31B7F1638ECEC0063DAC6 /* background-diaper.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "background-diaper.png"; path = "Resources/Home/background-diaper.png"; sourceTree = "<group>"; };
 		3FB31B871638ED770063DAC6 /* icons-history.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icons-history.png"; path = "Resources/Home/icons-history.png"; sourceTree = "<group>"; };
 		3FB31B881638ED770063DAC6 /* icons-ok.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icons-ok.png"; path = "Resources/Home/icons-ok.png"; sourceTree = "<group>"; };
@@ -530,7 +531,6 @@
 		3FE9B5F6154A303100199AAF /* test_Model.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = test_Model.m; path = Tests/test_Model.m; sourceTree = "<group>"; };
 		3FE9B5F8154A313700199AAF /* totSliderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totSliderView.h; path = Utility/totSliderView.h; sourceTree = "<group>"; };
 		3FE9B5F9154A313700199AAF /* totSliderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totSliderView.m; path = Utility/totSliderView.m; sourceTree = "<group>"; };
-		3FF2AA5216A8EE740023162E /* Logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Logo@2x.png"; sourceTree = "<group>"; };
 		3FF2AA5516A8F8FE0023162E /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		8E3AE8CD168D531E00E4CFAE /* icons-checkbox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icons-checkbox.png"; path = "Resources/Home/icons-checkbox.png"; sourceTree = "<group>"; };
 		8E3AE8CE168D531E00E4CFAE /* icons-diaper-solid_new.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "icons-diaper-solid_new.jpg"; path = "Resources/Home/icons-diaper-solid_new.jpg"; sourceTree = "<group>"; };
@@ -1050,8 +1050,6 @@
 		EF6283661536674B004031D6 = {
 			isa = PBXGroup;
 			children = (
-				3FF2AA5516A8F8FE0023162E /* Default-568h@2x.png */,
-				3FF2AA5216A8EE740023162E /* Logo@2x.png */,
 				3F7CDB5C157ABDCE009CD3D7 /* totdb.sqlite */,
 				3FE9B5F4154A2FCF00199AAF /* Tests */,
 				EF62838C153667BD004031D6 /* resources */,
@@ -1124,6 +1122,8 @@
 		EF62838C153667BD004031D6 /* resources */ = {
 			isa = PBXGroup;
 			children = (
+				3FF2AA5516A8F8FE0023162E /* Default-568h@2x.png */,
+				3F81369916BB9D100085432D /* Logo@2x.png */,
 				3FD29C96168D3B7000978B51 /* Fonts */,
 				EFBE580A1565A8FC003433D6 /* Logo.png */,
 				EF6283A215366DF1004031D6 /* Image */,
@@ -1649,8 +1649,8 @@
 				3F1331B8169FC71A00A39F41 /* text_weight_grey.png in Resources */,
 				3F1331B9169FC71A00A39F41 /* weight_bg.png in Resources */,
 				3F1331BA169FC71A00A39F41 /* weight_bg@2x.png in Resources */,
-				3FF2AA5316A8EE740023162E /* Logo@2x.png in Resources */,
 				3FF2AA5616A8F8FE0023162E /* Default-568h@2x.png in Resources */,
+				3F81369A16BB9D100085432D /* Logo@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
