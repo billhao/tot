@@ -10,8 +10,8 @@
 #import "totReviewStory.h"
 #import "totReviewStoryView.h"
 
-#define TABLE_CELL_WIDTH          280
-#define TABLE_CELL_DEFAULT_HEIGHT 100
+#define TABLE_CELL_WIDTH          320
+#define TABLE_CELL_DEFAULT_HEIGHT 155
 #define TABLE_CELL_START_X        (320-TABLE_CELL_WIDTH)/2
 
 @implementation totReviewTableViewController
@@ -70,7 +70,7 @@
         // constructs the detailed cell view.
         totReviewStoryView *view = [[totReviewStoryView alloc] initWithFrame:CGRectMake(TABLE_CELL_START_X, 0,
                                                                                         TABLE_CELL_WIDTH,
-                                                                                        cellHeight)];
+                                                                                        TABLE_CELL_DEFAULT_HEIGHT)];
         [view setReviewStory:story];
         [mData addObject:view];
         [view release];
@@ -81,7 +81,7 @@
 #pragma mark - UITableView delegate
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     totReviewStoryView* view = (totReviewStoryView*)[mData objectAtIndex:indexPath.row];
-    return view.height + 10;
+    return view.height;// + 10;
 }
 
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {
@@ -154,7 +154,7 @@
     [super viewDidLoad];
     
     mReviewTable.separatorStyle = UITableViewCellSeparatorStyleNone;
-    mReviewTable.backgroundColor = [UIColor colorWithRed:0.8 green:0.8 blue:0.8 alpha:1.0];
+    mReviewTable.backgroundColor = [UIColor clearColor];
 }
 
 - (void)viewDidUnload

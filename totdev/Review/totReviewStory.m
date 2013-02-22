@@ -8,8 +8,6 @@
 
 #import "totReviewStory.h"
 
-#define TABLE_CELL_DEFAULT_HEIGHT 120
-
 @implementation totReviewStory
 
 @synthesize mEventType;
@@ -55,7 +53,7 @@
 }
 
 - (int) storyViewHeight {
-    int cellHeight = TABLE_CELL_DEFAULT_HEIGHT;
+    int cellHeight = 155;
     
     if ([mEventType isEqualToString:@"basic/sleep"]) {
         if ([mRawContent isEqualToString:@"start"]) {
