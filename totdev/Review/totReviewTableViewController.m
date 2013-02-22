@@ -100,7 +100,11 @@
 }
 
 - (UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSString *identifier = [NSString stringWithFormat:@"cell_%i", indexPath.row];
+    NSString *identifier = nil;
+    if (mCurrentType)
+        identifier = [NSString stringWithFormat:@"cell_%@_%i", mCurrentType, indexPath.row];
+    else
+        identifier = [NSString stringWithFormat:@"cell_%i", indexPath.row];
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier] autorelease];

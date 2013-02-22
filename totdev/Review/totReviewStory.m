@@ -41,9 +41,6 @@
     NSString * category = [tokens objectAtIndex:0];
     if ([categories containsObject:category]) {
         visible = YES;
-        //printf("visible\n");
-    } else {
-        //printf("invisible\n");
     }
     return visible;
 }
