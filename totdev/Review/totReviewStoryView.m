@@ -9,7 +9,6 @@
 #import <QuartzCore/QuartzCore.h>
 #import "totReviewStoryView.h"
 #import "AppDelegate.h"
-#import "totReviewLineChart.h"
 #import "../Model/totModel.h"
 #import "../Model/totEvent.h"
 

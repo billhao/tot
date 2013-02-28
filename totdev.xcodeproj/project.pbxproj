@@ -208,7 +208,9 @@
 		8E46E50216A8F8CF00932B90 /* opener.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E46E50116A8F8CF00932B90 /* opener.png */; };
 		8E4D50E41614CC3A00890621 /* boy.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8E4D50E21614CC3A00890621 /* boy.jpg */; };
 		8E4D50E51614CC3A00890621 /* girl.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8E4D50E31614CC3A00890621 /* girl.jpg */; };
-		8E5F1208163F3A170040036D /* totReviewLineChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E5F1207163F3A170040036D /* totReviewLineChart.m */; };
+		8E61818816DFE5F50052E38E /* edit_2X.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E61818516DFE5F50052E38E /* edit_2X.png */; };
+		8E61818916DFE5F50052E38E /* start_2X.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E61818616DFE5F50052E38E /* start_2X.png */; };
+		8E61818A16DFE5F50052E38E /* wakeup_2X.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E61818716DFE5F50052E38E /* wakeup_2X.png */; };
 		8E632EBD16268CD900072D89 /* totHomeDiaperView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E632EBC16268CD900072D89 /* totHomeDiaperView.m */; };
 		8E920F8A161903D700725971 /* backgrounds-sleepduring.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E920F85161903D600725971 /* backgrounds-sleepduring.png */; };
 		8E920F8B161903D700725971 /* backgrounds-sleepstart.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E920F86161903D700725971 /* backgrounds-sleepstart.png */; };
@@ -236,8 +238,6 @@
 		EF0D6BEA1555CCD00027F012 /* totTimerController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF0D6BE91555CCD00027F012 /* totTimerController.m */; };
 		EF0D6BEF155631880027F012 /* gesture_salut.png in Resources */ = {isa = PBXBuildFile; fileRef = EF0D6BED155631880027F012 /* gesture_salut.png */; };
 		EF0D6BF0155631880027F012 /* motor_skill_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = EF0D6BEE155631880027F012 /* motor_skill_bg.png */; };
-		EF168A6E156856E500FDFBD6 /* homeDiaperView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF168A6D156856E500FDFBD6 /* homeDiaperView.xib */; };
-		EF168A721568571500FDFBD6 /* totHomeDiaperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF168A711568571500FDFBD6 /* totHomeDiaperViewController.m */; };
 		EF2387EB153B7D1600B9C8BD /* ActivityEntryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF2387EA153B7D1600B9C8BD /* ActivityEntryView.xib */; };
 		EF2387EF153B7D7700B9C8BD /* totActivityEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2387EE153B7D7700B9C8BD /* totActivityEntryViewController.m */; };
 		EF2387F5153BC4C300B9C8BD /* totActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2387F4153BC4C300B9C8BD /* totActivityViewController.m */; };
@@ -543,8 +543,9 @@
 		8E46E50116A8F8CF00932B90 /* opener.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = opener.png; path = Resources/Utility/opener.png; sourceTree = "<group>"; };
 		8E4D50E21614CC3A00890621 /* boy.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = boy.jpg; path = Resources/Home/boy.jpg; sourceTree = "<group>"; };
 		8E4D50E31614CC3A00890621 /* girl.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = girl.jpg; path = Resources/Home/girl.jpg; sourceTree = "<group>"; };
-		8E5F1206163F3A170040036D /* totReviewLineChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totReviewLineChart.h; path = Review/totReviewLineChart.h; sourceTree = "<group>"; };
-		8E5F1207163F3A170040036D /* totReviewLineChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totReviewLineChart.m; path = Review/totReviewLineChart.m; sourceTree = "<group>"; };
+		8E61818516DFE5F50052E38E /* edit_2X.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = edit_2X.png; path = Resources/Home/edit_2X.png; sourceTree = "<group>"; };
+		8E61818616DFE5F50052E38E /* start_2X.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = start_2X.png; path = Resources/Home/start_2X.png; sourceTree = "<group>"; };
+		8E61818716DFE5F50052E38E /* wakeup_2X.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = wakeup_2X.png; path = Resources/Home/wakeup_2X.png; sourceTree = "<group>"; };
 		8E632EBB16268CD900072D89 /* totHomeDiaperView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totHomeDiaperView.h; path = Home/totHomeDiaperView.h; sourceTree = "<group>"; };
 		8E632EBC16268CD900072D89 /* totHomeDiaperView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totHomeDiaperView.m; path = Home/totHomeDiaperView.m; sourceTree = "<group>"; };
 		8E920F85161903D600725971 /* backgrounds-sleepduring.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "backgrounds-sleepduring.png"; path = "Resources/Home/backgrounds-sleepduring.png"; sourceTree = "<group>"; };
@@ -579,9 +580,6 @@
 		EF0D6BEC1555EC240027F012 /* totEventName.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = totEventName.h; path = totdev/Model/totEventName.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		EF0D6BED155631880027F012 /* gesture_salut.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = gesture_salut.png; path = Resources/Activity/View/gesture_salut.png; sourceTree = "<group>"; };
 		EF0D6BEE155631880027F012 /* motor_skill_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = motor_skill_bg.png; path = Resources/Activity/View/motor_skill_bg.png; sourceTree = "<group>"; };
-		EF168A6D156856E500FDFBD6 /* homeDiaperView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = homeDiaperView.xib; sourceTree = "<group>"; };
-		EF168A701568571500FDFBD6 /* totHomeDiaperViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totHomeDiaperViewController.h; path = Home/totHomeDiaperViewController.h; sourceTree = "<group>"; };
-		EF168A711568571500FDFBD6 /* totHomeDiaperViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totHomeDiaperViewController.m; path = Home/totHomeDiaperViewController.m; sourceTree = "<group>"; };
 		EF2387EA153B7D1600B9C8BD /* ActivityEntryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActivityEntryView.xib; sourceTree = "<group>"; };
 		EF2387ED153B7D7700B9C8BD /* totActivityEntryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totActivityEntryViewController.h; path = Activity/totActivityEntryViewController.h; sourceTree = "<group>"; };
 		EF2387EE153B7D7700B9C8BD /* totActivityEntryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totActivityEntryViewController.m; path = Activity/totActivityEntryViewController.m; sourceTree = "<group>"; };
@@ -979,6 +977,9 @@
 		8E4D50E71616593900890621 /* Sleep */ = {
 			isa = PBXGroup;
 			children = (
+				8E61818516DFE5F50052E38E /* edit_2X.png */,
+				8E61818616DFE5F50052E38E /* start_2X.png */,
+				8E61818716DFE5F50052E38E /* wakeup_2X.png */,
 				8E920F85161903D600725971 /* backgrounds-sleepduring.png */,
 				8E920F86161903D700725971 /* backgrounds-sleepstart.png */,
 				8E920F87161903D700725971 /* icons-close.png */,
@@ -1137,7 +1138,6 @@
 				EF5FBB5B154E7B8E00CBBA27 /* PhotoView.xib */,
 				1572880215575B31005771DB /* homeFeedingView.xib */,
 				3F454D2C1555A84700AC66EE /* homeHeightViewController.xib */,
-				EF168A6D156856E500FDFBD6 /* homeDiaperView.xib */,
 				EF2BEA021574820D0002F763 /* ReviewTableView.xib */,
 				3FCA8974157AE42600B087D7 /* SettingEntryView.xib */,
 				3F2216DD1571758F000E86F3 /* totLoginController.xib */,
@@ -1164,8 +1164,6 @@
 				3F454D2B1555A84700AC66EE /* totHomeHeightViewController.m */,
 				15414FF71556F99600C3C828 /* totHomeFeedingViewController.h */,
 				15414FF81556F99600C3C828 /* totHomeFeedingViewController.m */,
-				EF168A701568571500FDFBD6 /* totHomeDiaperViewController.h */,
-				EF168A711568571500FDFBD6 /* totHomeDiaperViewController.m */,
 			);
 			name = Home;
 			sourceTree = "<group>";
@@ -1201,8 +1199,6 @@
 				EF4C585F157B3C9900D41C89 /* totReviewStory.m */,
 				EF4C5861157B3D6000D41C89 /* totReviewStoryView.h */,
 				EF4C5862157B3D6000D41C89 /* totReviewStoryView.m */,
-				8E5F1206163F3A170040036D /* totReviewLineChart.h */,
-				8E5F1207163F3A170040036D /* totReviewLineChart.m */,
 				8E451D8D169FCB48003D1438 /* totReviewFilterOpenerView.h */,
 				8E451D8E169FCB48003D1438 /* totReviewFilterOpenerView.m */,
 				8E46E4FD16A8F35500932B90 /* totReviewFilterView.h */,
@@ -1459,7 +1455,6 @@
 				EF0D6BF0155631880027F012 /* motor_skill_bg.png in Resources */,
 				1572880315575B31005771DB /* homeFeedingView.xib in Resources */,
 				EFBE580B1565A8FC003433D6 /* Logo.png in Resources */,
-				EF168A6E156856E500FDFBD6 /* homeDiaperView.xib in Resources */,
 				3F3F1F1A15698C050025F029 /* tab_background.png in Resources */,
 				3F3FF8431569912F004E4584 /* tab_selected_background.png in Resources */,
 				3F3FF84615699650004E4584 /* home@2x.png in Resources */,
@@ -1651,6 +1646,9 @@
 				3F1331BA169FC71A00A39F41 /* weight_bg@2x.png in Resources */,
 				3FF2AA5616A8F8FE0023162E /* Default-568h@2x.png in Resources */,
 				3F81369A16BB9D100085432D /* Logo@2x.png in Resources */,
+				8E61818816DFE5F50052E38E /* edit_2X.png in Resources */,
+				8E61818916DFE5F50052E38E /* start_2X.png in Resources */,
+				8E61818A16DFE5F50052E38E /* wakeup_2X.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1691,7 +1689,6 @@
 				3F454D2D1555A84700AC66EE /* totHomeHeightViewController.m in Sources */,
 				EF4CEE5915563E2400109BCC /* totLanguageInputViewController.m in Sources */,
 				15414FF91556F99600C3C828 /* totHomeFeedingViewController.m in Sources */,
-				EF168A721568571500FDFBD6 /* totHomeDiaperViewController.m in Sources */,
 				EF2BEA00157480080002F763 /* totReviewTableViewController.m in Sources */,
 				3F2216DE1571758F000E86F3 /* totLoginController.m in Sources */,
 				3F2216E61571763A000E86F3 /* STHorizontalPicker.m in Sources */,
@@ -1700,7 +1697,6 @@
 				3FCA8975157AE42600B087D7 /* totSettingEntryViewController.m in Sources */,
 				3FE62AF815E8A6E50079CE54 /* totNewBabyController.m in Sources */,
 				8E632EBD16268CD900072D89 /* totHomeDiaperView.m in Sources */,
-				8E5F1208163F3A170040036D /* totReviewLineChart.m in Sources */,
 				3F2770F3164E327900DF84EF /* totBaby.m in Sources */,
 				3F2770F6164E328C00DF84EF /* totUser.m in Sources */,
 				3F277109164F6F6100DF84EF /* totLoginNavigationController.m in Sources */,
@@ -1736,7 +1732,7 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
+				GCC_WARN_UNUSED_VARIABLE = NO;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PROVISIONING_PROFILE = "";
@@ -1782,7 +1778,7 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
+				GCC_WARN_UNUSED_VARIABLE = NO;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
@@ -1801,7 +1797,7 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
+				GCC_WARN_UNUSED_VARIABLE = NO;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PROVISIONING_PROFILE = "";

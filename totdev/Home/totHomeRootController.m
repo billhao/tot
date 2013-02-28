@@ -10,14 +10,12 @@
 #import "totHomeEntryViewController.h"
 #import "totHomeHeightViewController.h"
 #import "totHomeFeedingViewController.h"
-#import "totHomeDiaperViewController.h"
 
 @implementation totHomeRootController
 
 @synthesize homeEntryViewController;
 @synthesize homeFeedingViewController;
 @synthesize homeHeightViewController;
-@synthesize homeDiaperViewController;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -76,21 +74,13 @@
     self.homeHeightViewController.homeRootController = self;
     [aHeightView release];
     
-    totHomeDiaperViewController *aDiaperView = 
-        [[totHomeDiaperViewController alloc] initWithNibName:@"homeDiaperView" bundle:nil];
-    self.homeDiaperViewController = aDiaperView;
-    self.homeDiaperViewController.mHomeRootController = self;
-    [aDiaperView release];
-    
     [self.view addSubview:homeEntryViewController.view];
     [self.view addSubview:homeFeedingViewController.view];
     [self.view addSubview:homeHeightViewController.view];
-    [self.view addSubview:homeDiaperViewController.view];
     
     self.homeEntryViewController.view.frame = CGRectMake(0, 0, 320, 460);
     self.homeFeedingViewController.view.frame = CGRectMake(320, 0, 320, 460);
     self.homeHeightViewController.view.frame = CGRectMake(320, 0, 320, 460);
-    self.homeDiaperViewController.view.frame = CGRectMake(320, 0, 320, 460);
     
     mCurrentViewIndex = kHomeViewEntryView;
 }
@@ -104,8 +94,6 @@
             return homeFeedingViewController;
         case kHomeViewHeightView:
             return homeHeightViewController;
-        case kHomeViewDiaperView:
-            return homeDiaperViewController;
         default:
             printf("Invalid view index\n");
             return nil;
@@ -120,8 +108,6 @@
             return homeFeedingViewController.view.frame.origin.x;
         case kHomeViewHeightView:
             return homeHeightViewController.view.frame.origin.x;
-        case kHomeViewDiaperView:
-            return homeDiaperViewController.view.frame.origin.x;
         default:
             printf("Invalid view index\n");
             return -1;
@@ -149,8 +135,6 @@
             [(totHomeHeightViewController*)nextView setInitialPicker:i];
             break;
         }
-        case kHomeViewDiaperView:
-            break;
         default:
             break;
     }
