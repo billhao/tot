@@ -84,7 +84,7 @@
         totImageView* popUpBackground = [[totImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 260)];
         [popUpBackground imageFilePath:@"feeding-popup.png"];
         [mChooseFoodView addSubview:popUpBackground];
-        [popUpBackground release];
+        //[popUpBackground release];
         
         
         if(tag == BUTTON_CATEGORY_MIN + 0)
@@ -924,7 +924,7 @@
     totImageView* background = [[totImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
     [background imageFilePath:@"feeding-blank.png"];
     [self.view addSubview:background];
-    [background release];
+    // [background release];
     
     // create categories slider view
     [self createCategoryPanel];
