@@ -24,7 +24,8 @@
     totImageView *mSleepingBckgrnd;
     UIButton *mCancelButton;
     UIButton *mEditButton;
-    UIButton *mLabelBckgrnd;
+    UIButton *mStartButton;
+    UIButton *mWakeupButton;
     UIButton *mTimeLabel;
 }
 

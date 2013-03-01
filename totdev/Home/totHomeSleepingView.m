@@ -86,15 +86,15 @@
         NSDate *event_date = event.datetime;
 
         NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-        NSDateComponents *components = [calendar components:NSHourCalendarUnit | NSMinuteCalendarUnit
+        NSDateComponents *components = [calendar components:NSSecondCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit
                                                    fromDate:event_date
                                                      toDate:now
                                                     options:0];
-        NSString *duration = [NSString stringWithFormat:@"Zzz %d min", components.hour*60+components.minute];
+        NSString *duration = [NSString stringWithFormat:@"%02d:%02d:%02d", components.hour, components.minute, components.second];
         [mTimeLabel setTitle:duration forState:UIControlStateNormal];
         [calendar release];
     } else {
-        [mTimeLabel setTitle:@"Awake" forState:UIControlStateNormal];
+        [mTimeLabel setTitle:@"" forState:UIControlStateNormal];
     }
     timer_show_up = !timer_show_up;
 }
@@ -173,10 +173,16 @@
     
     if (isStart) {
         printf("baby starts sleeping\n");
-        [model addEvent:global.baby.babyID event:EVENT_BASIC_SLEEP datetimeString:[NSString stringWithUTF8String:now] value:@"start"];
+        [model addEvent:global.baby.babyID
+                  event:EVENT_BASIC_SLEEP
+         datetimeString:[NSString stringWithUTF8String:now]
+                  value:@"start"];
     } else {
         printf("baby wakes up\n");
-        [model addEvent:global.baby.babyID event:EVENT_BASIC_SLEEP datetimeString:[NSString stringWithUTF8String:now] value:@"end"];
+        [model addEvent:global.baby.babyID
+                  event:EVENT_BASIC_SLEEP
+         datetimeString:[NSString stringWithUTF8String:now]
+                  value:@"end"];
     }
 }
 
@@ -216,7 +222,7 @@
 
 - (void)showSleepingView {
     // add timer
-    mSleepTimer = [NSTimer scheduledTimerWithTimeInterval:2
+    mSleepTimer = [NSTimer scheduledTimerWithTimeInterval:1
                                                    target:self
                                                  selector:@selector(timerHandler)
                                                  userInfo:nil
@@ -233,25 +239,31 @@
     
     mEditButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [mEditButton setTag:BUTTON_EDIT];
-    [mEditButton setFrame:CGRectMake(185, 80, 45, 45)];
-    [mEditButton setImage:[UIImage imageNamed:@"icons-sleep-edit.png"] forState:UIControlStateNormal];
+    [mEditButton setFrame:CGRectMake(191, 85, 32, 32)];
+    [mEditButton setImage:[UIImage imageNamed:@"edit_2X.png"] forState:UIControlStateNormal];
     [mEditButton addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:mEditButton];
     
+    mWakeupButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [mWakeupButton setTag:BUTTON_END];
+    [mWakeupButton setFrame:CGRectMake(211, 43, 90, 68)];
+    [mWakeupButton setImage:[UIImage imageNamed:@"wakeup_2X.png"] forState:UIControlStateNormal];
+    [mWakeupButton addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    
     mTimeLabel = [UIButton buttonWithType:UIButtonTypeCustom];
-    [mTimeLabel setTag:BUTTON_END];
-    [mTimeLabel setTitle:@"Awake" forState:UIControlStateNormal];
-    [mTimeLabel.titleLabel setFont:[UIFont fontWithName:@"Roboto-Regular" size:14.0]];
-    [mTimeLabel setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [mTimeLabel setFrame:CGRectMake(200, 50, 120, 50)];
-    [mTimeLabel addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
-    [self insertSubview:mTimeLabel aboveSubview:mSleepingBckgrnd];
+    [mTimeLabel setFrame:CGRectMake(215, 75, 90, 30)];
+    [mTimeLabel.titleLabel setFont:[UIFont fontWithName:@"Roboto-Regular" size:12.0]];
+    [mTimeLabel setTitleColor:[UIColor colorWithRed:0.5f green:0.51f blue:0.52 alpha:1.0f] forState:UIControlStateNormal];
+    
+    [self insertSubview:mWakeupButton aboveSubview:mSleepingBckgrnd];
+    [self insertSubview:mTimeLabel aboveSubview:mWakeupButton];
     
     self.hidden = NO;
 }
 
 - (void)clearSleepingView {
     [mSleepingBckgrnd removeFromSuperview];
+    [mWakeupButton removeFromSuperview];
     [mTimeLabel removeFromSuperview];
     [mCancelButton removeFromSuperview];
     
@@ -262,7 +274,7 @@
 
 - (void)showNotSleepView {
     // add timer
-    mSleepTimer = [NSTimer scheduledTimerWithTimeInterval:2
+    mSleepTimer = [NSTimer scheduledTimerWithTimeInterval:1
                                                    target:self
                                                  selector:@selector(timerHandler)
                                                  userInfo:nil
@@ -279,17 +291,21 @@
 
     mEditButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [mEditButton setTag:BUTTON_EDIT];
-    [mEditButton setFrame:CGRectMake(185, 80, 45, 45)];
-    [mEditButton setImage:[UIImage imageNamed:@"icons-sleep-edit.png"] forState:UIControlStateNormal];
+    [mEditButton setFrame:CGRectMake(191, 85, 32, 32)];
+    [mEditButton setImage:[UIImage imageNamed:@"edit_2X.png"] forState:UIControlStateNormal];
+    //[mEditButton setFrame:CGRectMake(185, 80, 45, 45)];
+    //[mEditButton setImage:[UIImage imageNamed:@"icons-sleep-edit.png"] forState:UIControlStateNormal];
     [mEditButton addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:mEditButton];
     
-    mLabelBckgrnd = [UIButton buttonWithType:UIButtonTypeCustom];
-    [mLabelBckgrnd setTag:BUTTON_START];
-    [mLabelBckgrnd setFrame:CGRectMake(210, 50, 70, 50)];
-    [mLabelBckgrnd setImage:[UIImage imageNamed:@"icons-sleep-start.png"] forState:UIControlStateNormal];
-    [mLabelBckgrnd addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
-    [self addSubview:mLabelBckgrnd];
+    mStartButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [mStartButton setTag:BUTTON_START];
+    [mStartButton setFrame:CGRectMake(211, 43, 90, 68)];
+    [mStartButton setImage:[UIImage imageNamed:@"start_2X.png"] forState:UIControlStateNormal];
+    //[mLabelBckgrnd setFrame:CGRectMake(210, 50, 70, 50)];
+    //[mLabelBckgrnd setImage:[UIImage imageNamed:@"icons-sleep-start.png"] forState:UIControlStateNormal];
+    [mStartButton addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:mStartButton];
     
     self.hidden = NO;
 }
@@ -298,7 +314,7 @@
     [mReadyToSleepBckgrnd removeFromSuperview];
     [mCancelButton removeFromSuperview];
     [mEditButton removeFromSuperview];
-    [mLabelBckgrnd removeFromSuperview];
+    [mStartButton removeFromSuperview];
     
     [mSleepTimer invalidate];
     
