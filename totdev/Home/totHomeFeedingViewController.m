@@ -156,31 +156,36 @@
     NSString* summary = [NSString stringWithFormat:@"**%@", mDatetime.titleLabel.text ];
     NSLog(@"%@", summary);
     
-    
-    for(int i = 0; i < DEFAULT_MENU; i++){
-        /*
-        if(quantityList[i]>0){
-            NSString* temp = [NSString stringWithFormat:@"%@-%d:\t%.1f %@", @"food",i, quantityList[i],@"oz" ];
-            
+    //generate summary
+    if([foodChosenList count] > 0){
+        for(int i = 0; i < [foodChosenList count]; i++){
+            NSString* temp = [NSString stringWithFormat:@"%@\t%@",
+                              foodChosenList[i][@"name"],
+                              foodChosenList[i][@"quantity"] ]; //no unit
             summary = [NSString stringWithFormat:@"%@\n%@",summary,temp ];
             
-            // NSString* quantity = [NSString stringWithFormat:@"%.1f", picker_quantity.currentValue];
-            NSString* quantity = @"0";
-            
             // food list needs renew
-            [mTotModel addEvent:baby_id event:EVENT_FEEDING datetime:date value:quantity]; /// change 
             NSLog(@"%@",summary);
         }
-         */
-        
     }
-    
     [mSummary setTitle:summary forState:UIControlStateNormal];
     [self.view bringSubviewToFront:mSummary];
     [mSummary setHidden:false];
     
-    // get a list of events containing "emotion"
-    NSString* event = [[NSString alloc] initWithString:@"fedding"];
+    
+    //xxxxxxxxxxx add to databse by first converting foodChosenList to a JSON string
+    NSError* error;
+    NSData* jsonData = [NSJSONSerialization dataWithJSONObject:foodChosenList
+                    options:NSJSONWritingPrettyPrinted error:&error];
+    NSLog(@"%@",[[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding]);
+    
+    [mTotModel addEvent:baby_id
+                  event:EVENT_FEEDING
+               datetime:date
+                  value:[[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding] ]; // change value to a JSON
+   
+    //I don't event know what next code is for...
+    NSString* event = [[NSString alloc] initWithString:@"feeding"];
     // return from getEvent is an array of totEvent object
     // a totEvent represents a single event
     NSMutableArray *events = [mTotModel getEvent:0 event:event];
