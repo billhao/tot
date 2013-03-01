@@ -965,7 +965,7 @@
     [mDatetime addTarget:self action:@selector(DatetimeClicked:) forControlEvents:UIControlEventTouchUpInside];
     [mDatetime setBackgroundColor:[UIColor whiteColor]];
     [mDatetime setTitleColor:[UIColor colorWithRed:147.0/255 green:149.0/255 blue:152.0/255 alpha:1] forState:UIControlStateNormal];
-    [mDatetime setTitleColor:[UIColor colorWithRed:147.0/255 green:149.0/255 blue:152.0/255 alpha:1] forState:UIControlStateHighlighted];
+    [mDatetime setTitleColor:[UIColor colorWithRed:255/255 green:0/255 blue:0/255 alpha:1] forState:UIControlStateHighlighted];
     
     // set up date picker
     mWidth = self.view.frame.size.width;
@@ -1018,12 +1018,11 @@
     NSLog(@"%@", time);
     NSString *formattedTime;
     //need to parse time before display
-    NSArray* timeComponent = [time componentsSeparatedByString: @":"];
+    NSArray* timeComponent = [time componentsSeparatedByString: @" "];
     
-    formattedTime = [NSString stringWithFormat:@"%@:%@ %@",
+    formattedTime = [NSString stringWithFormat:@"%@ %@",
                      [timeComponent objectAtIndex:0],
-                     [timeComponent objectAtIndex:1],
-                     [[timeComponent objectAtIndex:2] uppercaseString]];
+                     [[timeComponent objectAtIndex:1] uppercaseString]];
     
     [mDatetime setTitle:formattedTime forState:UIControlStateNormal];
     
