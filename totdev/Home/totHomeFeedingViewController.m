@@ -279,7 +279,7 @@
     [categoriesImages addObject:[UIImage imageNamed:@"feedingcategories-vege.png"]];
     
     [mCategoriesSlider setContentArray:categoriesImages];
-    [categoriesImages release];
+    //[categoriesImages release];
     
     [mCategoriesSlider getWithPositionMemoryIdentifier:@"feedingCategories"];
 }
@@ -311,7 +311,7 @@
     
     
     [mRecentlyUsedSlider setContentArray:recentlyUsedImages];
-    [recentlyUsedImages release];
+    //[recentlyUsedImages release];
     
     [mRecentlyUsedSlider getWithPositionMemoryIdentifier:@"feedingRecentlyUsed"];
     
@@ -361,9 +361,8 @@
     
     [mChooseFoodSlider setContentArray:foodImages];
     
-    [filteredFood release];
-    [foodImages release];
-    
+    // [filteredFood release];
+    // [foodImages release];
     
     [mChooseFoodSlider getWithPositionMemoryIdentifier:@"chooseFood"];
 }
@@ -390,8 +389,8 @@
     
     [mFoodChosenSlider setContentArray:foodChosenImages];
 
-    [filteredFoodChosen release];
-    [foodChosenImages release];
+    //[filteredFoodChosen release];
+    //[foodChosenImages release];
     
     
     [mFoodChosenSlider getWithPositionMemoryIdentifier:@"feedingFoodChosen"];
