@@ -38,14 +38,15 @@ static NSString *EVENT_BASIC_LANGUAGE   = @"basic/language";
 static NSString *EVENT_BASIC_DIAPER     = @"basic/diaper";
 
 // feeding
-static NSString *EVENT_FEEDING_MILK     = @"feeding/milk";
-static NSString *EVENT_FEEDING_WATER    = @"feeding/water";
-static NSString *EVENT_FEEDING_RICE     = @"feeding/rice";
-static NSString *EVENT_FEEDING_FRUIT    = @"feeding/fruit";
-static NSString *EVENT_FEEDING_VEGETABLE= @"feeding/vegetable";
-static NSString *EVENT_FEEDING_CHEESE   = @"feeding/cheese";
-static NSString *EVENT_FEEDING_BREAD    = @"feeding/bread";
-static NSString *EVENT_FEEDING_EGG      = @"feeding/egg";
+//static NSString *EVENT_FEEDING_MILK     = @"feeding/milk";
+//static NSString *EVENT_FEEDING_WATER    = @"feeding/water";
+//static NSString *EVENT_FEEDING_RICE     = @"feeding/rice";
+//static NSString *EVENT_FEEDING_FRUIT    = @"feeding/fruit";
+//static NSString *EVENT_FEEDING_VEGETABLE= @"feeding/vegetable";
+//static NSString *EVENT_FEEDING_CHEESE   = @"feeding/cheese";
+//static NSString *EVENT_FEEDING_BREAD    = @"feeding/bread";
+//static NSString *EVENT_FEEDING_EGG      = @"feeding/egg";
+static NSString *EVENT_FEEDING      = @"feeding";
 
 
 // activity - emotion

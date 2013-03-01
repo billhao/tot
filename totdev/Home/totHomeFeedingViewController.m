@@ -105,21 +105,6 @@
         [self createChooseFoodPanel];
         [mChooseFoodView addSubview:mChooseFoodSlider];
         
-        
-        
-        //xxxxxxxxxxxxxxx picker image in  or USE a popup textbox
-        /*
-        picker_quantity = [STHorizontalPicker getPickerForFood:CGRectMake(20, 170, 190, 40)];
-        [picker_quantity setDelegate:self];
-        picker_quantity.hidden =YES;
-        [mChooseFoodView addSubview:picker_quantity];
-        */
-        /* not commit yet
-        for (int i=0; i<DEFAULT_MENU ; i++) {
-            quantityList[i]=0;
-        }
-        */
-        
         return; //tag segmentations are mutually exclusive
     }
     
@@ -173,6 +158,7 @@
     
     
     for(int i = 0; i < DEFAULT_MENU; i++){
+        /*
         if(quantityList[i]>0){
             NSString* temp = [NSString stringWithFormat:@"%@-%d:\t%.1f %@", @"food",i, quantityList[i],@"oz" ];
             
@@ -182,9 +168,10 @@
             NSString* quantity = @"0";
             
             // food list needs renew
-            [mTotModel addEvent:baby_id event:EVENT_FEEDING_MILK datetime:date value:quantity];
+            [mTotModel addEvent:baby_id event:EVENT_FEEDING datetime:date value:quantity]; /// change 
             NSLog(@"%@",summary);
         }
+         */
         
     }
     
@@ -205,31 +192,29 @@
 
 
 - (void)ChooseFoodOKButtonClicked: (UIButton *)button {
-    // xxxxxxxx get quantity input
-    double q;
+    double q; //quantity input
     [text_quantity resignFirstResponder];
     
     NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
     if ([formatter numberFromString:text_quantity.text] != nil){
         q = [text_quantity.text doubleValue];
+        NSNumber* tempQ = [NSNumber numberWithDouble:q];
         
+        // according to foodSelected, find food name and category
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"category == %@", categoryChosen];
+        NSArray *filteredFood = [inventory filteredArrayUsingPredicate:predicate];
         
+        NSString* chosenFoodName = [NSString stringWithFormat:filteredFood[foodSelected - BUTTON_CHOOSEFOOD_MIN][@"name"]];
+
         //insert into a result queue
-        
-        
-        
-        
-        
-        
-        
-        
-        
+        NSMutableDictionary *foodItem = [[NSMutableDictionary alloc] init];
+        [foodItem setObject:chosenFoodName forKey:@"name"];
+        [foodItem setObject:categoryChosen forKey:@"category"];
+        [foodItem setObject:[tempQ stringValue] forKey:@"quantity"];
+
         //xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
         // add to foodChosenList
-        
-        
-        
-
+        [foodChosenList addObject:foodItem];
         
     }
     else{
@@ -351,7 +336,7 @@
     
     
     
-    //xxxxxxxxxx
+    //
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"category == %@", categoryChosen];
     NSArray *filteredFood = [inventory filteredArrayUsingPredicate:predicate];
     
@@ -1082,10 +1067,6 @@
     [mCategoriesSlider clearButtonLabels];
     [mCategoriesSlider clearButtonBGColor];
     
-    //clear quantityList
-    for(int i=0;i<DEFAULT_MENU;i++){
-        quantityList[i]=0;
-    }
     foodChosenList = [[NSMutableArray alloc]init]; // clear all
 }
 

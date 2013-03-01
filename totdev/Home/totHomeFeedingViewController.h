@@ -58,7 +58,7 @@
     
     int foodSelected;
     
-    float quantityList[8];
+    //float quantityList[8];
     NSMutableArray *foodChosenList;
 }
 
