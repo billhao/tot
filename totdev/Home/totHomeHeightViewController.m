@@ -159,7 +159,7 @@
     // set picker position to last measurement in db
     
     // assign labels and buttons
-    int a, b;
+    int a = 0, b = 1;
     if( initialPicker == 0 ) {
         a = 1; b = 2;
     }
@@ -190,7 +190,7 @@
     // save new value to the array so it will switch when user changes to a different measure (height/weight/hc)
     int i = mLabel0Button.tag; // get current/top item
     //NSLog(@"picker = %d", i);
-    NSString* str;
+    NSString* str = NULL;
     if( i==0 || i==2 )
         // height or head
         str = [NSString stringWithFormat:@"%.2f inches",value];
@@ -285,7 +285,7 @@
 // when user click on one of the two labels at the bottom, switch it with the current/top label
 - (void)LabelButtonClicked: (UIButton *)button {    
     // switch buttons
-    UILabel* label;
+    UILabel* label = NULL;
     if( button == mLabel1Button )
         label = mLabel1;
     else if( button == mLabel2Button )
