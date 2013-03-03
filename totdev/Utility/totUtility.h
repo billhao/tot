@@ -14,5 +14,9 @@
 +(UIImage *)squareCropImage:(UIImage *)origImage;  
 +(NSString *)nowTimeString;
 
+// utility function print a frame
++ (NSString*)getFrameString:(CGRect)frame;
 
 @end
+
+extern void print(NSString* str);

@@ -57,6 +57,8 @@
     
     NSLog(@"%@", @"activity didload");
 
+    self.view.frame = CGRectMake(0, 20, 320, 460);
+
     totActivityEntryViewController *anEntryView = [[totActivityEntryViewController alloc] initWithNibName:@"ActivityEntryView"
                                                                                                    bundle:nil];
     self.activityEntryViewController = anEntryView;

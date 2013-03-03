@@ -48,7 +48,7 @@ static totModel* _model;
     NSString* email = [_model getPreferenceNoBaby:PREFERENCE_LOGGED_IN];
     if( email == nil ) return nil;
     
-    return [[totUser alloc] initWithID:email];
+    return [[[totUser alloc] initWithID:email] autorelease];
 }
 
 // add baby id to this user
@@ -76,7 +76,7 @@ static totModel* _model;
 -(totBaby*) getDefaultBaby {
     NSString* pref = [NSString stringWithFormat:PREFERENCE_DEFAULT_BABY, email];
     NSString* babyid = [_model getPreferenceNoBaby:pref];
-    return [[totBaby alloc] initWithID:[babyid intValue]];
+    return [[[totBaby alloc] initWithID:[babyid intValue]] autorelease];
 }
 
 @end

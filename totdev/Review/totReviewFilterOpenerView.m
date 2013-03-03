@@ -26,7 +26,7 @@
         UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
         
-        self.backgroundColor = [[UIColor alloc] initWithPatternImage:newImage];
+        self.backgroundColor = [[[UIColor alloc] initWithPatternImage:newImage] autorelease];
         
         self.userInteractionEnabled = YES;
         mStatus = FOLD;

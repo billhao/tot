@@ -79,5 +79,6 @@
 - (void)SummaryButtonClicked: (UIButton *)button;
 - (void)backButtonClicked: (UIButton *)button;
 
++ (NSArray*)stringToJSON:(NSString*) jsonstring;
 
 @end

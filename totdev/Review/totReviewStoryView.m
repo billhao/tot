@@ -33,6 +33,7 @@
         bgview.frame = CGRectMake(0, 0, img.size.width, img.size.height);
         [self addSubview:bgview];
         [self sendSubviewToBack:bgview];
+        [bgview release];
     }
     return self;
 }
@@ -102,6 +103,9 @@
         }
         else if ([subcategory isEqualToString:@"head"]) {
             desc = [NSString stringWithFormat:@"%@ is %s", global.baby.name, [rawValue UTF8String]];
+        }
+        else if ([subcategory isEqualToString:@"feeding"]) {
+            desc = [NSString stringWithString:@"Feeding"];
         }
     } else if ([category isEqualToString:@"eye_contact"]) {
         if ([self isFirstOccurrence:story]) {
@@ -230,6 +234,7 @@
         context.textColor = [UIColor colorWithRed:128.0/255 green:130.0/255 blue:133.0/255 alpha:1];
         [context setFont:[UIFont fontWithName:@"Roboto-Regular" size:12]];
         context.textAlignment = UITextAlignmentCenter;
+        context.numberOfLines = 5;
         
         NSString * subcategory = [tokens objectAtIndex:1];
         
@@ -258,6 +263,24 @@
                 context.text = @"Slept for 100 minutes";
             }
         }
+        
+        else if ([subcategory isEqualToString:@"feeding"]) {
+            NSArray* foodlist = [totHomeFeedingViewController stringToJSON:story.mRawContent];
+            NSMutableString* summary = [[NSMutableString alloc] initWithFormat:@"%@ ate", global.baby.name];
+            Boolean first = true;
+            for (int i=0; i<foodlist.count; i++) {
+                NSDictionary* food = foodlist[i];
+                if( foodlist.count>=2 && i+1 == foodlist.count ) // second but last, add "and"
+                    [summary appendString:@" and"];
+                else if( i > 0 ) // from the second one, add comma
+                    [summary appendString:@","];
+                [summary appendFormat:@" %@oz %@", food[@"quantity"], food[@"name"] ];
+            }
+            context.text = summary;
+            [summary release];
+        }
+
+        
         [parent addSubview:context];
         [context release];
     }

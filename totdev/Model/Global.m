@@ -19,7 +19,7 @@ Global* global = nil;
     NSLog(@"global init");
     if( self = [super init] ) {
         // create model
-        self.model = [[totModel alloc] init];
+        self.model = [[[totModel alloc] init] autorelease];
 
         // add reference to db
         [totUser setModel:model];

@@ -40,6 +40,7 @@
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
         self.birthday = [dateFormatter dateFromString:bday];
+        [dateFormatter release];
     }
     return self;
 }
@@ -58,10 +59,9 @@
         str_sex = @"FEMALE";
     
     // format bday
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
     [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     NSString* str_bday = [dateFormatter stringFromDate:bday];
-    [dateFormatter release];
 
     int baby_id = [global.model getNextBabyID];
     NSLog(@"next id = %d", baby_id);

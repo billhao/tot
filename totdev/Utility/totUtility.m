@@ -61,4 +61,15 @@
     return  nowString;
 }
 
+
+// utility function print a frame
++ (NSString*)getFrameString:(CGRect)frame {
+    return [NSString stringWithFormat:@"x=%f y=%f w=%f h=%f", frame.origin.x, frame.origin.y, frame.size.width, frame.size.height];
+}
+
+
+void print(NSString* str) {
+    NSLog(@"%@", str);
+}
+
 @end

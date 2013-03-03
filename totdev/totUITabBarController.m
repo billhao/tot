@@ -10,6 +10,7 @@
 #import "Utility/totCameraViewController.h"
 #import "Utility/totAlbumViewController.h"
 #import "Utility/totPhotoView.h"
+#import "Utility/totUtility.h"
 
 @implementation totUITabBarController
 
@@ -55,6 +56,9 @@
 {
     [super viewDidLoad];
     
+    NSLog(@"totUITabBarController viewDidLoad");
+    
+    
     // set tab bar property
     // [self.tabBar1 setBackgroundImage:nil];
     // set bg color
@@ -91,6 +95,15 @@
     [self.view addSubview:photoView.view];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    CGRect frame = self.view.bounds;
+    frame.origin.y = 20;
+    frame.size.height = 460;
+    homeController.view.frame = frame;
+    activityController.view.frame = frame;
+    reviewController.view.frame = frame;
+    settingController.view.frame = frame;
+}
 
 - (void)viewDidUnload
 {

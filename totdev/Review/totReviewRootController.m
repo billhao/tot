@@ -110,12 +110,18 @@
         mOffset = 0;
         [self loadEvents:YES ofType:nil];
     }
+    CGRect frame = self.view.frame;
+    CGRect bounds = self.view.bounds;
 }
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    // prevent the filter view show above the review view
+    self.view.frame = CGRectMake(0, 20, 320, 460);
+    self.view.clipsToBounds = true;
     
     totReviewTableViewController *aTableView = 
         [[totReviewTableViewController alloc] initWithNibName:@"ReviewTableView" bundle:nil];

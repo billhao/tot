@@ -47,6 +47,8 @@
 {
     [super viewDidLoad];
     
+    self.view.frame = CGRectMake(0, 20, 320, 460);
+
     // add the entry view
     mEntryView = [[totSettingEntryViewController alloc] initWithNibName:@"SettingEntryView" bundle:nil];
     [self.view addSubview:mEntryView.view];

@@ -180,7 +180,7 @@
     NSLog(@"%@",[[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding]);
     
     [mTotModel addEvent:baby_id
-                  event:EVENT_FEEDING
+                  event:EVENT_BASIC_FEEDING
                datetime:date
                   value:[[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding] ]; // change value to a JSON
    
@@ -195,6 +195,12 @@
     [event release];
 }
 
+// convert a json string to json object
++ (NSArray*)stringToJSON:(NSString*) jsonstring {
+    NSError* e = [[NSError alloc] init];
+    NSArray* json = [NSJSONSerialization JSONObjectWithData: [jsonstring dataUsingEncoding:NSUTF8StringEncoding] options: NSJSONReadingMutableContainers error: &e];
+    return json;
+}
 
 - (void)ChooseFoodOKButtonClicked: (UIButton *)button {
     double q; //quantity input

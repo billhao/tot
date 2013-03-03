@@ -58,6 +58,7 @@
     bgview.frame = CGRectMake(0, 0, img.size.width, img.size.height);
     [self.view addSubview:bgview];
     [self.view sendSubviewToBack:bgview];
+    [bgview release];
 
     // height picker
     picker_height = [STHorizontalPicker getPickerForHeight:CGRectMake(66, 169, 190, 40)];

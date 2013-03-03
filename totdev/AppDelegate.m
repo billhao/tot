@@ -12,6 +12,7 @@
 #import "Model/Global.h"
 #import "test_Model.h"
 #import "totEventName.h"
+#import "Utility/totUtility.h"
 
 @implementation AppDelegate
 
@@ -33,9 +34,20 @@
     return [global.model getPreferenceNoBaby:PREFERENCE_LOGGED_IN];
 }
 
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
+     // handle iphone 5 screen size
+    CGRect windowFrame = [[UIScreen mainScreen] bounds];
+    if( windowFrame.size.height > 480 ) {
+        // iphone 5, put the frame in the middle of the screen
+        int currentAppHeight = 480; // currently the app window is 480px in height
+        windowFrame.origin.y += (windowFrame.size.height-currentAppHeight)/2;
+        windowFrame.size.height = currentAppHeight;
+    }
+
+    self.window = [[[UIWindow alloc] initWithFrame:windowFrame] autorelease];
+
     // Override point for customization after application launch.
     
     // init the global variable before anything else
@@ -44,14 +56,13 @@
     
     // initialize the image cache
     mCache = [[totImageCache alloc] init];
-
-    // init navigation controller for login, registration and new baby
     
-    totUITabBarController* mainTabController = [[totUITabBarController alloc] initWithNibName:@"MainWindow" bundle:nil];
-    mainTabController.view.frame = CGRectMake(0, 20, mainTabController.view.frame.size.width, mainTabController.view.frame.size.height);
-
-    loginNavigationController = [[totLoginNavigationController alloc] initWithRootViewController:mainTabController];
+    // init navigation controller for login, registration and new baby
+    loginNavigationController = [[totLoginNavigationController alloc] init];
     loginNavigationController.navigationBarHidden = TRUE;
+    loginNavigationController.view.frame = self.window.bounds;
+    loginNavigationController.view.autoresizesSubviews = false;  // for iphone 5 screen size
+    
     self.window.rootViewController = loginNavigationController;
     [self showFirstView];
     [self.window makeKeyAndVisible];
@@ -88,7 +99,7 @@
             }
             [global.baby printBabyInfo];
 
-            //[self showHomeView];
+            [self showHomeView];
         }
         else {
             [self showLoginView];
@@ -103,7 +114,8 @@
     [loginNavigationController setViewControllers:nil];
     // show new baby
     totNewBabyController* newbabyController = [[totNewBabyController alloc] initWithNibName:@"totNewBabyController" bundle:nil];
-    newbabyController.view.frame = CGRectMake(0, 20, newbabyController.view.frame.size.width, newbabyController.view.frame.size.height);
+    CGRect frame = self.window.bounds;
+    newbabyController.view.frame = CGRectMake(0, 20, frame.size.width, frame.size.height);
     [loginNavigationController pushViewController:newbabyController animated:TRUE];
     [newbabyController release];
 }
@@ -113,14 +125,15 @@
     [loginNavigationController setViewControllers:nil];
     // show login
     totLoginController* loginController = [[totLoginController alloc] initWithNibName:@"totLoginController" bundle:nil];
-    loginController.view.frame = CGRectMake(0, 20, loginController.view.frame.size.width, loginController.view.frame.size.height);
+    CGRect frame = self.window.bounds;
+    loginController.view.frame = CGRectMake(0, 20, frame.size.width, frame.size.height);
     if( global.baby==nil || global.baby.babyID == -1 )
         loginController.newuser = FALSE;
     else {
         loginController.newuser = TRUE;
     }
     [loginNavigationController pushViewController:loginController animated:TRUE];
-    //[loginController release];
+    [loginController release];
 }
 
 - (void)showHomeView {
@@ -128,8 +141,10 @@
     [loginNavigationController setViewControllers:nil];
     // show home view
     totUITabBarController* mainTabController = [[totUITabBarController alloc] initWithNibName:@"MainWindow" bundle:nil];
-    mainTabController.view.frame = CGRectMake(0, 20, mainTabController.view.frame.size.width, mainTabController.view.frame.size.height);
+    CGRect frame = self.window.bounds;
+    mainTabController.view.frame = CGRectMake(0, 20, frame.size.width, frame.size.height);
     [loginNavigationController pushViewController:mainTabController animated:TRUE];
+    [mainTabController release];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

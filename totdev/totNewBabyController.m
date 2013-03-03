@@ -41,7 +41,7 @@
     NSLog(@"%@", @"new baby view did load");
     
     //set background
-    self.view.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"bg_newbaby.png"]];
+    self.view.backgroundColor = [[[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"bg_newbaby.png"]] autorelease];
     
     // set up events
     [mExistingAccount addTarget:self action:@selector(ExistingAccountButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
@@ -126,6 +126,7 @@
     
     // go to create account page
     global.baby = baby;
+    
     [[self getAppDelegate] showLoginView];
 }
 
