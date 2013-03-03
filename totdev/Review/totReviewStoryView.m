@@ -11,6 +11,7 @@
 #import "AppDelegate.h"
 #import "../Model/totModel.h"
 #import "../Model/totEvent.h"
+#import "totHomeFeedingViewController.h"
 
 @implementation totReviewStoryView
 
