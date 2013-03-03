@@ -150,24 +150,28 @@
 
 - (void)OKButtonClicked: (UIButton *)button {
     NSLog(@"%@", @"[feeding] ok button clicked");
+    
+    // do nothing if no food chosen
+    // maybe we should give some prompt?
+    if([foodChosenList count] == 0) return;
+
     int baby_id = 0;
     NSDate* date = [NSDate date];
     
-    NSString* summary = [NSString stringWithFormat:@"**%@", mDatetime.titleLabel.text ];
+    NSString* summary = [NSString stringWithFormat:@"%@", mDatetime.titleLabel.text ];
     NSLog(@"%@", summary);
     
     //generate summary
-    if([foodChosenList count] > 0){
-        for(int i = 0; i < [foodChosenList count]; i++){
-            NSString* temp = [NSString stringWithFormat:@"%@\t%@",
-                              foodChosenList[i][@"name"],
-                              foodChosenList[i][@"quantity"] ]; //no unit
-            summary = [NSString stringWithFormat:@"%@\n%@",summary,temp ];
-            
-            // food list needs renew
-            NSLog(@"%@",summary);
-        }
+    for(int i = 0; i < [foodChosenList count]; i++){
+        NSString* temp = [NSString stringWithFormat:@"%@\t%@",
+                          foodChosenList[i][@"name"],
+                          foodChosenList[i][@"quantity"] ]; //no unit
+        summary = [NSString stringWithFormat:@"%@\n%@",summary,temp ];
+        
+        // food list needs renew
+        NSLog(@"%@",summary);
     }
+
     [mSummary setTitle:summary forState:UIControlStateNormal];
     [self.view bringSubviewToFront:mSummary];
     [mSummary setHidden:false];
@@ -950,15 +954,17 @@
      */
     mBackButton = [UIButton buttonWithType:UIButtonTypeCustom];
     mBackButton.frame = CGRectMake(233, 0, 87, 72);
-    [mBackButton setImage:[UIImage imageNamed:@"feeding-back.png"] forState:UIControlStateNormal];
+    [mBackButton setBackgroundColor:[UIColor clearColor]];
+    //[mBackButton setImage:[UIImage imageNamed:@"feeding-back.png"] forState:UIControlStateNormal];
     [self.view addSubview:mBackButton];
     [mBackButton addTarget:self action:@selector(backButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
 
     
     //create ok button from icons
     mOKButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    mOKButton.frame = CGRectMake(220, 360, 40, 40);
-    [mOKButton setImage:[UIImage imageNamed:@"icons-ok.png"] forState:UIControlStateNormal];
+    mOKButton.frame = CGRectMake(210, 358, 60, 45);
+    [mBackButton setBackgroundColor:[UIColor clearColor]];
+    //[mOKButton setImage:[UIImage imageNamed:@"icons-ok.png"] forState:UIControlStateNormal];
     [self.view addSubview:mOKButton];
     [mOKButton addTarget:self action:@selector(OKButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -1060,7 +1066,6 @@
 
 
 - (void)viewWillAppear:(BOOL)animated {
-    NSLog(@"%@", @"[height] viewWillAppear");
     //[mSummary removeFromSuperview];
     [mSummary setHidden:YES];
     //reset time
