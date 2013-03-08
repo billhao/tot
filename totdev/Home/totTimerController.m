@@ -374,7 +374,7 @@
     keyboardDoneButtonView.tintColor	= nil;
     [keyboardDoneButtonView sizeToFit];
     
-    UIBarButtonItem* okButton     = [[UIBarButtonItem alloc] initWithTitle:@"OK" style:UIBarButtonItemStyleBordered  target:self action:@selector(buttonPressed:)];
+    UIBarButtonItem* okButton     = [[UIBarButtonItem alloc] initWithTitle:@"OK" style:UIBarButtonItemStyleDone  target:self action:@selector(buttonPressed:)];
     okButton.tag = kButtonOK;
     UIBarButtonItem* cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStyleBordered  target:self action:@selector(buttonPressed:)];
     cancelButton.tag = kButtonCancel;
