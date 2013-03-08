@@ -110,7 +110,7 @@
     mWidth = self.view.frame.size.width;
     mHeight= self.view.frame.size.height;
     
-    mClock = [[totTimerController alloc] init];
+    mClock = [[totTimerController alloc] init:self.view];
     mClock.view.frame = CGRectMake((mWidth-mClock.mWidth)/2, mHeight, mClock.mWidth, mClock.mHeight);
     [mClock setDelegate:self];
     [self.view addSubview:mClock.view];
@@ -260,18 +260,24 @@
 }
 
 - (void)showTimePicker {
+    [mClock setCurrentTime];
+    [mClock show];
+    return;
+
     //mClockBtn.hidden = YES;
     //[self.view setBackgroundColor:[UIColor blackColor]];
     //[self.view setAlpha:0.8f];
     [UIView beginAnimations:@"swipe" context:nil];
 	[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
 	[UIView setAnimationDuration:0.5f];
-    mClock.view.frame = CGRectMake((mWidth-mClock.mWidth)/2, mHeight-mClock.mHeight-45, mClock.mWidth, mClock.mHeight);
+    mClock.view.frame = CGRectMake((mWidth-mClock.mWidth)/2, mHeight-mClock.mHeight-49, mClock.mWidth, mClock.mHeight);
     [UIView commitAnimations];
-    [mClock setCurrentTime];
+    
 }
 
 - (void)hideTimePicker {
+    [mClock dismiss];
+    return;
     //self.hidden = YES;
     
     //mClockBtn.hidden = NO;

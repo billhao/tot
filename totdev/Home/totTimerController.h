@@ -39,7 +39,6 @@ enum {
 @end
 
 @interface totTimerController : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate> {
-    UIPickerView *mTimePicker;
     
     NSMutableArray *mHour, *mMinute, *mAmPm;
     NSMutableArray *mYear, *mMonth, *mDay;
@@ -51,6 +50,10 @@ enum {
     int mCurrentHourIdx, mCurrentMinuteIdx, mCurrentAmPm;
     int mCurrentYearIdx, mCurrentMonthIdx, mCurrentDayIdx;
     id<totTimerControllerDelegate> delegate;
+    
+    // keep the superview and hidden textview on the superview so we can use its InputView and InputAccessoryView
+    UIView* mSuperView;
+    UITextView* mHiddenText;
 }
 
 @property (nonatomic, readonly) int mMode;
@@ -63,6 +66,10 @@ enum {
 @property (nonatomic, assign) int mWidth;
 @property (nonatomic, assign) int mHeight;
 @property (nonatomic, retain) id<totTimerControllerDelegate> delegate;
+@property (nonatomic, retain) UIPickerView *mTimePicker;
+
+// must init with a super view
+- (id)init:(UIView*)superView;
 
 - (void)setCurrentTime;
 
@@ -77,5 +84,12 @@ enum {
 
 // return "May" from 5
 + (NSString*)getMonthString:(int)month;
+
+// for the ok and cancel button
+- (UIView*)createInputAccessoryView;
+
+// show and dismiss this picker
+- (void)show;
+- (void)dismiss;
 
 @end

@@ -52,27 +52,12 @@
 
 // display the time picker
 - (void)showTimePicker {
-    [UIView beginAnimations:@"showPicker" context:nil];
-	[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-	[UIView setAnimationDuration:0.5f];
-    mClock.view.frame = CGRectMake((self.frame.size.width-mClock.mWidth)/2,
-                                   (self.frame.size.height-mClock.mHeight-60),
-                                   (mClock.mWidth),
-                                   (mClock.mHeight));
-    [UIView commitAnimations];
+    [mClock show];
 }
 
 // hide the time picker
 - (void)hideTimePicker {
-    [UIView beginAnimations:@"hidePicker" context:nil];
-	[UIView setAnimationDelegate:self];
-    [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-	[UIView setAnimationDuration:0.5f];
-    mClock.view.frame = CGRectMake((self.frame.size.width-mClock.mWidth)/2,
-                                   (self.frame.size.height),
-                                   (mClock.mWidth),
-                                   (mClock.mHeight));
-    [UIView commitAnimations];
+    [mClock dismiss];
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -110,8 +95,8 @@
         [mSelectionSolidBox imageFilePath:@"icons-checkbox.png"];
         [mSelectionWetSolidBox imageFilePath:@"icons-checkbox.png"];
 
-        mClock = [[totTimerController alloc] init];
-        mClock.view.frame = CGRectMake((frame.size.width-mClock.mWidth)/2, frame.size.height, mClock.mWidth, mClock.mHeight);
+        mClock = [[totTimerController alloc] init:self];
+        mClock.view.frame = CGRectMake(0, 0, mClock.mWidth, mClock.mHeight);
         [mClock setMode:kTime];
         [mClock setDelegate:self];
         
@@ -180,9 +165,6 @@
     [mControlConfirm setImage:[UIImage imageNamed:@"icons-ok.png"] forState:UIControlStateNormal];
     [mControlConfirm addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:mControlConfirm];
-    
-    // add the clock view
-    [self addSubview:mClock.view];
     
     [self setHidden:NO];
 }

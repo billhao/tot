@@ -983,12 +983,11 @@
     mWidth = self.view.frame.size.width;
     mHeight= self.view.frame.size.height;
     
-    mClock = [[totTimerController alloc] init];
-    mClock.view.frame = CGRectMake((mWidth-mClock.mWidth)/2, 480, mClock.mWidth, mClock.mHeight);
+    mClock = [[totTimerController alloc] init:self.view];
+    mClock.view.frame = CGRectMake(0, 0, mClock.mWidth, mClock.mHeight);
     [mClock setMode:kTime];
     [mClock setDelegate:self];
     [mClock setCurrentTime];
-    [self.view addSubview:mClock.view];
 
     //final summary popup
     mSummary = [UIButton buttonWithType:UIButtonTypeRoundedRect];
@@ -1014,16 +1013,11 @@
 
 // display date selection
 - (void)DatetimeClicked: (UIButton *)button {
-    NSLog(@"%@", @"[feeding] datetime clicked");
-    [self showTimePicker];
+    [mClock show];
 }
 
 - (void)hideTimePicker {
-    [UIView beginAnimations:@"swipe" context:nil];
-	[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-	[UIView setAnimationDuration:0.5f];
-    mClock.view.frame = CGRectMake((mWidth-mClock.mWidth)/2, 480, mClock.mWidth, mClock.mHeight);
-    [UIView commitAnimations];
+    [mClock dismiss];
 }
 
 -(void)saveCurrentTime:(NSString*)time datetime:(NSDate*)datetime {

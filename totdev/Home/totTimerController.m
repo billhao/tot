@@ -7,6 +7,7 @@
 //
 
 #import "totTimerController.h"
+#import "totUtility.h"
 
 #define PICKER_COMPONENT_WIDTH 100
 #define PICKER_HEIGHT          200
@@ -28,22 +29,29 @@
 @synthesize mWidth;
 @synthesize mHeight;
 @synthesize delegate;
+@synthesize mTimePicker;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
+- (id)init:(UIView*)superView {
+    self = [super init];
+    if( self ) {
+        mComponentHeight= PICKER_HEIGHT;
+        mComponentWidth = PICKER_COMPONENT_WIDTH;
+        mWidth = 3*mComponentWidth+20;
+        mHeight= mComponentHeight;//+10+BUTTON_HEIGHT;
+        
+        mSuperView = [superView retain];
     }
     return self;
 }
 
-- (id)init {
-    mComponentHeight= PICKER_HEIGHT;
-    mComponentWidth = PICKER_COMPONENT_WIDTH;
-    mWidth = 3*mComponentWidth+20;
-    mHeight= mComponentHeight+10+BUTTON_HEIGHT;
-    return self;
+// show this picker
+- (void)show {
+    [mHiddenText becomeFirstResponder];
+}
+
+// dismiss this picker
+- (void)dismiss {
+    [mHiddenText resignFirstResponder];
 }
 
 - (void)didReceiveMemoryWarning
@@ -325,26 +333,14 @@
     
     [self.view addSubview:mTimePicker];
     
-    // add buttons
-    int margin = (mWidth-(2*buttonWidth+10))/2;
-    
-    UIButton *okBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    okBtn.frame = CGRectMake(margin, mComponentHeight-10, buttonWidth, buttonHeight);
-    okBtn.tag = kButtonOK;    
-    [okBtn setTitle:@"OK" forState:UIControlStateNormal];
-    [okBtn addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:okBtn];
-    
-    UIButton *cancelBtn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    cancelBtn.frame = CGRectMake(mWidth-margin-buttonWidth, mComponentHeight-10, buttonWidth, buttonHeight);
-    cancelBtn.tag = kButtonCancel;
-    [cancelBtn setTitle:@"Cancel" forState:UIControlStateNormal];
-    [cancelBtn addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:cancelBtn];
-    
-    [self.view setBackgroundColor:[UIColor whiteColor]];
-    
-    [super viewDidLoad];
+    // set the size of this picker, x and y doesn't really matter here, it seems ios sets y accordingly
+    //self.view.frame = CGRectMake(0, 0, 320, 200);
+
+    // create a hidden text view, the input view of which is associated with this picker
+    mHiddenText = [[UITextView alloc]initWithFrame:CGRectMake(-1, -1, 0, 0)];
+    [mSuperView addSubview:mHiddenText];
+    mHiddenText.inputView = self.view;
+    mHiddenText.inputAccessoryView = [self createInputAccessoryView];
 }
 
 - (void)viewDidUnload
@@ -359,12 +355,36 @@
     [mYear release];
     [mMonth release];
     [mDay release];
+    [mHiddenText release];
+    [mSuperView release];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+- (UIView*)createInputAccessoryView{
+    // create a done view + done button, attach to it a doneClicked action, and place it in a toolbar as an accessory input view...
+    // Prepare done button
+    UIToolbar* keyboardDoneButtonView	= [[[UIToolbar alloc] init] autorelease];
+    keyboardDoneButtonView.barStyle		= UIBarStyleBlack;
+    keyboardDoneButtonView.translucent	= YES;
+    keyboardDoneButtonView.tintColor	= nil;
+    [keyboardDoneButtonView sizeToFit];
+    
+    UIBarButtonItem* okButton     = [[UIBarButtonItem alloc] initWithTitle:@"OK" style:UIBarButtonItemStyleBordered  target:self action:@selector(buttonPressed:)];
+    okButton.tag = kButtonOK;
+    UIBarButtonItem* cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStyleBordered  target:self action:@selector(buttonPressed:)];
+    cancelButton.tag = kButtonCancel;
+    
+    // I put the spacers in to push the doneButton to the right side of the picker view
+    UIBarButtonItem *spacer    = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    
+    [keyboardDoneButtonView setItems:[NSArray arrayWithObjects:cancelButton, spacer, okButton, nil]];
+    
+    return keyboardDoneButtonView;
 }
 
 @end

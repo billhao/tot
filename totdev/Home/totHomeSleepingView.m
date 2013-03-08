@@ -50,11 +50,10 @@
         }
   
         // time picker
-        mClock = [[totTimerController alloc] init];
-        mClock.view.frame = CGRectMake((mWidth-mClock.mWidth)/2, mHeight, mClock.mWidth, mClock.mHeight);
+        mClock = [[totTimerController alloc] init:self];
+        mClock.view.frame = CGRectMake(0, 0, mClock.mWidth, mClock.mHeight);
         [mClock setMode:kTime];
         [mClock setDelegate:self];
-        [self addSubview:mClock.view];
 
         mReadyToSleepBckgrnd = [[totImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
         mSleepingBckgrnd = [[totImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
@@ -75,6 +74,7 @@
         return;
     }
     
+    timer_show_up = true; // timer also show up
     if (timer_show_up) {
         // retrieve from db the starting time
         totModel *model = global.model;
@@ -90,13 +90,18 @@
                                                    fromDate:event_date
                                                      toDate:now
                                                     options:0];
-        NSString *duration = [NSString stringWithFormat:@"%02d:%02d:%02d", components.hour, components.minute, components.second];
+        // format the duration accordingly
+        NSString *duration = nil;
+        if( components.hour == 0 )
+            duration = [NSString stringWithFormat:@"%02d:%02d", components.minute, components.second];
+        else
+            duration = [NSString stringWithFormat:@"%02d:%02d:%02d", components.hour, components.minute, components.second];
         [mTimeLabel setTitle:duration forState:UIControlStateNormal];
         [calendar release];
     } else {
         [mTimeLabel setTitle:@"" forState:UIControlStateNormal];
     }
-    timer_show_up = !timer_show_up;
+    //timer_show_up = !timer_show_up;
 }
 
 #pragma mark - totImageView delegate
@@ -146,21 +151,12 @@
 
 // display the time picker
 - (void)showTimePicker {
-    [UIView beginAnimations:@"showPicker" context:nil];
-	[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-	[UIView setAnimationDuration:0.5f];
-        mClock.view.frame = CGRectMake((mWidth-mClock.mWidth)/2, mHeight-mClock.mHeight-60, mClock.mWidth, mClock.mHeight);
-    [UIView commitAnimations];
+    [mClock show];
 }
 
 // hide the time picker
 - (void)hideTimePicker {
-    [UIView beginAnimations:@"hidePicker" context:nil];
-	[UIView setAnimationDelegate:self];
-    [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-	[UIView setAnimationDuration:0.5f];
-        mClock.view.frame = CGRectMake((mWidth-mClock.mWidth)/2, mHeight, mClock.mWidth, mClock.mHeight);
-    [UIView commitAnimations];
+    [mClock dismiss];
 }
 
 // save the start time to db
@@ -254,6 +250,10 @@
     [mTimeLabel setFrame:CGRectMake(215, 75, 90, 30)];
     [mTimeLabel.titleLabel setFont:[UIFont fontWithName:@"Roboto-Regular" size:12.0]];
     [mTimeLabel setTitleColor:[UIColor colorWithRed:0.5f green:0.51f blue:0.52 alpha:1.0f] forState:UIControlStateNormal];
+    [mTimeLabel setTitle:@"00:00" forState:UIControlStateNormal];
+    // press time label button is the same as wake up button
+    [mTimeLabel setTag:BUTTON_END];
+    [mTimeLabel addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
     
     [self insertSubview:mWakeupButton aboveSubview:mSleepingBckgrnd];
     [self insertSubview:mTimeLabel aboveSubview:mWakeupButton];
