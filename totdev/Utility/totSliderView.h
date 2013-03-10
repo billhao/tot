@@ -2,7 +2,7 @@
 //  totSliderView.h
 //  totdev
 //
-//  Created by Yifei Chen on 4/26/12.
+//  Created by Chengjie Zhang / Lixing Huang on 4/26/12.
 //  Copyright (c) 2012 USC. All rights reserved.
 //
 
@@ -26,26 +26,28 @@
     UIScrollView  * scrollView;
     UIPageControl * pageControl;
 
+    BOOL rememberPosition;
     int scrollWidth, scrollHeight;
     int btnPerRow, btnPerCol;
+    float btnWidthHeightRatio;
 
-    NSMutableArray * contentArray;  // each element is UIImage
+    NSMutableArray * contentArray;  // each element is UIButton
     NSMutableArray * marginArray;   // each element is boolean var
     NSMutableArray * labelArray;    // each element is UILabel
     NSMutableArray * titleArray;    // each element is UILabel
 
+    NSString * identifier;
     int pageControlPosition;
     id <totSliderViewDelegate> delegate;
-
-    BOOL rememberPosition;
-    NSString *positionIdentifier;
 }
 
 @property (nonatomic, retain) id <totSliderViewDelegate> delegate;
 
+- (void)setUniqueIdentifier: (NSString*)identifier;
 - (void)setPageCtrlPosition: (int)position;
 - (void)setBtnPerRow: (int)buttonPerRow;
 - (void)setBtnPerCol: (int)buttonPerCol;
+- (void)setBtnWidthHeightRatio: (float)r;
 
 - (void)retainMarginArray: (NSArray*)margins;
 - (void)retainContentArray: (NSArray*)images;
@@ -53,12 +55,12 @@
 - (void)retainTitleArray: (NSArray*)titles;
 
 - (void)get;
+- (void)getWithPositionMemoryIdentifier;
 
+- (void)changeButton:(int)btnIndex withNewImage:(NSString*)filename;
 - (void)changeButton:(int)btnIndex withNewLabel:(NSString*)l;
 - (void)clearButtonLabel:(int)btnIndex;
 - (void)clearAllButtonLabels;
-
 - (void)cleanScrollView;
-
 
 @end  

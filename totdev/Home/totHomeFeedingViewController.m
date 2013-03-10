@@ -89,25 +89,26 @@
     int baby_id = global.baby.babyID;
     NSDate* date = [NSDate date];
     
-    NSString* summary = [NSString stringWithFormat:@"**%@", mDatetime.titleLabel.text];
+    NSMutableString* summary = [NSMutableString stringWithFormat:@"**%@", mDatetime.titleLabel.text];
     NSLog(@"%@", summary);
 
     //generate summary
     if([foodChosenList count] > 0) {
         for(int i = 0; i < [foodChosenList count]; i++) {
-            NSString* temp = [NSString stringWithFormat:@"%@\t%@", foodChosenList[i][@"name"], foodChosenList[i][@"quantity"] ];
-            summary = [NSString stringWithFormat:@"%@\n%@", summary, temp];
+            NSString* temp = [NSString stringWithFormat:@"\n%@\t%@", foodChosenList[i][@"name"], foodChosenList[i][@"quantity"] ];
+            [summary appendString:temp];
             NSLog(@"%@",summary);
         }
     }
+    [mSummary setHidden:false];
     [mSummary setTitle:summary forState:UIControlStateNormal];
     [self.view bringSubviewToFront:mSummary];
-    [mSummary setHidden:false];
-    
+
     //add to databse by first converting foodChosenList to a JSON string
     NSError* error;
     NSData* jsonData = [NSJSONSerialization dataWithJSONObject:foodChosenList
                                                        options:NSJSONWritingPrettyPrinted error:&error];
+
     NSString *debug = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
     NSLog(@"%@", debug);
     [debug release];
@@ -119,14 +120,12 @@
 
     // TODO:
     // I don't event know what next code is for...
-    NSString* event = [[NSString alloc] initWithString:@"feeding"];
     // return from getEvent is an array of totEvent object
     // a totEvent represents a single event
-    NSMutableArray *events = [mTotModel getEvent:0 event:event];
+    NSMutableArray *events = [mTotModel getEvent:0 event:@"feeding"];
     for (totEvent* e in events) {
         NSLog(@"Return from db: %@", [e toString]);
     }
-    [event release];
 }
 
 - (void)ChooseFoodOKButtonClicked: (UIButton *)button {
@@ -142,7 +141,7 @@
         NSArray *filteredFood = [inventory filteredArrayUsingPredicate:predicate];
         NSString* chosenFoodName = [NSString stringWithString:filteredFood[foodSelected][@"name"]];
 
-        //insert into a result queue
+        // insert into a result queue
         NSMutableDictionary *foodItem = [[NSMutableDictionary alloc] init];
         [foodItem setObject:chosenFoodName forKey:@"name"];
         [foodItem setObject:categoryChosen forKey:@"category"];
@@ -180,6 +179,7 @@
     [mCategoriesSlider setDelegate:self];
     [mCategoriesSlider setBtnPerCol:2];
     [mCategoriesSlider setBtnPerRow:3];
+    [mCategoriesSlider setBtnWidthHeightRatio:0.6f];
     
     //load image
     NSMutableArray *categoriesImages = [[NSMutableArray alloc] init];
