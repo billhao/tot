@@ -97,7 +97,7 @@
 }
 
 #pragma mark - totSliderView delegate
-- (void)buttonPressed:(id)sender {
+- (void)sliderView:(totSliderView*)sv buttonPressed:(id)sender {
     UIButton *btn = (UIButton*)sender;
     int tag = [btn tag] - 1; // index starts from 0
     
@@ -209,14 +209,15 @@
         }
     }
     
-    [mSliderView setContentArray:images];
-    [mSliderView setMarginArray:margin];
-    [mSliderView setIsIconArray:icon];
+    [mSliderView retainContentArray:images];
+    [mSliderView retainMarginArray:margin];
+    //[mSliderView setIsIconArray:icon];
     [images release];
     [margin release];
     [icon release];
     
-    [mSliderView getWithPositionMemoryIdentifier:@"infoview"];
+    //[mSliderView getWithPositionMemoryIdentifier:@"infoview"];
+    [mSliderView get];
 }
 
 #pragma mark - totNavigationBar delegate
@@ -259,7 +260,8 @@
     // create the slider view
     mSliderView = [[totSliderView alloc] initWithFrame:CGRectMake(25, 180, 270, 260)];
     [mSliderView setDelegate:self];
-    [mSliderView enablePageControlOnBottom];
+    //[mSliderView enablePageControlOnBottom];
+    [mSliderView setPageCtrlPosition:PAGE_CTRL_BOTTOM];
     [self.view addSubview:mSliderView];
 }
 

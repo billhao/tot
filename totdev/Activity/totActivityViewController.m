@@ -119,7 +119,7 @@
 }
 
 #pragma totSliderView delegate
-- (void)buttonPressed: (id)sender {
+- (void)sliderView:(totSliderView*)sv buttonPressed: (id)sender {
     UIButton *btn = (UIButton*)sender;
     int tag = [btn tag] - 1;
     
@@ -218,10 +218,11 @@
         [activityMemberMargin addObject:[margin objectAtIndex:i]];
     }
     
-    [mSliderView setContentArray:activityMemberImages];
-    [mSliderView setMarginArray:activityMemberMargin];
-    [mSliderView setIsIconArray:isIcon];
-    [mSliderView getWithPositionMemoryIdentifier:@"activityView"];
+    [mSliderView retainContentArray:activityMemberImages];
+    [mSliderView retainMarginArray:activityMemberMargin];
+    //[mSliderView setIsIconArray:isIcon];
+    //[mSliderView getWithPositionMemoryIdentifier:@"activityView"];
+    [mSliderView get];
     
     [activityMemberImages release];
     [activityMemberMargin release];
@@ -252,7 +253,7 @@
     // create the slider view
     mSliderView = [[totSliderView alloc] initWithFrame:CGRectMake(25, 78, 270, 300)];
     [mSliderView setDelegate:self];
-    [mSliderView enablePageControlOnBottom];
+    //[mSliderView enablePageControlOnBottom];
     [self.view addSubview:mSliderView];
 
     // create camera buttons
