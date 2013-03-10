@@ -242,7 +242,8 @@
 }
 
 - (void)changeButton:(int)btnIndex withNewImage:(NSString*)filename {
-    
+    UIButton * btn = [contentArray objectAtIndex:btnIndex];
+    [btn setImage:[UIImage imageNamed:filename] forState:UIControlStateNormal];
 }
 
 - (void)changeButton:(int)btnIndex withNewLabel:(NSString*)l {
