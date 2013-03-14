@@ -20,6 +20,9 @@
 @interface totHomeFeedingViewController : UIViewController<UITextFieldDelegate,totSliderViewDelegate,totNavigationBarDelegate,totTimerControllerDelegate> {
     totHomeRootController* homeRootController;
     
+    NSMutableArray *inventory;
+    NSMutableArray *inventoryGrey;
+
     // according to current design, we need 3 slider views
     //   1 for recently used; 1 for categories; 1 for food chosen
     // plus one for food menu in pop ups
@@ -27,27 +30,20 @@
     totSliderView* mRecentlyUsedSlider;
     totSliderView* mCategoriesSlider;
     totSliderView* mFoodChosenSlider;
+    totSliderView* mChooseFoodSlider; // note the difference between foodChosen and chooseFood
     
     //totNavigationBar* mNavigationBar;
     UIButton* mBackButton;
-    
     UIButton* mOKButton; // final submission
     UIButton* mSummary;
     
     //for fodd input
     UIView* mChooseFoodView;
-    totSliderView* mChooseFoodSlider; // note the difference between foodChosen and chooseFood
     UIButton* mChooseFoodOKButton;
-    // STHorizontalPicker* picker_quantity; //no more picker! use an associative textfield
     UITextField *text_quantity;
-    NSMutableArray *inventory;
-    NSMutableArray *inventoryGrey;
     
-    
-    NSNumber* mCurrentFoodID;
     totModel* mTotModel;
     
-    //UIImageView *mBackground;
     NSString *categoryChosen;
     
     // for date picker
@@ -55,21 +51,12 @@
     UIButton* mDatetime;
 
     int mWidth, mHeight;
-    
     int foodSelected;
     
-    //float quantityList[8];
     NSMutableArray *foodChosenList;
 }
 
 @property (nonatomic, assign) totHomeRootController* homeRootController;
-@property (nonatomic, retain) totSliderView* mRecentlyUsedSlider;
-@property (nonatomic, retain) totSliderView* mCategoriesSlider;
-@property (nonatomic, retain) totSliderView* mFoodChosenSlider;
-@property (nonatomic, retain) totSliderView* mChooseFoodSlider;
-@property (nonatomic, retain) UITextField* text_quantity;
-@property (nonatomic, assign) NSNumber* mCurrentFoodID;
-
 
 
 // receive parameters passed by other module for initialization or customization
