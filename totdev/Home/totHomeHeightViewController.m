@@ -102,7 +102,6 @@
     [mCloseButton addTarget:self action:@selector(CloseButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [mDatetime addTarget:self action:@selector(DatetimeClicked:) forControlEvents:UIControlEventTouchUpInside];
     [mDatetimeImage addTarget:self action:@selector(DatetimeClicked:) forControlEvents:UIControlEventTouchUpInside];
-    [mSummary addTarget:self action:@selector(SummaryClicked:) forControlEvents:UIControlEventTouchUpInside];
     [mLabel1Button addTarget:self action:@selector(LabelButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [mLabel2Button addTarget:self action:@selector(LabelButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
 
@@ -116,30 +115,22 @@
     [self.view addSubview:mClock.view];
 
     // set appearances for the summary view
-    mSummary.frame = CGRectMake(35, 100, 250, 100);
-    mSummary.backgroundColor = [UIColor whiteColor];
-    mSummary.layer.borderColor = [UIColor blackColor].CGColor;
-    mSummary.layer.borderWidth = 0.5f;
-    mSummary.layer.cornerRadius = 10.0f;
-    UIFont* font2 = [UIFont fontWithName:@"Roboto-Regular" size:14.0];
-    [mSummary.titleLabel setFont:font2];
-    [mSummary setTitleColor:[UIColor colorWithRed:147.0/255 green:149.0/255 blue:152.0/255 alpha:1] forState:UIControlStateNormal];
-    [mSummary setTitleColor:[UIColor colorWithRed:147.0/255 green:149.0/255 blue:152.0/255 alpha:1] forState:UIControlStateHighlighted];
-    [mSummary setTitleColor:[UIColor colorWithRed:147.0/255 green:149.0/255 blue:152.0/255 alpha:1] forState:UIControlStateSelected];
+    UIImage* summaryImg = [UIImage imageNamed:@"summary_bg"];
+    mSummaryView = [[UIImageView alloc] initWithImage:summaryImg];
+    mSummaryView.frame = CGRectMake((320-summaryImg.size.width)/2, 100, summaryImg.size.width, summaryImg.size.height);
     
-    cover = [[UIButton buttonWithType:UIButtonTypeCustom] retain];
-    cover.frame = CGRectMake(0, 0, 320, 480);
-    cover.backgroundColor = [UIColor clearColor];
-
-    //create title navigation bar
-    // navigationBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
-    //[self.view addSubview:navigationBar];
-//    mNavigationBar= [[totNavigationBar alloc] initWithFrame:CGRectMake(0, 0, 320, 40)];
-//    [mNavigationBar setLeftButtonImg:@"return.png"];
-//    [mNavigationBar setNavigationBarTitle:@"Height & Weight" andColor:[UIColor blackColor]];
-//    [mNavigationBar setBackgroundColor:[UIColor whiteColor]];
-//    [mNavigationBar setDelegate:self];
-//    [self.view addSubview:mNavigationBar];
+    mSummaryLabel = [[UILabel alloc] initWithFrame:CGRectMake(35, 30, 182, 95)];
+    mSummaryLabel.numberOfLines = 5;
+    mSummaryLabel.textAlignment = UITextAlignmentCenter;
+    mSummaryLabel.backgroundColor = [UIColor clearColor];
+    mSummaryLabel.font = [UIFont fontWithName:@"Roboto-Regular" size:14.0];
+    mSummaryLabel.textColor = [UIColor colorWithRed:147.0/255 green:149.0/255 blue:152.0/255 alpha:1];
+    [mSummaryView addSubview:mSummaryLabel];
+    
+    mSummaryCover = [[UIButton buttonWithType:UIButtonTypeCustom] retain];
+    mSummaryCover.frame = self.view.bounds;
+    mSummaryCover.backgroundColor = [UIColor clearColor];
+    [mSummaryCover addTarget:self action:@selector(SummaryClicked:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -148,9 +139,7 @@
 
 - (void)resetView {
     //    self.view.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"weight_bg"]];
-    // remove the summary view
-    [cover removeFromSuperview];
-    [mSummary removeFromSuperview];
+    [self hideSummary];
     
     // reset all values
     all_numbers = [[NSMutableArray alloc] initWithObjects: @"", @"", @"", nil];
@@ -226,17 +215,28 @@
         NSString* head   = all_numbers[2];
         [model addEvent:global.baby.babyID event:EVENT_BASIC_HEAD datetime:self.selectedDate value:head];
         if( n > 0 ) summary = [summary stringByAppendingString:@" and "];
-        summary = [summary stringByAppendingFormat:@"has %@ of head circumference", head];
+        summary = [summary stringByAppendingFormat:@"is %@ in head circumference", head];
         n++;
     }
     if( n == 0 ) return;
-    
+
     // show cover and summary views
-    [mSummary setTitle:summary forState:UIControlStateNormal];
-    [self.view addSubview:cover];
-    [self.view bringSubviewToFront:cover];
-    [self.view addSubview:mSummary];
-    [self.view bringSubviewToFront:mSummary];
+    [self showSummary:summary];
+}
+
+- (void)showSummary:(NSString*)text {
+    mSummaryLabel.text = text;
+    [self.view addSubview:mSummaryView];
+    [self.view bringSubviewToFront:mSummaryView];
+    
+    [self.view addSubview:mSummaryCover];
+    [self.view bringSubviewToFront:mSummaryCover];
+}
+
+- (void)hideSummary {
+    // remove the summary view
+    [mSummaryCover removeFromSuperview];
+    [mSummaryView removeFromSuperview];
 }
 
 - (void)CloseButtonClicked: (UIButton *)button {
@@ -262,31 +262,10 @@
 - (void)showTimePicker {
     [mClock setCurrentTime];
     [mClock show];
-    return;
-
-    //mClockBtn.hidden = YES;
-    //[self.view setBackgroundColor:[UIColor blackColor]];
-    //[self.view setAlpha:0.8f];
-    [UIView beginAnimations:@"swipe" context:nil];
-	[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-	[UIView setAnimationDuration:0.5f];
-    mClock.view.frame = CGRectMake((mWidth-mClock.mWidth)/2, mHeight-mClock.mHeight-49, mClock.mWidth, mClock.mHeight);
-    [UIView commitAnimations];
-    
 }
 
 - (void)hideTimePicker {
     [mClock dismiss];
-    return;
-    //self.hidden = YES;
-    
-    //mClockBtn.hidden = NO;
-    [self.view setBackgroundColor:[UIColor clearColor]];
-    [UIView beginAnimations:@"swipe" context:nil];
-	[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-	[UIView setAnimationDuration:0.5f];
-    mClock.view.frame = CGRectMake((mWidth-mClock.mWidth)/2, mHeight, mClock.mWidth, mClock.mHeight);
-    [UIView commitAnimations];
 }
 
 // when user click on one of the two labels at the bottom, switch it with the current/top label
@@ -357,7 +336,8 @@
     [all_imgs release];
     [all_numbers release];
     [all_pickers release];
-    [cover release];
+    [mSummaryCover release];
+    [mSummaryView release];
     //[picker_head release];
     //[picker_height release];
     //[picker_weight release];

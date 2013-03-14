@@ -198,10 +198,10 @@
         case BUTTON_START:
             mState = SLEEPING;
             [self clearNotSleepView];
-            [self showSleepingView];
             if (!mUseTimePicker)
                 [self findCurrentTime];
             [self saveTimeToDatabase:YES];
+            [self showSleepingView];
             break;
         case BUTTON_END:
             mState = NOT_SLEEP;
@@ -250,7 +250,7 @@
     [mTimeLabel setFrame:CGRectMake(215, 75, 90, 30)];
     [mTimeLabel.titleLabel setFont:[UIFont fontWithName:@"Roboto-Regular" size:12.0]];
     [mTimeLabel setTitleColor:[UIColor colorWithRed:0.5f green:0.51f blue:0.52 alpha:1.0f] forState:UIControlStateNormal];
-    [mTimeLabel setTitle:@"00:00" forState:UIControlStateNormal];
+
     // press time label button is the same as wake up button
     [mTimeLabel setTag:BUTTON_END];
     [mTimeLabel addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
@@ -259,6 +259,9 @@
     [self insertSubview:mTimeLabel aboveSubview:mWakeupButton];
     
     self.hidden = NO;
+
+    // update time right away
+    [self timerHandler];
 }
 
 - (void)clearSleepingView {

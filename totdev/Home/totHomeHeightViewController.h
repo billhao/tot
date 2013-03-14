@@ -24,7 +24,6 @@
     IBOutlet UIButton    *mCloseButton;
     IBOutlet UIButton    *mDatetime;
     IBOutlet UIButton    *mDatetimeImage;
-    IBOutlet UIButton    *mSummary;
     IBOutlet UILabel     *mSelectedValue;
     IBOutlet UIButton    *mLabel0Button; // the top button
     IBOutlet UIButton    *mLabel1Button;
@@ -33,7 +32,10 @@
     IBOutlet UILabel     *mLabel1;
     IBOutlet UILabel     *mLabel2;
     
-    UIButton* cover; // used to cover the view when showing the summary view
+    // for the summary
+    UIImageView* mSummaryView;
+    UILabel* mSummaryLabel;
+    UIButton* mSummaryCover; // used to cover the view when showing the summary view
     
     totModel* model;
     

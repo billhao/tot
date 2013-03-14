@@ -34,7 +34,33 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     // Do any additional setup after loading the view from its nib.
+    
+    // add bg
+    UIImage* img = [UIImage imageNamed:@"settings_bg"];
+    UIImageView* bgview = [[UIImageView alloc] initWithImage:img];
+    bgview.frame = CGRectMake(0, 0, img.size.width, img.size.height);
+    [self.view addSubview:bgview];
+    [self.view sendSubviewToBack:bgview];
+    [bgview release];
+
+    // set buttons appearances
+    UIFont* font = [UIFont fontWithName:@"Roboto-Regular" size:16.0];
+    UIColor* fontcolor = [UIColor colorWithRed:217.0/255 green:27.0/255 blue:92.0/255 alpha:1];//[UIColor colorWithRed:147.0/255 green:149.0/255 blue:152.0/255 alpha:1];
+
+    [mClearDBButton.titleLabel setFont:font];
+    [mClearDBButton setTitleColor:fontcolor forState:UIControlStateNormal];
+    [mClearDBButton setTitleColor:fontcolor forState:UIControlStateHighlighted];
+    [mClearDBButton setTitle:@"clear database" forState:UIControlStateNormal];
+    [mClearDBButton setTitle:@"clear database" forState:UIControlStateHighlighted];
+
+    [mSignOutButton.titleLabel setFont:font];
+    [mSignOutButton setTitleColor:fontcolor forState:UIControlStateNormal];
+    [mSignOutButton setTitleColor:fontcolor forState:UIControlStateHighlighted];
+    [mSignOutButton setTitle:@"sign out" forState:UIControlStateNormal];
+    [mSignOutButton setTitle:@"sign out" forState:UIControlStateHighlighted];
+    
     [mClearDBButton addTarget:self action:@selector(ClearDBButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [mSignOutButton addTarget:self action:@selector(SignOutButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
 }
