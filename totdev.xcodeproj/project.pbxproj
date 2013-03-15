@@ -769,7 +769,7 @@
 			name = View;
 			sourceTree = "<group>";
 		};
-		24363034162741C70097B17D /* feeding */ = {
+		24363034162741C70097B17D /* Feeding */ = {
 			isa = PBXGroup;
 			children = (
 				2453E21B168D3F95001820B6 /* feeding-back.png */,
@@ -785,7 +785,7 @@
 				243630391627420F0097B17D /* feedingcategories-meat.png */,
 				2436303A1627420F0097B17D /* feedingcategories-vege.png */,
 			);
-			name = feeding;
+			name = Feeding;
 			sourceTree = "<group>";
 		};
 		24363041162742160097B17D /* foodicons_color */ = {
@@ -1343,7 +1343,7 @@
 			isa = PBXGroup;
 			children = (
 				3F2772541658C0C200DF84EF /* Height */,
-				24363034162741C70097B17D /* feeding */,
+				24363034162741C70097B17D /* Feeding */,
 				8E632EBF16268D8500072D89 /* Diaper */,
 				8E4D50E71616593900890621 /* Sleep */,
 				8E4D50E21614CC3A00890621 /* boy.jpg */,
