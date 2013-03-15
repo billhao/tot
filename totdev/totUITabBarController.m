@@ -73,7 +73,11 @@
     activityController = [[totActivityRootController alloc] init];
     reviewController = [[totReviewRootController alloc] init];
     settingController = [[totSettingRootController alloc] init];
-    NSArray* tabs = [NSArray arrayWithObjects:homeController, activityController, reviewController, settingController, nil];
+    
+    // I also delete a tab controller in MainWindow.xib, which should link to totActivityRootController
+    // NSArray* tabs = [NSArray arrayWithObjects:homeController, activityController, reviewController, settingController, nil];
+    NSArray* tabs = [NSArray arrayWithObjects:homeController, reviewController, settingController, nil];
+    
     [self setViewControllers:tabs];
 
     totCameraViewController *aCameraView = [[totCameraViewController alloc] initWithNibName:@"CameraView" bundle:nil];
