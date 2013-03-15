@@ -146,7 +146,7 @@
     }
     
     [UIView beginAnimations:@"swipe" context:nil];
-	[UIView setAnimationDuration:1.0f];
+	[UIView setAnimationDuration:0.5f];
     [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
     
     if (mCurrentViewIndex == kActivityEntryView) {

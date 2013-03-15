@@ -35,10 +35,14 @@
     for (int i = 0; i < [tokens count]; ++i) {
         printf("%s\n", [[tokens objectAtIndex:i] UTF8String]);
     }
-    
+
     NSString * category = [tokens objectAtIndex:0];
     if ([categories containsObject:category]) {
-        visible = YES;
+        if ([category isEqualToString:@"basic"] || [category isEqualToString:@"feeding"]) {
+            visible = YES;
+        } else {
+            visible = NO;
+        }
     }
     return visible;
 }

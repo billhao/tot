@@ -46,7 +46,10 @@
     
     if ([category isEqualToString:@"basic"]) {
         return [NSString stringWithFormat:@"review-%s.png", [[tokens objectAtIndex:1] UTF8String]];
-    } else if ([category isEqualToString:@"eye_contact"]) {
+    }
+    // ignore activity for now
+    /*
+    else if ([category isEqualToString:@"eye_contact"]) {
         return @"eye_contact.png";
     } else if ([category isEqualToString:@"vision_attention"]) {
         return @"vision_attention.png";
@@ -62,7 +65,9 @@
         return [NSString stringWithFormat:@"%s.png", [[tokens objectAtIndex:1] UTF8String]];
     } else if ([category isEqualToString:@"gesture"]) {
         return [NSString stringWithFormat:@"%s.png", [[tokens objectAtIndex:1] UTF8String]];
-    } else {
+    }
+    */
+    else {
         printf("Has not implemented yet.\n");
         return nil;
     }
@@ -106,9 +111,12 @@
             desc = [NSString stringWithFormat:@"%@ is %s", global.baby.name, [rawValue UTF8String]];
         }
         else if ([subcategory isEqualToString:@"feeding"]) {
-            desc = [NSString stringWithString:@"Feeding"];
+            desc = @"Feeding";  //[NSString stringWithString:@"Feeding"];
         }
-    } else if ([category isEqualToString:@"eye_contact"]) {
+    }
+    // ignore activity for now
+    /*
+    else if ([category isEqualToString:@"eye_contact"]) {
         if ([self isFirstOccurrence:story]) {
             desc = @"first eye contact";
         } else {
@@ -160,6 +168,7 @@
             desc = [NSString stringWithFormat:@"%s", [subcategory UTF8String]];
         }
     }
+    */
     return desc;
 }
 
@@ -285,7 +294,8 @@
         [parent addSubview:context];
         [context release];
     }
-    
+    // ignore activity for now
+    /*
     else if ([category isEqualToString:@"emotion"] || [category isEqualToString:@"motor_skill"] ||
              [category isEqualToString:@"gesture"] || [category isEqualToString:@"eye_contact"] ||
              [category isEqualToString:@"vision_attention"] || [category isEqualToString:@"chew"] ||
@@ -319,6 +329,7 @@
         [parent addSubview:img];
         [img release];
     }
+    */
 }
 
 // generate story view
