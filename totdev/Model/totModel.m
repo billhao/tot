@@ -178,6 +178,12 @@
     [self deleteEvents:PREFERENCE_NO_BABY event:pref_name];
 }
 
+// get N events in a category (event) before current_event_id (N=limit)
+- (NSMutableArray *) getPreviousEvent:(int)baby_id event:(NSString*)event limit:(int)limit current_event_date:(NSDate*)current_event_date {
+    return [self getEvent:baby_id event:event limit:1 offset:0 startDate:nil endDate:current_event_date];
+    //return [self getEvent:baby_id event:event limit:limit offset:1];
+}
+
 // get events with name
 - (NSMutableArray *) getEvent :(int)baby_id event:(NSString*)event {
     return [self getEvent:baby_id event:event limit:0 offset:0 startDate:nil endDate:nil]; // call the same function with no limit

@@ -31,7 +31,7 @@
                             nil];
     BOOL visible = NO;
     NSArray * tokens = [mEventType componentsSeparatedByString:@"/"];
-    printf("%s ", [mEventType UTF8String]);
+    //printf("%s ", [mEventType UTF8String]);
     for (int i = 0; i < [tokens count]; ++i) {
         printf("%s\n", [[tokens objectAtIndex:i] UTF8String]);
     }

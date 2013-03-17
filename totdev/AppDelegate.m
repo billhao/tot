@@ -14,6 +14,8 @@
 #import "totEventName.h"
 #import "Utility/totUtility.h"
 
+#import "totEvent.h"
+
 @implementation AppDelegate
 
 @synthesize window;
@@ -33,7 +35,6 @@
 - (NSString*) isLoggedIn {
     return [global.model getPreferenceNoBaby:PREFERENCE_LOGGED_IN];
 }
-
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
