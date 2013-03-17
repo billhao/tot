@@ -17,6 +17,7 @@
         SELECTION_WET = 1,
         SELECTION_SOLID = 2,
         SELECTION_WETSOLID = 3,
+        SELECTION_HIDE = 4,
     };
     enum Control {
         BUTTON_SHARE = 1,
@@ -31,10 +32,6 @@
     totImageView * mSelectionWet;
     totImageView * mSelectionSolid;
     totImageView * mSelectionWetSolid;
-
-    totImageView * mSelectionWetBox;
-    totImageView * mSelectionSolidBox;
-    totImageView * mSelectionWetSolidBox;
     
     UIButton * mControlShare;
     UIButton * mControlHistory;

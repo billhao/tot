@@ -14,6 +14,8 @@
 {
     UITextView* m_textView;
     UIButton* m_confirmButton;
+
+    NSString* defaultTxt; // define default text
 }
 
 @property (nonatomic, retain) UITextView* m_textView;

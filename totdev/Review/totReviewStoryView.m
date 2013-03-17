@@ -45,7 +45,7 @@
     NSString* category = [tokens objectAtIndex:0];
     
     if ([category isEqualToString:@"basic"]) {
-        return [NSString stringWithFormat:@"review-%s.png", [[tokens objectAtIndex:1] UTF8String]];
+        return [NSString stringWithFormat:@"review-%s", [[tokens objectAtIndex:1] UTF8String]];
     }
     // ignore activity for now
     /*
@@ -341,8 +341,10 @@
     
     NSString *icon_filename = [self getTypeIcon:story];
     if (icon_filename) {
-        UIImageView * icon = [[UIImageView alloc] initWithFrame:CGRectMake(34, 68, 26, 26)];
-        icon.contentMode = UIViewContentModeScaleAspectFit;
+        UIImageView * icon = [[UIImageView alloc] initWithFrame:CGRectMake(15, 45, 50, 50)];
+        //icon.contentMode = UIViewContentModeScaleAspectFit;
+        UIImage* img = [UIImage imageNamed:icon_filename];
+        CGSize frame = img.size;
         [icon setImage:[UIImage imageNamed:icon_filename]];
 //        [icon.layer setBorderColor: [[UIColor blackColor] CGColor]];
 //        [icon.layer setBorderWidth: 1.0];
@@ -352,7 +354,7 @@
     
     NSString *description = [self getStoryDescription:story];
     if (description) {
-        UILabel *storyDesc = [[UILabel alloc] initWithFrame:CGRectMake(115, 43, 160, 12)];
+        UILabel *storyDesc = [[UILabel alloc] initWithFrame:CGRectMake(115, 35, 160, 12)];
         storyDesc.backgroundColor = [UIColor clearColor];
         storyDesc.text = description;
         storyDesc.textAlignment = UITextAlignmentRight;
@@ -364,7 +366,7 @@
     
     NSString *time_description = [self getStoryTime:story];
     if (time_description) {
-        UILabel *timeDesc = [[UILabel alloc] initWithFrame:CGRectMake(115, 27, 160, 12)];
+        UILabel *timeDesc = [[UILabel alloc] initWithFrame:CGRectMake(115, 19, 160, 12)];
         timeDesc.backgroundColor = [UIColor clearColor];
         timeDesc.text = time_description;
         timeDesc.textAlignment = UITextAlignmentRight;
@@ -376,7 +378,7 @@
     
     // construct the context info.
     if ([story hasContext]) {
-        UIView *context = [[UIView alloc] initWithFrame:CGRectMake(122, 68, 145, 45)];
+        UIView *context = [[UIView alloc] initWithFrame:CGRectMake(122, 57, 145, 45)];
         [self buildContextInfo:story withFrame:CGRectMake(0, 0, 145, 45) withinParent:context];
         [self addSubview:context];
         [context release];

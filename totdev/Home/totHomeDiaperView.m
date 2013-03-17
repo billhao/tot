@@ -69,39 +69,30 @@
         self.hidden = YES;
         
         mBackground = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
-        mBackground.image = [UIImage imageNamed:@"background-diaper.png"];
+        mBackground.image = [UIImage imageNamed:@"background-diaper"];
         
-        mSelectionWetBox = [[totImageView alloc] initWithFrame:CGRectMake(45, 210, 25, 25)];
-        mSelectionWet = [[totImageView alloc] initWithFrame:CGRectMake(80, 205, 200, 30)];
-        
-        mSelectionSolidBox = [[totImageView alloc] initWithFrame:CGRectMake(45, 250, 25, 25)];
-        mSelectionSolid = [[totImageView alloc] initWithFrame:CGRectMake(80, 245, 200, 30)];
-
-        mSelectionWetSolidBox = [[totImageView alloc] initWithFrame:CGRectMake(45, 290, 25, 25)];
-        mSelectionWetSolid = [[totImageView alloc] initWithFrame:CGRectMake(80, 285, 200, 30)];
-        
+        mSelectionWet       = [[totImageView alloc] initWithFrame:CGRectMake(64, 208, 193, 28)];
+        mSelectionSolid     = [[totImageView alloc] initWithFrame:CGRectMake(64, 249, 193, 28)];
+        mSelectionWetSolid  = [[totImageView alloc] initWithFrame:CGRectMake(64, 290, 193, 28)];
 
         mSelectionWet.mTag = SELECTION_WET;
         mSelectionSolid.mTag = SELECTION_SOLID;
         mSelectionWetSolid.mTag = SELECTION_WETSOLID;
         
-        [mSelectionWet imageFilePath:@"icons-diaper-wet_new.jpg"];
+        [mSelectionWet imageFilePath:@"icons-diaper-wet_new"];
         [mSelectionWet setDelegate:self];
-        [mSelectionSolid imageFilePath:@"icons-diaper-solid_new.jpg"];
+        [mSelectionSolid imageFilePath:@"icons-diaper-solid_new"];
         [mSelectionSolid setDelegate:self];
-        [mSelectionWetSolid imageFilePath:@"icons-diaper-wetandsolid_new.jpg"];
+        [mSelectionWetSolid imageFilePath:@"icons-diaper-wetandsolid_new"];
         [mSelectionWetSolid setDelegate:self];
-        [mSelectionWetBox imageFilePath:@"icons-checkbox.png"];
-        [mSelectionSolidBox imageFilePath:@"icons-checkbox.png"];
-        [mSelectionWetSolidBox imageFilePath:@"icons-checkbox.png"];
 
         mClock = [[totTimerController alloc] init:self];
         mClock.view.frame = CGRectMake(0, 0, mClock.mWidth, mClock.mHeight);
         [mClock setMode:kTime];
         [mClock setDelegate:self];
         
-        mSelectedIcon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icons-ok.png"]];
-        mSelectedIcon.frame = CGRectMake(320, 480, 35, 35);
+        mSelectedIcon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icons-ok"]];
+        mSelectedIcon.frame = CGRectMake(320, 480, 30, 30);
         
         mDiaperType = -1;
     }
@@ -139,32 +130,34 @@
     [self addSubview:mSelectionWet];
     [self addSubview:mSelectionSolid];
     [self addSubview:mSelectionWetSolid];
-    [self addSubview:mSelectionWetBox];
-    [self addSubview:mSelectionWetSolidBox];
-    [self addSubview:mSelectionSolidBox];
     [self addSubview:mSelectedIcon];
     
     // Control section
-    mControlShare = [UIButton buttonWithType:UIButtonTypeCustom];
-    [mControlShare setTag:BUTTON_SHARE];
-    [mControlShare setFrame:CGRectMake(60, 340, 50, 50)];
-    [mControlShare setImage:[UIImage imageNamed:@"icons-share.png"] forState:UIControlStateNormal];
-    [mControlShare addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
-    [self addSubview:mControlShare];
+//    mControlShare = [UIButton buttonWithType:UIButtonTypeCustom];
+//    [mControlShare setTag:BUTTON_SHARE];
+//    [mControlShare setFrame:CGRectMake(60, 340, 50, 50)];
+//    [mControlShare setImage:[UIImage imageNamed:@"icons-share.png"] forState:UIControlStateNormal];
+//    [mControlShare addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
+//    [self addSubview:mControlShare];
+//    
+//    mControlHistory = [UIButton buttonWithType:UIButtonTypeCustom];
+//    [mControlHistory setTag:BUTTON_HISTORY];
+//    [mControlHistory setFrame:CGRectMake(140, 340, 50, 50)];
+//    [mControlHistory setImage:[UIImage imageNamed:@"icons-history.png"] forState:UIControlStateNormal];
+//    [mControlHistory addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
+//    [self addSubview:mControlHistory];
     
-    mControlHistory = [UIButton buttonWithType:UIButtonTypeCustom];
-    [mControlHistory setTag:BUTTON_HISTORY];
-    [mControlHistory setFrame:CGRectMake(140, 340, 50, 50)];
-    [mControlHistory setImage:[UIImage imageNamed:@"icons-history.png"] forState:UIControlStateNormal];
-    [mControlHistory addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
-    [self addSubview:mControlHistory];
-    
+    UIImage* okImg = [UIImage imageNamed:@"icons-ok"];
     mControlConfirm = [UIButton buttonWithType:UIButtonTypeCustom];
     [mControlConfirm setTag:BUTTON_CONFIRM];
-    [mControlConfirm setFrame:CGRectMake(220, 340, 50, 50)];
-    [mControlConfirm setImage:[UIImage imageNamed:@"icons-ok.png"] forState:UIControlStateNormal];
+    [mControlConfirm setFrame:CGRectMake(210, 350, okImg.size.width, okImg.size.height)];
+    [mControlConfirm setImage:okImg forState:UIControlStateNormal];
     [mControlConfirm addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:mControlConfirm];
+    
+    // reset selection
+    mDiaperType = -1;
+    [self showSelection:SELECTION_HIDE];
     
     [self setHidden:NO];
 }
@@ -231,12 +224,19 @@
     printf("pressed button %d in diaper view\n", tag);
     mDiaperType = tag;
     
+    [self showSelection:tag];
+}
+
+- (void)showSelection:(int)tag {
     if (tag == SELECTION_WET) {
-        [mSelectedIcon setFrame:CGRectMake(45, 200, 30, 30)];
+        [mSelectedIcon setFrame:CGRectMake(62, 206, 30, 30)];
     } else if (tag == SELECTION_SOLID) {
-        [mSelectedIcon setFrame:CGRectMake(45, 240, 30, 30)];
+        [mSelectedIcon setFrame:CGRectMake(62, 247, 30, 30)];
     } else if (tag == SELECTION_WETSOLID) {
-        [mSelectedIcon setFrame:CGRectMake(45, 280, 30, 30)];
+        [mSelectedIcon setFrame:CGRectMake(62, 288, 30, 30)];
+    } else if (tag == SELECTION_HIDE) {
+        // hide it
+        [mSelectedIcon setFrame:CGRectMake(1000, 1000, 30, 30)];
     }
 }
 

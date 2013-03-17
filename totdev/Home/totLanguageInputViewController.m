@@ -54,46 +54,65 @@
 // ViewDidLoad
 - (void) viewDidLoad
 {
+    [super viewDidLoad];
+    
+    defaultTxt = @"what did the baby say?";
+
     [self.view setFrame:CGRectMake(0, 0, 320, 480)];
     self.view.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:.5];
     
     // Add the message cloud into m_topView
     //UIImageView *aImgView = [[UIImageView alloc] initWithFrame:CGRectMake(14.4, 8, 291.2, 250)];
-    UIImageView *aImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 482)];
-    aImgView.image = [UIImage imageNamed:@"backgrounds-language.png"];
-    [self.view addSubview:aImgView];
+    UIButton* bgBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    bgBtn.frame = CGRectMake(0, 0, 320, 480);
+    [bgBtn addTarget:self action:@selector(backgroundTap) forControlEvents:UIControlEventTouchUpInside];
+    UIImageView *aImgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
+    aImgView.image = [UIImage imageNamed:@"backgrounds-language"];
+    [bgBtn addSubview:aImgView];
+    [self.view addSubview:bgBtn];
     [aImgView release];
     
+    // add the cloud for the text
+    UIImage* cloudImg = [UIImage imageNamed:@"icons-language"];
+    UIImageView* cloudImgView = [[UIImageView alloc] initWithImage:cloudImg];
+    cloudImgView.frame = CGRectMake(17, 43, cloudImg.size.width, cloudImg.size.height);
+    [self.view addSubview:cloudImgView];
+    [cloudImgView release];
+    
     // Construct m_textField
-    UITextView *aTxtView = [[UITextView alloc] initWithFrame:CGRectMake(20+HORIZ_DISPLACEMENT, 25, 225, 150)];
-    [aTxtView  setFont: [UIFont fontWithName:@"ArialMT" size:30]];
+    UITextView *aTxtView = [[UITextView alloc] initWithFrame:CGRectMake(40+HORIZ_DISPLACEMENT, 65, 185, 100)];
     aTxtView.editable = YES;
     aTxtView.delegate = self;
-    aTxtView.textAlignment = UITextAlignmentLeft;
+    aTxtView.textAlignment = UITextAlignmentCenter;
     aTxtView.backgroundColor = [UIColor clearColor];
-    NSString* defaultTxt = @"what did the baby say?"; // define default text   
-    aTxtView.text = defaultTxt;  // set default text
-    aTxtView.textColor = [UIColor lightGrayColor]; // set color for default text
+    aTxtView.font = [UIFont fontWithName:@"Roboto-Regular" size:16.0];
+    aTxtView.textColor = [UIColor colorWithRed:128.0/255 green:130.0/255 blue:133.0/255 alpha:1];
+    // disable auto correction, capitalization and etc
+    aTxtView.autocapitalizationType = UITextAutocapitalizationTypeNone;
+    aTxtView.autocorrectionType = UITextAutocorrectionTypeNo;
+    aTxtView.spellCheckingType = UITextSpellCheckingTypeNo;
+    
     self.m_textView = aTxtView;
     [aTxtView release];
     [self.view addSubview:m_textView];
     
     // Construct m_confirmButton
-    UIButton *aBtn = [[UIButton alloc] initWithFrame:CGRectMake(65+HORIZ_DISPLACEMENT, 180, 60, 45)];
+    UIImage* okBtnImg = [UIImage imageNamed:@"icons-ok"];
+    UIButton *aBtn = [[UIButton alloc] initWithFrame:CGRectMake(160+HORIZ_DISPLACEMENT, 180, okBtnImg.size.width, okBtnImg.size.height)];
     aBtn.backgroundColor = [UIColor clearColor];
-    [aBtn setBackgroundImage: [UIImage imageNamed:@"icons-ok.png"] forState:UIControlStateNormal];
+    [aBtn setBackgroundImage:okBtnImg forState:UIControlStateNormal];
     [aBtn addTarget:self action:@selector(ConfirmButtonClicked) forControlEvents:UIControlEventTouchUpInside];
     self.m_confirmButton = aBtn;
     [self.view addSubview:m_confirmButton];
     [aBtn release];
     
     // Construct history button
-    UIButton *bBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    bBtn.frame = CGRectMake(140+HORIZ_DISPLACEMENT, 180, 60, 45);
-    bBtn.backgroundColor = [UIColor clearColor];
-    [bBtn setBackgroundImage: [UIImage imageNamed:@"icons-history.png"] forState:UIControlStateNormal];
-    [bBtn addTarget:self action:@selector(ConfirmButtonClicked) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:bBtn];
+//    UIButton *bBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    bBtn.frame = CGRectMake(140+HORIZ_DISPLACEMENT, 180, 60, 45);
+//    bBtn.backgroundColor = [UIColor clearColor];
+//    [bBtn setBackgroundImage: [UIImage imageNamed:@"icons-history.png"] forState:UIControlStateNormal];
+//    [bBtn addTarget:self action:@selector(ConfirmButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+//    [self.view addSubview:bBtn];
     
     /*
     // Construct share button
@@ -123,9 +142,7 @@
 {
     /* Init and display m_textView */
     m_textView.hidden = NO;
-    NSString* defaultTxt = @"what did the baby say?"; // define default text
     m_textView.text = defaultTxt;
-    m_textView.textColor = [UIColor lightGrayColor];
     /* Display confirm button */
     m_confirmButton.hidden = NO;
     self.view.hidden = NO;
@@ -151,24 +168,27 @@
 - (void)ConfirmButtonClicked
 {
     /* Save text into database */
-    if(m_textView.hasText == YES && m_textView.textColor != [UIColor lightGrayColor]) {
+    NSString *text = [m_textView.text stringByTrimmingCharactersInSet: [NSCharacterSet whitespaceCharacterSet]];
+    if(m_textView.hasText == YES && (![text isEqualToString:defaultTxt]) ) {
         /* Get current date */
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
         NSDate* curDate = [NSDate date];
         NSString *formattedDateString = [dateFormatter stringFromDate:curDate];
+        [dateFormatter release];
         
         /* Get input text */
-        NSString* inputTxt = m_textView.text;
         /* Add to database */
         totModel* totModel = global.model;
-        [totModel addEvent:0 event:EVENT_BASIC_LANGUAGE datetimeString:formattedDateString value:inputTxt ];
+        [totModel addEvent:0 event:EVENT_BASIC_LANGUAGE datetimeString:formattedDateString value:text ];
         
         /* Clear textview text */
-        m_textView.text = @"";
+        m_textView.text = defaultTxt;
         
         /* Hide keyboard */
         [self.m_textView resignFirstResponder];
+        
+        m_textView.hidden = YES;
         
         /* Add Done image */
         /*UIImageView *aImgView = [[UIImageView alloc] initWithFrame:CGRectMake(80, 56, 170, 80)];
@@ -178,26 +198,26 @@
         [aImgView release];
         */
         // Display a confirmation message
-        UITextView *confirmTxtView = [[UITextView alloc] initWithFrame:CGRectMake(30+HORIZ_DISPLACEMENT, 30, 210, 150)];
-        [confirmTxtView  setFont: [UIFont fontWithName:@"TrebuchetMS" size:25]];
+        UITextView *confirmTxtView = [[UITextView alloc] initWithFrame:CGRectMake(40+HORIZ_DISPLACEMENT, 65, 185, 100)];
+        confirmTxtView.font = [UIFont fontWithName:@"Roboto-Regular" size:16.0];
         confirmTxtView.editable = NO;
         confirmTxtView.delegate = self;
         confirmTxtView.textAlignment = UITextAlignmentCenter;
         confirmTxtView.backgroundColor = [UIColor clearColor];
-        NSString* defaultTxt = @"Bravo! Tom has learnd 15 words this week^o^"; // define default text   
-        confirmTxtView.text = defaultTxt;  // set default text
-        confirmTxtView.textColor = [UIColor darkGrayColor]; // set color for default text
+        NSString* defaultConfirmTxt = @"Bravo! Tom has learnd 15 words this week^o^"; // define default text
+        confirmTxtView.text = defaultConfirmTxt;  // set default text
+        confirmTxtView.textColor = [UIColor colorWithRed:210.0/255 green:0.0 blue:63.0/255 alpha:1.0]; // set color for default text
         confirmTxtView.tag = 99;
         [self.view addSubview:confirmTxtView];
         [confirmTxtView release];
         // Construct share button
-        UIButton *shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        shareBtn.frame = CGRectMake(110, 130, 60, 45);
-        shareBtn.backgroundColor = [UIColor clearColor];
-        shareBtn.tag = 98;
-        [shareBtn setBackgroundImage: [UIImage imageNamed:@"icons-share.png"] forState:UIControlStateNormal];
-        [shareBtn addTarget:self action:@selector(ConfirmButtonClicked) forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:shareBtn];
+//        UIButton *shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//        shareBtn.frame = CGRectMake(110, 130, 60, 45);
+//        shareBtn.backgroundColor = [UIColor clearColor];
+//        shareBtn.tag = 98;
+//        [shareBtn setBackgroundImage: [UIImage imageNamed:@"icons-share.png"] forState:UIControlStateNormal];
+//        [shareBtn addTarget:self action:@selector(ConfirmButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+//        [self.view addSubview:shareBtn];
         
         /* Set timer to call MakeNoView */
         /*[NSTimer scheduledTimerWithTimeInterval:2.0f
@@ -205,21 +225,12 @@
                                        selector:@selector(MakeNoView)
                                        userInfo:nil
                                         repeats:NO];*/
-        [dateFormatter release];
     } else {
         /* Hide keyboard */
         [self.m_textView resignFirstResponder];
         [self MakeNoView];
     }
 }
-
-/*
-// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-}
-*/
 
 - (void)viewDidUnload
 {
@@ -262,9 +273,9 @@
 //// define the action when the textview is selected for editing
 - (BOOL) textViewShouldBeginEditing:(UITextView *)textView
 {
-    if (self.m_textView.textColor == [UIColor lightGrayColor]) {
+    NSString *text = [m_textView.text stringByTrimmingCharactersInSet: [NSCharacterSet whitespaceCharacterSet]];
+    if ( [text isEqualToString:defaultTxt]) {
         self.m_textView.text = @"";
-        self.m_textView.textColor = [UIColor blackColor];
     }
     
     return YES;
@@ -286,6 +297,14 @@
     self.view.hidden = YES;
     
     [self MakeNoView];
+}
+
+// dismiss this view when tap on the background button
+- (void) backgroundTap {
+    NSString *text = [m_textView.text stringByTrimmingCharactersInSet: [NSCharacterSet whitespaceCharacterSet]];
+    if ( [text isEqualToString:defaultTxt] && (![m_textView isFirstResponder]) ) {
+        [self CloseButtonClicked];
+    }
 }
 
 @end
