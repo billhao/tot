@@ -70,6 +70,9 @@
 // get # accounts
 - (int) getAccountCount;
 
+// get total # records in db
+- (int) getDBCount;
+
 // utility functions below
 
 // copy empty tables with structure to document folder

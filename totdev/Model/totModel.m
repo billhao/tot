@@ -470,6 +470,35 @@
     }
 }
 
+// get total # records in db
+- (int) getDBCount {
+    int cnt = -1;
+    sqlite3_stmt *stmt = nil;
+    @try {
+        if (db == nil) {
+            NSLog(@"Can't open db");
+            return cnt;
+        }
+        
+        const char *sql = "SELECT count(*) FROM event";
+        if(sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) != SQLITE_OK) {
+            NSLog(@"[db] Problem with prepare statement");
+            return cnt;
+        }
+
+        if (sqlite3_step(stmt)==SQLITE_ROW) {
+            cnt = sqlite3_column_int(stmt, 0);
+        }
+    }
+    @catch (NSException *exception) {
+        NSLog(@"[db] An exception occured: %@", [exception reason]);
+    }
+    @finally {
+        if( stmt != nil ) sqlite3_finalize(stmt);
+        return cnt;
+    }
+}
+
 - (BOOL) deleteEvents:(int)baby_id event:(NSString*)event {
     BOOL re = FALSE;
     sqlite3_stmt *stmt = nil;

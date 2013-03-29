@@ -24,6 +24,9 @@ static NSString *PREFERENCE_DEFAULT_BABY = @"pref/defaultbaby/%@"; // default ba
 static NSString *PREFERENCE_USER_BABY = @"pref/user_baby/%@"; // user id -> baby id
 static NSString *PREFERENCE_BABY_USER = @"pref/baby_user/%@"; // baby id -> user id
 
+// for tutorial, whether it has been shown
+static NSString *EVENT_TUTORIAL_SHOW     = @"tutorial";
+
 // baby information
 static NSString *BABY_NAME              = @"pref/baby/name";
 static NSString *BABY_BIRTHDAY          = @"pref/baby/birthday";

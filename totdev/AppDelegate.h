@@ -32,6 +32,8 @@
 
 - (void)showLoginView;
 - (void)showHomeView;
+- (void)showTutorial;
+
 - (NSString*) isLoggedIn;
 
 @end
