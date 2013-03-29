@@ -307,4 +307,45 @@
     }
 }
 
+- (NSString*) GetOutputStr: (NSString*) inputStr
+{
+    // Get total words learnd so far
+    totModel* totModel = global.model;
+    NSMutableArray *lanEventAll = [totModel getEvent: 0 event: EVENT_BASIC_LANGUAGE];
+    int num_word_all = lanEventAll.count;
+    
+    // Get words learnd since the 1st day of this month
+    NSDateFormatter *curDateFormatter = [[NSDateFormatter alloc] init];
+    [curDateFormatter setDateFormat:@"yyyy"];
+    int year = [[curDateFormatter stringFromDate:[NSDate date]] intValue];  // current year
+    [curDateFormatter setDateFormat:@"MM"];
+    int month = [[curDateFormatter stringFromDate:[NSDate date]] intValue];  // current month
+    [curDateFormatter release];
+    NSString *curMonthStr = [NSString stringWithFormat:@"%d-%d-01 00:00:00", year, month];  // needs to fig out time zone offset
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSDate *firstDayThisMonth = [formatter dateFromString:curMonthStr];
+    NSMutableArray *lanEventThisMonth = [totModel getEvent:0 event:EVENT_BASIC_LANGUAGE startDate:firstDayThisMonth endDate:[NSDate date]];
+    int num_word_this_month = lanEventThisMonth.count;
+    
+    // Decide the output to user
+    NSString *outputStr = nil;
+    if ( [inputStr caseInsensitiveCompare:@"mom"] == 0 || [inputStr caseInsensitiveCompare:@"dad"] == 0 ) {
+        outputStr = @"Hey, baby asks for ";
+        outputStr = [outputStr stringByAppendingFormat:inputStr];
+        outputStr = [outputStr stringByAppendingFormat:@"!"];
+    } else if ( num_word_this_month >= 5 ) {
+        outputStr = [NSString stringWithFormat:@"Bravo! Baby has learnd %d words this month!", num_word_this_month];
+    } else {
+        if (num_word_all % 1000 == 0 ) {
+            outputStr = [NSString stringWithFormat:@"Baby has learnd %d words in total. Great milestone!", num_word_all];
+        } else {
+            outputStr = [NSString stringWithFormat:@"Baby has learnd %d words in total. Keep going!", num_word_all];
+        }
+    }
+    
+    return outputStr;
+}
+
+
 @end

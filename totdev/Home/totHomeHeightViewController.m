@@ -198,21 +198,23 @@
     NSString* summary = [NSString stringWithFormat:@"On %@, %@ ", mDatetime.titleLabel.text, global.baby.name];
 
     int n = 0; // # of items user edited
-    if( ![all_numbers[0] isEqual: @""] ) {
-        NSString* height = all_numbers[0];
+    //if( ![all_numbers[0] isEqual: @""] ) {
+    if( ![ [all_numbers objectAtIndex:0] isEqual:@""]) {
+        NSString* height = [all_numbers objectAtIndex:0];
         [model addEvent:global.baby.babyID event:EVENT_BASIC_HEIGHT datetime:self.selectedDate value:height];
         summary = [summary stringByAppendingFormat:@"is %@ high", height];
         n++;
     }
-    if( ![all_numbers[1] isEqual: @""] ) {
-        NSString* weight = all_numbers[1];
+    
+    if( ![ [all_numbers objectAtIndex:1] isEqual: @""] ) {
+        NSString* weight = [all_numbers objectAtIndex:1];
         [model addEvent:global.baby.babyID event:EVENT_BASIC_WEIGHT datetime:self.selectedDate value:weight];
         if( n > 0 ) summary = [summary stringByAppendingString:@", "];
         summary = [summary stringByAppendingFormat:@"weighs %@", weight];
         n++;
     }
-    if( ![all_numbers[2] isEqual: @""] ) {
-        NSString* head   = all_numbers[2];
+    if( ![ [all_numbers objectAtIndex:2] isEqual: @""] ) {
+        NSString* head   = [all_numbers objectAtIndex:2];
         [model addEvent:global.baby.babyID event:EVENT_BASIC_HEAD datetime:self.selectedDate value:head];
         if( n > 0 ) summary = [summary stringByAppendingString:@" and "];
         summary = [summary stringByAppendingFormat:@"is %@ in head circumference", head];

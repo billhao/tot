@@ -15,6 +15,7 @@
 #import "Utility/totUtility.h"
 
 #import "totEvent.h"
+#import "Tutorial/totTutorialViewController.h"
 
 @implementation AppDelegate
 
@@ -63,8 +64,9 @@
     loginNavigationController.navigationBarHidden = TRUE;
     loginNavigationController.view.frame = self.window.bounds;
     loginNavigationController.view.autoresizesSubviews = false;  // for iphone 5 screen size
-    
+
     self.window.rootViewController = loginNavigationController;
+    self.window.backgroundColor = [UIColor blackColor];
     [self showFirstView];
     [self.window makeKeyAndVisible];
     return YES;
@@ -72,6 +74,14 @@
 
 // determine the first view (new baby, login or homepage) and show it
 - (BOOL)showFirstView {
+    
+    [loginNavigationController setViewControllers:nil];
+    
+    int db_event_count = [global.model getDBCount];
+    if (db_event_count == 0) {
+        [self showTutorial];
+        return YES;
+    }
     
     // get # accounts in db
     int account = [totUser getTotalAccountCount];
@@ -147,6 +157,15 @@
     mainTabController.view.frame = CGRectMake(0, 20, frame.size.width, frame.size.height);
     [loginNavigationController pushViewController:mainTabController animated:TRUE];
     [mainTabController release];
+}
+
+- (void)showTutorial {
+    [loginNavigationController setViewControllers:nil];
+    
+    totTutorialViewController* ttVC = [[totTutorialViewController alloc] init];
+    ttVC.view.frame = self.window.bounds;
+    [loginNavigationController pushViewController:ttVC animated:true];
+    [ttVC release];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

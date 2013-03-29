@@ -24,6 +24,6 @@
 -(void) Display;
 -(void) MakeNoView;
 -(void) ConfirmButtonClicked;
-
+-(NSString*) GetOutputStr: (NSString*) inputStr;
 
 @end
