@@ -14,10 +14,11 @@
 #import "../Model/totModel.h"
 #import "totTimerController.h"
 #import "../Utility/totNavigationBar.h"
+#import "../Utility/totQuantityController.h"
 
 #define DEFAULT_MENU 8
 
-@interface totHomeFeedingViewController : UIViewController<UITextFieldDelegate,totSliderViewDelegate,totNavigationBarDelegate,totTimerControllerDelegate> {
+@interface totHomeFeedingViewController : UIViewController<UITextFieldDelegate,totSliderViewDelegate,totNavigationBarDelegate,totTimerControllerDelegate,totQuantityControllerDelegate> {
     totHomeRootController* homeRootController;
     
     NSMutableArray *inventory;
@@ -31,6 +32,9 @@
     totSliderView* mCategoriesSlider;
     totSliderView* mFoodChosenSlider;
     totSliderView* mChooseFoodSlider; // note the difference between foodChosen and chooseFood
+    
+    // for quantity picker
+    totQuantityController* mQuantity;
     
     //totNavigationBar* mNavigationBar;
     UIButton* mBackButton;
