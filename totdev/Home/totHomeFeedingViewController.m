@@ -148,6 +148,12 @@
     [mQuantity resignFirstResponder];
     
     NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+    
+    //TODO: get rid of text_quantity. put result into the buffer array for later commit
+    
+    
+    
+    
     if ([formatter numberFromString:text_quantity.text] != nil){
         double q = [text_quantity.text doubleValue];
         NSNumber* tempQ = [NSNumber numberWithDouble:q];
