@@ -76,6 +76,8 @@
         text_quantity.placeholder = @"Quantity?";
         [text_quantity setHidden:false];
         
+        [mQuantity show];
+        
     } else if (sv == mFoodChosenSlider) {
         [homeRootController switchTo:kHomeViewEntryView withContextInfo:nil];
     }
@@ -251,12 +253,13 @@
     text_quantity.textColor = [UIColor blackColor];
     text_quantity.font = [UIFont fontWithName:@"Roboto-Regular" size:16];
     text_quantity.backgroundColor = [UIColor clearColor];
-    text_quantity.keyboardType = UIKeyboardTypeDecimalPad;
-    text_quantity.returnKeyType = UIReturnKeyDone;
-    text_quantity.clearButtonMode = UITextFieldViewModeWhileEditing;
+    //text_quantity.keyboardType = UIKeyboardTypeDecimalPad;
+    //text_quantity.returnKeyType = UIReturnKeyDone;
+    //text_quantity.clearButtonMode = UITextFieldViewModeWhileEditing;
     //[text_quantity addTarget:self action:@selector(TextQuantityClicked:) forControlEvents:UIControlEventTouchUpInside];
-    
+    //text_quantity.delegate = self;
     [text_quantity setHidden:true];
+    [mChooseFoodView addSubview:text_quantity];
     
     mQuantity = [[totQuantityController alloc] init:self.view];
     mQuantity.view.frame = CGRectMake(0, 0, mQuantity.mWidth, mQuantity.mHeight);
@@ -495,10 +498,12 @@
 }
 
 #pragma mark - totQuantityControllerDelegate
+/*
 - (void)TextQuantityClicked: (UIButton *)button {
     [mQuantity show];
 }
-
+*/
+ 
 - (void)showQuantityPicker {
     [UIView beginAnimations:@"swipe" context:nil];
 	[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
@@ -512,6 +517,8 @@
     //need to parse time before display
     
     [text_quantity setText:qu];
+    
+    [mChooseFoodSlider changeButton:foodSelected withNewLabel:qu];
     
     [self hideQuantityPicker];
 }

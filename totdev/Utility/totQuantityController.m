@@ -34,7 +34,7 @@
     if( self ) {
         mComponentHeight= PICKER_HEIGHT;
         mComponentWidth = PICKER_COMPONENT_WIDTH;
-        mWidth = 3*mComponentWidth+20;
+        mWidth = 2*mComponentWidth+20;
         mHeight= mComponentHeight;//+10+BUTTON_HEIGHT;
         
         mSuperView = [superView retain];
