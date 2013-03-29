@@ -11,7 +11,7 @@
 #import "totReviewStoryView.h"
 
 #define TABLE_CELL_WIDTH          320
-#define TABLE_CELL_DEFAULT_HEIGHT 155
+#define TABLE_CELL_DEFAULT_HEIGHT 149
 #define TABLE_CELL_START_X        (320-TABLE_CELL_WIDTH)/2
 
 @implementation totReviewTableViewController

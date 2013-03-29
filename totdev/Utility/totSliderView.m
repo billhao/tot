@@ -85,8 +85,8 @@
     if (contentArray) {
         [contentArray release];
     }
-    if (!images || [images count] == 0) {
-        printf("totSliderView.m setContentArray images cannot be empty\n");
+    if (!images) {
+        printf("totSliderView.m retainContentArray images cannot be empty\n");
         exit(1);
     }
     contentArray = [[NSMutableArray alloc] init];
@@ -110,7 +110,7 @@
     if (marginArray) {
         [marginArray release];
     }
-    if (!margins || [margins count] == 0) {
+    if (!margins) {
         printf("totSliderView.m setMarginArray margins cannot be empty\n");
         exit(1);
     }
@@ -200,7 +200,7 @@
                 }
                 if (marginArray && btn_index < [marginArray count]) {
                     if ([[marginArray objectAtIndex:btn_index] boolValue]) {
-                        UIImageView * margin = [[UIImageView alloc] initWithFrame:CGRectMake(xx, yy, btn_width + 4, btn_height + 4)];
+                        UIImageView * margin = [[UIImageView alloc] initWithFrame:CGRectMake(xx, yy, btn_width + 2, btn_height + 2)];
                         margin.image = [UIImage imageNamed:@"margin.png"];
                         [subview addSubview:margin];
                         [margin release];

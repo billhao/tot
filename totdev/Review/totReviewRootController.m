@@ -130,6 +130,7 @@
     [self.view addSubview:tableViewController.view];
     [aTableView release];
     
+    /*
     totReviewFilterView* filter = [[totReviewFilterView alloc] initWithFrame:CGRectMake(0, -200, 320, 200)];
     totReviewFilterOpenerView *filterOpener = [[totReviewFilterOpenerView alloc] initWithFrame:CGRectMake(240, -20, 30, 70)];
 
@@ -142,6 +143,7 @@
 
     [filterOpener release];
     [filter release];
+     */
 }
 
 - (void)viewDidUnload

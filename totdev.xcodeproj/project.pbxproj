@@ -184,7 +184,6 @@
 		3FD29CA1168D3C0500978B51 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3FD29C9E168D3C0500978B51 /* Roboto-Bold.ttf */; };
 		3FD29CA2168D3C0500978B51 /* Roboto-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3FD29C9F168D3C0500978B51 /* Roboto-Italic.ttf */; };
 		3FD29CA3168D3C0500978B51 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3FD29CA0168D3C0500978B51 /* Roboto-Regular.ttf */; };
-		3FD29CAC168D3F0E00978B51 /* backgrounds-language.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FD29CAB168D3F0E00978B51 /* backgrounds-language.png */; };
 		3FD29CB9168D481D00978B51 /* text_hc.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FD29CB3168D481D00978B51 /* text_hc.png */; };
 		3FD29CBA168D481D00978B51 /* text_hc@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FD29CB4168D481D00978B51 /* text_hc@2x.png */; };
 		3FD29CBB168D481D00978B51 /* text_height.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FD29CB5168D481D00978B51 /* text_height.png */; };
@@ -206,17 +205,7 @@
 		3FF2AA5616A8F8FE0023162E /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FF2AA5516A8F8FE0023162E /* Default-568h@2x.png */; };
 		3FFDF45C16D7431D0045A189 /* review_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FFDF45B16D7431D0045A189 /* review_bg.png */; };
 		3FFDF45E16D7436B0045A189 /* review_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FFDF45D16D7436B0045A189 /* review_bg@2x.png */; };
-		3FFDF46616D75D5E0045A189 /* review-diaper.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FFDF45F16D75D5E0045A189 /* review-diaper.png */; };
-		3FFDF46716D75D5E0045A189 /* review-feeding.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FFDF46016D75D5E0045A189 /* review-feeding.png */; };
-		3FFDF46816D75D5E0045A189 /* review-height.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FFDF46116D75D5E0045A189 /* review-height.png */; };
-		3FFDF46916D75D5E0045A189 /* review-language.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FFDF46216D75D5E0045A189 /* review-language.png */; };
-		3FFDF46A16D75D5E0045A189 /* review-medical.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FFDF46316D75D5E0045A189 /* review-medical.png */; };
-		3FFDF46B16D75D5E0045A189 /* review-sleep.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FFDF46416D75D5E0045A189 /* review-sleep.png */; };
-		3FFDF46C16D75D5E0045A189 /* review-weight.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FFDF46516D75D5E0045A189 /* review-weight.png */; };
 		8E3AE8D1168D531E00E4CFAE /* icons-checkbox.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E3AE8CD168D531E00E4CFAE /* icons-checkbox.png */; };
-		8E3AE8D2168D531E00E4CFAE /* icons-diaper-solid_new.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8E3AE8CE168D531E00E4CFAE /* icons-diaper-solid_new.jpg */; };
-		8E3AE8D3168D531E00E4CFAE /* icons-diaper-wet_new.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8E3AE8CF168D531E00E4CFAE /* icons-diaper-wet_new.jpg */; };
-		8E3AE8D4168D531E00E4CFAE /* icons-diaper-wetandsolid_new.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8E3AE8D0168D531E00E4CFAE /* icons-diaper-wetandsolid_new.jpg */; };
 		8E451D8F169FCB48003D1438 /* totReviewFilterOpenerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E451D8E169FCB48003D1438 /* totReviewFilterOpenerView.m */; };
 		8E46E4FF16A8F35500932B90 /* totReviewFilterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E46E4FE16A8F35500932B90 /* totReviewFilterView.m */; };
 		8E46E50216A8F8CF00932B90 /* opener.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E46E50116A8F8CF00932B90 /* opener.png */; };
@@ -232,7 +221,6 @@
 		8E920F8D161903D700725971 /* icons-sleep-edit.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E920F88161903D700725971 /* icons-sleep-edit.png */; };
 		8E920F8E161903D700725971 /* icons-sleep-start.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E920F89161903D700725971 /* icons-sleep-start.png */; };
 		8EC7A8321655A1430022AC93 /* icons-language.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EC7A8311655A1430022AC93 /* icons-language.png */; };
-		8EC7A8341655A19A0022AC93 /* done-01.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EC7A8331655A19A0022AC93 /* done-01.png */; };
 		8EE2E5D216968643000197D3 /* albumBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EE2E5D116968643000197D3 /* albumBackground.png */; };
 		8EFC1F8816277E9D003CF0FE /* return.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EFC1F8716277E9D003CF0FE /* return.png */; };
 		CE5C09FC154CCFDB00D41114 /* moviePlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5C09F9154CCFDB00D41114 /* moviePlayerViewController.m */; };
@@ -529,7 +517,6 @@
 		3FD29C9E168D3C0500978B51 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Bold.ttf"; path = "Resources/Fonts/Roboto-Bold.ttf"; sourceTree = "<group>"; };
 		3FD29C9F168D3C0500978B51 /* Roboto-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Italic.ttf"; path = "Resources/Fonts/Roboto-Italic.ttf"; sourceTree = "<group>"; };
 		3FD29CA0168D3C0500978B51 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Regular.ttf"; path = "Resources/Fonts/Roboto-Regular.ttf"; sourceTree = "<group>"; };
-		3FD29CAB168D3F0E00978B51 /* backgrounds-language.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "backgrounds-language.png"; sourceTree = "<group>"; };
 		3FD29CB3168D481D00978B51 /* text_hc.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = text_hc.png; path = Resources/Home/Height/text_hc.png; sourceTree = "<group>"; };
 		3FD29CB4168D481D00978B51 /* text_hc@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "text_hc@2x.png"; path = "Resources/Home/Height/text_hc@2x.png"; sourceTree = "<group>"; };
 		3FD29CB5168D481D00978B51 /* text_height.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = text_height.png; path = Resources/Home/Height/text_height.png; sourceTree = "<group>"; };
@@ -554,17 +541,7 @@
 		3FF2AA5516A8F8FE0023162E /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		3FFDF45B16D7431D0045A189 /* review_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = review_bg.png; path = Resources/Review/review_bg.png; sourceTree = "<group>"; };
 		3FFDF45D16D7436B0045A189 /* review_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "review_bg@2x.png"; path = "Resources/Review/review_bg@2x.png"; sourceTree = "<group>"; };
-		3FFDF45F16D75D5E0045A189 /* review-diaper.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "review-diaper.png"; path = "Resources/Review/review-diaper.png"; sourceTree = "<group>"; };
-		3FFDF46016D75D5E0045A189 /* review-feeding.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "review-feeding.png"; path = "Resources/Review/review-feeding.png"; sourceTree = "<group>"; };
-		3FFDF46116D75D5E0045A189 /* review-height.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "review-height.png"; path = "Resources/Review/review-height.png"; sourceTree = "<group>"; };
-		3FFDF46216D75D5E0045A189 /* review-language.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "review-language.png"; path = "Resources/Review/review-language.png"; sourceTree = "<group>"; };
-		3FFDF46316D75D5E0045A189 /* review-medical.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "review-medical.png"; path = "Resources/Review/review-medical.png"; sourceTree = "<group>"; };
-		3FFDF46416D75D5E0045A189 /* review-sleep.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "review-sleep.png"; path = "Resources/Review/review-sleep.png"; sourceTree = "<group>"; };
-		3FFDF46516D75D5E0045A189 /* review-weight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "review-weight.png"; path = "Resources/Review/review-weight.png"; sourceTree = "<group>"; };
 		8E3AE8CD168D531E00E4CFAE /* icons-checkbox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icons-checkbox.png"; path = "Resources/Home/icons-checkbox.png"; sourceTree = "<group>"; };
-		8E3AE8CE168D531E00E4CFAE /* icons-diaper-solid_new.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "icons-diaper-solid_new.jpg"; path = "Resources/Home/icons-diaper-solid_new.jpg"; sourceTree = "<group>"; };
-		8E3AE8CF168D531E00E4CFAE /* icons-diaper-wet_new.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "icons-diaper-wet_new.jpg"; path = "Resources/Home/icons-diaper-wet_new.jpg"; sourceTree = "<group>"; };
-		8E3AE8D0168D531E00E4CFAE /* icons-diaper-wetandsolid_new.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "icons-diaper-wetandsolid_new.jpg"; path = "Resources/Home/icons-diaper-wetandsolid_new.jpg"; sourceTree = "<group>"; };
 		8E451D8D169FCB48003D1438 /* totReviewFilterOpenerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totReviewFilterOpenerView.h; path = Review/totReviewFilterOpenerView.h; sourceTree = "<group>"; };
 		8E451D8E169FCB48003D1438 /* totReviewFilterOpenerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totReviewFilterOpenerView.m; path = Review/totReviewFilterOpenerView.m; sourceTree = "<group>"; };
 		8E46E4FD16A8F35500932B90 /* totReviewFilterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totReviewFilterView.h; path = Review/totReviewFilterView.h; sourceTree = "<group>"; };
@@ -583,7 +560,6 @@
 		8E920F88161903D700725971 /* icons-sleep-edit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icons-sleep-edit.png"; path = "Resources/Home/icons-sleep-edit.png"; sourceTree = "<group>"; };
 		8E920F89161903D700725971 /* icons-sleep-start.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icons-sleep-start.png"; path = "Resources/Home/icons-sleep-start.png"; sourceTree = "<group>"; };
 		8EC7A8311655A1430022AC93 /* icons-language.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icons-language.png"; path = "Resources/Home/icons-language.png"; sourceTree = "<group>"; };
-		8EC7A8331655A19A0022AC93 /* done-01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "done-01.png"; path = "Resources/Home/done-01.png"; sourceTree = "<group>"; };
 		8EE2E5D116968643000197D3 /* albumBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = albumBackground.png; path = Resources/Utility/albumBackground.png; sourceTree = "<group>"; };
 		8EFC1F8716277E9D003CF0FE /* return.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = return.png; path = Resources/Utility/return.png; sourceTree = "<group>"; };
 		CE5C09F8154CCFDB00D41114 /* moviePlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = moviePlayerViewController.h; path = Utility/moviePlayerViewController.h; sourceTree = "<group>"; };
@@ -1009,13 +985,14 @@
 		8E46E50016A8F8BA00932B90 /* Review */ = {
 			isa = PBXGroup;
 			children = (
-				3FFDF45F16D75D5E0045A189 /* review-diaper.png */,
-				3FFDF46016D75D5E0045A189 /* review-feeding.png */,
-				3FFDF46116D75D5E0045A189 /* review-height.png */,
-				3FFDF46216D75D5E0045A189 /* review-language.png */,
-				3FFDF46316D75D5E0045A189 /* review-medical.png */,
-				3FFDF46416D75D5E0045A189 /* review-sleep.png */,
-				3FFDF46516D75D5E0045A189 /* review-weight.png */,
+				3F0AB4F116F58BB700682926 /* review-diaper@2x.png */,
+				3F0AB4F216F58BB700682926 /* review-feeding@2x.png */,
+				3F0AB4F316F58BB700682926 /* review-head@2x.png */,
+				3F0AB4F416F58BB700682926 /* review-height@2x.png */,
+				3F0AB4F516F58BB700682926 /* review-language@2x.png */,
+				3F0AB4F616F58BB700682926 /* review-medical@2x.png */,
+				3F0AB4F716F58BB700682926 /* review-sleep@2x.png */,
+				3F0AB4F816F58BB700682926 /* review-weight@2x.png */,
 				3FFDF45D16D7436B0045A189 /* review_bg@2x.png */,
 				3FFDF45B16D7431D0045A189 /* review_bg.png */,
 				8E46E50116A8F8CF00932B90 /* opener.png */,
@@ -1041,14 +1018,19 @@
 		8E632EBF16268D8500072D89 /* Diaper */ = {
 			isa = PBXGroup;
 			children = (
+				3F0AB4E516F2E9D600682926 /* icons-diaper-solid_new.png */,
+				3F0AB4E616F2E9D600682926 /* icons-diaper-solid_new@2x.png */,
+				3F0AB4E716F2E9D600682926 /* icons-diaper-wet_new.png */,
+				3F0AB4E816F2E9D600682926 /* icons-diaper-wet_new@2x.png */,
+				3F0AB4E916F2E9D700682926 /* icons-diaper-wetandsolid_new.png */,
+				3F0AB4EA16F2E9D700682926 /* icons-diaper-wetandsolid_new@2x.png */,
 				8E3AE8CD168D531E00E4CFAE /* icons-checkbox.png */,
-				8E3AE8CE168D531E00E4CFAE /* icons-diaper-solid_new.jpg */,
-				8E3AE8CF168D531E00E4CFAE /* icons-diaper-wet_new.jpg */,
-				8E3AE8D0168D531E00E4CFAE /* icons-diaper-wetandsolid_new.jpg */,
 				3FB31B871638ED770063DAC6 /* icons-history.png */,
 				3FB31B881638ED770063DAC6 /* icons-ok.png */,
+				3F0AB4DD16F2D05B00682926 /* icons-ok@2x.png */,
 				3FB31B891638ED770063DAC6 /* icons-share.png */,
 				3FB31B7F1638ECEC0063DAC6 /* background-diaper.png */,
+				3F0AB4E316F2DFBD00682926 /* background-diaper@2x.png */,
 			);
 			name = Diaper;
 			sourceTree = "<group>";
@@ -1381,9 +1363,10 @@
 		EFFB60981558493D006C4C80 /* Language */ = {
 			isa = PBXGroup;
 			children = (
-				3FD29CAB168D3F0E00978B51 /* backgrounds-language.png */,
-				8EC7A8331655A19A0022AC93 /* done-01.png */,
+				3F0AB50316F5BEAD00682926 /* backgrounds-language.png */,
+				3F0AB50116F5BE7900682926 /* backgrounds-language@2x.png */,
 				8EC7A8311655A1430022AC93 /* icons-language.png */,
+				3F0AB4DF16F2D36B00682926 /* icons-language@2x.png */,
 			);
 			name = Language;
 			sourceTree = "<group>";
@@ -1665,21 +1648,16 @@
 				3F2771901650B4FA00DF84EF /* ruler_weight.png in Resources */,
 				3F2771911650B4FA00DF84EF /* ruler_weight@2x.png in Resources */,
 				8EC7A8321655A1430022AC93 /* icons-language.png in Resources */,
-				8EC7A8341655A19A0022AC93 /* done-01.png in Resources */,
 				24433B4B166840D000C27389 /* feeding-popup.png in Resources */,
 				3FD29CA1168D3C0500978B51 /* Roboto-Bold.ttf in Resources */,
 				3FD29CA2168D3C0500978B51 /* Roboto-Italic.ttf in Resources */,
 				3FD29CA3168D3C0500978B51 /* Roboto-Regular.ttf in Resources */,
 				8E3AE8D1168D531E00E4CFAE /* icons-checkbox.png in Resources */,
-				8E3AE8D2168D531E00E4CFAE /* icons-diaper-solid_new.jpg in Resources */,
-				8E3AE8D3168D531E00E4CFAE /* icons-diaper-wet_new.jpg in Resources */,
-				8E3AE8D4168D531E00E4CFAE /* icons-diaper-wetandsolid_new.jpg in Resources */,
 				2453E21C168D3F95001820B6 /* feeding-back.png in Resources */,
 				2453E223168D4EA5001820B6 /* feeding-milk.png in Resources */,
 				2453E226168D4EBE001820B6 /* feedinggrey-milk.png in Resources */,
 				2453E228168D5044001820B6 /* feeding-orange juice.png in Resources */,
 				2453E22A168D5051001820B6 /* feedinggrey-orange juice.png in Resources */,
-				3FD29CAC168D3F0E00978B51 /* backgrounds-language.png in Resources */,
 				3FD29CB9168D481D00978B51 /* text_hc.png in Resources */,
 				3FD29CBA168D481D00978B51 /* text_hc@2x.png in Resources */,
 				3FD29CBB168D481D00978B51 /* text_height.png in Resources */,
@@ -1700,13 +1678,6 @@
 				3F81369A16BB9D100085432D /* Logo@2x.png in Resources */,
 				3FFDF45C16D7431D0045A189 /* review_bg.png in Resources */,
 				3FFDF45E16D7436B0045A189 /* review_bg@2x.png in Resources */,
-				3FFDF46616D75D5E0045A189 /* review-diaper.png in Resources */,
-				3FFDF46716D75D5E0045A189 /* review-feeding.png in Resources */,
-				3FFDF46816D75D5E0045A189 /* review-height.png in Resources */,
-				3FFDF46916D75D5E0045A189 /* review-language.png in Resources */,
-				3FFDF46A16D75D5E0045A189 /* review-medical.png in Resources */,
-				3FFDF46B16D75D5E0045A189 /* review-sleep.png in Resources */,
-				3FFDF46C16D75D5E0045A189 /* review-weight.png in Resources */,
 				8E61818816DFE5F50052E38E /* edit_2X.png in Resources */,
 				8E61818916DFE5F50052E38E /* start_2X.png in Resources */,
 				8E61818A16DFE5F50052E38E /* wakeup_2X.png in Resources */,
@@ -1714,6 +1685,25 @@
 				3FA4071716EC08D700B5B89E /* summary_bg@2x.png in Resources */,
 				3FA4071F16EC09AC00B5B89E /* settings_bg.png in Resources */,
 				3FA4072016EC09AC00B5B89E /* settings_bg@2x.png in Resources */,
+				3F0AB4DE16F2D05C00682926 /* icons-ok@2x.png in Resources */,
+				3F0AB4E016F2D36B00682926 /* icons-language@2x.png in Resources */,
+				3F0AB4E416F2DFBD00682926 /* background-diaper@2x.png in Resources */,
+				3F0AB4EB16F2E9D700682926 /* icons-diaper-solid_new.png in Resources */,
+				3F0AB4EC16F2E9D700682926 /* icons-diaper-solid_new@2x.png in Resources */,
+				3F0AB4ED16F2E9D700682926 /* icons-diaper-wet_new.png in Resources */,
+				3F0AB4EE16F2E9D700682926 /* icons-diaper-wet_new@2x.png in Resources */,
+				3F0AB4EF16F2E9D700682926 /* icons-diaper-wetandsolid_new.png in Resources */,
+				3F0AB4F016F2E9D700682926 /* icons-diaper-wetandsolid_new@2x.png in Resources */,
+				3F0AB4F916F58BB700682926 /* review-diaper@2x.png in Resources */,
+				3F0AB4FA16F58BB700682926 /* review-feeding@2x.png in Resources */,
+				3F0AB4FB16F58BB700682926 /* review-head@2x.png in Resources */,
+				3F0AB4FC16F58BB700682926 /* review-height@2x.png in Resources */,
+				3F0AB4FD16F58BB700682926 /* review-language@2x.png in Resources */,
+				3F0AB4FE16F58BB700682926 /* review-medical@2x.png in Resources */,
+				3F0AB4FF16F58BB700682926 /* review-sleep@2x.png in Resources */,
+				3F0AB50016F58BB700682926 /* review-weight@2x.png in Resources */,
+				3F0AB50216F5BE7A00682926 /* backgrounds-language@2x.png in Resources */,
+				3F0AB50416F5BEAD00682926 /* backgrounds-language.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

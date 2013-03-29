@@ -39,6 +39,9 @@
 // this is copied from getEvent, the difference is that this function return exact matches, not LIKE
 - (NSMutableArray *) getItem:(int)baby_id name:(NSString*)name limit:(int)limit offset:(int)offset startDate:(NSDate*)start endDate:(NSDate*)end;
 
+// get N events in a category (event) before current_event_id (N=limit)
+- (NSMutableArray *) getPreviousEvent:(int)baby_id event:(NSString*)event limit:(int)limit current_event_date:(NSDate*)current_event_date;
+
 - (int) getEventCount:(int)baby_id event:(NSString*)event;
 - (BOOL) deleteEvents:(int)baby_id event:(NSString*)event;
 

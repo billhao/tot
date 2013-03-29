@@ -14,6 +14,8 @@
 #import "totEventName.h"
 #import "Utility/totUtility.h"
 
+#import "totEvent.h"
+
 @implementation AppDelegate
 
 @synthesize window;
@@ -33,7 +35,6 @@
 - (NSString*) isLoggedIn {
     return [global.model getPreferenceNoBaby:PREFERENCE_LOGGED_IN];
 }
-
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -141,6 +142,7 @@
     [loginNavigationController setViewControllers:nil];
     // show home view
     totUITabBarController* mainTabController = [[totUITabBarController alloc] initWithNibName:@"MainWindow" bundle:nil];
+    self.mainTabController = mainTabController;
     CGRect frame = self.window.bounds;
     mainTabController.view.frame = CGRectMake(0, 20, frame.size.width, frame.size.height);
     [loginNavigationController pushViewController:mainTabController animated:TRUE];

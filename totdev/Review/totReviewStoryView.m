@@ -12,6 +12,7 @@
 #import "../Model/totModel.h"
 #import "../Model/totEvent.h"
 #import "totHomeFeedingViewController.h"
+#import "totEventName.h"
 
 @implementation totReviewStoryView
 
@@ -45,8 +46,11 @@
     NSString* category = [tokens objectAtIndex:0];
     
     if ([category isEqualToString:@"basic"]) {
-        return [NSString stringWithFormat:@"review-%s.png", [[tokens objectAtIndex:1] UTF8String]];
-    } else if ([category isEqualToString:@"eye_contact"]) {
+        return [NSString stringWithFormat:@"review-%s", [[tokens objectAtIndex:1] UTF8String]];
+    }
+    // ignore activity for now
+    /*
+    else if ([category isEqualToString:@"eye_contact"]) {
         return @"eye_contact.png";
     } else if ([category isEqualToString:@"vision_attention"]) {
         return @"vision_attention.png";
@@ -62,7 +66,9 @@
         return [NSString stringWithFormat:@"%s.png", [[tokens objectAtIndex:1] UTF8String]];
     } else if ([category isEqualToString:@"gesture"]) {
         return [NSString stringWithFormat:@"%s.png", [[tokens objectAtIndex:1] UTF8String]];
-    } else {
+    }
+    */
+    else {
         printf("Has not implemented yet.\n");
         return nil;
     }
@@ -84,10 +90,10 @@
         NSString* subcategory = [tokens objectAtIndex:1];
         
         if ([subcategory isEqualToString:@"diaper"]) {
-            desc = [NSString stringWithFormat:@"%@ had a %s diaper", global.baby.name, [rawValue UTF8String]];
+            desc = @"Diaper";
         }
         else if ([subcategory isEqualToString:@"language"]) {
-            desc = [NSString stringWithFormat:@"%@ learned %s", global.baby.name, [rawValue UTF8String]];
+            desc = [NSString stringWithFormat:@"%@ learned %@", global.baby.name, rawValue];
         }
         else if ([subcategory isEqualToString:@"sleep"]) {
             if ([rawValue isEqualToString:@"end"]) {
@@ -97,18 +103,21 @@
             }
         }
         else if ([subcategory isEqualToString:@"height"]) {
-            desc = [NSString stringWithFormat:@"%@ is %s", global.baby.name, [rawValue UTF8String]];
+            desc = [NSString stringWithFormat:@"%@ is %@", global.baby.name, rawValue];
         }
         else if ([subcategory isEqualToString:@"weight"]) {
-            desc = [NSString stringWithFormat:@"%@ is %s", global.baby.name, [rawValue UTF8String]];
+            desc = [NSString stringWithFormat:@"%@ is %@", global.baby.name, rawValue];
         }
         else if ([subcategory isEqualToString:@"head"]) {
-            desc = [NSString stringWithFormat:@"%@ is %s", global.baby.name, [rawValue UTF8String]];
+            desc = [NSString stringWithFormat:@"%@ is %@", global.baby.name, rawValue];
         }
         else if ([subcategory isEqualToString:@"feeding"]) {
-            desc = [NSString stringWithString:@"Feeding"];
+            desc = @"Feeding";  //[NSString stringWithString:@"Feeding"];
         }
-    } else if ([category isEqualToString:@"eye_contact"]) {
+    }
+    // ignore activity for now
+    /*
+    else if ([category isEqualToString:@"eye_contact"]) {
         if ([self isFirstOccurrence:story]) {
             desc = @"first eye contact";
         } else {
@@ -160,6 +169,7 @@
             desc = [NSString stringWithFormat:@"%s", [subcategory UTF8String]];
         }
     }
+    */
     return desc;
 }
 
@@ -261,31 +271,78 @@
         else if ([subcategory isEqualToString:@"sleep"]) {
             if ([story.mRawContent isEqualToString:@"end"]) {
                 // query db to get how long the baby had slept
-                context.text = @"Slept for 100 minutes";
+                NSMutableArray* sleep = [global.model getPreviousEvent:global.baby.babyID event:EVENT_BASIC_SLEEP limit:1 current_event_date:story.mWhen];
+                if( sleep.count > 0 ) {
+                    totEvent* e = sleep[0];
+                    //NSLog(@"%d %@ - %d %@", e.event_id, e.datetime, story.mEventId, story.mWhen);
+                    
+                    // Get conversion to months, days, hours, minutes
+                    NSCalendar *sysCalendar = [NSCalendar currentCalendar];
+                    unsigned int unitFlags = NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit;
+                    NSDateComponents *conversionInfo = [sysCalendar components:unitFlags fromDate:e.datetime  toDate:story.mWhen options:0];
+                    
+                    int h = [conversionInfo hour];
+                    int m = [conversionInfo minute];
+                    int s = [conversionInfo second];
+                    
+                    NSString* text;
+                    if( h>0 && m<10 ) {
+                        if( h==1 )
+                            text = [NSString stringWithFormat:@"%@ slept for about an hour", global.baby.name];
+                        else
+                            text = [NSString stringWithFormat:@"%@ slept for about %d hours", global.baby.name, h];
+                    }
+                    else if( m>50 ) {
+                        if( h==0 )
+                            text = [NSString stringWithFormat:@"%@ slept for about an hour", global.baby.name];
+                        else
+                            text = [NSString stringWithFormat:@"%@ slept for about %d hours", global.baby.name, h+1];
+                    }
+                    else if( h==0 && m==0 )
+                        text = [NSString stringWithFormat:@"%@ slept for less than a minute", global.baby.name];
+                    else if( h==0 && m==1 )
+                        text = [NSString stringWithFormat:@"%@ slept for a minute", global.baby.name];
+                    else if( h==0 && m>1 )
+                        text = [NSString stringWithFormat:@"%@ slept for %d minutes", global.baby.name, m];
+                    else if( h>=15 )
+                        text = [NSString stringWithFormat:@"%@ slept for %d hours. Really?", global.baby.name, h];
+                    else
+                        text = [NSString stringWithFormat:@"%@ slept for %d hours %d minutes", global.baby.name, h, m];
+                    context.text = text;
+                }
+                else {
+                    context.text = @"";
+                }
             }
         }
-        
         else if ([subcategory isEqualToString:@"feeding"]) {
             NSArray* foodlist = [totHomeFeedingViewController stringToJSON:story.mRawContent];
-            NSMutableString* summary = [[NSMutableString alloc] initWithFormat:@"%@ ate", global.baby.name];
-            Boolean first = true;
-            for (int i=0; i<foodlist.count; i++) {
-                NSDictionary* food = foodlist[i];
-                if( foodlist.count>=2 && i+1 == foodlist.count ) // second but last, add "and"
-                    [summary appendString:@" and"];
-                else if( i > 0 ) // from the second one, add comma
-                    [summary appendString:@","];
-                [summary appendFormat:@" %@oz %@", food[@"quantity"], food[@"name"] ];
+            if( foodlist.count > 0 ){
+                NSMutableString* summary = [[NSMutableString alloc] initWithFormat:@"%@ ate", global.baby.name];
+                Boolean first = true;
+                for (int i=0; i<foodlist.count; i++) {
+                    NSDictionary* food = foodlist[i];
+                    if( foodlist.count>=2 && i+1 == foodlist.count ) // second but last, add "and"
+                        [summary appendString:@" and"];
+                    else if( i > 0 ) // from the second one, add comma
+                        [summary appendString:@","];
+                    [summary appendFormat:@" %@oz %@", food[@"quantity"], food[@"name"] ];
+                }
+                context.text = summary;
+                [summary release];
             }
-            context.text = summary;
-            [summary release];
+            else
+                context.text = @"";
         }
-
+        else if ([subcategory isEqualToString:@"diaper"]) {
+            context.text = [NSString stringWithFormat:@"%@ had a %@ diaper", global.baby.name, story.mRawContent];
+        }
         
         [parent addSubview:context];
         [context release];
     }
-    
+    // ignore activity for now
+    /*
     else if ([category isEqualToString:@"emotion"] || [category isEqualToString:@"motor_skill"] ||
              [category isEqualToString:@"gesture"] || [category isEqualToString:@"eye_contact"] ||
              [category isEqualToString:@"vision_attention"] || [category isEqualToString:@"chew"] ||
@@ -319,6 +376,7 @@
         [parent addSubview:img];
         [img release];
     }
+    */
 }
 
 // generate story view
@@ -330,8 +388,10 @@
     
     NSString *icon_filename = [self getTypeIcon:story];
     if (icon_filename) {
-        UIImageView * icon = [[UIImageView alloc] initWithFrame:CGRectMake(34, 68, 26, 26)];
-        icon.contentMode = UIViewContentModeScaleAspectFit;
+        UIImageView * icon = [[UIImageView alloc] initWithFrame:CGRectMake(15, 45, 50, 50)];
+        //icon.contentMode = UIViewContentModeScaleAspectFit;
+        UIImage* img = [UIImage imageNamed:icon_filename];
+        CGSize frame = img.size;
         [icon setImage:[UIImage imageNamed:icon_filename]];
 //        [icon.layer setBorderColor: [[UIColor blackColor] CGColor]];
 //        [icon.layer setBorderWidth: 1.0];
@@ -341,7 +401,7 @@
     
     NSString *description = [self getStoryDescription:story];
     if (description) {
-        UILabel *storyDesc = [[UILabel alloc] initWithFrame:CGRectMake(115, 43, 160, 12)];
+        UILabel *storyDesc = [[UILabel alloc] initWithFrame:CGRectMake(115, 35, 160, 12)];
         storyDesc.backgroundColor = [UIColor clearColor];
         storyDesc.text = description;
         storyDesc.textAlignment = UITextAlignmentRight;
@@ -353,7 +413,7 @@
     
     NSString *time_description = [self getStoryTime:story];
     if (time_description) {
-        UILabel *timeDesc = [[UILabel alloc] initWithFrame:CGRectMake(115, 27, 160, 12)];
+        UILabel *timeDesc = [[UILabel alloc] initWithFrame:CGRectMake(115, 19, 160, 12)];
         timeDesc.backgroundColor = [UIColor clearColor];
         timeDesc.text = time_description;
         timeDesc.textAlignment = UITextAlignmentRight;
@@ -365,7 +425,7 @@
     
     // construct the context info.
     if ([story hasContext]) {
-        UIView *context = [[UIView alloc] initWithFrame:CGRectMake(122, 68, 145, 45)];
+        UIView *context = [[UIView alloc] initWithFrame:CGRectMake(122, 57, 145, 45)];
         [self buildContextInfo:story withFrame:CGRectMake(0, 0, 145, 45) withinParent:context];
         [self addSubview:context];
         [context release];
