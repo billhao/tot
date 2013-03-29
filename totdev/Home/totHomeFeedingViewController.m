@@ -75,6 +75,7 @@
         // show input box
         text_quantity.placeholder = @"Quantity?";
         [text_quantity setHidden:false];
+        
     } else if (sv == mFoodChosenSlider) {
         [homeRootController switchTo:kHomeViewEntryView withContextInfo:nil];
     }
@@ -142,6 +143,7 @@
 
 - (void)ChooseFoodOKButtonClicked: (UIButton *)button {
     [text_quantity resignFirstResponder];
+    [mQuantity resignFirstResponder];
     
     NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
     if ([formatter numberFromString:text_quantity.text] != nil){
@@ -252,9 +254,13 @@
     text_quantity.keyboardType = UIKeyboardTypeDecimalPad;
     text_quantity.returnKeyType = UIReturnKeyDone;
     text_quantity.clearButtonMode = UITextFieldViewModeWhileEditing;
-    text_quantity.delegate = self;
+    //[text_quantity addTarget:self action:@selector(TextQuantityClicked:) forControlEvents:UIControlEventTouchUpInside];
+    
     [text_quantity setHidden:true];
-    [mChooseFoodView addSubview:text_quantity];
+    
+    mQuantity = [[totQuantityController alloc] init:self.view];
+    mQuantity.view.frame = CGRectMake(0, 0, mQuantity.mWidth, mQuantity.mHeight);
+    [mQuantity setDelegate:self];
     
     mChooseFoodSlider = [[totSliderView alloc] initWithFrame:CGRectMake(20, 10, 280, 160)];
     [mChooseFoodSlider setDelegate:self];
@@ -488,6 +494,36 @@
     foodChosenList = [[NSMutableArray alloc]init];
 }
 
+#pragma mark - totQuantityControllerDelegate
+- (void)TextQuantityClicked: (UIButton *)button {
+    [mQuantity show];
+}
+
+- (void)showQuantityPicker {
+    [UIView beginAnimations:@"swipe" context:nil];
+	[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+	[UIView setAnimationDuration:0.5f];
+    mQuantity.view.frame = CGRectMake((mWidth-mQuantity.mWidth)/2, mHeight-mQuantity.mHeight, mQuantity.mWidth, mQuantity.mHeight);
+    [UIView commitAnimations];
+}
+
+-(void)saveQuantity:(NSString *)qu{
+    NSLog(@"%@", qu);
+    //need to parse time before display
+    
+    [text_quantity setText:qu];
+    
+    [self hideQuantityPicker];
+}
+
+- (void)hideQuantityPicker {
+    [mQuantity dismiss];
+}
+
+-(void)cancelQuantity {
+    [self hideQuantityPicker];
+}
+
 #pragma mark - totTimerControllerDelegate
 - (void)showTimePicker {
     [UIView beginAnimations:@"swipe" context:nil];
@@ -505,6 +541,7 @@
 - (void)hideTimePicker {
     [mClock dismiss];
 }
+
 
 -(void)saveCurrentTime:(NSString*)time datetime:(NSDate*)datetime {
     NSLog(@"%@", time);
@@ -536,6 +573,7 @@
     [mChooseFoodSlider release];
     [text_quantity release];
     [mClock release];
+    [mQuantity release];
     [foodChosenList release];
 }
 

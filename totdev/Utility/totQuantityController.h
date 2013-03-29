@@ -9,8 +9,8 @@
 #import <UIKit/UIKit.h>
 
 enum {
-    kButtonOK = 0,
-    kButtonCancel = 1
+    kQUButtonOK = 0,  // borrowed from kButtonOk + QU
+    kQUButtonCancel = 1
 };
 
 enum {
@@ -34,7 +34,7 @@ enum {
     
     int mComponentWidth, mComponentHeight;
     int mWidth, mHeight;
-    int mUnitPicked, mQuantityPicked;
+    int mCurrentQuantityIdx, mCurrentUnitIdx;
     id<totQuantityControllerDelegate> delegate;
     
     // keep the superview and hidden textview on the superview so we can use its InputView and InputAccessoryView
@@ -42,10 +42,12 @@ enum {
     UITextView* mHiddenText;
 }
 
+@property (nonatomic, readonly) int mCurrentQuantityIdx;
+@property (nonatomic, readonly) int mCurrentUnitIdx;
 @property (nonatomic, assign) int mWidth;
 @property (nonatomic, assign) int mHeight;
 @property (nonatomic, retain) id<totQuantityControllerDelegate> delegate;
-@property (nonatomic, retain) UIPickerView *mQuanitityPicker;
+@property (nonatomic, retain) UIPickerView *mQuantityPicker;
 
 // must init with a super view
 - (id)init:(UIView*)superView;

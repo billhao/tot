@@ -14,15 +14,20 @@
 #define BUTTON_WIDTH           90
 #define BUTTON_HEIGHT          50
 
+#define UNIT_NUMBER 4
+#define QUANTITY_RESOLUTION 0.5
+#define MIN_QUANTITY 0.5
+#define MAX_QUANTITY 30
 
-@implementation totTimerController
 
-@synthesize mQuantityPicked;
-@synthesize mUnitPicked;
+@implementation totQuantityController
+
 @synthesize mWidth;
 @synthesize mHeight;
 @synthesize delegate;
 @synthesize mQuantityPicker;
+@synthesize mCurrentQuantityIdx;
+@synthesize mCurrentUnitIdx;
 
 - (id)init:(UIView*)superView {
     self = [super init];
@@ -58,40 +63,18 @@
 
 #pragma mark - UIPickerView delegate
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
-    if( mMode == kTime ) {
-        if( component == kPickerHour )
-            mCurrentHourIdx = row;
-        else if( component == kPickerMinute )
-            mCurrentMinuteIdx = row;
-        else
-            mCurrentAmPm = row;
-    } else {
-        if( component == kPickerYear )
-            mCurrentYearIdx = row;
-        else if( component == kPickerMonth )
-            mCurrentMonthIdx = row;
-        else
-            mCurrentDayIdx = row;
-    }
-    
+    if( component == kPickerQuantity )
+        mCurrentQuantityIdx = row;
+    else
+        mCurrentUnitIdx = row;
 }
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
-    if( mMode == kTime ) {
-        if ( component == kPickerAmPm )
-            return [mAmPm count];
-        else if ( component == kPickerMinute )
-            return [mMinute count];
-        else
-            return [mHour count];
-    } else {
-        if ( component == kPickerYear )
-            return [mYear count];
-        else if ( component == kPickerMonth )
-            return [mMonth count];
-        else
-            return [mDay count];
-    }
+    if ( component == kPickerQuantity )
+        return [mQuantity count];
+    else
+        return [mUnit count];
+
 }
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
@@ -99,22 +82,11 @@
 }
 
 - (NSString*)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
-    if( mMode == kTime ) {
-        if( component == kPickerHour ) {
-            return [mHour objectAtIndex:row];
-        } else if( component == kPickerMinute ) {
-            return [mMinute objectAtIndex:row];
-        } else {
-            return [mAmPm objectAtIndex:row];
-        }
-    } else {
-        if( component == kPickerYear ) {
-            return [mYear objectAtIndex:row];
-        } else if( component == kPickerMonth ) {
-            return [mMonth objectAtIndex:row];
-        } else {
-            return [mDay objectAtIndex:row];
-        }
+    if( component == kPickerQuantity ) {
+        return [mQuantity objectAtIndex:row];
+    }
+    else {
+        return [mUnit objectAtIndex:row];
     }
 }
 
@@ -132,20 +104,15 @@
 }
 */
 
-
-xxxxxxxxxxxxxxxxxx setQuantityPicked
-- (void)setCurrentHour:(int)h andMinute:(int)m andAmPm:(int)ap {
-    if( 1 <= h && h <= 12 ) {
-        mCurrentHourIdx = h-1;
-        [mTimePicker selectRow:h-1 inComponent:kPickerHour animated:NO];
+- (void)setQuantityPicked:(int)q andUnitPicked:(int)u{
+    if( q >= 0 && q <= (MAX_QUANTITY - MIN_QUANTITY)/ QUANTITY_RESOLUTION ) {
+        mCurrentQuantityIdx = q;
+        [mQuantityPicker selectRow:q inComponent:kPickerQuantity animated:NO];
     }
-    if( 0 <= m && m <= 59 ) {
-        mCurrentMinuteIdx = m;
-        [mTimePicker selectRow:m inComponent:kPickerMinute animated:NO];
-    }
-    if( 0 <= ap && ap <= 1 ) {
-        mCurrentAmPm = ap;
-        [mTimePicker selectRow:ap inComponent:kPickerAmPm animated:NO];
+    
+    if( u >= 0 && u <= UNIT_NUMBER-1 ) {
+        mCurrentUnitIdx = u;
+        [mQuantityPicker selectRow:u inComponent:kPickerUnit animated:NO];
     }
 }
 
@@ -154,19 +121,19 @@ xxxxxxxxxxxxxxxxxx setQuantityPicked
 - (void)buttonPressed: (id)sender {
     UIButton *btn = (UIButton*)sender;
     int tag = btn.tag;
-    if( tag == kButtonOK ) {
+    if( tag == kQUButtonOK ) {
         if( [delegate respondsToSelector:@selector(saveQuantity:)] ) {
-            NSString *q = nil; //quantity
+            NSString *qu = nil; //quantity and unit
             
-            q = [[NSString alloc] initWithFormat:@"%s %s",
-                 [[mQuantity objectAtIndex:mQuantityPicked] UTF8String],
-                 [[mUnit objectAtIndex:mUnitPicked] UTF8String]];
+            qu = [[NSString alloc] initWithFormat:@"%s %s",
+                 [[mQuantity objectAtIndex:mCurrentQuantityIdx] UTF8String],
+                 [[mUnit objectAtIndex:mCurrentUnitIdx] UTF8String]];
             
             // call the delegate
-            [delegate saveQuantity:q];
-            [q release];
+            [delegate saveQuantity:qu];
+            [qu release];
         }
-    } else if( tag == kButtonCancel ) {
+    } else if( tag == kQUButtonCancel ) {
         if( [delegate respondsToSelector:@selector(cancelQuantity)] ) {
             [delegate cancelQuantity];
         }
@@ -174,7 +141,7 @@ xxxxxxxxxxxxxxxxxx setQuantityPicked
 }
 
 + (NSString*)getUnitString:(int)u {
-    switch (month) {
+    switch (u) {
         case 1:
             return @"oz";
             break;
@@ -202,10 +169,9 @@ xxxxxxxxxxxxxxxxxx setQuantityPicked
         buttonHeight = BUTTON_HEIGHT;
     
     mQuantity = [[NSMutableArray alloc] init];
-    for ( int i = 0.1; i <= 0.9; i++ )
-        [mQuantity addObject:[NSString stringWithFormat:@"%d", i]];
-    for ( int i = 1; i <= 15; i+=0.5 )
-        [mQuantity addObject:[NSString stringWithFormat:@"%d", i]];
+    // right now the unit and quantity are independant
+    for ( double i = MIN_QUANTITY; i <= MAX_QUANTITY; i += QUANTITY_RESOLUTION )
+        [mQuantity addObject:[NSString stringWithFormat:@"%g", i]];
     
     mUnit = [[NSMutableArray alloc] init];
     [mUnit addObject:[NSString stringWithFormat:@"oz"]];
@@ -216,7 +182,7 @@ xxxxxxxxxxxxxxxxxx setQuantityPicked
     mQuantityPicker = [[UIPickerView alloc] initWithFrame:CGRectMake(0, -10, mWidth, mComponentHeight)];
     mQuantityPicker.dataSource = self;
     mQuantityPicker.delegate = self;
-    mTimePicker.showsSelectionIndicator = YES;
+    mQuantityPicker.showsSelectionIndicator = YES;
     
     [self.view addSubview:mQuantityPicker];
     
@@ -236,7 +202,7 @@ xxxxxxxxxxxxxxxxxx setQuantityPicked
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
     [mQuantityPicker release];
-    
+        
     [mQuantity release];
     [mUnit release];
     
@@ -260,14 +226,16 @@ xxxxxxxxxxxxxxxxxx setQuantityPicked
     [keyboardDoneButtonView sizeToFit];
     
     UIBarButtonItem* okButton     = [[UIBarButtonItem alloc] initWithTitle:@"OK" style:UIBarButtonItemStyleDone  target:self action:@selector(buttonPressed:)];
-    okButton.tag = kButtonOK;
+    okButton.tag = kQUButtonOK;
     UIBarButtonItem* cancelButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStyleBordered  target:self action:@selector(buttonPressed:)];
-    cancelButton.tag = kButtonCancel;
+    cancelButton.tag = kQUButtonCancel;
     
     // I put the spacers in to push the doneButton to the right side of the picker view
     UIBarButtonItem *spacer    = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     
     [keyboardDoneButtonView setItems:[NSArray arrayWithObjects:cancelButton, spacer, okButton, nil]];
+    
+    [spacer release];
     
     return keyboardDoneButtonView;
 }
