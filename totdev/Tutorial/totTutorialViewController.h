@@ -10,6 +10,7 @@
 
 @interface totTutorialViewController : UIViewController <UIScrollViewDelegate> {
     UIScrollView* tutorialScrollView;
+    UIPageControl* pageControl;
     
     int image_cnt;
     BOOL scrollCanceled;

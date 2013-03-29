@@ -75,7 +75,7 @@
 // determine the first view (new baby, login or homepage) and show it
 - (BOOL)showFirstView {
     
-    [loginNavigationController setViewControllers:nil];
+    //[loginNavigationController setViewControllers:nil];
     
     int db_event_count = [global.model getDBCount];
     if (db_event_count == 0) {
@@ -122,7 +122,7 @@
 
 - (void)showNewBabyView {
     // remove all previous views
-    [loginNavigationController setViewControllers:nil];
+    //[loginNavigationController setViewControllers:nil];
     // show new baby
     totNewBabyController* newbabyController = [[totNewBabyController alloc] initWithNibName:@"totNewBabyController" bundle:nil];
     CGRect frame = self.window.bounds;
@@ -133,7 +133,7 @@
 
 - (void)showLoginView {
     // remove all previous views
-    [loginNavigationController setViewControllers:nil];
+    //[loginNavigationController setViewControllers:nil];
     // show login
     totLoginController* loginController = [[totLoginController alloc] initWithNibName:@"totLoginController" bundle:nil];
     CGRect frame = self.window.bounds;
@@ -149,7 +149,7 @@
 
 - (void)showHomeView {
     // remove all previous views
-    [loginNavigationController setViewControllers:nil];
+    //[loginNavigationController setViewControllers:nil];
     // show home view
     totUITabBarController* mainTabController = [[totUITabBarController alloc] initWithNibName:@"MainWindow" bundle:nil];
     self.mainTabController = mainTabController;
@@ -160,12 +160,14 @@
 }
 
 - (void)showTutorial {
-    [loginNavigationController setViewControllers:nil];
-    
     totTutorialViewController* ttVC = [[totTutorialViewController alloc] init];
     ttVC.view.frame = self.window.bounds;
-    [loginNavigationController pushViewController:ttVC animated:true];
+    [loginNavigationController pushViewController:ttVC animated:TRUE];
     [ttVC release];
+}
+
+- (void)popup {
+    [loginNavigationController popViewControllerAnimated:false];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

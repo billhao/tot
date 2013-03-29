@@ -33,6 +33,7 @@
 - (void)showLoginView;
 - (void)showHomeView;
 - (void)showTutorial;
+- (void)popup;
 
 - (NSString*) isLoggedIn;
 

@@ -7,8 +7,10 @@
 //
 
 #import "totSettingEntryViewController.h"
-#import "AppDelegate.h"
+#import "../AppDelegate.h"
 #import "totEventName.h"
+#import "totTutorialViewController.h"
+#import "totUtility.h"
 
 @implementation totSettingEntryViewController
 
@@ -60,9 +62,16 @@
     [mSignOutButton setTitleColor:fontcolor forState:UIControlStateHighlighted];
     [mSignOutButton setTitle:@"sign out" forState:UIControlStateNormal];
     [mSignOutButton setTitle:@"sign out" forState:UIControlStateHighlighted];
-    
+
+    [mTutorialButton.titleLabel setFont:font];
+    [mTutorialButton setTitleColor:fontcolor forState:UIControlStateNormal];
+    [mTutorialButton setTitleColor:fontcolor forState:UIControlStateHighlighted];
+    [mTutorialButton setTitle:@"show tutorial" forState:UIControlStateNormal];
+    [mTutorialButton setTitle:@"show tutorial" forState:UIControlStateHighlighted];
+
     [mClearDBButton addTarget:self action:@selector(ClearDBButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [mSignOutButton addTarget:self action:@selector(SignOutButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [mTutorialButton addTarget:self action:@selector(TutorialButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)viewDidUnload
@@ -89,6 +98,15 @@
     // show login view
     [appDelegate showFirstView];
     //[self presentViewController:appDelegate.loginController animated:TRUE completion:nil];
+}
+
+- (void)TutorialButtonClicked: (UIButton *)button {
+    AppDelegate* app = [self getAppDelegate];
+    [app showTutorial];
+}
+
+-(AppDelegate*) getAppDelegate {
+    return [[UIApplication sharedApplication] delegate];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

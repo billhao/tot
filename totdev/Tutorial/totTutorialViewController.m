@@ -9,6 +9,7 @@
 #import "totTutorialViewController.h"
 #import "../AppDelegate.h"
 #import "../Model/totEventName.h"
+#import "totUtility.h"
 
 @interface totTutorialViewController ()
 
@@ -29,6 +30,8 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    NSLog(@"totTutorialViewController viewDidLoad");
+    NSLog(@"%@", [totUtility getFrameString:self.view.bounds]);
 
     // tutorial
     tutorialScrollView = [[UIScrollView alloc] initWithFrame:self.view.bounds];
@@ -37,7 +40,7 @@
     tutorialScrollView.showsHorizontalScrollIndicator = NO;
     tutorialScrollView.delegate = self;
     
-    image_cnt = 3;
+    image_cnt = 2;
     scrollCanceled = false;
     
     int x=0;
@@ -54,19 +57,44 @@
         x += width;
     }
     [self.view addSubview:tutorialScrollView];
-
+    
+    pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
+    pageControl.frame = CGRectMake(0, (height - 30), width, 15);
+    pageControl.numberOfPages = image_cnt;
+    pageControl.currentPage = 0;
+    [self.view addSubview:pageControl];
 }
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+//- (void)viewWillAppear:(BOOL)animated {
+//    NSLog(@"totTutorialViewController viewWillAppear");
+//}
+
+//- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+//    //NSLog(@"scrollViewDidScroll %f", scrollView.contentOffset.x);
+//}
+//
+//- (void)scrollViewDidEndDecelerating:(UIScrollView *)sv {
+//    NSLog(@"scrollViewDidEndDecelerating %f", sv.contentOffset.x);
+//    int page = sv.contentOffset.x / sv.frame.size.width;
+//    pageControl.currentPage = page;
+//}
+//
+//- (void)scrollViewWillBeginDecelerating:(UIScrollView *)sv {
+//    NSLog(@"scrollViewWillBeginDecelerating %f", sv.contentOffset.x);
+//}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)sv willDecelerate:(BOOL)decelerate {
+    NSLog(@"scrollViewDidEndDragging %f %d", sv.contentOffset.x, decelerate);
     if( scrollCanceled ) return;
     
-    NSLog(@"scrollViewDidScroll %f", scrollView.contentOffset.x);
-    if( scrollView.contentOffset.x > scrollView.frame.size.width * (image_cnt - 1.5) ) {
+    if( sv.contentOffset.x > sv.frame.size.width * (image_cnt - .95) ) {
         
         scrollCanceled = true;
         
         // now the tutorial has been shown, mark in db, never show it again
         [global.model addEvent:PREFERENCE_NO_BABY event:EVENT_TUTORIAL_SHOW datetime:[NSDate date] value:@"true"];
+        
+        [[self getAppDelegate] popup];
         
         // stop tutorial, go to main view
         [[self getAppDelegate] showFirstView];
