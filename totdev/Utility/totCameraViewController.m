@@ -87,7 +87,7 @@
         UIImageWriteToSavedPhotosAlbum(photo, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
     } else {
         NSString *tempFilePath = [(NSURL*)[info valueForKey:UIImagePickerControllerMediaURL] absoluteString];
-        tempFilePath = [[tempFilePath substringFromIndex:16] retain];
+        tempFilePath = [tempFilePath substringFromIndex:16];
         
         // Check if the video file can be saved to camera roll.
         if (UIVideoAtPathIsCompatibleWithSavedPhotosAlbum(tempFilePath)){
@@ -138,6 +138,7 @@
         [self hideCamera];
         [thumbnail release];
         CGImageRelease(im);
+        [generator release];
         
         /*
         AVAssetImageGeneratorCompletionHandler handler = ^(CMTime requestedTime, CGImageRef im, CMTime actualTime, AVAssetImageGeneratorResult result, NSError *error) {

@@ -63,13 +63,17 @@
         mLogin.hidden = TRUE;
         mNewuser.frame = CGRectMake(47, mNewuser.frame.origin.y, mNewuser.frame.size.width, mNewuser.frame.size.height);
         //set background
-        self.view.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"bg_registration"]];
+        UIColor* bg = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"bg_registration"]];
+        self.view.backgroundColor = bg;
+        [bg release];
     }
     else {
         mNewuser.hidden = FALSE;
         
         //set background
-        self.view.backgroundColor = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"bg_login"]];
+        UIColor* bg = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"bg_login"]];
+        self.view.backgroundColor = bg;
+        [bg release];
     }
 
     // set email and clear password
@@ -113,6 +117,9 @@
             // check if baby is set. it may be nil after register. get the default baby for user if baby is not set.
             global.baby = [global.user getDefaultBaby];
         }
+        
+        [user release];
+        
         if( global.baby != nil )
             [global.baby printBabyInfo];
         
@@ -168,6 +175,7 @@
             [user addBabyToUser:global.baby];
             [user setDefaultBaby:global.baby];
         }
+        [user release];
         // if yes and pwd matches, go to home view
         [self backgroundTap:nil]; // dismiss keyboard
         [self setLoggedIn:email];

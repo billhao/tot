@@ -126,6 +126,7 @@
     
     // go to create account page
     global.baby = baby;
+    [baby release];
     
     [[self getAppDelegate] showLoginView];
 }
@@ -172,7 +173,7 @@
 - (UIView*)createInputAccessoryView{
     // create a done view + done button, attach to it a doneClicked action, and place it in a toolbar as an accessory input view...
     // Prepare done button
-    UIToolbar* keyboardDoneButtonView	= [[UIToolbar alloc] init];
+    UIToolbar* keyboardDoneButtonView	= [[[UIToolbar alloc] init] autorelease];
     keyboardDoneButtonView.barStyle		= UIBarStyleBlack;
     keyboardDoneButtonView.translucent	= YES;
     keyboardDoneButtonView.tintColor	= nil;
@@ -188,6 +189,8 @@
                                                                                target:nil action:nil];
     
     [keyboardDoneButtonView setItems:[NSArray arrayWithObjects:spacer, spacer1, doneButton, nil]];
+    [spacer release];
+    [spacer1 release];
     
     return keyboardDoneButtonView;
 }

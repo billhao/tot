@@ -65,7 +65,8 @@
             continue;
         
         // have to set the height of each cell manually.
-        int cellHeight = [story storyViewHeight];
+        //int cellHeight =
+        [story storyViewHeight];
         
         // constructs the detailed cell view.
         totReviewStoryView *view = [[totReviewStoryView alloc] initWithFrame:CGRectMake(TABLE_CELL_START_X, 0,
