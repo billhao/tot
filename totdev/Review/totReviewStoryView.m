@@ -262,7 +262,11 @@
         }
         
         else if ([subcategory isEqualToString:@"language"]) {
-            NSArray* events = [database getEvent:global.baby.babyID event:story.mEventType];
+            //NSArray* events = [database getEvent:global.baby.babyID event:story.mEventType];
+            NSArray* events = [database getPreviousEvent:global.baby.babyID
+                                                   event:story.mEventType
+                                                   limit:-1
+                                      current_event_date:story.mWhen];
             NSString* desc = [NSString stringWithFormat:@"%@ has learned %d words", global.baby.name, [events count]];
             
             context.text = desc;

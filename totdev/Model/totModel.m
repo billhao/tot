@@ -180,7 +180,7 @@
 
 // get N events in a category (event) before current_event_id (N=limit)
 - (NSMutableArray *) getPreviousEvent:(int)baby_id event:(NSString*)event limit:(int)limit current_event_date:(NSDate*)current_event_date {
-    return [self getEvent:baby_id event:event limit:1 offset:0 startDate:nil endDate:current_event_date];
+    return [self getEvent:baby_id event:event limit:limit offset:0 startDate:nil endDate:current_event_date];
     //return [self getEvent:baby_id event:event limit:limit offset:1];
 }
 
