@@ -129,7 +129,7 @@
     for (int i = 0; i < [labels count]; i++) {
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
         [label setText:[labels objectAtIndex:i]];
-        [label setFont:[UIFont fontWithName:@"Roboto-Regular" size:18.0]];
+        [label setFont:[UIFont fontWithName:@"Roboto-Regular" size:16.0]];
         label.backgroundColor = [UIColor clearColor];
         label.textAlignment = UITextAlignmentCenter;
         label.textColor = [UIColor colorWithRed:0 green:0.47f blue:0.8f alpha:1.0f];

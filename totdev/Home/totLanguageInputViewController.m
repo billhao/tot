@@ -204,12 +204,20 @@
         confirmTxtView.delegate = self;
         confirmTxtView.textAlignment = UITextAlignmentCenter;
         confirmTxtView.backgroundColor = [UIColor clearColor];
-        NSString* defaultConfirmTxt = @"Bravo! Tom has learnd 15 words this week^o^"; // define default text
+        
+        // Constructs the message.
+        //NSString* babyName = global.baby.name;
+        //NSArray* events = [global.model getEvent:global.baby.babyID event:EVENT_BASIC_LANGUAGE];
+        //NSString* defaultConfirmTxt = [[NSString alloc] initWithFormat:@"Bravo! %@ has learnt %d words this week^o^", babyName, [events count]];
+        NSString* defaultConfirmTxt = [self GetOutputStr:text];
+        //NSString* defaultConfirmTxt = @"Bravo! Tom has learnd 15 words this week^o^"; // define default text
+
         confirmTxtView.text = defaultConfirmTxt;  // set default text
         confirmTxtView.textColor = [UIColor colorWithRed:210.0/255 green:0.0 blue:63.0/255 alpha:1.0]; // set color for default text
         confirmTxtView.tag = 99;
         [self.view addSubview:confirmTxtView];
         [confirmTxtView release];
+        //[defaultConfirmTxt release];
         // Construct share button
 //        UIButton *shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
 //        shareBtn.frame = CGRectMake(110, 130, 60, 45);
@@ -343,7 +351,7 @@
             outputStr = [NSString stringWithFormat:@"Baby has learnd %d words in total. Keep going!", num_word_all];
         }
     }
-    
+    [formatter release];
     return outputStr;
 }
 

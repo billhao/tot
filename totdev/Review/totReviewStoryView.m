@@ -257,13 +257,46 @@
                 totEvent* prevEvt = [events objectAtIndex:1];
                 float incr = [currEvt.value floatValue] - [prevEvt.value floatValue];
             
-                context.text = [NSString stringWithFormat:@"%@ is %f taller than last time", global.baby.name, incr];
+                context.text = [NSString stringWithFormat:@"%@ is %.2f taller than last time", global.baby.name, incr];
+            }
+        }
+        
+        else if ([subcategory isEqualToString:@"weight"]) {
+            NSArray* events = [database getEvent:global.baby.babyID event:story.mEventType];
+            
+            totEvent* currEvt = [events objectAtIndex:0];
+            if( events.count > 1 ) {
+                totEvent* prevEvt = [events objectAtIndex:1];
+                float incr = [currEvt.value floatValue] - [prevEvt.value floatValue];
+                
+                context.text = [NSString stringWithFormat:@"%@ is %.2f heavier than last time", global.baby.name, incr];
+            }
+        }
+        
+        else if ([subcategory isEqualToString:@"head"]) {
+            NSArray* events = [database getEvent:global.baby.babyID event:story.mEventType];
+            
+            totEvent* currEvt = [events objectAtIndex:0];
+            if( events.count > 1 ) {
+                totEvent* prevEvt = [events objectAtIndex:1];
+                float incr = [currEvt.value floatValue] - [prevEvt.value floatValue];
+                
+                context.text = [NSString stringWithFormat:@"%@'s head is %.2f bigger than last time", global.baby.name, incr];
             }
         }
         
         else if ([subcategory isEqualToString:@"language"]) {
-            NSArray* events = [database getEvent:global.baby.babyID event:story.mEventType];
-            NSString* desc = [NSString stringWithFormat:@"%@ has learned %d words", global.baby.name, [events count]];
+            //NSArray* events = [database getEvent:global.baby.babyID event:story.mEventType];
+            NSArray* events = [database getPreviousEvent:global.baby.babyID
+                                                   event:story.mEventType
+                                                   limit:-1
+                                      current_event_date:story.mWhen];
+            NSString* desc;
+            if ([events count] > 0) {
+                desc = [NSString stringWithFormat:@"%@ has learned %d words", global.baby.name, [events count]];
+            } else {
+                desc = [NSString stringWithFormat:@"This is %@'s first word", global.baby.name];
+            }
             
             context.text = desc;
         }
@@ -273,7 +306,8 @@
                 // query db to get how long the baby had slept
                 NSMutableArray* sleep = [global.model getPreviousEvent:global.baby.babyID event:EVENT_BASIC_SLEEP limit:1 current_event_date:story.mWhen];
                 if( sleep.count > 0 ) {
-                    totEvent* e = sleep[0];
+                    ////totEvent* e = sleep[0];
+                    totEvent* e = [sleep objectAtIndex:0];
                     //NSLog(@"%d %@ - %d %@", e.event_id, e.datetime, story.mEventId, story.mWhen);
                     
                     // Get conversion to months, days, hours, minutes
@@ -315,18 +349,21 @@
                 }
             }
         }
+        
         else if ([subcategory isEqualToString:@"feeding"]) {
             NSArray* foodlist = [totHomeFeedingViewController stringToJSON:story.mRawContent];
             if( foodlist.count > 0 ){
                 NSMutableString* summary = [[NSMutableString alloc] initWithFormat:@"%@ ate", global.baby.name];
                 Boolean first = true;
                 for (int i=0; i<foodlist.count; i++) {
-                    NSDictionary* food = foodlist[i];
+                    ////NSDictionary* food = foodlist[i];
+                    NSDictionary* food = [foodlist objectAtIndex:i];
                     if( foodlist.count>=2 && i+1 == foodlist.count ) // second but last, add "and"
                         [summary appendString:@" and"];
                     else if( i > 0 ) // from the second one, add comma
                         [summary appendString:@","];
-                    [summary appendFormat:@" %@oz %@", food[@"quantity"], food[@"name"] ];
+                    ////[summary appendFormat:@" %@oz %@", food[@"quantity"], food[@"name"] ];
+                    [summary appendFormat:@" %@oz %@", [food objectForKey:@"quantity"], [food objectForKey:@"name"] ];
                 }
                 context.text = summary;
                 [summary release];
@@ -334,6 +371,7 @@
             else
                 context.text = @"";
         }
+        
         else if ([subcategory isEqualToString:@"diaper"]) {
             context.text = [NSString stringWithFormat:@"%@ had a %@ diaper", global.baby.name, story.mRawContent];
         }
