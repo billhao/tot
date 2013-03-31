@@ -197,7 +197,7 @@
 
 #pragma mark - View lifecycle
 -(void)createCategoryPanel {
-    mCategoriesSlider = [[totSliderView alloc] initWithFrame:CGRectMake(38, 170, 244, 120)];
+    mCategoriesSlider = [[totSliderView alloc] initWithFrame:CGRectMake(38, 155, 244, 120)];
     [mCategoriesSlider setDelegate:self];
     [mCategoriesSlider setBtnPerCol:2];
     [mCategoriesSlider setBtnPerRow:3];
@@ -232,7 +232,7 @@
     [images addObject:[UIImage imageNamed:@"feeding-cheerios.png"]];
     [images addObject:[UIImage imageNamed:@"feeding-green pea.png"]];
     
-    mRecentlyUsedSlider = [[totSliderView alloc] initWithFrame:CGRectMake(38, 95, 244, 60)];
+    mRecentlyUsedSlider = [[totSliderView alloc] initWithFrame:CGRectMake(38, 85, 244, 60)];
     [mRecentlyUsedSlider setDelegate:self];
     [mRecentlyUsedSlider setBtnPerCol:1];
     [mRecentlyUsedSlider setBtnPerRow:4];
@@ -247,14 +247,14 @@
 
 - (void)createChooseFoodPanel {
     mChooseFoodOKButton = [UIButton buttonWithType:UIButtonTypeCustom];;
-    mChooseFoodOKButton.frame = CGRectMake(140, 200, 170, 40);
+    mChooseFoodOKButton.frame = CGRectMake(140, 190, 170, 40);
     [mChooseFoodOKButton setTitle:@"OK" forState:UIControlStateNormal];
     [mChooseFoodOKButton setTitleColor:[UIColor magentaColor] forState:UIControlStateNormal];
     [mChooseFoodOKButton setBackgroundColor:[UIColor whiteColor]];
     [mChooseFoodOKButton addTarget:self action:@selector(ChooseFoodOKButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [mChooseFoodView addSubview:mChooseFoodOKButton];
     
-    text_quantity = [[UITextField alloc] initWithFrame:CGRectMake(30, 200, 110, 40)];
+    text_quantity = [[UITextField alloc] initWithFrame:CGRectMake(30, 190, 110, 40)];
     text_quantity.borderStyle = UITextBorderStyleRoundedRect;
     text_quantity.textColor = [UIColor blackColor];
     text_quantity.font = [UIFont fontWithName:@"Roboto-Regular" size:16];
@@ -288,7 +288,7 @@
 }
 
 - (void)createFoodChosenPanel {
-    mFoodChosenSlider = [[totSliderView alloc] initWithFrame:CGRectMake(38, 285, 244, 60)];
+    mFoodChosenSlider = [[totSliderView alloc] initWithFrame:CGRectMake(38, 275, 244, 60)];
     [mFoodChosenSlider setDelegate:self];
     [mFoodChosenSlider setBtnPerCol:1];
     [mFoodChosenSlider setBtnPerRow:4];
@@ -429,10 +429,11 @@
     [self addFoodToInventoryGrey];
     
     // create background
-    totImageView* background = [[totImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
-    [background imageFilePath:@"feeding-blank.png"];
-    [self.view addSubview:background];
-    [background release];
+    UIImage* img = [UIImage imageNamed:@"feeding_bg"];
+    UIImageView* bgview = [[UIImageView alloc] initWithImage:img];
+    bgview.frame = CGRectMake(0, 0, img.size.width, img.size.height);    
+    [self.view addSubview:bgview];
+    [bgview release];
     
     // create recently used slider view
     [self createRecentlyUsedPanel];
@@ -457,7 +458,7 @@
     [self.view addSubview:mNavigationBar];
      */
     mBackButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    mBackButton.frame = CGRectMake(233, 0, 87, 72);
+    mBackButton.frame = CGRectMake(233, 0, 87, 62);
     [mBackButton setBackgroundColor:[UIColor clearColor]];
     //[mBackButton setImage:[UIImage imageNamed:@"feeding-back.png"] forState:UIControlStateNormal];
     [self.view addSubview:mBackButton];
@@ -465,7 +466,7 @@
     
     //create ok button from icons
     mOKButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    mOKButton.frame = CGRectMake(210, 358, 60, 45);
+    mOKButton.frame = CGRectMake(210, 348, 60, 45);
     [mBackButton setBackgroundColor:[UIColor clearColor]];
     //[mOKButton setImage:[UIImage imageNamed:@"icons-ok.png"] forState:UIControlStateNormal];
     [self.view addSubview:mOKButton];
@@ -473,12 +474,12 @@
     
     //date and time
     mDatetime = [UIButton buttonWithType:UIButtonTypeCustom];
-    mDatetime.frame = CGRectMake(100, 40, 120, 30);
+    mDatetime.frame = CGRectMake(100, 28, 120, 30);
     [mDatetime.titleLabel setFont:[UIFont fontWithName:@"Roboto-Regular" size:16.0]];
     [mDatetime setTitle:[totUtility nowTimeString] forState:UIControlStateNormal];
     [self.view addSubview:mDatetime];
     [mDatetime addTarget:self action:@selector(DatetimeClicked:) forControlEvents:UIControlEventTouchUpInside];
-    [mDatetime setBackgroundColor:[UIColor whiteColor]];
+    [mDatetime setBackgroundColor:[UIColor clearColor]];
     [mDatetime setTitleColor:[UIColor colorWithRed:147.0/255 green:149.0/255 blue:152.0/255 alpha:1] forState:UIControlStateNormal];
     [mDatetime setTitleColor:[UIColor colorWithRed:255/255 green:0/255 blue:0/255 alpha:1] forState:UIControlStateHighlighted];
     

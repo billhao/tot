@@ -1,10 +1,7 @@
-//
-//  tutorialViewController.m
-//  totdev
-//
-//  Created by Hao Wang on 3/28/13.
-//  Copyright (c) 2013 tot. All rights reserved.
-//
+/* Add tutorial images as tutorial_x@2x.png
+ * in the order of 1, 2, 3 ...
+ * The code will automatically use all images in above names.
+ */
 
 #import "totTutorialViewController.h"
 #import "../AppDelegate.h"
@@ -30,8 +27,8 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    NSLog(@"totTutorialViewController viewDidLoad");
-    NSLog(@"%@", [totUtility getFrameString:self.view.bounds]);
+    //NSLog(@"totTutorialViewController viewDidLoad");
+    //NSLog(@"%@", [totUtility getFrameString:self.view.bounds]);
 
     // tutorial
     tutorialScrollView = [[UIScrollView alloc] initWithFrame:self.view.bounds];
@@ -40,22 +37,26 @@
     tutorialScrollView.showsHorizontalScrollIndicator = NO;
     tutorialScrollView.delegate = self;
     
-    image_cnt = 2;
-    scrollCanceled = false;
     
     int x=0;
     int y=0;
     int width=tutorialScrollView.frame.size.width;
     int height=tutorialScrollView.frame.size.height;
-    tutorialScrollView.contentSize = CGSizeMake(width * (image_cnt), height);
-    for( int i=3; i<5; i++ ) {
-        NSString* imgName = [NSString stringWithFormat:@"tutorial_%d", i];
-        UIImageView* imgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:imgName]];
+    image_cnt = 0;
+    while( image_cnt < 20 ) {
+        NSString* imgName = [NSString stringWithFormat:@"tutorial_%d", (image_cnt+1)];
+        UIImage* img = [UIImage imageNamed:imgName];
+        if( img == nil ) break;
+        
+        UIImageView* imgView = [[UIImageView alloc] initWithImage:img];
         imgView.frame = CGRectMake(x, y, width, height);
         [tutorialScrollView addSubview:imgView];
         [imgView release];
         x += width;
+        image_cnt++;
     }
+    scrollCanceled = false;
+    tutorialScrollView.contentSize = CGSizeMake(width * (image_cnt), height);
     [self.view addSubview:tutorialScrollView];
     
     pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
@@ -84,7 +85,7 @@
 //}
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)sv willDecelerate:(BOOL)decelerate {
-    NSLog(@"scrollViewDidEndDragging %f %d", sv.contentOffset.x, decelerate);
+    //NSLog(@"scrollViewDidEndDragging %f %d", sv.contentOffset.x, decelerate);
     if( scrollCanceled ) return;
     
     if( sv.contentOffset.x > sv.frame.size.width * (image_cnt - .95) ) {
