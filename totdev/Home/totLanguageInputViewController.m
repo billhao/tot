@@ -332,8 +332,8 @@
     NSString *outputStr = nil;
     if ( [inputStr caseInsensitiveCompare:@"mom"] == 0 || [inputStr caseInsensitiveCompare:@"dad"] == 0 ) {
         outputStr = @"Hey, baby asks for ";
-        outputStr = [outputStr stringByAppendingFormat:inputStr];
-        outputStr = [outputStr stringByAppendingFormat:@"!"];
+        outputStr = [outputStr stringByAppendingString:inputStr];
+        outputStr = [outputStr stringByAppendingString:@"!"];
     } else if ( num_word_this_month >= 5 ) {
         outputStr = [NSString stringWithFormat:@"Bravo! Baby has learnd %d words this month!", num_word_this_month];
     } else {

@@ -129,7 +129,10 @@
     for (int i = 0; i < [labels count]; i++) {
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
         [label setText:[labels objectAtIndex:i]];
-        [label setFont:[UIFont fontWithName:@"Roboto-Regular" size:12.0]];
+        [label setFont:[UIFont fontWithName:@"Roboto-Regular" size:18.0]];
+        label.backgroundColor = [UIColor clearColor];
+        label.textAlignment = UITextAlignmentCenter;
+        label.textColor = [UIColor colorWithRed:0 green:0.47f blue:0.8f alpha:1.0f];
         [labelArray addObject:label];
         [label release];
     }
@@ -212,9 +215,12 @@
                     [subview addSubview:title];
                 }
                 if (labelArray && btn_index < [labelArray count]) {
-                    UILabel * label = [labelArray objectAtIndex:btn_index];
-                    [label setFrame:CGRectMake(xx, yy + btn_height/2, btn_width, v_gap)];
+                    UILabel* label = [labelArray objectAtIndex:btn_index];
+                    [label setFrame:CGRectMake(xx, yy + btn_height/2 - v_gap/2, btn_width, v_gap)];
                     [subview insertSubview:label aboveSubview:[contentArray objectAtIndex:btn_index]];
+                    if ([label.text isEqualToString:@""]) {
+                        label.hidden = YES;
+                    }
                 }
             }
         }
@@ -247,7 +253,9 @@
 }
 
 - (void)changeButton:(int)btnIndex withNewLabel:(NSString*)l {
-    [(UILabel*)[labelArray objectAtIndex:btnIndex] setText:l];
+    UILabel* ll = (UILabel*)[labelArray objectAtIndex:btnIndex];
+    [ll setText:l];
+    ll.hidden = NO;
 }
 
 - (void)clearButtonLabel:(int)btnIndex {

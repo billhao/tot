@@ -278,10 +278,18 @@
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"category == %@", categoryChosen];
     NSArray *filteredFood = [inventory filteredArrayUsingPredicate:predicate];
     NSMutableArray *foodImages = [[NSMutableArray alloc] init];
+    
+    // in order to set labels for button, we have to set the labels first here.
+    NSMutableArray* labels = [[NSMutableArray alloc] init];
+    
     for (int i = 0; i < [filteredFood count]; i++) {
         [foodImages addObject:filteredFood[i][@"file"]];
+        [labels addObject:@""];
     }
     [mChooseFoodSlider retainContentArray:foodImages];
+    [mChooseFoodSlider retainLabelArray:labels];
+    
+    [labels release];
     [foodImages release];
     [mChooseFoodSlider get];
     [mChooseFoodView addSubview:mChooseFoodSlider];
