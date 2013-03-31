@@ -257,7 +257,31 @@
                 totEvent* prevEvt = [events objectAtIndex:1];
                 float incr = [currEvt.value floatValue] - [prevEvt.value floatValue];
             
-                context.text = [NSString stringWithFormat:@"%@ is %f taller than last time", global.baby.name, incr];
+                context.text = [NSString stringWithFormat:@"%@ is %.2f taller than last time", global.baby.name, incr];
+            }
+        }
+        
+        else if ([subcategory isEqualToString:@"weight"]) {
+            NSArray* events = [database getEvent:global.baby.babyID event:story.mEventType];
+            
+            totEvent* currEvt = [events objectAtIndex:0];
+            if( events.count > 1 ) {
+                totEvent* prevEvt = [events objectAtIndex:1];
+                float incr = [currEvt.value floatValue] - [prevEvt.value floatValue];
+                
+                context.text = [NSString stringWithFormat:@"%@ is %.2f heavier than last time", global.baby.name, incr];
+            }
+        }
+        
+        else if ([subcategory isEqualToString:@"head"]) {
+            NSArray* events = [database getEvent:global.baby.babyID event:story.mEventType];
+            
+            totEvent* currEvt = [events objectAtIndex:0];
+            if( events.count > 1 ) {
+                totEvent* prevEvt = [events objectAtIndex:1];
+                float incr = [currEvt.value floatValue] - [prevEvt.value floatValue];
+                
+                context.text = [NSString stringWithFormat:@"%@'s head is %.2f bigger than last time", global.baby.name, incr];
             }
         }
         
@@ -267,7 +291,12 @@
                                                    event:story.mEventType
                                                    limit:-1
                                       current_event_date:story.mWhen];
-            NSString* desc = [NSString stringWithFormat:@"%@ has learned %d words", global.baby.name, [events count]];
+            NSString* desc;
+            if ([events count] > 0) {
+                desc = [NSString stringWithFormat:@"%@ has learned %d words", global.baby.name, [events count]];
+            } else {
+                desc = [NSString stringWithFormat:@"This is %@'s first word", global.baby.name];
+            }
             
             context.text = desc;
         }
@@ -320,6 +349,7 @@
                 }
             }
         }
+        
         else if ([subcategory isEqualToString:@"feeding"]) {
             NSArray* foodlist = [totHomeFeedingViewController stringToJSON:story.mRawContent];
             if( foodlist.count > 0 ){
@@ -341,6 +371,7 @@
             else
                 context.text = @"";
         }
+        
         else if ([subcategory isEqualToString:@"diaper"]) {
             context.text = [NSString stringWithFormat:@"%@ had a %@ diaper", global.baby.name, story.mRawContent];
         }
