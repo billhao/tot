@@ -224,6 +224,14 @@
 		3FF6C2841708E872007B48DA /* review-sleep@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FF6C27C1708E872007B48DA /* review-sleep@2x.png */; };
 		3FF6C2851708E872007B48DA /* review-weight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FF6C27D1708E872007B48DA /* review-weight@2x.png */; };
 		3FF6C2871708E889007B48DA /* Logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FF6C2861708E889007B48DA /* Logo@2x.png */; };
+		3FF6C2901708F3C1007B48DA /* review-diaper.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FF6C2881708F3BC007B48DA /* review-diaper.png */; };
+		3FF6C2911708F3C1007B48DA /* review-feeding.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FF6C2891708F3BD007B48DA /* review-feeding.png */; };
+		3FF6C2921708F3C1007B48DA /* review-head.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FF6C28A1708F3BD007B48DA /* review-head.png */; };
+		3FF6C2931708F3C1007B48DA /* review-height.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FF6C28B1708F3BE007B48DA /* review-height.png */; };
+		3FF6C2941708F3C1007B48DA /* review-language.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FF6C28C1708F3BE007B48DA /* review-language.png */; };
+		3FF6C2951708F3C1007B48DA /* review-medical.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FF6C28D1708F3BF007B48DA /* review-medical.png */; };
+		3FF6C2961708F3C1007B48DA /* review-sleep.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FF6C28E1708F3BF007B48DA /* review-sleep.png */; };
+		3FF6C2971708F3C1007B48DA /* review-weight.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FF6C28F1708F3BF007B48DA /* review-weight.png */; };
 		3FFDF45C16D7431D0045A189 /* review_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FFDF45B16D7431D0045A189 /* review_bg.png */; };
 		3FFDF45E16D7436B0045A189 /* review_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FFDF45D16D7436B0045A189 /* review_bg@2x.png */; };
 		8E3AE8D1168D531E00E4CFAE /* icons-checkbox.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E3AE8CD168D531E00E4CFAE /* icons-checkbox.png */; };
@@ -582,6 +590,14 @@
 		3FF6C27C1708E872007B48DA /* review-sleep@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "review-sleep@2x.png"; path = "Resources/Review/review-sleep@2x.png"; sourceTree = "<group>"; };
 		3FF6C27D1708E872007B48DA /* review-weight@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "review-weight@2x.png"; path = "Resources/Review/review-weight@2x.png"; sourceTree = "<group>"; };
 		3FF6C2861708E889007B48DA /* Logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Logo@2x.png"; path = "Resources/Logo@2x.png"; sourceTree = "<group>"; };
+		3FF6C2881708F3BC007B48DA /* review-diaper.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "review-diaper.png"; path = "Resources/Review/review-diaper.png"; sourceTree = "<group>"; };
+		3FF6C2891708F3BD007B48DA /* review-feeding.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "review-feeding.png"; path = "Resources/Review/review-feeding.png"; sourceTree = "<group>"; };
+		3FF6C28A1708F3BD007B48DA /* review-head.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "review-head.png"; path = "Resources/Review/review-head.png"; sourceTree = "<group>"; };
+		3FF6C28B1708F3BE007B48DA /* review-height.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "review-height.png"; path = "Resources/Review/review-height.png"; sourceTree = "<group>"; };
+		3FF6C28C1708F3BE007B48DA /* review-language.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "review-language.png"; path = "Resources/Review/review-language.png"; sourceTree = "<group>"; };
+		3FF6C28D1708F3BF007B48DA /* review-medical.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "review-medical.png"; path = "Resources/Review/review-medical.png"; sourceTree = "<group>"; };
+		3FF6C28E1708F3BF007B48DA /* review-sleep.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "review-sleep.png"; path = "Resources/Review/review-sleep.png"; sourceTree = "<group>"; };
+		3FF6C28F1708F3BF007B48DA /* review-weight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "review-weight.png"; path = "Resources/Review/review-weight.png"; sourceTree = "<group>"; };
 		3FFDF45B16D7431D0045A189 /* review_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = review_bg.png; path = Resources/Review/review_bg.png; sourceTree = "<group>"; };
 		3FFDF45D16D7436B0045A189 /* review_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "review_bg@2x.png"; path = "Resources/Review/review_bg@2x.png"; sourceTree = "<group>"; };
 		8E3AE8CD168D531E00E4CFAE /* icons-checkbox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icons-checkbox.png"; path = "Resources/Home/icons-checkbox.png"; sourceTree = "<group>"; };
@@ -1045,6 +1061,14 @@
 		8E46E50016A8F8BA00932B90 /* Review */ = {
 			isa = PBXGroup;
 			children = (
+				3FF6C2881708F3BC007B48DA /* review-diaper.png */,
+				3FF6C2891708F3BD007B48DA /* review-feeding.png */,
+				3FF6C28A1708F3BD007B48DA /* review-head.png */,
+				3FF6C28B1708F3BE007B48DA /* review-height.png */,
+				3FF6C28C1708F3BE007B48DA /* review-language.png */,
+				3FF6C28D1708F3BF007B48DA /* review-medical.png */,
+				3FF6C28E1708F3BF007B48DA /* review-sleep.png */,
+				3FF6C28F1708F3BF007B48DA /* review-weight.png */,
 				3FF6C2761708E872007B48DA /* review-diaper@2x.png */,
 				3FF6C2771708E872007B48DA /* review-feeding@2x.png */,
 				3FF6C2781708E872007B48DA /* review-head@2x.png */,
@@ -1767,6 +1791,14 @@
 				3FF6C2841708E872007B48DA /* review-sleep@2x.png in Resources */,
 				3FF6C2851708E872007B48DA /* review-weight@2x.png in Resources */,
 				3FF6C2871708E889007B48DA /* Logo@2x.png in Resources */,
+				3FF6C2901708F3C1007B48DA /* review-diaper.png in Resources */,
+				3FF6C2911708F3C1007B48DA /* review-feeding.png in Resources */,
+				3FF6C2921708F3C1007B48DA /* review-head.png in Resources */,
+				3FF6C2931708F3C1007B48DA /* review-height.png in Resources */,
+				3FF6C2941708F3C1007B48DA /* review-language.png in Resources */,
+				3FF6C2951708F3C1007B48DA /* review-medical.png in Resources */,
+				3FF6C2961708F3C1007B48DA /* review-sleep.png in Resources */,
+				3FF6C2971708F3C1007B48DA /* review-weight.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
