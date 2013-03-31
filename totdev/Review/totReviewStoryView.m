@@ -277,7 +277,8 @@
                 // query db to get how long the baby had slept
                 NSMutableArray* sleep = [global.model getPreviousEvent:global.baby.babyID event:EVENT_BASIC_SLEEP limit:1 current_event_date:story.mWhen];
                 if( sleep.count > 0 ) {
-                    totEvent* e = sleep[0];
+                    ////totEvent* e = sleep[0];
+                    totEvent* e = [sleep objectAtIndex:0];
                     //NSLog(@"%d %@ - %d %@", e.event_id, e.datetime, story.mEventId, story.mWhen);
                     
                     // Get conversion to months, days, hours, minutes
@@ -325,12 +326,14 @@
                 NSMutableString* summary = [[NSMutableString alloc] initWithFormat:@"%@ ate", global.baby.name];
                 Boolean first = true;
                 for (int i=0; i<foodlist.count; i++) {
-                    NSDictionary* food = foodlist[i];
+                    ////NSDictionary* food = foodlist[i];
+                    NSDictionary* food = [foodlist objectAtIndex:i];
                     if( foodlist.count>=2 && i+1 == foodlist.count ) // second but last, add "and"
                         [summary appendString:@" and"];
                     else if( i > 0 ) // from the second one, add comma
                         [summary appendString:@","];
-                    [summary appendFormat:@" %@oz %@", food[@"quantity"], food[@"name"] ];
+                    ////[summary appendFormat:@" %@oz %@", food[@"quantity"], food[@"name"] ];
+                    [summary appendFormat:@" %@oz %@", [food objectForKey:@"quantity"], [food objectForKey:@"name"] ];
                 }
                 context.text = summary;
                 [summary release];
