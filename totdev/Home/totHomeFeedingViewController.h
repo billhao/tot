@@ -44,7 +44,8 @@
     //for fodd input
     UIView* mChooseFoodView;
     UIButton* mChooseFoodOKButton;
-    UITextField *text_quantity;
+    UIButton* mChooseFoodCancelButton;
+    //UITextField *text_quantity;
     
     totModel* mTotModel;
     
@@ -56,6 +57,7 @@
 
     int mWidth, mHeight;
     int foodSelected;
+    NSMutableDictionary *foodSelectedBuffer;
     
     NSMutableArray *foodChosenList;
 }

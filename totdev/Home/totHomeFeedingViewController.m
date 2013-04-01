@@ -73,8 +73,10 @@
         foodSelected = tag;
         
         // show input box
+        /*
         text_quantity.placeholder = @"Quantity?";
         [text_quantity setHidden:false];
+         */
         
         [mQuantity show];
         
@@ -144,16 +146,41 @@
 }
 
 - (void)ChooseFoodOKButtonClicked: (UIButton *)button {
-    [text_quantity resignFirstResponder];
+    //[text_quantity resignFirstResponder];
     [mQuantity resignFirstResponder];
     
+    if([foodSelectedBuffer count] >=1 ){
+        NSArray *foodKeys = [foodSelectedBuffer allKeys];
+        for (NSString *key in foodKeys) {
+            //NSLog(@"%@ is %@",key, [foodSelectedBuffer objectForKey:key]);
+            
+            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"category == %@", categoryChosen];
+            NSArray *filteredFood = [inventory filteredArrayUsingPredicate:predicate];
+            NSString* chosenFoodName = [NSString stringWithString:filteredFood[[key integerValue]][@"name"]];
+            
+            // insert into a result queue
+            NSMutableDictionary *foodItem = [[NSMutableDictionary alloc] init];
+            [foodItem setObject:chosenFoodName forKey:@"name"];
+            [foodItem setObject:categoryChosen forKey:@"category"];
+            [foodItem setObject:[foodSelectedBuffer objectForKey:key] forKey:@"quantity"];
+            
+            // add to foodChosenList
+            [foodChosenList addObject:foodItem];
+            [foodItem release];
+        }
+    }
+    else{
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Empty Selection"
+                                                        message:@"Please choose at least one kind of food before submission."
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+        [alert release];
+    }
+    
+    /*
     NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
-    
-    //TODO: get rid of text_quantity. put result into the buffer array for later commit
-    
-    
-    
-    
     if ([formatter numberFromString:text_quantity.text] != nil){
         double q = [text_quantity.text doubleValue];
         NSNumber* tempQ = [NSNumber numberWithDouble:q];
@@ -181,7 +208,10 @@
         [alert show];
         [alert release];
     }
+    
     [formatter release];
+    */
+    
     
     for (UIView *subview in [mChooseFoodView subviews]) {
         [subview removeFromSuperview];
@@ -189,7 +219,22 @@
     [mChooseFoodView removeFromSuperview];
     //mChooseFoodView.hidden = YES;
     //[mChooseFoodView release];
+    
+    [foodSelectedBuffer removeAllObjects];
 }
+
+- (void)ChooseFoodCancelButtonClicked: (UIButton *)button {
+    //[text_quantity resignFirstResponder];
+    [mQuantity resignFirstResponder];
+
+    for (UIView *subview in [mChooseFoodView subviews]) {
+        [subview removeFromSuperview];
+    }
+    [mChooseFoodView removeFromSuperview];
+    [foodSelectedBuffer removeAllObjects];
+
+}
+
 
 -(void)SummaryButtonClicked:(UIButton *)button {
     [homeRootController switchTo:kHomeViewEntryView withContextInfo:nil];
@@ -246,26 +291,39 @@
 }
 
 - (void)createChooseFoodPanel {
-    mChooseFoodOKButton = [UIButton buttonWithType:UIButtonTypeCustom];;
+    mChooseFoodOKButton = [UIButton buttonWithType:UIButtonTypeCustom];
     mChooseFoodOKButton.frame = CGRectMake(140, 190, 170, 40);
     [mChooseFoodOKButton setTitle:@"OK" forState:UIControlStateNormal];
-    [mChooseFoodOKButton setTitleColor:[UIColor magentaColor] forState:UIControlStateNormal];
+    [mChooseFoodOKButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     [mChooseFoodOKButton setBackgroundColor:[UIColor whiteColor]];
     [mChooseFoodOKButton addTarget:self action:@selector(ChooseFoodOKButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [mChooseFoodView addSubview:mChooseFoodOKButton];
     
+    mChooseFoodCancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    mChooseFoodCancelButton.frame = CGRectMake(30,190, 110, 40);
+    [mChooseFoodCancelButton setTitle:@"Cancel" forState:UIControlStateNormal];
+    [mChooseFoodCancelButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+    [mChooseFoodCancelButton setBackgroundColor:[UIColor whiteColor]];
+    [mChooseFoodCancelButton addTarget:self action:@selector(ChooseFoodCancelButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [mChooseFoodView addSubview:mChooseFoodCancelButton];
+
+    /*
     text_quantity = [[UITextField alloc] initWithFrame:CGRectMake(30, 190, 110, 40)];
     text_quantity.borderStyle = UITextBorderStyleRoundedRect;
     text_quantity.textColor = [UIColor blackColor];
     text_quantity.font = [UIFont fontWithName:@"Roboto-Regular" size:16];
     text_quantity.backgroundColor = [UIColor clearColor];
-    //text_quantity.keyboardType = UIKeyboardTypeDecimalPad;
-    //text_quantity.returnKeyType = UIReturnKeyDone;
-    //text_quantity.clearButtonMode = UITextFieldViewModeWhileEditing;
-    //[text_quantity addTarget:self action:@selector(TextQuantityClicked:) forControlEvents:UIControlEventTouchUpInside];
-    //text_quantity.delegate = self;
+    text_quantity.keyboardType = UIKeyboardTypeDecimalPad;
+    text_quantity.returnKeyType = UIReturnKeyDone;
+    text_quantity.clearButtonMode = UITextFieldViewModeWhileEditing;
+    [text_quantity addTarget:self action:@selector(TextQuantityClicked:) forControlEvents:UIControlEventTouchUpInside];
+    text_quantity.delegate = self;
     [text_quantity setHidden:true];
     [mChooseFoodView addSubview:text_quantity];
+     */
+    
+    
+    
     
     mQuantity = [[totQuantityController alloc] init:self.view];
     mQuantity.view.frame = CGRectMake(0, 0, mQuantity.mWidth, mQuantity.mHeight);
@@ -510,6 +568,7 @@
     [mSummary addTarget:self action:@selector(SummaryButtonClicked:) forControlEvents: UIControlEventTouchUpInside];
 
     foodChosenList = [[NSMutableArray alloc]init];
+    foodSelectedBuffer = [[NSMutableDictionary alloc] init];
 }
 
 #pragma mark - totQuantityControllerDelegate
@@ -530,10 +589,12 @@
 -(void)saveQuantity:(NSString *)qu{
     NSLog(@"%@", qu);
     //need to parse time before display
-    
-    [text_quantity setText:qu];
-    
+
+    //[text_quantity setText:qu];
     [mChooseFoodSlider changeButton:foodSelected withNewLabel:qu];
+    
+    //TODO: save quantity to a dictionary
+    [foodSelectedBuffer setObject:qu forKey:[NSString stringWithFormat:@"%d", foodSelected]];
     
     [self hideQuantityPicker];
 }
@@ -593,10 +654,12 @@
     [mFoodChosenSlider release];
     [mCategoriesSlider release];
     [mChooseFoodSlider release];
-    [text_quantity release];
+    //[text_quantity release];
     [mClock release];
     [mQuantity release];
     [foodChosenList release];
+    
+    [foodSelectedBuffer release];
 }
 
 
@@ -619,6 +682,8 @@
     if (foodChosenList) {
         [foodChosenList removeAllObjects];
     }
+    
+    [foodSelectedBuffer removeAllObjects];
 }
 
 

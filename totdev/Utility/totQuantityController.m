@@ -19,6 +19,11 @@
 #define MIN_QUANTITY 0.5
 #define MAX_QUANTITY 30
 
+#define UNIT1 "oz"
+#define UNIT2 "ct"
+#define UNIT3 "lb"
+#define UNIT4 "g"
+
 
 @implementation totQuantityController
 
@@ -143,16 +148,16 @@
 + (NSString*)getUnitString:(int)u {
     switch (u) {
         case 1:
-            return @"oz";
+            return @UNIT1;
             break;
         case 2:
-            return @"count";
+            return @UNIT2;
             break;
         case 3:
-            return @"lb";
+            return @UNIT3;
             break;
         case 4:
-            return @"g";
+            return @UNIT4;
             break;
     }
     return @"";
@@ -174,10 +179,10 @@
         [mQuantity addObject:[NSString stringWithFormat:@"%g", i]];
     
     mUnit = [[NSMutableArray alloc] init];
-    [mUnit addObject:[NSString stringWithFormat:@"oz"]];
-    [mUnit addObject:[NSString stringWithFormat:@"count"]];
-    [mUnit addObject:[NSString stringWithFormat:@"lb"]];
-    [mUnit addObject:[NSString stringWithFormat:@"g"]];
+    [mUnit addObject:[NSString stringWithFormat:@UNIT1]];
+    [mUnit addObject:[NSString stringWithFormat:@UNIT2]];
+    [mUnit addObject:[NSString stringWithFormat:@UNIT3]];
+    [mUnit addObject:[NSString stringWithFormat:@UNIT4]];
 
     mQuantityPicker = [[UIPickerView alloc] initWithFrame:CGRectMake(0, -10, mWidth, mComponentHeight)];
     mQuantityPicker.dataSource = self;
