@@ -317,7 +317,7 @@
                     
                     int h = [conversionInfo hour];
                     int m = [conversionInfo minute];
-                    int s = [conversionInfo second];
+                    //int s = [conversionInfo second];
                     
                     NSString* text;
                     if( h>0 && m<10 ) {
@@ -428,8 +428,6 @@
     if (icon_filename) {
         UIImageView * icon = [[UIImageView alloc] initWithFrame:CGRectMake(15, 45, 50, 50)];
         //icon.contentMode = UIViewContentModeScaleAspectFit;
-        UIImage* img = [UIImage imageNamed:icon_filename];
-        CGSize frame = img.size;
         [icon setImage:[UIImage imageNamed:icon_filename]];
 //        [icon.layer setBorderColor: [[UIColor blackColor] CGColor]];
 //        [icon.layer setBorderWidth: 1.0];

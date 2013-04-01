@@ -109,7 +109,7 @@ const int ARROW_POSITION = 76;//39; // position of the arrow that indicates curr
 }
 
 + (STHorizontalPicker*) getPickerForFood:(CGRect)frame {
-    STHorizontalPicker* picker = [[STHorizontalPicker alloc] initWithFrame:frame rulerImageName:@"ruler_food" distanceBetweenItems:7.7083 steps:49];
+    STHorizontalPicker* picker = [[[STHorizontalPicker alloc] initWithFrame:frame rulerImageName:@"ruler_food" distanceBetweenItems:7.7083 steps:49] autorelease];
     picker.name = @"picker_food";
     picker.minimumValue = 0.5;
     picker.maximumValue = 25;
@@ -141,18 +141,22 @@ const int ARROW_POSITION = 76;//39; // position of the arrow that indicates curr
         self.backgroundColor = [UIColor clearColor];
         self.backgroundColor = [UIColor whiteColor];
         
-        self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.frame.size.width, self.frame.size.height)];
-        self.scrollView.contentSize = CGSizeMake(contentWidth, self.frame.size.height);
-        //self.scrollView.layer.cornerRadius = 0f;
-        self.scrollView.layer.borderWidth = 0;
-        self.scrollView.layer.borderColor = borderColor.CGColor ? borderColor.CGColor : [UIColor grayColor].CGColor;
-        //self.scrollView.backgroundColor = [UIColor colorWithRed:0.95 green:0.95 blue:0.95 alpha:1.0];
-        self.scrollView.showsVerticalScrollIndicator = NO;
-        self.scrollView.showsHorizontalScrollIndicator = NO;        
-        self.scrollView.pagingEnabled = NO;
-        self.scrollView.delegate = self;
+        UIScrollView* sv = [[UIScrollView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.frame.size.width, self.frame.size.height)];
+        sv.contentSize = CGSizeMake(contentWidth, self.frame.size.height);
+        //sv.layer.cornerRadius = 0f;
+        sv.layer.borderWidth = 0;
+        sv.layer.borderColor = borderColor.CGColor ? borderColor.CGColor : [UIColor grayColor].CGColor;
+        //sv.backgroundColor = [UIColor colorWithRed:0.95 green:0.95 blue:0.95 alpha:1.0];
+        sv.showsVerticalScrollIndicator = NO;
+        sv.showsHorizontalScrollIndicator = NO;        
+        sv.pagingEnabled = NO;
+        sv.delegate = self;
+        self.scrollView = sv;
+        [sv release];
         
-        self.scrollViewMarkerContainerView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, contentWidth, self.frame.size.height)];
+        UIView* view = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, contentWidth, self.frame.size.height)];
+        self.scrollViewMarkerContainerView = view;
+        [view release];
         self.scrollViewMarkerLayerArray = [NSMutableArray arrayWithCapacity:steps];
         
         // add bg layer

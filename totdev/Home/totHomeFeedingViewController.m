@@ -123,15 +123,17 @@
     NSLog(@"%@", debug);
     [debug release];
     
+    NSString* jsonstr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
     [mTotModel addEvent:baby_id
                   event:EVENT_BASIC_FEEDING
                datetime:date
-                  value:[[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding] ]; // change value to a JSON
+                  value:jsonstr ]; // change value to a JSON
+    [jsonstr release];
 
     // TODO:
     // I don't event know what next code is for...
     // return from getEvent is an array of totEvent object
-    // a totEvent represents a single event
+    // a totEvent represents a single eventß
     NSMutableArray *events = [mTotModel getEvent:0 event:@"feeding"];
     for (totEvent* e in events) {
         NSLog(@"Return from db: %@", [e toString]);
@@ -258,7 +260,7 @@
     [categoriesImages addObject:[UIImage imageNamed:@"feedingcategories-vege.png"]];
     [mCategoriesSlider retainContentArray:categoriesImages];
     [mCategoriesSlider get];
-    
+    [categoriesImages release];
     [self.view addSubview:mCategoriesSlider];
 }
 

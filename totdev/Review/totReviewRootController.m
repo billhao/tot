@@ -110,8 +110,6 @@
         mOffset = 0;
         [self loadEvents:YES ofType:nil];
     }
-    CGRect frame = self.view.frame;
-    CGRect bounds = self.view.bounds;
 }
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.

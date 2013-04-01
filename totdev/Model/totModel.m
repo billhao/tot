@@ -614,7 +614,7 @@
 // get # accounts
 - (int) getAccountCount {
     int cnt = 0;
-    cnt = [self getEventCount:PREFERENCE_NO_BABY event:PREFERENCE_ACCOUNT_QUERY];
+    //cnt = [self getEventCount:PREFERENCE_NO_BABY event:PREFERENCE_ACCOUNT_QUERY];
     return [self getPreferenceNoBabyCount:PREFERENCE_ACCOUNT_QUERY];
 }
 

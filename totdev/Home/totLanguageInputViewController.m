@@ -338,18 +338,16 @@
     
     // Decide the output to user
     NSString *outputStr = nil;
-    if ( [inputStr caseInsensitiveCompare:@"mom"] == 0 || [inputStr caseInsensitiveCompare:@"dad"] == 0 ) {
-        outputStr = @"Hey, baby asks for ";
-        outputStr = [outputStr stringByAppendingString:inputStr];
-        outputStr = [outputStr stringByAppendingString:@"!"];
+    if ( [inputStr caseInsensitiveCompare:@"mom"] == 0 || [inputStr caseInsensitiveCompare:@"dad"] == 0 ||
+        [inputStr caseInsensitiveCompare:@"mama"] == 0 || [inputStr caseInsensitiveCompare:@"dada"] == 0 ||
+        [inputStr caseInsensitiveCompare:@"mommy"] == 0 || [inputStr caseInsensitiveCompare:@"daddy"] == 0 ) {
+        outputStr = [NSString stringWithFormat:@"Wow, %@ just said %@!", global.baby.name, inputStr];
+    } else if (num_word_all % 50 == 0 ) {
+            outputStr = [NSString stringWithFormat:@"%@ has learnd %d words in total. Great milestone!", global.baby.name, num_word_all];
     } else if ( num_word_this_month >= 5 ) {
-        outputStr = [NSString stringWithFormat:@"Bravo! Baby has learnd %d words this month!", num_word_this_month];
+        outputStr = [NSString stringWithFormat:@"Bravo! %@ has learnd %d words this month!", global.baby.name, num_word_this_month];
     } else {
-        if (num_word_all % 1000 == 0 ) {
-            outputStr = [NSString stringWithFormat:@"Baby has learnd %d words in total. Great milestone!", num_word_all];
-        } else {
-            outputStr = [NSString stringWithFormat:@"Baby has learnd %d words in total. Keep going!", num_word_all];
-        }
+        outputStr = [NSString stringWithFormat:@"%@ has learnd %d words in total. Keep going!", global.baby.name, num_word_all];
     }
     [formatter release];
     return outputStr;
