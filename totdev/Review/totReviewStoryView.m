@@ -363,7 +363,7 @@
                     else if( i > 0 ) // from the second one, add comma
                         [summary appendString:@","];
                     ////[summary appendFormat:@" %@oz %@", food[@"quantity"], food[@"name"] ];
-                    [summary appendFormat:@" %@oz %@", [food objectForKey:@"quantity"], [food objectForKey:@"name"] ];
+                    [summary appendFormat:@" %@ %@", [food objectForKey:@"quantity"], [food objectForKey:@"name"] ];
                 }
                 context.text = summary;
                 [summary release];

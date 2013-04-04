@@ -132,8 +132,9 @@
         [label setFont:[UIFont fontWithName:@"Roboto-Regular" size:16.0]];
         label.backgroundColor = [UIColor clearColor];
         label.textAlignment = UITextAlignmentCenter;
-        //label.textColor = [UIColor colorWithRed:0 green:0.47f blue:0.8f alpha:1.0f];
-        label.textColor = [UIColor whiteColor];
+        label.textColor = [UIColor colorWithRed:210.0/255 green:0.0 blue:63.0/255 alpha:1.0];
+        //label.textColor = [UIColor colorWithRed:218.0/255.0 green:31.0/255.0 blue:95.0/255.0 alpha:1.0f];
+        //label.textColor = [UIColor blackColor];
         [labelArray addObject:label];
         [label release];
     }

@@ -39,8 +39,12 @@
     //totNavigationBar* mNavigationBar;
     UIButton* mBackButton;
     UIButton* mOKButton; // final submission
-    UIButton* mSummary;
-    
+
+    // for the summary
+    UIImageView* mSummaryView;
+    UILabel* mSummaryLabel;
+    UIButton* mSummaryCover; // used to cover the view when showing the summary view
+
     //for fodd input
     UIView* mChooseFoodView;
     UIButton* mChooseFoodOKButton;

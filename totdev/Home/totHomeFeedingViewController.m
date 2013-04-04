@@ -99,20 +99,16 @@
     int baby_id = global.baby.babyID;
     NSDate* date = [NSDate date];
     
-    NSMutableString* summary = [NSMutableString stringWithFormat:@"**%@", mDatetime.titleLabel.text];
+    NSMutableString* summary = [NSMutableString stringWithFormat:@"%@ has eaten", global.baby.name];
     NSLog(@"%@", summary);
 
     //generate summary
-    if([foodChosenList count] > 0) {
-        for(int i = 0; i < [foodChosenList count]; i++) {
-            NSString* temp = [NSString stringWithFormat:@"\n%@\t%@", foodChosenList[i][@"name"], foodChosenList[i][@"quantity"] ];
-            [summary appendString:temp];
-            NSLog(@"%@",summary);
-        }
+    for(int i = 0; i < [foodChosenList count]; i++) {
+        NSString* temp = [NSString stringWithFormat:@"\n%@\t%@", foodChosenList[i][@"name"], foodChosenList[i][@"quantity"] ];
+        [summary appendString:temp];
+        NSLog(@"%@",summary);
     }
-    [mSummary setHidden:false];
-    [mSummary setTitle:summary forState:UIControlStateNormal];
-    [self.view bringSubviewToFront:mSummary];
+    [self showSummary:summary];
 
     //add to databse by first converting foodChosenList to a JSON string
     NSError* error;
@@ -294,18 +290,18 @@
 
 - (void)createChooseFoodPanel {
     mChooseFoodOKButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    mChooseFoodOKButton.frame = CGRectMake(140, 190, 170, 40);
+    mChooseFoodOKButton.frame = CGRectMake(170, 200, 120, 40);
     [mChooseFoodOKButton setTitle:@"OK" forState:UIControlStateNormal];
     [mChooseFoodOKButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-    [mChooseFoodOKButton setBackgroundColor:[UIColor whiteColor]];
+    [mChooseFoodOKButton setBackgroundColor:[UIColor clearColor]];
     [mChooseFoodOKButton addTarget:self action:@selector(ChooseFoodOKButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [mChooseFoodView addSubview:mChooseFoodOKButton];
     
     mChooseFoodCancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    mChooseFoodCancelButton.frame = CGRectMake(30,190, 110, 40);
+    mChooseFoodCancelButton.frame = CGRectMake(30,200, 120, 40);
     [mChooseFoodCancelButton setTitle:@"Cancel" forState:UIControlStateNormal];
     [mChooseFoodCancelButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-    [mChooseFoodCancelButton setBackgroundColor:[UIColor whiteColor]];
+    [mChooseFoodCancelButton setBackgroundColor:[UIColor clearColor]];
     [mChooseFoodCancelButton addTarget:self action:@selector(ChooseFoodCancelButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [mChooseFoodView addSubview:mChooseFoodCancelButton];
 
@@ -562,12 +558,23 @@
     [mClock setCurrentTime];
 
     //final summary popup
-    mSummary = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    mSummary.frame = CGRectMake(50, 80, 220, 311);
-    [mSummary setHidden:YES];
-    mSummary.titleLabel.lineBreakMode=UILineBreakModeWordWrap;
-    [self.view addSubview:mSummary];
-    [mSummary addTarget:self action:@selector(SummaryButtonClicked:) forControlEvents: UIControlEventTouchUpInside];
+    // set appearances for the summary view
+    UIImage* summaryImg = [UIImage imageNamed:@"summary_bg"];
+    mSummaryView = [[UIImageView alloc] initWithImage:summaryImg];
+    mSummaryView.frame = CGRectMake((320-summaryImg.size.width)/2, 100, summaryImg.size.width, summaryImg.size.height);
+    
+    mSummaryLabel = [[UILabel alloc] initWithFrame:CGRectMake(35, 30, 182, 95)];
+    mSummaryLabel.numberOfLines = 5;
+    mSummaryLabel.textAlignment = UITextAlignmentCenter;
+    mSummaryLabel.backgroundColor = [UIColor clearColor];
+    mSummaryLabel.font = [UIFont fontWithName:@"Roboto-Regular" size:14.0];
+    mSummaryLabel.textColor = [UIColor colorWithRed:147.0/255 green:149.0/255 blue:152.0/255 alpha:1];
+    [mSummaryView addSubview:mSummaryLabel];
+    
+    mSummaryCover = [[UIButton buttonWithType:UIButtonTypeCustom] retain];
+    mSummaryCover.frame = self.view.bounds;
+    mSummaryCover.backgroundColor = [UIColor clearColor];
+    [mSummaryCover addTarget:self action:@selector(SummaryClicked:) forControlEvents:UIControlEventTouchUpInside];
 
     foodChosenList = [[NSMutableArray alloc]init];
     foodSelectedBuffer = [[NSMutableDictionary alloc] init];
@@ -662,12 +669,15 @@
     [foodChosenList release];
     
     [foodSelectedBuffer release];
+
+    [mSummaryCover release];
+    [mSummaryView release];
 }
 
 
 - (void)viewWillAppear:(BOOL)animated {
-    //[mSummary removeFromSuperview];
-    [mSummary setHidden:YES];
+    [self hideSummary];
+
     //reset time
     [mDatetime setTitle:[totUtility nowTimeString] forState:UIControlStateNormal];
 
@@ -688,6 +698,27 @@
     [foodSelectedBuffer removeAllObjects];
 }
 
+
+- (void)showSummary:(NSString*)text {
+    mSummaryLabel.text = text;
+    [self.view addSubview:mSummaryView];
+    [self.view bringSubviewToFront:mSummaryView];
+    
+    [self.view addSubview:mSummaryCover];
+    [self.view bringSubviewToFront:mSummaryCover];
+}
+
+- (void)hideSummary {
+    // remove the summary view
+    [mSummaryCover removeFromSuperview];
+    [mSummaryView removeFromSuperview];
+}
+
+
+// click on summary, return to home
+- (void)SummaryClicked: (UIButton *)button {
+    [homeRootController switchTo:kHomeViewEntryView withContextInfo:nil];
+}
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
