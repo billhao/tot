@@ -73,13 +73,13 @@
 //- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
 //    //NSLog(@"scrollViewDidScroll %f", scrollView.contentOffset.x);
 //}
-//
-//- (void)scrollViewDidEndDecelerating:(UIScrollView *)sv {
-//    NSLog(@"scrollViewDidEndDecelerating %f", sv.contentOffset.x);
-//    int page = sv.contentOffset.x / sv.frame.size.width;
-//    pageControl.currentPage = page;
-//}
-//
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)sv {
+    NSLog(@"scrollViewDidEndDecelerating %f", sv.contentOffset.x);
+    int page = sv.contentOffset.x / sv.frame.size.width;
+    pageControl.currentPage = page;
+}
+
 //- (void)scrollViewWillBeginDecelerating:(UIScrollView *)sv {
 //    NSLog(@"scrollViewWillBeginDecelerating %f", sv.contentOffset.x);
 //}
