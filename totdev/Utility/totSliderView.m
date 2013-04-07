@@ -249,6 +249,22 @@
     scrollView.delegate = self;
 }
 
+- (void)addNewButton:(UIImage *)buttonImg {
+    UIButton *imageButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];  // size will be adjusted later in get() function.
+    imageButton.layer.cornerRadius = 6.0;
+    imageButton.layer.masksToBounds = YES;
+    [imageButton setImage:buttonImg forState:UIControlStateNormal];
+    [imageButton addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [contentArray addObject:imageButton];
+    [imageButton release];
+}
+
+- (void)removeButtonAtIndex:(int)index {
+    if (0 <= index && index < [contentArray count]) {
+        [contentArray removeObjectAtIndex:index];
+    }
+}
+
 - (void)changeButton:(int)btnIndex withNewImage:(NSString*)filename {
     UIButton * btn = [contentArray objectAtIndex:btnIndex];
     [btn setImage:[UIImage imageNamed:filename] forState:UIControlStateNormal];
