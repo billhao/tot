@@ -97,7 +97,8 @@
         [mQuantity show];
         
     } else if (sv == mFoodChosenSlider) {
-        [homeRootController switchTo:kHomeViewEntryView withContextInfo:nil];
+        //[homeRootController switchTo:kHomeViewEntryView withContextInfo:nil];
+        //do nothing
     }
 }
 
@@ -185,8 +186,7 @@
             // add to foodChosen slider
             [mFoodChosenSlider addNewButton:[[filteredFood objectAtIndex:[key integerValue]] objectForKey:@"file"]];
             // add quantity
-            
-            [mFoodChosenSlider changeButton:0 withNewLabel:[foodItem objectForKey:@"quantity"]];
+            [mFoodChosenSlider changeButton:[mFoodChosenSlider getContentCount]-1 withNewLabel:[foodItem objectForKey:@"quantity"]];
             // rendering
             [mFoodChosenSlider get];
 
