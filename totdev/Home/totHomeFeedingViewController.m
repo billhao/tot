@@ -340,6 +340,7 @@
 }
 
 - (void)createChooseFoodPanel {
+    flag = 0;
     mChooseFoodOKButton = [UIButton buttonWithType:UIButtonTypeCustom];
     mChooseFoodOKButton.frame = CGRectMake(170, 200, 120, 40);
     [mChooseFoodOKButton setTitle:@"OK" forState:UIControlStateNormal];
@@ -556,7 +557,7 @@
     [bgview release];
     
     // create recently used slider view
-    [self createRecentlyUsedPanel];
+    //[self createRecentlyUsedPanel];
     
     // create categories slider view
     [self createCategoryPanel];
@@ -686,6 +687,8 @@
                 // rendering
                 [mFoodChosenSlider get];
                 
+                [foodSelectedBuffer removeAllObjects];
+                
                 [foodItem release];
             }
         } else {
@@ -790,6 +793,8 @@
     [mFoodChosenSlider retainContentArray:foodChosenImages];
     [mFoodChosenSlider retainLabelArray:labels];
     [mFoodChosenSlider get];
+    
+    [self createRecentlyUsedPanel];
     
     if (foodChosenList) {
         [foodChosenList removeAllObjects];
