@@ -361,18 +361,24 @@
     [mFoodChosenSlider setBtnPerCol:1];
     [mFoodChosenSlider setBtnPerRow:4];
     
-    //set content array
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"category == %@", @"fruit"];
-    NSArray *filteredFoodChosen = [inventoryGrey filteredArrayUsingPredicate:predicate];
+    //do NOT pre-set content array here
     
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"category == %@", @"meat"];
+    NSArray *filteredFoodChosen = [inventoryGrey filteredArrayUsingPredicate:predicate];
     NSMutableArray *foodChosenImages = [[NSMutableArray alloc] init];
     for (int i = 0; i < [filteredFoodChosen count]; i++) {
         [foodChosenImages addObject:filteredFoodChosen[i][@"file"]];
     }
+    
+    // NSMutableArray *foodChosenImages = [[NSMutableArray alloc] init];
     [mFoodChosenSlider retainContentArray:foodChosenImages];
     [foodChosenImages release];
-    
     [mFoodChosenSlider get];
+    
+    //add new button?
+    [mFoodChosenSlider addNewButton:[[inventory objectAtIndex:1] objectForKey:@"file"]];
+    [mFoodChosenSlider addNewButton:[[inventory objectAtIndex:5] objectForKey:@"file"]];
+    
     
     [self.view addSubview:mFoodChosenSlider];
 }
