@@ -69,6 +69,22 @@
         
         [self createChooseFoodPanel];
     } else if (sv == mRecentlyUsedSlider) {
+        // Find category and name
+        NSArray* info = (NSArray*)[[mRecentlyUsedSlider getInfo] objectAtIndex:tag];
+        categoryChosen = [info objectAtIndex:0];
+        NSString* name = [info objectAtIndex:1];
+        
+        // Find the index of this food from inventory
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"category == %@", categoryChosen];
+        NSArray *filteredFood = [inventory filteredArrayUsingPredicate:predicate];
+        for (int i = 0; i < [filteredFood count]; ++i) {
+            if ([[[filteredFood objectAtIndex:i] objectForKey:@"name"] isEqualToString:name]) {
+                foodSelected = i;
+                break;
+            }
+        }
+        
+        [mQuantity show];
     } else if (sv == mChooseFoodSlider) {
         foodSelected = tag;
         
@@ -261,34 +277,50 @@
 }
 
 -(void)createRecentlyUsedPanel {
+    const int RECENT_USED_LENGTH = 8;
+    int count = 0;
+    NSMutableArray * images = [[NSMutableArray alloc] init];
+    NSMutableArray * info = [[NSMutableArray alloc] init];
+    NSMutableArray * label = [[NSMutableArray alloc] init];
+    NSMutableSet* already_used = [[NSMutableSet alloc] init];
     NSArray* events = [mTotModel getEvent:global.baby.babyID event:EVENT_BASIC_FEEDING limit:100];
     for (int i = 0; i < [events count]; ++i) {
-        [events objectAtIndex:i];
+        totEvent* evt = (totEvent*)[events objectAtIndex:i];
+        NSString* value = evt.value;
+        NSArray* food_list = [totHomeFeedingViewController stringToJSON:value];
+        for (int j = 0; j < [food_list count]; ++j) {
+            NSDictionary* food_item = [food_list objectAtIndex:j];
+            NSString* food_name = [food_item objectForKey:@"name"];
+            NSString* category_name = [food_item objectForKey:@"category"];
+            NSArray* food_info = [NSArray arrayWithObjects:category_name, food_name, nil];
+            if (count < RECENT_USED_LENGTH && ![already_used member:food_name]) {
+                ++count;
+                [already_used addObject:food_name];
+                [images addObject:[UIImage imageNamed:[NSString stringWithFormat:@"feeding-%@.png", food_name]]];
+                [info addObject:food_info];
+                [label addObject:@""];
+            }
+        }
+        if (count == RECENT_USED_LENGTH) {
+            break;
+        }
     }
-    NSMutableArray * images = [[NSMutableArray alloc] init];
-    // TODO: needs to double check if the UIImage is nil or not.
-    // if it is nil, there will be an exception and corrupted memory later. quite difficult to debug and find out. -hao
-    
-    [images addObject:[UIImage imageNamed:@"feeding-blueberry.png"]];
-    [images addObject:[UIImage imageNamed:@"feeding-papaya.png"]];
-    [images addObject:[UIImage imageNamed:@"feeding-kiwi.png"]];
-    [images addObject:[UIImage imageNamed:@"feeding-mango.png"]];
-    [images addObject:[UIImage imageNamed:@"feeding-bread.png"]];
-    [images addObject:[UIImage imageNamed:@"feeding-banana.png"]];
-    [images addObject:[UIImage imageNamed:@"feeding-rice white.png"]];
-    [images addObject:[UIImage imageNamed:@"feeding-cheerios.png"]];
-    [images addObject:[UIImage imageNamed:@"feeding-green pea.png"]];
-    
+    [already_used release];
+
     mRecentlyUsedSlider = [[totSliderView alloc] initWithFrame:CGRectMake(38, 85, 244, 60)];
     [mRecentlyUsedSlider setDelegate:self];
     [mRecentlyUsedSlider setBtnPerCol:1];
     [mRecentlyUsedSlider setBtnPerRow:4];
     [mRecentlyUsedSlider retainContentArray:images];
+    [mRecentlyUsedSlider retainInfoArray:info];
+    [mRecentlyUsedSlider retainLabelArray:label];
     
     [mRecentlyUsedSlider get];
     
     [self.view addSubview:mRecentlyUsedSlider];
     
+    [info release];
+    [label release];
     [images release];
 }
 

@@ -80,6 +80,25 @@
     }
 }
 
+- (void)retainInfoArray:(NSArray *)info {
+    if (infoArray) {
+        [infoArray release];
+    }
+    if (!info) {
+        printf("totSliderView.m retainInfoArray info cannot be empty\n");
+        exit(1);
+    }
+    infoArray = [[NSMutableArray alloc] initWithArray:info];
+}
+
+- (NSArray*) getInfo {
+    return infoArray;
+}
+
+- (int)getContentCount {
+    return [contentArray count];
+}
+
 // copy data
 - (void)retainContentArray: (NSArray*)images {
     if (contentArray) {
@@ -256,6 +275,18 @@
     [imageButton setImage:buttonImg forState:UIControlStateNormal];
     [imageButton addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [contentArray addObject:imageButton];
+
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
+    [label setText:@""];
+    [label setFont:[UIFont fontWithName:@"Roboto-Regular" size:16.0]];
+    label.backgroundColor = [UIColor clearColor];
+    label.textAlignment = UITextAlignmentCenter;
+    label.textColor = [UIColor colorWithRed:210.0/255 green:0.0 blue:63.0/255 alpha:1.0];
+    //label.textColor = [UIColor colorWithRed:218.0/255.0 green:31.0/255.0 blue:95.0/255.0 alpha:1.0f];
+    //label.textColor = [UIColor blackColor];
+    [labelArray addObject:label];
+    [label release];
+
     [imageButton release];
 }
 
@@ -314,6 +345,7 @@
     [marginArray release];
     [titleArray release];
     [labelArray release];
+    [infoArray release];
     [pageControl release];
     [scrollView release];
     [super dealloc];  
