@@ -130,10 +130,10 @@
     // I don't event know what next code is for...
     // return from getEvent is an array of totEvent object
     // a totEvent represents a single eventß
-    NSMutableArray *events = [mTotModel getEvent:0 event:@"feeding"];
-    for (totEvent* e in events) {
-        NSLog(@"Return from db: %@", [e toString]);
-    }
+    //NSMutableArray *events = [mTotModel getEvent:0 event:@"feeding"];
+    //for (totEvent* e in events) {
+    //    NSLog(@"Return from db: %@", [e toString]);
+    //}
 }
 
 // convert a json string to json object
@@ -261,6 +261,10 @@
 }
 
 -(void)createRecentlyUsedPanel {
+    NSArray* events = [mTotModel getEvent:global.baby.babyID event:EVENT_BASIC_FEEDING limit:100];
+    for (int i = 0; i < [events count]; ++i) {
+        [events objectAtIndex:i];
+    }
     NSMutableArray * images = [[NSMutableArray alloc] init];
     // TODO: needs to double check if the UIImage is nil or not.
     // if it is nil, there will be an exception and corrupted memory later. quite difficult to debug and find out. -hao
