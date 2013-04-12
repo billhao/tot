@@ -35,6 +35,7 @@
     NSMutableArray * marginArray;   // each element is boolean var
     NSMutableArray * labelArray;    // each element is UILabel
     NSMutableArray * titleArray;    // each element is UILabel
+    NSMutableArray * infoArray;     // each element is a NSDictionary
 
     NSString * identifier;
     int pageControlPosition;
@@ -53,6 +54,9 @@
 - (void)retainContentArray: (NSArray*)images;
 - (void)retainLabelArray: (NSArray*)labels;
 - (void)retainTitleArray: (NSArray*)titles;
+- (void)retainInfoArray: (NSArray*)info;
+- (NSArray*) getInfo;
+- (int)getContentCount;
 
 - (void)get;
 - (void)getWithPositionMemoryIdentifier;

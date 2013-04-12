@@ -14,6 +14,9 @@
     
     int image_cnt;
     BOOL scrollCanceled;
+    CGRect _frame;
 }
+
+- (id)initWithFrame:(CGRect)frame;
 
 @end
