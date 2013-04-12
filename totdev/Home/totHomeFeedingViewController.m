@@ -25,6 +25,7 @@
     if (self) {
         // Custom initialization
         mTotModel = global.model;
+        flag = 0;
     }
     return self;
 }
@@ -83,6 +84,8 @@
                 break;
             }
         }
+        
+        flag = 1;
         
         [mQuantity show];
     } else if (sv == mChooseFoodSlider) {
@@ -638,6 +641,7 @@
 }
 
 -(void)saveQuantity:(NSString *)qu{
+    flag = 0;
     NSLog(@"%@", qu);
     //need to parse time before display
 
@@ -651,6 +655,9 @@
 }
 
 - (void)hideQuantityPicker {
+    if (flag == 1) {
+        
+    }
     [mQuantity dismiss];
 }
 
