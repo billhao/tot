@@ -57,10 +57,12 @@
 - (void)get;
 - (void)getWithPositionMemoryIdentifier;
 
+- (void)addNewButton:(UIImage*)buttonImg;
+- (void)removeButtonAtIndex:(int)index;
 - (void)changeButton:(int)btnIndex withNewImage:(NSString*)filename;
 - (void)changeButton:(int)btnIndex withNewLabel:(NSString*)l;
 - (void)clearButtonLabel:(int)btnIndex;
 - (void)clearAllButtonLabels;
 - (void)cleanScrollView;
 
-@end  
+@end
