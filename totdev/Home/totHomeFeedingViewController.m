@@ -154,17 +154,28 @@
             
             NSPredicate *predicate = [NSPredicate predicateWithFormat:@"category == %@", categoryChosen];
             NSArray *filteredFood = [inventory filteredArrayUsingPredicate:predicate];
-            NSString* chosenFoodName = [NSString stringWithString:filteredFood[[key integerValue]][@"name"]];
+            //NSString* chosenFoodName = [NSString stringWithString:filteredFood[[key integerValue]][@"name"]];
+            NSString* chosenFoodName = [NSString stringWithString:[[filteredFood objectAtIndex:[key integerValue]] objectForKey:@"name"]];
             
             // insert into a result queue
             NSMutableDictionary *foodItem = [[NSMutableDictionary alloc] init];
             [foodItem setObject:chosenFoodName forKey:@"name"];
             [foodItem setObject:categoryChosen forKey:@"category"];
             [foodItem setObject:[foodSelectedBuffer objectForKey:key] forKey:@"quantity"];
-            
+
             // add to foodChosenList
             [foodChosenList addObject:foodItem];
+        
+            // add to foodChosen slider
+            [mFoodChosenSlider addNewButton:[[filteredFood objectAtIndex:[key integerValue]] objectForKey:@"file"]];
+            // add quantity
+            
+            [mFoodChosenSlider changeButton:0 withNewLabel:[foodItem objectForKey:@"quantity"]];
+            // rendering
+            [mFoodChosenSlider get];
+
             [foodItem release];
+        
         }
     }
     else{
@@ -358,23 +369,23 @@
     [mFoodChosenSlider setBtnPerRow:4];
     
     //do NOT pre-set content array here
-    
+        /*
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"category == %@", @"meat"];
     NSArray *filteredFoodChosen = [inventoryGrey filteredArrayUsingPredicate:predicate];
     NSMutableArray *foodChosenImages = [[NSMutableArray alloc] init];
     for (int i = 0; i < [filteredFoodChosen count]; i++) {
         [foodChosenImages addObject:filteredFoodChosen[i][@"file"]];
     }
+    */
     
-    // NSMutableArray *foodChosenImages = [[NSMutableArray alloc] init];
+    NSMutableArray *foodChosenImages = [[NSMutableArray alloc] init]; // use an empty array to make sure the first get is working
+    NSMutableArray* labels = [[NSMutableArray alloc] init];
+    
     [mFoodChosenSlider retainContentArray:foodChosenImages];
+    [mFoodChosenSlider retainLabelArray:labels];
+    
     [foodChosenImages release];
     [mFoodChosenSlider get];
-    
-    //add new button?
-    [mFoodChosenSlider addNewButton:[[inventory objectAtIndex:1] objectForKey:@"file"]];
-    [mFoodChosenSlider addNewButton:[[inventory objectAtIndex:5] objectForKey:@"file"]];
-    
     
     [self.view addSubview:mFoodChosenSlider];
 }
@@ -607,8 +618,6 @@
 
     //[text_quantity setText:qu];
     [mChooseFoodSlider changeButton:foodSelected withNewLabel:qu];
-    
-    //TODO: save quantity to a dictionary
     [foodSelectedBuffer setObject:qu forKey:[NSString stringWithFormat:@"%d", foodSelected]];
     
     [self hideQuantityPicker];
@@ -689,13 +698,15 @@
 
     //reset time picker
     [mClock setCurrentTime];
-    
+
     //reset quantity on picker
     //[picker_quantity setValue:DEFAULT_QUANTITY];
     //picker_quantity.hidden = YES;
     
     //reset quantiy on buttons
     [mCategoriesSlider clearAllButtonLabels];
+
+    [mFoodChosenSlider cleanScrollView];
     
     if (foodChosenList) {
         [foodChosenList removeAllObjects];
