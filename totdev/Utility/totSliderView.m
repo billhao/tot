@@ -140,7 +140,7 @@
     if (labelArray) {
         [labelArray release];
     }
-    if (!labels || [labels count] == 0) {
+    if (!labels) {
         printf("totSliderView.m setLabelArray labels cannot be empty\n");
         exit(1);
     }
