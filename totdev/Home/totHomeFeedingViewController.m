@@ -424,6 +424,8 @@
     [mFoodChosenSlider get];
     
     [self.view addSubview:mFoodChosenSlider];
+    
+    [labels release];
 }
 
 - (void)addFoodToInventory {
@@ -804,6 +806,9 @@
     }
     
     [foodSelectedBuffer removeAllObjects];
+    
+    [labels release];
+    [foodChosenImages release];
 }
 
 

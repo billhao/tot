@@ -75,6 +75,13 @@
             // [homeRootController switchTo:kHomeViewDiaperView withContextInfo:nil];
             [mHomeDiaperView showDiaperView];
             break;
+        case kBasicHealth:
+        {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"Medical record will be available in the next version." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [alert show];
+            [alert release];
+            break;
+        }
         default:
             break;
     }
