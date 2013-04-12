@@ -371,12 +371,6 @@
      */
     
     
-    
-    
-    mQuantity = [[totQuantityController alloc] init:self.view];
-    mQuantity.view.frame = CGRectMake(0, 0, mQuantity.mWidth, mQuantity.mHeight);
-    [mQuantity setDelegate:self];
-    
     mChooseFoodSlider = [[totSliderView alloc] initWithFrame:CGRectMake(20, 10, 280, 160)];
     [mChooseFoodSlider setDelegate:self];
     [mChooseFoodSlider setBtnPerCol:2];
@@ -402,7 +396,7 @@
 }
 
 - (void)createFoodChosenPanel {
-    mFoodChosenSlider = [[totSliderView alloc] initWithFrame:CGRectMake(38, 275, 244, 60)];
+    mFoodChosenSlider = [[totSliderView alloc] initWithFrame:CGRectMake(20, 275, 280, 80)];
     [mFoodChosenSlider setDelegate:self];
     [mFoodChosenSlider setBtnPerCol:1];
     [mFoodChosenSlider setBtnPerRow:4];
@@ -547,6 +541,11 @@
     // food inventory
     [self addFoodToInventory];
     [self addFoodToInventoryGrey];
+    
+    // initialize quantity picker.
+    mQuantity = [[totQuantityController alloc] init:self.view];
+    mQuantity.view.frame = CGRectMake(0, 0, mQuantity.mWidth, mQuantity.mHeight);
+    [mQuantity setDelegate:self];
     
     // create background
     UIImage* img = [UIImage imageNamed:@"feeding_bg"];
@@ -749,7 +748,12 @@
     //reset quantiy on buttons
     [mCategoriesSlider clearAllButtonLabels];
 
-    [mFoodChosenSlider cleanScrollView];
+    //[mFoodChosenSlider cleanScrollView];
+    NSMutableArray *foodChosenImages = [[NSMutableArray alloc] init]; // use an empty array to make sure the first get is working
+    NSMutableArray* labels = [[NSMutableArray alloc] init];
+    [mFoodChosenSlider retainContentArray:foodChosenImages];
+    [mFoodChosenSlider retainLabelArray:labels];
+    [mFoodChosenSlider get];
     
     if (foodChosenList) {
         [foodChosenList removeAllObjects];
