@@ -64,6 +64,9 @@
     NSMutableDictionary *foodSelectedBuffer;
     
     NSMutableArray *foodChosenList;
+    
+    // hacking...
+    int flag;
 }
 
 @property (nonatomic, assign) totHomeRootController* homeRootController;
