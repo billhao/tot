@@ -770,6 +770,9 @@
     [mSummaryView release];
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [mRecentlyUsedSlider cleanScrollView];
+}
 
 - (void)viewWillAppear:(BOOL)animated {
     [self hideSummary];
