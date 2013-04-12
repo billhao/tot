@@ -14,11 +14,10 @@
 
 @implementation totTutorialViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
+- (id)initWithFrame:(CGRect)frame {
+    self = [super init];
+    if( self ) {
+        _frame = frame;
     }
     return self;
 }
@@ -31,20 +30,20 @@
     //NSLog(@"%@", [totUtility getFrameString:self.view.bounds]);
 
     // tutorial
-    tutorialScrollView = [[UIScrollView alloc] initWithFrame:self.view.bounds];
+    
+    tutorialScrollView = [[UIScrollView alloc] initWithFrame:_frame];
     tutorialScrollView.pagingEnabled = true;
     tutorialScrollView.showsVerticalScrollIndicator = NO;
     tutorialScrollView.showsHorizontalScrollIndicator = NO;
     tutorialScrollView.delegate = self;
-    
-    
-    int x=0;
-    int y=0;
-    int width=tutorialScrollView.frame.size.width;
-    int height=tutorialScrollView.frame.size.height;
+
+    int x = 0;
+    int y = 0;
+    int width  = _frame.size.width;
+    int height = _frame.size.height;
     image_cnt = 0;
     while( image_cnt < 20 ) {
-        NSString* imgName = [NSString stringWithFormat:@"tutorial_%d", (image_cnt+1)];
+        NSString* imgName = [NSString stringWithFormat:@"tutorial_%d", (image_cnt)];
         UIImage* img = [UIImage imageNamed:imgName];
         if( img == nil ) break;
         
@@ -75,7 +74,7 @@
 //}
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)sv {
-    NSLog(@"scrollViewDidEndDecelerating %f", sv.contentOffset.x);
+    //NSLog(@"scrollViewDidEndDecelerating %f", sv.contentOffset.x);
     int page = sv.contentOffset.x / sv.frame.size.width;
     pageControl.currentPage = page;
 }

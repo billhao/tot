@@ -160,8 +160,9 @@
 }
 
 - (void)showTutorial {
-    totTutorialViewController* ttVC = [[totTutorialViewController alloc] init];
-    ttVC.view.frame = self.window.bounds;
+    CGRect frame = self.window.bounds;
+    frame.size.height = 460;
+    totTutorialViewController* ttVC = [[totTutorialViewController alloc] initWithFrame:frame];
     [loginNavigationController pushViewController:ttVC animated:TRUE];
     [ttVC release];
 }
