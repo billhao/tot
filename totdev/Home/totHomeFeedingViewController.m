@@ -25,6 +25,7 @@
     if (self) {
         // Custom initialization
         mTotModel = global.model;
+        flag = 0;
     }
     return self;
 }
@@ -69,6 +70,24 @@
         
         [self createChooseFoodPanel];
     } else if (sv == mRecentlyUsedSlider) {
+        // Find category and name
+        NSArray* info = (NSArray*)[[mRecentlyUsedSlider getInfo] objectAtIndex:tag];
+        categoryChosen = [info objectAtIndex:0];
+        NSString* name = [info objectAtIndex:1];
+        
+        // Find the index of this food from inventory
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"category == %@", categoryChosen];
+        NSArray *filteredFood = [inventory filteredArrayUsingPredicate:predicate];
+        for (int i = 0; i < [filteredFood count]; ++i) {
+            if ([[[filteredFood objectAtIndex:i] objectForKey:@"name"] isEqualToString:name]) {
+                foodSelected = i;
+                break;
+            }
+        }
+        
+        flag = 1;
+        
+        [mQuantity show];
     } else if (sv == mChooseFoodSlider) {
         foodSelected = tag;
         
@@ -81,7 +100,8 @@
         [mQuantity show];
         
     } else if (sv == mFoodChosenSlider) {
-        [homeRootController switchTo:kHomeViewEntryView withContextInfo:nil];
+        //[homeRootController switchTo:kHomeViewEntryView withContextInfo:nil];
+        //do nothing
     }
 }
 
@@ -130,10 +150,10 @@
     // I don't event know what next code is for...
     // return from getEvent is an array of totEvent object
     // a totEvent represents a single eventß
-    NSMutableArray *events = [mTotModel getEvent:0 event:@"feeding"];
-    for (totEvent* e in events) {
-        NSLog(@"Return from db: %@", [e toString]);
-    }
+    //NSMutableArray *events = [mTotModel getEvent:0 event:@"feeding"];
+    //for (totEvent* e in events) {
+    //    NSLog(@"Return from db: %@", [e toString]);
+    //}
 }
 
 // convert a json string to json object
@@ -154,17 +174,27 @@
             
             NSPredicate *predicate = [NSPredicate predicateWithFormat:@"category == %@", categoryChosen];
             NSArray *filteredFood = [inventory filteredArrayUsingPredicate:predicate];
-            NSString* chosenFoodName = [NSString stringWithString:filteredFood[[key integerValue]][@"name"]];
+            //NSString* chosenFoodName = [NSString stringWithString:filteredFood[[key integerValue]][@"name"]];
+            NSString* chosenFoodName = [NSString stringWithString:[[filteredFood objectAtIndex:[key integerValue]] objectForKey:@"name"]];
             
             // insert into a result queue
             NSMutableDictionary *foodItem = [[NSMutableDictionary alloc] init];
             [foodItem setObject:chosenFoodName forKey:@"name"];
             [foodItem setObject:categoryChosen forKey:@"category"];
             [foodItem setObject:[foodSelectedBuffer objectForKey:key] forKey:@"quantity"];
-            
+
             // add to foodChosenList
             [foodChosenList addObject:foodItem];
+        
+            // add to foodChosen slider
+            [mFoodChosenSlider addNewButton:[[filteredFood objectAtIndex:[key integerValue]] objectForKey:@"file"]];
+            // add quantity
+            [mFoodChosenSlider changeButton:[mFoodChosenSlider getContentCount]-1 withNewLabel:[foodItem objectForKey:@"quantity"]];
+            // rendering
+            [mFoodChosenSlider get];
+
             [foodItem release];
+        
         }
     }
     else{
@@ -261,30 +291,50 @@
 }
 
 -(void)createRecentlyUsedPanel {
+    const int RECENT_USED_LENGTH = 8;
+    int count = 0;
     NSMutableArray * images = [[NSMutableArray alloc] init];
-    // TODO: needs to double check if the UIImage is nil or not.
-    // if it is nil, there will be an exception and corrupted memory later. quite difficult to debug and find out. -hao
-    
-    [images addObject:[UIImage imageNamed:@"feeding-blueberry.png"]];
-    [images addObject:[UIImage imageNamed:@"feeding-papaya.png"]];
-    [images addObject:[UIImage imageNamed:@"feeding-kiwi.png"]];
-    [images addObject:[UIImage imageNamed:@"feeding-mango.png"]];
-    [images addObject:[UIImage imageNamed:@"feeding-bread.png"]];
-    [images addObject:[UIImage imageNamed:@"feeding-banana.png"]];
-    [images addObject:[UIImage imageNamed:@"feeding-rice white.png"]];
-    [images addObject:[UIImage imageNamed:@"feeding-cheerios.png"]];
-    [images addObject:[UIImage imageNamed:@"feeding-green pea.png"]];
-    
+    NSMutableArray * info = [[NSMutableArray alloc] init];
+    NSMutableArray * label = [[NSMutableArray alloc] init];
+    NSMutableSet* already_used = [[NSMutableSet alloc] init];
+    NSArray* events = [mTotModel getEvent:global.baby.babyID event:EVENT_BASIC_FEEDING limit:100];
+    for (int i = 0; i < [events count]; ++i) {
+        totEvent* evt = (totEvent*)[events objectAtIndex:i];
+        NSString* value = evt.value;
+        NSArray* food_list = [totHomeFeedingViewController stringToJSON:value];
+        for (int j = 0; j < [food_list count]; ++j) {
+            NSDictionary* food_item = [food_list objectAtIndex:j];
+            NSString* food_name = [food_item objectForKey:@"name"];
+            NSString* category_name = [food_item objectForKey:@"category"];
+            NSArray* food_info = [NSArray arrayWithObjects:category_name, food_name, nil];
+            if (count < RECENT_USED_LENGTH && ![already_used member:food_name]) {
+                ++count;
+                [already_used addObject:food_name];
+                [images addObject:[UIImage imageNamed:[NSString stringWithFormat:@"feeding-%@.png", food_name]]];
+                [info addObject:food_info];
+                [label addObject:@""];
+            }
+        }
+        if (count == RECENT_USED_LENGTH) {
+            break;
+        }
+    }
+    [already_used release];
+
     mRecentlyUsedSlider = [[totSliderView alloc] initWithFrame:CGRectMake(38, 85, 244, 60)];
     [mRecentlyUsedSlider setDelegate:self];
     [mRecentlyUsedSlider setBtnPerCol:1];
     [mRecentlyUsedSlider setBtnPerRow:4];
     [mRecentlyUsedSlider retainContentArray:images];
+    [mRecentlyUsedSlider retainInfoArray:info];
+    [mRecentlyUsedSlider retainLabelArray:label];
     
     [mRecentlyUsedSlider get];
     
     [self.view addSubview:mRecentlyUsedSlider];
     
+    [info release];
+    [label release];
     [images release];
 }
 
@@ -358,23 +408,23 @@
     [mFoodChosenSlider setBtnPerRow:4];
     
     //do NOT pre-set content array here
-    
+        /*
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"category == %@", @"meat"];
     NSArray *filteredFoodChosen = [inventoryGrey filteredArrayUsingPredicate:predicate];
     NSMutableArray *foodChosenImages = [[NSMutableArray alloc] init];
     for (int i = 0; i < [filteredFoodChosen count]; i++) {
         [foodChosenImages addObject:filteredFoodChosen[i][@"file"]];
     }
+    */
     
-    // NSMutableArray *foodChosenImages = [[NSMutableArray alloc] init];
+    NSMutableArray *foodChosenImages = [[NSMutableArray alloc] init]; // use an empty array to make sure the first get is working
+    NSMutableArray* labels = [[NSMutableArray alloc] init];
+    
     [mFoodChosenSlider retainContentArray:foodChosenImages];
+    [mFoodChosenSlider retainLabelArray:labels];
+    
     [foodChosenImages release];
     [mFoodChosenSlider get];
-    
-    //add new button?
-    [mFoodChosenSlider addNewButton:[[inventory objectAtIndex:1] objectForKey:@"file"]];
-    [mFoodChosenSlider addNewButton:[[inventory objectAtIndex:5] objectForKey:@"file"]];
-    
     
     [self.view addSubview:mFoodChosenSlider];
 }
@@ -602,19 +652,21 @@
 }
 
 -(void)saveQuantity:(NSString *)qu{
+    flag = 0;
     NSLog(@"%@", qu);
     //need to parse time before display
 
     //[text_quantity setText:qu];
     [mChooseFoodSlider changeButton:foodSelected withNewLabel:qu];
-    
-    //TODO: save quantity to a dictionary
     [foodSelectedBuffer setObject:qu forKey:[NSString stringWithFormat:@"%d", foodSelected]];
     
     [self hideQuantityPicker];
 }
 
 - (void)hideQuantityPicker {
+    if (flag == 1) {
+        
+    }
     [mQuantity dismiss];
 }
 
@@ -689,13 +741,15 @@
 
     //reset time picker
     [mClock setCurrentTime];
-    
+
     //reset quantity on picker
     //[picker_quantity setValue:DEFAULT_QUANTITY];
     //picker_quantity.hidden = YES;
     
     //reset quantiy on buttons
     [mCategoriesSlider clearAllButtonLabels];
+
+    [mFoodChosenSlider cleanScrollView];
     
     if (foodChosenList) {
         [foodChosenList removeAllObjects];
