@@ -748,7 +748,12 @@
     //reset quantiy on buttons
     [mCategoriesSlider clearAllButtonLabels];
 
-    [mFoodChosenSlider cleanScrollView];
+    //[mFoodChosenSlider cleanScrollView];
+    NSMutableArray *foodChosenImages = [[NSMutableArray alloc] init]; // use an empty array to make sure the first get is working
+    NSMutableArray* labels = [[NSMutableArray alloc] init];
+    [mFoodChosenSlider retainContentArray:foodChosenImages];
+    [mFoodChosenSlider retainLabelArray:labels];
+    [mFoodChosenSlider get];
     
     if (foodChosenList) {
         [foodChosenList removeAllObjects];
