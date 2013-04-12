@@ -120,8 +120,10 @@
         
         [user release];
         
-        if( global.baby != nil )
+        /*
+         if( global.baby != nil )
             [global.baby printBabyInfo];
+        */
         
         // if yes and pwd matches, go to home view
         [self backgroundTap:nil]; // dismiss keyboard

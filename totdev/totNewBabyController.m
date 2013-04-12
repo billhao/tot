@@ -116,9 +116,9 @@
         return;
     }
     
-    NSLog(@"%@", name);
-    NSLog(@"%d", sex);
-    NSLog(@"%@", bday);
+    //NSLog(@"%@", name);
+    //NSLog(@"%d", sex);
+    //NSLog(@"%@", bday);
     
 
     // save baby info to db
