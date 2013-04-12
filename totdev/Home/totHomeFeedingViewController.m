@@ -371,12 +371,6 @@
      */
     
     
-    
-    
-    mQuantity = [[totQuantityController alloc] init:self.view];
-    mQuantity.view.frame = CGRectMake(0, 0, mQuantity.mWidth, mQuantity.mHeight);
-    [mQuantity setDelegate:self];
-    
     mChooseFoodSlider = [[totSliderView alloc] initWithFrame:CGRectMake(20, 10, 280, 160)];
     [mChooseFoodSlider setDelegate:self];
     [mChooseFoodSlider setBtnPerCol:2];
@@ -547,6 +541,11 @@
     // food inventory
     [self addFoodToInventory];
     [self addFoodToInventoryGrey];
+    
+    // initialize quantity picker.
+    mQuantity = [[totQuantityController alloc] init:self.view];
+    mQuantity.view.frame = CGRectMake(0, 0, mQuantity.mWidth, mQuantity.mHeight);
+    [mQuantity setDelegate:self];
     
     // create background
     UIImage* img = [UIImage imageNamed:@"feeding_bg"];
