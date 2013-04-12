@@ -61,6 +61,7 @@
 
     int mWidth, mHeight;
     int foodSelected;
+    int buttonSelected;
     NSMutableDictionary *foodSelectedBuffer;
     
     NSMutableArray *foodChosenList;

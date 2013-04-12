@@ -70,6 +70,7 @@
         
         [self createChooseFoodPanel];
     } else if (sv == mRecentlyUsedSlider) {
+        buttonSelected = tag;
         // Find category and name
         NSArray* info = (NSArray*)[[mRecentlyUsedSlider getInfo] objectAtIndex:tag];
         categoryChosen = [info objectAtIndex:0];
@@ -396,6 +397,7 @@
 }
 
 - (void)createFoodChosenPanel {
+    flag = 0;
     mFoodChosenSlider = [[totSliderView alloc] initWithFrame:CGRectMake(20, 275, 280, 80)];
     [mFoodChosenSlider setDelegate:self];
     [mFoodChosenSlider setBtnPerCol:1];
@@ -534,8 +536,7 @@
 }
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
     
     // food inventory
@@ -651,21 +652,56 @@
 }
 
 -(void)saveQuantity:(NSString *)qu{
-    flag = 0;
     NSLog(@"%@", qu);
     //need to parse time before display
 
     //[text_quantity setText:qu];
-    [mChooseFoodSlider changeButton:foodSelected withNewLabel:qu];
+    if (flag == 0)
+        [mChooseFoodSlider changeButton:foodSelected withNewLabel:qu];
     [foodSelectedBuffer setObject:qu forKey:[NSString stringWithFormat:@"%d", foodSelected]];
     
+    if (flag == 1) {
+        [mQuantity resignFirstResponder];
+        if([foodSelectedBuffer count] >= 1 ) {
+            NSArray *foodKeys = [foodSelectedBuffer allKeys];
+            for (NSString *key in foodKeys) {
+                NSPredicate *predicate = [NSPredicate predicateWithFormat:@"category == %@", categoryChosen];
+                NSArray *filteredFood = [inventory filteredArrayUsingPredicate:predicate];
+                NSString* chosenFoodName =
+                    [NSString stringWithString:[[filteredFood objectAtIndex:[key integerValue]] objectForKey:@"name"]];
+                
+                // insert into a result queue
+                NSMutableDictionary *foodItem = [[NSMutableDictionary alloc] init];
+                [foodItem setObject:chosenFoodName forKey:@"name"];
+                [foodItem setObject:categoryChosen forKey:@"category"];
+                [foodItem setObject:[foodSelectedBuffer objectForKey:key] forKey:@"quantity"];
+                
+                // add to foodChosenList
+                [foodChosenList addObject:foodItem];
+                
+                // add to foodChosen slider
+                [mFoodChosenSlider addNewButton:[[filteredFood objectAtIndex:[key integerValue]] objectForKey:@"file"]];
+                // add quantity
+                [mFoodChosenSlider changeButton:[mFoodChosenSlider getContentCount]-1 withNewLabel:[foodItem objectForKey:@"quantity"]];
+                // rendering
+                [mFoodChosenSlider get];
+                
+                [foodItem release];
+            }
+        } else {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Empty Selection"
+                                                            message:@"Please choose at least one kind of food before submission."
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil];
+            [alert show];
+            [alert release];
+        }
+    }
     [self hideQuantityPicker];
 }
 
 - (void)hideQuantityPicker {
-    if (flag == 1) {
-        
-    }
     [mQuantity dismiss];
 }
 
