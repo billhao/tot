@@ -402,7 +402,7 @@
 }
 
 - (void)createFoodChosenPanel {
-    mFoodChosenSlider = [[totSliderView alloc] initWithFrame:CGRectMake(38, 275, 244, 60)];
+    mFoodChosenSlider = [[totSliderView alloc] initWithFrame:CGRectMake(20, 275, 280, 80)];
     [mFoodChosenSlider setDelegate:self];
     [mFoodChosenSlider setBtnPerCol:1];
     [mFoodChosenSlider setBtnPerRow:4];
