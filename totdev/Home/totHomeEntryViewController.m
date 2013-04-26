@@ -77,9 +77,18 @@
             break;
         case kBasicHealth:
         {
+            // Use the proper one for debugging.
+            NSMutableDictionary* info = [[NSMutableDictionary alloc] init];
+            // Put necessary information into the info.
+            [homeRootController switchTo:kHomeActivityLabelController withContextInfo:info];  // label
+            //[homeRootController switchTo:kHomeActivityBrowseController withContextInfo:info];  // browse photo by photo
+            //[homeRootController switchTo:kHomeAlbumBrowseController withContextInfo:info];  // browse the whole album
+
+            /*
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"Medical record will be available in the next version." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
             [alert show];
             [alert release];
+             */
             break;
         }
         default:

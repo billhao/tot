@@ -10,12 +10,18 @@
 #import "totHomeEntryViewController.h"
 #import "totHomeHeightViewController.h"
 #import "totHomeFeedingViewController.h"
+#import "totHomeActivityBrowseController.h"
+#import "totHomeActivityLabelController.h"
+#import "totHomeAlbumBrowseController.h"
 
 @implementation totHomeRootController
 
 @synthesize homeEntryViewController;
 @synthesize homeFeedingViewController;
 @synthesize homeHeightViewController;
+@synthesize homeActivityLabelController;
+@synthesize homeActivityBrowseController;
+@synthesize homeAlbumBrowseController;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -74,13 +80,34 @@
     self.homeHeightViewController.homeRootController = self;
     [aHeightView release];
     
+    totHomeActivityLabelController* labelController = [[totHomeActivityLabelController alloc] init];
+    self.homeActivityLabelController = labelController;
+    self.homeActivityLabelController.homeRootController = self;
+    [labelController release];
+    
+    totHomeActivityBrowseController* browseController = [[totHomeActivityBrowseController alloc] init];
+    self.homeActivityBrowseController = browseController;
+    self.homeActivityBrowseController.homeRootController = self;
+    [browseController release];
+    
+    totHomeAlbumBrowseController* albumBrowseController = [[totHomeAlbumBrowseController alloc] init];
+    self.homeAlbumBrowseController = albumBrowseController;
+    self.homeAlbumBrowseController.homeRootController = self;
+    [albumBrowseController release];
+    
     [self.view addSubview:homeEntryViewController.view];
     [self.view addSubview:homeFeedingViewController.view];
     [self.view addSubview:homeHeightViewController.view];
+    [self.view addSubview:homeActivityBrowseController.view];
+    [self.view addSubview:homeActivityLabelController.view];
+    [self.view addSubview:homeAlbumBrowseController.view];
     
     self.homeEntryViewController.view.frame = CGRectMake(0, 0, 320, 460);
     self.homeFeedingViewController.view.frame = CGRectMake(320, 0, 320, 460);
     self.homeHeightViewController.view.frame = CGRectMake(320, 0, 320, 460);
+    self.homeActivityLabelController.view.frame = CGRectMake(320, 0, 320, 460);
+    self.homeActivityBrowseController.view.frame = CGRectMake(320, 0, 320, 460);
+    self.homeAlbumBrowseController.view.frame = CGRectMake(320, 0, 320, 460);
     
     mCurrentViewIndex = kHomeViewEntryView;
 }
@@ -94,6 +121,12 @@
             return homeFeedingViewController;
         case kHomeViewHeightView:
             return homeHeightViewController;
+        case kHomeActivityLabelController:
+            return homeActivityLabelController;
+        case kHomeActivityBrowseController:
+            return homeActivityBrowseController;
+        case kHomeAlbumBrowseController:
+            return homeAlbumBrowseController;
         default:
             printf("Invalid view index\n");
             return nil;
@@ -108,6 +141,12 @@
             return homeFeedingViewController.view.frame.origin.x;
         case kHomeViewHeightView:
             return homeHeightViewController.view.frame.origin.x;
+        case kHomeActivityLabelController:
+            return homeActivityLabelController.view.frame.origin.x;
+        case kHomeActivityBrowseController:
+            return homeActivityBrowseController.view.frame.origin.x;
+        case kHomeAlbumBrowseController:
+            return homeAlbumBrowseController.view.frame.origin.x;
         default:
             printf("Invalid view index\n");
             return -1;
@@ -135,6 +174,15 @@
             [(totHomeHeightViewController*)nextView setInitialPicker:i];
             break;
         }
+        case kHomeActivityLabelController:
+            [homeActivityLabelController receiveMessage:info];
+            break;
+        case kHomeActivityBrowseController:
+            [homeActivityBrowseController receiveMessage:info];
+            break;
+        case kHomeAlbumBrowseController:
+            [homeAlbumBrowseController receiveMessage:info];
+            break;
         default:
             break;
     }
@@ -166,6 +214,9 @@
     [homeEntryViewController release];
     [homeFeedingViewController release];
     [homeHeightViewController release];
+    [homeActivityLabelController release];
+    [homeActivityBrowseController release];
+    [homeAlbumBrowseController release];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

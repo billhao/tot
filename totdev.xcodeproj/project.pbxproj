@@ -259,6 +259,9 @@
 		8E920F8E161903D700725971 /* icons-sleep-start.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E920F89161903D700725971 /* icons-sleep-start.png */; };
 		8EC7A8321655A1430022AC93 /* icons-language.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EC7A8311655A1430022AC93 /* icons-language.png */; };
 		8EE2E5D216968643000197D3 /* albumBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EE2E5D116968643000197D3 /* albumBackground.png */; };
+		8EFADEE0172A3AF300C4DE58 /* totHomeActivityLabelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EFADEDF172A3AF300C4DE58 /* totHomeActivityLabelController.m */; };
+		8EFADEE3172A3B2F00C4DE58 /* totHomeActivityBrowseController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EFADEE2172A3B2F00C4DE58 /* totHomeActivityBrowseController.m */; };
+		8EFADEE6172A4CBC00C4DE58 /* totHomeAlbumBrowseController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8EFADEE5172A4CBC00C4DE58 /* totHomeAlbumBrowseController.m */; };
 		8EFC1F8816277E9D003CF0FE /* return.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EFC1F8716277E9D003CF0FE /* return.png */; };
 		CE5C09FC154CCFDB00D41114 /* moviePlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5C09F9154CCFDB00D41114 /* moviePlayerViewController.m */; };
 		CE5C09FD154CCFDB00D41114 /* totAlbumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5C09FB154CCFDB00D41114 /* totAlbumViewController.m */; };
@@ -636,6 +639,12 @@
 		8E920F89161903D700725971 /* icons-sleep-start.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icons-sleep-start.png"; path = "Resources/Home/icons-sleep-start.png"; sourceTree = "<group>"; };
 		8EC7A8311655A1430022AC93 /* icons-language.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icons-language.png"; path = "Resources/Home/icons-language.png"; sourceTree = "<group>"; };
 		8EE2E5D116968643000197D3 /* albumBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = albumBackground.png; path = Resources/Utility/albumBackground.png; sourceTree = "<group>"; };
+		8EFADEDE172A3AF300C4DE58 /* totHomeActivityLabelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totHomeActivityLabelController.h; path = Home/totHomeActivityLabelController.h; sourceTree = "<group>"; };
+		8EFADEDF172A3AF300C4DE58 /* totHomeActivityLabelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totHomeActivityLabelController.m; path = Home/totHomeActivityLabelController.m; sourceTree = "<group>"; };
+		8EFADEE1172A3B2F00C4DE58 /* totHomeActivityBrowseController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totHomeActivityBrowseController.h; path = Home/totHomeActivityBrowseController.h; sourceTree = "<group>"; };
+		8EFADEE2172A3B2F00C4DE58 /* totHomeActivityBrowseController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totHomeActivityBrowseController.m; path = Home/totHomeActivityBrowseController.m; sourceTree = "<group>"; };
+		8EFADEE4172A4CBC00C4DE58 /* totHomeAlbumBrowseController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totHomeAlbumBrowseController.h; path = Home/totHomeAlbumBrowseController.h; sourceTree = "<group>"; };
+		8EFADEE5172A4CBC00C4DE58 /* totHomeAlbumBrowseController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totHomeAlbumBrowseController.m; path = Home/totHomeAlbumBrowseController.m; sourceTree = "<group>"; };
 		8EFC1F8716277E9D003CF0FE /* return.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = return.png; path = Resources/Utility/return.png; sourceTree = "<group>"; };
 		CE5C09F8154CCFDB00D41114 /* moviePlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = moviePlayerViewController.h; path = Utility/moviePlayerViewController.h; sourceTree = "<group>"; };
 		CE5C09F9154CCFDB00D41114 /* moviePlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = moviePlayerViewController.m; path = Utility/moviePlayerViewController.m; sourceTree = "<group>"; };
@@ -1304,6 +1313,12 @@
 				3F454D2B1555A84700AC66EE /* totHomeHeightViewController.m */,
 				15414FF71556F99600C3C828 /* totHomeFeedingViewController.h */,
 				15414FF81556F99600C3C828 /* totHomeFeedingViewController.m */,
+				8EFADEDE172A3AF300C4DE58 /* totHomeActivityLabelController.h */,
+				8EFADEDF172A3AF300C4DE58 /* totHomeActivityLabelController.m */,
+				8EFADEE1172A3B2F00C4DE58 /* totHomeActivityBrowseController.h */,
+				8EFADEE2172A3B2F00C4DE58 /* totHomeActivityBrowseController.m */,
+				8EFADEE4172A4CBC00C4DE58 /* totHomeAlbumBrowseController.h */,
+				8EFADEE5172A4CBC00C4DE58 /* totHomeAlbumBrowseController.m */,
 			);
 			name = Home;
 			sourceTree = "<group>";
@@ -1887,6 +1902,9 @@
 				8E46E4FF16A8F35500932B90 /* totReviewFilterView.m in Sources */,
 				24C98C2416F2C0EF00541492 /* totQuantityController.m in Sources */,
 				3F987DCF1705717E00712A58 /* totTutorialViewController.m in Sources */,
+				8EFADEE0172A3AF300C4DE58 /* totHomeActivityLabelController.m in Sources */,
+				8EFADEE3172A3B2F00C4DE58 /* totHomeActivityBrowseController.m in Sources */,
+				8EFADEE6172A4CBC00C4DE58 /* totHomeAlbumBrowseController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
