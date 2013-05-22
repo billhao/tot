@@ -6,12 +6,15 @@
 //  Copyright (c) 2012 USC. All rights reserved.
 //
 
+#import "AppDelegate.h"
+#import "totUITabBarController.h"
 #import "totHomeEntryViewController.h"
 #import "totHomeSleepingView.h"
 #import "totLanguageInputViewController.h"
 #import "totHomeRootController.h"
 #import "totHomeDiaperView.h"
 #import "../Utility/totImageView.h"
+#import "../Activity/totActivityUtility.h"
 
 @implementation totHomeEntryViewController
 
@@ -36,6 +39,45 @@
     
     // Release any cached data, images, etc that aren't in use.
 }
+
+#pragma mark - CameraViewDelegate
+- (void) saveImage:(UIImage*)photo intoFile:(NSString*)filename {
+    UIImage *resizedPhoto = [totActivityUtility imageWithImage:photo scaledToSize:CGSizeMake(320, 480)];
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentDirectory = [paths objectAtIndex:0];
+    NSString *imagePath = [documentDirectory stringByAppendingPathComponent:filename];
+    NSData *data = UIImageJPEGRepresentation(resizedPhoto, 0.8);
+    [data writeToFile:imagePath atomically:NO];
+}
+
+- (void) saveVideo:(NSString*)videoPath intoFile:(NSString*)filename {
+    NSURL *contentURL = [NSURL fileURLWithPath:videoPath];
+    NSData *videoData = [NSData dataWithContentsOfURL:contentURL];
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentDirectory = [paths objectAtIndex:0];
+    NSString *path = [documentDirectory stringByAppendingPathComponent:filename];
+    [videoData writeToFile:path atomically:NO];
+}
+
+- (void) cameraView:(id)cameraView didFinishSavingImageToAlbum:(UIImage*)photo {
+    NSDate* today = [NSDate date];
+    NSTimeInterval interval = [today timeIntervalSince1970];
+    NSString *filename = [[NSString alloc] initWithFormat:@"%d.jpg", (int)interval];
+    NSLog(@"%@", filename);
+    [self saveImage:photo intoFile:filename];
+}
+
+- (void) cameraView:(id)cameraView didFinishSavingVideoToAlbum:(NSString*)videoPath {
+    NSDate *today = [NSDate date];
+    NSTimeInterval interval = [today timeIntervalSince1970];
+    NSString *filename = [[NSString alloc] initWithFormat:@"%d.mov", (int)interval];
+    NSLog(@"%@", filename);
+    [self saveVideo:videoPath intoFile:filename];
+}
+
+- (void) cameraView:(id)cameraView didFinishSavingThumbnail:(UIImage*)thumbnail {
+}
+
 
 #pragma mark - View lifecycle
 
@@ -77,12 +119,20 @@
             break;
         case kBasicHealth:
         {
+            // Starts the camera.
+            AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+            [appDelegate.mainTabController.cameraView setDelegate:self];
+            [appDelegate.mainTabController.cameraView launchCamera];
+            
+            /**
             // Use the proper one for debugging.
             NSMutableDictionary* info = [[NSMutableDictionary alloc] init];
             // Put necessary information into the info.
             [homeRootController switchTo:kHomeActivityLabelController withContextInfo:info];  // label
             //[homeRootController switchTo:kHomeActivityBrowseController withContextInfo:info];  // browse photo by photo
             //[homeRootController switchTo:kHomeAlbumBrowseController withContextInfo:info];  // browse the whole album
+            [info release];
+             */
 
             /*
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:@"Medical record will be available in the next version." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];

@@ -29,5 +29,6 @@
 //- (void) setDelegate:(id<CameraViewDelegate>)aDelegate;
 - (void) launchPhotoCamera;
 - (void) launchVideoCamera;
+- (void) launchCamera;
 
 @end

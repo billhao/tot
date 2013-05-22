@@ -1150,6 +1150,13 @@
 			name = Diaper;
 			sourceTree = "<group>";
 		};
+		8E84C91D174C80A6004057B9 /* Scrapbook */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Scrapbook;
+			sourceTree = "<group>";
+		};
 		EF043C3B154DE2D600975BCD /* Utility */ = {
 			isa = PBXGroup;
 			children = (
@@ -1346,6 +1353,7 @@
 		EF62839415366D74004031D6 /* Review */ = {
 			isa = PBXGroup;
 			children = (
+				8E84C91D174C80A6004057B9 /* Scrapbook */,
 				EF62839C15366DCD004031D6 /* totReviewRootController.h */,
 				EF62839D15366DCD004031D6 /* totReviewRootController.m */,
 				EF2BE9FE157480080002F763 /* totReviewTableViewController.h */,

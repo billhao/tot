@@ -65,7 +65,6 @@
     }
 }
 
-
 - (void)launchVideoCamera {
     bPhotoCamera = NO;
     self.view.frame = CGRectMake(0, 0, 320, 460);
@@ -79,16 +78,26 @@
     }
 }
 
+- (void)launchCamera {
+    self.view.frame = CGRectMake(0, 0, 320, 460);
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        imagePicker = [[UIImagePickerController alloc] init];
+        imagePicker.delegate = self;
+        imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+        imagePicker.mediaTypes = [NSArray arrayWithObjects:(NSString*)kUTTypeMovie, (NSString*)kUTTypeImage, nil];
+        imagePicker.allowsEditing = NO;
+        [self presentModalViewController:imagePicker animated:NO];
+    }
+}
 
 - (void)imagePickerController:(UIImagePickerController*)picker didFinishPickingMediaWithInfo:(NSDictionary*)info {
-    if( bPhotoCamera ) {
+    NSString* mediaType = [info objectForKey:UIImagePickerControllerMediaType];
+    if ([mediaType isEqualToString:(NSString*)kUTTypeImage]) {
         UIImage *photo = (UIImage*)[info objectForKey:@"UIImagePickerControllerOriginalImage"];
-                
         UIImageWriteToSavedPhotosAlbum(photo, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
-    } else {
+    } else if ([mediaType isEqualToString:(NSString*)kUTTypeMovie]) {
         NSString *tempFilePath = [(NSURL*)[info valueForKey:UIImagePickerControllerMediaURL] absoluteString];
         tempFilePath = [tempFilePath substringFromIndex:16];
-        
         // Check if the video file can be saved to camera roll.
         if (UIVideoAtPathIsCompatibleWithSavedPhotosAlbum(tempFilePath)){
             // YES. Copy it to the camera roll.
@@ -154,7 +163,6 @@
             }
             [generator release];
         };
-        
         [generator generateCGImagesAsynchronouslyForTimes:[NSArray arrayWithObject:[NSValue valueWithCMTime:thumbnailTime]] 
                                         completionHandler:handler];
         */

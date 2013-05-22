@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "../Utility/totCameraViewController.h"
 
 @class totHomeSleepingView;
 @class totLanguageInputViewController;
@@ -24,7 +25,7 @@ enum {
     kBasicHead=7
 };
 
-@interface totHomeEntryViewController : UIViewController {
+@interface totHomeEntryViewController : UIViewController <CameraViewDelegate> {
     totHomeSleepingView *mHomeSleepingView;
     totLanguageInputViewController *mLanguageInputView;
     totHomeDiaperView *mHomeDiaperView;
