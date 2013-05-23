@@ -12,6 +12,9 @@
 
 @interface totHomeActivityLabelController : UIViewController {
     totHomeRootController* homeRootController;
+    
+    UIImageView* backgroundImage;
+    NSMutableDictionary* mMessage;
 }
 
 @property (nonatomic, assign) totHomeRootController* homeRootController;

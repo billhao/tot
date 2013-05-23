@@ -28,6 +28,8 @@
         mHomeSleepingView = [[totHomeSleepingView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
         mHomeDiaperView = [[totHomeDiaperView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
         mLanguageInputView = [[totLanguageInputViewController alloc] init];
+        
+        mMessage = [[NSMutableDictionary alloc] init];
     }
     return self;
 }
@@ -63,19 +65,42 @@
     NSDate* today = [NSDate date];
     NSTimeInterval interval = [today timeIntervalSince1970];
     NSString *filename = [[NSString alloc] initWithFormat:@"%d.jpg", (int)interval];
-    NSLog(@"%@", filename);
+
+    NSLog(@"Photo filename: %@", filename);
     [self saveImage:photo intoFile:filename];
+    
+    [mMessage removeAllObjects];
+    [mMessage setObject:filename forKey:@"storedImage"];
+    [filename release];
+    
+    // Switches to the next view.
+    [homeRootController switchTo:kHomeActivityLabelController withContextInfo:mMessage];
 }
 
 - (void) cameraView:(id)cameraView didFinishSavingVideoToAlbum:(NSString*)videoPath {
     NSDate *today = [NSDate date];
     NSTimeInterval interval = [today timeIntervalSince1970];
     NSString *filename = [[NSString alloc] initWithFormat:@"%d.mov", (int)interval];
-    NSLog(@"%@", filename);
+
+    NSLog(@"Video filename: %@", filename);
     [self saveVideo:videoPath intoFile:filename];
+    
+    [mMessage setObject:filename forKey:@"storedVideo"];
+    [filename release];
 }
 
 - (void) cameraView:(id)cameraView didFinishSavingThumbnail:(UIImage*)thumbnail {
+    NSString *videoFilename = [mMessage objectForKey:@"storedVideo"];
+    if (!videoFilename) {
+        printf("Must have video filename\n");
+        exit(-1);
+    }
+    NSString *thumbFilename = [videoFilename stringByAppendingString:@".jpg"];
+    [self saveImage:thumbnail intoFile:thumbFilename];  // save the thumbnail.
+    [mMessage setObject:thumbFilename forKey:@"storedImage"];
+    
+    // Switches to the next view.
+    [homeRootController switchTo:kHomeActivityLabelController withContextInfo:mMessage];
 }
 
 
@@ -197,6 +222,8 @@
     [mHomeSleepingView release];
     [mLanguageInputView release];
     [mHomeDiaperView release];
+    
+    [mMessage release];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

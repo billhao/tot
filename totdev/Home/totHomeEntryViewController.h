@@ -30,6 +30,9 @@ enum {
     totLanguageInputViewController *mLanguageInputView;
     totHomeDiaperView *mHomeDiaperView;
     totHomeRootController *homeRootController;
+    
+    // Message passed to the next view.
+    NSMutableDictionary* mMessage;
 }
 
 @property (nonatomic, assign) totHomeRootController *homeRootController;
