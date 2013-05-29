@@ -7,14 +7,22 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "totSliderView.h"
 
 @class totHomeRootController;
 
-@interface totHomeActivityLabelController : UIViewController {
+@interface totHomeActivityLabelController : UIViewController<totSliderViewDelegate> {
     totHomeRootController* homeRootController;
     
     UIImageView* backgroundImage;
     NSMutableDictionary* mMessage;
+    
+    NSMutableArray* mActivities;
+    NSMutableDictionary* mActivityChildren;
+    
+    totSliderView* mActivitySlider;
+    NSMutableArray* mActivityChildrenSliders;
+    totSliderView* currentChildSlider;
 }
 
 @property (nonatomic, assign) totHomeRootController* homeRootController;
@@ -24,5 +32,8 @@
 // So expect there is a key named "image" in the message.
 // When writing code for this module, just suppose there is a UIImage* existed as a value.
 - (void)receiveMessage: (NSMutableDictionary*)message;
+
+
+- (void)sliderView:(totSliderView*)sv buttonPressed:(id)sender;
 
 @end
