@@ -63,6 +63,31 @@
     // category slider
     [self createActivitySlider];
     
+    // create existing activity vertical slider
+    [self createExistingActivitySlider];
+    
+}
+
+-(void)createExistingActivitySlider {
+    // get existing activities from db
+    
+    //load image
+    NSMutableArray *categoriesImages = [[NSMutableArray alloc] init];
+    for( int i=0; i<mActivities.count; i++ ) {
+        [categoriesImages addObject:[UIImage imageNamed:[mActivities objectAtIndex:i]]];
+    }
+    
+    // create slider
+    mExistingActivitySlider = [[totSliderView alloc] initWithFrame:CGRectMake(260, 0, 80, 300)];
+    [mExistingActivitySlider setDelegate:self];
+    [mExistingActivitySlider setBtnPerCol:4];
+    [mExistingActivitySlider setBtnPerRow:1];
+    [mExistingActivitySlider setBtnWidthHeightRatio:1.0f];
+    
+    [mExistingActivitySlider retainContentArray:categoriesImages];
+    [mExistingActivitySlider get];
+    [self.view addSubview:mExistingActivitySlider];
+    [categoriesImages release];
 }
 
 -(void)createActivitySlider {
@@ -99,6 +124,7 @@
     //load image in this activity
     NSString* activity = [mActivities objectAtIndex:index];
     NSMutableArray* childActivities = [mActivityChildren objectForKey:activity];
+    if( childActivities == nil ) return nil;
     
     NSMutableArray *childActivityImages = [[NSMutableArray alloc] init];
     for( int i=0; i<childActivities.count; i++ ) {
@@ -130,7 +156,8 @@
         
         // set current
         currentChildSlider = [self getActivityChildrenSlider:tag];
-        [self.view addSubview:currentChildSlider];
+        if( currentChildSlider != nil )
+            [self.view addSubview:currentChildSlider];
     }
     else {
         NSLog(@"%d", tag);

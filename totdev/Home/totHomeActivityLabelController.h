@@ -23,6 +23,8 @@
     totSliderView* mActivitySlider;
     NSMutableArray* mActivityChildrenSliders;
     totSliderView* currentChildSlider;
+    totSliderView* mExistingActivitySlider;
+
 }
 
 @property (nonatomic, assign) totHomeRootController* homeRootController;
