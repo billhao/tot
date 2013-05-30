@@ -351,7 +351,7 @@
         }
         
         else if ([subcategory isEqualToString:@"feeding"]) {
-            NSArray* foodlist = [totHomeFeedingViewController stringToJSON:story.mRawContent];
+            NSArray* foodlist = [totHomeFeedingViewController JSONToObject:story.mRawContent];
             if( foodlist.count > 0 ){
                 NSMutableString* summary = [[NSMutableString alloc] initWithFormat:@"%@ ate", global.baby.name];
                 Boolean first = true;

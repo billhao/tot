@@ -8,6 +8,10 @@
 
 #import "totHomeRootController.h"
 #import "totHomeActivityLabelController.h"
+#import "totEventName.h"
+#import "totEvent.h"
+#import "Global.h"
+#import "totHomeFeedingViewController.h"
 
 @interface totHomeActivityLabelController ()
 
@@ -22,6 +26,8 @@
         // Custom initialization
         [self initActivities];
         currentChildSlider = nil;
+        currentImageFileName = nil;
+        currentImageData = nil;
         
         self.view.backgroundColor = [UIColor whiteColor];
         self.view.userInteractionEnabled = YES;
@@ -31,14 +37,26 @@
 }
 
 - (void)receiveMessage: (NSMutableDictionary*)message {
-    NSString* filename = [message objectForKey:@"storedImage"];
+    currentImageFileName = [message objectForKey:@"storedImage"];
     NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString* documentDirectory = [paths objectAtIndex:0];
-    NSString* imagePath = [documentDirectory stringByAppendingPathComponent:filename];
+    NSString* imagePath = [documentDirectory stringByAppendingPathComponent:currentImageFileName];
     [backgroundImage setImage:[UIImage imageWithContentsOfFile:imagePath]];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+    if( currentImageFileName == nil ) return;
+    
+    // load associated data
+    [self loadActivity];
+    NSLog(@"%@", currentImageData);
+    
+    // reset activity slider
+    
+    // update existing activity slider
+    [self updateExistingActivitySlider];
+    
+    title.text = currentImageFileName;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {}
@@ -47,12 +65,11 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    
     backgroundImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 411)];
     [self.view addSubview:backgroundImage];
 
     // title
-    UILabel* title = [[UILabel alloc]initWithFrame:CGRectMake(100, 20, 120, 40)];
+    title = [[UILabel alloc]initWithFrame:CGRectMake(100, 20, 120, 40)];
     title.text = @"Label your photo";
     title.textAlignment = NSTextAlignmentCenter;
     title.backgroundColor = [UIColor clearColor];
@@ -65,25 +82,38 @@
     
     // create existing activity vertical slider
     [self createExistingActivitySlider];
-    
 }
 
 -(void)createExistingActivitySlider {
-    // get existing activities from db
-    
-    //load image
-    NSMutableArray *categoriesImages = [[NSMutableArray alloc] init];
-    for( int i=0; i<mActivities.count; i++ ) {
-        [categoriesImages addObject:[UIImage imageNamed:[mActivities objectAtIndex:i]]];
-    }
-    
     // create slider
     mExistingActivitySlider = [[totSliderView alloc] initWithFrame:CGRectMake(260, 0, 80, 300)];
     [mExistingActivitySlider setDelegate:self];
     [mExistingActivitySlider setBtnPerCol:4];
     [mExistingActivitySlider setBtnPerRow:1];
     [mExistingActivitySlider setBtnWidthHeightRatio:1.0f];
-    
+    [self.view addSubview:mExistingActivitySlider];
+}
+
+-(void)updateExistingActivitySlider {
+    //load image
+    NSMutableArray* categoriesImages = [[NSMutableArray alloc]init];
+    NSMutableArray* labels = [currentImageData objectForKey:@"labels"];
+    if( labels != nil ) {
+        for( int i=0; i<labels.count; i++ ) {
+            [categoriesImages addObject:[UIImage imageNamed:[labels objectAtIndex:i]]];
+        }
+    }
+
+    if( mExistingActivitySlider != nil ) {
+        [mExistingActivitySlider removeFromSuperview];
+        [mExistingActivitySlider release];
+    }
+        
+    mExistingActivitySlider = [[totSliderView alloc] initWithFrame:CGRectMake(260, 0, 80, 300)];
+    [mExistingActivitySlider setDelegate:self];
+    [mExistingActivitySlider setBtnPerCol:4];
+    [mExistingActivitySlider setBtnPerRow:1];
+    [mExistingActivitySlider setBtnWidthHeightRatio:1.0f];
     [mExistingActivitySlider retainContentArray:categoriesImages];
     [mExistingActivitySlider get];
     [self.view addSubview:mExistingActivitySlider];
@@ -148,9 +178,11 @@
 - (void)sliderView:(totSliderView*)sv buttonPressed:(id)sender {
     UIButton *btn = (UIButton*)sender;
     int tag = [btn tag] - 1;
+    NSString* activityToSave = nil;
 
     if( sv == mActivitySlider ) {
-        NSLog(@"%d", tag);
+        currentSelectedActivity = [mActivities objectAtIndex:tag];
+        NSLog(@"%d %@", tag, currentSelectedActivity);
         // hide current
         if( currentChildSlider != nil ) [currentChildSlider removeFromSuperview];
         
@@ -158,10 +190,60 @@
         currentChildSlider = [self getActivityChildrenSlider:tag];
         if( currentChildSlider != nil )
             [self.view addSubview:currentChildSlider];
+        else
+            activityToSave = currentSelectedActivity;
+    }
+    else if (sv == mExistingActivitySlider ) {
     }
     else {
-        NSLog(@"%d", tag);
+        // one of the child sliders
+        NSMutableArray* childActivities = [mActivityChildren objectForKey:currentSelectedActivity];
+        if( childActivities != nil ) {
+            NSString* childActivity = [childActivities objectAtIndex:tag];
+            NSLog(@"%d %@", tag, childActivity);
+            activityToSave = childActivity;
+        }
     }
+    
+    if( activityToSave != nil ) {
+        // this activity has no children
+        NSMutableArray* labels = [currentImageData objectForKey:@"labels"];
+        if( labels == nil ) {
+            labels = [[NSMutableArray alloc]init];
+            [currentImageData setObject:labels forKey:@"labels"];
+            [labels release];
+        }
+        // check if exists already
+        if( [labels indexOfObject:activityToSave] == NSNotFound ) {
+            [labels addObject:activityToSave];
+            [self saveActivity];
+            [self updateExistingActivitySlider];
+        }
+    }
+}
+
+- (NSString*)getActivityName {
+    //return @"activity/photo/1369913416.jpg";
+    return [NSString stringWithFormat:ACTIVITY_PHOTO, currentImageFileName];
+}
+
+- (void)saveActivity {
+    [global.model setItem:global.baby.babyID name:[self getActivityName] value:currentImageData];
+}
+
+- (void)loadActivity {
+    if( currentImageData != nil ) {
+        [currentImageData release];
+        currentImageData = nil;
+    }
+
+    totEvent* event = [global.model getItem:global.baby.babyID name:[self getActivityName]];
+    if( event != nil ) {
+        currentImageData = (NSMutableDictionary*)[totHomeFeedingViewController JSONToObject:event.value];
+        [currentImageData retain];
+    }
+    else
+        currentImageData = [[NSMutableDictionary alloc]init]; // create if not exist in db
 }
 
 - (void)didReceiveMemoryWarning
@@ -174,6 +256,7 @@
     [super dealloc];
     [backgroundImage release];
     [mMessage release];
+    if( currentImageData != nil ) [currentImageData release];
 }
 
 - (void)initActivities {

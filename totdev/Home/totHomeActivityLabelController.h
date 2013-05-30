@@ -15,6 +15,7 @@
     totHomeRootController* homeRootController;
     
     UIImageView* backgroundImage;
+    UILabel* title;
     NSMutableDictionary* mMessage;
     
     NSMutableArray* mActivities;
@@ -24,6 +25,11 @@
     NSMutableArray* mActivityChildrenSliders;
     totSliderView* currentChildSlider;
     totSliderView* mExistingActivitySlider;
+    
+    // current image, the name must be unique
+    NSString* currentImageFileName;
+    NSMutableDictionary* currentImageData;
+    NSString* currentSelectedActivity;
 
 }
 

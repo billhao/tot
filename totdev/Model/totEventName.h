@@ -71,4 +71,7 @@ static NSString *EVENT_MOTOR_ROLLOVER   = @"motor_skill/motor_skill_roll_over";
 static NSString *EVENT_MOTOR_KICKLEG    = @"motor_skill/motor_skill_kick_leg";
 static NSString *EVENT_MOTOR_LIFTNECK   = @"motor_skill/motor_skill_lift_neck";
 
+// activity for photo including labels
+static NSString *ACTIVITY_PHOTO         = @"activity/photo/%@";
+
 #endif

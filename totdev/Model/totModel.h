@@ -4,6 +4,7 @@
 
 #import <Foundation/Foundation.h>
 #import <sqlite3.h>
+#import "totEvent.h"
 
 @interface totModel : NSObject {
     NSString *dbfile;
@@ -36,9 +37,17 @@
 - (NSMutableArray *) getEvent:(int)baby_id event:(NSString*)event limit:(int)limit offset:(int)offset;
 // get events with all sorts of parameters (offset starts at 1)
 - (NSMutableArray *) getEvent:(int)baby_id event:(NSString*)event limit:(int)limit offset:(int)offset startDate:(NSDate*)start endDate:(NSDate*)end;
-// this is copied from getEvent, the difference is that this function return exact matches, not LIKE
-- (NSMutableArray *) getItem:(int)baby_id name:(NSString*)name limit:(int)limit offset:(int)offset startDate:(NSDate*)start endDate:(NSDate*)end;
 
+
+// this is copied from getEvent, the difference is that this function return exact matches, not LIKE
+// return an array of totEvent
+- (NSMutableArray *) getItem:(int)baby_id name:(NSString*)name limit:(int)limit offset:(int)offset startDate:(NSDate*)start endDate:(NSDate*)end;
+// a shortcut to getItem, limit=-1, offset=-1, start and end date = nil
+- (totEvent *) getItem:(int)baby_id name:(NSString*)name;
+// insert or update a record
+- (BOOL) setItem:(int)baby_id name:(NSString*)name value:(NSDictionary*)dict;
+
+    
 // get N events in a category (event) before current_event_id (N=limit)
 - (NSMutableArray *) getPreviousEvent:(int)baby_id event:(NSString*)event limit:(int)limit current_event_date:(NSDate*)current_event_date;
 

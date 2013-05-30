@@ -5,8 +5,8 @@
 //  Created by Hao on 4/21/12.
 
 #import "totModel.h"
-#import "totEvent.h"
 #import "totEventName.h"
+#import "totHomeFeedingViewController.h"
 
 @implementation totModel
 
@@ -437,6 +437,21 @@
         if( stmt != nil ) sqlite3_finalize(stmt);
         return events;
     }
+}
+
+// a shortcut to getItem, limit=-1, offset=-1, start and end date = nil
+- (totEvent *) getItem:(int)baby_id name:(NSString*)name {
+    NSArray* items = [self getItem:baby_id name:name limit:-1 offset:-1 startDate:nil endDate:nil];
+    if( items.count > 0 )
+        return [items objectAtIndex:0];
+    else
+        return nil;
+}
+
+// a shortcut to getItem, limit=-1, offset=-1, start and end date = nil
+- (BOOL) setItem:(int)baby_id name:(NSString*)name value:(NSDictionary*)dict {
+    NSString* jsonstr = [totHomeFeedingViewController ObjectToJSON:dict];
+    return [self updatePreference:baby_id preference:name value:jsonstr];
 }
 
 - (int) getEventCount:(int)baby_id event:(NSString*)event {
