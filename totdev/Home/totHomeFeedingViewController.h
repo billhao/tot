@@ -80,6 +80,9 @@
 - (void)SummaryButtonClicked: (UIButton *)button;
 - (void)backButtonClicked: (UIButton *)button;
 
-+ (NSArray*)stringToJSON:(NSString*) jsonstring;
+// json string to object
++ (NSArray*)JSONToObject:(NSString*) jsonstring;
+// object to json string
++ (NSString*)ObjectToJSON:(id)obj;
 
 @end

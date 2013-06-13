@@ -158,11 +158,21 @@
 }
 
 // convert a json string to json object
-+ (NSArray*)stringToJSON:(NSString*) jsonstring {
++ (NSArray*)JSONToObject:(NSString*) jsonstring {
     NSError* e = [[NSError alloc] init];
     NSArray* json = [NSJSONSerialization JSONObjectWithData: [jsonstring dataUsingEncoding:NSUTF8StringEncoding] options: NSJSONReadingMutableContainers error: &e];
     [e release];
     return json;
+}
+
++ (NSString*)ObjectToJSON:(id)obj {
+    NSError* e = [[NSError alloc] init];
+    NSData* jsonData = [NSJSONSerialization dataWithJSONObject:obj
+                                                       options:NSJSONWritingPrettyPrinted error:&e];
+    
+    NSString* jsonstr = [[[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding] autorelease];
+    [e release];
+    return jsonstr;
 }
 
 - (void)ChooseFoodOKButtonClicked: (UIButton *)button {
@@ -303,7 +313,7 @@
     for (int i = 0; i < [events count]; ++i) {
         totEvent* evt = (totEvent*)[events objectAtIndex:i];
         NSString* value = evt.value;
-        NSArray* food_list = [totHomeFeedingViewController stringToJSON:value];
+        NSArray* food_list = [totHomeFeedingViewController JSONToObject:value];
         for (int j = 0; j < [food_list count]; ++j) {
             NSDictionary* food_item = [food_list objectAtIndex:j];
             NSString* food_name = [food_item objectForKey:@"name"];

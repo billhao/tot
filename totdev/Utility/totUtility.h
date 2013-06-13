@@ -13,6 +13,8 @@
 
 +(UIImage *)squareCropImage:(UIImage *)origImage;  
 +(NSString *)nowTimeString;
++(NSString *)dateToString:(NSDate*)date;
++(NSDate *)stringToDate:(NSString*)dateStr;
 
 // utility function print a frame
 + (NSString*)getFrameString:(CGRect)frame;
