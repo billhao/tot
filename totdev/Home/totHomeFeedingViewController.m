@@ -161,6 +161,7 @@
 + (NSArray*)stringToJSON:(NSString*) jsonstring {
     NSError* e = [[NSError alloc] init];
     NSArray* json = [NSJSONSerialization JSONObjectWithData: [jsonstring dataUsingEncoding:NSUTF8StringEncoding] options: NSJSONReadingMutableContainers error: &e];
+    [e release];
     return json;
 }
 
