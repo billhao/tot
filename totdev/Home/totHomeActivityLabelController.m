@@ -12,6 +12,7 @@
 #import "totEvent.h"
 #import "Global.h"
 #import "totHomeFeedingViewController.h"
+#import "totEvent.h"
 
 @interface totHomeActivityLabelController ()
 
@@ -38,13 +39,11 @@
 
 - (void)receiveMessage: (NSMutableDictionary*)message {
     currentImageFileName = [message objectForKey:@"storedImage"];
-    NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString* documentDirectory = [paths objectAtIndex:0];
-    NSString* imagePath = [documentDirectory stringByAppendingPathComponent:currentImageFileName];
-    [backgroundImage setImage:[UIImage imageWithContentsOfFile:imagePath]];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
+- (void)showImage:(NSString*)imageFileName {
+    currentImageFileName = imageFileName;
+    
     if( currentImageFileName == nil ) return;
     
     // load associated data
@@ -56,7 +55,44 @@
     // update existing activity slider
     [self updateExistingActivitySlider];
     
-    title.text = currentImageFileName;
+    NSNumber* event_id = [currentImageData objectForKey:@"event_id"];
+    title.text = [NSString stringWithFormat:@"%d", event_id.intValue];//currentImageFileName;
+
+    NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString* documentDirectory = [paths objectAtIndex:0];
+    NSString* imagePath = [documentDirectory stringByAppendingPathComponent:currentImageFileName];
+    [backgroundImage setImage:[UIImage imageWithContentsOfFile:imagePath]];
+}
+
+// show next (newer) image if previous is false. show previous (older) image if true.
+- (void)showNextImage:(BOOL)previous {
+    // get the image file name to show
+    NSDate* currentImageDate = [totEvent dateFromString:[currentImageData objectForKey:@"added_at"]];
+    NSString* nextImageFileName = nil;
+    
+    NSArray* events;
+    if( previous ) {
+        events = [global.model getEvent:global.baby.babyID event:ACTIVITY_PHOTO limit:1 offset:-1 startDate:nil endDate:currentImageDate orderByDesc:TRUE];
+        NSLog(@"Previous");
+    }
+    else {
+        events = [global.model getEvent:global.baby.babyID event:ACTIVITY_PHOTO limit:1 offset:-1 startDate:currentImageDate endDate:nil orderByDesc:FALSE];
+        NSLog(@"Next");
+    }
+    if( events.count > 0 ) {
+        totEvent* event = [events objectAtIndex:0];
+        // release???
+        NSMutableDictionary* obj = [(NSMutableDictionary*)[totHomeFeedingViewController JSONToObject:event.value] retain];
+        nextImageFileName = [obj objectForKey:@"filename"];
+        NSLog(@"%d", event.event_id);
+    }
+    
+    if( nextImageFileName != nil )
+        [self showImage:nextImageFileName];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [self showImage:currentImageFileName];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {}
@@ -69,19 +105,39 @@
     [self.view addSubview:backgroundImage];
 
     // title
-    title = [[UILabel alloc]initWithFrame:CGRectMake(100, 20, 120, 40)];
+    title = [[UILabel alloc]initWithFrame:CGRectMake(100, 20, 120, 20)];
     title.text = @"Label your photo";
     title.textAlignment = NSTextAlignmentCenter;
-    title.backgroundColor = [UIColor clearColor];
-    title.font = [UIFont systemFontOfSize:9];
+    title.backgroundColor = [UIColor blackColor];
+    title.alpha = 1.0f;
+    title.font = [UIFont systemFontOfSize:11];
     title.textColor = [UIColor whiteColor];
     [self.view addSubview:title];
+
+    // score
+    score = [[UILabel alloc]initWithFrame:CGRectMake(260, 20, 40, 20)];
+    score.text = @"score";
+    score.textAlignment = NSTextAlignmentCenter;
+    score.backgroundColor = [UIColor blackColor];
+    score.alpha = 0.5f;
+    score.font = [UIFont systemFontOfSize:9];
+    score.textColor = [UIColor whiteColor];
+    [self.view addSubview:score];
 
     // category slider
     [self createActivitySlider];
     
     // create existing activity vertical slider
     [self createExistingActivitySlider];
+    
+    // init left and right gestures
+    UISwipeGestureRecognizer* leftSwipeRecognizer = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipeGestureEvent:)];
+    leftSwipeRecognizer.direction = UISwipeGestureRecognizerDirectionLeft;
+    [self.view addGestureRecognizer:leftSwipeRecognizer];
+    
+    UISwipeGestureRecognizer* rightSwipeRecognizer = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipeGestureEvent:)];
+    rightSwipeRecognizer.direction = UISwipeGestureRecognizerDirectionRight;
+    [self.view addGestureRecognizer:rightSwipeRecognizer];
 }
 
 -(void)createExistingActivitySlider {
@@ -222,34 +278,43 @@
     }
 }
 
-- (NSString*)getActivityName {
++ (NSString*)getActivityName:(NSString*)currentImageFileName {
     //return @"activity/photo/1369913416.jpg";
-    return [NSString stringWithFormat:ACTIVITY_PHOTO, currentImageFileName];
+    return [NSString stringWithFormat:ACTIVITY_PHOTO_REPLACABLE, currentImageFileName];
 }
 
 - (void)saveActivity {
-    [global.model setItem:global.baby.babyID name:[self getActivityName] value:currentImageData];
+    [global.model setItem:global.baby.babyID name:[totHomeActivityLabelController getActivityName:currentImageFileName] value:currentImageData];
 }
 
-- (void)loadActivity {
-    if( currentImageData != nil ) {
-        [currentImageData release];
-        currentImageData = nil;
+// Respond to a swipe gesture
+- (IBAction)swipeGestureEvent:(UISwipeGestureRecognizer *)swipeRecognizer {
+    // Get the location of the gesture
+    CGPoint location = [swipeRecognizer locationInView:self.view];
+    NSLog(@"Swipe");
+    if( swipeRecognizer.direction == UISwipeGestureRecognizerDirectionLeft ) {
+        [self showNextImage:TRUE]; // show newer image
     }
-
-    totEvent* event = [global.model getItem:global.baby.babyID name:[self getActivityName]];
-    if( event != nil ) {
-        currentImageData = (NSMutableDictionary*)[totHomeFeedingViewController JSONToObject:event.value];
-        [currentImageData retain];
+    else if( swipeRecognizer.direction == UISwipeGestureRecognizerDirectionRight ) {
+        [self showNextImage:FALSE]; // show older image
     }
-    else
-        currentImageData = [[NSMutableDictionary alloc]init]; // create if not exist in db
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+//
+//    // Display an image view at that location
+//    [self drawImageForGestureRecognizer:recognizer atPoint:location];
+//    
+//    // If gesture is a left swipe, specify an end location
+//    // to the left of the current location
+//    if (recognizer.direction == UISwipeGestureRecognizerDirectionLeft) {
+//        location.x -= 220.0;
+//    } else {
+//        location.x += 220.0;
+//    }
+//    
+//    // Animate the image view in the direction of the swipe as it fades out
+//    [UIView animateWithDuration:0.5 animations:^{
+//        self.imageView.alpha = 0.0;
+//        self.imageView.center = location;
+//    }];
 }
 
 - (void)dealloc {
@@ -257,6 +322,22 @@
     [backgroundImage release];
     [mMessage release];
     if( currentImageData != nil ) [currentImageData release];
+}
+
+- (void)loadActivity {
+    if( currentImageData != nil ) {
+        [currentImageData release];
+        currentImageData = nil;
+    }
+    
+    totEvent* event = [global.model getItem:global.baby.babyID name:[totHomeActivityLabelController getActivityName:currentImageFileName]];
+    if( event != nil ) {
+        currentImageData = (NSMutableDictionary*)[totHomeFeedingViewController JSONToObject:event.value];
+        [currentImageData retain];
+        [currentImageData setObject:[NSNumber numberWithInt:event.event_id] forKey:@"event_id"];
+    }
+    else
+        currentImageData = [[NSMutableDictionary alloc]init]; // create if not exist in db
 }
 
 - (void)initActivities {

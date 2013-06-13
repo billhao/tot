@@ -49,18 +49,28 @@
 
 
 +(NSString *)nowTimeString{
-    
     NSDate *now = [NSDate date];
-	NSDateFormatter *formatter = nil;
-    NSString *nowString;
-	formatter = [[NSDateFormatter alloc] init];
-	[formatter setTimeStyle:NSDateFormatterShortStyle];//mm:ss AM
-	nowString =[formatter stringFromDate:now];
-	[formatter release];
-    
-    return  nowString;
+    return [totUtility dateToString:now];
 }
 
++(NSString *)dateToString:(NSDate*)date{
+	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    NSString *dateString;
+	[formatter setDateStyle:NSDateFormatterFullStyle];
+	[formatter setTimeStyle:NSDateFormatterFullStyle];
+	dateString =[formatter stringFromDate:date];
+	[formatter release];
+    return  dateString;
+}
+
++(NSDate *)stringToDate:(NSString*)dateStr{
+	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+	[formatter setDateStyle:NSDateFormatterFullStyle];
+	[formatter setTimeStyle:NSDateFormatterFullStyle];
+    NSDate* date = [formatter dateFromString:dateStr];
+	[formatter release];
+    return  date;
+}
 
 // utility function print a frame
 + (NSString*)getFrameString:(CGRect)frame {

@@ -16,6 +16,7 @@
     
     UIImageView* backgroundImage;
     UILabel* title;
+    UILabel* score;
     NSMutableDictionary* mMessage;
     
     NSMutableArray* mActivities;
@@ -30,7 +31,6 @@
     NSString* currentImageFileName;
     NSMutableDictionary* currentImageData;
     NSString* currentSelectedActivity;
-
 }
 
 @property (nonatomic, assign) totHomeRootController* homeRootController;

@@ -86,6 +86,7 @@
     [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     NSString *formattedDateString = [dateFormatter stringFromDate:datetime];
     [dateFormatter release];
+    NSLog(@"second time %@", formattedDateString);
     return [self addEvent:baby_id event:event datetimeString:formattedDateString value:value];
 }
 
@@ -215,7 +216,11 @@
 }
 
 - (NSMutableArray *) getEvent:(int)baby_id event:(NSString*)event limit:(int)limit offset:(int)offset startDate:(NSDate*)start endDate:(NSDate*)end {
-    NSMutableArray *events = [[[NSMutableArray alloc] init] autorelease];
+    return [self getEvent:baby_id event:event limit:limit offset:offset startDate:start endDate:end orderByDesc:TRUE];
+}
+
+- (NSMutableArray *) getEvent:(int)baby_id event:(NSString*)event limit:(int)limit offset:(int)offset startDate:(NSDate*)start endDate:(NSDate*)end orderByDesc:(BOOL)orderByDesc {
+NSMutableArray *events = [[[NSMutableArray alloc] init] autorelease];
     sqlite3_stmt *stmt = nil;
     @try {
         if (db == nil) {
@@ -226,14 +231,14 @@
         NSString* searchname = nil;
         if( event!=nil ) searchname = [NSString stringWithFormat:@"%@%%", event];
         //NSLog(@"%@", searchname);
-        NSString* sql_main = @"SELECT event.event_id, event.time, event.name, event.value FROM event %@ ORDER BY datetime(event.time) DESC %@";
+        NSString* sql_main = @"SELECT event.event_id, event.time, event.name, event.value FROM event %@ ORDER BY datetime(event.time) %@ %@";
         NSString* sql_condition;
         if( event!=nil ) {
             if( start!=nil && end!=nil ) {
                 sql_condition = @"WHERE name LIKE ? AND datetime(time) >= ? AND datetime(time) < ?";
             }
             else if( start!=nil ) {
-                sql_condition = @"WHERE name LIKE ? AND datetime(time) >= ?";
+                sql_condition = @"WHERE name LIKE ? AND datetime(time) > ?";
             }
             else if( end!=nil ) {
                 sql_condition = @"WHERE name LIKE ? AND datetime(time) < ?";
@@ -256,6 +261,13 @@
                 sql_condition = @"";
             }
         }
+        
+        NSString* sql_order = @"";
+        if( orderByDesc )
+            sql_order = @"DESC";
+        else
+            sql_order = @"ASC";
+        
         NSString* sql_limit = @"";
         if( limit > 0 ) {
             if( offset > 0 )
@@ -264,7 +276,7 @@
                 sql_limit = @"LIMIT ?";
         }
         
-        NSString* sql = [NSString stringWithFormat:sql_main, sql_condition, sql_limit];
+        NSString* sql = [NSString stringWithFormat:sql_main, sql_condition, sql_order, sql_limit];
         //NSLog(@"[db] SQL=%@", sql);
         
         const char *sqlz = [sql cStringUsingEncoding:NSASCIIStringEncoding];
@@ -448,10 +460,61 @@
         return nil;
 }
 
+// unlike updatePreference, this function does not update event.time
 // a shortcut to getItem, limit=-1, offset=-1, start and end date = nil
 - (BOOL) setItem:(int)baby_id name:(NSString*)name value:(NSDictionary*)dict {
     NSString* jsonstr = [totHomeFeedingViewController ObjectToJSON:dict];
-    return [self updatePreference:baby_id preference:name value:jsonstr];
+
+    int cnt = [self getEventCount:baby_id event:name];
+    if( cnt == 0 ) {
+        // add record
+        return [self addPreference:baby_id preference:name value:jsonstr];
+    }
+    
+    // update record
+    BOOL re = FALSE;
+    sqlite3_stmt *stmt = nil;
+    @try {
+        while(true) {
+            if (db == nil) {
+                NSLog(@"Can't open db");
+                break;
+            }
+            NSString* sql = @"UPDATE event SET value=? WHERE name=?";
+            
+            const char *sqlz = [sql cStringUsingEncoding:NSUTF8StringEncoding];
+            int ret;
+            ret = sqlite3_prepare_v2(db, sqlz, -1, &stmt, NULL);
+            if(ret != SQLITE_OK) {
+                NSLog(@"[db] Problem with prepare statement %d", ret);
+                break;
+            }
+            ret = sqlite3_bind_text(stmt, 1, [jsonstr UTF8String], -1, SQLITE_TRANSIENT);
+            if( ret != SQLITE_OK ) {
+                NSLog(@"[db] getEvent bind_text %d", ret);
+                break;
+            }
+            ret = sqlite3_bind_text(stmt, 2, [name UTF8String], -1, SQLITE_TRANSIENT);
+            if( ret != SQLITE_OK ) {
+                NSLog(@"[db] getEvent bind_text %d", ret);
+                break;
+            }
+            
+            ret = sqlite3_step(stmt);
+            if (ret==SQLITE_DONE)
+                re = TRUE;
+            else
+                NSLog(@"[db] sqlite3_step %d", ret);
+            break;
+        }
+    }
+    @catch (NSException *exception) {
+        NSLog(@"[db] An exception occured: %@", [exception reason]);
+    }
+    @finally {
+        if( stmt != nil ) sqlite3_finalize(stmt);
+        return re;
+    }
 }
 
 - (int) getEventCount:(int)baby_id event:(NSString*)event {

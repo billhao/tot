@@ -15,6 +15,8 @@
 #import "totHomeDiaperView.h"
 #import "../Utility/totImageView.h"
 #import "../Activity/totActivityUtility.h"
+#import "totEventName.h"
+#import "totUtility.h"
 
 @implementation totHomeEntryViewController
 
@@ -65,12 +67,22 @@
     NSDate* today = [NSDate date];
     NSTimeInterval interval = [today timeIntervalSince1970];
     NSString *filename = [[NSString alloc] initWithFormat:@"%d.jpg", (int)interval];
+    
+    // add a record to db
+    NSMutableDictionary* imageData = [[NSMutableDictionary alloc] init];
+    [imageData setValue:filename forKey:@"filename"];
+    [imageData setValue:[totEvent formatTime:today] forKey:@"added_at"];
+    NSLog(@"first time %@", [totEvent formatTime:today]);
+    NSString* activityName = [NSString stringWithFormat:ACTIVITY_PHOTO_REPLACABLE, filename];
+    [global.model setItem:global.baby.babyID name:activityName value:imageData];
+
 
     NSLog(@"Photo filename: %@", filename);
     [self saveImage:photo intoFile:filename];
     
     [mMessage removeAllObjects];
     [mMessage setObject:filename forKey:@"storedImage"];
+    [mMessage setObject:today forKey:@"added_at"];
     [filename release];
     
     // Switches to the next view.
