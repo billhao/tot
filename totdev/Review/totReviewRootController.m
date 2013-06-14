@@ -12,6 +12,9 @@
 #import "totReviewStory.h"
 #import "totReviewFilterOpenerView.h"
 #import "totReviewFilterView.h"
+#import "totBooklet.h"
+#import "totBookletTest.h"
+#import "totBookViewController.h"
 #import "../Model/totEvent.h"
 
 #define LIMIT 10
@@ -19,6 +22,7 @@
 @implementation totReviewRootController
 
 @synthesize tableViewController;
+@synthesize mBookController;
 @synthesize mModel;
 @synthesize mOffset;
 @synthesize mCurrentBabyId;
@@ -115,8 +119,20 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
+    // totBookletTest* test = [[totBookletTest alloc] init];
+    // [test basicTest];
+    // [test release];
+
     [super viewDidLoad];
     
+    // Scrapbook
+    totBookViewController* aBookController = [[totBookViewController alloc] initWithNibName:@"ScrapbookView" bundle:nil];
+    self.mBookController = aBookController;
+    [self.view addSubview:self.mBookController.view];
+    [aBookController release];
+    
+    // Timeline
+    /**
     // prevent the filter view show above the review view
     self.view.frame = CGRectMake(0, 20, 320, 460);
     self.view.clipsToBounds = true;
@@ -127,18 +143,17 @@
     [self.tableViewController setRootController:self];
     [self.view addSubview:tableViewController.view];
     [aTableView release];
+     */
     
-    /*
+    // Filter
+    /**
     totReviewFilterView* filter = [[totReviewFilterView alloc] initWithFrame:CGRectMake(0, -200, 320, 200)];
     totReviewFilterOpenerView *filterOpener = [[totReviewFilterOpenerView alloc] initWithFrame:CGRectMake(240, -20, 30, 70)];
-
     filter.opener = filterOpener;
     filter.parentController = self;
     [self.view addSubview:filter];
-    
     filterOpener.filter = filter;
     [self.view insertSubview:filterOpener belowSubview:filter];
-
     [filterOpener release];
     [filter release];
      */
@@ -151,6 +166,7 @@
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
     [tableViewController release];
+    [mBookController release];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
