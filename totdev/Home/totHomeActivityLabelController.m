@@ -124,6 +124,21 @@
     score.textColor = [UIColor whiteColor];
     [self.view addSubview:score];
 
+    // exit button
+    UIButton* exitBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    exitBtn.frame = CGRectMake(20, 20, 40, 20);
+    [exitBtn setTitle:@"Exit" forState:UIControlStateNormal];
+    [exitBtn setTitle:@"Exit" forState:UIControlStateSelected];
+    [exitBtn setTitle:@"Exit" forState:UIControlStateHighlighted];
+    [exitBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [exitBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
+    [exitBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
+    [exitBtn setBackgroundColor:[UIColor blackColor]];
+    [exitBtn setAlpha:0.5f];
+    [exitBtn addTarget:self action:@selector(exitButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [exitBtn.titleLabel setFont:[UIFont systemFontOfSize:9]];
+    [self.view addSubview:exitBtn];
+
     // category slider
     [self createActivitySlider];
     
@@ -138,6 +153,10 @@
     UISwipeGestureRecognizer* rightSwipeRecognizer = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipeGestureEvent:)];
     rightSwipeRecognizer.direction = UISwipeGestureRecognizerDirectionRight;
     [self.view addGestureRecognizer:rightSwipeRecognizer];
+}
+
+- (void)exitButtonPressed:(UIButton*)sender {
+    [homeRootController switchTo:kHomeViewEntryView withContextInfo:nil];
 }
 
 -(void)createExistingActivitySlider {
