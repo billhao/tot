@@ -6,13 +6,15 @@
 //  Copyright (c) 2013 tot. All rights reserved.
 //
 
+#import <math.h>
 #import "totBookletView.h"
 #import "totBooklet.h"
 #import <QuartzCore/QuartzCore.h>
 
-@implementation totBookBasicView
+#define FULL_PAGE_W 320.0f
+#define FULL_PAGE_H 411.0f
 
-static int mRotate = 0;
+@implementation totBookBasicView
 
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
@@ -22,21 +24,33 @@ static int mRotate = 0;
     return self;
 }
 
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    mRotate += 10; [self rotate:mRotate];
+- (void)rotate:(float)radians {
+    self.transform = CGAffineTransformRotate(self.transform, radians);
 }
 
-- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {}
+- (void)rotateTo:(float)radians {
+    self.transform = CGAffineTransformMakeRotation(radians);
+}
 
-- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {}
+- (void)scale:(float)s {
+    self.transform = CGAffineTransformScale(self.transform, s, s);
+}
 
-- (void)rotate:(float)r {
-    self.transform = CGAffineTransformMakeRotation(r / 180.0 * M_PI);
+- (void)scaleTo:(float)s {
+    self.transform = CGAffineTransformMakeScale(1, 1);
+}
+
+- (void)scaleToX:(float)sx andToY:(float)sy {
+    self.transform = CGAffineTransformMakeScale(sx, sy);
+}
+
+- (void)moveTo:(CGPoint)p {
+    self.transform = CGAffineTransformMakeTranslation(p.x, p.y);
 }
 
 @end
 
-@implementation totPageElementView
+@implementation totPageElementViewInternal
 
 @synthesize mData;
 
@@ -44,14 +58,18 @@ static int mRotate = 0;
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
+        mData = nil;
+        mImage = nil;
     }
     return self;
 }
 
 - (id)initWithElement:(totPageElement *)data {
+    // the top-left point has to be (0,0)
     self = [super initWithFrame:CGRectMake(0, 0, data.w, data.h)];
     if (self) {
         self.mData = data;
+        mImage = nil;
     }
     return self;
 }
@@ -60,21 +78,196 @@ static int mRotate = 0;
     if (self.mData) {
         NSString* image_path = [self.mData getResource:[totPageElement image]];
         if (image_path) {
-            UIImageView* image = [[UIImageView alloc] initWithFrame:self.frame];
-            image.image = [UIImage imageNamed:image_path];
-            image.layer.cornerRadius = 10.0f;
-            image.layer.masksToBounds = YES;
-            image.layer.borderColor = [UIColor colorWithRed:0.7f green:0.7f blue:0.7f alpha:1.0f].CGColor;
-            image.layer.borderWidth = 3.0f;
-            [self addSubview:image];
-            [image release];
+            mImage = [[UIImageView alloc] initWithFrame:self.frame];
+            mImage.image = [UIImage imageNamed:image_path];
+            mImage.layer.cornerRadius = 10.0f;
+            mImage.layer.masksToBounds = YES;
+            mImage.layer.borderColor = [UIColor colorWithRed:0.7f green:0.7f blue:0.7f alpha:1.0f].CGColor;
+            mImage.layer.borderWidth = 3.0f;
+            [self addSubview:mImage];
+            [mImage release];
         }
     }
+}
+
+- (void)removeImage {
+    if (mImage) {
+        [mImage removeFromSuperview];
+        [mImage release]; mImage = nil;  // Group these two lines.
+    }
+}
+
+- (void)resizeTo:(CGRect)size {
+    [mImage setFrame:size];
+    [self setFrame:size];
 }
 
 - (void)dealloc {
     [super dealloc];
     [mData release];
+    [mImage release];
+}
+
+@end
+
+
+@implementation totPageElementView
+
+@synthesize mView;
+
+static BOOL bIsFullPage = NO;
+static BOOL bAnimationStarted = NO;
+- (void)animationDidStart:(NSString*)animationID context:(void*)context {
+    bAnimationStarted = YES;
+    printf("animation started\n");
+}
+- (void)animationDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context {
+    bAnimationStarted = NO;
+    printf("animation finished\n");
+}
+
+- (void)animateRemaining {
+    [UIView beginAnimations:@"page_element_animation" context:nil];
+    [UIView setAnimationDelegate:self];
+    [UIView setAnimationDuration:0.5f];
+    [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+    [UIView setAnimationWillStartSelector:@selector(animationDidStart:context:)];
+    [UIView setAnimationDidStopSelector:@selector(animationDidStop:finished:context:)];
+    if (bIsFullPage) {
+        [self setFrame:CGRectMake(mView.mData.x, mView.mData.y, mView.mData.w, mView.mData.h)];
+        [mView resizeTo:CGRectMake(0, 0, mView.mData.w, mView.mData.h)];
+        [mView rotateTo:mView.mData.radians];
+        bIsFullPage = NO;
+    } else {
+        [mView rotateTo:0];
+        [mView resizeTo:CGRectMake(0, 0, FULL_PAGE_W, FULL_PAGE_H)];
+        [self setFrame:CGRectMake(0, 0, FULL_PAGE_W, FULL_PAGE_H)];
+        bIsFullPage = YES;
+    }
+    [UIView commitAnimations];
+}
+
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
+    return YES;
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+    return YES;
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer
+shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+    return YES;
+}
+
+- (void)handleTap:(UIGestureRecognizer *)gestureRecognizer {
+    if ([gestureRecognizer isKindOfClass:UITapGestureRecognizer.class]) {
+        [self animateRemaining];
+    }
+}
+
+- (void)handlePan:(UIGestureRecognizer *)gestureRecognizer {
+    if ([gestureRecognizer isKindOfClass:UIPanGestureRecognizer.class]) {
+        UIPanGestureRecognizer* pan = (UIPanGestureRecognizer*)gestureRecognizer;
+        CGPoint pos = [pan translationInView:self];
+        if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
+            mTouchLastTime = CGPointMake(pos.x, pos.y);
+        } else if (gestureRecognizer.state != UIGestureRecognizerStateBegan) {
+            float new_x = self.frame.origin.x + (pos.x - mTouchLastTime.x);
+            float new_y = self.frame.origin.y + (pos.y - mTouchLastTime.y);
+            [self setFrame:CGRectMake(new_x, new_y, self.frame.size.width, self.frame.size.height)];
+            mTouchLastTime = CGPointMake(pos.x, pos.y);
+        }
+        if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
+            [self animateRemaining];
+        }
+    }
+}
+
+- (void)handlePinch:(UIGestureRecognizer *)gestureRecognizer {
+    if ([gestureRecognizer isKindOfClass:UIPinchGestureRecognizer.class]) {
+        if (gestureRecognizer.state == UIGestureRecognizerStateBegan || gestureRecognizer.state == UIGestureRecognizerStateChanged) {
+            UIPinchGestureRecognizer* pinch = (UIPinchGestureRecognizer*)gestureRecognizer;
+            [mView scale:pinch.scale];
+            [pinch setScale:1];
+        }
+        if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
+            [self animateRemaining];
+        }
+    }
+}
+
+- (void)handleRotate:(UIGestureRecognizer *)gestureRecognizer {
+    if ([gestureRecognizer isKindOfClass:UIRotationGestureRecognizer.class]) {
+        if (gestureRecognizer.state == UIGestureRecognizerStateBegan || gestureRecognizer.state == UIGestureRecognizerStateChanged) {
+            UIRotationGestureRecognizer* rotate = (UIRotationGestureRecognizer*)gestureRecognizer;
+            [mView rotate:rotate.rotation];
+            [rotate setRotation:0];
+        }
+        if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
+            [self animateRemaining];
+        }
+    }
+}
+
+- (id)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
+    if (self) {
+        mView = nil;
+    }
+    return self;
+}
+
+- (id)initWithElementData:(totPageElement*)data {
+    self = [super initWithFrame:CGRectMake(data.x, data.y, data.w, data.h)];
+    if (self) {
+        // Register gesture recognizers.
+        UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
+        [tap setDelegate:self];
+        [self addGestureRecognizer:tap];
+        [tap release];
+        
+        /*
+        UIPanGestureRecognizer* pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
+        pan.minimumNumberOfTouches = 2;
+        pan.maximumNumberOfTouches = 2;
+        [pan setDelegate:self];
+        [self addGestureRecognizer:pan];
+        [pan release];
+        
+        UIPinchGestureRecognizer* pinch = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(handlePinch:)];
+        [pinch setDelegate:self];
+        [self addGestureRecognizer:pinch];
+        [pinch release];
+        
+        UIRotationGestureRecognizer* rotate = [[UIRotationGestureRecognizer alloc] initWithTarget:self action:@selector(handleRotate:)];
+        [rotate setDelegate:self];
+        [self addGestureRecognizer:rotate];
+        [rotate release];
+         */
+        
+        mView = [[totPageElementViewInternal alloc] initWithElement:data];
+        [mView rotate:data.radians];
+        [mView display];
+        [self addSubview:mView];
+    }
+    return self;
+}
+
+- (void)setPageElementData:(totPageElement*)data {
+    if (mView) {
+        [mView removeFromSuperview];
+        [mView release]; mView = nil;
+    }
+    mView = [[totPageElementViewInternal alloc] initWithElement:data];
+    [mView rotate:data.radians];
+    [mView display];
+    [self addSubview:mView];
+}
+
+- (void)dealloc {
+    [super dealloc];
+    [mView release];
 }
 
 @end

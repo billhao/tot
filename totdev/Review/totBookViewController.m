@@ -26,23 +26,6 @@
     return self;
 }
 
-- (void)initPageElement:(totPageElement*)e
-                      x:(float)x
-                      y:(float)y
-                      w:(float)w
-                      h:(float)h
-                      r:(float)r
-                      n:(NSString*)name
-                      t:(PageElementMediaType)t {
-    e.x = x;
-    e.y = y;
-    e.w = w;
-    e.h = h;
-    e.radius = r;
-    e.name = name;
-    e.type = t;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -50,19 +33,13 @@
     
     // Setup a pageElement
     totPageElement* element = [[totPageElement alloc] init];
-    [self initPageElement:element x:20 y:20 w:100 h:100 r:0 n:@"Test" t:IMAGE];
+    [totPageElement initPageElement:element x:50 y:50 w:50 h:50 r:0.9 n:@"Test" t:IMAGE];
     [element addResource:[totPageElement image] withPath:@"bg_registration.png"];
     
-    UIView* wrapper = [[UIView alloc] initWithFrame:CGRectMake(20, 20, 100, 100)];
-    totPageElementView* elementView = [[totPageElementView alloc] initWithElement:element];
-    elementView.mData = element;
-    [wrapper addSubview:elementView];
-    [self.view addSubview:wrapper];
-    [elementView display];
-    [elementView rotate:45];
-
-    [wrapper release];
+    totPageElementView* elementView = [[totPageElementView alloc] initWithElementData:element];
+    [self.view addSubview:elementView];
     [elementView release];
+    
     [element release];
 }
 

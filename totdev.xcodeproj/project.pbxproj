@@ -1178,12 +1178,12 @@
 		8E84C91D174C80A6004057B9 /* Scrapbook */ = {
 			isa = PBXGroup;
 			children = (
+				8E84CC52175F0AA6004057B9 /* totBookletTest.h */,
+				8E84CC53175F0AA6004057B9 /* totBookletTest.m */,
 				8E84C91E174DF242004057B9 /* totBooklet.h */,
 				8E84C91F174DF242004057B9 /* totBooklet.m */,
 				8ECAC85A17684500000B4E0B /* totBookletView.h */,
 				8ECAC85B17684500000B4E0B /* totBookletView.m */,
-				8E84CC52175F0AA6004057B9 /* totBookletTest.h */,
-				8E84CC53175F0AA6004057B9 /* totBookletTest.m */,
 				8ECAC85717683E4B000B4E0B /* totBookViewController.h */,
 				8ECAC85817683E4B000B4E0B /* totBookViewController.m */,
 			);

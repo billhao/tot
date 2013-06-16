@@ -10,32 +10,54 @@
 
 @class totPageElement;
 
+// Takes care of the animation.
 @interface totBookBasicView : UIView {
-
 }
 
 - (void) rotate: (float)r;
+- (void) scale: (float)s;
+- (void) rotateTo: (float)r;
+- (void) scaleToX: (float)sx andToY:(float)sy;
+- (void) scaleTo: (float)s;
+- (void) moveTo: (CGPoint)p;
 
 @end
 
-@interface totPageElementView : totBookBasicView {
+// Represents the view of basic page element.
+@interface totPageElementViewInternal : totBookBasicView {
     totPageElement* mData;
+    UIImageView *mImage;
 }
 
 @property (nonatomic, retain) totPageElement* mData;
 
 - (id)initWithElement:(totPageElement*)data;
 - (void)display;
+- (void)resizeTo:(CGRect)size;
 
 @end
 
+// Wrapper of the basic page element. (To make the rotation work..)
+@interface totPageElementView : UIView <UIGestureRecognizerDelegate> {
+    totPageElementViewInternal* mView;
+    CGPoint mTouchLastTime;
+}
 
+@property (nonatomic, readonly) totPageElementViewInternal* mView;
+
+- (id)initWithElementData:(totPageElement*)data;
+- (void)setPageElementData:(totPageElement*)data;
+@end
+
+
+// Page View
 @interface totPageView : UIView {
 
 }
 
 @end
 
+// Book View
 @interface totBookView : UIView {
 
 }

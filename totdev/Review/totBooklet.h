@@ -18,9 +18,9 @@ typedef enum {
 
 // Represents each element on the page. The element could be txt, image, or video.
 @interface totPageElement : NSObject {
-    float x, y;  // the top-left corner
+    float x, y;  // the center
     float w, h;  // the size of the element
-    float radius;  // rotate the element at the center
+    float radians;  // rotate the element at the center
     NSMutableDictionary* resources;  // the paths to the resource files (each element may contain more than one resource)
     PageElementMediaType type;  // the media type
     NSMutableString* name;  // identifier of the element
@@ -30,7 +30,7 @@ typedef enum {
 @property (nonatomic, assign) float y;
 @property (nonatomic, assign) float w;
 @property (nonatomic, assign) float h;
-@property (nonatomic, assign) float radius;
+@property (nonatomic, assign) float radians;
 @property (nonatomic, assign) PageElementMediaType type;
 @property (nonatomic, retain) NSString* name;
 
@@ -42,7 +42,15 @@ typedef enum {
 + (NSString*) image;
 + (NSString*) video;
 + (NSString*) audio;
-
+// NOTE: (x, y) is the center of the element.
++ (void)initPageElement:(totPageElement*)e
+                      x:(float)x
+                      y:(float)y
+                      w:(float)w
+                      h:(float)h
+                      r:(float)r
+                      n:(NSString*)name
+                      t:(PageElementMediaType)t;
 @end
 
 
@@ -68,6 +76,8 @@ typedef enum {
 - (void) addPageElement:(id)element;
 - (NSDictionary*) toDictionary;
 - (void) loadFromDictionary: (NSDictionary*)dict;
+// TODO(lxhuang)
+- (totPageElement*) getPageElement:(NSString*)name;
 
 @end
 

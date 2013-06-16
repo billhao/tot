@@ -18,7 +18,7 @@
 @synthesize y;
 @synthesize w;
 @synthesize h;
-@synthesize radius;
+@synthesize radians;
 @synthesize type;
 @synthesize name;
 
@@ -26,10 +26,27 @@
     if (self = [super init]) {
         x = y = w = h = 0;
         type = TEXT;
-        radius = 0;
+        radians = 0;
         resources = [[NSMutableDictionary alloc] init];
     }
     return self;
+}
+
++ (void)initPageElement:(totPageElement*)e
+                      x:(float)x
+                      y:(float)y
+                      w:(float)w
+                      h:(float)h
+                      r:(float)r
+                      n:(NSString*)name
+                      t:(PageElementMediaType)t {
+    e.x = x;
+    e.y = y;
+    e.w = w;
+    e.h = h;
+    e.radians = r;
+    e.name = name;
+    e.type = t;
 }
 
 - (void) addResource:(NSString *)key withPath:(NSString *)path {
@@ -51,7 +68,7 @@
     [output setObject:[NSNumber numberWithFloat:y] forKey:@"y"];
     [output setObject:[NSNumber numberWithFloat:w] forKey:@"w"];
     [output setObject:[NSNumber numberWithFloat:h] forKey:@"h"];
-    [output setObject:[NSNumber numberWithFloat:radius] forKey:@"radius"];
+    [output setObject:[NSNumber numberWithFloat:radians] forKey:@"radius"];
     [output setObject:[NSNumber numberWithInt:type] forKey:@"type"];
     if (name && [name length] > 0) {
         [output setObject:name forKey:@"name"];
@@ -83,7 +100,7 @@
     self.y = [self getFloatValue:@"y" fromObject:dict];
     self.w = [self getFloatValue:@"w" fromObject:dict];
     self.h = [self getFloatValue:@"h" fromObject:dict];
-    self.radius = [self getFloatValue:@"radius" fromObject:dict];
+    self.radians = [self getFloatValue:@"radius" fromObject:dict];
     self.type = [self getIntValue:@"type" fromObject:dict];
 
     [self.name release];  // it is retained...
@@ -133,6 +150,10 @@
     [pageElements release];
 }
 
+- (totPageElement*) getPageElement:(NSString*)name {
+    return nil;
+}
+
 // Used to load data from template description file.
 - (void) addPageElement:(id)element {
     totPageElement* new_element = [[totPageElement alloc] init];
@@ -146,7 +167,7 @@
             new_element.y = [y_str floatValue];
         } else if ([element_attr isEqualToString:@"radius"]) {
             NSString* radius_str = [element_object objectForKey:element_attr];
-            new_element.radius = [radius_str floatValue];
+            new_element.radians = [radius_str floatValue];
         } else if ([element_attr isEqualToString:@"w"]) {
             NSString* w_str = [element_object objectForKey:element_attr];
             new_element.w = [w_str floatValue];
