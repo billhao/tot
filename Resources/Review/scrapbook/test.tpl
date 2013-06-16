@@ -15,13 +15,13 @@
       "meta": "cover",
       "elements": [
         {
-          "x": 10,
-          "y": 20,
-          "w": 10,
-          "h": 10,
-          "radius": 20,
-          "type": "text",
-          "name": "test1",
+          "x": 222,
+          "y": 233,
+          "w": 185,
+          "h": 154,
+          "radius": 0,
+          "type": "image",
+          "name": "cover",
         },
         {
           "x": 10,

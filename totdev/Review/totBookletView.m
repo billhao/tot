@@ -37,7 +37,7 @@
 }
 
 - (void)scaleTo:(float)s {
-    self.transform = CGAffineTransformMakeScale(1, 1);
+    self.transform = CGAffineTransformMakeScale(s, s);
 }
 
 - (void)scaleToX:(float)sx andToY:(float)sy {
@@ -74,6 +74,10 @@
     return self;
 }
 
+- (BOOL)isEmpty {
+    return (mData == nil) || [mData isEmpty];
+}
+
 - (void)display {
     if (self.mData) {
         NSString* image_path = [self.mData getResource:[totPageElement image]];
@@ -85,7 +89,10 @@
             mImage.layer.borderColor = [UIColor colorWithRed:0.7f green:0.7f blue:0.7f alpha:1.0f].CGColor;
             mImage.layer.borderWidth = 3.0f;
             [self addSubview:mImage];
-            [mImage release];
+        } else {
+            mImage = [[UIImageView alloc] initWithFrame:self.frame];
+            mImage.image = [UIImage imageNamed:@"add_image.png"];  // default.
+            [self addSubview:mImage];
         }
     }
 }
@@ -109,7 +116,6 @@
 }
 
 @end
-
 
 @implementation totPageElementView
 
@@ -147,14 +153,9 @@ static BOOL bAnimationStarted = NO;
     [UIView commitAnimations];
 }
 
-- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
-    return YES;
-}
-
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
-    return YES;
-}
-
+// Delegates
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer { return YES; }
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch { return YES; }
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer
 shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
     return YES;
@@ -162,7 +163,11 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
 
 - (void)handleTap:(UIGestureRecognizer *)gestureRecognizer {
     if ([gestureRecognizer isKindOfClass:UITapGestureRecognizer.class]) {
-        [self animateRemaining];
+        if (![mView isEmpty]) {
+            [self animateRemaining];
+        } else {
+            printf("add new element\n");
+        }
     }
 }
 
@@ -226,7 +231,7 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
         [tap setDelegate:self];
         [self addGestureRecognizer:tap];
         [tap release];
-        
+
         /*
         UIPanGestureRecognizer* pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
         pan.minimumNumberOfTouches = 2;
@@ -234,21 +239,21 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
         [pan setDelegate:self];
         [self addGestureRecognizer:pan];
         [pan release];
-        
+
         UIPinchGestureRecognizer* pinch = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(handlePinch:)];
         [pinch setDelegate:self];
         [self addGestureRecognizer:pinch];
         [pinch release];
-        
+
         UIRotationGestureRecognizer* rotate = [[UIRotationGestureRecognizer alloc] initWithTarget:self action:@selector(handleRotate:)];
         [rotate setDelegate:self];
         [self addGestureRecognizer:rotate];
         [rotate release];
          */
-        
+
         mView = [[totPageElementViewInternal alloc] initWithElement:data];
-        [mView rotate:data.radians];
         [mView display];
+        [mView rotateTo:data.radians];  // rotate to the specified angle.
         [self addSubview:mView];
     }
     return self;
@@ -260,8 +265,8 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
         [mView release]; mView = nil;
     }
     mView = [[totPageElementViewInternal alloc] initWithElement:data];
-    [mView rotate:data.radians];
     [mView display];
+    [mView rotate:data.radians];
     [self addSubview:mView];
 }
 
@@ -275,11 +280,51 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
 
 @implementation totPageView
 
+@synthesize mPage;
+
+- (CGPoint)fullPageSize {
+    return CGPointMake(FULL_PAGE_W, FULL_PAGE_W);
+}
+
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
     }
     return self;
+}
+
+- (id)initWithFrame:(CGRect)frame andPageTemplateData:(NSDictionary *)data {
+    self = [super initWithFrame:frame];
+    if (self) {
+        mPage = [[totPage alloc] init];
+        [mPage loadFromDictionary:data];
+        
+        // Setup the background image
+        mBackground = [[UIImageView alloc] initWithFrame:self.frame];
+        mBackground.image = [UIImage imageNamed:self.mPage.templateFilename];
+        [self addSubview:mBackground];
+        
+        // Setup page element views.
+        mElementsView = [[NSMutableArray alloc] init];
+        for (int i = 0; i < [mPage elementCount]; ++i) {
+            totPageElementView* elementView = [[totPageElementView alloc] initWithElementData:[mPage getPageElementAtIndex:i]];
+            [mElementsView addObject:elementView];
+            [elementView release];
+        }
+        for (totPageElementView* view in mElementsView) {
+            [self insertSubview:view aboveSubview:mBackground];
+        }
+    }
+    return self;
+}
+
+- (void)loadFromData:(NSString *)jsonData {}
+
+- (void)dealloc {
+    [super dealloc];
+    [mBackground release];
+    [mPage release];
+    [mElementsView release];
 }
 
 @end
@@ -289,9 +334,11 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        
     }
     return self;
+}
+
+- (void)addNewPage:(NSString*)pageName {
 }
 
 @end

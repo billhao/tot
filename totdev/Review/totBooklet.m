@@ -32,6 +32,10 @@
     return self;
 }
 
++ (NSString*) image { return @"image"; }
++ (NSString*) video { return @"video"; }
++ (NSString*) audio { return @"audio"; }
+
 + (void)initPageElement:(totPageElement*)e
                       x:(float)x
                       y:(float)y
@@ -60,6 +64,10 @@
         return [resources objectForKey:key];
     else
         return nil;
+}
+
+- (BOOL) isEmpty {
+    return ([resources count] == 0);
 }
 
 - (NSDictionary*) toDictionary {
@@ -103,7 +111,6 @@
     self.radians = [self getFloatValue:@"radius" fromObject:dict];
     self.type = [self getIntValue:@"type" fromObject:dict];
 
-    [self.name release];  // it is retained...
     self.name = [dict objectForKey:@"name"];
     NSDictionary* res = [dict objectForKey:@"resources"];
     [resources removeAllObjects];
@@ -119,10 +126,6 @@
     [resources release];
     [name release];
 }
-
-+ (NSString*) image { return @"image"; }
-+ (NSString*) video { return @"video"; }
-+ (NSString*) audio { return @"audio"; }
 
 @end
 
@@ -150,8 +153,18 @@
     [pageElements release];
 }
 
+- (int)elementCount {
+    return [pageElements count];
+}
+
 - (totPageElement*) getPageElement:(NSString*)name {
     return nil;
+}
+
+- (totPageElement*) getPageElementAtIndex:(int)index {
+    if (index < 0 || index >= [pageElements count])
+        return nil;
+    return [pageElements objectAtIndex:index];
 }
 
 // Used to load data from template description file.
@@ -217,9 +230,7 @@
         self.type = [tt intValue];
     }
     
-    [self.templateFilename release];
     self.templateFilename = [dict objectForKey:@"template"];
-    [self.name release];
     self.name = [dict objectForKey:@"name"];
 
     NSArray* ee = [dict objectForKey:@"elements"];
@@ -268,7 +279,6 @@
 - (void) parseTemplateJSONObject:(NSDictionary*)object {
     for (id key in object) {
         if ([key isEqualToString:@"template_name"]) {
-            [self.templateName release];
             self.templateName = [object objectForKey:key];
         } else if ([key isEqualToString:@"pages"]) {
             // NSArray contains page objects.
@@ -360,9 +370,7 @@
 }
 
 - (void)loadFromDictionary:(NSDictionary *)dict {
-    [self.bookname release];
     self.bookname = [dict objectForKey:@"bookname"];
-    [self.templateName release];
     self.templateName = [dict objectForKey:@"template"];
 
     NSArray* pp = [dict objectForKey:@"pages"];
@@ -388,6 +396,21 @@
     }
     [self loadFromDictionary:object];
     [error release];
+}
+
+- (NSDictionary*)getPage:(NSString*)name {
+    return nil;
+}
+
+- (NSDictionary*)getPageWithIndex:(int)pageIndex {
+    if (pageIndex < 0 || pageIndex >= [pages count]) {
+        return nil;
+    }
+    return [[pages objectAtIndex:pageIndex] toDictionary];
+}
+
+- (int)pageCount {
+    return [pages count];
 }
 
 - (void)loadBook:(NSString *)bookname {}

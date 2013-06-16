@@ -10,6 +10,7 @@
 
 #import <UIKit/UIKit.h>
 
+// Types of page element.
 typedef enum {
     TEXT  = 0,
     IMAGE = 1,
@@ -18,7 +19,7 @@ typedef enum {
 
 // Represents each element on the page. The element could be txt, image, or video.
 @interface totPageElement : NSObject {
-    float x, y;  // the center
+    float x, y;  // the top-left point.
     float w, h;  // the size of the element
     float radians;  // rotate the element at the center
     NSMutableDictionary* resources;  // the paths to the resource files (each element may contain more than one resource)
@@ -37,12 +38,14 @@ typedef enum {
 - (id) init;
 - (void) addResource:(NSString*)key withPath:(NSString*)path;
 - (NSString*) getResource:(NSString*)key;
+- (BOOL) isEmpty;  // whether contains any resources or not.
 - (NSDictionary*) toDictionary;
 - (void) loadFromDictionary: (NSDictionary*)dict;
+// Return the keys. We can use these keys to getResource later.
 + (NSString*) image;
 + (NSString*) video;
 + (NSString*) audio;
-// NOTE: (x, y) is the center of the element.
+// NOTE: (x, y) is the top-left corner of the element.
 + (void)initPageElement:(totPageElement*)e
                       x:(float)x
                       y:(float)y
@@ -76,8 +79,11 @@ typedef enum {
 - (void) addPageElement:(id)element;
 - (NSDictionary*) toDictionary;
 - (void) loadFromDictionary: (NSDictionary*)dict;
+
 // TODO(lxhuang)
 - (totPageElement*) getPageElement:(NSString*)name;
+- (totPageElement*) getPageElementAtIndex:(int)index;
+- (int)elementCount;
 
 @end
 
@@ -93,9 +99,13 @@ typedef enum {
 @property (nonatomic, retain) NSString* templateName;
 
 - (void) loadFromTemplateFile:(NSString*)filename;  // result in an empty book.
+- (void) loadFromDictionary: (NSDictionary*)dict;
+- (void) loadFromJSONString: (NSString*)json;  // json represents the book.
 - (void) loadBook:(NSString*)bookname;  // result in an editted book.
 - (NSDictionary*) toDictionary;
-- (void) loadFromDictionary: (NSDictionary*)dict;
-- (void) loadFromJSONString: (NSString*)json;
+
+- (NSDictionary*) getPage:(NSString*)name;
+- (NSDictionary*) getPageWithIndex:(int)pageIndex;
+- (int)pageCount;
 
 @end

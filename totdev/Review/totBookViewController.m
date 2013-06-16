@@ -32,6 +32,7 @@
 	// Do any additional setup after loading the view.
     
     // Setup a pageElement
+    /*
     totPageElement* element = [[totPageElement alloc] init];
     [totPageElement initPageElement:element x:50 y:50 w:50 h:50 r:0.9 n:@"Test" t:IMAGE];
     [element addResource:[totPageElement image] withPath:@"bg_registration.png"];
@@ -41,6 +42,21 @@
     [elementView release];
     
     [element release];
+     */
+    
+    // Setup a page
+    NSString* path = [[NSBundle mainBundle] pathForResource:@"test" ofType:@"tpl"];
+    totBook* book = [[totBook alloc] init];
+    [book loadFromTemplateFile:path];
+    
+    NSDictionary* pageData = [book getPage:0];
+    totPageView* page = [[totPageView alloc] initWithFrame:CGRectMake(0, 0, 320, 411) andPageTemplateData:pageData];
+    [self.view addSubview:page];
+    [page release];
+    
+    [book release];
+    
+    // Setup a book
 }
 
 - (void)didReceiveMemoryWarning
