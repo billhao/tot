@@ -10,6 +10,8 @@
 
 #import <UIKit/UIKit.h>
 
+// ---------------------------------totPageElement---------------------------------------
+
 // Types of page element.
 typedef enum {
     TEXT  = 0,
@@ -34,6 +36,7 @@ typedef enum {
 @property (nonatomic, assign) float radians;
 @property (nonatomic, assign) PageElementMediaType type;
 @property (nonatomic, retain) NSString* name;
+@property (nonatomic, retain) id book; // the page this element belongs to, should be totPage*
 
 - (id) init;
 - (void) addResource:(NSString*)key withPath:(NSString*)path;
@@ -41,6 +44,7 @@ typedef enum {
 - (BOOL) isEmpty;  // whether contains any resources or not.
 - (NSDictionary*) toDictionary;
 - (void) loadFromDictionary: (NSDictionary*)dict;
+
 // Return the keys. We can use these keys to getResource later.
 + (NSString*) image;
 + (NSString*) video;
@@ -56,12 +60,14 @@ typedef enum {
                       t:(PageElementMediaType)t;
 @end
 
+// ---------------------------------totPage---------------------------------------
 
 // Represents the page of scrapbook.
 typedef enum {
     COVER = 1,
     PAGE = 2,
 } PageType;
+
 @interface totPage : NSObject {
     PageType type;
     NSString* templateFilename;
@@ -72,6 +78,7 @@ typedef enum {
 @property (nonatomic, assign) PageType type;
 @property (nonatomic, retain) NSString* templateFilename;
 @property (nonatomic, retain) NSString* name;
+@property (nonatomic, retain) id book; // the book this page belongs to
 
 - (id) init;
 // element is a NSDictionary containing all necessary information for the element.
@@ -79,6 +86,7 @@ typedef enum {
 - (void) addPageElement:(id)element;
 - (NSDictionary*) toDictionary;
 - (void) loadFromDictionary: (NSDictionary*)dict;
+//- (NSDictionary*) saveToDictionary;
 
 // TODO(lxhuang)
 - (totPageElement*) getPageElement:(NSString*)name;
@@ -87,6 +95,7 @@ typedef enum {
 
 @end
 
+// ---------------------------------totBook---------------------------------------
 
 // Represents the scrapbook.
 @interface totBook : NSObject {
@@ -104,8 +113,11 @@ typedef enum {
 - (void) loadBook:(NSString*)bookname;  // result in an editted book.
 - (NSDictionary*) toDictionary;
 
+- (void) saveToDB; // save the book as a json string in db
+
 - (NSDictionary*) getPage:(NSString*)name;
-- (NSDictionary*) getPageWithIndex:(int)pageIndex;
+//- (NSDictionary*) getPageWithIndex:(int)pageIndex;
+- (totPage*) getPageWithIndex:(int)pageIndex;
 - (int)pageCount;
 
 @end

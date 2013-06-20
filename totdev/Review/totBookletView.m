@@ -10,6 +10,10 @@
 #import "totBookletView.h"
 #import "totBooklet.h"
 #import <QuartzCore/QuartzCore.h>
+#import "AppDelegate.h"
+#import "totUITabBarController.h"
+
+#import "totHomeEntryViewController.h"
 
 #define FULL_PAGE_W 320.0f
 #define FULL_PAGE_H 411.0f
@@ -83,7 +87,8 @@
         NSString* image_path = [self.mData getResource:[totPageElement image]];
         if (image_path) {
             mImage = [[UIImageView alloc] initWithFrame:self.frame];
-            mImage.image = [UIImage imageNamed:image_path];
+            UIImage* img = [UIImage imageWithContentsOfFile:image_path];
+            mImage.image = img;
             mImage.layer.cornerRadius = 10.0f;
             mImage.layer.masksToBounds = YES;
             mImage.layer.borderColor = [UIColor colorWithRed:0.7f green:0.7f blue:0.7f alpha:1.0f].CGColor;
@@ -167,8 +172,51 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
             [self animateRemaining];
         } else {
             printf("add new element\n");
+            // display image selector here
+            if( self.mView.mData.type == TEXT ) {
+                NSLog(@"Page element tap: show text editor");
+            }
+            else if( self.mView.mData.type == IMAGE ) {
+                NSLog(@"Page element tap: show image selector");
+                [self launchCamera:nil];
+            }
+            else if( self.mView.mData.type == VIDEO ) {
+                NSLog(@"Page element tap: show video selector");
+                [self launchVideo:nil];
+            }
         }
     }
+}
+
+// copied from totactivityviewcontroller
+// launch camera
+- (void) launchCamera:(id)sender {
+    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    [appDelegate.mainTabController.cameraView setDelegate:self];
+    [appDelegate.mainTabController.cameraView launchCamera];
+}
+
+- (void) launchVideo:(id)sender {
+    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    [appDelegate.mainTabController.cameraView setDelegate:self];
+    [appDelegate.mainTabController.cameraView launchCamera];
+}
+
+#pragma totCameraViewController delegate
+- (void) cameraView:(id)cameraView didFinishSavingImageToAlbum:(NSString*)imagePath image:(UIImage*)photo {
+    // update data
+    [mView.mData addResource:[totPageElement image] withPath:imagePath];
+    
+    // update view
+    [self setPageElementData:mView.mData];
+    
+    // save the data
+    [self savePageData];
+}
+
+- (void)savePageData {
+    // save entire book's data to db
+    [mView.mData.book saveToDB];
 }
 
 - (void)handlePan:(UIGestureRecognizer *)gestureRecognizer {
@@ -232,7 +280,7 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
         [self addGestureRecognizer:tap];
         [tap release];
 
-        /*
+        
         UIPanGestureRecognizer* pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
         pan.minimumNumberOfTouches = 2;
         pan.maximumNumberOfTouches = 2;
@@ -249,7 +297,7 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
         [rotate setDelegate:self];
         [self addGestureRecognizer:rotate];
         [rotate release];
-         */
+        
 
         mView = [[totPageElementViewInternal alloc] initWithElement:data];
         [mView display];
@@ -298,6 +346,30 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
     if (self) {
         mPage = [[totPage alloc] init];
         [mPage loadFromDictionary:data];
+        
+        // Setup the background image
+        mBackground = [[UIImageView alloc] initWithFrame:self.frame];
+        mBackground.image = [UIImage imageNamed:self.mPage.templateFilename];
+        [self addSubview:mBackground];
+        
+        // Setup page element views.
+        mElementsView = [[NSMutableArray alloc] init];
+        for (int i = 0; i < [mPage elementCount]; ++i) {
+            totPageElementView* elementView = [[totPageElementView alloc] initWithElementData:[mPage getPageElementAtIndex:i]];
+            [mElementsView addObject:elementView];
+            [elementView release];
+        }
+        for (totPageElementView* view in mElementsView) {
+            [self insertSubview:view aboveSubview:mBackground];
+        }
+    }
+    return self;
+}
+
+- (id)initWithFrame:(CGRect)frame pagedata:(totPage*)pagedata {
+    self = [super initWithFrame:frame];
+    if (self) {
+        mPage = pagedata;
         
         // Setup the background image
         mBackground = [[UIImageView alloc] initWithFrame:self.frame];

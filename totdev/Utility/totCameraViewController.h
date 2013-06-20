@@ -11,7 +11,7 @@
 @protocol CameraViewDelegate <NSObject>
 
 @optional
-- (void) cameraView:(id)cameraView didFinishSavingImageToAlbum:(UIImage*)photo;
+- (void) cameraView:(id)cameraView didFinishSavingImageToAlbum:(NSString*)imagePath image:(UIImage*)photo;
 - (void) cameraView:(id)cameraView didFinishSavingVideoToAlbum:(NSString*)videoPath;
 - (void) cameraView:(id)cameraView didFinishSavingThumbnail:(UIImage*)thumbnail;
 

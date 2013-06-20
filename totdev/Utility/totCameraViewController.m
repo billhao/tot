@@ -14,6 +14,7 @@
 #import <AVFoundation/AVMediaFormat.h>
 #import <AVFoundation/AVTime.h>
 #import <CoreMedia/CMTime.h>
+#import "AppDelegate.h"
 
 @implementation totCameraViewController
 
@@ -102,8 +103,28 @@
     NSString* mediaType = [info objectForKey:UIImagePickerControllerMediaType];
     if ([mediaType isEqualToString:(NSString*)kUTTypeImage]) {
         UIImage *photo = (UIImage*)[info objectForKey:@"UIImagePickerControllerOriginalImage"];
-        UIImageWriteToSavedPhotosAlbum(photo, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
-    } else if ([mediaType isEqualToString:(NSString*)kUTTypeMovie]) {
+
+        // only save the image to camera roll if it is from the camera
+        // do not save an image from photo library or camera roll
+        if( picker.sourceType == UIImagePickerControllerSourceTypeCamera ) {
+            UIImageWriteToSavedPhotosAlbum(photo, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+        }
+        
+        // generate a filename for the image
+        NSDate* today = [NSDate date];
+        NSTimeInterval interval = [today timeIntervalSince1970];
+        NSString *filename = [[NSString alloc] initWithFormat:@"%d.jpg", (int)interval];
+
+        // Save the image file and add it to cache.
+        NSString* filepath = [self saveImage:photo intoFile:filename];
+        AppDelegate *appdelegate = [[UIApplication sharedApplication] delegate];
+        [appdelegate.mCache addImage:photo WithKey:filename];
+        
+        if( [delegate respondsToSelector:@selector(cameraView:didFinishSavingImageToAlbum:image:)] ) {
+            [delegate cameraView:self didFinishSavingImageToAlbum:filepath image:photo];
+        }
+    }
+    else if ([mediaType isEqualToString:(NSString*)kUTTypeMovie]) {
         NSString *tempFilePath = [(NSURL*)[info valueForKey:UIImagePickerControllerMediaURL] absoluteString];
         tempFilePath = [tempFilePath substringFromIndex:16];
         // Check if the video file can be saved to camera roll.
@@ -112,6 +133,7 @@
             UISaveVideoAtPathToSavedPhotosAlbum(tempFilePath, self, @selector(video:didFinishSavingWithError:contextInfo:), tempFilePath);
         }
     }
+    [self hideCamera];
 }
 
 - (void)hideCamera {
@@ -126,10 +148,6 @@
 
 
 - (void)image: (UIImage*)image didFinishSavingWithError:(NSError*)error contextInfo:(void*)contextInfo {
-    if( [delegate respondsToSelector:@selector(cameraView:didFinishSavingImageToAlbum:)] ) {
-        [delegate cameraView:self didFinishSavingImageToAlbum:image];
-    }
-    [self hideCamera];
 }
 
 - (void)video: (NSString*)videoPath didFinishSavingWithError:(NSError*)error contextInfo:(NSString*)contextInfo {
@@ -200,6 +218,16 @@
 {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+- (NSString*) saveImage:(UIImage*)photo intoFile:(NSString*)filename {
+//    UIImage *resizedPhoto = [totActivityUtility imageWithImage:photo scaledToSize:CGSizeMake(320, 480)];
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentDirectory = [paths objectAtIndex:0];
+    NSString *imagePath = [documentDirectory stringByAppendingPathComponent:filename];
+    NSData *data = UIImageJPEGRepresentation(photo, 1.0);
+    [data writeToFile:imagePath atomically:NO];
+    return imagePath;
 }
 
 @end

@@ -7,10 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "totCameraViewController.h"
 
 @class totPageElement;
 @class totPage;
 @class totBook;
+
+// ---------------------------------totBookBasicView---------------------------------------
 
 // Takes care of the animation.
 @interface totBookBasicView : UIView {
@@ -24,6 +27,8 @@
 - (void) moveTo: (CGPoint)p;
 
 @end
+
+// ---------------------------------totPageElementViewInternal---------------------------------------
 
 // Represents the view of basic page element.
 @interface totPageElementViewInternal : totBookBasicView {
@@ -43,9 +48,11 @@
 
 @end
 
+// ---------------------------------totPageElementView---------------------------------------
+
 // Wrapper of the basic page element. (To make the rotation work..)
 // And deal with other touch events.
-@interface totPageElementView : UIView <UIGestureRecognizerDelegate> {
+@interface totPageElementView : UIView <UIGestureRecognizerDelegate, CameraViewDelegate> {
     totPageElementViewInternal* mView;
     CGPoint mTouchLastTime;
 }
@@ -57,6 +64,7 @@
 
 @end
 
+// ---------------------------------totPageView---------------------------------------
 
 // Page View
 @interface totPageView : UIView {
@@ -73,12 +81,16 @@
 // Loads the template data.
 // data should be [totPage toDictionary];
 - (id)initWithFrame:(CGRect)frame andPageTemplateData:(NSDictionary*)data;
-// Loads an existed book.
+- (id)initWithFrame:(CGRect)frame pagedata:(totPage*)pagedata;
+
+    // Loads an existed book.
 - (void)loadFromData:(NSString*)jsonData;
 
 - (CGPoint)fullPageSize;
 
 @end
+
+// ---------------------------------totBookView---------------------------------------
 
 // Book View
 @interface totBookView : UIView {

@@ -7,7 +7,9 @@
 //
 
 #import "totBooklet.h"
-
+#import "totHomeFeedingViewController.h"
+#import "Global.h"
+#import "totEventName.h"
 
 ////////////////////////////////////////////////////////////////
 // totPageElement
@@ -170,6 +172,7 @@
 // Used to load data from template description file.
 - (void) addPageElement:(id)element {
     totPageElement* new_element = [[totPageElement alloc] init];
+    new_element.book = self.book;
     NSDictionary* element_object = (NSDictionary*)element;
     for (id element_attr in element_object) {
         if ([element_attr isEqualToString:@"x"]) {
@@ -238,6 +241,7 @@
     if (ee && [ee count] > 0) {
         for (int i = 0; i < [ee count]; ++i) {
             totPageElement* e = [[totPageElement alloc] init];
+            e.book = self.book;
             [e loadFromDictionary:[ee objectAtIndex:i]];
             [pageElements addObject:e];
             [e release];
@@ -245,6 +249,27 @@
     }
 }
 
+//- (NSDictionary*) saveToDictionary {
+//    NSMutableDictionary* dict = [[NSMutableDictionary alloc]init];
+//    [dict setObject:[NSNumber numberWithInt:self.type] forKey:@"type"];
+//    
+//    [dict setObject:self.templateFilename forKey:@"template"];
+//    [dict setObject:self.name forKey:@"name"];
+//    
+//    NSMutableArray* pp = [[NSMutableArray alloc]init];
+//    [dict setObject:pp forKey:@"elements"];
+//    
+//    if (pageElements) {
+//        for (int i = 0; i < [pageElements count]; ++i) {
+//            totPageElement* e = [pageElements objectAtIndex:i];
+//            NSDictionary* element_dict = [e saveToDictionary];
+//            [pp addObject:element_dict];
+//        }
+//    }
+//    
+//    [pp release];
+//    return dict;
+//}
 @end
 
 
@@ -286,6 +311,7 @@
             for (id page_json_object in page_json_objects) {  // Iterates through pages.
                 // For each page, creates a new totPage.
                 totPage* new_page = [[totPage alloc] init];
+                new_page.book = self;
                 for (id object_key in page_json_object) {
                     if ([object_key isEqualToString:@"template_path"]) {
                         new_page.templateFilename = [page_json_object objectForKey:object_key];
@@ -378,6 +404,7 @@
     if (pp && [pp count] > 0) {
         for (int i = 0; i < [pp count]; ++i) {
             totPage* p = [[totPage alloc] init];
+            p.book = self;
             [p loadFromDictionary:[pp objectAtIndex:i]];
             [pages addObject:p];
             [p release];
@@ -398,22 +425,67 @@
     [error release];
 }
 
+//- (NSDictionary*) saveToDictionary {
+//    NSMutableDictionary* dict = [[NSMutableDictionary alloc]init];
+//    [dict setObject:self.bookname forKey:@"bookname"];
+//    [dict setObject:self.templateName  forKey:@"template"];
+//    
+//    NSMutableArray* pp = [[NSMutableArray alloc]init];
+//    [dict setObject:pp forKey:@"pages"];
+//    
+//    if (pages) {
+//        for (int i = 0; i < [pages count]; ++i) {
+//            totPage* p = [pages objectAtIndex:i];
+//            NSDictionary* page_dict = [p saveToDictionary];
+//            [pp addObject:page_dict];
+//        }
+//    }
+//    [pp release];
+//    return dict;
+//}
+
+// save the book as a json string in db
+- (void) saveToDB {
+    NSDictionary* dict = [self toDictionary];
+    NSString* bookid = [NSString stringWithFormat:SCRAPBOOK_REPLACABLE, self.bookname];
+    [global.model setItem:global.baby.babyID name:bookid value:dict];
+}
+
++ (totBook*) loadFromDB:(NSString*)bookname {
+    NSString* bookid = [NSString stringWithFormat:SCRAPBOOK_REPLACABLE, bookname];
+    totEvent* e = [global.model getItem:global.baby.babyID name:bookid];
+    if( e == nil )
+        return nil;
+    
+    totBook* book = [[totBook alloc]init];
+    [book loadFromJSONString:e.value];
+    return book;
+}
+
+- (void)loadBook:(NSString *)bookname {}
+
 - (NSDictionary*)getPage:(NSString*)name {
     return nil;
 }
 
-- (NSDictionary*)getPageWithIndex:(int)pageIndex {
+//- (NSDictionary*)getPageWithIndex:(int)pageIndex {
+//    if (pageIndex < 0 || pageIndex >= [pages count]) {
+//        return nil;
+//    }
+//    return [[pages objectAtIndex:pageIndex] toDictionary];
+//}
+
+- (totPage*)getPageWithIndex:(int)pageIndex {
     if (pageIndex < 0 || pageIndex >= [pages count]) {
         return nil;
     }
-    return [[pages objectAtIndex:pageIndex] toDictionary];
+    return [pages objectAtIndex:pageIndex];
 }
+
 
 - (int)pageCount {
     return [pages count];
 }
-
-- (void)loadBook:(NSString *)bookname {}
 
 - (void)dealloc {
     [super dealloc];

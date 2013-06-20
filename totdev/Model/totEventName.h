@@ -75,4 +75,8 @@ static NSString *EVENT_MOTOR_LIFTNECK   = @"motor_skill/motor_skill_lift_neck";
 static NSString *ACTIVITY_PHOTO           = @"activity/photo/";
 static NSString *ACTIVITY_PHOTO_REPLACABLE= @"activity/photo/%@";
 
+// scrapbook
+static NSString *SCRAPBOOK           = @"scrapbook/";
+static NSString *SCRAPBOOK_REPLACABLE= @"scrapbook/%@";
+
 #endif

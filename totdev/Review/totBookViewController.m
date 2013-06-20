@@ -48,9 +48,11 @@
     NSString* path = [[NSBundle mainBundle] pathForResource:@"test" ofType:@"tpl"];
     totBook* book = [[totBook alloc] init];
     [book loadFromTemplateFile:path];
+    book.bookname = @"test_scrapbook";
     
-    NSDictionary* pageData = [book getPage:0];
-    totPageView* page = [[totPageView alloc] initWithFrame:CGRectMake(0, 0, 320, 411) andPageTemplateData:pageData];
+    totPage* pagedata = [book getPageWithIndex:0];
+    //NSDictionary* pageData = [book getPageWithIndex:0];
+    totPageView* page = [[totPageView alloc] initWithFrame:CGRectMake(0, 0, 320, 411) pagedata:pagedata];
     [self.view addSubview:page];
     [page release];
     
