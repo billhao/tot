@@ -13,6 +13,7 @@
     {
       "template_path": "FirstYearTemplateCover.jpg",
       "meta": "cover",
+      "name": "FirstYearTemplateCover",
       "elements": [
         {
           "x": 222,
@@ -38,6 +39,7 @@
     {
       "template_path": "FirstYearTemplateP1.jpg",
       "meta": "page",
+      "name": "FirstYearTemplateP1",
       "elements": [
         {
           "x": 10,

@@ -20,8 +20,8 @@
 }
 
 - (void) rotate: (float)r;
-- (void) scale: (float)s;
 - (void) rotateTo: (float)r;
+- (void) scale: (float)s;
 - (void) scaleToX: (float)sx andToY:(float)sy;
 - (void) scaleTo: (float)s;
 - (void) moveTo: (CGPoint)p;
@@ -42,6 +42,7 @@
 
 - (id)initWithElement:(totPageElement*)data;
 - (void)display;
+- (void)removeImage;
 - (void)resizeTo:(CGRect)size;
 // whether the element contains media files or not.
 - (BOOL)isEmpty;
@@ -76,34 +77,51 @@
     UIImageView* mBackground;
 }
 
-@property (nonatomic, readonly) totPage* mPage;
+@property (nonatomic, retain) totPage* mPage;
 
 // Loads the template data.
 // data should be [totPage toDictionary];
 - (id)initWithFrame:(CGRect)frame andPageTemplateData:(NSDictionary*)data;
 - (id)initWithFrame:(CGRect)frame pagedata:(totPage*)pagedata;
 
-    // Loads an existed book.
-- (void)loadFromData:(NSString*)jsonData;
-
-- (CGPoint)fullPageSize;
-
 @end
 
 // ---------------------------------totBookView---------------------------------------
 
+@class totBookView;
+
+@protocol BookViewDelegate <NSObject>
+@optional
+- (void) tapAtBook:(totBookView*)bookview;
+- (void) longPressAtBook:(totBookView*)bookview;
+@end
+
 // Book View
 @interface totBookView : UIView {
     // Data
-    totBook* mBook;
+    totBook* mTemplateBook;  // only stores template.
+    totBook* mBook;  // book containing the real data.
     
+    id <BookViewDelegate> delegate;
+    
+    NSMutableArray* mPageViews;
     // Subviews
+    /*  // Gives up for now..
     totPageView* mPrev;
     totPageView* mCurr;
     totPageView* mNext;
+     */
 }
 
+@property (nonatomic, assign) totBook* mBook;
+
+- (void)loadTemplateFile:(NSString*)filename;
+
+// New page means an empty page, so that there is no data associated with the page yet.
 - (void)addNewPage:(NSString*)pageName;
+
+- (void)saveBook:(NSString*)bookname;
+- (void)loadBook:(NSString*)bookname;
 
 @end
 

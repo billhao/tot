@@ -45,20 +45,26 @@
      */
     
     // Setup a page
+    /*
     NSString* path = [[NSBundle mainBundle] pathForResource:@"test" ofType:@"tpl"];
     totBook* book = [[totBook alloc] init];
     [book loadFromTemplateFile:path];
     book.bookname = @"test_scrapbook";
     
     totPage* pagedata = [book getPageWithIndex:0];
-    //NSDictionary* pageData = [book getPageWithIndex:0];
     totPageView* page = [[totPageView alloc] initWithFrame:CGRectMake(0, 0, 320, 411) pagedata:pagedata];
     [self.view addSubview:page];
     [page release];
     
     [book release];
+     */
     
     // Setup a book
+    totBookView* bookview = [[totBookView alloc] initWithFrame:CGRectMake(0, 0, 320, 411)];
+    [bookview loadTemplateFile:@"test"];
+    [bookview addNewPage:@"FirstYearTemplateP1"];
+    [self.view addSubview:bookview];
+    [bookview release];
 }
 
 - (void)didReceiveMemoryWarning

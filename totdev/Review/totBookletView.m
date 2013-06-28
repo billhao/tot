@@ -211,13 +211,14 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
     [self setPageElementData:mView.mData];
     
     // save the data
-    [self savePageData];
+    //[self savePageData];
 }
-
+/*
 - (void)savePageData {
     // save entire book's data to db
     [mView.mData.book saveToDB];
 }
+*/
 
 - (void)handlePan:(UIGestureRecognizer *)gestureRecognizer {
     if ([gestureRecognizer isKindOfClass:UIPanGestureRecognizer.class]) {
@@ -274,30 +275,27 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
 - (id)initWithElementData:(totPageElement*)data {
     self = [super initWithFrame:CGRectMake(data.x, data.y, data.w, data.h)];
     if (self) {
-        // Register gesture recognizers.
+        // Register tap gesture recognizers.
         UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
         [tap setDelegate:self];
         [self addGestureRecognizer:tap];
         [tap release];
-
-        
+        // Register pan gesture recognizers.
         UIPanGestureRecognizer* pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
-        pan.minimumNumberOfTouches = 2;
-        pan.maximumNumberOfTouches = 2;
+        pan.minimumNumberOfTouches = pan.maximumNumberOfTouches = 2;
         [pan setDelegate:self];
         [self addGestureRecognizer:pan];
         [pan release];
-
+        // Register pinch gesture recognizers.
         UIPinchGestureRecognizer* pinch = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(handlePinch:)];
         [pinch setDelegate:self];
         [self addGestureRecognizer:pinch];
         [pinch release];
-
+        // Register rotate gesture recognizers.
         UIRotationGestureRecognizer* rotate = [[UIRotationGestureRecognizer alloc] initWithTarget:self action:@selector(handleRotate:)];
         [rotate setDelegate:self];
         [self addGestureRecognizer:rotate];
         [rotate release];
-        
 
         mView = [[totPageElementViewInternal alloc] initWithElement:data];
         [mView display];
@@ -334,34 +332,32 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
     return CGPointMake(FULL_PAGE_W, FULL_PAGE_W);
 }
 
-- (id)initWithFrame:(CGRect)frame {
-    self = [super initWithFrame:frame];
-    if (self) {
+- (void)setup {
+    // Setup the background image
+    mBackground = [[UIImageView alloc] initWithFrame:self.frame];
+    mBackground.image = [UIImage imageNamed:self.mPage.templateFilename];
+    [self addSubview:mBackground];
+    
+    // Setup page element views.
+    mElementsView = [[NSMutableArray alloc] init];
+    for (int i = 0; i < [mPage elementCount]; ++i) {
+        totPageElementView* elementView = [[totPageElementView alloc] initWithElementData:[mPage getPageElementAtIndex:i]];
+        [mElementsView addObject:elementView];
+        [elementView release];
     }
-    return self;
+    for (totPageElementView* view in mElementsView) {
+        [self insertSubview:view aboveSubview:mBackground];
+    }
 }
 
 - (id)initWithFrame:(CGRect)frame andPageTemplateData:(NSDictionary *)data {
     self = [super initWithFrame:frame];
     if (self) {
-        mPage = [[totPage alloc] init];
-        [mPage loadFromDictionary:data];
-        
-        // Setup the background image
-        mBackground = [[UIImageView alloc] initWithFrame:self.frame];
-        mBackground.image = [UIImage imageNamed:self.mPage.templateFilename];
-        [self addSubview:mBackground];
-        
-        // Setup page element views.
-        mElementsView = [[NSMutableArray alloc] init];
-        for (int i = 0; i < [mPage elementCount]; ++i) {
-            totPageElementView* elementView = [[totPageElementView alloc] initWithElementData:[mPage getPageElementAtIndex:i]];
-            [mElementsView addObject:elementView];
-            [elementView release];
-        }
-        for (totPageElementView* view in mElementsView) {
-            [self insertSubview:view aboveSubview:mBackground];
-        }
+        totPage* aPage = [[totPage alloc] init];
+        [aPage loadFromDictionary:data];
+        self.mPage = aPage;
+        [aPage release];
+        [self setup];
     }
     return self;
 }
@@ -369,28 +365,11 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
 - (id)initWithFrame:(CGRect)frame pagedata:(totPage*)pagedata {
     self = [super initWithFrame:frame];
     if (self) {
-        mPage = pagedata;
-        
-        // Setup the background image
-        mBackground = [[UIImageView alloc] initWithFrame:self.frame];
-        mBackground.image = [UIImage imageNamed:self.mPage.templateFilename];
-        [self addSubview:mBackground];
-        
-        // Setup page element views.
-        mElementsView = [[NSMutableArray alloc] init];
-        for (int i = 0; i < [mPage elementCount]; ++i) {
-            totPageElementView* elementView = [[totPageElementView alloc] initWithElementData:[mPage getPageElementAtIndex:i]];
-            [mElementsView addObject:elementView];
-            [elementView release];
-        }
-        for (totPageElementView* view in mElementsView) {
-            [self insertSubview:view aboveSubview:mBackground];
-        }
+        self.mPage = pagedata;
+        [self setup];
     }
     return self;
 }
-
-- (void)loadFromData:(NSString *)jsonData {}
 
 - (void)dealloc {
     [super dealloc];
@@ -403,14 +382,92 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
 
 @implementation totBookView
 
+@synthesize mBook;
+
+- (void)handleTap:(UIGestureRecognizer *)gestureRecognizer {
+    if ([gestureRecognizer isKindOfClass:UITapGestureRecognizer.class]) {
+        printf("Tap at book\n");
+        if( [delegate respondsToSelector:@selector(tapAtBook:)] ) {
+            [delegate tapAtBook:self];
+        }
+        [self addNewPage:@"FirstYearTemplateP1"];  // For testing...
+    }
+}
+
+- (void)handleLongPress:(UIGestureRecognizer *)gestureRecognizer {
+    if ([gestureRecognizer isKindOfClass:UILongPressGestureRecognizer.class]) {
+        printf("Long press at book\n");
+        if ([delegate respondsToSelector:@selector(longPressAtBook:)]) {
+            [delegate longPressAtBook:self];
+        }
+    }
+}
+
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
+        mTemplateBook = nil;
+        mPageViews = [[NSMutableArray alloc] init];
+        
+        UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
+        [self addGestureRecognizer:tap];
+        [tap release];
+        UILongPressGestureRecognizer* longpress = [[UILongPressGestureRecognizer alloc] initWithTarget:self
+                                                                                                action:@selector(handleLongPress:)];
+        [self addGestureRecognizer:longpress];
+        [longpress release];
     }
     return self;
 }
 
+- (void)loadTemplateFile:(NSString*)filename {
+    NSString* path = [[NSBundle mainBundle] pathForResource:filename ofType:@"tpl"];
+    mTemplateBook = [[totBook alloc] init];
+    [mTemplateBook loadFromTemplateFile:path]; // this is an empty book so there is no book name yet.
+    mBook = [[totBook alloc] init];
+    mBook.templateName = mTemplateBook.templateName;
+}
+
 - (void)addNewPage:(NSString*)pageName {
+    if (!mTemplateBook) {
+        printf("You MUST call loadTemplateFile first\n");
+        exit(-1);
+    }
+    totPage* pageData = [mTemplateBook getPage:pageName];
+    if (!pageData) return;  // Invalid page name.
+    
+    // add it to mBook (since we are adding a real page.)
+    [mBook addPage:pageData];
+    
+    // add a view.
+    totPageView* newPage = [[totPageView alloc] initWithFrame:self.frame pagedata:pageData];
+    [mPageViews addObject:newPage];
+    [self addSubview:[mPageViews lastObject]];
+    [newPage release];
+    if ([mPageViews count] > 1) {
+        int pageNum = [mPageViews count];
+        totPageView* curr = [mPageViews objectAtIndex:pageNum-1];
+        curr.frame = CGRectMake(320, 0, self.frame.size.width, self.frame.size.height);
+        totPageView* prev = [mPageViews objectAtIndex:pageNum-2];
+        
+        // swipe the previous page, and display the current page.
+        [UIView beginAnimations:@"swipe" context:nil];
+        [UIView setAnimationDuration:0.5f];
+        [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+            prev.frame = CGRectMake(-320, 0, self.frame.size.width, self.frame.size.height);
+            curr.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
+        [UIView commitAnimations];
+    }
+}
+
+- (void)saveBook:(NSString*)bookname {}
+- (void)loadBook:(NSString*)bookname {}
+
+- (void)dealloc {
+    [super dealloc];
+    [mTemplateBook release];
+    [mBook release];
+    [mPageViews release];
 }
 
 @end

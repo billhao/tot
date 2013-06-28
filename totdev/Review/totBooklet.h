@@ -36,12 +36,12 @@ typedef enum {
 @property (nonatomic, assign) float radians;
 @property (nonatomic, assign) PageElementMediaType type;
 @property (nonatomic, retain) NSString* name;
-@property (nonatomic, retain) id book; // the page this element belongs to, should be totPage*
 
 - (id) init;
 - (void) addResource:(NSString*)key withPath:(NSString*)path;
 - (NSString*) getResource:(NSString*)key;
 - (BOOL) isEmpty;  // whether contains any resources or not.
+
 - (NSDictionary*) toDictionary;
 - (void) loadFromDictionary: (NSDictionary*)dict;
 
@@ -78,17 +78,16 @@ typedef enum {
 @property (nonatomic, assign) PageType type;
 @property (nonatomic, retain) NSString* templateFilename;
 @property (nonatomic, retain) NSString* name;
-@property (nonatomic, retain) id book; // the book this page belongs to
 
 - (id) init;
+
 // element is a NSDictionary containing all necessary information for the element.
 // keys: x, y, w, h, radius, type, name, etc.
 - (void) addPageElement:(id)element;
+
 - (NSDictionary*) toDictionary;
 - (void) loadFromDictionary: (NSDictionary*)dict;
-//- (NSDictionary*) saveToDictionary;
 
-// TODO(lxhuang)
 - (totPageElement*) getPageElement:(NSString*)name;
 - (totPageElement*) getPageElementAtIndex:(int)index;
 - (int)elementCount;
@@ -108,16 +107,20 @@ typedef enum {
 @property (nonatomic, retain) NSString* templateName;
 
 - (void) loadFromTemplateFile:(NSString*)filename;  // result in an empty book.
-- (void) loadFromDictionary: (NSDictionary*)dict;
 - (void) loadFromJSONString: (NSString*)json;  // json represents the book.
 - (void) loadBook:(NSString*)bookname;  // result in an editted book.
+
 - (NSDictionary*) toDictionary;
+- (void) loadFromDictionary: (NSDictionary*)dict;
+
+// caller needs to release the page.
+- (void) addPage:(totPage*)page;
 
 - (void) saveToDB; // save the book as a json string in db
 
-- (NSDictionary*) getPage:(NSString*)name;
-//- (NSDictionary*) getPageWithIndex:(int)pageIndex;
+- (totPage*) getPage:(NSString*)name;
 - (totPage*) getPageWithIndex:(int)pageIndex;
-- (int)pageCount;
+
+- (int) pageCount;
 
 @end

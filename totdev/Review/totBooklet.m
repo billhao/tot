@@ -159,7 +159,12 @@
     return [pageElements count];
 }
 
-- (totPageElement*) getPageElement:(NSString*)name {
+- (totPageElement*) getPageElement:(NSString*)n {
+    for (totPageElement* element in pageElements) {
+        if ([element.name caseInsensitiveCompare:n]) {
+            return element;
+        }
+    }
     return nil;
 }
 
@@ -172,7 +177,6 @@
 // Used to load data from template description file.
 - (void) addPageElement:(id)element {
     totPageElement* new_element = [[totPageElement alloc] init];
-    new_element.book = self.book;
     NSDictionary* element_object = (NSDictionary*)element;
     for (id element_attr in element_object) {
         if ([element_attr isEqualToString:@"x"]) {
@@ -241,7 +245,6 @@
     if (ee && [ee count] > 0) {
         for (int i = 0; i < [ee count]; ++i) {
             totPageElement* e = [[totPageElement alloc] init];
-            e.book = self.book;
             [e loadFromDictionary:[ee objectAtIndex:i]];
             [pageElements addObject:e];
             [e release];
@@ -249,27 +252,6 @@
     }
 }
 
-//- (NSDictionary*) saveToDictionary {
-//    NSMutableDictionary* dict = [[NSMutableDictionary alloc]init];
-//    [dict setObject:[NSNumber numberWithInt:self.type] forKey:@"type"];
-//    
-//    [dict setObject:self.templateFilename forKey:@"template"];
-//    [dict setObject:self.name forKey:@"name"];
-//    
-//    NSMutableArray* pp = [[NSMutableArray alloc]init];
-//    [dict setObject:pp forKey:@"elements"];
-//    
-//    if (pageElements) {
-//        for (int i = 0; i < [pageElements count]; ++i) {
-//            totPageElement* e = [pageElements objectAtIndex:i];
-//            NSDictionary* element_dict = [e saveToDictionary];
-//            [pp addObject:element_dict];
-//        }
-//    }
-//    
-//    [pp release];
-//    return dict;
-//}
 @end
 
 
@@ -290,17 +272,34 @@
 
 // Parse template description file
 - (BOOL) isComment:(NSString*)line {
-    if ([line length] < 2) {
-        return NO;
-    }
+    if ([line length] < 2) return NO;
     NSString* s = [line substringToIndex:2];
-    if ([s isEqualToString:@"//"]) {
-        return YES;
-    } else {
-        return NO;
+    return ([s isEqualToString:@"//"] ? YES : NO);
+}
+- (void) parsePageObject:(id)page_json_object toPage:(totPage*)new_page {
+    if (!page_json_object || !new_page) return;
+    for (id object_key in page_json_object) {
+        if ([object_key isEqualToString:@"template_path"]) {
+            new_page.templateFilename = [page_json_object objectForKey:object_key];
+        } else if ([object_key isEqualToString:@"meta"]) {
+            NSString* meta = [page_json_object objectForKey:object_key];
+            if ([meta caseInsensitiveCompare:@"cover"] == NSOrderedSame) {
+                new_page.type = COVER;
+            } else if ([meta caseInsensitiveCompare:@"page"] == NSOrderedSame) {
+                new_page.type = PAGE;
+            }
+        } else if ([object_key isEqualToString:@"name"]) {
+            new_page.name = [page_json_object objectForKey:object_key];
+        } else if ([object_key isEqualToString:@"elements"]) {
+            NSArray* element_json_objects = [page_json_object objectForKey:object_key];
+            for (id element_json_element in element_json_objects) {
+                [new_page addPageElement:element_json_element];
+            }
+        } else {
+            printf("Invalid key: %s\n", [object_key UTF8String]);
+        }
     }
 }
-
 - (void) parseTemplateJSONObject:(NSDictionary*)object {
     for (id key in object) {
         if ([key isEqualToString:@"template_name"]) {
@@ -311,28 +310,7 @@
             for (id page_json_object in page_json_objects) {  // Iterates through pages.
                 // For each page, creates a new totPage.
                 totPage* new_page = [[totPage alloc] init];
-                new_page.book = self;
-                for (id object_key in page_json_object) {
-                    if ([object_key isEqualToString:@"template_path"]) {
-                        new_page.templateFilename = [page_json_object objectForKey:object_key];
-                    } else if ([object_key isEqualToString:@"meta"]) {
-                        NSString* meta = [page_json_object objectForKey:object_key];
-                        if ([meta isEqualToString:@"cover"]) {
-                            new_page.type = COVER;
-                        } else if ([meta isEqualToString:@"page"]) {
-                            new_page.type = PAGE;
-                        }
-                    } else if ([object_key isEqualToString:@"name"]) {
-                        new_page.name = [page_json_object objectForKey:object_key];
-                    } else if ([object_key isEqualToString:@"elements"]) {
-                        NSArray* element_json_objects = [page_json_object objectForKey:object_key];
-                        for (id element_json_element in element_json_objects) {
-                            [new_page addPageElement:element_json_element];
-                        }
-                    } else {
-                        printf("Invalid key: %s\n", [object_key UTF8String]);
-                    }
-                }
+                [self parsePageObject:page_json_object toPage:new_page];
                 [pages addObject:new_page];
                 [new_page release];
             }
@@ -404,7 +382,6 @@
     if (pp && [pp count] > 0) {
         for (int i = 0; i < [pp count]; ++i) {
             totPage* p = [[totPage alloc] init];
-            p.book = self;
             [p loadFromDictionary:[pp objectAtIndex:i]];
             [pages addObject:p];
             [p release];
@@ -425,25 +402,6 @@
     [error release];
 }
 
-//- (NSDictionary*) saveToDictionary {
-//    NSMutableDictionary* dict = [[NSMutableDictionary alloc]init];
-//    [dict setObject:self.bookname forKey:@"bookname"];
-//    [dict setObject:self.templateName  forKey:@"template"];
-//    
-//    NSMutableArray* pp = [[NSMutableArray alloc]init];
-//    [dict setObject:pp forKey:@"pages"];
-//    
-//    if (pages) {
-//        for (int i = 0; i < [pages count]; ++i) {
-//            totPage* p = [pages objectAtIndex:i];
-//            NSDictionary* page_dict = [p saveToDictionary];
-//            [pp addObject:page_dict];
-//        }
-//    }
-//    [pp release];
-//    return dict;
-//}
-
 // save the book as a json string in db
 - (void) saveToDB {
     NSDictionary* dict = [self toDictionary];
@@ -462,18 +420,18 @@
     return book;
 }
 
-- (void)loadBook:(NSString *)bookname {}
-
-- (NSDictionary*)getPage:(NSString*)name {
-    return nil;
+- (void)addPage:(totPage *)page {
+    [pages addObject:page];
 }
 
-//- (NSDictionary*)getPageWithIndex:(int)pageIndex {
-//    if (pageIndex < 0 || pageIndex >= [pages count]) {
-//        return nil;
-//    }
-//    return [[pages objectAtIndex:pageIndex] toDictionary];
-//}
+- (totPage*)getPage:(NSString*)name {
+    for (totPage* page in pages) {
+        if ([page.name caseInsensitiveCompare:name] == NSOrderedSame) {
+            return page;
+        }
+    }
+    return nil;
+}
 
 - (totPage*)getPageWithIndex:(int)pageIndex {
     if (pageIndex < 0 || pageIndex >= [pages count]) {
@@ -482,10 +440,11 @@
     return [pages objectAtIndex:pageIndex];
 }
 
-
 - (int)pageCount {
     return [pages count];
 }
+
+- (void)loadBook:(NSString *)bookname {}
 
 - (void)dealloc {
     [super dealloc];
