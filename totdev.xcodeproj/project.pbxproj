@@ -266,6 +266,11 @@
 		8E920F8C161903D700725971 /* icons-close.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E920F87161903D700725971 /* icons-close.png */; };
 		8E920F8D161903D700725971 /* icons-sleep-edit.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E920F88161903D700725971 /* icons-sleep-edit.png */; };
 		8E920F8E161903D700725971 /* icons-sleep-start.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E920F89161903D700725971 /* icons-sleep-start.png */; };
+		8E9815FB177F9ACE003439FD /* totReviewCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E9815FA177F9ACE003439FD /* totReviewCardView.m */; };
+		8E9815FE177FA17E003439FD /* totTestCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E9815FD177FA17E003439FD /* totTestCard.m */; };
+		8E981601177FA6DB003439FD /* totTimeline.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E981600177FA6DB003439FD /* totTimeline.m */; };
+		8E981603177FA806003439FD /* Timeline.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8E981602177FA806003439FD /* Timeline.xib */; };
+		8E981606177FA838003439FD /* totTimelineController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E981605177FA838003439FD /* totTimelineController.m */; };
 		8EC7A8321655A1430022AC93 /* icons-language.png in Resources */ = {isa = PBXBuildFile; fileRef = 8EC7A8311655A1430022AC93 /* icons-language.png */; };
 		8ECAC85917683E4B000B4E0B /* totBookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ECAC85817683E4B000B4E0B /* totBookViewController.m */; };
 		8ECAC85C17684500000B4E0B /* totBookletView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ECAC85B17684500000B4E0B /* totBookletView.m */; };
@@ -659,6 +664,15 @@
 		8E920F87161903D700725971 /* icons-close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icons-close.png"; path = "Resources/Home/icons-close.png"; sourceTree = "<group>"; };
 		8E920F88161903D700725971 /* icons-sleep-edit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icons-sleep-edit.png"; path = "Resources/Home/icons-sleep-edit.png"; sourceTree = "<group>"; };
 		8E920F89161903D700725971 /* icons-sleep-start.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icons-sleep-start.png"; path = "Resources/Home/icons-sleep-start.png"; sourceTree = "<group>"; };
+		8E9815F9177F9ACD003439FD /* totReviewCardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totReviewCardView.h; path = Review/totReviewCardView.h; sourceTree = "<group>"; };
+		8E9815FA177F9ACE003439FD /* totReviewCardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totReviewCardView.m; path = Review/totReviewCardView.m; sourceTree = "<group>"; };
+		8E9815FC177FA17E003439FD /* totTestCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totTestCard.h; path = Review/totTestCard.h; sourceTree = "<group>"; };
+		8E9815FD177FA17E003439FD /* totTestCard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totTestCard.m; path = Review/totTestCard.m; sourceTree = "<group>"; };
+		8E9815FF177FA6DB003439FD /* totTimeline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totTimeline.h; path = Review/totTimeline.h; sourceTree = "<group>"; };
+		8E981600177FA6DB003439FD /* totTimeline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totTimeline.m; path = Review/totTimeline.m; sourceTree = "<group>"; };
+		8E981602177FA806003439FD /* Timeline.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Timeline.xib; sourceTree = "<group>"; };
+		8E981604177FA838003439FD /* totTimelineController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totTimelineController.h; path = Review/totTimelineController.h; sourceTree = "<group>"; };
+		8E981605177FA838003439FD /* totTimelineController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totTimelineController.m; path = Review/totTimelineController.m; sourceTree = "<group>"; };
 		8EC7A8311655A1430022AC93 /* icons-language.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icons-language.png"; path = "Resources/Home/icons-language.png"; sourceTree = "<group>"; };
 		8ECAC85717683E4B000B4E0B /* totBookViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totBookViewController.h; path = Review/totBookViewController.h; sourceTree = "<group>"; };
 		8ECAC85817683E4B000B4E0B /* totBookViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totBookViewController.m; path = Review/totBookViewController.m; sourceTree = "<group>"; };
@@ -1205,6 +1219,21 @@
 			name = scrapbook;
 			sourceTree = "<group>";
 		};
+		8E9815F8177EB2ED003439FD /* Timeline */ = {
+			isa = PBXGroup;
+			children = (
+				8E9815FC177FA17E003439FD /* totTestCard.h */,
+				8E9815FD177FA17E003439FD /* totTestCard.m */,
+				8E9815F9177F9ACD003439FD /* totReviewCardView.h */,
+				8E9815FA177F9ACE003439FD /* totReviewCardView.m */,
+				8E9815FF177FA6DB003439FD /* totTimeline.h */,
+				8E981600177FA6DB003439FD /* totTimeline.m */,
+				8E981604177FA838003439FD /* totTimelineController.h */,
+				8E981605177FA838003439FD /* totTimelineController.m */,
+			);
+			name = Timeline;
+			sourceTree = "<group>";
+		};
 		EF043C3B154DE2D600975BCD /* Utility */ = {
 			isa = PBXGroup;
 			children = (
@@ -1346,6 +1375,7 @@
 				3FCA8974157AE42600B087D7 /* SettingEntryView.xib */,
 				3F2216DD1571758F000E86F3 /* totLoginController.xib */,
 				8E84CC55175F1CE5004057B9 /* ScrapbookView.xib */,
+				8E981602177FA806003439FD /* Timeline.xib */,
 			);
 			name = resources;
 			sourceTree = "<group>";
@@ -1402,6 +1432,7 @@
 		EF62839415366D74004031D6 /* Review */ = {
 			isa = PBXGroup;
 			children = (
+				8E9815F8177EB2ED003439FD /* Timeline */,
 				8E84C91D174C80A6004057B9 /* Scrapbook */,
 				EF62839C15366DCD004031D6 /* totReviewRootController.h */,
 				EF62839D15366DCD004031D6 /* totReviewRootController.m */,
@@ -1910,6 +1941,7 @@
 				8E84CC511754700A004057B9 /* test.tpl in Resources */,
 				8E84CC56175F1CE5004057B9 /* ScrapbookView.xib in Resources */,
 				8E22B40B176E7456002C668C /* add_image.png in Resources */,
+				8E981603177FA806003439FD /* Timeline.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1973,6 +2005,10 @@
 				8E84CC54175F0AA6004057B9 /* totBookletTest.m in Sources */,
 				8ECAC85917683E4B000B4E0B /* totBookViewController.m in Sources */,
 				8ECAC85C17684500000B4E0B /* totBookletView.m in Sources */,
+				8E9815FB177F9ACE003439FD /* totReviewCardView.m in Sources */,
+				8E9815FE177FA17E003439FD /* totTestCard.m in Sources */,
+				8E981601177FA6DB003439FD /* totTimeline.m in Sources */,
+				8E981606177FA838003439FD /* totTimelineController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

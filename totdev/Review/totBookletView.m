@@ -87,7 +87,7 @@
         NSString* image_path = [self.mData getResource:[totPageElement image]];
         if (image_path) {
             mImage = [[UIImageView alloc] initWithFrame:self.frame];
-            UIImage* img = [UIImage imageWithContentsOfFile:image_path];
+            UIImage* img = [UIImage imageNamed:image_path];
             mImage.image = img;
             mImage.layer.cornerRadius = 10.0f;
             mImage.layer.masksToBounds = YES;
@@ -219,6 +219,7 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
     [mView.mData.book saveToDB];
 }
 */
+// Tesing code ends
 
 - (void)handlePan:(UIGestureRecognizer *)gestureRecognizer {
     if ([gestureRecognizer isKindOfClass:UIPanGestureRecognizer.class]) {
@@ -410,12 +411,12 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
         mPageViews = [[NSMutableArray alloc] init];
         
         UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
-        [self addGestureRecognizer:tap];
-        [tap release];
         UILongPressGestureRecognizer* longpress = [[UILongPressGestureRecognizer alloc] initWithTarget:self
                                                                                                 action:@selector(handleLongPress:)];
+        [self addGestureRecognizer:tap];
         [self addGestureRecognizer:longpress];
         [longpress release];
+        [tap release];
     }
     return self;
 }

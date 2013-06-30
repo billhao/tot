@@ -60,11 +60,13 @@
      */
     
     // Setup a book
+    /*
     totBookView* bookview = [[totBookView alloc] initWithFrame:CGRectMake(0, 0, 320, 411)];
     [bookview loadTemplateFile:@"test"];
-    [bookview addNewPage:@"FirstYearTemplateP1"];
+    [bookview addNewPage:@"FirstYearTemplateCover"];
     [self.view addSubview:bookview];
     [bookview release];
+     */
 }
 
 - (void)didReceiveMemoryWarning
