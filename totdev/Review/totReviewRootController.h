@@ -11,17 +11,20 @@
 
 @class totReviewTableViewController;
 @class totBookViewController;
+@class totTimelineController;
 
 @interface totReviewRootController : UIViewController {
     totReviewTableViewController* tableViewController;
     totBookViewController* mBookController;
+    totTimelineController* mTimelineController;
     totModel* mModel;
     int mCurrentBabyId;
     int mOffset;
 }
 
-@property (nonatomic, retain) totReviewTableViewController *tableViewController;
-@property (nonatomic, retain) totBookViewController *mBookController;
+@property (nonatomic, retain) totReviewTableViewController* tableViewController;
+@property (nonatomic, retain) totBookViewController* mBookController;
+@property (nonatomic, retain) totTimelineController* mTimelineController;
 @property (nonatomic, assign) totModel * mModel;
 @property (nonatomic, assign) int mOffset;
 @property (nonatomic, assign) int mCurrentBabyId;

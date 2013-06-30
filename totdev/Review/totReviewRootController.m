@@ -15,6 +15,7 @@
 #import "totBooklet.h"
 #import "totBookletTest.h"
 #import "totBookViewController.h"
+#import "totTimelineController.h"
 #import "../Model/totEvent.h"
 
 #define LIMIT 10
@@ -23,6 +24,7 @@
 
 @synthesize tableViewController;
 @synthesize mBookController;
+@synthesize mTimelineController;
 @synthesize mModel;
 @synthesize mOffset;
 @synthesize mCurrentBabyId;
@@ -126,10 +128,18 @@
     [super viewDidLoad];
     
     // Scrapbook
+    /*
     totBookViewController* aBookController = [[totBookViewController alloc] initWithNibName:@"ScrapbookView" bundle:nil];
     self.mBookController = aBookController;
     [self.view addSubview:self.mBookController.view];
     [aBookController release];
+     */
+    
+    // New Timeline
+    totTimelineController* aTimelineController = [[totTimelineController alloc] initWithNibName:@"Timeline" bundle:nil];
+    self.mTimelineController = aTimelineController;
+    [self.view addSubview:self.mTimelineController.view];
+    [aTimelineController release];
     
     // Timeline
     /**
@@ -167,6 +177,7 @@
     // e.g. self.myOutlet = nil;
     [tableViewController release];
     [mBookController release];
+    [mTimelineController release];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
