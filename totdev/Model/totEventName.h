@@ -19,6 +19,7 @@ static NSString *PREFERENCE_ACTIVE_BABY_ID = @"pref/active_baby_id";
 static NSString *PREFERENCE_ACCOUNT = @"pref/account/%@"; // user name -> password
 static NSString *PREFERENCE_ACCOUNT_QUERY = @"pref/account/"; // for query all accounts
 static NSString *PREFERENCE_DEFAULT_BABY = @"pref/defaultbaby/%@"; // default baby for a user
+static NSString *PREFERENCE_LAST_PHOTO_VIEWED = @"pref/last_photo_viewed/%@"; // the last viewed photo (activity) for a user
 
 // mapping from user to baby and from baby to user
 static NSString *PREFERENCE_USER_BABY = @"pref/user_baby/%@"; // user id -> baby id

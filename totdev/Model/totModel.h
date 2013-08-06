@@ -8,11 +8,9 @@
 
 @interface totModel : NSObject {
     NSString *dbfile;
-    NSFileManager *fileMgr;
     sqlite3 *db;
 }
 
-@property (nonatomic,retain) NSFileManager *fileMgr;
 @property (nonatomic,retain) NSString *dbfile;
 
 // constructor and destructor
@@ -43,11 +41,12 @@
 // return an array of totEvent
 - (NSMutableArray *) getItem:(int)baby_id name:(NSString*)name limit:(int)limit offset:(int)offset startDate:(NSDate*)start endDate:(NSDate*)end;
 // a shortcut to getItem, limit=-1, offset=-1, start and end date = nil
-- (totEvent *) getItem:(int)baby_id name:(NSString*)name;
+- (totEvent*) getItem:(int)baby_id name:(NSString*)name;
 // insert or update a record
 - (BOOL) setItem:(int)baby_id name:(NSString*)name value:(NSDictionary*)dict;
 
-    
+- (totEvent*) getEventByID:(int)event_id;
+
 // get N events in a category (event) before current_event_id (N=limit)
 - (NSMutableArray *) getPreviousEvent:(int)baby_id event:(NSString*)event limit:(int)limit current_event_date:(NSDate*)current_event_date;
 

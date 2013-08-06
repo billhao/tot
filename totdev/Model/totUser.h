@@ -6,6 +6,8 @@
 #import <Foundation/Foundation.h>
 #import "totModel.h"
 #import "totBaby.h"
+#import "totMediaLibrary.h"
+
 
 @interface totUser : NSObject {
     NSString* email;
@@ -35,5 +37,10 @@
 
 // set the default baby for this user
 -(void) setDefaultBaby:(totBaby*)baby;
+
+// set last viewed photo for this user
+-(void) setLastViewedPhoto:(MediaInfo*)mediaInfo;
+// get last viewed photo for this user
+-(MediaInfo*) getLastViewedPhoto;
 
 @end

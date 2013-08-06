@@ -18,6 +18,7 @@
 #import "totEventName.h"
 #import "totUtility.h"
 #import "../Utility/totMediaLibrary.h"
+#import "totHomeFeedingViewController.h"
 
 @implementation totHomeEntryViewController
 
@@ -124,9 +125,17 @@
 
 - (void)showPhoto:(MediaInfo*)mediaInfo {
     if( mediaInfo == nil ) {
-        // show default photo
-        [mPhotoView imageFilePath:@"home_default_photo"];
-        return;
+        // get the last viewed photo when first entering this view
+        mediaInfo = [global.user getLastViewedPhoto];
+        if( mediaInfo == nil) {
+            // show default photo
+            [mPhotoView imageFilePath:@"home_default_photo"];
+            return;
+        }
+    }
+    else {
+        // save last viewed photo
+        [global.user setLastViewedPhoto:mediaInfo];
     }
     
     // show photo
@@ -139,8 +148,31 @@
     
 }
 
+// Load activities from the json file. Returns the json object.
+- (NSArray*)loadActivitiesFromFile {
+    NSString* path = [[NSBundle mainBundle] pathForResource:@"Activities" ofType:@"json"];
+    NSString* jsonStr = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:NULL];
+    return [totHomeFeedingViewController JSONToObject:jsonStr];
+}
+
 - (void)createActivityView {
-    activityView = [[UIView alloc] initWithFrame:CGRectMake(10, 300, 300, 150)];
+    NSArray* activities = [self loadActivitiesFromFile];
+    
+    int margin_x = 10;
+    int margin_x_left = 10;
+    int margin_x_right = 10;
+    int margin_y = 10;
+    int margin_y_top = 10;
+    int margin_y_bottom = 10;
+    int icon_height = 50;
+    int icon_width = 50;
+    int label_height = 20;
+    int rows = 2;
+    int columns = ceil(activities.count/rows);
+    int scrollview_height = margin_y_top+margin_y_bottom+rows*(icon_height+label_height)+(rows-1)*margin_y;
+    
+    // create the activity view (top view)
+    activityView = [[UIView alloc] initWithFrame:CGRectMake(10, 460-margin_y_bottom-scrollview_height, 300, scrollview_height)];
     //UIImageView* bg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"activity_background"]];
     UIView* bg = [[UIView alloc] init];
     bg.frame = CGRectMake(0, 0, 300, 150);
@@ -149,29 +181,43 @@
     [activityView addSubview:bg];
     [bg release];
     
-    UIScrollView* scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, 300, 150)];
+    // create the scroll view
+    UIScrollView* scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, 300, scrollview_height)];
     [activityView addSubview:scrollView];
     
     scrollView.pagingEnabled = FALSE;
     scrollView.showsVerticalScrollIndicator = NO;
     scrollView.showsHorizontalScrollIndicator = NO;
     scrollView.delegate = self;
-
-    int margin_x = 10;
-    int margin_x_left = 10;
-    int margin_x_right = 10;
-    int margin_y = 10;
-    int margin_y_top = 10;
-    int margin_y_bottom = 10;
-    for (int i=0; i<14; i++) {
-        UIButton* activityBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        activityBtn.frame = CGRectMake(margin_x_left+i*(50+margin_x), margin_y_top, 50, 50);
-        [activityBtn setImage:[UIImage imageNamed:@"camera_button"] forState:UIControlStateNormal];
-        [activityBtn setImage:[UIImage imageNamed:@"camera_button_pressed"] forState:UIControlStateHighlighted];
-        [activityBtn addTarget:self action:@selector(activityBtnPressed:) forControlEvents:UIControlEventTouchUpInside];
-        [scrollView addSubview:activityBtn];
+    
+    for (int c=0; c<columns; c++) {
+        for( int r=0; r<rows; r++) {
+            // get the icon file names, just replace space with underscore
+            NSString* activity = [activities objectAtIndex:c*rows+r];
+            NSString* tmpname = [activity stringByReplacingOccurrencesOfString:@" " withString:@"_"];
+            NSString* activityIcon = [NSString stringWithFormat:@"activity_%@", tmpname];
+            NSString* activityIconPressed = [NSString stringWithFormat:@"activity_%@_pressed", tmpname];
+            activityIcon = @"camera_button";
+            activityIconPressed = @"camera_button";
+            
+            UIButton* activityBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+            activityBtn.frame = CGRectMake(margin_x_left+c*(icon_width+margin_x), margin_y_top+r*(icon_height+label_height+margin_y), icon_width, icon_height);
+            [activityBtn setImage:[UIImage imageNamed:activityIcon] forState:UIControlStateNormal];
+            [activityBtn setImage:[UIImage imageNamed:activityIconPressed] forState:UIControlStateHighlighted];
+            [activityBtn addTarget:self action:@selector(activityButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+            
+            UILabel* activityLabel = [[UILabel alloc] init];
+            activityLabel.frame = CGRectMake(margin_x_left+c*(icon_width+margin_x), margin_y_top+r*(icon_height+label_height+margin_y)+icon_height, icon_width, label_height);
+            activityLabel.backgroundColor = [UIColor clearColor];
+            activityLabel.alpha = 0.8;
+            activityLabel.text = activity;
+            
+            [scrollView addSubview:activityBtn];
+            [scrollView addSubview:activityLabel];
+        }
     }
-    scrollView.contentSize = CGSizeMake(14*50 + 13*margin_x + margin_x_left + margin_x_right, 150);
+    scrollView.contentSize = CGSizeMake(margin_x_left+margin_x_right+columns*icon_width+(columns-1)*margin_x,
+        scrollview_height);
     [scrollView release];
     
     activityView.hidden = TRUE;
@@ -231,6 +277,9 @@
 }
 
 - (void)menuButtonPressed: (id)sender {
+}
+
+- (void)activityButtonPressed: (id)sender {
 }
 
 #pragma mark - CameraViewDelegate

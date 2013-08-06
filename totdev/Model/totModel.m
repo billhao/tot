@@ -10,13 +10,14 @@
 
 @implementation totModel
 
-@synthesize fileMgr;
 @synthesize dbfile;
 
 - (id) init {
     self = [super init];
     if (self != nil) {
         @try {
+            NSFileManager* fileMgr = [NSFileManager defaultManager];
+            
             // db file name 
             dbfile = @"totdb.sqlite";
             
@@ -60,12 +61,11 @@
 -(void)CopyDbToDocumentsFolder{
     NSError *err=nil;
     
-    fileMgr = [NSFileManager defaultManager];
-    
     NSString *dbpath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:dbfile];
     
     NSString *copydbpath = [[totModel GetDocumentDirectory] stringByAppendingPathComponent:dbfile];
     
+    NSFileManager* fileMgr = [NSFileManager defaultManager];
     [fileMgr removeItemAtPath:copydbpath error:&err];
     
     //NSLog(@"DB path = %@", copydbpath);
@@ -477,7 +477,7 @@ NSMutableArray *events = [[[NSMutableArray alloc] init] autorelease];
     }
     
     // update record
-    BOOL re = FALSE;
+    int re = 0;
     sqlite3_stmt *stmt = nil;
     @try {
         while(true) {
@@ -519,6 +519,50 @@ NSMutableArray *events = [[[NSMutableArray alloc] init] autorelease];
     @finally {
         if( stmt != nil ) sqlite3_finalize(stmt);
         return re;
+    }
+}
+
+// get event by event_id
+- (totEvent *) getEventByID:(int)event_id {
+    sqlite3_stmt *stmt = nil;
+    @try {
+        if (db == nil) {
+            NSLog(@"Can't open db");
+            return nil;
+        }
+        
+        NSString* sql = [NSString stringWithFormat:@"SELECT event.event_id, event.time, event.name, event.value FROM event WHERE event_id=%d", event_id];
+        
+        const char *sqlz = [sql cStringUsingEncoding:NSASCIIStringEncoding];
+        if(sqlite3_prepare_v2(db, sqlz, -1, &stmt, NULL) != SQLITE_OK) {
+            NSLog(@"[db] Problem with prepare statement");
+            return nil;
+        }
+
+        while (sqlite3_step(stmt)==SQLITE_ROW) {
+            int i = sqlite3_column_int(stmt, 0);
+            NSString *time  = [NSString stringWithUTF8String:(char *) sqlite3_column_text(stmt, 1)];
+            NSString *name  = [NSString stringWithUTF8String:(char *) sqlite3_column_text(stmt, 2)];
+            NSString *value = [NSString stringWithUTF8String:(char *) sqlite3_column_text(stmt, 3)];
+            //NSLog(@"[db] record, %d, %@", i, value);
+            
+            totEvent* e = [[[totEvent alloc] init] autorelease];
+            e.event_id = i;
+            e.baby_id = -1;
+            e.name = name;
+            e.value = value;
+            //NSLog(@"model setTimeFromText %@", time);
+            [e setTimeFromText:time];
+            return e;
+        }
+        return nil;
+    }
+    @catch (NSException *exception) {
+        NSLog(@"[db] An exception occured: %@", [exception reason]);
+    }
+    @finally {
+        if( stmt != nil ) sqlite3_finalize(stmt);
+        return nil;
     }
 }
 

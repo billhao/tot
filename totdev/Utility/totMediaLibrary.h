@@ -15,6 +15,8 @@
 @property(retain) NSDate* dateTimeTaken;
 @property(retain) NSString* filename;
 
+- (id)initWithJSON:(NSString*)jsonData;
+
 @end
 
 

@@ -8,6 +8,7 @@
 
 #import "totUser.h"
 #import "totEventName.h"
+#import "Global.h"
 
 @implementation totUser
 
@@ -23,7 +24,7 @@ static totModel* _model;
 // init to an existing user
 -(id) initWithID:(NSString*)_email {
     if( self = [super init] ) {
-        email = _email;
+        email = [_email retain]; // release at the end?
     }
     return self;
 }
@@ -77,6 +78,27 @@ static totModel* _model;
     NSString* pref = [NSString stringWithFormat:PREFERENCE_DEFAULT_BABY, email];
     NSString* babyid = [_model getPreferenceNoBaby:pref];
     return [[[totBaby alloc] initWithID:[babyid intValue]] autorelease];
+}
+
+// set last viewed photo for this user
+-(void) setLastViewedPhoto:(MediaInfo*)mediaInfo {
+    NSString* pref = [NSString stringWithFormat:PREFERENCE_LAST_PHOTO_VIEWED, email];
+    [_model updatePreferenceNoBaby:pref value:mediaInfo.filename];
+}
+
+// get last viewed photo for this user
+-(MediaInfo*) getLastViewedPhoto {
+    NSString* pref = [NSString stringWithFormat:PREFERENCE_LAST_PHOTO_VIEWED, email];
+    NSString* filename = [_model getPreferenceNoBaby:pref];
+    if( filename == nil ) return nil;
+    
+    NSString* activityName = [NSString stringWithFormat:ACTIVITY_PHOTO_REPLACABLE, filename];
+    totEvent* e = [_model getItem:global.baby.babyID name:activityName];
+    if( e == nil ) return nil;
+    
+    MediaInfo* mediaInfo = [[[MediaInfo alloc] initWithJSON:e.value] autorelease];
+    mediaInfo.eventID = e.event_id;
+    return mediaInfo;
 }
 
 @end
