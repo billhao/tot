@@ -7,6 +7,7 @@
 //
 
 #import "Global.h"
+#import "totCameraViewController.h"
 
 @implementation Global
 
@@ -28,6 +29,10 @@ Global* global = nil;
         // create baby and user
         self.baby = nil;
         self.user = nil;
+        
+        // init camera
+        self.cameraView = [[totCameraViewController alloc] initWithNibName:@"CameraView" bundle:nil];
+        self.cameraView.view.frame = CGRectMake(0, 0, 0, 0);
     }
     return self;
 }
@@ -36,6 +41,9 @@ Global* global = nil;
     NSLog(@"dealloc");
     self.baby = nil;
     self.user = nil;
+    
+    [self.cameraView release];
+    
     [super dealloc];
 }
 

@@ -14,6 +14,7 @@
 #import "totLoginNavigationController.h"
 
 @class totUITabBarController;
+@class totHomeRootController;
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate> {
     UIWindow *window;
@@ -23,6 +24,7 @@
     totImageCache *mCache;
 
 }
+@property (retain, nonatomic) totHomeRootController* homeController;
 @property (retain, nonatomic) totUITabBarController* mainTabController;
 @property (retain, nonatomic) totImageCache *mCache;
 @property (strong, nonatomic) UIWindow *window;

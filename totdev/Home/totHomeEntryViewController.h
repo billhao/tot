@@ -9,10 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "../Utility/totCameraViewController.h"
 
-@class totHomeSleepingView;
-@class totLanguageInputViewController;
-@class totHomeRootController;
-@class totHomeDiaperView;
+@class totImageView;
+@class totMediaLibrary;
 
 enum {
     kBasicLanguage=0,
@@ -25,11 +23,16 @@ enum {
     kBasicHead=7
 };
 
-@interface totHomeEntryViewController : UIViewController <CameraViewDelegate> {
-    totHomeSleepingView *mHomeSleepingView;
-    totLanguageInputViewController *mLanguageInputView;
-    totHomeDiaperView *mHomeDiaperView;
-    totHomeRootController *homeRootController;
+@interface totHomeEntryViewController : UIViewController <CameraViewDelegate, UIScrollViewDelegate> {
+    totImageView* mPhotoView;
+    UIView* activityView;
+    
+    UIButton* cameraBtn;
+    UIButton* menuBtn;
+    
+    totMediaLibrary* mediaLib;
+    
+    MediaInfo* currentPhoto;
     
     // Message passed to the next view.
     NSMutableDictionary* mMessage;

@@ -175,6 +175,12 @@
 		3F79A42717180453004E96F6 /* tutorial_3.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F79A42517180453004E96F6 /* tutorial_3.png */; };
 		3F79A42817180453004E96F6 /* tutorial_3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F79A42617180453004E96F6 /* tutorial_3@2x.png */; };
 		3F7CDB5D157ABDCE009CD3D7 /* totdb.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 3F7CDB5C157ABDCE009CD3D7 /* totdb.sqlite */; };
+		3F7E654B17ADDBEB00C43C02 /* camera_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F7E654817ADDBEB00C43C02 /* camera_button@2x.png */; };
+		3F7E654C17ADDBEB00C43C02 /* home_default_photo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F7E654917ADDBEB00C43C02 /* home_default_photo@2x.png */; };
+		3F7E654D17ADDBEB00C43C02 /* menu_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F7E654A17ADDBEB00C43C02 /* menu_button@2x.png */; };
+		3F7E655017AE19AF00C43C02 /* totMediaLibrary.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F7E654F17AE19AF00C43C02 /* totMediaLibrary.m */; };
+		3F7E655417AE200700C43C02 /* photo2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F7E655217AE200700C43C02 /* photo2@2x.png */; };
+		3F7E655617AE208400C43C02 /* photo1.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F7E655517AE208400C43C02 /* photo1.png */; };
 		3F987DCF1705717E00712A58 /* totTutorialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F987DCE1705717E00712A58 /* totTutorialViewController.m */; };
 		3FA4071616EC08D700B5B89E /* summary_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FA4071416EC08D700B5B89E /* summary_bg.png */; };
 		3FA4071716EC08D700B5B89E /* summary_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FA4071516EC08D700B5B89E /* summary_bg@2x.png */; };
@@ -561,6 +567,13 @@
 		3F79A42517180453004E96F6 /* tutorial_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tutorial_3.png; path = Resources/Tutorial/tutorial_3.png; sourceTree = "<group>"; };
 		3F79A42617180453004E96F6 /* tutorial_3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tutorial_3@2x.png"; path = "Resources/Tutorial/tutorial_3@2x.png"; sourceTree = "<group>"; };
 		3F7CDB5C157ABDCE009CD3D7 /* totdb.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = totdb.sqlite; sourceTree = "<group>"; };
+		3F7E654817ADDBEB00C43C02 /* camera_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera_button@2x.png"; sourceTree = "<group>"; };
+		3F7E654917ADDBEB00C43C02 /* home_default_photo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home_default_photo@2x.png"; sourceTree = "<group>"; };
+		3F7E654A17ADDBEB00C43C02 /* menu_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu_button@2x.png"; sourceTree = "<group>"; };
+		3F7E654E17AE19AF00C43C02 /* totMediaLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totMediaLibrary.h; path = Utility/totMediaLibrary.h; sourceTree = "<group>"; };
+		3F7E654F17AE19AF00C43C02 /* totMediaLibrary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totMediaLibrary.m; path = Utility/totMediaLibrary.m; sourceTree = "<group>"; };
+		3F7E655217AE200700C43C02 /* photo2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "photo2@2x.png"; sourceTree = "<group>"; };
+		3F7E655517AE208400C43C02 /* photo1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = photo1.png; sourceTree = "<group>"; };
 		3F987DCD1705717E00712A58 /* totTutorialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totTutorialViewController.h; path = Tutorial/totTutorialViewController.h; sourceTree = "<group>"; };
 		3F987DCE1705717E00712A58 /* totTutorialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totTutorialViewController.m; path = Tutorial/totTutorialViewController.m; sourceTree = "<group>"; };
 		3FA4071416EC08D700B5B89E /* summary_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = summary_bg.png; path = Resources/Home/Height/summary_bg.png; sourceTree = "<group>"; };
@@ -1046,6 +1059,27 @@
 			name = Tutorial;
 			sourceTree = "<group>";
 		};
+		3F7E654617ADDBC500C43C02 /* ResourcesV2 */ = {
+			isa = PBXGroup;
+			children = (
+				3F7E654717ADDBEB00C43C02 /* Home */,
+			);
+			name = ResourcesV2;
+			sourceTree = "<group>";
+		};
+		3F7E654717ADDBEB00C43C02 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				3F7E655517AE208400C43C02 /* photo1.png */,
+				3F7E655217AE200700C43C02 /* photo2@2x.png */,
+				3F7E654817ADDBEB00C43C02 /* camera_button@2x.png */,
+				3F7E654917ADDBEB00C43C02 /* home_default_photo@2x.png */,
+				3F7E654A17ADDBEB00C43C02 /* menu_button@2x.png */,
+			);
+			name = Home;
+			path = Resources/v2.0/Home;
+			sourceTree = "<group>";
+		};
 		3FA4071816EC08F300B5B89E /* Settings */ = {
 			isa = PBXGroup;
 			children = (
@@ -1281,6 +1315,7 @@
 		EF6283661536674B004031D6 = {
 			isa = PBXGroup;
 			children = (
+				3F7E654617ADDBC500C43C02 /* ResourcesV2 */,
 				3F7CDB5C157ABDCE009CD3D7 /* totdb.sqlite */,
 				3FE9B5F4154A2FCF00199AAF /* Tests */,
 				EF62838C153667BD004031D6 /* resources */,
@@ -1513,6 +1548,8 @@
 		EF97E7C1153B43DD0037E52D /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				3F7E654E17AE19AF00C43C02 /* totMediaLibrary.h */,
+				3F7E654F17AE19AF00C43C02 /* totMediaLibrary.m */,
 				24C98C2216F2C0EF00541492 /* totQuantityController.h */,
 				24C98C2316F2C0EF00541492 /* totQuantityController.m */,
 				3F2216E41571763A000E86F3 /* STHorizontalPicker.h */,
@@ -1942,6 +1979,11 @@
 				8E84CC56175F1CE5004057B9 /* ScrapbookView.xib in Resources */,
 				8E22B40B176E7456002C668C /* add_image.png in Resources */,
 				8E981603177FA806003439FD /* Timeline.xib in Resources */,
+				3F7E654B17ADDBEB00C43C02 /* camera_button@2x.png in Resources */,
+				3F7E654C17ADDBEB00C43C02 /* home_default_photo@2x.png in Resources */,
+				3F7E654D17ADDBEB00C43C02 /* menu_button@2x.png in Resources */,
+				3F7E655417AE200700C43C02 /* photo2@2x.png in Resources */,
+				3F7E655617AE208400C43C02 /* photo1.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2009,6 +2051,7 @@
 				8E9815FE177FA17E003439FD /* totTestCard.m in Sources */,
 				8E981601177FA6DB003439FD /* totTimeline.m in Sources */,
 				8E981606177FA838003439FD /* totTimelineController.m in Sources */,
+				3F7E655017AE19AF00C43C02 /* totMediaLibrary.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

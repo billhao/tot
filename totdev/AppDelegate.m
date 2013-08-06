@@ -16,11 +16,11 @@
 
 #import "totEvent.h"
 #import "Tutorial/totTutorialViewController.h"
+#import "totCameraViewController.h"
 
 @implementation AppDelegate
 
-@synthesize window;
-@synthesize mCache;
+@synthesize window, mCache;
 
 - (void)alloc {
     loginNavigationController = nil;
@@ -39,6 +39,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [totMediaLibrary checkMediaDirectory];
+    
      // handle iphone 5 screen size
     CGRect windowFrame = [[UIScreen mainScreen] bounds];
     if( windowFrame.size.height > 480 ) {
@@ -92,7 +94,7 @@
 //    if( !re ) return FALSE;
     
     // output some system information
-    NSLog(@"App data path = %@", [global.model GetDocumentDirectory]);
+    NSLog(@"App data path = %@", [totModel GetDocumentDirectory]);
     NSLog(@"# Acc = %d", account);
 
     if( account == 0 ) {
@@ -151,12 +153,17 @@
     // remove all previous views
     //[loginNavigationController setViewControllers:nil];
     // show home view
-    totUITabBarController* mainTabController = [[totUITabBarController alloc] initWithNibName:@"MainWindow" bundle:nil];
-    self.mainTabController = mainTabController;
+    self.homeController = [[totHomeRootController alloc] init];
     CGRect frame = self.window.bounds;
-    mainTabController.view.frame = CGRectMake(0, 20, frame.size.width, frame.size.height);
-    [loginNavigationController pushViewController:mainTabController animated:TRUE];
-    [mainTabController release];
+    _homeController.view.frame = CGRectMake(0, 20, frame.size.width, frame.size.height);
+    [loginNavigationController pushViewController:_homeController animated:TRUE];
+    
+//    totUITabBarController* mainTabController = [[totUITabBarController alloc] initWithNibName:@"MainWindow" bundle:nil];
+//    self.mainTabController = mainTabController;
+//    CGRect frame = self.window.bounds;
+//    mainTabController.view.frame = CGRectMake(0, 20, frame.size.width, frame.size.height);
+//    [loginNavigationController pushViewController:mainTabController animated:TRUE];
+//    [mainTabController release];
 }
 
 - (void)showTutorial {

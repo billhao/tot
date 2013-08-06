@@ -11,11 +11,15 @@
 #import "totUser.h"
 #import "totModel.h"
 
+@class totCameraViewController;
+
 @interface Global : NSObject
 
 @property(nonatomic, retain) totModel* model;
 @property(nonatomic, retain) totBaby* baby;
 @property(nonatomic, retain) totUser* user;
+
+@property (nonatomic, retain) totCameraViewController *cameraView;
 
 @end
 

@@ -24,7 +24,7 @@
             NSLog(@"[db] init");
             db = nil;
             // get filename for db
-            NSString *dbPath = [self.GetDocumentDirectory stringByAppendingPathComponent:dbfile];
+            NSString *dbPath = [[totModel GetDocumentDirectory] stringByAppendingPathComponent:dbfile];
             // does it exist?
             BOOL success = [fileMgr fileExistsAtPath:dbPath];
             if(!success) {
@@ -64,7 +64,7 @@
     
     NSString *dbpath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:dbfile];
     
-    NSString *copydbpath = [self.GetDocumentDirectory stringByAppendingPathComponent:dbfile];
+    NSString *copydbpath = [[totModel GetDocumentDirectory] stringByAppendingPathComponent:dbfile];
     
     [fileMgr removeItemAtPath:copydbpath error:&err];
     
@@ -75,9 +75,14 @@
     }
 }
     
--(NSString *)GetDocumentDirectory{
-    fileMgr = [NSFileManager defaultManager];
-    NSString *homeDir = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
++(NSString *)GetDocumentDirectory{
+//    fileMgr = [NSFileManager defaultManager];
+//    NSString *homeDir = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
+    
+    // a better one
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *homeDir = [paths objectAtIndex:0]; // Get documents folder
+
     return homeDir;
 }
 

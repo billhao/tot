@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "totMediaLibrary.h"
 
 @protocol CameraViewDelegate <NSObject>
 
@@ -14,6 +15,7 @@
 - (void) cameraView:(id)cameraView didFinishSavingImageToAlbum:(NSString*)imagePath image:(UIImage*)photo;
 - (void) cameraView:(id)cameraView didFinishSavingVideoToAlbum:(NSString*)videoPath;
 - (void) cameraView:(id)cameraView didFinishSavingThumbnail:(UIImage*)thumbnail;
+- (void) cameraView:(id)cameraView didFinishSavingMedia:(MediaInfo*)mediaInfo;
 
 @end
 
@@ -29,6 +31,6 @@
 //- (void) setDelegate:(id<CameraViewDelegate>)aDelegate;
 - (void) launchPhotoCamera;
 - (void) launchVideoCamera;
-- (void) launchCamera;
+- (void) launchCamera:(UIViewController*)vc;
 
 @end

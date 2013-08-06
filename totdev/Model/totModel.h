@@ -86,7 +86,7 @@
 
 // copy empty tables with structure to document folder
 - (void) CopyDbToDocumentsFolder;
-- (NSString *) GetDocumentDirectory;
++ (NSString *) GetDocumentDirectory;
 
 // clear all records in the database
 - (BOOL) clearDB;

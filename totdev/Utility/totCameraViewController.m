@@ -15,6 +15,7 @@
 #import <AVFoundation/AVTime.h>
 #import <CoreMedia/CMTime.h>
 #import "AppDelegate.h"
+#import "totEventName.h"
 
 @implementation totCameraViewController
 
@@ -79,7 +80,7 @@
     }
 }
 
-- (void)launchCamera {
+- (void)launchCamera:(UIViewController*)vc {
     self.view.frame = CGRectMake(0, 0, 320, 460);
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         imagePicker = [[UIImagePickerController alloc] init];
@@ -87,7 +88,7 @@
         imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
         imagePicker.mediaTypes = [NSArray arrayWithObjects:(NSString*)kUTTypeMovie, (NSString*)kUTTypeImage, nil];
         imagePicker.allowsEditing = NO;
-        [self presentModalViewController:imagePicker animated:NO];
+        [vc presentModalViewController:imagePicker animated:NO];
     }
     else if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
         imagePicker = [[UIImagePickerController alloc] init];
@@ -95,11 +96,13 @@
         imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
         imagePicker.mediaTypes = [NSArray arrayWithObjects:(NSString*)kUTTypeMovie, (NSString*)kUTTypeImage, nil];
         imagePicker.allowsEditing = NO;
-        [self presentModalViewController:imagePicker animated:NO];
+        [vc presentModalViewController:imagePicker animated:NO];
     }
 }
 
 - (void)imagePickerController:(UIImagePickerController*)picker didFinishPickingMediaWithInfo:(NSDictionary*)info {
+    MediaInfo* mediaInfo = [[[MediaInfo alloc] init] autorelease];
+    
     NSString* mediaType = [info objectForKey:UIImagePickerControllerMediaType];
     if ([mediaType isEqualToString:(NSString*)kUTTypeImage]) {
         UIImage *photo = (UIImage*)[info objectForKey:@"UIImagePickerControllerOriginalImage"];
@@ -114,25 +117,40 @@
         NSDate* today = [NSDate date];
         NSTimeInterval interval = [today timeIntervalSince1970];
         NSString *filename = [[NSString alloc] initWithFormat:@"%d.jpg", (int)interval];
+        mediaInfo.filename = [NSString stringWithString:filename];
 
         // Save the image file and add it to cache.
         NSString* filepath = [self saveImage:photo intoFile:filename];
+
         AppDelegate *appdelegate = [[UIApplication sharedApplication] delegate];
         [appdelegate.mCache addImage:photo WithKey:filename];
         
         if( [delegate respondsToSelector:@selector(cameraView:didFinishSavingImageToAlbum:image:)] ) {
             [delegate cameraView:self didFinishSavingImageToAlbum:filepath image:photo];
         }
+        [filename release];
     }
     else if ([mediaType isEqualToString:(NSString*)kUTTypeMovie]) {
-        NSString *tempFilePath = [(NSURL*)[info valueForKey:UIImagePickerControllerMediaURL] absoluteString];
-        tempFilePath = [tempFilePath substringFromIndex:16];
+        // TODO check where video is saved (should be in media dir)
+        NSString* filepath = [(NSURL*)[info valueForKey:UIImagePickerControllerMediaURL] absoluteString];
+        filepath = [filepath substringFromIndex:16];
         // Check if the video file can be saved to camera roll.
-        if (UIVideoAtPathIsCompatibleWithSavedPhotosAlbum(tempFilePath)){
+        if (UIVideoAtPathIsCompatibleWithSavedPhotosAlbum(filepath)){
             // YES. Copy it to the camera roll.
-            UISaveVideoAtPathToSavedPhotosAlbum(tempFilePath, self, @selector(video:didFinishSavingWithError:contextInfo:), tempFilePath);
+            UISaveVideoAtPathToSavedPhotosAlbum(filepath, self, @selector(video:didFinishSavingWithError:contextInfo:), filepath);
         }
+        mediaInfo.filename = [NSString stringWithString:filepath];
     }
+    else
+        return;
+    
+    mediaInfo.dateTimeTaken = [NSDate date];
+    [totMediaLibrary addPhoto:mediaInfo];
+
+    if( [delegate respondsToSelector:@selector(cameraView:didFinishSavingMedia:)] ) {
+        [delegate cameraView:self didFinishSavingMedia:mediaInfo];
+    }
+    
     [self hideCamera];
 }
 
@@ -222,9 +240,7 @@
 
 - (NSString*) saveImage:(UIImage*)photo intoFile:(NSString*)filename {
 //    UIImage *resizedPhoto = [totActivityUtility imageWithImage:photo scaledToSize:CGSizeMake(320, 480)];
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentDirectory = [paths objectAtIndex:0];
-    NSString *imagePath = [documentDirectory stringByAppendingPathComponent:filename];
+    NSString *imagePath = [totMediaLibrary getMediaPath:filename];
     NSData *data = UIImageJPEGRepresentation(photo, 1.0);
     [data writeToFile:imagePath atomically:NO];
     return imagePath;
