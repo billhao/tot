@@ -13,6 +13,7 @@
 #import "totHomeActivityBrowseController.h"
 #import "totHomeActivityLabelController.h"
 #import "totHomeAlbumBrowseController.h"
+#import "totTimelineController.h"
 
 @implementation totHomeRootController
 
@@ -22,6 +23,7 @@
 @synthesize homeActivityLabelController;
 @synthesize homeActivityBrowseController;
 @synthesize homeAlbumBrowseController;
+@synthesize timelineController;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -68,6 +70,13 @@
     self.homeEntryViewController.homeRootController = self;
     [aHomeView release];
     
+    // Create timeline. This view will be displayed when the user flip the finger up.
+    totTimelineController* tc = [[totTimelineController alloc] initWithNibName:@"Timeline" bundle:nil];
+    self.timelineController = tc;
+    [tc release];
+    
+    // commented by Lixing. We don't need these views any more in V2.0.
+    /*
     totHomeFeedingViewController *aFeedView = 
         [[totHomeFeedingViewController alloc] initWithNibName:@"homeFeedingView" bundle:nil];
     self.homeFeedingViewController = aFeedView;
@@ -94,20 +103,29 @@
     self.homeAlbumBrowseController = albumBrowseController;
     self.homeAlbumBrowseController.homeRootController = self;
     [albumBrowseController release];
+     */
     
-    [self.view addSubview:homeEntryViewController.view];
-    [self.view addSubview:homeFeedingViewController.view];
-    [self.view addSubview:homeHeightViewController.view];
-    [self.view addSubview:homeActivityBrowseController.view];
-    [self.view addSubview:homeActivityLabelController.view];
-    [self.view addSubview:homeAlbumBrowseController.view];
+    //[self.view addSubview:homeFeedingViewController.view];
+    //[self.view addSubview:homeHeightViewController.view];
+    //[self.view addSubview:homeActivityBrowseController.view];
+    //[self.view addSubview:homeActivityLabelController.view];
+    //[self.view addSubview:homeAlbumBrowseController.view];
+
     
-    self.homeEntryViewController.view.frame = CGRectMake(0, 0, 320, 460);
-    self.homeFeedingViewController.view.frame = CGRectMake(320, 0, 320, 460);
-    self.homeHeightViewController.view.frame = CGRectMake(320, 0, 320, 460);
-    self.homeActivityLabelController.view.frame = CGRectMake(320, 0, 320, 460);
-    self.homeActivityBrowseController.view.frame = CGRectMake(320, 0, 320, 460);
-    self.homeAlbumBrowseController.view.frame = CGRectMake(320, 0, 320, 460);
+    // =================V2.0==================
+    //[self.view addSubview:homeEntryViewController.view];
+    //self.homeEntryViewController.view.frame = CGRectMake(0, 0, 320, 460);
+    
+    [self.view addSubview:timelineController.view];
+    self.timelineController.view.frame = CGRectMake(0, 0, 320, 460);
+    
+    // =======================================
+    
+    //self.homeFeedingViewController.view.frame = CGRectMake(320, 0, 320, 460);
+    //self.homeHeightViewController.view.frame = CGRectMake(320, 0, 320, 460);
+    //self.homeActivityLabelController.view.frame = CGRectMake(320, 0, 320, 460);
+    //self.homeActivityBrowseController.view.frame = CGRectMake(320, 0, 320, 460);
+    //self.homeAlbumBrowseController.view.frame = CGRectMake(320, 0, 320, 460);
     
     mCurrentViewIndex = kHomeViewEntryView;
 }

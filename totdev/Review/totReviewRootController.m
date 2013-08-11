@@ -128,18 +128,18 @@
     [super viewDidLoad];
     
     // Scrapbook
+    /*
     totBookViewController* aBookController = [[totBookViewController alloc] initWithNibName:@"ScrapbookView" bundle:nil];
     self.mBookController = aBookController;
     [self.view addSubview:self.mBookController.view];
     [aBookController release];
+     */
     
     // New Timeline
-    /*
     totTimelineController* aTimelineController = [[totTimelineController alloc] initWithNibName:@"Timeline" bundle:nil];
     self.mTimelineController = aTimelineController;
     [self.view addSubview:self.mTimelineController.view];
     [aTimelineController release];
-     */
     
     // Timeline
     /**

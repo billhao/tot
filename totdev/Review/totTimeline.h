@@ -11,7 +11,11 @@
 
 @interface totTimeline : UIScrollView {
     NSMutableArray* mCards;
+    
+    int gapBetweenCards;
 }
+
+- (void) setBackground;
 
 - (void) addEmptyCard:(ReviewCardType)type;
 - (void) addCard:(ReviewCardType)type data:(NSString*)data;

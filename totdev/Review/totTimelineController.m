@@ -29,8 +29,13 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    totTimeline* timelineView = [[totTimeline alloc] initWithFrame:CGRectMake(0, 0, 320, 411)];
+    totTimeline* timelineView = [[totTimeline alloc] initWithFrame:CGRectMake(0, 0, 320, 460)];
+
+    [timelineView addEmptyCard:SUMMARY];
     [timelineView addEmptyCard:TEST];
+    [timelineView addEmptyCard:TEST];
+    [timelineView addEmptyCard:TEST];
+    
     [self.view addSubview:timelineView];
     [timelineView release];
 }

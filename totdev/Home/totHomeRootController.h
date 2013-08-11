@@ -15,6 +15,7 @@
 @class totHomeActivityLabelController;
 @class totHomeActivityBrowseController;
 @class totHomeAlbumBrowseController;
+@class totTimelineController;
 
 enum {
     kHomeViewEntryView  = 0,
@@ -33,6 +34,8 @@ enum {
     totHomeActivityBrowseController* homeActivityBrowseController;
     totHomeAlbumBrowseController* homeAlbumBrowseController;
     
+    totTimelineController* timelineController;
+    
     int mCurrentViewIndex;
 }
 
@@ -42,6 +45,8 @@ enum {
 @property (nonatomic, retain) totHomeActivityLabelController* homeActivityLabelController;
 @property (nonatomic, retain) totHomeActivityBrowseController* homeActivityBrowseController;
 @property (nonatomic, retain) totHomeAlbumBrowseController* homeAlbumBrowseController;
+
+@property (nonatomic, retain) totTimelineController* timelineController;
 
 - (void) switchTo:(int)viewIndex withContextInfo:(NSMutableDictionary*)info;
 

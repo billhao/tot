@@ -43,6 +43,7 @@ typedef enum {
     DIAPER   = 4,
     SLEEP    = 5,
     LANGUAGE = 6,
+    SUMMARY  = 7,
 } ReviewCardType;
 
 @interface totReviewCardView : UIView {

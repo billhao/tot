@@ -193,13 +193,13 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
 - (void) launchCamera:(id)sender {
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
     [appDelegate.mainTabController.cameraView setDelegate:self];
-    [appDelegate.mainTabController.cameraView launchCamera];
+    [appDelegate.mainTabController.cameraView launchPhotoCamera];
 }
 
 - (void) launchVideo:(id)sender {
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
     [appDelegate.mainTabController.cameraView setDelegate:self];
-    [appDelegate.mainTabController.cameraView launchCamera];
+    [appDelegate.mainTabController.cameraView launchVideoCamera];
 }
 
 #pragma totCameraViewController delegate

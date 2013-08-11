@@ -8,6 +8,7 @@
 
 #import "totReviewCardView.h"
 #import "totTestCard.h"
+#import "totSummaryCard.h"
 
 @implementation totReviewEditCardView
 
@@ -46,11 +47,6 @@
     return self;
 }
 
-// Different type of cards may need different size.
-+ (CGRect) getSizeOfType:(ReviewCardType)type {
-    return CGRectMake(0, 0, 320, 200);
-}
-
 // Loads existing card.
 - (id)initWithType:(ReviewCardType)type andData:(NSString*)data {
     return nil;
@@ -74,12 +70,25 @@
                 [c2 release];
                 break;
             }
+            case SUMMARY:
+            {
+                totSummaryCard* c = [[totSummaryCard alloc] initWithFrame:self.frame];
+                self.mShowView = c;
+                self.mShowView.parentView = self;
+                [c release];
+            }
             default:
                 break;
         }
         // When creating a new card, the default view is editting view.
-        [self addSubview:self.mEditView];
-        mMode = EDIT;
+        // except for summary card.
+        if (type == SUMMARY) {
+            [self addSubview:self.mShowView];
+            mMode = SHOW;
+        } else {
+            [self addSubview:self.mEditView];
+            mMode = EDIT;
+        }
     }
     return self;
 }
@@ -103,6 +112,18 @@
 }
 
 // Static methods.
+// Different type of cards may need different size.
++ (CGRect) getSizeOfType:(ReviewCardType)type {
+    int w, h;
+    if (type == SUMMARY) {
+        w = [totSummaryCard width];
+        h = [totSummaryCard height];
+        return CGRectMake((320 - w) / 2, 0, w, h);
+    } else {
+        return CGRectMake(0, 0, 320, 100);
+    }
+}
+
 + (totReviewCardView*) createEmptyCard:(ReviewCardType)type {
     totReviewCardView* view = [[totReviewCardView alloc] initWithType:type];
     return view;
