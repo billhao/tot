@@ -12,6 +12,7 @@
 @class totPageElement;
 @class totPage;
 @class totBook;
+@class totBookViewController;
 
 // ---------------------------------totBookBasicView---------------------------------------
 
@@ -56,11 +57,13 @@
 @interface totPageElementView : UIView <UIGestureRecognizerDelegate, CameraViewDelegate> {
     totPageElementViewInternal* mView;
     CGPoint mTouchLastTime;
+    
 }
 
+@property(nonatomic, retain) totBookViewController* bookvc;
 @property (nonatomic, readonly) totPageElementViewInternal* mView;
 
-- (id)initWithElementData:(totPageElement*)data;
+- (id)initWithElementData:(totPageElement*)data bookvc:(totBookViewController*)bookvc;
 - (void)setPageElementData:(totPageElement*)data;
 
 @end
@@ -75,14 +78,16 @@
     // Subviews
     NSMutableArray* mElementsView;
     UIImageView* mBackground;
+
 }
 
+@property(nonatomic, retain) totBookViewController* bookvc;
 @property (nonatomic, retain) totPage* mPage;
 
 // Loads the template data.
 // data should be [totPage toDictionary];
-- (id)initWithFrame:(CGRect)frame andPageTemplateData:(NSDictionary*)data;
-- (id)initWithFrame:(CGRect)frame pagedata:(totPage*)pagedata;
+- (id)initWithFrame:(CGRect)frame andPageTemplateData:(NSDictionary*)data bookvc:(totBookViewController*)bookvc;
+- (id)initWithFrame:(CGRect)frame pagedata:(totPage*)pagedata bookvc:(totBookViewController*)bookvc;
 
 @end
 
@@ -97,7 +102,7 @@
 @end
 
 // Book View
-@interface totBookView : UIView {
+@interface totBookView : UIView <UIGestureRecognizerDelegate> {
     // Data
     totBook* mTemplateBook;  // only stores template.
     totBook* mBook;  // book containing the real data.
@@ -111,7 +116,9 @@
     totPageView* mCurr;
     totPageView* mNext;
      */
+
 }
+@property(nonatomic, retain) totBookViewController* bookvc;
 
 @property (nonatomic, assign) totBook* mBook;
 

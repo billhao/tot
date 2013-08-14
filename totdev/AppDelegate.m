@@ -17,10 +17,11 @@
 #import "totEvent.h"
 #import "Tutorial/totTutorialViewController.h"
 #import "totCameraViewController.h"
+#import "totBookListViewController.h"
 
 @implementation AppDelegate
 
-@synthesize window, mCache;
+@synthesize window, mCache, loginNavigationController;
 
 - (void)alloc {
     loginNavigationController = nil;
@@ -65,10 +66,13 @@
     loginNavigationController = [[totLoginNavigationController alloc] init];
     loginNavigationController.navigationBarHidden = TRUE;
     loginNavigationController.view.frame = self.window.bounds;
-    loginNavigationController.view.autoresizesSubviews = false;  // for iphone 5 screen size
+//    loginNavigationController.view.autoresizesSubviews = false;  // for iphone 5 screen size
 
     self.window.rootViewController = loginNavigationController;
     self.window.backgroundColor = [UIColor blackColor];
+    // use transparent status bar
+//    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackTranslucent];
+
     [self showFirstView];
     [self.window makeKeyAndVisible];
     return YES;
@@ -153,11 +157,17 @@
     // remove all previous views
     //[loginNavigationController setViewControllers:nil];
     // show home view
-    self.homeController = [[totHomeRootController alloc] init];
-    CGRect frame = self.window.bounds;
-    _homeController.view.frame = CGRectMake(0, 20, frame.size.width, frame.size.height);
-    [loginNavigationController pushViewController:_homeController animated:TRUE];
+    //self.homeController = [[totHomeRootController alloc] init];
     
+    totBookListViewController* book = [[totBookListViewController alloc] init];
+    CGRect frame = self.window.bounds;
+    //book.view.backgroundColor = [UIColor greenColor];
+    book.view.frame = CGRectMake(0, 0, frame.size.width, frame.size.height);
+    //_homeController.view.frame = CGRectMake(0, 0, frame.size.width, frame.size.height);
+    [loginNavigationController pushViewController:book animated:TRUE];
+    [book release];
+
+
 //    totUITabBarController* mainTabController = [[totUITabBarController alloc] initWithNibName:@"MainWindow" bundle:nil];
 //    self.mainTabController = mainTabController;
 //    CGRect frame = self.window.bounds;

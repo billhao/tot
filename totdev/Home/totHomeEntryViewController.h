@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "../Utility/totCameraViewController.h"
+#import "totBookListViewController.h"
 
 @class totImageView;
 @class totMediaLibrary;
@@ -29,6 +30,7 @@ enum {
     
     UIButton* cameraBtn;
     UIButton* menuBtn;
+    UIButton* scrapbookBtn;
     
     totMediaLibrary* mediaLib;
     
@@ -36,6 +38,8 @@ enum {
     
     // Message passed to the next view.
     NSMutableDictionary* mMessage;
+    
+    totBookListViewController* scrapbookListController;
 }
 
 @property (nonatomic, assign) totHomeRootController *homeRootController;

@@ -18,12 +18,13 @@
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate> {
     UIWindow *window;
-    totLoginNavigationController *loginNavigationController;
+    
     
     // global
     totImageCache *mCache;
 
 }
+@property (strong, nonatomic) totLoginNavigationController *loginNavigationController;
 @property (retain, nonatomic) totHomeRootController* homeController;
 @property (retain, nonatomic) totUITabBarController* mainTabController;
 @property (retain, nonatomic) totImageCache *mCache;

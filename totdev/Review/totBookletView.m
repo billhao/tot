@@ -87,7 +87,7 @@
         NSString* image_path = [self.mData getResource:[totPageElement image]];
         if (image_path) {
             mImage = [[UIImageView alloc] initWithFrame:self.frame];
-            UIImage* img = [UIImage imageNamed:image_path];
+            UIImage* img = [UIImage imageWithContentsOfFile:image_path];
             mImage.image = img;
             mImage.layer.cornerRadius = 10.0f;
             mImage.layer.masksToBounds = YES;
@@ -160,14 +160,15 @@ static BOOL bAnimationStarted = NO;
 
 // Delegates
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer { return YES; }
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch { return YES; }
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer
-shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+    NSLog(@"%@", touch.view.class);
     return YES;
 }
 
 - (void)handleTap:(UIGestureRecognizer *)gestureRecognizer {
-    if ([gestureRecognizer isKindOfClass:UITapGestureRecognizer.class]) {
+    NSLog(@"%@", gestureRecognizer.view.class);
+    if ([gestureRecognizer isKindOfClass:UITapGestureRecognizer.class] && [gestureRecognizer.view isKindOfClass:totPageElementView.class]) {
         if (![mView isEmpty]) {
             [self animateRemaining];
         } else {
@@ -191,24 +192,34 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
 // copied from totactivityviewcontroller
 // launch camera
 - (void) launchCamera:(id)sender {
-    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-    [appDelegate.mainTabController.cameraView setDelegate:self];
-    [appDelegate.mainTabController.cameraView launchCamera];
+//    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+//    [appDelegate.mainTabController.cameraView setDelegate:self];
+//    [appDelegate.mainTabController.cameraView launchCamera];
+    [global.cameraView setDelegate:self];
+    [global.cameraView launchCamera:self.bookvc];
 }
 
 - (void) launchVideo:(id)sender {
-    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-    [appDelegate.mainTabController.cameraView setDelegate:self];
-    [appDelegate.mainTabController.cameraView launchCamera];
+//    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+//    [appDelegate.mainTabController.cameraView setDelegate:self];
+//    [appDelegate.mainTabController.cameraView launchCamera];
+    [global.cameraView setDelegate:self];
+    [global.cameraView launchCamera:self.bookvc];
+}
+
+#pragma mark - CameraViewDelegate
+- (void) cameraView:(id)cameraView didFinishSavingMedia:(MediaInfo*)mediaInfo {
+    NSLog(@"%@", mediaInfo.filename);
+    //currentPhoto = mediaInfo;
+    // update data
+    [mView.mData addResource:[totPageElement image] withPath:[totMediaLibrary getMediaPath:mediaInfo.filename]];
+    
+    // update view
+    [self setPageElementData:mView.mData];
 }
 
 #pragma totCameraViewController delegate
 - (void) cameraView:(id)cameraView didFinishSavingImageToAlbum:(NSString*)imagePath image:(UIImage*)photo {
-    // update data
-    [mView.mData addResource:[totPageElement image] withPath:imagePath];
-    
-    // update view
-    [self setPageElementData:mView.mData];
     
     // save the data
     //[self savePageData];
@@ -273,7 +284,7 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
     return self;
 }
 
-- (id)initWithElementData:(totPageElement*)data {
+- (id)initWithElementData:(totPageElement*)data bookvc:(totBookViewController*)bookvc {
     self = [super initWithFrame:CGRectMake(data.x, data.y, data.w, data.h)];
     if (self) {
         // Register tap gesture recognizers.
@@ -298,6 +309,8 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
         [self addGestureRecognizer:rotate];
         [rotate release];
 
+        self.bookvc = bookvc;
+        
         mView = [[totPageElementViewInternal alloc] initWithElement:data];
         [mView display];
         [mView rotateTo:data.radians];  // rotate to the specified angle.
@@ -342,7 +355,7 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
     // Setup page element views.
     mElementsView = [[NSMutableArray alloc] init];
     for (int i = 0; i < [mPage elementCount]; ++i) {
-        totPageElementView* elementView = [[totPageElementView alloc] initWithElementData:[mPage getPageElementAtIndex:i]];
+        totPageElementView* elementView = [[totPageElementView alloc] initWithElementData:[mPage getPageElementAtIndex:i] bookvc:self.bookvc];
         [mElementsView addObject:elementView];
         [elementView release];
     }
@@ -351,22 +364,24 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
     }
 }
 
-- (id)initWithFrame:(CGRect)frame andPageTemplateData:(NSDictionary *)data {
+- (id)initWithFrame:(CGRect)frame andPageTemplateData:(NSDictionary *)data bookvc:(totBookViewController*)bookvc {
     self = [super initWithFrame:frame];
     if (self) {
         totPage* aPage = [[totPage alloc] init];
         [aPage loadFromDictionary:data];
         self.mPage = aPage;
         [aPage release];
+        self.bookvc = bookvc;
         [self setup];
     }
     return self;
 }
 
-- (id)initWithFrame:(CGRect)frame pagedata:(totPage*)pagedata {
+- (id)initWithFrame:(CGRect)frame pagedata:(totPage*)pagedata bookvc:(totBookViewController*)bookvc {
     self = [super initWithFrame:frame];
     if (self) {
         self.mPage = pagedata;
+        self.bookvc = bookvc;
         [self setup];
     }
     return self;
@@ -386,11 +401,12 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
 @synthesize mBook;
 
 - (void)handleTap:(UIGestureRecognizer *)gestureRecognizer {
-    if ([gestureRecognizer isKindOfClass:UITapGestureRecognizer.class]) {
+    if ([gestureRecognizer isKindOfClass:UITapGestureRecognizer.class] && [gestureRecognizer.view isKindOfClass:totPageView.class]) {
         printf("Tap at book\n");
         if( [delegate respondsToSelector:@selector(tapAtBook:)] ) {
             [delegate tapAtBook:self];
         }
+        // get next book
         [self addNewPage:@"FirstYearTemplateP1"];  // For testing...
     }
 }
@@ -411,6 +427,7 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
         mPageViews = [[NSMutableArray alloc] init];
         
         UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
+        [tap setDelegate:self];
         UILongPressGestureRecognizer* longpress = [[UILongPressGestureRecognizer alloc] initWithTarget:self
                                                                                                 action:@selector(handleLongPress:)];
         [self addGestureRecognizer:tap];
@@ -422,7 +439,7 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
 }
 
 - (void)loadTemplateFile:(NSString*)filename {
-    NSString* path = [[NSBundle mainBundle] pathForResource:filename ofType:@"tpl"];
+    NSString* path = [[NSBundle mainBundle] pathForResource:filename ofType:@"tpl" inDirectory:@"Templates"];
     mTemplateBook = [[totBook alloc] init];
     [mTemplateBook loadFromTemplateFile:path]; // this is an empty book so there is no book name yet.
     mBook = [[totBook alloc] init];
@@ -432,7 +449,7 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
 - (void)addNewPage:(NSString*)pageName {
     if (!mTemplateBook) {
         printf("You MUST call loadTemplateFile first\n");
-        exit(-1);
+        return;
     }
     totPage* pageData = [mTemplateBook getPage:pageName];
     if (!pageData) return;  // Invalid page name.
@@ -441,7 +458,7 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
     [mBook addPage:pageData];
     
     // add a view.
-    totPageView* newPage = [[totPageView alloc] initWithFrame:self.frame pagedata:pageData];
+    totPageView* newPage = [[totPageView alloc] initWithFrame:self.frame pagedata:pageData bookvc:self.bookvc];
     [mPageViews addObject:newPage];
     [self addSubview:[mPageViews lastObject]];
     [newPage release];
@@ -470,5 +487,13 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
     [mBook release];
     [mPageViews release];
 }
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+    if( [touch.view isKindOfClass:totPageView.class] )
+        return YES;
+    else
+        return NO;
+}
+
 
 @end

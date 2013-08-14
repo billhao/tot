@@ -59,6 +59,14 @@
     [cameraBtn addTarget:self action:@selector(cameraButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:cameraBtn];
     
+    // add scrapbook icon
+    scrapbookBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    scrapbookBtn.frame = CGRectMake(0, 400, 60, 60);
+    [scrapbookBtn setImage:[UIImage imageNamed:@"scrapbook_button"] forState:UIControlStateNormal];
+    [scrapbookBtn setImage:[UIImage imageNamed:@"scrapbook_button_pressed"] forState:UIControlStateHighlighted];
+    [scrapbookBtn addTarget:self action:@selector(scrapbookButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:scrapbookBtn];
+
     // add the camera view to window
     [self.view addSubview:global.cameraView.view];
 
@@ -277,6 +285,14 @@
 }
 
 - (void)menuButtonPressed: (id)sender {
+}
+
+- (void)scrapbookButtonPressed: (id)sender {
+    // show scrapbook
+    if( scrapbookListController == nil ) {
+        scrapbookListController = [[totBookListViewController alloc] init];
+    }
+    [self.view addSubview:scrapbookListController.view];
 }
 
 - (void)activityButtonPressed: (id)sender {
