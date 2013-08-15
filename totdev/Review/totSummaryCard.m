@@ -94,6 +94,8 @@
 }
 
 - (void) dealloc {
+    [super dealloc];
+    
     [icon_height release];
     [icon_weight release];
     [icon_hc release];
@@ -110,8 +112,6 @@
     [label_feed release];
     [label_diaper release];
     [label_babyName release];
-    
-    [super dealloc];
 }
 
 @end

@@ -254,6 +254,7 @@
 		8E46E50216A8F8CF00932B90 /* opener.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E46E50116A8F8CF00932B90 /* opener.png */; };
 		8E4D50E41614CC3A00890621 /* boy.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8E4D50E21614CC3A00890621 /* boy.jpg */; };
 		8E4D50E51614CC3A00890621 /* girl.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8E4D50E31614CC3A00890621 /* girl.jpg */; };
+		8E5692F117B9FE63001686CB /* totTimeUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E5692F017B9FE63001686CB /* totTimeUtil.m */; };
 		8E61818816DFE5F50052E38E /* edit_2X.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E61818516DFE5F50052E38E /* edit_2X.png */; };
 		8E61818916DFE5F50052E38E /* start_2X.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E61818616DFE5F50052E38E /* start_2X.png */; };
 		8E61818A16DFE5F50052E38E /* wakeup_2X.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E61818716DFE5F50052E38E /* wakeup_2X.png */; };
@@ -261,6 +262,12 @@
 		8E7C5A8517B84BFD00A2BA61 /* totSummaryCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E7C5A8417B84BFC00A2BA61 /* totSummaryCard.m */; };
 		8E7C5A8717B84E4A00A2BA61 /* circle_icon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8E7C5A8617B84E4A00A2BA61 /* circle_icon.jpg */; };
 		8E7C5A8A17B859B200A2BA61 /* totHeightCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E7C5A8917B859B100A2BA61 /* totHeightCard.m */; };
+		8E7C5A8D17B8707500A2BA61 /* totWeightCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E7C5A8C17B8707400A2BA61 /* totWeightCard.m */; };
+		8E7C5A9017B8708900A2BA61 /* totHCCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E7C5A8F17B8708800A2BA61 /* totHCCard.m */; };
+		8E7C5A9317B870A400A2BA61 /* totSleepCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E7C5A9217B870A300A2BA61 /* totSleepCard.m */; };
+		8E7C5A9617B870B800A2BA61 /* totDiaperCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E7C5A9517B870B800A2BA61 /* totDiaperCard.m */; };
+		8E7C5A9917B870CD00A2BA61 /* totFeedCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E7C5A9817B870CC00A2BA61 /* totFeedCard.m */; };
+		8E7C5A9C17B870F700A2BA61 /* totLanguageCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E7C5A9B17B870F700A2BA61 /* totLanguageCard.m */; };
 		8E84C920174DF242004057B9 /* totBooklet.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E84C91F174DF242004057B9 /* totBooklet.m */; };
 		8E84C92817546833004057B9 /* FirstYearTemplateCover.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8E84C92417546833004057B9 /* FirstYearTemplateCover.jpg */; };
 		8E84C92917546833004057B9 /* FirstYearTemplateP1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8E84C92517546833004057B9 /* FirstYearTemplateP1.jpg */; };
@@ -658,6 +665,8 @@
 		8E46E50116A8F8CF00932B90 /* opener.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = opener.png; path = Resources/Utility/opener.png; sourceTree = "<group>"; };
 		8E4D50E21614CC3A00890621 /* boy.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = boy.jpg; path = Resources/Home/boy.jpg; sourceTree = "<group>"; };
 		8E4D50E31614CC3A00890621 /* girl.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = girl.jpg; path = Resources/Home/girl.jpg; sourceTree = "<group>"; };
+		8E5692EF17B9FE63001686CB /* totTimeUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totTimeUtil.h; path = Utility/totTimeUtil.h; sourceTree = "<group>"; };
+		8E5692F017B9FE63001686CB /* totTimeUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totTimeUtil.m; path = Utility/totTimeUtil.m; sourceTree = "<group>"; };
 		8E61818516DFE5F50052E38E /* edit_2X.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = edit_2X.png; path = Resources/Home/edit_2X.png; sourceTree = "<group>"; };
 		8E61818616DFE5F50052E38E /* start_2X.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = start_2X.png; path = Resources/Home/start_2X.png; sourceTree = "<group>"; };
 		8E61818716DFE5F50052E38E /* wakeup_2X.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = wakeup_2X.png; path = Resources/Home/wakeup_2X.png; sourceTree = "<group>"; };
@@ -668,6 +677,18 @@
 		8E7C5A8617B84E4A00A2BA61 /* circle_icon.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = circle_icon.jpg; path = Resources/Review/circle_icon.jpg; sourceTree = "<group>"; };
 		8E7C5A8817B859B100A2BA61 /* totHeightCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totHeightCard.h; path = Review/totHeightCard.h; sourceTree = "<group>"; };
 		8E7C5A8917B859B100A2BA61 /* totHeightCard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totHeightCard.m; path = Review/totHeightCard.m; sourceTree = "<group>"; };
+		8E7C5A8B17B8707400A2BA61 /* totWeightCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totWeightCard.h; path = Review/totWeightCard.h; sourceTree = "<group>"; };
+		8E7C5A8C17B8707400A2BA61 /* totWeightCard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totWeightCard.m; path = Review/totWeightCard.m; sourceTree = "<group>"; };
+		8E7C5A8E17B8708800A2BA61 /* totHCCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totHCCard.h; path = Review/totHCCard.h; sourceTree = "<group>"; };
+		8E7C5A8F17B8708800A2BA61 /* totHCCard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totHCCard.m; path = Review/totHCCard.m; sourceTree = "<group>"; };
+		8E7C5A9117B870A300A2BA61 /* totSleepCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totSleepCard.h; path = Review/totSleepCard.h; sourceTree = "<group>"; };
+		8E7C5A9217B870A300A2BA61 /* totSleepCard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totSleepCard.m; path = Review/totSleepCard.m; sourceTree = "<group>"; };
+		8E7C5A9417B870B700A2BA61 /* totDiaperCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totDiaperCard.h; path = Review/totDiaperCard.h; sourceTree = "<group>"; };
+		8E7C5A9517B870B800A2BA61 /* totDiaperCard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totDiaperCard.m; path = Review/totDiaperCard.m; sourceTree = "<group>"; };
+		8E7C5A9717B870CC00A2BA61 /* totFeedCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totFeedCard.h; path = Review/totFeedCard.h; sourceTree = "<group>"; };
+		8E7C5A9817B870CC00A2BA61 /* totFeedCard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totFeedCard.m; path = Review/totFeedCard.m; sourceTree = "<group>"; };
+		8E7C5A9A17B870F600A2BA61 /* totLanguageCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totLanguageCard.h; path = Review/totLanguageCard.h; sourceTree = "<group>"; };
+		8E7C5A9B17B870F700A2BA61 /* totLanguageCard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totLanguageCard.m; path = Review/totLanguageCard.m; sourceTree = "<group>"; };
 		8E84C91E174DF242004057B9 /* totBooklet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totBooklet.h; path = Review/totBooklet.h; sourceTree = "<group>"; };
 		8E84C91F174DF242004057B9 /* totBooklet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totBooklet.m; path = Review/totBooklet.m; sourceTree = "<group>"; };
 		8E84C92417546833004057B9 /* FirstYearTemplateCover.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = FirstYearTemplateCover.jpg; path = Resources/Review/scrapbook/FirstYearTemplateCover.jpg; sourceTree = "<group>"; };
@@ -1266,6 +1287,10 @@
 				8E9815FD177FA17E003439FD /* totTestCard.m */,
 				8E7C5A8817B859B100A2BA61 /* totHeightCard.h */,
 				8E7C5A8917B859B100A2BA61 /* totHeightCard.m */,
+				8E7C5A8B17B8707400A2BA61 /* totWeightCard.h */,
+				8E7C5A8C17B8707400A2BA61 /* totWeightCard.m */,
+				8E7C5A8E17B8708800A2BA61 /* totHCCard.h */,
+				8E7C5A8F17B8708800A2BA61 /* totHCCard.m */,
 				8E7C5A8317B84BFC00A2BA61 /* totSummaryCard.h */,
 				8E7C5A8417B84BFC00A2BA61 /* totSummaryCard.m */,
 				8E9815F9177F9ACD003439FD /* totReviewCardView.h */,
@@ -1274,6 +1299,14 @@
 				8E981600177FA6DB003439FD /* totTimeline.m */,
 				8E981604177FA838003439FD /* totTimelineController.h */,
 				8E981605177FA838003439FD /* totTimelineController.m */,
+				8E7C5A9117B870A300A2BA61 /* totSleepCard.h */,
+				8E7C5A9217B870A300A2BA61 /* totSleepCard.m */,
+				8E7C5A9417B870B700A2BA61 /* totDiaperCard.h */,
+				8E7C5A9517B870B800A2BA61 /* totDiaperCard.m */,
+				8E7C5A9717B870CC00A2BA61 /* totFeedCard.h */,
+				8E7C5A9817B870CC00A2BA61 /* totFeedCard.m */,
+				8E7C5A9A17B870F600A2BA61 /* totLanguageCard.h */,
+				8E7C5A9B17B870F700A2BA61 /* totLanguageCard.m */,
 			);
 			name = Timeline;
 			sourceTree = "<group>";
@@ -1582,6 +1615,8 @@
 				15414FDE154CCB8800C3C828 /* totUtility.m */,
 				EFD8404B1551198D00F75B69 /* totNavigationBar.h */,
 				EFD8404C1551198E00F75B69 /* totNavigationBar.m */,
+				8E5692EF17B9FE63001686CB /* totTimeUtil.h */,
+				8E5692F017B9FE63001686CB /* totTimeUtil.m */,
 			);
 			name = Util;
 			sourceTree = "<group>";
@@ -2064,6 +2099,13 @@
 				3F7E655017AE19AF00C43C02 /* totMediaLibrary.m in Sources */,
 				8E7C5A8517B84BFD00A2BA61 /* totSummaryCard.m in Sources */,
 				8E7C5A8A17B859B200A2BA61 /* totHeightCard.m in Sources */,
+				8E7C5A8D17B8707500A2BA61 /* totWeightCard.m in Sources */,
+				8E7C5A9017B8708900A2BA61 /* totHCCard.m in Sources */,
+				8E7C5A9317B870A400A2BA61 /* totSleepCard.m in Sources */,
+				8E7C5A9617B870B800A2BA61 /* totDiaperCard.m in Sources */,
+				8E7C5A9917B870CD00A2BA61 /* totFeedCard.m in Sources */,
+				8E7C5A9C17B870F700A2BA61 /* totLanguageCard.m in Sources */,
+				8E5692F117B9FE63001686CB /* totTimeUtil.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

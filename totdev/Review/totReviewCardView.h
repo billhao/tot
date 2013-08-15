@@ -8,6 +8,19 @@
 
 #import <UIKit/UIKit.h>
 
+// Each card will have an icon, they should share the same position info.
+#define CARD_ICON_X 5
+#define CARD_ICON_Y 5
+#define CARD_ICON_W 40
+#define CARD_ICON_H 40
+
+#define TIME1_X 50
+#define TIME2_X 150
+#define TIME1_W 80
+#define TIME2_W 100
+#define TIME_H 40
+#define TIME_Y 5
+
 @class totReviewCardView;
 
 // ---------------- Card in editting mode --------------------
@@ -16,6 +29,8 @@
 }
 
 @property (nonatomic, assign) totReviewCardView* parentView;
+
+- (void) setBackground;
 
 @end
 
@@ -26,9 +41,13 @@
 
 @property (nonatomic, assign) totReviewCardView* parentView;
 
+- (void) setBackground;
+
 @end
 
 // ---------------- Review card ------------------------------
+@class totTimeline;
+
 typedef enum {
     EDIT = 0,
     SHOW = 1,
@@ -46,18 +65,29 @@ typedef enum {
     SUMMARY  = 7,
 } ReviewCardType;
 
-@interface totReviewCardView : UIView {
+@interface totReviewCardView : UIView <UIGestureRecognizerDelegate> {
     totReviewEditCardView* mEditView;
     totReviewShowCardView* mShowView;
     ReviewCardMode mMode;
+    totTimeline* parent;
+    UIButton* associated_delete_button;
+    
+    // pan gesture related
+    float touch_x;
+    float touch_y;
+    float origin_x;  // used to recover the position.
 }
 
 @property (nonatomic, retain) totReviewEditCardView* mEditView;
 @property (nonatomic, retain) totReviewShowCardView* mShowView;
+@property (nonatomic, assign) totTimeline* parent;
+@property (nonatomic, assign) UIButton* associated_delete_button;
 
 - (void) flip;
 
 + (totReviewCardView*) createEmptyCard:(ReviewCardType)type;
 + (totReviewCardView*) loadCard:(ReviewCardType)type data:(NSString*)data;
+
+- (void) deleteSelf: (totReviewCardView*)card;  // not used for now.
 
 @end

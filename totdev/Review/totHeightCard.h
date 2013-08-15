@@ -8,9 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "totReviewCardView.h"
+#import "STHorizontalPicker.h"
 
-@interface totHeightEditCard : totReviewEditCardView {
-
+@interface totHeightEditCard : totReviewEditCardView <STHorizontalPickerDelegate> {
+    STHorizontalPicker* picker_height;
+    
+    UIButton* confirm;
+    UIButton* cancel;
 }
 
 + (int) height;

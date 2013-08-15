@@ -32,9 +32,13 @@
     totTimeline* timelineView = [[totTimeline alloc] initWithFrame:CGRectMake(0, 0, 320, 460)];
 
     [timelineView addEmptyCard:SUMMARY];
-    [timelineView addEmptyCard:TEST];
-    [timelineView addEmptyCard:TEST];
-    [timelineView addEmptyCard:TEST];
+    [timelineView addEmptyCard:HEIGHT];
+    [timelineView addEmptyCard:DIAPER];
+    
+    [timelineView addEmptyCard:SUMMARY];
+    [timelineView addEmptyCard:SUMMARY];
+    [timelineView addEmptyCard:SUMMARY];
+    [timelineView addEmptyCard:SUMMARY];
     
     [self.view addSubview:timelineView];
     [timelineView release];
