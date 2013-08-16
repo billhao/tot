@@ -34,6 +34,7 @@
     [timelineView addEmptyCard:SUMMARY];
     [timelineView addEmptyCard:HEIGHT];
     [timelineView addEmptyCard:DIAPER];
+    [timelineView addEmptyCard:LANGUAGE];
     
     [timelineView addEmptyCard:SUMMARY];
     [timelineView addEmptyCard:SUMMARY];

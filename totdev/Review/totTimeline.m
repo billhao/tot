@@ -107,6 +107,12 @@
     }
 }
 
+- (void) moveToTop:(totReviewCardView *)card {
+    float card_y = card.frame.origin.y;
+    float view_y = self.contentOffset.y;
+    [self setContentOffset:CGPointMake(0, card_y) animated:YES];
+}
+
 - (void) deleteCard:(totReviewCardView *)card {
     for (int i = 0; i < [mCards count]; ++i) {
         totReviewCardView* cv = [mCards objectAtIndex:i];

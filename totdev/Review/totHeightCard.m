@@ -38,18 +38,19 @@
 - (void) cancel: (UIButton*) btn {}
 
 - (void) loadButtons {
-    confirm = [[UIButton alloc] initWithFrame:CGRectMake(30, 100, 100, 30)];
-    cancel = [[UIButton alloc] initWithFrame:CGRectMake(190, 100, 100, 30)];
+    confirm_button = [[UIButton alloc] initWithFrame:CGRectMake(30, 100, 100, 30)];
+    cancel_button = [[UIButton alloc] initWithFrame:CGRectMake(190, 100, 100, 30)];
     
-    confirm.backgroundColor = [UIColor redColor];
-    cancel.backgroundColor = [UIColor redColor];
-    [confirm setTitle:@"Yes" forState:UIControlStateNormal];
-    [cancel setTitle:@"No" forState:UIControlStateNormal];
-    [confirm addTarget:self action:@selector(confirm:) forControlEvents:UIControlEventTouchUpInside];
-    [cancel addTarget:self action:@selector(cancel:) forControlEvents:UIControlEventTouchUpInside];
+    confirm_button.backgroundColor = [UIColor redColor];
+    cancel_button.backgroundColor = [UIColor redColor];
     
-    [self addSubview:confirm];
-    [self addSubview:cancel];
+    [confirm_button setTitle:@"Yes" forState:UIControlStateNormal];
+    [cancel_button setTitle:@"No" forState:UIControlStateNormal];
+    [confirm_button addTarget:self action:@selector(confirm:) forControlEvents:UIControlEventTouchUpInside];
+    [cancel_button addTarget:self action:@selector(cancel:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self addSubview:confirm_button];
+    [self addSubview:cancel_button];
 }
 
 - (void) setBackground {
@@ -59,8 +60,8 @@
 - (void) dealloc {
     [super dealloc];
     [picker_height release];
-    [confirm release];
-    [cancel release];
+    [confirm_button release];
+    [cancel_button release];
 }
 
 @end

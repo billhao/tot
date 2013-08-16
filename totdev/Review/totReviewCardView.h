@@ -69,8 +69,8 @@ typedef enum {
     totReviewEditCardView* mEditView;
     totReviewShowCardView* mShowView;
     ReviewCardMode mMode;
-    totTimeline* parent;
-    UIButton* associated_delete_button;
+    totTimeline* parent;  // the parent view, don't take ownership.
+    UIButton* associated_delete_button;  // the delete button associated with this card, don't take ownership.
     
     // pan gesture related
     float touch_x;
@@ -87,7 +87,5 @@ typedef enum {
 
 + (totReviewCardView*) createEmptyCard:(ReviewCardType)type;
 + (totReviewCardView*) loadCard:(ReviewCardType)type data:(NSString*)data;
-
-- (void) deleteSelf: (totReviewCardView*)card;  // not used for now.
 
 @end

@@ -24,4 +24,6 @@
 
 - (void) refreshView;
 
+- (void) moveToTop:(totReviewCardView*)card;
+
 @end

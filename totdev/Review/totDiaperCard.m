@@ -51,7 +51,7 @@
     [time_button2 setFrame:CGRectMake(TIME2_X, TIME_Y, TIME2_W, TIME_H)];
     [time_button2 setTitleColor:[UIColor colorWithRed:128.0/255 green:130.0/255 blue:130.0/255 alpha:1.0]
                        forState:UIControlStateNormal];
-    [time_button2 setTitle:[NSString stringWithFormat:@"%02d/%02d/%04d", now.day, now.month, now.year]
+    [time_button2 setTitle:[NSString stringWithFormat:@"%02d/%02d/%04d", now.month, now.day, now.year]
                   forState:UIControlStateNormal];
     [time_button2.titleLabel setFont:[UIFont fontWithName:@"Roboto-Regular" size:13]];
     [self addSubview:time_button2];

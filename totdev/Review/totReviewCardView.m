@@ -12,7 +12,7 @@
 #import "totSummaryCard.h"
 #import "totHeightCard.h"
 #import "totDiaperCard.h"
-
+#import "totLanguageCard.h"
 
 @implementation totReviewEditCardView
 
@@ -120,10 +120,6 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
     touch_x = -1.0f;
 }
 
-- (void) deleteSelf: (totReviewCardView*)card {
-    [self.parent deleteCard:card];
-}
-
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) { mEditView = nil; mShowView = nil; }
@@ -187,6 +183,18 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
                 [c2 release];
                 break;
             }
+            case LANGUAGE:
+            {
+                totLanguageEditCard* c1 = [[totLanguageEditCard alloc] initWithFrame:self.frame];
+                totLanguageShowCard* c2 = [[totLanguageShowCard alloc] initWithFrame:[totReviewCardView getShowCardSizeOfType:type]];
+                self.mEditView = c1;
+                self.mShowView = c2;
+                self.mEditView.parentView = self;
+                self.mShowView.parentView = self;
+                [c1 release];
+                [c2 release];
+                break;
+            }
             default:
                 break;
         }
@@ -205,11 +213,20 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
     return self;
 }
 
+
+- (void) animationDidStart:(NSString*)animationID context:(void*)context {
+    self.associated_delete_button.hidden = YES;
+}
+- (void) animationDidStop:(NSString*)animationID finished:(NSNumber*)finished context:(void*)context {
+    self.associated_delete_button.hidden = NO;
+}
+
 - (void) flip {
-    // TODO(lxhuang) we should hide the delete button when the animation starts, and display it again after
-    // the animation finishes.
-    [UIView beginAnimations:@"Flip" context:nil];
+    [UIView beginAnimations:@"review_card_flip" context:nil];
     [UIView setAnimationDuration:0.5];
+    [UIView setAnimationDelegate:self];
+    [UIView setAnimationWillStartSelector:@selector(animationDidStart:context:)];
+    [UIView setAnimationDidStopSelector:@selector(animationDidStop:finished:context:)];
     [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
     if (mMode == EDIT) {
         mMode = SHOW;
@@ -244,6 +261,12 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
     } else if (type == DIAPER) {
         w = [totDiaperEditCard width];
         h = [totDiaperEditCard height];
+    } else if (type == LANGUAGE) {
+        w = [totLanguageEditCard width];
+        h = [totLanguageEditCard height];
+    } else {
+        printf("please add size info to getEditCardSizeOfType\n");
+        exit(-1);
     }
     return CGRectMake(0, 0, w, h);
 }
@@ -259,6 +282,12 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
     } else if (type == DIAPER) {
         w = [totDiaperShowCard width];
         h = [totDiaperShowCard height];
+    } else if (type == LANGUAGE) {
+        w = [totLanguageShowCard width];
+        h = [totLanguageShowCard height];
+    } else {
+        printf("please add size info to getShowCardSizeOfType\n");
+        exit(-1);
     }
     return CGRectMake(0, 0, w, h);
 }
