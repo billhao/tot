@@ -73,7 +73,7 @@
 //    [books release];
     
     // load book templates from resources
-    NSString* templatePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Templates"];
+    NSString* templatePath = [[NSBundle mainBundle] resourcePath];
     NSArray* files = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:templatePath error:nil];
     for (NSString* filename in files) {
         if( [[filename pathExtension] isEqualToString:@"tpl"] ) {
@@ -158,12 +158,15 @@
 // open a book
 - (void)openBook:(int)bookID {
     if( mCurrentBook == nil ) {
-        mCurrentBook = [[totBookViewController alloc] init];
+        mCurrentBook = [[totBookViewController alloc] init:self];
     }
     NSMutableDictionary* book = booksAndTemplates[bookID];
     [mCurrentBook open:[book objectForKey:@"name"] isTemplate:[[book objectForKey:@"type"] isEqualToString:@"template"]];
-    
-    [self.view addSubview:mCurrentBook.view];
+}
+
+- (void)closeBook {
+    [mCurrentBook release];
+    mCurrentBook = nil;
 }
 
 - (void)bookSelected:(id)sender {

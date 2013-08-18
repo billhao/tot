@@ -20,24 +20,30 @@ typedef enum {
 } PageElementMediaType;
 
 // Represents each element on the page. The element could be txt, image, or video.
-@interface totPageElement : NSObject {
-    float x, y;  // the top-left point.
-    float w, h;  // the size of the element
-    float radians;  // rotate the element at the center
-    NSMutableDictionary* resources;  // the paths to the resource files (each element may contain more than one resource)
-    PageElementMediaType type;  // the media type
-    NSMutableString* name;  // identifier of the element
-}
+@interface totPageElement : NSObject<NSCopying>
 
+// the top-left point
 @property (nonatomic, assign) float x;
 @property (nonatomic, assign) float y;
+
+// the size of the element
 @property (nonatomic, assign) float w;
 @property (nonatomic, assign) float h;
-@property (nonatomic, assign) float radians;
-@property (nonatomic, assign) PageElementMediaType type;
-@property (nonatomic, retain) NSString* name;
 
+// rotate the element at the center
+@property (nonatomic, assign) float radians;
+
+// the media type
+@property (nonatomic, assign) PageElementMediaType type;
+
+// identifier of the element
+@property (nonatomic, retain) NSString* name;
+@property (nonatomic, retain) NSMutableDictionary* resources;  // the paths to the resource files (each element may contain more than one resource)
+
+// fucntions
 - (id) init;
+- (id)copyWithZone:(NSZone *)zone; // a deep copy this object
+
 - (void) addResource:(NSString*)key withPath:(NSString*)path;
 - (NSString*) getResource:(NSString*)key;
 - (BOOL) isEmpty;  // whether contains any resources or not.
@@ -68,18 +74,16 @@ typedef enum {
     PAGE = 2,
 } PageType;
 
-@interface totPage : NSObject {
-    PageType type;
-    NSString* templateFilename;
-    NSString* name;  // identifier of the page.
-    NSMutableArray* pageElements;  // Each element is a totPageElement.
-}
+@interface totPage : NSObject<NSCopying>
 
 @property (nonatomic, assign) PageType type;
 @property (nonatomic, retain) NSString* templateFilename;
-@property (nonatomic, retain) NSString* name;
+@property (nonatomic, retain) NSString* name; // identifier of the page.
+@property (nonatomic, retain) NSMutableArray* pageElements;  // Each element is a totPageElement.
 
+// functions
 - (id) init;
+- (id)copyWithZone:(NSZone *)zone; // a deep copy this object
 
 // element is a NSDictionary containing all necessary information for the element.
 // keys: x, y, w, h, radius, type, name, etc.
@@ -101,6 +105,8 @@ typedef enum {
     NSString* bookname;  // Must be unique.
     NSString* templateName;
     NSMutableArray* pages;  // Each element is a totPage.
+    
+    int lastRandomPage; // use this to avoid generate repeated random page 
 }
 
 @property (nonatomic, retain) NSString* bookname;
@@ -114,12 +120,14 @@ typedef enum {
 - (void) loadFromDictionary: (NSDictionary*)dict;
 
 // caller needs to release the page.
-- (void) addPage:(totPage*)page;
+- (void)insertPage:(totPage *)page pageIndex:(int)pageIndex;
+- (void)deletePage:(int)pageIndex;
 
 - (void) saveToDB; // save the book as a json string in db
 
 - (totPage*) getPage:(NSString*)name;
 - (totPage*) getPageWithIndex:(int)pageIndex;
+- (totPage*) getRandomPage;
 
 - (int) pageCount;
 

@@ -11,6 +11,7 @@
 #import "totBooklet.h"
 #import <QuartzCore/QuartzCore.h>
 #import "AppDelegate.h"
+#import "totBookListViewController.h"
 
 @interface totBookViewController ()
 
@@ -19,13 +20,14 @@
 @implementation totBookViewController
 
 //- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-- (id)init
+- (id)init:(totBookListViewController*)vc
 {
     //self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     self = [super init];
     if (self) {
         // Custom initialization
         bookview = nil;
+        bookListVC = vc;
     }
     return self;
 }
@@ -47,38 +49,20 @@
     //optionBtn.backgroundColor = [UIColor blueColor];
     [optionMenuBtn addTarget:self action:@selector(optionMenuButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:optionMenuBtn];
-    [optionMenuBtn release];
     
+    // bind gesture events
+    // left swipe
+    UISwipeGestureRecognizer* leftSwipeRecognizer = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipeGestureEvent:)];
+    leftSwipeRecognizer.direction = UISwipeGestureRecognizerDirectionLeft;
+    [self.view addGestureRecognizer:leftSwipeRecognizer];
+    [leftSwipeRecognizer release];
+    
+    // right swipe
+    UISwipeGestureRecognizer* rightSwipeRecognizer = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipeGestureEvent:)];
+    rightSwipeRecognizer.direction = UISwipeGestureRecognizerDirectionRight;
+    [self.view addGestureRecognizer:rightSwipeRecognizer];
+    [rightSwipeRecognizer release];
 
-    
-    // Setup a pageElement
-    /*
-    totPageElement* element = [[totPageElement alloc] init];
-    [totPageElement initPageElement:element x:50 y:50 w:50 h:50 r:0.9 n:@"Test" t:IMAGE];
-    [element addResource:[totPageElement image] withPath:@"bg_registration.png"];
-    
-    totPageElementView* elementView = [[totPageElementView alloc] initWithElementData:element];
-    [self.view addSubview:elementView];
-    [elementView release];
-    
-    [element release];
-     */
-    
-    // Setup a page
-    /*
-    NSString* path = [[NSBundle mainBundle] pathForResource:@"test" ofType:@"tpl"];
-    totBook* book = [[totBook alloc] init];
-    [book loadFromTemplateFile:path];
-    book.bookname = @"test_scrapbook";
-    
-    totPage* pagedata = [book getPageWithIndex:0];
-    totPageView* page = [[totPageView alloc] initWithFrame:CGRectMake(0, 0, 320, 411) pagedata:pagedata];
-    [self.view addSubview:page];
-    [page release];
-    
-    [book release];
-     */
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -112,16 +96,64 @@
     if( bookview != nil) [bookview release];
 }
 
+#pragma mark - Event handler
+
+// Respond to a swipe gesture
+- (IBAction)swipeGestureEvent:(UISwipeGestureRecognizer *)swipeRecognizer {
+    // Get the location of the gesture
+    CGPoint location = [swipeRecognizer locationInView:self.view];
+    NSLog(@"Swipe %d", swipeRecognizer.direction);
+    if( swipeRecognizer.direction == UISwipeGestureRecognizerDirectionLeft ) {
+        // go to next page
+        [bookview nextPage];
+    }
+    else if( swipeRecognizer.direction == UISwipeGestureRecognizerDirectionRight ) {
+        // go to prev page
+        [bookview previousPage];
+    }
+}
+
 - (void)optionButtonPressed:(id)sender {
     NSLog(@"option clicked");
+    
+    // hide option view
     optionView.hidden = TRUE;
     optionMenuBtn.hidden = FALSE;
+    
+    UIButton* btn = (UIButton*)sender;
+    switch (btn.tag) {
+        case 0:
+            [self addNewPage];
+            break;
+        case 1:
+            [self deleteCurrentPage];
+            break;
+        case 2:
+            [self closeBook];
+            break;
+        default:
+            break;
+    }
 }
 
 - (void)optionMenuButtonPressed:(id)sender {
     optionView.hidden = FALSE;
     optionMenuBtn.hidden = TRUE;
 }
+
+- (void)hideOptionMenuAndButton:(BOOL)hide {
+    if( hide ) {
+        optionMenuBtn.alpha = 0;
+//        optionView.hidden = TRUE;
+//        optionMenuBtn.hidden = TRUE;
+    }
+    else {
+        optionMenuBtn.alpha = 1;
+//        optionMenuBtn.hidden = FALSE;
+    }
+}
+
+#pragma mark - Helper functions
 
 - (void)createOptionMenu {
     optionView = [[UIView alloc] init];
@@ -131,7 +163,7 @@
     
     NSMutableArray* buttons = [[NSMutableArray alloc] initWithObjects:
                                @"Add new page",
-                               @"Remove this page",
+                               @"Delete this page",
                                @"Close",
                                nil];
 
@@ -163,7 +195,23 @@
     [self.view addSubview:optionView];
 }
 
-- (void)open:(NSString*)bookname isTemplate:(BOOL)isTemplate {
+- (void)addNewPage {
+    [bookview addNewPage:nil]; // add a random page
+}
+
+- (void)deleteCurrentPage {
+    [bookview deleteCurrentPage];
+}
+
+- (void)closeBook {
+    // prompt to save if it is a template and has been modified
+    
+    // remove book view from parent
+    [self.view removeFromSuperview];
+    [bookListVC closeBook]; // release the bookvc
+}
+
+- (void)open:(NSString*)bookname isTemplate:(BOOL)isTemplate  {
     // Setup a book
     bookview = [[totBookView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
     bookview.bookvc = self;
@@ -174,6 +222,8 @@
     else {
         [bookview loadBook:bookname];
     }
+    
+    [bookListVC.view addSubview:self.view];
 }
 
 @end

@@ -109,7 +109,6 @@
     
     id <BookViewDelegate> delegate;
     
-    NSMutableArray* mPageViews;
     // Subviews
     /*  // Gives up for now..
     totPageView* mPrev;
@@ -118,14 +117,19 @@
      */
 
 }
+@property(nonatomic, retain) NSMutableArray* mPageViews;
+@property(nonatomic, assign) int currentPageIndex;
 @property(nonatomic, retain) totBookViewController* bookvc;
-
 @property (nonatomic, assign) totBook* mBook;
 
 - (void)loadTemplateFile:(NSString*)filename;
 
 // New page means an empty page, so that there is no data associated with the page yet.
 - (void)addNewPage:(NSString*)pageName;
+- (void)deleteCurrentPage;
+
+- (void)nextPage;
+- (void)previousPage;
 
 - (void)saveBook:(NSString*)bookname;
 - (void)loadBook:(NSString*)bookname;

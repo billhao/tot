@@ -181,7 +181,6 @@
 		3F686B1517B84C730018BE6E /* add_image.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F686AFC17B84C730018BE6E /* add_image.png */; };
 		3F686B1617B84C730018BE6E /* book1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F686AFD17B84C730018BE6E /* book1@2x.png */; };
 		3F686B1717B84C730018BE6E /* book2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F686AFE17B84C730018BE6E /* book2@2x.png */; };
-		3F686B2117B84CA20018BE6E /* Templates in Resources */ = {isa = PBXBuildFile; fileRef = 3F686B2017B84CA20018BE6E /* Templates */; };
 		3F686B2417B84CE60018BE6E /* First Year Template@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F686B2317B84CE60018BE6E /* First Year Template@2x.png */; };
 		3F79A42717180453004E96F6 /* tutorial_3.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F79A42517180453004E96F6 /* tutorial_3.png */; };
 		3F79A42817180453004E96F6 /* tutorial_3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F79A42617180453004E96F6 /* tutorial_3@2x.png */; };
@@ -189,6 +188,13 @@
 		3F7E655017AE19AF00C43C02 /* totMediaLibrary.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F7E654F17AE19AF00C43C02 /* totMediaLibrary.m */; };
 		3F8A45F617BB7550006A7566 /* scrapbook_option_button_pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F8A45F417BB7550006A7566 /* scrapbook_option_button_pressed@2x.png */; };
 		3F8A45F717BB7550006A7566 /* scrapbook_option_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F8A45F517BB7550006A7566 /* scrapbook_option_button@2x.png */; };
+		3F954A7917C079A40007C125 /* First Year Template.tpl in Resources */ = {isa = PBXBuildFile; fileRef = 3F954A7217C079A40007C125 /* First Year Template.tpl */; };
+		3F954A7A17C079A40007C125 /* FirstYearTemplateCover.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3F954A7317C079A40007C125 /* FirstYearTemplateCover.jpg */; };
+		3F954A7B17C079A40007C125 /* FirstYearTemplateP1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3F954A7417C079A40007C125 /* FirstYearTemplateP1.jpg */; };
+		3F954A7C17C079A40007C125 /* FirstYearTemplateP2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3F954A7517C079A40007C125 /* FirstYearTemplateP2.jpg */; };
+		3F954A7D17C079A40007C125 /* FirstYearTemplateP3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3F954A7617C079A40007C125 /* FirstYearTemplateP3.jpg */; };
+		3F954A7E17C079A40007C125 /* Second Year Template.tpl in Resources */ = {isa = PBXBuildFile; fileRef = 3F954A7717C079A40007C125 /* Second Year Template.tpl */; };
+		3F954A7F17C079A40007C125 /* Third Year Template.tpl in Resources */ = {isa = PBXBuildFile; fileRef = 3F954A7817C079A40007C125 /* Third Year Template.tpl */; };
 		3F987DCF1705717E00712A58 /* totTutorialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F987DCE1705717E00712A58 /* totTutorialViewController.m */; };
 		3FA4071616EC08D700B5B89E /* summary_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FA4071416EC08D700B5B89E /* summary_bg.png */; };
 		3FA4071716EC08D700B5B89E /* summary_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FA4071516EC08D700B5B89E /* summary_bg@2x.png */; };
@@ -578,7 +584,6 @@
 		3F686AFC17B84C730018BE6E /* add_image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = add_image.png; sourceTree = "<group>"; };
 		3F686AFD17B84C730018BE6E /* book1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "book1@2x.png"; sourceTree = "<group>"; };
 		3F686AFE17B84C730018BE6E /* book2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "book2@2x.png"; sourceTree = "<group>"; };
-		3F686B2017B84CA20018BE6E /* Templates */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Templates; sourceTree = "<group>"; };
 		3F686B2317B84CE60018BE6E /* First Year Template@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "First Year Template@2x.png"; sourceTree = "<group>"; };
 		3F79A42517180453004E96F6 /* tutorial_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tutorial_3.png; path = Resources/Tutorial/tutorial_3.png; sourceTree = "<group>"; };
 		3F79A42617180453004E96F6 /* tutorial_3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tutorial_3@2x.png"; path = "Resources/Tutorial/tutorial_3@2x.png"; sourceTree = "<group>"; };
@@ -587,6 +592,13 @@
 		3F7E654F17AE19AF00C43C02 /* totMediaLibrary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totMediaLibrary.m; path = Utility/totMediaLibrary.m; sourceTree = "<group>"; };
 		3F8A45F417BB7550006A7566 /* scrapbook_option_button_pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "scrapbook_option_button_pressed@2x.png"; sourceTree = "<group>"; };
 		3F8A45F517BB7550006A7566 /* scrapbook_option_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "scrapbook_option_button@2x.png"; sourceTree = "<group>"; };
+		3F954A7217C079A40007C125 /* First Year Template.tpl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "First Year Template.tpl"; sourceTree = "<group>"; };
+		3F954A7317C079A40007C125 /* FirstYearTemplateCover.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = FirstYearTemplateCover.jpg; sourceTree = "<group>"; };
+		3F954A7417C079A40007C125 /* FirstYearTemplateP1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = FirstYearTemplateP1.jpg; sourceTree = "<group>"; };
+		3F954A7517C079A40007C125 /* FirstYearTemplateP2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = FirstYearTemplateP2.jpg; sourceTree = "<group>"; };
+		3F954A7617C079A40007C125 /* FirstYearTemplateP3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = FirstYearTemplateP3.jpg; sourceTree = "<group>"; };
+		3F954A7717C079A40007C125 /* Second Year Template.tpl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Second Year Template.tpl"; sourceTree = "<group>"; };
+		3F954A7817C079A40007C125 /* Third Year Template.tpl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Third Year Template.tpl"; sourceTree = "<group>"; };
 		3F987DCD1705717E00712A58 /* totTutorialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totTutorialViewController.h; path = Tutorial/totTutorialViewController.h; sourceTree = "<group>"; };
 		3F987DCE1705717E00712A58 /* totTutorialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totTutorialViewController.m; path = Tutorial/totTutorialViewController.m; sourceTree = "<group>"; };
 		3FA4071416EC08D700B5B89E /* summary_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = summary_bg.png; path = Resources/Home/Height/summary_bg.png; sourceTree = "<group>"; };
@@ -1093,11 +1105,11 @@
 		3F686AFB17B84C730018BE6E /* Scrapbook */ = {
 			isa = PBXGroup;
 			children = (
-				3FEC0F4917BB7D0700EBBA92 /* scrapbook_option_menu_background@2x.png */,
-				3F8A45F417BB7550006A7566 /* scrapbook_option_button_pressed@2x.png */,
-				3F8A45F517BB7550006A7566 /* scrapbook_option_button@2x.png */,
+				3F954A7117C079A40007C125 /* Templates */,
 				3F686B2217B84CC30018BE6E /* Templates_thumbnails */,
-				3F686B2017B84CA20018BE6E /* Templates */,
+				3F8A45F417BB7550006A7566 /* scrapbook_option_button_pressed@2x.png */,
+				3FEC0F4917BB7D0700EBBA92 /* scrapbook_option_menu_background@2x.png */,
+				3F8A45F517BB7550006A7566 /* scrapbook_option_button@2x.png */,
 				3F686AFC17B84C730018BE6E /* add_image.png */,
 				3F686AFD17B84C730018BE6E /* book1@2x.png */,
 				3F686AFE17B84C730018BE6E /* book2@2x.png */,
@@ -1110,7 +1122,22 @@
 			children = (
 				3F686B2317B84CE60018BE6E /* First Year Template@2x.png */,
 			);
-			path = Templates_thumbnails;
+			name = Templates_thumbnails;
+			path = ResourcesV2/Scrapbook/Templates_thumbnails;
+			sourceTree = SOURCE_ROOT;
+		};
+		3F954A7117C079A40007C125 /* Templates */ = {
+			isa = PBXGroup;
+			children = (
+				3F954A7217C079A40007C125 /* First Year Template.tpl */,
+				3F954A7317C079A40007C125 /* FirstYearTemplateCover.jpg */,
+				3F954A7417C079A40007C125 /* FirstYearTemplateP1.jpg */,
+				3F954A7517C079A40007C125 /* FirstYearTemplateP2.jpg */,
+				3F954A7617C079A40007C125 /* FirstYearTemplateP3.jpg */,
+				3F954A7717C079A40007C125 /* Second Year Template.tpl */,
+				3F954A7817C079A40007C125 /* Third Year Template.tpl */,
+			);
+			path = Templates;
 			sourceTree = "<group>";
 		};
 		3FA4071816EC08F300B5B89E /* Settings */ = {
@@ -2001,11 +2028,17 @@
 				3F686B1517B84C730018BE6E /* add_image.png in Resources */,
 				3F686B1617B84C730018BE6E /* book1@2x.png in Resources */,
 				3F686B1717B84C730018BE6E /* book2@2x.png in Resources */,
-				3F686B2117B84CA20018BE6E /* Templates in Resources */,
 				3F686B2417B84CE60018BE6E /* First Year Template@2x.png in Resources */,
 				3F8A45F617BB7550006A7566 /* scrapbook_option_button_pressed@2x.png in Resources */,
 				3F8A45F717BB7550006A7566 /* scrapbook_option_button@2x.png in Resources */,
 				3FEC0F4A17BB7D0700EBBA92 /* scrapbook_option_menu_background@2x.png in Resources */,
+				3F954A7917C079A40007C125 /* First Year Template.tpl in Resources */,
+				3F954A7A17C079A40007C125 /* FirstYearTemplateCover.jpg in Resources */,
+				3F954A7B17C079A40007C125 /* FirstYearTemplateP1.jpg in Resources */,
+				3F954A7C17C079A40007C125 /* FirstYearTemplateP2.jpg in Resources */,
+				3F954A7D17C079A40007C125 /* FirstYearTemplateP3.jpg in Resources */,
+				3F954A7E17C079A40007C125 /* Second Year Template.tpl in Resources */,
+				3F954A7F17C079A40007C125 /* Third Year Template.tpl in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2121,7 +2154,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "totdev/totdev-Prefix.pch";
 				INFOPLIST_FILE = "totdev/totdev-Info.plist";
@@ -2162,6 +2195,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
 			};
 			name = Debug;
 		};
@@ -2210,7 +2244,7 @@
 		EF62838B1536674C004031D6 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "totdev/totdev-Prefix.pch";
 				INFOPLIST_FILE = "totdev/totdev-Info.plist";

@@ -22,7 +22,7 @@
 @synthesize h;
 @synthesize radians;
 @synthesize type;
-@synthesize name;
+@synthesize name, resources;
 
 - (id) init {
     if (self = [super init]) {
@@ -53,6 +53,26 @@
     e.radians = r;
     e.name = name;
     e.type = t;
+}
+
+// make a deep of this element because when make copy an element from a template to a real book
+// every embeded object need to be a new one. otherwise it will point to the same objects
+-(id)copyWithZone:(NSZone *)zone
+{
+    totPageElement* e = [[totPageElement alloc] init];
+    e.x = self.x;
+    e.y = self.y;
+    e.w = self.w;
+    e.h = self.h;
+    e.radians = self.radians;
+    e.name = [NSString stringWithString:self.name];
+    e.type = self.type;
+    
+    for (NSString* key in resources.keyEnumerator) {
+        [e.resources setObject:[resources objectForKey:key] forKey:key];
+    }
+    
+    return e;
 }
 
 - (void) addResource:(NSString *)key withPath:(NSString *)path {
@@ -118,7 +138,8 @@
     [resources removeAllObjects];
     if (res) {
         for (id key in res) {
-            [resources setObject:[res objectForKey:key] forKey:key];
+            [resources setObject:[NSString stringWithString:[res objectForKey:key]]
+                          forKey:[NSString stringWithString:key]];
         }
     }
 }
@@ -137,9 +158,7 @@
 ////////////////////////////////////////////////////////////////
 @implementation totPage
 
-@synthesize type;
-@synthesize templateFilename;
-@synthesize name;
+@synthesize type, templateFilename, name, pageElements;
 
 - (id) init {
     if (self = [super init]) {
@@ -154,6 +173,20 @@
     [templateFilename release];
     [pageElements release];
 }
+
+// a deep copy this object. see totPageElement's comment on this
+- (id)copyWithZone:(NSZone *)zone {
+    totPage* p = [[totPage alloc] init];
+    p.type = self.type;
+    p.templateFilename = [NSString stringWithString:self.templateFilename];
+    p.name = [NSString stringWithString:self.name];
+
+    for (totPageElement* e in pageElements) {
+        [p.pageElements addObject:[e copyWithZone:nil]];
+    }
+    return p;
+}
+
 
 - (int)elementCount {
     return [pageElements count];
@@ -420,8 +453,12 @@
     return book;
 }
 
-- (void)addPage:(totPage *)page {
-    [pages addObject:page];
+- (void)insertPage:(totPage *)page pageIndex:(int)pageIndex {
+    [pages insertObject:page atIndex:pageIndex];
+}
+
+- (void)deletePage:(int)pageIndex {
+    [pages removeObjectAtIndex:pageIndex];
 }
 
 - (totPage*)getPage:(NSString*)name {
@@ -431,6 +468,19 @@
         }
     }
     return nil;
+}
+
+- (totPage*)getRandomPage {
+    int cnt = 10;
+    int n;
+    while( cnt > 0 ) {
+        cnt--;
+        n = arc4random_uniform(pages.count);
+        if( n != lastRandomPage )
+            break;
+    }
+    lastRandomPage = n;
+    return pages[n];
 }
 
 - (totPage*)getPageWithIndex:(int)pageIndex {

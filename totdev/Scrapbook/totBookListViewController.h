@@ -19,4 +19,6 @@
 
 @property(strong, nonatomic) UIViewController* parentController;
 
+- (void)closeBook;
+
 @end

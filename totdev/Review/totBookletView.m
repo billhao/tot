@@ -13,10 +13,9 @@
 #import "AppDelegate.h"
 #import "totUITabBarController.h"
 
-#import "totHomeEntryViewController.h"
 
 #define FULL_PAGE_W 320.0f
-#define FULL_PAGE_H 411.0f
+#define FULL_PAGE_H 480.0f
 
 @implementation totBookBasicView
 
@@ -89,16 +88,30 @@
             mImage = [[UIImageView alloc] initWithFrame:self.frame];
             UIImage* img = [UIImage imageWithContentsOfFile:image_path];
             mImage.image = img;
-            mImage.layer.cornerRadius = 10.0f;
-            mImage.layer.masksToBounds = YES;
-            mImage.layer.borderColor = [UIColor colorWithRed:0.7f green:0.7f blue:0.7f alpha:1.0f].CGColor;
-            mImage.layer.borderWidth = 3.0f;
             [self addSubview:mImage];
         } else {
             mImage = [[UIImageView alloc] initWithFrame:self.frame];
             mImage.image = [UIImage imageNamed:@"add_image.png"];  // default.
             [self addSubview:mImage];
         }
+        [self setStyle:TRUE];
+    }
+}
+
+- (void)setStyle:(BOOL)style {
+    if( style ) {
+        mImage.layer.cornerRadius = 10.0f;
+        mImage.layer.masksToBounds = YES;
+        mImage.layer.borderColor = [UIColor colorWithRed:0.7f green:0.7f blue:0.7f alpha:1.0f].CGColor;
+        mImage.layer.borderWidth = 3.0f;
+//        mImage.layer.opacity = 1;
+    }
+    else {
+        mImage.layer.cornerRadius = 0;
+        mImage.layer.masksToBounds = YES;
+        mImage.layer.borderColor = [UIColor clearColor].CGColor;
+        mImage.layer.borderWidth = 0;
+//        mImage.layer.opacity = 0;
     }
 }
 
@@ -124,7 +137,7 @@
 
 @implementation totPageElementView
 
-@synthesize mView;
+@synthesize mView, bookvc;
 
 static BOOL bIsFullPage = NO;
 static BOOL bAnimationStarted = NO;
@@ -149,11 +162,15 @@ static BOOL bAnimationStarted = NO;
         [mView resizeTo:CGRectMake(0, 0, mView.mData.w, mView.mData.h)];
         [mView rotateTo:mView.mData.radians];
         bIsFullPage = NO;
+        [mView setStyle:TRUE];
+        [bookvc hideOptionMenuAndButton:FALSE];
     } else {
         [mView rotateTo:0];
         [mView resizeTo:CGRectMake(0, 0, FULL_PAGE_W, FULL_PAGE_H)];
         [self setFrame:CGRectMake(0, 0, FULL_PAGE_W, FULL_PAGE_H)];
         bIsFullPage = YES;
+        [mView setStyle:FALSE];
+        [bookvc hideOptionMenuAndButton:TRUE];
     }
     [UIView commitAnimations];
 }
@@ -398,7 +415,7 @@ static BOOL bAnimationStarted = NO;
 
 @implementation totBookView
 
-@synthesize mBook;
+@synthesize mBook, currentPageIndex, mPageViews;
 
 - (void)handleTap:(UIGestureRecognizer *)gestureRecognizer {
     if ([gestureRecognizer isKindOfClass:UITapGestureRecognizer.class] && [gestureRecognizer.view isKindOfClass:totPageView.class]) {
@@ -425,6 +442,7 @@ static BOOL bAnimationStarted = NO;
     if (self) {
         mTemplateBook = nil;
         mPageViews = [[NSMutableArray alloc] init];
+        currentPageIndex = -1;
         
         UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
         [tap setDelegate:self];
@@ -439,34 +457,38 @@ static BOOL bAnimationStarted = NO;
 }
 
 - (void)loadTemplateFile:(NSString*)filename {
-    NSString* path = [[NSBundle mainBundle] pathForResource:filename ofType:@"tpl" inDirectory:@"Templates"];
+    NSString* path = [[NSBundle mainBundle] pathForResource:filename ofType:@"tpl"];
     mTemplateBook = [[totBook alloc] init];
     [mTemplateBook loadFromTemplateFile:path]; // this is an empty book so there is no book name yet.
     mBook = [[totBook alloc] init];
     mBook.templateName = mTemplateBook.templateName;
 }
 
+// add a random page if pageName is nil
 - (void)addNewPage:(NSString*)pageName {
     if (!mTemplateBook) {
         printf("You MUST call loadTemplateFile first\n");
         return;
     }
-    totPage* pageData = [mTemplateBook getPage:pageName];
+    totPage* pageData = nil;
+    if( pageName )
+        pageData = [[mTemplateBook getPage:pageName] copyWithZone:nil];
+    else
+        pageData = [[mTemplateBook getRandomPage] copyWithZone:nil];
     if (!pageData) return;  // Invalid page name.
     
     // add it to mBook (since we are adding a real page.)
-    [mBook addPage:pageData];
+    int newPageIndex = currentPageIndex + 1;
+    [mBook insertPage:pageData pageIndex:newPageIndex];
     
     // add a view.
     totPageView* newPage = [[totPageView alloc] initWithFrame:self.frame pagedata:pageData bookvc:self.bookvc];
-    [mPageViews addObject:newPage];
-    [self addSubview:[mPageViews lastObject]];
-    [newPage release];
+    [mPageViews insertObject:newPage atIndex:newPageIndex];
+    [self addSubview:newPage];
     if ([mPageViews count] > 1) {
-        int pageNum = [mPageViews count];
-        totPageView* curr = [mPageViews objectAtIndex:pageNum-1];
+        totPageView* curr = newPage;
         curr.frame = CGRectMake(320, 0, self.frame.size.width, self.frame.size.height);
-        totPageView* prev = [mPageViews objectAtIndex:pageNum-2];
+        totPageView* prev = [mPageViews objectAtIndex:newPageIndex-1];
         
         // swipe the previous page, and display the current page.
         [UIView beginAnimations:@"swipe" context:nil];
@@ -476,6 +498,79 @@ static BOOL bAnimationStarted = NO;
             curr.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
         [UIView commitAnimations];
     }
+    [newPage release];
+    currentPageIndex = newPageIndex;
+}
+
+- (void)deleteCurrentPage {
+    // swipe the previous page, and display the current page.
+    totPageView* curr = [mPageViews objectAtIndex:currentPageIndex];
+    curr.clipsToBounds = TRUE;
+    [UIView animateWithDuration:0.5f animations: ^{
+        curr.frame = CGRectMake(self.frame.size.width/2, self.frame.size.height/2, 0, 0);
+    } completion:^(BOOL finished) {
+        // remove both page view and data
+        int lastPageIndex = currentPageIndex;
+        [mPageViews removeObjectAtIndex:lastPageIndex];
+        [mBook deletePage:lastPageIndex];
+        
+        // swipe to the next page
+        if( mPageViews.count > currentPageIndex+1 ) {
+            // there is a page after it, go to that one
+            totPageView* curr = [mPageViews objectAtIndex:currentPageIndex+1];
+            [self swipeViews:nil view2:curr leftToRight:FALSE];
+        }
+        else if( mPageViews.count > 0 ) {
+            // this is the last page, go to the page before it
+            totPageView* curr = [mPageViews objectAtIndex:currentPageIndex-1];
+            currentPageIndex--;
+            [self swipeViews:curr view2:nil leftToRight:TRUE];
+        }
+        else {
+            // this is the only page
+            // add a new page, and swipe to the new page
+            // next = newpage;
+            currentPageIndex = -1;
+            [self addNewPage:nil];
+        }        
+    }];
+}
+
+- (void)nextPage {
+    if( currentPageIndex == mPageViews.count-1 ) {
+        // indicate this is already the last page
+        return;
+    }
+    totPageView* curr = mPageViews[currentPageIndex];
+    totPageView* next = mPageViews[currentPageIndex+1];
+    [self swipeViews:curr view2:next leftToRight:FALSE];
+    currentPageIndex++;
+}
+
+- (void)previousPage {
+    if( currentPageIndex == 0 ) {
+        // indicate this is already the first page
+        return;
+    }
+    totPageView* curr = mPageViews[currentPageIndex];
+    totPageView* prev = mPageViews[currentPageIndex-1];
+    [self swipeViews:prev view2:curr leftToRight:TRUE];
+    currentPageIndex--;
+}
+
+- (void)swipeViews:(totPageView*)view1 view2:(totPageView*)view2 leftToRight:(BOOL)leftToRight {
+    int width = self.frame.size.width;
+    int height = self.frame.size.height;
+    [UIView animateWithDuration:0.5f animations:^ {
+        if( leftToRight ) {
+            if(view1) view1.frame = CGRectMake(0, 0, width, height);
+            if(view2) view2.frame = CGRectMake(width, 0, width, height);
+        }
+        else {
+            if(view1) view1.frame = CGRectMake(-width, 0, width, height);
+            if(view2) view2.frame = CGRectMake(0, 0, width, height);
+        }
+    }];
 }
 
 - (void)saveBook:(NSString*)bookname {}

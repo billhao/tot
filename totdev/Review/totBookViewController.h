@@ -10,13 +10,20 @@
 
 @class totPageElementView;
 @class totBookView;
+@class totBookListViewController;
 
 @interface totBookViewController : UIViewController {
     totBookView* bookview;
     UIButton* optionMenuBtn;
     UIView* optionView;
+    
+    totBookListViewController* bookListVC;
 }
 
+- (id)init:(totBookListViewController*)vc;
+
 - (void)open:(NSString*)bookname isTemplate:(BOOL)isTemplate;
+- (void)hideOptionMenuAndButton:(BOOL)hide;
+- (IBAction)swipeGestureEvent:(UISwipeGestureRecognizer *)swipeRecognizer;
 
 @end
