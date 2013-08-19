@@ -8,11 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "totCameraViewController.h"
+#import "totBookViewController.h"
 
 @class totPageElement;
 @class totPage;
 @class totBook;
-@class totBookViewController;
 
 // ---------------------------------totBookBasicView---------------------------------------
 
@@ -86,7 +86,7 @@
 
 // Loads the template data.
 // data should be [totPage toDictionary];
-- (id)initWithFrame:(CGRect)frame andPageTemplateData:(NSDictionary*)data bookvc:(totBookViewController*)bookvc;
+//- (id)initWithFrame:(CGRect)frame andPageTemplateData:(NSDictionary*)data bookvc:(totBookViewController*)bookvc;
 - (id)initWithFrame:(CGRect)frame pagedata:(totPage*)pagedata bookvc:(totBookViewController*)bookvc;
 
 @end
@@ -122,6 +122,8 @@
 @property(nonatomic, retain) totBookViewController* bookvc;
 @property (nonatomic, assign) totBook* mBook;
 
+- (void)display;
+
 - (void)loadTemplateFile:(NSString*)filename;
 
 // New page means an empty page, so that there is no data associated with the page yet.
@@ -132,7 +134,7 @@
 - (void)previousPage;
 
 - (void)saveBook:(NSString*)bookname;
-- (void)loadBook:(NSString*)bookname;
+- (void)loadBook:(NSString*)bookid bookname:(NSString*)bookname;
 
 @end
 

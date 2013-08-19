@@ -5,7 +5,7 @@
 
 {
   // Template Name
-  "template_name" : "FirstYear",
+  "template_name" : "First year",
 
   // Define the template page by page
   "pages" : [

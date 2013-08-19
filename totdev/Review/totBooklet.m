@@ -10,6 +10,7 @@
 #import "totHomeFeedingViewController.h"
 #import "Global.h"
 #import "totEventName.h"
+#import "totModel.h"
 
 ////////////////////////////////////////////////////////////////
 // totPageElement
@@ -24,12 +25,13 @@
 @synthesize type;
 @synthesize name, resources;
 
-- (id) init {
+- (id) init:(totPage*)page {
     if (self = [super init]) {
         x = y = w = h = 0;
         type = TEXT;
         radians = 0;
         resources = [[NSMutableDictionary alloc] init];
+        self.page = page;
     }
     return self;
 }
@@ -57,9 +59,9 @@
 
 // make a deep of this element because when make copy an element from a template to a real book
 // every embeded object need to be a new one. otherwise it will point to the same objects
--(id)copyWithZone:(NSZone *)zone
+- (id)copy:(totPage*)page
 {
-    totPageElement* e = [[totPageElement alloc] init];
+    totPageElement* e = [[totPageElement alloc] init:self.page];
     e.x = self.x;
     e.y = self.y;
     e.w = self.w;
@@ -67,6 +69,7 @@
     e.radians = self.radians;
     e.name = [NSString stringWithString:self.name];
     e.type = self.type;
+    e.page = page;
     
     for (NSString* key in resources.keyEnumerator) {
         [e.resources setObject:[resources objectForKey:key] forKey:key];
@@ -160,9 +163,10 @@
 
 @synthesize type, templateFilename, name, pageElements;
 
-- (id) init {
+- (id) init:(totBook*)book {
     if (self = [super init]) {
         pageElements = [[NSMutableArray alloc] init];
+        self.book = book;
     }
     return self;
 }
@@ -175,18 +179,18 @@
 }
 
 // a deep copy this object. see totPageElement's comment on this
-- (id)copyWithZone:(NSZone *)zone {
-    totPage* p = [[totPage alloc] init];
+- (id)copy:(totBook*)book {
+    totPage* p = [[totPage alloc] init:book];
     p.type = self.type;
     p.templateFilename = [NSString stringWithString:self.templateFilename];
     p.name = [NSString stringWithString:self.name];
-
+    p.book = book;
+    
     for (totPageElement* e in pageElements) {
-        [p.pageElements addObject:[e copyWithZone:nil]];
+        [p.pageElements addObject:[e copy:p]];
     }
     return p;
 }
-
 
 - (int)elementCount {
     return [pageElements count];
@@ -209,7 +213,7 @@
 
 // Used to load data from template description file.
 - (void) addPageElement:(id)element {
-    totPageElement* new_element = [[totPageElement alloc] init];
+    totPageElement* new_element = [[totPageElement alloc] init:self];
     NSDictionary* element_object = (NSDictionary*)element;
     for (id element_attr in element_object) {
         if ([element_attr isEqualToString:@"x"]) {
@@ -277,7 +281,7 @@
     [pageElements removeAllObjects];
     if (ee && [ee count] > 0) {
         for (int i = 0; i < [ee count]; ++i) {
-            totPageElement* e = [[totPageElement alloc] init];
+            totPageElement* e = [[totPageElement alloc] init:self];
             [e loadFromDictionary:[ee objectAtIndex:i]];
             [pageElements addObject:e];
             [e release];
@@ -293,12 +297,12 @@
 ////////////////////////////////////////////////////////////////
 @implementation totBook
 
-@synthesize bookname;
-@synthesize templateName;
+@synthesize bookid, bookname, templateName;
 
 - (id) init {
     if (self = [super init]) {
         pages = [[NSMutableArray alloc] init];
+        self.bookid = [NSString stringWithFormat:@"%d", [totModel getSecondsSince1970]];
     }
     return self;
 }
@@ -342,7 +346,7 @@
             NSArray* page_json_objects = [object objectForKey:key];
             for (id page_json_object in page_json_objects) {  // Iterates through pages.
                 // For each page, creates a new totPage.
-                totPage* new_page = [[totPage alloc] init];
+                totPage* new_page = [[totPage alloc] init:self];
                 [self parsePageObject:page_json_object toPage:new_page];
                 [pages addObject:new_page];
                 [new_page release];
@@ -414,7 +418,7 @@
     [pages removeAllObjects];
     if (pp && [pp count] > 0) {
         for (int i = 0; i < [pp count]; ++i) {
-            totPage* p = [[totPage alloc] init];
+            totPage* p = [[totPage alloc] init:self];
             [p loadFromDictionary:[pp objectAtIndex:i]];
             [pages addObject:p];
             [p release];
@@ -438,17 +442,20 @@
 // save the book as a json string in db
 - (void) saveToDB {
     NSDictionary* dict = [self toDictionary];
-    NSString* bookid = [NSString stringWithFormat:SCRAPBOOK_REPLACABLE, self.bookname];
-    [global.model setItem:global.baby.babyID name:bookid value:dict];
+    NSString* dbid = [NSString stringWithFormat:SCRAPBOOK_REPLACABLE, self.bookid, self.bookname];
+    NSLog(@"save book %@ to db", dbid);
+    [global.model setItem:global.baby.babyID name:dbid value:dict];
 }
 
-+ (totBook*) loadFromDB:(NSString*)bookname {
-    NSString* bookid = [NSString stringWithFormat:SCRAPBOOK_REPLACABLE, bookname];
-    totEvent* e = [global.model getItem:global.baby.babyID name:bookid];
++ (totBook*) loadFromDB:(NSString*)bookid bookname:(NSString*)bookname {
+    NSString* dbid = [NSString stringWithFormat:SCRAPBOOK_REPLACABLE, bookid, bookname];
+    NSLog(@"load book %@ to db", dbid);
+    totEvent* e = [global.model getItem:global.baby.babyID name:dbid];
     if( e == nil )
         return nil;
     
     totBook* book = [[totBook alloc]init];
+    book.bookid = bookid;
     [book loadFromJSONString:e.value];
     return book;
 }
@@ -494,7 +501,9 @@
     return [pages count];
 }
 
-- (void)loadBook:(NSString *)bookname {}
+- (void)loadBook:(NSString*)bookid bookname:(NSString*)bookname {
+    
+}
 
 - (void)dealloc {
     [super dealloc];

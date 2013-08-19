@@ -745,4 +745,7 @@ NSMutableArray *events = [[[NSMutableArray alloc] init] autorelease];
     return [self getPreferenceNoBabyCount:PREFERENCE_ACCOUNT_QUERY];
 }
 
++ (int)getSecondsSince1970 {
+    return (int)[[NSDate date] timeIntervalSince1970];
+}
 @end

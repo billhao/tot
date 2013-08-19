@@ -22,7 +22,7 @@
 
 - (id)init:(totBookListViewController*)vc;
 
-- (void)open:(NSString*)bookname isTemplate:(BOOL)isTemplate;
+- (void)open:(NSString*)bookid bookname:(NSString*)bookname isTemplate:(BOOL)isTemplate;
 - (void)hideOptionMenuAndButton:(BOOL)hide;
 - (IBAction)swipeGestureEvent:(UISwipeGestureRecognizer *)swipeRecognizer;
 

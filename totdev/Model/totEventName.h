@@ -78,6 +78,6 @@ static NSString *ACTIVITY_PHOTO_REPLACABLE= @"activity/photo/%@";
 
 // scrapbook
 static NSString *SCRAPBOOK           = @"scrapbook/";
-static NSString *SCRAPBOOK_REPLACABLE= @"scrapbook/%@";
+static NSString *SCRAPBOOK_REPLACABLE= @"scrapbook/%@/%@";
 
 #endif

@@ -95,5 +95,6 @@
 // print events to log
 + (void) printEvents:(NSMutableArray*)events;
 
++ (int)getSecondsSince1970;
 
 @end

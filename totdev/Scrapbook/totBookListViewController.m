@@ -8,6 +8,7 @@
 
 #import "totBookListViewController.h"
 #import "AppDelegate.h"
+#import "totEventName.h"
 
 @interface totBookListViewController ()
 
@@ -61,13 +62,18 @@
         booksAndTemplates = [[NSMutableArray alloc] init];
 
     // load books from DB
-    for (int i=1; i<3; i++) {
+    NSMutableArray* events = [global.model getEvent:global.baby.babyID event:SCRAPBOOK];
+    for ( totEvent* e in events ) {
         NSMutableDictionary* book = [[NSMutableDictionary alloc] init];
-        [book setObject:[NSString stringWithFormat:@"book%d", i] forKey:@"name"];
+        NSArray* names = [e.name componentsSeparatedByString:@"/"];
+        if( names.count != 3 ) continue;
+        [book setObject:names[1] forKey:@"id"];
+        [book setObject:names[2] forKey:@"name"];
         [book setObject:@"book" forKey:@"type"];
         [booksAndTemplates addObject:book];
         [book release];
     }
+    
 //    NSMutableArray* books = [[[NSMutableArray alloc]initWithObjects:@"book1", @"book2", @"book1", @"book2", @"book1", @"book2", @"book1", @"book2", @"book1", @"book2", nil] autorelease];
 //    [booksAndTemplates addObjectsFromArray:books];
 //    [books release];
@@ -78,6 +84,7 @@
     for (NSString* filename in files) {
         if( [[filename pathExtension] isEqualToString:@"tpl"] ) {
             NSMutableDictionary* book = [[NSMutableDictionary alloc] init];
+            [book setObject:@"" forKey:@"id"];
             [book setObject:[[filename lastPathComponent] stringByDeletingPathExtension] forKey:@"name"];
             [book setObject:@"template" forKey:@"type"];
             [booksAndTemplates addObject:book];
@@ -161,7 +168,7 @@
         mCurrentBook = [[totBookViewController alloc] init:self];
     }
     NSMutableDictionary* book = booksAndTemplates[bookID];
-    [mCurrentBook open:[book objectForKey:@"name"] isTemplate:[[book objectForKey:@"type"] isEqualToString:@"template"]];
+    [mCurrentBook open:[book objectForKey:@"id"] bookname:[book objectForKey:@"name"] isTemplate:[[book objectForKey:@"type"] isEqualToString:@"template"]];
 }
 
 - (void)closeBook {

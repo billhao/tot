@@ -139,6 +139,65 @@
 
 @synthesize mView, bookvc;
 
+- (id)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
+    if (self) {
+        mView = nil;
+    }
+    return self;
+}
+
+- (id)initWithElementData:(totPageElement*)data bookvc:(totBookViewController*)bookViewController {
+    self = [super initWithFrame:CGRectMake(data.x, data.y, data.w, data.h)];
+    if (self) {
+        // Register tap gesture recognizers.
+        UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
+        [tap setDelegate:self];
+        [self addGestureRecognizer:tap];
+        [tap release];
+        // Register pan gesture recognizers.
+        UIPanGestureRecognizer* pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
+        pan.minimumNumberOfTouches = pan.maximumNumberOfTouches = 2;
+        [pan setDelegate:self];
+        [self addGestureRecognizer:pan];
+        [pan release];
+        // Register pinch gesture recognizers.
+        UIPinchGestureRecognizer* pinch = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(handlePinch:)];
+        [pinch setDelegate:self];
+        [self addGestureRecognizer:pinch];
+        [pinch release];
+        // Register rotate gesture recognizers.
+        UIRotationGestureRecognizer* rotate = [[UIRotationGestureRecognizer alloc] initWithTarget:self action:@selector(handleRotate:)];
+        [rotate setDelegate:self];
+        [self addGestureRecognizer:rotate];
+        [rotate release];
+        
+        self.bookvc = bookViewController;
+        
+        mView = [[totPageElementViewInternal alloc] initWithElement:data];
+        [mView display];
+        [mView rotateTo:data.radians];  // rotate to the specified angle.
+        [self addSubview:mView];
+    }
+    return self;
+}
+
+- (void)setPageElementData:(totPageElement*)data {
+    if (mView) {
+        [mView removeFromSuperview];
+        [mView release]; mView = nil;
+    }
+    mView = [[totPageElementViewInternal alloc] initWithElement:data];
+    [mView display];
+    [mView rotate:data.radians];
+    [self addSubview:mView];
+}
+
+- (void)dealloc {
+    [super dealloc];
+    [mView release];
+}
+
 static BOOL bIsFullPage = NO;
 static BOOL bAnimationStarted = NO;
 - (void)animationDidStart:(NSString*)animationID context:(void*)context {
@@ -233,6 +292,9 @@ static BOOL bAnimationStarted = NO;
     
     // update view
     [self setPageElementData:mView.mData];
+
+    // save the data
+    [self savePageData];
 }
 
 #pragma totCameraViewController delegate
@@ -241,12 +303,12 @@ static BOOL bAnimationStarted = NO;
     // save the data
     //[self savePageData];
 }
-/*
+
 - (void)savePageData {
     // save entire book's data to db
-    [mView.mData.book saveToDB];
+    [mView.mData.page.book saveToDB];
 }
-*/
+
 // Tesing code ends
 
 - (void)handlePan:(UIGestureRecognizer *)gestureRecognizer {
@@ -293,65 +355,6 @@ static BOOL bAnimationStarted = NO;
     }
 }
 
-- (id)initWithFrame:(CGRect)frame {
-    self = [super initWithFrame:frame];
-    if (self) {
-        mView = nil;
-    }
-    return self;
-}
-
-- (id)initWithElementData:(totPageElement*)data bookvc:(totBookViewController*)bookvc {
-    self = [super initWithFrame:CGRectMake(data.x, data.y, data.w, data.h)];
-    if (self) {
-        // Register tap gesture recognizers.
-        UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
-        [tap setDelegate:self];
-        [self addGestureRecognizer:tap];
-        [tap release];
-        // Register pan gesture recognizers.
-        UIPanGestureRecognizer* pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
-        pan.minimumNumberOfTouches = pan.maximumNumberOfTouches = 2;
-        [pan setDelegate:self];
-        [self addGestureRecognizer:pan];
-        [pan release];
-        // Register pinch gesture recognizers.
-        UIPinchGestureRecognizer* pinch = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(handlePinch:)];
-        [pinch setDelegate:self];
-        [self addGestureRecognizer:pinch];
-        [pinch release];
-        // Register rotate gesture recognizers.
-        UIRotationGestureRecognizer* rotate = [[UIRotationGestureRecognizer alloc] initWithTarget:self action:@selector(handleRotate:)];
-        [rotate setDelegate:self];
-        [self addGestureRecognizer:rotate];
-        [rotate release];
-
-        self.bookvc = bookvc;
-        
-        mView = [[totPageElementViewInternal alloc] initWithElement:data];
-        [mView display];
-        [mView rotateTo:data.radians];  // rotate to the specified angle.
-        [self addSubview:mView];
-    }
-    return self;
-}
-
-- (void)setPageElementData:(totPageElement*)data {
-    if (mView) {
-        [mView removeFromSuperview];
-        [mView release]; mView = nil;
-    }
-    mView = [[totPageElementViewInternal alloc] initWithElement:data];
-    [mView display];
-    [mView rotate:data.radians];
-    [self addSubview:mView];
-}
-
-- (void)dealloc {
-    [super dealloc];
-    [mView release];
-}
-
 @end
 
 
@@ -364,6 +367,8 @@ static BOOL bAnimationStarted = NO;
 }
 
 - (void)setup {
+    self.clipsToBounds = TRUE;
+    
     // Setup the background image
     mBackground = [[UIImageView alloc] initWithFrame:self.frame];
     mBackground.image = [UIImage imageNamed:self.mPage.templateFilename];
@@ -381,18 +386,18 @@ static BOOL bAnimationStarted = NO;
     }
 }
 
-- (id)initWithFrame:(CGRect)frame andPageTemplateData:(NSDictionary *)data bookvc:(totBookViewController*)bookvc {
-    self = [super initWithFrame:frame];
-    if (self) {
-        totPage* aPage = [[totPage alloc] init];
-        [aPage loadFromDictionary:data];
-        self.mPage = aPage;
-        [aPage release];
-        self.bookvc = bookvc;
-        [self setup];
-    }
-    return self;
-}
+//- (id)initWithFrame:(CGRect)frame andPageTemplateData:(NSDictionary *)data bookvc:(totBookViewController*)bookvc {
+//    self = [super initWithFrame:frame];
+//    if (self) {
+//        totPage* aPage = [[totPage alloc] init:bookvc.bookview.mBook];
+//        [aPage loadFromDictionary:data];
+//        self.mPage = aPage;
+//        [aPage release];
+//        self.bookvc = bookvc;
+//        [self setup];
+//    }
+//    return self;
+//}
 
 - (id)initWithFrame:(CGRect)frame pagedata:(totPage*)pagedata bookvc:(totBookViewController*)bookvc {
     self = [super initWithFrame:frame];
@@ -462,6 +467,20 @@ static BOOL bAnimationStarted = NO;
     [mTemplateBook loadFromTemplateFile:path]; // this is an empty book so there is no book name yet.
     mBook = [[totBook alloc] init];
     mBook.templateName = mTemplateBook.templateName;
+    mBook.bookname = mTemplateBook.templateName;
+}
+
+- (void)display {
+    totPage* pageData = [mBook getPageWithIndex:0];
+    
+    // add a view.
+    totPageView* newPage = [[totPageView alloc] initWithFrame:self.frame pagedata:pageData bookvc:self.bookvc];
+    
+    int newPageIndex = currentPageIndex + 1;
+    [mPageViews insertObject:newPage atIndex:newPageIndex];
+    [self addSubview:newPage];
+    currentPageIndex = newPageIndex;
+    [newPage release];
 }
 
 // add a random page if pageName is nil
@@ -472,9 +491,9 @@ static BOOL bAnimationStarted = NO;
     }
     totPage* pageData = nil;
     if( pageName )
-        pageData = [[mTemplateBook getPage:pageName] copyWithZone:nil];
+        pageData = [[mTemplateBook getPage:pageName] copy:mBook];
     else
-        pageData = [[mTemplateBook getRandomPage] copyWithZone:nil];
+        pageData = [[mTemplateBook getRandomPage] copy:mBook];
     if (!pageData) return;  // Invalid page name.
     
     // add it to mBook (since we are adding a real page.)
@@ -515,15 +534,15 @@ static BOOL bAnimationStarted = NO;
         [mBook deletePage:lastPageIndex];
         
         // swipe to the next page
-        if( mPageViews.count > currentPageIndex+1 ) {
+        if( mPageViews.count > currentPageIndex ) {
             // there is a page after it, go to that one
-            totPageView* curr = [mPageViews objectAtIndex:currentPageIndex+1];
+            totPageView* curr = [mPageViews objectAtIndex:currentPageIndex];
             [self swipeViews:nil view2:curr leftToRight:FALSE];
         }
         else if( mPageViews.count > 0 ) {
             // this is the last page, go to the page before it
-            totPageView* curr = [mPageViews objectAtIndex:currentPageIndex-1];
             currentPageIndex--;
+            totPageView* curr = [mPageViews objectAtIndex:currentPageIndex];
             [self swipeViews:curr view2:nil leftToRight:TRUE];
         }
         else {
@@ -574,7 +593,10 @@ static BOOL bAnimationStarted = NO;
 }
 
 - (void)saveBook:(NSString*)bookname {}
-- (void)loadBook:(NSString*)bookname {}
+
+- (void)loadBook:(NSString*)bookid bookname:(NSString*)bookname {
+    mBook = [totBook loadFromDB:bookid bookname:bookname];
+}
 
 - (void)dealloc {
     [super dealloc];

@@ -129,6 +129,9 @@
             [self deleteCurrentPage];
             break;
         case 2:
+            [self editBookName];
+            break;
+        case 3:
             [self closeBook];
             break;
         default:
@@ -164,6 +167,7 @@
     NSMutableArray* buttons = [[NSMutableArray alloc] initWithObjects:
                                @"Add new page",
                                @"Delete this page",
+                               @"Edit book name",
                                @"Close",
                                nil];
 
@@ -211,18 +215,35 @@
     [bookListVC closeBook]; // release the bookvc
 }
 
-- (void)open:(NSString*)bookname isTemplate:(BOOL)isTemplate  {
+- (void)editBookName {
+    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Edit book name" message:@"What is the new book name?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
+    alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+    [alert textFieldAtIndex:0].text = bookview.mBook.bookname;
+    [alert show];
+    [alert release];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    NSLog(@"Entered: %@",[[alertView textFieldAtIndex:0] text]);
+    if( buttonIndex == 1 ) {
+        bookview.mBook.bookname = [alertView textFieldAtIndex:0].text;
+    }
+}
+
+// load book data and show it
+- (void)open:(NSString*)bookid bookname:(NSString*)bookname isTemplate:(BOOL)isTemplate {
     // Setup a book
     bookview = [[totBookView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
     bookview.bookvc = self;
     if( isTemplate ) {
         [bookview loadTemplateFile:bookname];
-        [bookview addNewPage:@"FirstYearTemplateCover"];
+        //[bookview addNewPage:@"FirstYearTemplateCover"];
     }
     else {
-        [bookview loadBook:bookname];
+        [bookview loadBook:bookid bookname:bookname];
     }
     
+    [bookview display];
     [bookListVC.view addSubview:self.view];
 }
 

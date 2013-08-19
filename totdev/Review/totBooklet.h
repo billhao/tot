@@ -10,6 +10,9 @@
 
 #import <UIKit/UIKit.h>
 
+@class totPage;
+@class totBook;
+
 // ---------------------------------totPageElement---------------------------------------
 
 // Types of page element.
@@ -20,7 +23,7 @@ typedef enum {
 } PageElementMediaType;
 
 // Represents each element on the page. The element could be txt, image, or video.
-@interface totPageElement : NSObject<NSCopying>
+@interface totPageElement : NSObject
 
 // the top-left point
 @property (nonatomic, assign) float x;
@@ -40,9 +43,11 @@ typedef enum {
 @property (nonatomic, retain) NSString* name;
 @property (nonatomic, retain) NSMutableDictionary* resources;  // the paths to the resource files (each element may contain more than one resource)
 
+@property (nonatomic, retain) totPage* page; // parent page
+
 // fucntions
-- (id) init;
-- (id)copyWithZone:(NSZone *)zone; // a deep copy this object
+- (id)init:(totPage*)page;
+- (id)copy:(totPage*)page; // a deep copy this object
 
 - (void) addResource:(NSString*)key withPath:(NSString*)path;
 - (NSString*) getResource:(NSString*)key;
@@ -74,16 +79,17 @@ typedef enum {
     PAGE = 2,
 } PageType;
 
-@interface totPage : NSObject<NSCopying>
+@interface totPage : NSObject
 
 @property (nonatomic, assign) PageType type;
 @property (nonatomic, retain) NSString* templateFilename;
 @property (nonatomic, retain) NSString* name; // identifier of the page.
 @property (nonatomic, retain) NSMutableArray* pageElements;  // Each element is a totPageElement.
+@property (nonatomic, retain) totBook* book; // parent book
 
 // functions
-- (id) init;
-- (id)copyWithZone:(NSZone *)zone; // a deep copy this object
+- (id)init:(totBook*)book;
+- (id)copy:(totBook*)book; // a deep copy this object
 
 // element is a NSDictionary containing all necessary information for the element.
 // keys: x, y, w, h, radius, type, name, etc.
@@ -102,14 +108,14 @@ typedef enum {
 
 // Represents the scrapbook.
 @interface totBook : NSObject {
-    NSString* bookname;  // Must be unique.
-    NSString* templateName;
     NSMutableArray* pages;  // Each element is a totPage.
+    
     
     int lastRandomPage; // use this to avoid generate repeated random page 
 }
 
-@property (nonatomic, retain) NSString* bookname;
+@property (nonatomic, retain) NSString* bookid; // a unique id. book name may not be unique
+@property (nonatomic, retain) NSString* bookname; // may not be unique
 @property (nonatomic, retain) NSString* templateName;
 
 - (void) loadFromTemplateFile:(NSString*)filename;  // result in an empty book.
@@ -123,6 +129,7 @@ typedef enum {
 - (void)insertPage:(totPage *)page pageIndex:(int)pageIndex;
 - (void)deletePage:(int)pageIndex;
 
++ (totBook*) loadFromDB:(NSString*)bookid bookname:(NSString*)bookname;
 - (void) saveToDB; // save the book as a json string in db
 
 - (totPage*) getPage:(NSString*)name;
