@@ -13,6 +13,9 @@
 
 }
 
++ (int) height;
++ (int) width;
+
 @end
 
 
@@ -20,6 +23,9 @@
 @interface totWeightShowCard : totReviewShowCardView {
 
 }
+
++ (int) height;
++ (int) width;
 
 @end
 

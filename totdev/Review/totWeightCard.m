@@ -10,11 +10,13 @@
 
 @implementation totWeightEditCard
 
++ (int) height { return 150; }
++ (int) width { return 310; }
+
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
-        // Initialization code
     }
     return self;
 }
@@ -24,13 +26,16 @@
 
 @implementation totWeightShowCard
 
++ (int) height { return 150; }
++ (int) width { return 310; }
+
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
-        // Initialization code
     }
     return self;
 }
 
 @end
+

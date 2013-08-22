@@ -7,7 +7,26 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "totReviewCardView.h"
 
-@interface totHCCard : UIView
+@interface totHCEditCard : totReviewEditCardView {
+
+}
+
++ (int) height;
++ (int) width;
 
 @end
+
+
+
+@interface totHCShowCard : totReviewShowCardView {
+
+}
+
++ (int) height;
++ (int) width;
+
+@end
+
+

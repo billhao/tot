@@ -8,15 +8,34 @@
 
 #import "totHCCard.h"
 
-@implementation totHCCard
+@implementation totHCEditCard
 
-- (id)initWithFrame:(CGRect)frame
-{
++ (int) height { return 150; }
++ (int) width { return 310; }
+
+- (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        // Initialization code
     }
     return self;
 }
 
 @end
+
+
+
+@implementation totHCShowCard
+
++ (int) height { return 150; }
++ (int) width { return 310; }
+
+- (id)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
+    if (self) {
+    }
+    return self;
+}
+
+@end
+
+

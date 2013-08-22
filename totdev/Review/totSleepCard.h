@@ -6,8 +6,29 @@
 //  Copyright (c) 2013 tot. All rights reserved.
 //
 
+#import "totReviewCardView.h"
 #import <UIKit/UIKit.h>
 
-@interface totSleepCard : UIView
+@interface totSleepEditCard : totReviewEditCardView {
+    UIButton* time_button;
+    UIButton* start_button;
+    UIButton* stop_button;
+}
+
++ (int) height;
++ (int) width;
 
 @end
+
+
+
+@interface totSleepShowCard : totReviewShowCardView {
+
+}
+
++ (int) height;
++ (int) width;
+
+@end
+
+

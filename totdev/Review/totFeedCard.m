@@ -8,16 +8,32 @@
 
 #import "totFeedCard.h"
 
-@implementation totFeedCard
+@implementation totFeedEditCard
 
-- (id)initWithFrame:(CGRect)frame
-{
++ (int) height { return 200; }
++ (int) width { return 310; }
+
+- (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        // Initialization code
     }
     return self;
 }
 
+@end
+
+
+@implementation totFeedShowCard
+
++ (int) height { return 200; }
++ (int) width { return 310; }
+
+- (id)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
+    if (self) {
+    }
+    return self;
+}
 
 @end
+

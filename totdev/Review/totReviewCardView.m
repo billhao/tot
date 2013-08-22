@@ -13,6 +13,7 @@
 #import "totHeightCard.h"
 #import "totDiaperCard.h"
 #import "totLanguageCard.h"
+#import "totSleepCard.h"
 
 @implementation totReviewEditCardView
 
@@ -195,6 +196,18 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
                 [c2 release];
                 break;
             }
+            case SLEEP:
+            {
+                totSleepEditCard* c1 = [[totSleepEditCard alloc] initWithFrame:self.frame];
+                totSleepShowCard* c2 = [[totSleepShowCard alloc] initWithFrame:[totReviewCardView getShowCardSizeOfType:type]];
+                self.mEditView = c1;
+                self.mShowView = c2;
+                self.mEditView.parentView = self;
+                self.mShowView.parentView = self;
+                [c1 release];
+                [c2 release];
+                break;
+            }
             default:
                 break;
         }
@@ -264,6 +277,9 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
     } else if (type == LANGUAGE) {
         w = [totLanguageEditCard width];
         h = [totLanguageEditCard height];
+    } else if (type == SLEEP) {
+        w = [totSleepEditCard width];
+        h = [totSleepEditCard height];
     } else {
         printf("please add size info to getEditCardSizeOfType\n");
         exit(-1);
@@ -285,6 +301,9 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
     } else if (type == LANGUAGE) {
         w = [totLanguageShowCard width];
         h = [totLanguageShowCard height];
+    } else if (type == SLEEP) {
+        w = [totSleepShowCard width];
+        h = [totSleepShowCard height];
     } else {
         printf("please add size info to getShowCardSizeOfType\n");
         exit(-1);

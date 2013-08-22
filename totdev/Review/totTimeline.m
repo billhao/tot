@@ -113,6 +113,18 @@
     [self setContentOffset:CGPointMake(0, card_y) animated:YES];
 }
 
+- (void) moveCard:(totReviewCardView *)card To:(int)index {
+    for (int i = 0; i < [mCards count]; ++i) {
+        totReviewCardView* cv = [mCards objectAtIndex:i];
+        if (cv == card) {
+            [mCards removeObjectAtIndex:i];
+            [mCards insertObject:cv atIndex:index];
+            break;
+        }
+    }
+    [self refreshView];
+}
+
 - (void) deleteCard:(totReviewCardView *)card {
     for (int i = 0; i < [mCards count]; ++i) {
         totReviewCardView* cv = [mCards objectAtIndex:i];

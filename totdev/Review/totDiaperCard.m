@@ -38,6 +38,7 @@
     // Initializes timestamp.
     Walltime now; [totTimeUtil now:&now];
 
+    // Inserts hour/minute button.
     time_button1 = [UIButton buttonWithType:UIButtonTypeCustom];
     [time_button1 setFrame:CGRectMake(TIME1_X, TIME_Y, TIME1_W, TIME_H)];
     [time_button1 setTitleColor:[UIColor colorWithRed:128.0/255 green:130.0/255 blue:130.0/255 alpha:1.0]
@@ -47,6 +48,7 @@
     [time_button1.titleLabel setFont:[UIFont fontWithName:@"Roboto-Regular" size:15]];
     [self addSubview:time_button1];
     
+    // Inserts year/month/day button
     time_button2 = [UIButton buttonWithType:UIButtonTypeCustom];
     [time_button2 setFrame:CGRectMake(TIME2_X, TIME_Y, TIME2_W, TIME_H)];
     [time_button2 setTitleColor:[UIColor colorWithRed:128.0/255 green:130.0/255 blue:130.0/255 alpha:1.0]
