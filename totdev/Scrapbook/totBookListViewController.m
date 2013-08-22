@@ -32,14 +32,18 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    // load all books and templates
-    [self loadBooksAndTemplates];
-    
     // create navigation bar
     //navController = [[UINavigationController alloc] initWithRootViewController:self.parentViewController];
     
     // create book list scroll view
     [self createScrollView];
+    
+    // load all books and templates
+    [self loadBooksAndTemplates];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    NSLog(@"book list view appear");
 }
 
 - (void)dealloc {
@@ -57,9 +61,11 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)loadBooksAndTemplates {
+- (void)loadBooksAndTemplatesData {
     if( booksAndTemplates == nil )
         booksAndTemplates = [[NSMutableArray alloc] init];
+    else
+        [booksAndTemplates removeAllObjects];
 
     // load books from DB
     NSMutableArray* events = [global.model getEvent:global.baby.babyID event:SCRAPBOOK];
@@ -95,8 +101,14 @@
     NSLog(@"%@", booksAndTemplates);
 }
 
-// create a scroll view of books and templates
-- (void)createScrollView {
+- (void)loadBooksAndTemplates {
+    // load data first
+    [self loadBooksAndTemplatesData];
+
+    // remove any view already there
+    [[scrollView subviews]
+     makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    
     int margin_x = 20;
     int margin_x_left = 20;
     int margin_x_right = 20;
@@ -107,32 +119,17 @@
     int icon_width = 130;
     int label_height = 20;
     int columns = 2;
-    int rows = ceil(booksAndTemplates.count/columns);
-    int scrollview_height = 420; // 480 - 20 - 40navi
-    
-    // create the view
-    bookListView = [[UIView alloc] initWithFrame:CGRectMake(0, 60, 320, scrollview_height)];
-    //UIImageView* bg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"activity_background"]];
-    UIView* bg = [[UIView alloc] init];
-    bg.frame = CGRectMake(0, 0, 320, scrollview_height);
-    bg.backgroundColor = [UIColor grayColor];
-    bg.alpha = 1;
-    [bookListView addSubview:bg];
-    [bg release];
-    
-    // create the scroll view
-    UIScrollView* scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, 320, scrollview_height)];
-    [bookListView addSubview:scrollView];
-    
-    scrollView.pagingEnabled = FALSE;
-    scrollView.showsVerticalScrollIndicator = NO;
-    scrollView.showsHorizontalScrollIndicator = NO;
-    scrollView.delegate = self;
+    int rows = ceil((double)booksAndTemplates.count/columns);
     
     for (int r=0; r<rows; r++) {
         for( int c=0; c<columns; c++) {
             int i = r * columns + c; // book #
+            if( i >= booksAndTemplates.count ) break;
+            
             NSMutableDictionary* book = booksAndTemplates[i];
+            BOOL isTemplate = [[book objectForKey:@"type"] isEqualToString:@"template"];
+            NSString* bookid = [book objectForKey:@"id"];
+            
             // get the icon file names, just replace space with underscore
             NSString* bookIcon = [book objectForKey:@"name"];
             NSString* bookIconPressed = [NSString stringWithFormat:@"activity_%@_pressed", bookIcon];
@@ -141,8 +138,15 @@
             
             UIButton* bookBtn = [UIButton buttonWithType:UIButtonTypeCustom];
             bookBtn.frame = CGRectMake(margin_x_left+c*(icon_width+margin_x), margin_y_top+r*(icon_height+label_height+margin_y), icon_width, icon_height);
-            [bookBtn setImage:[UIImage imageNamed:bookIcon] forState:UIControlStateNormal];
-            [bookBtn setImage:[UIImage imageNamed:bookIconPressed] forState:UIControlStateHighlighted];
+            if( isTemplate ) {
+                [bookBtn setImage:[UIImage imageNamed:bookIcon] forState:UIControlStateNormal];
+                [bookBtn setImage:[UIImage imageNamed:bookIconPressed] forState:UIControlStateHighlighted];
+            }
+            else {
+                UIImage* coverImg = [totBookViewController loadPageImageFromFile:bookid];
+                [bookBtn setImage:coverImg forState:UIControlStateNormal];
+                [bookBtn setImage:coverImg forState:UIControlStateHighlighted];
+            }
             bookBtn.tag = i;
             [bookBtn addTarget:self action:@selector(bookSelected:) forControlEvents:UIControlEventTouchUpInside];
             
@@ -154,10 +158,34 @@
             
             [scrollView addSubview:bookBtn];
             [scrollView addSubview:bookLabel];
+            [bookLabel release];
         }
     }
     scrollView.contentSize = CGSizeMake(320, margin_y_top+margin_y_bottom+rows*(icon_height+label_height+margin_y));
-    [scrollView release];
+}
+
+// create a scroll view of books and templates
+- (void)createScrollView {
+    int scrollview_height = 420; // 480 - 20 - 40navi
+
+    // create the view
+    bookListView = [[UIView alloc] initWithFrame:CGRectMake(0, 60, 320, scrollview_height)];
+    //UIImageView* bg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"activity_background"]];
+    UIView* bg = [[UIView alloc] init];
+    bg.frame = CGRectMake(0, 0, 320, scrollview_height);
+    bg.backgroundColor = [UIColor grayColor];
+    bg.alpha = 1;
+    [bookListView addSubview:bg];
+    [bg release];
+    
+    // create the scroll view
+    scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, 320, scrollview_height)];
+    [bookListView addSubview:scrollView];
+    
+    scrollView.pagingEnabled = FALSE;
+    scrollView.showsVerticalScrollIndicator = NO;
+    scrollView.showsHorizontalScrollIndicator = NO;
+    scrollView.delegate = self;
     
     [self.view addSubview:bookListView];
 }
@@ -168,12 +196,20 @@
         mCurrentBook = [[totBookViewController alloc] init:self];
     }
     NSMutableDictionary* book = booksAndTemplates[bookID];
-    [mCurrentBook open:[book objectForKey:@"id"] bookname:[book objectForKey:@"name"] isTemplate:[[book objectForKey:@"type"] isEqualToString:@"template"]];
+    [mCurrentBook openBook:[book objectForKey:@"id"] bookname:[book objectForKey:@"name"] isTemplate:[[book objectForKey:@"type"] isEqualToString:@"template"]];
 }
 
-- (void)closeBook {
+- (void)closeBook:(BOOL)modified {
     [mCurrentBook release];
     mCurrentBook = nil;
+    
+    if( modified ) {
+        // refresh
+        [self loadBooksAndTemplates];
+        
+        // scroll to top
+        scrollView.contentOffset = CGPointMake(0, 0);
+    }
 }
 
 - (void)bookSelected:(id)sender {

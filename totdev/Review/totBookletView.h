@@ -58,6 +58,7 @@
     totPageElementViewInternal* mView;
     CGPoint mTouchLastTime;
     
+    int myIndexInSuperview; // this is used to remember the index of this view in its superview. when animate this view to full screen, we need this index when bring it back to original
 }
 
 @property(nonatomic, retain) totBookViewController* bookvc;
@@ -89,6 +90,9 @@
 //- (id)initWithFrame:(CGRect)frame andPageTemplateData:(NSDictionary*)data bookvc:(totBookViewController*)bookvc;
 - (id)initWithFrame:(CGRect)frame pagedata:(totPage*)pagedata bookvc:(totBookViewController*)bookvc;
 
+// save the view to an image
+- (UIImage*)renderToImage;
+
 @end
 
 // ---------------------------------totBookView---------------------------------------
@@ -103,10 +107,6 @@
 
 // Book View
 @interface totBookView : UIView <UIGestureRecognizerDelegate> {
-    // Data
-    totBook* mTemplateBook;  // only stores template.
-    totBook* mBook;  // book containing the real data.
-    
     id <BookViewDelegate> delegate;
     
     // Subviews
@@ -117,24 +117,10 @@
      */
 
 }
-@property(nonatomic, retain) NSMutableArray* mPageViews;
-@property(nonatomic, assign) int currentPageIndex;
 @property(nonatomic, retain) totBookViewController* bookvc;
-@property (nonatomic, assign) totBook* mBook;
 
-- (void)display;
 
-- (void)loadTemplateFile:(NSString*)filename;
-
-// New page means an empty page, so that there is no data associated with the page yet.
-- (void)addNewPage:(NSString*)pageName;
-- (void)deleteCurrentPage;
-
-- (void)nextPage;
-- (void)previousPage;
-
-- (void)saveBook:(NSString*)bookname;
-- (void)loadBook:(NSString*)bookid bookname:(NSString*)bookname;
+- (void)swipeViews:(totPageView*)view1 view2:(totPageView*)view2 leftToRight:(BOOL)leftToRight;
 
 @end
 

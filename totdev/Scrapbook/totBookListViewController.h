@@ -12,6 +12,8 @@
 @interface totBookListViewController : UIViewController <UIScrollViewDelegate> {
     UINavigationController *navController;
     UIView* bookListView; // a scroll view of books and templates
+    UIScrollView* scrollView;
+    
     totBookViewController* mCurrentBook;
     
     NSMutableArray* booksAndTemplates;
@@ -19,6 +21,6 @@
 
 @property(strong, nonatomic) UIViewController* parentController;
 
-- (void)closeBook;
+- (void)closeBook:(BOOL)modified;
 
 @end

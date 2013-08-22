@@ -366,6 +366,10 @@
     
     // Get rid of comments and empty lines.
     NSArray* lines = [content componentsSeparatedByString:@"\n"];
+    if( lines == nil ) {
+        NSLog(@"Template file not found: %@", filename);
+        return;
+    }
     for (int i = 0; i < [lines count]; ++i) {
         NSString* line = (NSString*)[lines objectAtIndex:i];
         line = [line stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];

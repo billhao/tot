@@ -11,19 +11,34 @@
 @class totPageElementView;
 @class totBookView;
 @class totBookListViewController;
+@class totBook;
+@class totPageView;
 
 @interface totBookViewController : UIViewController {
+    // views
     totBookView* bookview;
     UIButton* optionMenuBtn;
     UIView* optionView;
     
+    NSMutableArray* mPageViews;
+    int currentPageIndex;
+    
+    // data
+    totBook* mTemplateBook;  // only stores template.
+    totBook* mBook;  // book containing the real data.
+
     totBookListViewController* bookListVC;
+    
 }
 
 - (id)init:(totBookListViewController*)vc;
 
-- (void)open:(NSString*)bookid bookname:(NSString*)bookname isTemplate:(BOOL)isTemplate;
+- (void)openBook:(NSString*)bookid bookname:(NSString*)bookname isTemplate:(BOOL)isTemplate;
+- (void)hideOptionMenu:(BOOL)hidden;
 - (void)hideOptionMenuAndButton:(BOOL)hide;
 - (IBAction)swipeGestureEvent:(UISwipeGestureRecognizer *)swipeRecognizer;
+
++ (void)savePageImageToFile:(NSString*)bookid page:(totPageView*)page;
++ (UIImage*)loadPageImageFromFile:(NSString*)bookid;
 
 @end
