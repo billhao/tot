@@ -157,6 +157,8 @@
 		3F28EB9417C5E4E200F96A81 /* First Year Template P1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F28EB9017C5E4E200F96A81 /* First Year Template P1@2x.png */; };
 		3F28EB9517C5E4E200F96A81 /* First Year Template P2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F28EB9117C5E4E200F96A81 /* First Year Template P2@2x.png */; };
 		3F28EB9617C5E4E200F96A81 /* First Year Template P3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F28EB9217C5E4E200F96A81 /* First Year Template P3@2x.png */; };
+		3F28EB9B17C7256600F96A81 /* Birthday.tpl in Resources */ = {isa = PBXBuildFile; fileRef = 3F28EB9917C7256600F96A81 /* Birthday.tpl */; };
+		3F28EB9D17C7258E00F96A81 /* Birthday Template Cover@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F28EB9C17C7258E00F96A81 /* Birthday Template Cover@2x.png */; };
 		3F2CC24F17120EA9001EDD75 /* tutorial_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F2CC24B17120EA9001EDD75 /* tutorial_1.png */; };
 		3F2CC25017120EA9001EDD75 /* tutorial_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F2CC24C17120EA9001EDD75 /* tutorial_2.png */; };
 		3F2CC25417120ED2001EDD75 /* tutorial_0@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F2CC25317120ED2001EDD75 /* tutorial_0@2x.png */; };
@@ -217,6 +219,8 @@
 		3FD29CBC168D481D00978B51 /* text_height@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FD29CB6168D481D00978B51 /* text_height@2x.png */; };
 		3FD29CBD168D481D00978B51 /* text_weight.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FD29CB7168D481D00978B51 /* text_weight.png */; };
 		3FD29CBE168D481D00978B51 /* text_weight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FD29CB8168D481D00978B51 /* text_weight@2x.png */; };
+		3FD3C5E717C75BDE00DB1B71 /* delete_button_pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FD3C5E517C75BDE00DB1B71 /* delete_button_pressed@2x.png */; };
+		3FD3C5E817C75BDE00DB1B71 /* delete_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FD3C5E617C75BDE00DB1B71 /* delete_button@2x.png */; };
 		3FE55A26164BA050008F02DD /* activity_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FE55A1E164BA050008F02DD /* activity_selected.png */; };
 		3FE55A27164BA050008F02DD /* activity.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FE55A1F164BA050008F02DD /* activity.png */; };
 		3FE55A28164BA050008F02DD /* home_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FE55A20164BA050008F02DD /* home_selected.png */; };
@@ -556,6 +560,8 @@
 		3F28EB9017C5E4E200F96A81 /* First Year Template P1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "First Year Template P1@2x.png"; sourceTree = "<group>"; };
 		3F28EB9117C5E4E200F96A81 /* First Year Template P2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "First Year Template P2@2x.png"; sourceTree = "<group>"; };
 		3F28EB9217C5E4E200F96A81 /* First Year Template P3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "First Year Template P3@2x.png"; sourceTree = "<group>"; };
+		3F28EB9917C7256600F96A81 /* Birthday.tpl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Birthday.tpl; sourceTree = "<group>"; };
+		3F28EB9C17C7258E00F96A81 /* Birthday Template Cover@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Birthday Template Cover@2x.png"; sourceTree = "<group>"; };
 		3F2CC24B17120EA9001EDD75 /* tutorial_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tutorial_1.png; path = Resources/Tutorial/tutorial_1.png; sourceTree = "<group>"; };
 		3F2CC24C17120EA9001EDD75 /* tutorial_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tutorial_2.png; path = Resources/Tutorial/tutorial_2.png; sourceTree = "<group>"; };
 		3F2CC25317120ED2001EDD75 /* tutorial_0@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tutorial_0@2x.png"; path = "Resources/Tutorial/tutorial_0@2x.png"; sourceTree = "<group>"; };
@@ -624,6 +630,8 @@
 		3FD29CB6168D481D00978B51 /* text_height@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "text_height@2x.png"; path = "Resources/Home/Height/text_height@2x.png"; sourceTree = "<group>"; };
 		3FD29CB7168D481D00978B51 /* text_weight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = text_weight.png; path = Resources/Home/Height/text_weight.png; sourceTree = "<group>"; };
 		3FD29CB8168D481D00978B51 /* text_weight@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "text_weight@2x.png"; path = "Resources/Home/Height/text_weight@2x.png"; sourceTree = "<group>"; };
+		3FD3C5E517C75BDE00DB1B71 /* delete_button_pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "delete_button_pressed@2x.png"; sourceTree = "<group>"; };
+		3FD3C5E617C75BDE00DB1B71 /* delete_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "delete_button@2x.png"; sourceTree = "<group>"; };
 		3FE55A1E164BA050008F02DD /* activity_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = activity_selected.png; path = Resources/Tab/activity_selected.png; sourceTree = "<group>"; };
 		3FE55A1F164BA050008F02DD /* activity.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = activity.png; path = Resources/Tab/activity.png; sourceTree = "<group>"; };
 		3FE55A20164BA050008F02DD /* home_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = home_selected.png; path = Resources/Tab/home_selected.png; sourceTree = "<group>"; };
@@ -1053,6 +1061,15 @@
 			name = Height;
 			sourceTree = "<group>";
 		};
+		3F28EB9717C7256600F96A81 /* Birthday */ = {
+			isa = PBXGroup;
+			children = (
+				3F28EB9C17C7258E00F96A81 /* Birthday Template Cover@2x.png */,
+				3F28EB9917C7256600F96A81 /* Birthday.tpl */,
+			);
+			path = Birthday;
+			sourceTree = "<group>";
+		};
 		3F63C227170537140014E8C7 /* Tutorial */ = {
 			isa = PBXGroup;
 			children = (
@@ -1103,6 +1120,8 @@
 		3F686AFB17B84C730018BE6E /* Scrapbook */ = {
 			isa = PBXGroup;
 			children = (
+				3FD3C5E517C75BDE00DB1B71 /* delete_button_pressed@2x.png */,
+				3FD3C5E617C75BDE00DB1B71 /* delete_button@2x.png */,
 				3F954A7117C079A40007C125 /* Templates */,
 				3F686B2217B84CC30018BE6E /* Templates_thumbnails */,
 				3F8A45F417BB7550006A7566 /* scrapbook_option_button_pressed@2x.png */,
@@ -1127,6 +1146,7 @@
 		3F954A7117C079A40007C125 /* Templates */ = {
 			isa = PBXGroup;
 			children = (
+				3F28EB9717C7256600F96A81 /* Birthday */,
 				3F28EB8F17C5E4E200F96A81 /* First Year Template Cover@2x.png */,
 				3F28EB9017C5E4E200F96A81 /* First Year Template P1@2x.png */,
 				3F28EB9117C5E4E200F96A81 /* First Year Template P2@2x.png */,
@@ -2035,6 +2055,10 @@
 				3F28EB9417C5E4E200F96A81 /* First Year Template P1@2x.png in Resources */,
 				3F28EB9517C5E4E200F96A81 /* First Year Template P2@2x.png in Resources */,
 				3F28EB9617C5E4E200F96A81 /* First Year Template P3@2x.png in Resources */,
+				3F28EB9B17C7256600F96A81 /* Birthday.tpl in Resources */,
+				3F28EB9D17C7258E00F96A81 /* Birthday Template Cover@2x.png in Resources */,
+				3FD3C5E717C75BDE00DB1B71 /* delete_button_pressed@2x.png in Resources */,
+				3FD3C5E817C75BDE00DB1B71 /* delete_button@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

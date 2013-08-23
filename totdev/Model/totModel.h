@@ -42,8 +42,10 @@
 - (NSMutableArray *) getItem:(int)baby_id name:(NSString*)name limit:(int)limit offset:(int)offset startDate:(NSDate*)start endDate:(NSDate*)end;
 // a shortcut to getItem, limit=-1, offset=-1, start and end date = nil
 - (totEvent*) getItem:(int)baby_id name:(NSString*)name;
-// insert or update a record
+// insert or update a specific record
 - (BOOL) setItem:(int)baby_id name:(NSString*)name value:(NSDictionary*)dict;
+// delete a specific record
+- (BOOL) deleteItem:(int)baby_id name:(NSString*)name;
 
 - (totEvent*) getEventByID:(int)event_id;
 

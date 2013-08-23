@@ -509,6 +509,17 @@
     
 }
 
++ (void) deleteBook:(NSString*)bookid bookname:(NSString*)bookname {
+    NSString* dbid = [NSString stringWithFormat:SCRAPBOOK_REPLACABLE, bookid, bookname];
+    NSLog(@"delete book %@ from db", dbid);
+    BOOL re = [global.model deleteItem:global.baby.babyID name:dbid];
+    if( re == FALSE ) {
+        NSLog(@"Fail to delete book %@ %@", bookid, bookname);
+    }
+    
+    // TODO delete all resources related to this book?
+}
+
 - (void)dealloc {
     [super dealloc];
     [bookname release];

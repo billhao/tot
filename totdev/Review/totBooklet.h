@@ -121,6 +121,7 @@ typedef enum {
 - (void) loadFromTemplateFile:(NSString*)filename;  // result in an empty book.
 - (void) loadFromJSONString: (NSString*)json;  // json represents the book.
 - (void) loadBook:(NSString*)bookid bookname:(NSString*)bookname;  // result in an editted book.
++ (void) deleteBook:(NSString*)bookid bookname:(NSString*)bookname;
 
 - (NSDictionary*) toDictionary;
 - (void) loadFromDictionary: (NSDictionary*)dict;

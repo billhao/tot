@@ -13,6 +13,8 @@
     UINavigationController *navController;
     UIView* bookListView; // a scroll view of books and templates
     UIScrollView* scrollView;
+    UIButton* deleteBtn;
+    NSMutableArray* bookBtnList;
     
     totBookViewController* mCurrentBook;
     

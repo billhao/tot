@@ -68,7 +68,7 @@
     loginNavigationController.view.frame = self.window.bounds;
 //    loginNavigationController.view.autoresizesSubviews = false;  // for iphone 5 screen size
 
-    self.window.rootViewController = loginNavigationController;
+    //self.window.rootViewController = loginNavigationController;
     self.window.backgroundColor = [UIColor blackColor];
     // use transparent status bar
 //    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackTranslucent];
@@ -164,7 +164,9 @@
     //book.view.backgroundColor = [UIColor greenColor];
     book.view.frame = CGRectMake(0, 0, frame.size.width, frame.size.height);
     //_homeController.view.frame = CGRectMake(0, 0, frame.size.width, frame.size.height);
-    [loginNavigationController pushViewController:book animated:TRUE];
+    //[loginNavigationController pushViewController:book animated:TRUE];
+    self.window.rootViewController = book;
+    
     [book release];
 
 

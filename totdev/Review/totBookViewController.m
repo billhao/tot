@@ -12,6 +12,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "AppDelegate.h"
 #import "totBookListViewController.h"
+#import "totUtility.h"
 
 @interface totBookViewController ()
 
@@ -35,6 +36,8 @@
         mTemplateBook = nil;
         
         bookListVC = vc;
+        
+        fullPageFrame = CGRectMake(0, 0, 480, 320);
     }
     return self;
 }
@@ -45,6 +48,7 @@
 	// Do any additional setup after loading the view.
     
     self.view.backgroundColor = [UIColor colorWithRed:240 green:240 blue:240 alpha:1.0];
+    self.view.clipsToBounds = TRUE;
     
     [self.view addSubview:bookview];
     
@@ -52,7 +56,7 @@
     
     // add scrapbook option menu button
     optionMenuBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    optionMenuBtn.frame = CGRectMake(320-50, 480-50, 50, 50);
+    optionMenuBtn.frame = CGRectMake(fullPageFrame.size.width-50, fullPageFrame.size.height-50, 50, 50);
     [optionMenuBtn setImage:[UIImage imageNamed:@"scrapbook_option_button"] forState:UIControlStateNormal];
     [optionMenuBtn setImage:[UIImage imageNamed:@"scrapbook_option_button_pressed"] forState:UIControlStateHighlighted];
     //optionBtn.backgroundColor = [UIColor blueColor];
@@ -72,6 +76,7 @@
     [self.view addGestureRecognizer:rightSwipeRecognizer];
     [rightSwipeRecognizer release];
 
+    NSLog(@"bookvc viewdidload %@", [totUtility getFrameString:self.view.frame]);
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -82,6 +87,10 @@
     appDelegate.loginNavigationController.view.frame = f;
     self.view.frame = f;
     [appDelegate.loginNavigationController.view setNeedsLayout];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    NSLog(@"bookvc viewdidappear %@", [totUtility getFrameString:self.view.frame]);
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -107,6 +116,23 @@
     if(mBook != nil) [mBook release];
 }
 
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {
+    NSLog(@"bookvc preferredInterfaceOrientationForPresentation");
+    return UIInterfaceOrientationLandscapeRight;
+}
+
+- (NSUInteger)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskLandscapeLeft | UIInterfaceOrientationMaskLandscapeRight;
+}
+
+- (BOOL)shouldAutorotate {
+    return TRUE;
+}
+
+- (void)viewWillLayoutSubviews {
+    NSLog(@"bookvc viewWillLayoutSubviews %@", [totUtility getFrameString:self.view.bounds]);
+    bookview.frame = self.view.bounds;
+}
 
 #pragma mark - Book operations
 // load book data and show it
@@ -140,11 +166,10 @@
     }
     
     // set up the views
-    bookview = [[totBookView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
+    bookview = [[totBookView alloc] initWithFrame:fullPageFrame];
     bookview.bookvc = self;
     
     [self.view insertSubview:bookview atIndex:0];
-    [bookListVC.view addSubview:self.view];
     
     [self gotoPage:0];
 }
@@ -156,9 +181,6 @@
     if( mPageViews.count > 0 ) {
         [totBookViewController savePageImageToFile:mBook.bookid page:mPageViews[0]];
     }
-    
-    // remove book view from parent
-    [self.view removeFromSuperview];
     
     [bookListVC closeBook:TRUE]; // release the bookvc
 }
@@ -242,8 +264,8 @@
         // create the page view
         totPage* pageData = [mBook getPageWithIndex:pageIndex];
         // add a view.
-        CGRect f = CGRectMake(0, 0, 320, 480);
-        page = [[totPageView alloc] initWithFrame:f pagedata:pageData bookvc:self];
+        // TODO orientation
+        page = [[totPageView alloc] initWithFrame:fullPageFrame pagedata:pageData bookvc:self];
         [mPageViews setObject:page atIndexedSubscript:pageIndex];
         [bookview addSubview:page];
         [page release];
@@ -388,7 +410,8 @@
 
 - (void)createOptionMenu {
     optionView = [[UIView alloc] init];
-    optionView.frame = CGRectMake(160, 240, 320-160-10, 480-240-10);
+    // TODO orientation
+    optionView.frame = CGRectMake(480-140-20, 320-60*4-10, 160, 150*4);
     optionView.backgroundColor = [UIColor grayColor];
     optionView.alpha = 0.8;
     

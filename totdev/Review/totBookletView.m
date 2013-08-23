@@ -14,8 +14,8 @@
 #import "totUITabBarController.h"
 
 
-#define FULL_PAGE_W 320.0f
-#define FULL_PAGE_H 480.0f
+#define FULL_PAGE_W 480.0f
+#define FULL_PAGE_H 320.0f
 
 @implementation totBookBasicView
 
@@ -63,6 +63,9 @@
         // Initialization code
         mData = nil;
         mImage = nil;
+        
+        self.autoresizesSubviews = TRUE;
+        self.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     }
     return self;
 }
@@ -100,10 +103,10 @@
 
 - (void)setStyle:(BOOL)style {
     if( style ) {
-        mImage.layer.cornerRadius = 10.0f;
+//        mImage.layer.cornerRadius = 10.0f;
         mImage.layer.masksToBounds = YES;
-        mImage.layer.borderColor = [UIColor colorWithRed:0.7f green:0.7f blue:0.7f alpha:1.0f].CGColor;
-        mImage.layer.borderWidth = 3.0f;
+//        mImage.layer.borderColor = [UIColor colorWithRed:0.7f green:0.7f blue:0.7f alpha:1.0f].CGColor;
+//        mImage.layer.borderWidth = 3.0f;
 //        mImage.layer.opacity = 1;
     }
     else {
@@ -174,6 +177,9 @@
         
         self.bookvc = bookViewController;
         
+        self.autoresizesSubviews = TRUE;
+        self.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+
         mView = [[totPageElementViewInternal alloc] initWithElement:data];
         [mView display];
         [mView rotateTo:data.radians];  // rotate to the specified angle.
@@ -395,6 +401,10 @@ static BOOL bAnimationStarted = NO;
     if (self) {
         self.mPage = pagedata;
         self.bookvc = bookvc;
+        
+        self.autoresizesSubviews = TRUE;
+        self.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+        
         [self setup];
     }
     return self;
@@ -415,7 +425,7 @@ static BOOL bAnimationStarted = NO;
     self.clipsToBounds = TRUE;
     
     // Setup the background image
-    mBackground = [[UIImageView alloc] initWithFrame:self.frame];
+    mBackground = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 480, 320)];
     mBackground.image = [UIImage imageNamed:self.mPage.templateFilename];
     [self addSubview:mBackground];
     
@@ -427,7 +437,7 @@ static BOOL bAnimationStarted = NO;
         [elementView release];
     }
     for (totPageElementView* view in mElementsView) {
-        [self insertSubview:view aboveSubview:mBackground];
+        [self insertSubview:view belowSubview:mBackground];
     }
 }
 
@@ -456,6 +466,9 @@ static BOOL bAnimationStarted = NO;
     self = [super initWithFrame:frame];
     if (self) {
         
+        self.autoresizesSubviews = TRUE;
+        self.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+
         UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
         [tap setDelegate:self];
         UILongPressGestureRecognizer* longpress = [[UILongPressGestureRecognizer alloc] initWithTarget:self
