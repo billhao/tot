@@ -17,6 +17,8 @@
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
+        self.backgroundColor = [UIColor whiteColor];
+        
         mLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 20, 280, 60)];
         mLabel.text = @"Editting Mode";
         mLabel.backgroundColor = [UIColor greenColor];
@@ -46,6 +48,8 @@
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
+        self.backgroundColor = [UIColor whiteColor];
+        
         mLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 20, 280, 60)];
         mLabel.text = @"Showing Mode";
         mLabel.backgroundColor = [UIColor blueColor];
