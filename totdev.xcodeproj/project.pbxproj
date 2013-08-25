@@ -153,12 +153,6 @@
 		3F27718F1650B4FA00DF84EF /* ruler_height@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F2771891650B4FA00DF84EF /* ruler_height@2x.png */; };
 		3F2771901650B4FA00DF84EF /* ruler_weight.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F27718A1650B4FA00DF84EF /* ruler_weight.png */; };
 		3F2771911650B4FA00DF84EF /* ruler_weight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F27718B1650B4FA00DF84EF /* ruler_weight@2x.png */; };
-		3F28EB9317C5E4E200F96A81 /* First Year Template Cover@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F28EB8F17C5E4E200F96A81 /* First Year Template Cover@2x.png */; };
-		3F28EB9417C5E4E200F96A81 /* First Year Template P1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F28EB9017C5E4E200F96A81 /* First Year Template P1@2x.png */; };
-		3F28EB9517C5E4E200F96A81 /* First Year Template P2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F28EB9117C5E4E200F96A81 /* First Year Template P2@2x.png */; };
-		3F28EB9617C5E4E200F96A81 /* First Year Template P3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F28EB9217C5E4E200F96A81 /* First Year Template P3@2x.png */; };
-		3F28EB9B17C7256600F96A81 /* Birthday.tpl in Resources */ = {isa = PBXBuildFile; fileRef = 3F28EB9917C7256600F96A81 /* Birthday.tpl */; };
-		3F28EB9D17C7258E00F96A81 /* Birthday Template Cover@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F28EB9C17C7258E00F96A81 /* Birthday Template Cover@2x.png */; };
 		3F2CC24F17120EA9001EDD75 /* tutorial_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F2CC24B17120EA9001EDD75 /* tutorial_1.png */; };
 		3F2CC25017120EA9001EDD75 /* tutorial_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F2CC24C17120EA9001EDD75 /* tutorial_2.png */; };
 		3F2CC25417120ED2001EDD75 /* tutorial_0@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F2CC25317120ED2001EDD75 /* tutorial_0@2x.png */; };
@@ -194,8 +188,6 @@
 		3F7E655017AE19AF00C43C02 /* totMediaLibrary.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F7E654F17AE19AF00C43C02 /* totMediaLibrary.m */; };
 		3F8A45F617BB7550006A7566 /* scrapbook_option_button_pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F8A45F417BB7550006A7566 /* scrapbook_option_button_pressed@2x.png */; };
 		3F8A45F717BB7550006A7566 /* scrapbook_option_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F8A45F517BB7550006A7566 /* scrapbook_option_button@2x.png */; };
-		3F954A7917C079A40007C125 /* First Year Template.tpl in Resources */ = {isa = PBXBuildFile; fileRef = 3F954A7217C079A40007C125 /* First Year Template.tpl */; };
-		3F954A7E17C079A40007C125 /* Second Year Template.tpl in Resources */ = {isa = PBXBuildFile; fileRef = 3F954A7717C079A40007C125 /* Second Year Template.tpl */; };
 		3F987DCF1705717E00712A58 /* totTutorialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F987DCE1705717E00712A58 /* totTutorialViewController.m */; };
 		3FA4071616EC08D700B5B89E /* summary_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FA4071416EC08D700B5B89E /* summary_bg.png */; };
 		3FA4071716EC08D700B5B89E /* summary_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FA4071516EC08D700B5B89E /* summary_bg@2x.png */; };
@@ -221,6 +213,16 @@
 		3FD29CBE168D481D00978B51 /* text_weight@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FD29CB8168D481D00978B51 /* text_weight@2x.png */; };
 		3FD3C5E717C75BDE00DB1B71 /* delete_button_pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FD3C5E517C75BDE00DB1B71 /* delete_button_pressed@2x.png */; };
 		3FD3C5E817C75BDE00DB1B71 /* delete_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FD3C5E617C75BDE00DB1B71 /* delete_button@2x.png */; };
+		3FD3C61C17C86F9E00DB1B71 /* Birthday Template P1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FD3C61117C86F9E00DB1B71 /* Birthday Template P1@2x.png */; };
+		3FD3C61D17C86F9E00DB1B71 /* Birthday Template P2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FD3C61217C86F9E00DB1B71 /* Birthday Template P2@2x.png */; };
+		3FD3C61E17C86F9E00DB1B71 /* Birthday Template P3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FD3C61317C86F9E00DB1B71 /* Birthday Template P3@2x.png */; };
+		3FD3C61F17C86F9E00DB1B71 /* Birthday Template P4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FD3C61417C86F9E00DB1B71 /* Birthday Template P4@2x.png */; };
+		3FD3C62017C86F9E00DB1B71 /* Birthday.tpl in Resources */ = {isa = PBXBuildFile; fileRef = 3FD3C61517C86F9E00DB1B71 /* Birthday.tpl */; };
+		3FD3C62117C86F9E00DB1B71 /* First Year Template Cover@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FD3C61717C86F9E00DB1B71 /* First Year Template Cover@2x.png */; };
+		3FD3C62217C86F9E00DB1B71 /* First Year Template P1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FD3C61817C86F9E00DB1B71 /* First Year Template P1@2x.png */; };
+		3FD3C62317C86F9E00DB1B71 /* First Year Template P2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FD3C61917C86F9E00DB1B71 /* First Year Template P2@2x.png */; };
+		3FD3C62417C86F9E00DB1B71 /* First Year Template P3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FD3C61A17C86F9E00DB1B71 /* First Year Template P3@2x.png */; };
+		3FD3C62517C86F9E00DB1B71 /* First Year Template.tpl in Resources */ = {isa = PBXBuildFile; fileRef = 3FD3C61B17C86F9E00DB1B71 /* First Year Template.tpl */; };
 		3FE55A26164BA050008F02DD /* activity_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FE55A1E164BA050008F02DD /* activity_selected.png */; };
 		3FE55A27164BA050008F02DD /* activity.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FE55A1F164BA050008F02DD /* activity.png */; };
 		3FE55A28164BA050008F02DD /* home_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FE55A20164BA050008F02DD /* home_selected.png */; };
@@ -272,7 +274,6 @@
 		8E069FF717C495D900D04FF6 /* language2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E069FF017C495D900D04FF6 /* language2.png */; };
 		8E069FF817C495D900D04FF6 /* sleep2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E069FF117C495D900D04FF6 /* sleep2.png */; };
 		8E069FF917C495D900D04FF6 /* weight2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E069FF217C495D900D04FF6 /* weight2.png */; };
-		8E22B40B176E7456002C668C /* add_image.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E22B40A176E7456002C668C /* add_image.png */; };
 		8E3AE8D1168D531E00E4CFAE /* icons-checkbox.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E3AE8CD168D531E00E4CFAE /* icons-checkbox.png */; };
 		8E451D8F169FCB48003D1438 /* totReviewFilterOpenerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E451D8E169FCB48003D1438 /* totReviewFilterOpenerView.m */; };
 		8E46E4FF16A8F35500932B90 /* totReviewFilterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E46E4FE16A8F35500932B90 /* totReviewFilterView.m */; };
@@ -574,12 +575,6 @@
 		3F2771891650B4FA00DF84EF /* ruler_height@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ruler_height@2x.png"; path = "Resources/Utility/Ruler/ruler_height@2x.png"; sourceTree = "<group>"; };
 		3F27718A1650B4FA00DF84EF /* ruler_weight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ruler_weight.png; path = Resources/Utility/Ruler/ruler_weight.png; sourceTree = "<group>"; };
 		3F27718B1650B4FA00DF84EF /* ruler_weight@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ruler_weight@2x.png"; path = "Resources/Utility/Ruler/ruler_weight@2x.png"; sourceTree = "<group>"; };
-		3F28EB8F17C5E4E200F96A81 /* First Year Template Cover@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "First Year Template Cover@2x.png"; sourceTree = "<group>"; };
-		3F28EB9017C5E4E200F96A81 /* First Year Template P1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "First Year Template P1@2x.png"; sourceTree = "<group>"; };
-		3F28EB9117C5E4E200F96A81 /* First Year Template P2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "First Year Template P2@2x.png"; sourceTree = "<group>"; };
-		3F28EB9217C5E4E200F96A81 /* First Year Template P3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "First Year Template P3@2x.png"; sourceTree = "<group>"; };
-		3F28EB9917C7256600F96A81 /* Birthday.tpl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Birthday.tpl; sourceTree = "<group>"; };
-		3F28EB9C17C7258E00F96A81 /* Birthday Template Cover@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Birthday Template Cover@2x.png"; sourceTree = "<group>"; };
 		3F2CC24B17120EA9001EDD75 /* tutorial_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tutorial_1.png; path = Resources/Tutorial/tutorial_1.png; sourceTree = "<group>"; };
 		3F2CC24C17120EA9001EDD75 /* tutorial_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tutorial_2.png; path = Resources/Tutorial/tutorial_2.png; sourceTree = "<group>"; };
 		3F2CC25317120ED2001EDD75 /* tutorial_0@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tutorial_0@2x.png"; path = "Resources/Tutorial/tutorial_0@2x.png"; sourceTree = "<group>"; };
@@ -619,8 +614,6 @@
 		3F7E654F17AE19AF00C43C02 /* totMediaLibrary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totMediaLibrary.m; path = Utility/totMediaLibrary.m; sourceTree = "<group>"; };
 		3F8A45F417BB7550006A7566 /* scrapbook_option_button_pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "scrapbook_option_button_pressed@2x.png"; sourceTree = "<group>"; };
 		3F8A45F517BB7550006A7566 /* scrapbook_option_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "scrapbook_option_button@2x.png"; sourceTree = "<group>"; };
-		3F954A7217C079A40007C125 /* First Year Template.tpl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "First Year Template.tpl"; sourceTree = "<group>"; };
-		3F954A7717C079A40007C125 /* Second Year Template.tpl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Second Year Template.tpl"; sourceTree = "<group>"; };
 		3F987DCD1705717E00712A58 /* totTutorialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totTutorialViewController.h; path = Tutorial/totTutorialViewController.h; sourceTree = "<group>"; };
 		3F987DCE1705717E00712A58 /* totTutorialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totTutorialViewController.m; path = Tutorial/totTutorialViewController.m; sourceTree = "<group>"; };
 		3FA4071416EC08D700B5B89E /* summary_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = summary_bg.png; path = Resources/Home/Height/summary_bg.png; sourceTree = "<group>"; };
@@ -650,6 +643,16 @@
 		3FD29CB8168D481D00978B51 /* text_weight@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "text_weight@2x.png"; path = "Resources/Home/Height/text_weight@2x.png"; sourceTree = "<group>"; };
 		3FD3C5E517C75BDE00DB1B71 /* delete_button_pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "delete_button_pressed@2x.png"; sourceTree = "<group>"; };
 		3FD3C5E617C75BDE00DB1B71 /* delete_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "delete_button@2x.png"; sourceTree = "<group>"; };
+		3FD3C61117C86F9E00DB1B71 /* Birthday Template P1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Birthday Template P1@2x.png"; sourceTree = "<group>"; };
+		3FD3C61217C86F9E00DB1B71 /* Birthday Template P2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Birthday Template P2@2x.png"; sourceTree = "<group>"; };
+		3FD3C61317C86F9E00DB1B71 /* Birthday Template P3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Birthday Template P3@2x.png"; sourceTree = "<group>"; };
+		3FD3C61417C86F9E00DB1B71 /* Birthday Template P4@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Birthday Template P4@2x.png"; sourceTree = "<group>"; };
+		3FD3C61517C86F9E00DB1B71 /* Birthday.tpl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Birthday.tpl; sourceTree = "<group>"; };
+		3FD3C61717C86F9E00DB1B71 /* First Year Template Cover@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "First Year Template Cover@2x.png"; sourceTree = "<group>"; };
+		3FD3C61817C86F9E00DB1B71 /* First Year Template P1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "First Year Template P1@2x.png"; sourceTree = "<group>"; };
+		3FD3C61917C86F9E00DB1B71 /* First Year Template P2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "First Year Template P2@2x.png"; sourceTree = "<group>"; };
+		3FD3C61A17C86F9E00DB1B71 /* First Year Template P3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "First Year Template P3@2x.png"; sourceTree = "<group>"; };
+		3FD3C61B17C86F9E00DB1B71 /* First Year Template.tpl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "First Year Template.tpl"; sourceTree = "<group>"; };
 		3FE55A1E164BA050008F02DD /* activity_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = activity_selected.png; path = Resources/Tab/activity_selected.png; sourceTree = "<group>"; };
 		3FE55A1F164BA050008F02DD /* activity.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = activity.png; path = Resources/Tab/activity.png; sourceTree = "<group>"; };
 		3FE55A20164BA050008F02DD /* home_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = home_selected.png; path = Resources/Tab/home_selected.png; sourceTree = "<group>"; };
@@ -705,7 +708,6 @@
 		8E069FF017C495D900D04FF6 /* language2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = language2.png; path = Resources/v2.0/Home/language2.png; sourceTree = "<group>"; };
 		8E069FF117C495D900D04FF6 /* sleep2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sleep2.png; path = Resources/v2.0/Home/sleep2.png; sourceTree = "<group>"; };
 		8E069FF217C495D900D04FF6 /* weight2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = weight2.png; path = Resources/v2.0/Home/weight2.png; sourceTree = "<group>"; };
-		8E22B40A176E7456002C668C /* add_image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = add_image.png; path = Resources/Review/scrapbook/add_image.png; sourceTree = "<group>"; };
 		8E3AE8CD168D531E00E4CFAE /* icons-checkbox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icons-checkbox.png"; path = "Resources/Home/icons-checkbox.png"; sourceTree = "<group>"; };
 		8E451D8D169FCB48003D1438 /* totReviewFilterOpenerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totReviewFilterOpenerView.h; path = Review/totReviewFilterOpenerView.h; sourceTree = "<group>"; };
 		8E451D8E169FCB48003D1438 /* totReviewFilterOpenerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totReviewFilterOpenerView.m; path = Review/totReviewFilterOpenerView.m; sourceTree = "<group>"; };
@@ -1106,15 +1108,6 @@
 			name = Height;
 			sourceTree = "<group>";
 		};
-		3F28EB9717C7256600F96A81 /* Birthday */ = {
-			isa = PBXGroup;
-			children = (
-				3F28EB9C17C7258E00F96A81 /* Birthday Template Cover@2x.png */,
-				3F28EB9917C7256600F96A81 /* Birthday.tpl */,
-			);
-			path = Birthday;
-			sourceTree = "<group>";
-		};
 		3F63C227170537140014E8C7 /* Tutorial */ = {
 			isa = PBXGroup;
 			children = (
@@ -1191,13 +1184,8 @@
 		3F954A7117C079A40007C125 /* Templates */ = {
 			isa = PBXGroup;
 			children = (
-				3F28EB9717C7256600F96A81 /* Birthday */,
-				3F28EB8F17C5E4E200F96A81 /* First Year Template Cover@2x.png */,
-				3F28EB9017C5E4E200F96A81 /* First Year Template P1@2x.png */,
-				3F28EB9117C5E4E200F96A81 /* First Year Template P2@2x.png */,
-				3F28EB9217C5E4E200F96A81 /* First Year Template P3@2x.png */,
-				3F954A7217C079A40007C125 /* First Year Template.tpl */,
-				3F954A7717C079A40007C125 /* Second Year Template.tpl */,
+				3FD3C61017C86F9E00DB1B71 /* Birthday */,
+				3FD3C61617C86F9E00DB1B71 /* First Year */,
 			);
 			path = Templates;
 			sourceTree = "<group>";
@@ -1276,6 +1264,32 @@
 			name = Fonts;
 			sourceTree = "<group>";
 		};
+		3FD3C61017C86F9E00DB1B71 /* Birthday */ = {
+			isa = PBXGroup;
+			children = (
+				3FD3C61117C86F9E00DB1B71 /* Birthday Template P1@2x.png */,
+				3FD3C61217C86F9E00DB1B71 /* Birthday Template P2@2x.png */,
+				3FD3C61317C86F9E00DB1B71 /* Birthday Template P3@2x.png */,
+				3FD3C61417C86F9E00DB1B71 /* Birthday Template P4@2x.png */,
+				3FD3C61517C86F9E00DB1B71 /* Birthday.tpl */,
+			);
+			name = Birthday;
+			path = "../../../../../../Dropbox/tot/tot version 2/Scrapbook design/Templates/Birthday";
+			sourceTree = "<group>";
+		};
+		3FD3C61617C86F9E00DB1B71 /* First Year */ = {
+			isa = PBXGroup;
+			children = (
+				3FD3C61717C86F9E00DB1B71 /* First Year Template Cover@2x.png */,
+				3FD3C61817C86F9E00DB1B71 /* First Year Template P1@2x.png */,
+				3FD3C61917C86F9E00DB1B71 /* First Year Template P2@2x.png */,
+				3FD3C61A17C86F9E00DB1B71 /* First Year Template P3@2x.png */,
+				3FD3C61B17C86F9E00DB1B71 /* First Year Template.tpl */,
+			);
+			name = "First Year";
+			path = "../../../../../../Dropbox/tot/tot version 2/Scrapbook design/Templates/First Year";
+			sourceTree = "<group>";
+		};
 		3FE9B5F4154A2FCF00199AAF /* Tests */ = {
 			isa = PBXGroup;
 			children = (
@@ -1304,7 +1318,6 @@
 			children = (
 				8E069FEB17C495B200D04FF6 /* timeline */,
 				8E7C5A8617B84E4A00A2BA61 /* circle_icon.jpg */,
-				8E84C923175463F9004057B9 /* scrapbook */,
 				3FF6C2881708F3BC007B48DA /* review-diaper.png */,
 				3FF6C2891708F3BD007B48DA /* review-feeding.png */,
 				3FF6C28A1708F3BD007B48DA /* review-head.png */,
@@ -2115,10 +2128,6 @@
 				3F79A42817180453004E96F6 /* tutorial_3@2x.png in Resources */,
 				8E84CC56175F1CE5004057B9 /* ScrapbookView.xib in Resources */,
 				8E981603177FA806003439FD /* Timeline.xib in Resources */,
-				3F7E654B17ADDBEB00C43C02 /* camera_button@2x.png in Resources */,
-				3F7E654C17ADDBEB00C43C02 /* home_default_photo@2x.png in Resources */,
-				3F7E654D17ADDBEB00C43C02 /* menu_button@2x.png in Resources */,
-				3F686AC717B0B1B90018BE6E /* Activities.json in Resources */,
 				8E7C5A8717B84E4A00A2BA61 /* circle_icon.jpg in Resources */,
 				8E069FF317C495D900D04FF6 /* diaper2.png in Resources */,
 				8E069FF417C495D900D04FF6 /* food2.png in Resources */,
@@ -2141,16 +2150,18 @@
 				3F8A45F617BB7550006A7566 /* scrapbook_option_button_pressed@2x.png in Resources */,
 				3F8A45F717BB7550006A7566 /* scrapbook_option_button@2x.png in Resources */,
 				3FEC0F4A17BB7D0700EBBA92 /* scrapbook_option_menu_background@2x.png in Resources */,
-				3F954A7917C079A40007C125 /* First Year Template.tpl in Resources */,
-				3F954A7E17C079A40007C125 /* Second Year Template.tpl in Resources */,
-				3F28EB9317C5E4E200F96A81 /* First Year Template Cover@2x.png in Resources */,
-				3F28EB9417C5E4E200F96A81 /* First Year Template P1@2x.png in Resources */,
-				3F28EB9517C5E4E200F96A81 /* First Year Template P2@2x.png in Resources */,
-				3F28EB9617C5E4E200F96A81 /* First Year Template P3@2x.png in Resources */,
-				3F28EB9B17C7256600F96A81 /* Birthday.tpl in Resources */,
-				3F28EB9D17C7258E00F96A81 /* Birthday Template Cover@2x.png in Resources */,
 				3FD3C5E717C75BDE00DB1B71 /* delete_button_pressed@2x.png in Resources */,
 				3FD3C5E817C75BDE00DB1B71 /* delete_button@2x.png in Resources */,
+				3FD3C61C17C86F9E00DB1B71 /* Birthday Template P1@2x.png in Resources */,
+				3FD3C61D17C86F9E00DB1B71 /* Birthday Template P2@2x.png in Resources */,
+				3FD3C61E17C86F9E00DB1B71 /* Birthday Template P3@2x.png in Resources */,
+				3FD3C61F17C86F9E00DB1B71 /* Birthday Template P4@2x.png in Resources */,
+				3FD3C62017C86F9E00DB1B71 /* Birthday.tpl in Resources */,
+				3FD3C62117C86F9E00DB1B71 /* First Year Template Cover@2x.png in Resources */,
+				3FD3C62217C86F9E00DB1B71 /* First Year Template P1@2x.png in Resources */,
+				3FD3C62317C86F9E00DB1B71 /* First Year Template P2@2x.png in Resources */,
+				3FD3C62417C86F9E00DB1B71 /* First Year Template P3@2x.png in Resources */,
+				3FD3C62517C86F9E00DB1B71 /* First Year Template.tpl in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

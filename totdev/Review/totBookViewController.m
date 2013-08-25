@@ -380,8 +380,10 @@
 }
 
 - (void)hideOptionMenu:(BOOL)hidden {
-    if( optionView.hidden != hidden)
+    if( optionView.hidden != hidden) {
         optionView.hidden = hidden;
+        optionMenuBtn.hidden = !hidden;
+    }
 }
 
 - (void)hideOptionMenuAndButton:(BOOL)hide {
@@ -391,6 +393,7 @@
         //        optionMenuBtn.hidden = TRUE;
     }
     else {
+        optionMenuBtn.hidden = FALSE;
         optionMenuBtn.alpha = 1;
         //        optionMenuBtn.hidden = FALSE;
     }

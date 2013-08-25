@@ -27,12 +27,12 @@
     return self;
 }
 
-- (void)rotate:(float)radians {
-    self.transform = CGAffineTransformRotate(self.transform, radians);
+- (void)rotate:(float)angle {
+    self.transform = CGAffineTransformRotate(self.transform, angle*M_PI/180.0);
 }
 
-- (void)rotateTo:(float)radians {
-    self.transform = CGAffineTransformMakeRotation(radians);
+- (void)rotateTo:(float)angle {
+    self.transform = CGAffineTransformMakeRotation(angle*M_PI/180.0);
 }
 
 - (void)scale:(float)s {
