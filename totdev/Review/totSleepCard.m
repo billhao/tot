@@ -16,18 +16,22 @@
 + (int) height { return 70; }
 + (int) width { return 310; }
 
-- (id)initWithFrame:(CGRect)frame {
-    self = [super initWithFrame:frame];
+- (id)init {
+    self = [super init];
     if (self) {
-        [self loadIcons];
     }
     return self;
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self loadIcons];
 }
 
 - (void)loadIcons {
     UIImageView* icon = [[UIImageView alloc] initWithFrame:CGRectMake(5, 5, 40, 40)];
     icon.image = [UIImage imageNamed:@"sleep2.png"];
-    [self addSubview:icon];
+    [self.view addSubview:icon];
     [icon release];
     
     Walltime now; [totTimeUtil now:&now];
@@ -38,7 +42,7 @@
     [time_button setTitle:[NSString stringWithFormat:@"%02d:%02d", now.hour, now.minute]
                  forState:UIControlStateNormal];
     [time_button.titleLabel setFont:[UIFont fontWithName:@"Roboto-Regular" size:20]];
-    [self addSubview:time_button];
+    [self.view addSubview:time_button];
     
     start_button = [UIButton buttonWithType:UIButtonTypeCustom];
     start_button.backgroundColor = [UIColor greenColor];
@@ -46,7 +50,7 @@
     [start_button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [start_button setFrame:CGRectMake(200, 5, 60, 40)];
     [start_button addTarget:self action:@selector(startSleep:) forControlEvents:UIControlEventTouchUpInside];
-    [self addSubview:start_button];
+    [self.view addSubview:start_button];
     
     stop_button = [UIButton buttonWithType:UIButtonTypeCustom];
     stop_button.backgroundColor = [UIColor redColor];
@@ -55,7 +59,7 @@
     [stop_button setTitle:@"Wake up" forState:UIControlStateNormal];
     [stop_button setFrame:CGRectMake(200, 5, 80, 40)];
     [stop_button addTarget:self action:@selector(stopSleep:) forControlEvents:UIControlEventTouchUpInside];
-    [self addSubview:stop_button];
+    [self.view addSubview:stop_button];
 }
 
 - (void)startSleep: (UIButton*)button {
@@ -83,11 +87,15 @@
 + (int) height { return 70; }
 + (int) width { return 310; }
 
-- (id)initWithFrame:(CGRect)frame {
-    self = [super initWithFrame:frame];
+- (id)init {
+    self = [super init];
     if (self) {
     }
     return self;
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
 }
 
 @end

@@ -19,16 +19,19 @@
 
 @synthesize parentView;
 
-- (id)initWithFrame:(CGRect)frame {
-    self = [super initWithFrame:frame];
+- (id)init {
+    self = [super init];
     if (self) {
-        [self setBackground];
     }
     return self;
 }
 
+- (void)viewDidLoad {
+    [self setBackground];
+}
+
 - (void) setBackground {
-    self.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = [UIColor whiteColor];
 }
 
 @end
@@ -37,16 +40,31 @@
 
 @synthesize parentView;
 
-- (id)initWithFrame:(CGRect)frame {
-    self = [super initWithFrame:frame];
+- (id)init {
+    self = [super init];
     if (self) {
-        [self setBackground];
     }
     return self;
 }
 
+- (void)viewDidLoad {
+    [self setBackground];
+
+    title = [[UILabel alloc] initWithFrame:CGRectMake(20, 10, 260, 60)];
+    title.text = @"title";
+    title.layer.borderWidth = 1;
+    title.layer.borderColor = [UIColor grayColor].CGColor;
+    [self.view addSubview:title];
+    
+    description = [[UILabel alloc] initWithFrame:CGRectMake(20, 80, 260, 60)];
+    description.text = @"description";
+    description.layer.borderWidth = 1;
+    description.layer.borderColor = [UIColor grayColor].CGColor;
+    [self.view addSubview:description];
+}
+
 - (void) setBackground {
-    self.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = [UIColor whiteColor];
 }
 
 @end
@@ -62,7 +80,14 @@
 
 // Gesture delegates
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
-    return YES;
+    UIViewController* vc = (mMode==EDIT)?self.mEditView:self.mShowView;
+    UIView* v = [vc.view hitTest:[gestureRecognizer locationInView:vc.view ] withEvent:nil];
+    NSLog(@"%@", v.class);
+    // add this condition to avoid moving the view while scrolling the height picker
+    if( v.class == self.mEditView.class || v.class == self.mShowView.class || v.class == nil )
+        return YES;
+    else
+        return NO;
 }
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
     return YES;
@@ -139,85 +164,71 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
     origin_x = GAP_BETWEEN_CARDS;
     self = [super initWithFrame:[totReviewCardView getEditCardSizeOfType:type]];
     if (self) {
+        totReviewEditCardView* c1 = nil;
+        totReviewShowCardView* c2 = nil;
         switch (type) {
             case TEST:
             {
-                totTestEditCard* c1 = [[totTestEditCard alloc] initWithFrame:self.frame];
-                totTestShowCard* c2 = [[totTestShowCard alloc] initWithFrame:[totReviewCardView getShowCardSizeOfType:type]];
-                self.mEditView = c1;
-                self.mShowView = c2;
-                self.mEditView.parentView = self;
-                self.mShowView.parentView = self;
-                [c1 release];
-                [c2 release];
+                c1 = [[totTestEditCard alloc] init];
+                c2 = [[totTestShowCard alloc] init];
                 break;
             }
             case SUMMARY:
             {
-                totSummaryCard* c = [[totSummaryCard alloc] initWithFrame:self.frame];
+                totSummaryCard* c = [[totSummaryCard alloc] init];
+                c.view.frame = self.frame;
                 self.mShowView = c;
                 self.mShowView.parentView = self;
                 [c release];
                 break;
             }
             case HEIGHT:
+            case WEIGHT:
+            case HEAD:
             {
-                totHeightEditCard* c1 = [[totHeightEditCard alloc] initWithFrame:self.frame];
-                totHeightShowCard* c2 = [[totHeightShowCard alloc] initWithFrame:[totReviewCardView getShowCardSizeOfType:type]];
-                self.mEditView = c1;
-                self.mShowView = c2;
-                self.mEditView.parentView = self;
-                self.mShowView.parentView = self;
-                [c1 release];
-                [c2 release];
+                c1 = (totReviewEditCardView*) [[totHeightEditCard alloc] init:type];
+                c2 = (totReviewShowCardView*) [[totHeightShowCard alloc] init:type];
                 break;
             }
             case DIAPER:
             {
-                totDiaperEditCard* c1 = [[totDiaperEditCard alloc] initWithFrame:self.frame];
-                totDiaperShowCard* c2 = [[totDiaperShowCard alloc] initWithFrame:[totReviewCardView getShowCardSizeOfType:type]];
-                self.mEditView = c1;
-                self.mShowView = c2;
-                self.mEditView.parentView = self;
-                self.mShowView.parentView = self;
-                [c1 release];
-                [c2 release];
+                c1 = (totReviewEditCardView*) [[totDiaperEditCard alloc] init];
+                c2 = (totReviewShowCardView*) [[totDiaperShowCard alloc] init];
                 break;
             }
             case LANGUAGE:
             {
-                totLanguageEditCard* c1 = [[totLanguageEditCard alloc] initWithFrame:self.frame];
-                totLanguageShowCard* c2 = [[totLanguageShowCard alloc] initWithFrame:[totReviewCardView getShowCardSizeOfType:type]];
-                self.mEditView = c1;
-                self.mShowView = c2;
-                self.mEditView.parentView = self;
-                self.mShowView.parentView = self;
-                [c1 release];
-                [c2 release];
+                c1 = (totReviewEditCardView*) [[totLanguageEditCard alloc] init];
+                c2 = (totReviewShowCardView*) [[totLanguageShowCard alloc] init];
                 break;
             }
             case SLEEP:
             {
-                totSleepEditCard* c1 = [[totSleepEditCard alloc] initWithFrame:self.frame];
-                totSleepShowCard* c2 = [[totSleepShowCard alloc] initWithFrame:[totReviewCardView getShowCardSizeOfType:type]];
-                self.mEditView = c1;
-                self.mShowView = c2;
-                self.mEditView.parentView = self;
-                self.mShowView.parentView = self;
-                [c1 release];
-                [c2 release];
+                c1 = (totReviewEditCardView*) [[totSleepEditCard alloc] init];
+                c2 = (totReviewShowCardView*) [[totSleepShowCard alloc] init];
                 break;
             }
             default:
                 break;
         }
+        if( c1 != nil && c2 != nil ) {
+            c1.view.frame = self.bounds;
+            c2.view.frame = [totReviewCardView getShowCardSizeOfType:type];
+            self.mEditView = c1;
+            self.mShowView = c2;
+            self.mEditView.parentView = self;
+            self.mShowView.parentView = self;
+            [c1 release];
+            [c2 release];
+        }
+
         // When creating a new card, the default view is editting view.
         // except for summary card.
         if (type == SUMMARY) {
-            [self addSubview:self.mShowView];
+            [self addSubview:self.mShowView.view];
             mMode = SHOW;
         } else {
-            [self addSubview:self.mEditView];
+            [self addSubview:self.mEditView.view];
             mMode = EDIT;
         }
         // Register gesture recognizer.
@@ -244,17 +255,21 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
     if (mMode == EDIT) {
         mMode = SHOW;
         [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:self cache:YES];
-        [mEditView removeFromSuperview];
-        [self addSubview:mShowView];
+        [mEditView.view removeFromSuperview];
+        [self addSubview:mShowView.view];
         // Change the frame size.
-        self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, mShowView.frame.size.width, mShowView.frame.size.height);
+        CGRect f = CGRectMake(self.frame.origin.x, self.frame.origin.y, mShowView.view.frame.size.width, mShowView.view.frame.size.height);
+        self.frame = f;
+        mShowView.view.frame = self.bounds;
     } else {
         mMode = EDIT;
         [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:self cache:YES];
-        [mShowView removeFromSuperview];
-        [self addSubview:mEditView];
+        [mShowView.view removeFromSuperview];
+        [self addSubview:mEditView.view];
         // Change the frame size.
-        self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, mEditView.frame.size.width, mEditView.frame.size.height);
+        CGRect f = CGRectMake(self.frame.origin.x, self.frame.origin.y, mEditView.view.frame.size.width, mEditView.view.frame.size.height);
+        self.frame = f;
+        mEditView.view.frame = self.bounds;
     }
     // Need refresh the whole timeline view.
     [self.parent refreshView];
@@ -268,7 +283,7 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
     if (type == SUMMARY) {
         w = [totSummaryCard width];
         h = [totSummaryCard height];
-    } else if (type == HEIGHT) {
+    } else if (type == HEIGHT||type == WEIGHT||type == HEAD) {
         w = [totHeightEditCard width];
         h = [totHeightEditCard height];
     } else if (type == DIAPER) {
@@ -292,7 +307,7 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
     if (type == SUMMARY) {
         w = [totSummaryCard width];
         h = [totSummaryCard height];
-    } else if (type == HEIGHT) {
+    } else if (type == HEIGHT||type == WEIGHT||type == HEAD) {
         w = [totHeightShowCard width];
         h = [totHeightShowCard height];
     } else if (type == DIAPER) {

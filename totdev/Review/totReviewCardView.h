@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Global.h"
+#import "totEventName.h"
 
 // Each card will have an icon, they should share the same position info.
 #define CARD_ICON_X 5
@@ -24,7 +26,7 @@
 @class totReviewCardView;
 
 // ---------------- Card in editting mode --------------------
-@interface totReviewEditCardView : UIView {
+@interface totReviewEditCardView : UIViewController {
     totReviewCardView* parentView;
 }
 
@@ -35,8 +37,10 @@
 @end
 
 // ---------------- Card in displaying mode ------------------
-@interface totReviewShowCardView : UIView {
+@interface totReviewShowCardView : UIViewController {
     totReviewCardView* parentView;
+    UILabel* title;
+    UILabel* description;
 }
 
 @property (nonatomic, assign) totReviewCardView* parentView;

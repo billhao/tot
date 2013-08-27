@@ -33,7 +33,7 @@
     UILabel* age_in_days_label;
     UILabel* diaper_status_label; // could be wet, solid and web&solid.
     UILabel* timestamp_label;
-    UILabel* description;
+    //UILabel* description;
 }
 
 + (int) height;

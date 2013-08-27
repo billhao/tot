@@ -13,20 +13,30 @@
 + (int) height { return 380; }
 + (int) width { return 310; }
 
-- (id)initWithFrame:(CGRect)frame {
-    self = [super initWithFrame:frame];
+- (id)init {
+    self = [super init];
     if (self) {
-        [self setBackground];
-        [self loadIcons];
-        [self loadLabels];
-        
-        [self loadData];
     }
     return self;
 }
 
+- (void)viewDidLoad {
+    // we don't need title and desc for summary card
+//    [title removeFromSuperview];
+//    [description removeFromSuperview];
+    
+    [self setBackground];
+    [self loadIcons];
+    [self loadLabels];
+    
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [self loadData];
+}
+
 - (void)setBackground {
-    [self setBackgroundColor:[UIColor whiteColor]];
+    [self.view setBackgroundColor:[UIColor whiteColor]];
 }
 
 - (void)loadIcons {
@@ -50,13 +60,13 @@
     icon_language.image = [UIImage imageNamed:@"language2.png"];
     icon_feed.image = [UIImage imageNamed:@"food2.png"];
     
-    [self addSubview:icon_height];
-    [self addSubview:icon_weight];
-    [self addSubview:icon_hc];
-    [self addSubview:icon_language];
-    [self addSubview:icon_sleep];
-    [self addSubview:icon_diaper];
-    [self addSubview:icon_feed];
+    [self.view addSubview:icon_height];
+    [self.view addSubview:icon_weight];
+    [self.view addSubview:icon_hc];
+    [self.view addSubview:icon_language];
+    [self.view addSubview:icon_sleep];
+    [self.view addSubview:icon_diaper];
+    [self.view addSubview:icon_feed];
 }
 
 - (void)loadLabels {
@@ -99,15 +109,15 @@
     [label_feed setFont:[UIFont fontWithName:@"Roboto-Regular" size:15]];
     [label_feed setTextColor:fontColor];
     
-    [self addSubview:label_height];
-    [self addSubview:label_weight];
-    [self addSubview:label_hc];
-    [self addSubview:label_sleep];
-    [self addSubview:label_diaper];
-    [self addSubview:label_language];
-    [self addSubview:label_feed];
+    [self.view addSubview:label_height];
+    [self.view addSubview:label_weight];
+    [self.view addSubview:label_hc];
+    [self.view addSubview:label_sleep];
+    [self.view addSubview:label_diaper];
+    [self.view addSubview:label_language];
+    [self.view addSubview:label_feed];
     
-    [self addSubview:label_babyName];
+    [self.view addSubview:label_babyName];
 }
 
 - (void) loadData {
