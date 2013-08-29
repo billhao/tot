@@ -40,6 +40,13 @@ enum {
     NSMutableDictionary* mMessage;
     
     totBookListViewController* scrapbookListController;
+    
+    // activity related stuff
+    NSArray* allActivities;             // all available activities
+    NSMutableArray* selectedActivities; // activities selected by the user
+
+    UIImageView* selectedActivities_bgView;
+    UIImageView* selectedActivities_lineView;
 }
 
 @property (nonatomic, assign) totHomeRootController *homeRootController;

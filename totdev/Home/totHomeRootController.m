@@ -65,7 +65,8 @@
     // customize the tab bar item
     NSLog(@"%@", @"home root didload");
     
-    totHomeEntryViewController *aHomeView = [[totHomeEntryViewController alloc] initWithNibName:@"HomeView" bundle:nil];
+    totHomeEntryViewController *aHomeView = [[totHomeEntryViewController alloc] init];
+    aHomeView.view.frame = self.view.frame;
     self.homeEntryViewController = aHomeView;
     self.homeEntryViewController.homeRootController = self;
     [aHomeView release];
@@ -113,11 +114,11 @@
 
     
     // =================V2.0==================
-    //[self.view addSubview:homeEntryViewController.view];
-    //self.homeEntryViewController.view.frame = CGRectMake(0, 0, 320, 460);
+    [self.view addSubview:homeEntryViewController.view];
+    self.homeEntryViewController.view.frame = CGRectMake(0, 0, 320, 460);
     
-    [self.view addSubview:timelineController.view];
-    self.timelineController.view.frame = CGRectMake(0, 0, 320, 460);
+//    [self.view addSubview:timelineController.view];
+//    self.timelineController.view.frame = CGRectMake(0, 0, 320, 460);
     
     // =======================================
     

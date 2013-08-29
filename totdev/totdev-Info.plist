@@ -49,6 +49,9 @@
 		<string>Roboto-Regular.ttf</string>
 		<string>Roboto-Bold.ttf</string>
 		<string>Roboto-Italic.ttf</string>
+		<string>Raleway-Light_2.ttf</string>
+		<string>Raleway-Regular_2.ttf</string>
+		<string>Raleway-SemiBold_2.ttf</string>
 	</array>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
