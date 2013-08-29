@@ -13,11 +13,11 @@
       "name": "Birthday Template P1",
       "elements": [
         {
-          "x": 26,
-          "y": 149,
-          "w": 122,
-          "h": 103,
-          "radius": 20.1,
+          "x": 37,
+          "y": 125,
+          "w": 126,
+          "h": 104,
+          "radius": -20.1,
           "type": "image",
           "name": "cover",
         },
@@ -31,11 +31,11 @@
           "name": "cover",
         },
         {
-          "x": 317,
-          "y": 137,
-          "w": 122,
-          "h": 103,
-          "radius": 12.4,
+          "x": 323,
+          "y": 122,
+          "w": 125,
+          "h": 104,
+          "radius": -12.4,
           "type": "image",
           "name": "cover",
         }
