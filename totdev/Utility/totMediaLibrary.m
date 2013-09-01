@@ -12,15 +12,47 @@
 #import "totHomeFeedingViewController.h"
 
 @implementation MediaInfo
+
 - (id)initWithJSON:(NSString*)jsonData {
     self = [super init];
     if (self) {
         NSMutableDictionary* obj = (NSMutableDictionary*)[totHomeFeedingViewController JSONToObject:jsonData];
         self.filename = [obj objectForKey:@"filename"];
         self.dateTimeTaken = [totEvent dateFromString:[obj objectForKey:@"datetime_taken"]];
+        NSMutableArray* activities = [obj objectForKey:@"activities"];
+        if( !activities )
+            activities = [[NSMutableArray alloc] init];
+        self.activities = activities;
     }
     return self;
 }
+
+// save this media info to db
+- (void)save {
+    // add a record to db
+    NSMutableDictionary* imageData = [[NSMutableDictionary alloc] init];
+    [imageData setValue:self.filename forKey:@"filename"];
+    [imageData setValue:[totEvent formatTime:self.dateTimeTaken] forKey:@"datetime_taken"];
+    [imageData setValue:self.activities forKey:@"activities"];
+
+    NSString* activityName = [NSString stringWithFormat:ACTIVITY_PHOTO_REPLACABLE, self.filename];
+    [global.model setItem:global.baby.babyID name:activityName value:imageData];
+}
+
+// datetime is nil for default media
++ (MediaInfo*)getDefault {
+    MediaInfo* m = [[MediaInfo alloc] init];
+    m.filename = @"home_bg";
+    m.dateTimeTaken = nil;
+    m.activities = [[NSMutableArray alloc] init];
+    return m;
+}
+
+// datetime is nil for default media
+- (BOOL)isDefault {
+    return self.dateTimeTaken == nil;
+}
+
 @end
 
 
@@ -30,6 +62,12 @@
     self = [super init];
     if (self) {
         pid = 1;
+        // get the last photo or the default photo
+        MediaInfo* m = [global.user getLastViewedPhoto];
+        if( m == nil )
+            self.currentMediaInfo = [MediaInfo getDefault];
+        else
+            self.currentMediaInfo = m;
     }
     return self;
 }
@@ -82,10 +120,11 @@
         events = [global.model getEvent:global.baby.babyID event:ACTIVITY_PHOTO limit:1 offset:-1 startDate:datetime endDate:nil orderByDesc:FALSE];
     }
     if( events.count > 0 ) {
-        // release???
+        // TODO release???
         totEvent* event = [events objectAtIndex:0];
         MediaInfo* mediaInfo = [[[MediaInfo alloc] initWithJSON:event.value] autorelease];
         mediaInfo.eventID = event.event_id;
+//        mediaInfo.eventName = [NSString stringWithString:event.name];
         return mediaInfo;
     }
     return nil;

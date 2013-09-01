@@ -145,6 +145,7 @@
         return;
     
     mediaInfo.dateTimeTaken = [NSDate date];
+    mediaInfo.activities = [[[NSMutableArray alloc] init] autorelease];
     [totMediaLibrary addPhoto:mediaInfo];
 
     if( [delegate respondsToSelector:@selector(cameraView:didFinishSavingMedia:)] ) {

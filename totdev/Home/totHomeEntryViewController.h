@@ -43,12 +43,15 @@ enum {
     
     // activity related stuff
     NSArray* allActivities;             // all available activities
-    NSMutableArray* selectedActivities; // activities selected by the user
 
-    UIImageView* selectedActivities_bgView;
+    UIView* selectedActivities_bgView;
     UIImageView* selectedActivities_lineView;
+    
+    BOOL activity_animation_on; // activity animation is on
 }
 
 @property (nonatomic, assign) totHomeRootController *homeRootController;
+
+@property (nonatomic, readonly) int MAX_SELECTED_ACTIVITIES;
 
 @end

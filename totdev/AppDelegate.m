@@ -157,17 +157,20 @@
     // remove all previous views
     //[loginNavigationController setViewControllers:nil];
     // show home view
-    //self.homeController = [[totHomeRootController alloc] init];
     
-    totBookListViewController* book = [[totBookListViewController alloc] init];
     CGRect frame = self.window.bounds;
-    //book.view.backgroundColor = [UIColor greenColor];
-    book.view.frame = CGRectMake(0, 0, frame.size.width, frame.size.height);
-    //_homeController.view.frame = CGRectMake(0, 0, frame.size.width, frame.size.height);
-    //[loginNavigationController pushViewController:book animated:TRUE];
-    self.window.rootViewController = book;
     
-    [book release];
+    self.homeController = [[totHomeRootController alloc] init];
+    self.homeController.view.backgroundColor = [UIColor grayColor];
+    self.homeController.view.frame = CGRectMake(0, 0, frame.size.width, frame.size.height);
+    self.window.rootViewController = loginNavigationController;// self.homeController;
+    [loginNavigationController pushViewController:self.homeController animated:TRUE];
+    
+
+    //totBookListViewController* book = [[totBookListViewController alloc] init];
+    //book.view.frame = CGRectMake(0, 0, frame.size.width, frame.size.height);
+    //self.window.rootViewController = book;
+    //[book release];
 
 
 //    totUITabBarController* mainTabController = [[totUITabBarController alloc] initWithNibName:@"MainWindow" bundle:nil];

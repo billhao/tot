@@ -12,10 +12,16 @@
 
 @property long mediaID;
 @property long eventID;
-@property(retain) NSDate* dateTimeTaken;
-@property(retain) NSString* filename;
+@property(nonatomic, retain) NSDate* dateTimeTaken;
+@property(nonatomic, retain) NSString* filename;
+@property(nonatomic, retain) NSMutableArray* activities;
 
 - (id)initWithJSON:(NSString*)jsonData;
+- (void)save;
+- (BOOL)isDefault; // if the current media is default photo for home page
+
+// get default photo for home page
++ (MediaInfo*)getDefault;
 
 @end
 
