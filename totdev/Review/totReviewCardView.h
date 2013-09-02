@@ -24,6 +24,7 @@
 #define TIME_H 40
 #define TIME_Y 5
 
+@class totTimeline;
 @class totReviewCardView;
 
 // ---------------- Card in editting mode --------------------
@@ -38,6 +39,7 @@
 }
 
 @property (nonatomic, assign) totReviewCardView* parentView;
+@property (nonatomic, retain) totTimeline* timeline;
 
 - (void) setBackground;
 - (void) setIcon:(NSString*)icon_name withCalendarDays:(int)days;
@@ -53,9 +55,11 @@
     totReviewCardView* parentView;
     UILabel* title;
     UILabel* description;
+    
 }
 
 @property (nonatomic, assign) totReviewCardView* parentView;
+@property (nonatomic, retain) totTimeline* timeline;
 
 - (void) setBackground;
 
@@ -74,10 +78,10 @@ typedef enum {
     HEIGHT   = 0,
     WEIGHT   = 1,
     HEAD     = 2,
-    FEEDING  = 3,
-    DIAPER   = 4,
+    DIAPER   = 3,
+    LANGUAGE = 4,
     SLEEP    = 5,
-    LANGUAGE = 6,
+    FEEDING  = 6,
     SUMMARY  = 7,
 } ReviewCardType;
 
@@ -101,7 +105,7 @@ typedef enum {
 
 - (void) flip;
 
-+ (totReviewCardView*) createEmptyCard:(ReviewCardType)type;
-+ (totReviewCardView*) loadCard:(ReviewCardType)type data:(NSString*)data;
++ (totReviewCardView*) createEmptyCard:(ReviewCardType)type timeline:(totTimeline*)timeline;
++ (totReviewCardView*) loadCard:(ReviewCardType)type data:(NSString*)data timeline:(totTimeline*)timeline ;
 
 @end

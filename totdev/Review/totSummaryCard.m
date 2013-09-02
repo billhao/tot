@@ -7,6 +7,7 @@
 //
 
 #import "totSummaryCard.h"
+#import "totTimeline.h"
 
 @implementation totSummaryCard
 
@@ -16,6 +17,7 @@
 - (id)init {
     self = [super init];
     if (self) {
+        physicalLabels = nil;
     }
     return self;
 }
@@ -28,49 +30,48 @@
     [self createBabyInfo];
     [self setBackground];
     [self loadIcons];
-}
-
-- (void)viewWillAppear:(BOOL)animated {
+    
     [self loadData];
 }
 
+// bug - not called
+//- (void)viewWillAppear:(BOOL)animated {
+//    [self loadData];
+//}
+//
+//- (void)viewDidAppear:(BOOL)animated {
+//    [self loadData];    
+//}
+
 - (void)setBackground {
     [self.view setBackgroundColor:[UIColor whiteColor]];
+    
+    UIImageView* line = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"timeline_line"]];
+    line.frame = CGRectMake(0, 100, [totSummaryCard width], line.frame.size.height);
+    [self.view addSubview:line];
 }
 
 - (void)loadIcons {
+    // physical icons (as buttons)
     int icon_x[] = {20, 112, 204, 20, 112, 204, 20};
     int icon_y[] = {112, 112, 112, 162, 162, 162, 212};
-    int index = 0;
+    NSMutableArray* icon_img_filename = [[NSMutableArray alloc] initWithObjects:
+                                  @"height2", @"weight2", @"hc2", @"diaper2", @"language2", @"sleep2", @"food2", nil];
+    NSMutableArray* label_text = [[NSMutableArray alloc] initWithObjects:
+                                  @"height", @"weight", @"head", @"diaper", @"language", @"sleep", @"feeding", nil];
     
     float icon_w  = 41;
     float icon_h = 41;
+    int cnt = sizeof(icon_x)/sizeof(icon_x[0]);
     
-    icon_height   = [[UIImageView alloc] initWithFrame:CGRectMake(icon_x[index], icon_y[index], icon_w, icon_h)]; ++index;
-    icon_weight   = [[UIImageView alloc] initWithFrame:CGRectMake(icon_x[index], icon_y[index], icon_w, icon_h)]; ++index;
-    icon_hc       = [[UIImageView alloc] initWithFrame:CGRectMake(icon_x[index], icon_y[index], icon_w, icon_h)]; ++index;
-    icon_diaper   = [[UIImageView alloc] initWithFrame:CGRectMake(icon_x[index], icon_y[index], icon_w, icon_h)]; ++index;
-    icon_language = [[UIImageView alloc] initWithFrame:CGRectMake(icon_x[index], icon_y[index], icon_w, icon_h)]; ++index;
-    icon_sleep    = [[UIImageView alloc] initWithFrame:CGRectMake(icon_x[index], icon_y[index], icon_w, icon_h)]; ++index;
-    icon_feed     = [[UIImageView alloc] initWithFrame:CGRectMake(icon_x[index], icon_y[index], icon_w, icon_h)]; ++index;
-
-    icon_height.image = [UIImage imageNamed:@"height2.png"];
-    icon_diaper.image = [UIImage imageNamed:@"diaper2.png"];
-    icon_weight.image = [UIImage imageNamed:@"weight2.png"];
-    icon_sleep.image = [UIImage imageNamed:@"sleep2.png"];
-    icon_hc.image = [UIImage imageNamed:@"hc2.png"];
-    icon_language.image = [UIImage imageNamed:@"language2.png"];
-    icon_feed.image = [UIImage imageNamed:@"food2.png"];
-    
-    [self.view addSubview:icon_height];
-    [self.view addSubview:icon_weight];
-    [self.view addSubview:icon_hc];
-    [self.view addSubview:icon_language];
-    [self.view addSubview:icon_sleep];
-    [self.view addSubview:icon_diaper];
-    [self.view addSubview:icon_feed];
-
-    // loadLabels
+    for( int i=0; i<cnt; i++ ) {
+        UIButton* btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        btn.frame = CGRectMake(icon_x[i], icon_y[i], icon_w, icon_h);
+        btn.tag = i;
+        [btn setImage:[UIImage imageNamed:icon_img_filename[i]] forState:UIControlStateNormal];
+        [btn addTarget:self action:@selector(physicalIconBtnPressed:) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:btn];
+    }
     
     // baby name
     label_babyName = [[UILabel alloc] initWithFrame:CGRectMake(129, 42, 170, 32)];
@@ -92,100 +93,100 @@
 //    [self enableBorder:label_babyAge];
 
     
-    int label_x[7]; // = {55, 210, 55, 210, 55, 210, 55};  // should be the value in the x array in loadIcons + 50
-    int label_y[7]; // = {80, 80, 160, 160, 240, 240, 310};  // should be the same as the y array in loadIcons
-    NSMutableArray* label_text = [[NSMutableArray alloc] initWithObjects:
-                                  @"height", @"weight", @"head", @"diaper", @"language", @"sleep", @"feeding", nil];
-    int cnt = sizeof(icon_x)/sizeof(icon_x[0]);
-    for( int i=0; i<cnt; i++ ) {
-        label_x[i] = icon_x[i] + 44;
-        label_y[i] = icon_y[i] + 16;
-    }
-    index = 0;
-    
+    // loadLabels    
     float label_h = 30;
     float label_w = 44;
-    label_height   = [[UILabel alloc] initWithFrame:CGRectMake(label_x[index], label_y[index], label_w, label_h)]; ++index;
-    label_weight   = [[UILabel alloc] initWithFrame:CGRectMake(label_x[index], label_y[index], label_w, label_h)]; ++index;
-    label_hc       = [[UILabel alloc] initWithFrame:CGRectMake(label_x[index], label_y[index], label_w, label_h)]; ++index;
-    label_diaper   = [[UILabel alloc] initWithFrame:CGRectMake(label_x[index], label_y[index], label_w, label_h)]; ++index;
-    label_language = [[UILabel alloc] initWithFrame:CGRectMake(label_x[index], label_y[index], label_w, label_h)]; ++index;
-    label_sleep    = [[UILabel alloc] initWithFrame:CGRectMake(label_x[index], label_y[index], label_w, label_h)]; ++index;
-    label_feed     = [[UILabel alloc] initWithFrame:CGRectMake(label_x[index], label_y[index], 220, label_h)]; ++index;
-    
-    // color them.
-    //label_height.backgroundColor = [UIColor colorWithRed:0.8f green:0.8f blue:0.8f alpha:0.8f];
-    //label_diaper.backgroundColor = [UIColor colorWithRed:0.8f green:0.8f blue:0.8f alpha:0.8f];
-    //label_weight.backgroundColor = [UIColor colorWithRed:0.8f green:0.8f blue:0.8f alpha:0.8f];
-    //label_sleep.backgroundColor = [UIColor colorWithRed:0.8f green:0.8f blue:0.8f alpha:0.8f];
-    //label_hc.backgroundColor = [UIColor colorWithRed:0.8f green:0.8f blue:0.8f alpha:0.8f];
-    //label_language.backgroundColor = [UIColor colorWithRed:0.8f green:0.8f blue:0.8f alpha:0.8f];
-    //label_feed.backgroundColor = [UIColor colorWithRed:0.8f green:0.8f blue:0.8f alpha:0.8f];
-    
+
+    UIFont* font3 = [UIFont fontWithName:@"Raleway" size:8];
     UIColor* fontColor = [UIColor grayColor];
-    [label_height setFont:[UIFont fontWithName:@"Roboto-Regular" size:15]];
-    [label_height setTextColor:fontColor];
-    [label_diaper setFont:[UIFont fontWithName:@"Roboto-Regular" size:15]];
-    [label_diaper setTextColor:fontColor];
-    [label_weight setFont:[UIFont fontWithName:@"Roboto-Regular" size:15]];
-    [label_weight setTextColor:fontColor];
-    [label_sleep setFont:[UIFont fontWithName:@"Roboto-Regular" size:15]];
-    [label_sleep setTextColor:fontColor];
-    [label_hc setFont:[UIFont fontWithName:@"Roboto-Regular" size:15]];
-    [label_hc setTextColor:fontColor];
-    [label_language setFont:[UIFont fontWithName:@"Roboto-Regular" size:15]];
-    [label_language setTextColor:fontColor];
-    [label_feed setFont:[UIFont fontWithName:@"Roboto-Regular" size:15]];
-    [label_feed setTextColor:fontColor];
     
-    label_height.text = @"height";
-    label_weight.text = @"weight";
-    label_hc.text = @"head";
-    label_diaper.text = @"diaper";
-    label_language.text = @"langauge";
-    label_sleep.text = @"sleep";
-    label_feed.text = @"feeding";
-    
-    [self.view addSubview:label_height];
-    [self.view addSubview:label_weight];
-    [self.view addSubview:label_hc];
-    [self.view addSubview:label_sleep];
-    [self.view addSubview:label_diaper];
-    [self.view addSubview:label_language];
-    [self.view addSubview:label_feed];
-    
+    if( physicalLabels != nil ) [physicalLabels release];
+    physicalLabels = [[NSMutableArray alloc] initWithCapacity:cnt];
+    for( int i=0; i<cnt; i++ ) {
+        int label_x = icon_x[i] + 44;
+        int label_y = icon_y[i] + 16;
+        UILabel *label   = [[UILabel alloc] initWithFrame:CGRectMake(label_x, label_y, label_w, label_h)];
+        label.font = font3;
+        label.textColor = fontColor;
+        label.text = label_text[i];
+        [self.view addSubview:label];
+        [physicalLabels addObject:label];
+    }
 }
 
+// load data from db
 - (void) loadData {
-    [label_height setText:@"100cm"];
-    [label_diaper setText:@"Wet"];
-    [label_weight setText:@"5kg"];
-    [label_sleep setText:@"10hr"];
-    [label_hc setText:@"25cm"];
-    [label_language setText:@"Mom"];
-    [label_feed setText:@"milk 2oz, apple 3pc"];
+    NSMutableArray* values = [[NSMutableArray alloc] initWithCapacity:physicalLabels.count];
+    
+    NSMutableArray* events;
+    events = [global.model getEvent:global.baby.babyID event:EVENT_BASIC_HEIGHT limit:1];
+    if( events.count == 1 )
+        [values addObject:((totEvent*)events[0]).value];
+    else
+        [values addObject:[NSNull null]];
+
+    events = [global.model getEvent:global.baby.babyID event:EVENT_BASIC_WEIGHT limit:1];
+    if( events.count == 1 )
+        [values addObject:((totEvent*)events[0]).value];
+    else
+        [values addObject:[NSNull null]];
+    
+    events = [global.model getEvent:global.baby.babyID event:EVENT_BASIC_HEAD limit:1];
+    if( events.count == 1 )
+        [values addObject:((totEvent*)events[0]).value];
+    else
+        [values addObject:[NSNull null]];
+    
+    events = [global.model getEvent:global.baby.babyID event:EVENT_BASIC_DIAPER limit:1];
+    if( events.count == 1 )
+        [values addObject:((totEvent*)events[0]).value];
+    else
+        [values addObject:[NSNull null]];
+    
+    events = [global.model getEvent:global.baby.babyID event:EVENT_BASIC_LANGUAGE limit:1];
+    if( events.count == 1 )
+        [values addObject:((totEvent*)events[0]).value];
+    else
+        [values addObject:[NSNull null]];
+    
+    events = [global.model getEvent:global.baby.babyID event:EVENT_BASIC_SLEEP limit:1];
+    if( events.count == 1 )
+        [values addObject:((totEvent*)events[0]).value];
+    else
+        [values addObject:[NSNull null]];
+    
+    events = [global.model getEvent:global.baby.babyID event:EVENT_BASIC_FEEDING limit:1];
+    if( events.count == 1 )
+        [values addObject:((totEvent*)events[0]).value];
+    else
+        [values addObject:[NSNull null]];
+    
+    for( int i=0; i<physicalLabels.count; i++ ) {
+        if( ![values[i] isKindOfClass:NSNull.class] ) {
+            NSString* value = values[i];
+            ((UILabel*)physicalLabels[i]).text = value;
+        }
+    }
+    [values release];
 }
 
 - (void) dealloc {
     [super dealloc];
     
-    [icon_height release];
-    [icon_weight release];
-    [icon_hc release];
-    [icon_sleep release];
-    [icon_language release];
-    [icon_feed release];
-    [icon_diaper release];
-    
-    [label_height release];
-    [label_weight release];
-    [label_hc release];
-    [label_sleep release];
-    [label_language release];
-    [label_feed release];
-    [label_diaper release];
+    if( physicalLabels != nil ) {
+        for( UILabel* label in physicalLabels )
+            [label release];
+    }
+
     [label_babyName release];
     [label_babyAge release];
+}
+
+// tap this icon to add a new card
+- (void)physicalIconBtnPressed:(id)sender {
+    // add a new card
+    int tag = ((UIButton*)sender).tag;
+    [self.timeline addEmptyCard:tag];
 }
 
 // create UI elements for basic baby info like name, photo and bday

@@ -29,7 +29,7 @@
 }
 
 - (void) addEmptyCard:(ReviewCardType)type {
-    totReviewCardView* card = [totReviewCardView createEmptyCard:type];
+    totReviewCardView* card = [totReviewCardView createEmptyCard:type timeline:self];
     card.parent = self;
     [mCards addObject:card];
     [card release];
@@ -39,7 +39,7 @@
 }
 
 - (void) addCard:(ReviewCardType)type data:(NSString*)data {
-    totReviewCardView* card = [totReviewCardView loadCard:type data:data];
+    totReviewCardView* card = [totReviewCardView loadCard:type data:data timeline:self];
     card.parent = self;
     [mCards addObject:card];
     [card release];
@@ -110,7 +110,7 @@
 - (void) moveToTop:(totReviewCardView *)card {
     float card_y = card.frame.origin.y;
     float view_y = self.contentOffset.y;
-    [self setContentOffset:CGPointMake(0, card_y) animated:YES];
+    [self setContentOffset:CGPointMake(0, card_y-4) animated:YES];
 }
 
 - (void) moveCard:(totReviewCardView *)card To:(int)index {

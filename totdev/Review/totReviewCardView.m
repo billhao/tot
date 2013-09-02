@@ -254,14 +254,14 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
 }
 
 // Loads existing card.
-- (id)initWithType:(ReviewCardType)type andData:(NSString*)data {
+- (id)initWithType:(ReviewCardType)type andData:(NSString*)data timeline:(totTimeline*)timeline {
     // Don't forget to register gesture recognizer.
     return nil;
 }
 
 // Creates empty card.
 // Default is edit card.
-- (id)initWithType:(ReviewCardType)type {
+- (id)initWithType:(ReviewCardType)type timeline:(totTimeline*)timeline {
     origin_x = GAP_BETWEEN_CARDS;
     self = [super initWithFrame:[totReviewCardView getEditCardSizeOfType:type]];
     if (self) {
@@ -277,6 +277,7 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
             case SUMMARY:
             {
                 totSummaryCard* c = [[totSummaryCard alloc] init];
+                c.timeline = timeline;
                 c.view.frame = self.frame;
                 self.mShowView = c;
                 self.mShowView.parentView = self;
@@ -320,6 +321,8 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
         if( c1 != nil && c2 != nil ) {
             c1.view.frame = self.bounds;
             c2.view.frame = [totReviewCardView getShowCardSizeOfType:type];
+            c1.timeline = timeline;
+            c2.timeline = timeline;
             self.mEditView = c1;
             self.mShowView = c2;
             self.mEditView.parentView = self;
@@ -438,13 +441,13 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
     return CGRectMake(0, 0, w, h);
 }
 
-+ (totReviewCardView*) createEmptyCard:(ReviewCardType)type {
-    totReviewCardView* view = [[totReviewCardView alloc] initWithType:type];
++ (totReviewCardView*) createEmptyCard:(ReviewCardType)type timeline:(totTimeline*)timeline {
+    totReviewCardView* view = [[totReviewCardView alloc] initWithType:type timeline:timeline];
     return view;
 }
 
-+ (totReviewCardView*) loadCard:(ReviewCardType)type data:(NSString*)data {
-    totReviewCardView* view = [[totReviewCardView alloc] initWithType:type andData:data];
++ (totReviewCardView*) loadCard:(ReviewCardType)type data:(NSString*)data timeline:(totTimeline*)timeline {
+    totReviewCardView* view = [[totReviewCardView alloc] initWithType:type andData:data timeline:timeline];
     return view;
 }
 
