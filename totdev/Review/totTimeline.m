@@ -29,7 +29,7 @@
 }
 
 - (void) addEmptyCard:(ReviewCardType)type {
-    totReviewCardView* card = [totReviewCardView createEmptyCard:type];
+    totReviewCardView* card = [totReviewCardView createEmptyCard:type timeline:self];
     card.parent = self;
     [mCards addObject:card];
     [card release];
@@ -39,7 +39,7 @@
 }
 
 - (void) addCard:(ReviewCardType)type data:(NSString*)data {
-    totReviewCardView* card = [totReviewCardView loadCard:type data:data];
+    totReviewCardView* card = [totReviewCardView loadCard:type data:data timeline:self];
     card.parent = self;
     [mCards addObject:card];
     [card release];

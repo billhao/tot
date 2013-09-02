@@ -36,15 +36,6 @@
     totTimeline* timelineView = [[totTimeline alloc] initWithFrame:CGRectMake(0, navbar_height, 320, 460-navbar_height)];
 
     [timelineView addEmptyCard:SUMMARY];
-    [timelineView addEmptyCard:HEIGHT];
-    [timelineView addEmptyCard:DIAPER];
-    [timelineView addEmptyCard:LANGUAGE];
-    [timelineView addEmptyCard:SLEEP];
-    
-    [timelineView addEmptyCard:SUMMARY];
-    [timelineView addEmptyCard:SUMMARY];
-    [timelineView addEmptyCard:SUMMARY];
-    [timelineView addEmptyCard:SUMMARY];
     
     [self.view addSubview:timelineView];
     [timelineView release];
