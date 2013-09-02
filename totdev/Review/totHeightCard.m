@@ -16,7 +16,8 @@
 {
     // check card type
     if( !(cardType == HEIGHT || cardType == HEAD || cardType == WEIGHT) )
-        [NSException raise:@"Invalid card type" format:@"Invalid card type to totHeightEditCard: %d. Only height, weight and HC are allowed.", cardType];
+        [NSException raise:@"Invalid card type"
+                    format:@"Invalid card type to totHeightEditCard: %d. Only height, weight and HC are allowed.", cardType];
 
     self = [super init];
     if (self) {
@@ -31,8 +32,8 @@
     [super dealloc];
     [bgview release];
     [picker release];
-    [confirm_button release];
-    [cancel_button release];
+    //[confirm_button release];
+    //[cancel_button release];
 }
 
 -(void)viewDidLoad {
@@ -97,13 +98,13 @@
 - (void) loadButtons {
     [self setTimestamp];
     if (type == HEIGHT) {
-        [self setIcon:@"height2.png"];
+        [self setIcon:@"height_gray.png"];
         [self setTitle:@"Height"];
     } else if (type == WEIGHT) {
-        [self setIcon:@"weight2.png"];
+        [self setIcon:@"weight_gray.png"];
         [self setTitle:@"Weight"];
     } else if (type == HEAD) {
-        [self setIcon:@"hc2.png"];
+        [self setIcon:@"hc_gray.png"];
         [self setTitle:@"HC"];
     }
     
@@ -115,23 +116,23 @@
     selectedValueLabel.backgroundColor = [UIColor clearColor];
     [self.view addSubview:selectedValueLabel];
 
-    confirm_button = [UIButton buttonWithType:UIButtonTypeCustom];
-    confirm_button.frame = CGRectMake(self.width-20+2*(-60-10), bgview.frame.origin.y+bgview.frame.size.height+20, 60, 40);
-    cancel_button =  [UIButton buttonWithType:UIButtonTypeCustom];
-    cancel_button.frame = CGRectMake(self.width-20-60-10, bgview.frame.origin.y+bgview.frame.size.height+20, 60, 40);
+    //confirm_button = [UIButton buttonWithType:UIButtonTypeCustom];
+    //confirm_button.frame = CGRectMake(self.width-20+2*(-60-10), bgview.frame.origin.y+bgview.frame.size.height+20, 60, 40);
+    //cancel_button =  [UIButton buttonWithType:UIButtonTypeCustom];
+    //cancel_button.frame = CGRectMake(self.width-20-60-10, bgview.frame.origin.y+bgview.frame.size.height+20, 60, 40);
     
     //self.width-20+2*(-60-10), bgview.frame.origin.y+bgview.frame.size.height+20, 60, 40)];
     
     //self.width-20-60-10, 350, 60, 40)];
-    [confirm_button setImage:[UIImage imageNamed:@"icons-ok"] forState:UIControlStateNormal];
-    [confirm_button setImage:[UIImage imageNamed:@"icons-ok_pressed"] forState:UIControlStateHighlighted];
-    [cancel_button setImage:[UIImage imageNamed:@"icons-close"] forState:UIControlStateNormal];
-    [cancel_button setImage:[UIImage imageNamed:@"icons-close_pressed"] forState:UIControlStateHighlighted];
-    [confirm_button addTarget:self action:@selector(confirm:) forControlEvents:UIControlEventTouchUpInside];
-    [cancel_button addTarget:self action:@selector(cancel:) forControlEvents:UIControlEventTouchUpInside];
+    //[confirm_button setImage:[UIImage imageNamed:@"icons-ok"] forState:UIControlStateNormal];
+    //[confirm_button setImage:[UIImage imageNamed:@"icons-ok_pressed"] forState:UIControlStateHighlighted];
+    //[cancel_button setImage:[UIImage imageNamed:@"icons-close"] forState:UIControlStateNormal];
+    //[cancel_button setImage:[UIImage imageNamed:@"icons-close_pressed"] forState:UIControlStateHighlighted];
+    //[confirm_button addTarget:self action:@selector(confirm:) forControlEvents:UIControlEventTouchUpInside];
+    //[cancel_button addTarget:self action:@selector(cancel:) forControlEvents:UIControlEventTouchUpInside];
     
-    [self.view addSubview:confirm_button];
-    [self.view addSubview:cancel_button];
+    //[self.view addSubview:confirm_button];
+    //[self.view addSubview:cancel_button];
 }
 
 - (void) setBackground {
@@ -220,7 +221,6 @@
 
 - (void) setBackground {
     self.view.backgroundColor = [UIColor whiteColor];
-    
 }
 
 + (int) height { return 150; }

@@ -29,23 +29,23 @@
 }
 
 - (void)loadIcons {
-    [self setIcon:@"sleep2.png"];
+    [self setIcon:@"sleep_gray.png"];
     [self setTitle:@"Sleep"];
     [self setTimestamp];
     
-    stop_button = [UIButton buttonWithType:UIButtonTypeCustom];
-    stop_button.backgroundColor = [UIColor redColor];
-    stop_button.hidden = YES;
-    [stop_button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [stop_button setTitle:@"Wake up" forState:UIControlStateNormal];
-    [stop_button setFrame:CGRectMake(200, 5, 80, 40)];
-    [stop_button addTarget:self action:@selector(stopSleep:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:stop_button];
+    //stop_button = [UIButton buttonWithType:UIButtonTypeCustom];
+    //stop_button.backgroundColor = [UIColor redColor];
+    //stop_button.hidden = YES;
+    //[stop_button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    //[stop_button setTitle:@"Wake up" forState:UIControlStateNormal];
+    //[stop_button setFrame:CGRectMake(200, 5, 80, 40)];
+    //[stop_button addTarget:self action:@selector(stopSleep:) forControlEvents:UIControlEventTouchUpInside];
+    //[self.view addSubview:stop_button];
 }
 
 - (void)startSleep: (UIButton*)button {
-    start_button.hidden = YES;
-    stop_button.hidden = NO;
+    //start_button.hidden = YES;
+    //stop_button.hidden = NO;
     [self.parentView.parent moveCard:self.parentView To:0];
     [self.parentView.parent moveToTop:self.parentView];
 }
@@ -54,9 +54,9 @@
 
 - (void)dealloc {
     [super dealloc];
-    [time_button release];
-    [start_button release];
-    [stop_button release];
+    //[time_button release];
+    //[start_button release];
+    //[stop_button release];
 }
 
 @end

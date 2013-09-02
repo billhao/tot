@@ -10,9 +10,9 @@
 #import <UIKit/UIKit.h>
 
 @interface totSleepEditCard : totReviewEditCardView {
-    UIButton* time_button;
-    UIButton* start_button;
-    UIButton* stop_button;
+    //UIButton* time_button;
+    //UIButton* start_button;
+    //UIButton* stop_button;
 }
 
 + (int) height;

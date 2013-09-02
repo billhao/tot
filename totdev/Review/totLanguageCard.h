@@ -10,7 +10,6 @@
 #import "totReviewCardView.h"
 
 @interface totLanguageEditCard : totReviewEditCardView {
-    UIButton* confirm_button;
     UITextView* new_words_input;
 }
 

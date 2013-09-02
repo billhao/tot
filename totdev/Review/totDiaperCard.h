@@ -15,9 +15,6 @@
     totImageView* wet;
     totImageView* solid;
     totImageView* wet_solid;
-    
-    UIButton* confirm_button;
-    UIButton* cancel_button;
 }
 
 + (int) height;

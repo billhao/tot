@@ -24,8 +24,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self loadIcons];
     [self setBackground];
+    [self loadIcons];
+    [self loadInputContent];
 }
 
 - (void) setBackground {
@@ -33,32 +34,25 @@
 }
 
 - (void) loadIcons {
-    [self setIcon:@"diaper2.png" withCalendarDays:999];
+    [self setIcon:@"diaper_gray.png" withCalendarDays:999];
     [self setTimestamp];
     [self setTitle:@"Diaper"];
-    
-    // Initializes UI.
-    wet = [[totImageView alloc] initWithFrame: CGRectMake(15, 50, 193, 28)];
-    solid = [[totImageView alloc] initWithFrame:CGRectMake(15, 91, 193, 28)];
-    wet_solid = [[totImageView alloc] initWithFrame:CGRectMake(15, 132, 193, 28)];
+    [self setConfirmAndCancelButtons:140];
+}
+
+- (void) loadInputContent {
+    int x = 68;
+    wet = [[totImageView alloc] initWithFrame: CGRectMake(x, 75, 193, 28)];
     [wet imageFilePath:@"icons-diaper-wet_new"];
-    [solid imageFilePath:@"icons-diaper-solid_new"];
-    [wet_solid imageFilePath:@"icons-diaper-wetandsolid_new"];
     [self.view addSubview:wet];
+
+    solid = [[totImageView alloc] initWithFrame:CGRectMake(x, 105, 193, 28)];
+    [solid imageFilePath:@"icons-diaper-solid_new"];
     [self.view addSubview:solid];
+
+    wet_solid = [[totImageView alloc] initWithFrame:CGRectMake(x, 135, 193, 28)];
+    [wet_solid imageFilePath:@"icons-diaper-wetandsolid_new"];
     [self.view addSubview:wet_solid];
-    
-    // Initializes buttons.
-    confirm_button = [[UIButton alloc] initWithFrame:CGRectMake(30, 160, 100, 20)];
-    cancel_button = [[UIButton alloc] initWithFrame:CGRectMake(190, 160, 100, 20)];
-    confirm_button.backgroundColor = [UIColor redColor];
-    cancel_button.backgroundColor = [UIColor redColor];
-    [confirm_button setTitle:@"Yes" forState:UIControlStateNormal];
-    [cancel_button setTitle:@"No" forState:UIControlStateNormal];
-    [confirm_button addTarget:self action:@selector(confirm:) forControlEvents:UIControlEventTouchUpInside];
-    [cancel_button addTarget:self action:@selector(cancel:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:confirm_button];
-    [self.view addSubview:cancel_button];
 }
 
 - (void) confirm: (UIButton*)btn {
@@ -71,11 +65,10 @@
     [wet release];
     [solid release];
     [wet_solid release];
-    [confirm_button release];
-    [cancel_button release];
 }
 
 @end
+
 
 
 
