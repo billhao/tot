@@ -74,6 +74,7 @@
     
     // Create timeline. This view will be displayed when the user flip the finger up.
     totTimelineController* tc = [[totTimelineController alloc] initWithNibName:@"Timeline" bundle:nil];
+    tc.homeController = self;
     self.timelineController = tc;
     [tc release];
     
@@ -90,6 +91,7 @@
     //[self presentViewController:homeEntryViewController animated:FALSE completion:nil];
     //[self presentViewController:timelineController animated:FALSE completion:nil];
     [self switchTo:kHomeViewEntryView withContextInfo:nil];
+    [self switchTo:kTimeline withContextInfo:nil];
 }
 
 - (UIViewController*)getViewByIndex:(int)viewIndex {
@@ -172,8 +174,13 @@
 //    }
 
     AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+    UINavigationController* nc = delegate.loginNavigationController;
     if( viewIndex == kHomeViewEntryView ) {
-        [delegate.loginNavigationController pushViewController:nextView animated:FALSE];
+        if([nc.viewControllers containsObject:nextView]) {
+            [nc popToViewController:nextView animated:FALSE];
+        }
+        else
+            [nc pushViewController:nextView animated:FALSE];
     }
     else if( viewIndex == kTimeline ) {
         nextView.view.frame = CGRectMake(0, 480, 320, 460);

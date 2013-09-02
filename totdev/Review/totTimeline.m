@@ -25,7 +25,7 @@
 
 // Change the background of the timeline
 - (void) setBackground {
-    [self setBackgroundColor:[UIColor colorWithRed:0.7f green:0.7f blue:0.7f alpha:1.0f]];
+    [self setBackgroundColor:[UIColor colorWithRed:240.0/255 green:240.0/255 blue:240.0/255 alpha:1.0f]];
 }
 
 - (void) addEmptyCard:(ReviewCardType)type {

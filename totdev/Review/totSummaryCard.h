@@ -20,6 +20,7 @@
     UIImageView* icon_language;
     
     UILabel* label_babyName;
+    UILabel* label_babyAge;
     UILabel* label_life_in_days;
     UILabel* label_height;
     UILabel* label_weight;
