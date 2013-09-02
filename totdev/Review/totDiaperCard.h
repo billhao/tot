@@ -20,14 +20,8 @@
         SELECTION_WETSOILED = 3,
     };
 
-    totImageView* wet;
-    totImageView* soiled;
-    totImageView* wet_soiled;
     UIImageView * mSelectedIcon;
     
-    UIButton* confirm_button;
-    UIButton* cancel_button;
-
     int mDiaperType;
     
     // position of first selection item

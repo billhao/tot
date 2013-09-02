@@ -77,6 +77,7 @@
 - (void)setTitle:(NSString *)desc {
     UILabel* title = [[UILabel alloc] initWithFrame:CGRectMake(70, 10, 150, 30)];
     [title setText:desc];
+    [title setBackgroundColor:[UIColor clearColor]];
     [title setTextColor:[UIColor colorWithRed:0.5f green:0.5f blue:0.5f alpha:1.0f]];
     [title setFont:[UIFont fontWithName:@"Raleway-SemiBold" size:20]];
     [self.view addSubview:title];
@@ -96,6 +97,7 @@
     [time_button1 setTitle:[NSString stringWithFormat:@"%02d:%02d", now.hour, now.minute]
                   forState:UIControlStateNormal];
     [time_button1.titleLabel setFont:[UIFont fontWithName:@"Raleway" size:13]];
+    [time_button1 setBackgroundColor:[UIColor clearColor]];
     [self.view addSubview:time_button1];
     
     // Inserts year/month/day button.
@@ -107,9 +109,17 @@
     [time_button2 setTitle:[NSString stringWithFormat:@"%02d/%02d/%04d", now.month, now.day, now.year]
                   forState:UIControlStateNormal];
     [time_button2.titleLabel setFont:[UIFont fontWithName:@"Raleway" size:13]];
+    [time_button2 setBackgroundColor:[UIColor clearColor]];
     [self.view addSubview:time_button2];
 }
 
+- (void)dealloc {
+    [super dealloc];
+    [cancel_button release];
+    [confirm_button release];
+    [time_button1 release];
+    [time_button2 release];
+}
 
 @end
 

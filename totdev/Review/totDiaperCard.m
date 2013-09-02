@@ -27,15 +27,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self loadIcons];
     [self setBackground];
+    [self loadIcons];
 }
 
 - (void) dealloc {
     [super dealloc];
-    [wet release];
-    [soiled release];
-    [wet_soiled release];
     [confirm_button release];
     [cancel_button release];
     [mSelectedIcon release];
@@ -72,7 +69,7 @@
 }
 
 - (void) loadIcons {
-    [self setIcon:@"diaper2.png" withCalendarDays:999];
+    [self setIcon:@"diaper_gray.png" withCalendarDays:999];
     [self setTimestamp];
     [self setTitle:@"Diaper"];
     
@@ -95,43 +92,11 @@
     
     //[totUtility enableBorder:wetBtn];
     
-//    wet = [[totImageView alloc] initWithFrame: CGRectMake(15, 50, 193, 28)];
-//    soiled = [[totImageView alloc] initWithFrame:CGRectMake(15, 91, 193, 28)];
-//    wet_soiled = [[totImageView alloc] initWithFrame:CGRectMake(15, 132, 193, 28)];
-//    
-//    [wet imageFilePath:@"icons-diaper-wet_new"];
-//    [soiled imageFilePath:@"icons-diaper-solid_new"];
-//    [wet_soiled imageFilePath:@"icons-diaper-wetandsolid_new"];
-//    
-//    wet.mTag = SELECTION_WET;
-//    soiled.mTag = SELECTION_SOILED;
-//    wet_soiled.mTag = SELECTION_WETSOILED;
-//    
-//    [wet setDelegate:self];
-//    [soiled setDelegate:self];
-//    [wet_soiled setDelegate:self];
-    
-//    [self.view addSubview:wet];
-//    [self.view addSubview:soiled];
-//    [self.view addSubview:wet_soiled];
-    
     mSelectedIcon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icons-ok"]];
     mSelectedIcon.frame = CGRectMake(-1, -1, 0, 0);
     [self.view addSubview:mSelectedIcon];
     
     mDiaperType = -1;
-    
-    // Initializes buttons.
-    confirm_button = [[UIButton alloc] initWithFrame:CGRectMake(30, 160, 100, 20)];
-    cancel_button = [[UIButton alloc] initWithFrame:CGRectMake(190, 160, 100, 20)];
-    confirm_button.backgroundColor = [UIColor redColor];
-    cancel_button.backgroundColor = [UIColor redColor];
-    [confirm_button setTitle:@"Yes" forState:UIControlStateNormal];
-    [cancel_button setTitle:@"No" forState:UIControlStateNormal];
-    [confirm_button addTarget:self action:@selector(confirm:) forControlEvents:UIControlEventTouchUpInside];
-    [cancel_button addTarget:self action:@selector(cancel:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:confirm_button];
-    [self.view addSubview:cancel_button];
 }
 
 - (UIButton*)createButton:(float)yy {
@@ -194,6 +159,7 @@
 
 
 @end
+
 
 
 

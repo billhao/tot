@@ -13,8 +13,6 @@
 @interface totHeightEditCard : totReviewEditCardView <STHorizontalPickerDelegate> {
     STHorizontalPicker* picker;
     UILabel* selectedValueLabel;
-    UIButton* confirm_button;
-    UIButton* cancel_button;
     UIImageView* bgview;
 }
 

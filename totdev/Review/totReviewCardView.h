@@ -33,6 +33,9 @@
     
     UIButton* time_button1;  // hour/minute
     UIButton* time_button2;  // year/month/day
+    
+    UIButton* confirm_button;
+    UIButton* cancel_button;
 }
 
 @property (nonatomic, assign) totReviewCardView* parentView;
@@ -43,6 +46,7 @@
 - (void) setIcon:(NSString*)icon_name;
 - (void) setTimestamp;
 - (void) setTitle:(NSString *)desc;
+- (void) setConfirmAndCancelButtons:(int)y;
 
 @end
 

@@ -23,7 +23,6 @@
     [super viewDidLoad];
     [self setBackground];
     [self loadIcons];
-    [self loadButtons];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -36,9 +35,37 @@
 
 
 - (void) loadIcons {
+    [self setTimestamp];
+    [self setTitle:@"New Word"];
+    [self setIcon:@"language_gray.png" withCalendarDays:99];
+}
+
+/*
+- (void) loadInputContent {
+    //confirm_button = [UIButton buttonWithType:UIButtonTypeCustom];
+    //confirm_button.backgroundColor = [UIColor greenColor];
+    //[confirm_button setFrame:CGRectMake(10, 160, 100, 30)];
+    //[confirm_button setTitle:@"Confirm" forState:UIControlStateNormal];
+    //[confirm_button addTarget:self action:@selector(confirm:) forControlEvents:UIControlEventTouchUpInside];
+    //[self.view addSubview:confirm_button];
+    
+    // text input area
+    new_words_input = [[UITextView alloc] initWithFrame:CGRectMake(10, 100, 290, 40)];
+    new_words_input.backgroundColor = [UIColor clearColor];
+    [self.view addSubview:new_words_input];
+    // text input area background
+    UIView* background = [[UIView alloc] initWithFrame:CGRectMake(10, 100, 290, 40)];
+    background.backgroundColor = [UIColor yellowColor];
+    [self.view insertSubview:background belowSubview:new_words_input];
+    [background release];
+}
+
+- (void) confirm: (UIButton*)button {
+    [self.parentView.parent moveToTop:self.parentView];
     [self setTitle:@"Language"];
     [self setIcon:@"language2.png" withCalendarDays:0];
 }
+ */
 
 - (void) loadButtons {
     [self setTimestamp];
@@ -152,11 +179,13 @@
 
 
 
+
 @implementation totLanguageShowCard
 
 - (id) init {
     self = [super init];
-    if (self) {}
+    if (self) {
+    }
     return self;
 }
 
