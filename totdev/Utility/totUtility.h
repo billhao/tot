@@ -19,6 +19,8 @@
 // utility function print a frame
 + (NSString*)getFrameString:(CGRect)frame;
 
++ (void)enableBorder:(UIView*)v;
+
 @end
 
 extern void print(NSString* str);

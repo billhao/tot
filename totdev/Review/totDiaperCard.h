@@ -8,16 +8,34 @@
 
 #import <UIKit/UIKit.h>
 #import "totReviewCardView.h"
+#import "totImageView.h"
 
 @class totImageView;
 
-@interface totDiaperEditCard : totReviewEditCardView {
+@interface totDiaperEditCard : totReviewEditCardView<totImageViewDelegate> {
+
+    enum Selection {
+        SELECTION_WET = 1,
+        SELECTION_SOILED = 2,
+        SELECTION_WETSOILED = 3,
+    };
+
     totImageView* wet;
-    totImageView* solid;
-    totImageView* wet_solid;
+    totImageView* soiled;
+    totImageView* wet_soiled;
+    UIImageView * mSelectedIcon;
     
     UIButton* confirm_button;
     UIButton* cancel_button;
+
+    int mDiaperType;
+    
+    // position of first selection item
+    float x;
+    float y;
+    float w;
+    float h;
+    float margin_y;
 }
 
 + (int) height;

@@ -236,7 +236,7 @@ NSMutableArray *events = [[[NSMutableArray alloc] init] autorelease];
         NSString* searchname = nil;
         if( event!=nil ) searchname = [NSString stringWithFormat:@"%@%%", event];
         //NSLog(@"%@", searchname);
-        NSString* sql_main = @"SELECT event.event_id, event.time, event.name, event.value FROM event %@ ORDER BY datetime(event.time) %@ %@";
+        NSString* sql_main = @"SELECT event.event_id, event.time, event.name, event.value FROM event %@ ORDER BY datetime(event.event_id) %@ %@";
         NSString* sql_condition;
         if( event!=nil ) {
             if( start!=nil && end!=nil ) {
@@ -356,7 +356,7 @@ NSMutableArray *events = [[[NSMutableArray alloc] init] autorelease];
         NSString* searchname = nil;
         if( name!=nil ) searchname = [NSString stringWithFormat:@"%@", name];
         //NSLog(@"%@", searchname);
-        NSString* sql_main = @"SELECT event.event_id, event.time, event.name, event.value FROM event %@ ORDER BY datetime(event.time) DESC %@";
+        NSString* sql_main = @"SELECT event.event_id, event.time, event.name, event.value FROM event %@ ORDER BY datetime(event.event_id) DESC %@";
         NSString* sql_condition;
         if( name!=nil ) {
             if( start!=nil && end!=nil ) {
