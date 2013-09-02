@@ -34,13 +34,14 @@
     [self loadData];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [self loadData];
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    [self loadData];    
-}
+// bug - not called
+//- (void)viewWillAppear:(BOOL)animated {
+//    [self loadData];
+//}
+//
+//- (void)viewDidAppear:(BOOL)animated {
+//    [self loadData];    
+//}
 
 - (void)setBackground {
     [self.view setBackgroundColor:[UIColor whiteColor]];

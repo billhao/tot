@@ -9,9 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "totReviewCardView.h"
 
-@interface totLanguageEditCard : totReviewEditCardView {
+@interface totLanguageEditCard : totReviewEditCardView<UITextViewDelegate> {
     UIButton* confirm_button;
-    UITextView* new_words_input;
+    UITextView* textView;
+    NSString* defaultTxt;
 }
 
 + (int) height;

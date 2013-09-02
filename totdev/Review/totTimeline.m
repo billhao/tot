@@ -110,7 +110,7 @@
 - (void) moveToTop:(totReviewCardView *)card {
     float card_y = card.frame.origin.y;
     float view_y = self.contentOffset.y;
-    [self setContentOffset:CGPointMake(0, card_y) animated:YES];
+    [self setContentOffset:CGPointMake(0, card_y-4) animated:YES];
 }
 
 - (void) moveCard:(totReviewCardView *)card To:(int)index {
