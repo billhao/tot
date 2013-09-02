@@ -172,7 +172,22 @@
     //self.window.rootViewController = book;
     //[book release];
 
+    
+    // commented by Lixing. To test timeline
+    /*
+    totBookListViewController* book = [[totBookListViewController alloc] init];
+    //book.view.backgroundColor = [UIColor greenColor];
+    book.view.frame = CGRectMake(0, 0, frame.size.width, frame.size.height);
+    //[loginNavigationController pushViewController:book animated:TRUE];
+    self.window.rootViewController = book;
+    [book release];
+     */
 
+    // Load timeline view.
+    self.homeController.view.frame = CGRectMake(0, 0, frame.size.width, frame.size.height);
+    self.window.rootViewController = self.homeController;
+    
+    
 //    totUITabBarController* mainTabController = [[totUITabBarController alloc] initWithNibName:@"MainWindow" bundle:nil];
 //    self.mainTabController = mainTabController;
 //    CGRect frame = self.window.bounds;

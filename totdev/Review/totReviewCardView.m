@@ -14,6 +14,7 @@
 #import "totDiaperCard.h"
 #import "totLanguageCard.h"
 #import "totSleepCard.h"
+#import "totFeedCard.h"
 
 @implementation totReviewEditCardView
 
@@ -208,6 +209,11 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
                 c2 = (totReviewShowCardView*) [[totSleepShowCard alloc] init];
                 break;
             }
+            case FEEDING:
+            {
+                c1 = (totReviewEditCardView*) [[totFeedEditCard alloc] init];
+                c2 = (totReviewShowCardView*) [[totFeedShowCard alloc] init];
+            }
             default:
                 break;
         }
@@ -295,6 +301,9 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
     } else if (type == SLEEP) {
         w = [totSleepEditCard width];
         h = [totSleepEditCard height];
+    } else if (type == FEEDING) {
+        w = [totFeedEditCard width];
+        h = [totFeedEditCard height];
     } else {
         printf("please add size info to getEditCardSizeOfType\n");
         exit(-1);
@@ -319,6 +328,9 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
     } else if (type == SLEEP) {
         w = [totSleepShowCard width];
         h = [totSleepShowCard height];
+    } else if (type == FEEDING) {
+        w = [totFeedShowCard width];
+        h = [totFeedShowCard height];
     } else {
         printf("please add size info to getShowCardSizeOfType\n");
         exit(-1);

@@ -16,12 +16,17 @@
 - (id)init {
     self = [super init];
     if (self) {
+        [self setBackground];
     }
     return self;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+}
+
+- (void)setIcons {
+    
 }
 
 @end
@@ -35,6 +40,7 @@
 - (id)init {
     self = [super init];
     if (self) {
+        [self setBackground];
     }
     return self;
 }
