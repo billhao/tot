@@ -12,9 +12,6 @@
 @class totImageView;
 
 @interface totDiaperEditCard : totReviewEditCardView {
-    UIButton* time_button1;
-    UIButton* time_button2;
-    
     totImageView* wet;
     totImageView* solid;
     totImageView* wet_solid;

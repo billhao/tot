@@ -78,15 +78,7 @@
     self.timelineController = tc;
     [tc release];
     
-    // =================V2.0==================
-    
-    
-    //[self switchTo:kHomeViewEntryView withContextInfo:nil];
-    
-//    [self.view addSubview:homeEntryViewController.view];
     self.homeEntryViewController.view.frame = CGRectMake(0, 0, 320, 460);
-    
-//    [self.view addSubview:timelineController.view];
     self.timelineController.view.frame = CGRectMake(0, 0, 320, 460);
     
     // =======================================

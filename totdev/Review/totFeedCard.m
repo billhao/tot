@@ -7,15 +7,21 @@
 //
 
 #import "totFeedCard.h"
+#import "totReviewCardView.h"
+#import "totTimeUtil.h"
 
 @implementation totFeedEditCard
 
 + (int) height { return 200; }
-+ (int) width { return 310; }
++ (int) width { return 308; }
 
 - (id)init {
     self = [super init];
     if (self) {
+        [self setBackground];
+        [self setIcon:@"food2.png" withCalendarDays:1000];
+        [self setTitle:@"Breakfast"];
+        [self setTimestamp];
     }
     return self;
 }
@@ -30,11 +36,12 @@
 @implementation totFeedShowCard
 
 + (int) height { return 200; }
-+ (int) width { return 310; }
++ (int) width { return 308; }
 
 - (id)init {
     self = [super init];
     if (self) {
+        [self setBackground];
     }
     return self;
 }

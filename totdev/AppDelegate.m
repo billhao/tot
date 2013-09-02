@@ -171,8 +171,8 @@
     //book.view.frame = CGRectMake(0, 0, frame.size.width, frame.size.height);
     //self.window.rootViewController = book;
     //[book release];
-
-
+    
+    
 //    totUITabBarController* mainTabController = [[totUITabBarController alloc] initWithNibName:@"MainWindow" bundle:nil];
 //    self.mainTabController = mainTabController;
 //    CGRect frame = self.window.bounds;

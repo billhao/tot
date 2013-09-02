@@ -14,6 +14,8 @@
 #import "totDiaperCard.h"
 #import "totLanguageCard.h"
 #import "totSleepCard.h"
+#import "totFeedCard.h"
+#import "totTimeUtil.h"
 
 @implementation totReviewEditCardView
 
@@ -33,6 +35,81 @@
 - (void) setBackground {
     self.view.backgroundColor = [UIColor whiteColor];
 }
+
+//
+// ------------------- Layout ----------------------
+//
+
+- (void)setIcon:(NSString*)icon_name withCalendarDays:(int)days {
+    // Icon.
+    UIImageView* icon = [[UIImageView alloc] initWithFrame:CGRectMake(5, 5, 50, 50)];
+    icon.image = [UIImage imageNamed:icon_name];
+    [self.view addSubview:icon];
+    [icon release];
+    
+    // Calendar.
+    UIImageView* calendar_icon = [[UIImageView alloc] initWithFrame:CGRectMake(250, 0, 45, 50)];
+    calendar_icon.image = [UIImage imageNamed:@"calendar.png"];
+    [self.view addSubview:calendar_icon];
+    [calendar_icon release];
+    [self setCalendarDay:days];
+}
+
+- (void)setIcon:(NSString*)icon_name {
+    // Icon.
+    UIImageView* icon = [[UIImageView alloc] initWithFrame:CGRectMake(5, 5, 50, 50)];
+    icon.image = [UIImage imageNamed:icon_name];
+    [self.view addSubview:icon];
+    [icon release];
+}
+
+- (void)setCalendarDay:(int)days {
+    UILabel* label_day = [[UILabel alloc] initWithFrame:CGRectMake(253, 26, 40, 20)];
+    [label_day setText:[NSString stringWithFormat:@"%d", days]];
+    [label_day setTextColor:[UIColor colorWithRed:136/255.0 green:212/255.0 blue:173/255.0 alpha:1.0f]];
+    [label_day setFont:[UIFont fontWithName:@"Raleway-SemiBold" size:16]];
+    [label_day setBackgroundColor:[UIColor clearColor]];
+    label_day.textAlignment = NSTextAlignmentCenter;
+    [self.view addSubview:label_day];
+    [label_day release];
+}
+
+- (void)setTitle:(NSString *)desc {
+    UILabel* title = [[UILabel alloc] initWithFrame:CGRectMake(70, 10, 150, 30)];
+    [title setText:desc];
+    [title setTextColor:[UIColor colorWithRed:0.5f green:0.5f blue:0.5f alpha:1.0f]];
+    [title setFont:[UIFont fontWithName:@"Raleway-SemiBold" size:20]];
+    [self.view addSubview:title];
+    [title release];
+}
+
+- (void)setTimestamp {
+    // Initializes timestamp.
+    Walltime now; [totTimeUtil now:&now];
+    
+    // Inserts hour/minute button.
+    time_button1 = [UIButton buttonWithType:UIButtonTypeCustom];
+    // Sets hour/minute.
+    [time_button1 setFrame:CGRectMake(55, 30, 60, 30)];
+    [time_button1 setTitleColor:[UIColor colorWithRed:128.0/255 green:130.0/255 blue:130.0/255 alpha:1.0]
+                       forState:UIControlStateNormal];
+    [time_button1 setTitle:[NSString stringWithFormat:@"%02d:%02d", now.hour, now.minute]
+                  forState:UIControlStateNormal];
+    [time_button1.titleLabel setFont:[UIFont fontWithName:@"Raleway" size:13]];
+    [self.view addSubview:time_button1];
+    
+    // Inserts year/month/day button.
+    time_button2 = [UIButton buttonWithType:UIButtonTypeCustom];
+    // Sets year/month/day.
+    [time_button2 setFrame:CGRectMake(95, 30, 100, 30)];
+    [time_button2 setTitleColor:[UIColor colorWithRed:128.0/255 green:130.0/255 blue:130.0/255 alpha:1.0]
+                       forState:UIControlStateNormal];
+    [time_button2 setTitle:[NSString stringWithFormat:@"%02d/%02d/%04d", now.month, now.day, now.year]
+                  forState:UIControlStateNormal];
+    [time_button2.titleLabel setFont:[UIFont fontWithName:@"Raleway" size:13]];
+    [self.view addSubview:time_button2];
+}
+
 
 @end
 
@@ -209,6 +286,11 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
                 c2 = (totReviewShowCardView*) [[totSleepShowCard alloc] init];
                 break;
             }
+            case FEEDING:
+            {
+                c1 = (totReviewEditCardView*) [[totFeedEditCard alloc] init];
+                c2 = (totReviewShowCardView*) [[totFeedShowCard alloc] init];
+            }
             default:
                 break;
         }
@@ -298,6 +380,9 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
     } else if (type == SLEEP) {
         w = [totSleepEditCard width];
         h = [totSleepEditCard height];
+    } else if (type == FEEDING) {
+        w = [totFeedEditCard width];
+        h = [totFeedEditCard height];
     } else {
         printf("please add size info to getEditCardSizeOfType\n");
         exit(-1);
@@ -322,6 +407,9 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
     } else if (type == SLEEP) {
         w = [totSleepShowCard width];
         h = [totSleepShowCard height];
+    } else if (type == FEEDING) {
+        w = [totFeedShowCard width];
+        h = [totFeedShowCard height];
     } else {
         printf("please add size info to getShowCardSizeOfType\n");
         exit(-1);

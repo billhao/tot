@@ -20,7 +20,7 @@
 }
 
 + (int) height { return 200; }
-+ (int) width { return 310; }
++ (int) width { return 308; }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -33,33 +33,9 @@
 }
 
 - (void) loadIcons {
-    UIImageView* icon = [[UIImageView alloc] initWithFrame:CGRectMake(CARD_ICON_X, CARD_ICON_Y, CARD_ICON_W, CARD_ICON_H)];
-    [icon setImage:[UIImage imageNamed:@"circle_icon.jpg"]];
-    [self.view addSubview:icon];
-    [icon release];
-    
-    // Initializes timestamp.
-    Walltime now; [totTimeUtil now:&now];
-
-    // Inserts hour/minute button.
-    time_button1 = [UIButton buttonWithType:UIButtonTypeCustom];
-    [time_button1 setFrame:CGRectMake(TIME1_X, TIME_Y, TIME1_W, TIME_H)];
-    [time_button1 setTitleColor:[UIColor colorWithRed:128.0/255 green:130.0/255 blue:130.0/255 alpha:1.0]
-                       forState:UIControlStateNormal];
-    [time_button1 setTitle:[NSString stringWithFormat:@"%02d:%02d", now.hour, now.minute]
-                   forState:UIControlStateNormal];
-    [time_button1.titleLabel setFont:[UIFont fontWithName:@"Roboto-Regular" size:15]];
-    [self.view addSubview:time_button1];
-    
-    // Inserts year/month/day button
-    time_button2 = [UIButton buttonWithType:UIButtonTypeCustom];
-    [time_button2 setFrame:CGRectMake(TIME2_X, TIME_Y, TIME2_W, TIME_H)];
-    [time_button2 setTitleColor:[UIColor colorWithRed:128.0/255 green:130.0/255 blue:130.0/255 alpha:1.0]
-                       forState:UIControlStateNormal];
-    [time_button2 setTitle:[NSString stringWithFormat:@"%02d/%02d/%04d", now.month, now.day, now.year]
-                  forState:UIControlStateNormal];
-    [time_button2.titleLabel setFont:[UIFont fontWithName:@"Roboto-Regular" size:13]];
-    [self.view addSubview:time_button2];
+    [self setIcon:@"diaper2.png" withCalendarDays:999];
+    [self setTimestamp];
+    [self setTitle:@"Diaper"];
     
     // Initializes UI.
     wet = [[totImageView alloc] initWithFrame: CGRectMake(15, 50, 193, 28)];
@@ -113,7 +89,7 @@
 }
 
 + (int) height { return 300; }
-+ (int) width { return 310; }
++ (int) width { return 308; }
 
 - (void)viewDidLoad {
     [super viewDidLoad];

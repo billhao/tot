@@ -30,12 +30,19 @@
 // ---------------- Card in editting mode --------------------
 @interface totReviewEditCardView : UIViewController {
     totReviewCardView* parentView;
+    
+    UIButton* time_button1;  // hour/minute
+    UIButton* time_button2;  // year/month/day
 }
 
 @property (nonatomic, assign) totReviewCardView* parentView;
 @property (nonatomic, retain) totTimeline* timeline;
 
 - (void) setBackground;
+- (void) setIcon:(NSString*)icon_name withCalendarDays:(int)days;
+- (void) setIcon:(NSString*)icon_name;
+- (void) setTimestamp;
+- (void) setTitle:(NSString *)desc;
 
 @end
 
