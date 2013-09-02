@@ -10,8 +10,6 @@
 #import "totReviewCardView.h"
 
 @interface totLanguageEditCard : totReviewEditCardView {
-    UIButton* time_button1;  // hour, minute
-    UIButton* time_button2;  // year, month, day
     UIButton* confirm_button;
     UITextView* new_words_input;
 }

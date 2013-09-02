@@ -14,7 +14,7 @@
 @implementation totSleepEditCard
 
 + (int) height { return 70; }
-+ (int) width { return 310; }
++ (int) width { return 308; }
 
 - (id)init {
     self = [super init];
@@ -29,28 +29,9 @@
 }
 
 - (void)loadIcons {
-    UIImageView* icon = [[UIImageView alloc] initWithFrame:CGRectMake(5, 5, 40, 40)];
-    icon.image = [UIImage imageNamed:@"sleep2.png"];
-    [self.view addSubview:icon];
-    [icon release];
-    
-    Walltime now; [totTimeUtil now:&now];
-    
-    time_button = [UIButton buttonWithType:UIButtonTypeCustom];
-    [time_button setFrame:CGRectMake(TIME1_X, TIME_Y, TIME1_W, TIME_H)];
-    [time_button setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-    [time_button setTitle:[NSString stringWithFormat:@"%02d:%02d", now.hour, now.minute]
-                 forState:UIControlStateNormal];
-    [time_button.titleLabel setFont:[UIFont fontWithName:@"Roboto-Regular" size:20]];
-    [self.view addSubview:time_button];
-    
-    start_button = [UIButton buttonWithType:UIButtonTypeCustom];
-    start_button.backgroundColor = [UIColor greenColor];
-    [start_button setTitle:@"Sleep" forState:UIControlStateNormal];
-    [start_button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [start_button setFrame:CGRectMake(200, 5, 60, 40)];
-    [start_button addTarget:self action:@selector(startSleep:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:start_button];
+    [self setIcon:@"sleep2.png"];
+    [self setTitle:@"Sleep"];
+    [self setTimestamp];
     
     stop_button = [UIButton buttonWithType:UIButtonTypeCustom];
     stop_button.backgroundColor = [UIColor redColor];
@@ -85,7 +66,7 @@
 @implementation totSleepShowCard
 
 + (int) height { return 70; }
-+ (int) width { return 310; }
++ (int) width { return 308; }
 
 - (id)init {
     self = [super init];

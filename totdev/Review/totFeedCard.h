@@ -10,7 +10,6 @@
 #import "totReviewCardView.h"
 
 @interface totFeedEditCard : totReviewEditCardView {
-
 }
 
 + (int) height;

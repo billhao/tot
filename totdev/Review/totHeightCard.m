@@ -92,9 +92,21 @@
 - (int) getWidth  { return 294; } // 13px for left and right margin
 - (int) getHeight { return 400; }
 + (int) width  { return 294; }
-+ (int) height { return 400; }
++ (int) height { return 308; }
 
 - (void) loadButtons {
+    [self setTimestamp];
+    if (type == HEIGHT) {
+        [self setIcon:@"height2.png"];
+        [self setTitle:@"Height"];
+    } else if (type == WEIGHT) {
+        [self setIcon:@"weight2.png"];
+        [self setTitle:@"Weight"];
+    } else if (type == HEAD) {
+        [self setIcon:@"hc2.png"];
+        [self setTitle:@"HC"];
+    }
+    
     selectedValueLabel = [[UILabel alloc] initWithFrame:CGRectMake(80, 30, 120, 30)];
     UIFont* font = [UIFont fontWithName:@"Roboto-Regular" size:16.0];
     selectedValueLabel.font = font;
@@ -212,7 +224,7 @@
 }
 
 + (int) height { return 150; }
-+ (int) width { return 310; }
++ (int) width { return 308; }
 
 
 @end
