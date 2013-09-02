@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "totHomeRootController.h"
 
 @interface totTimelineController : UIViewController
+
+@property(nonatomic, retain) totHomeRootController* homeController;
 
 @end
