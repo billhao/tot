@@ -21,14 +21,14 @@
 - (id)init {
     self = [super init];
     if (self) {
+        margin_x = 6;
+        margin_y = 10;
         x = 20;
-        y = 70;
+        y = contentYOffset + margin_y;
         w1 = 120;
         w2 = 40;
         w3 = 40;
         h = 30;
-        margin_x = 6;
-        margin_y = 10;
         
         foodBoxes = [[NSMutableArray alloc] init];
         quanBoxes = [[NSMutableArray alloc] init];
@@ -41,8 +41,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setBackground];
-    [self setIcon:@"food_gray.png" withCalendarDays:1000];
-    [self setTitle:@"Breakfast"];
+    [self setIcon:@"food_gray" confirmedIcon:@"food2" withCalendarDays:999];
+    [self setTitle:@"Feeding"];
     [self setTimestamp];
     
     [self createUI];
@@ -176,8 +176,8 @@
         // add a food item
         NSMutableDictionary *foodItem = [[NSMutableDictionary alloc] init];
         [foodItem setObject:((UITextField*)foodBoxes[i]).text forKey:@"name"];
-        [foodItem setObject:((UITextField*)foodBoxes[i]).text forKey:@"quantity"];
-        [foodItem setObject:((UITextField*)foodBoxes[i]).text forKey:@"unit"];
+        [foodItem setObject:((UITextField*)quanBoxes[i]).text forKey:@"quantity"];
+        [foodItem setObject:((UITextField*)unitBoxes[i]).text forKey:@"unit"];
         [foodItem setObject:@"" forKey:@"category"];
         [list addObject:foodItem];
         [foodItem release];
@@ -231,7 +231,7 @@
             NSDictionary* item = list[i];
             text = [NSString stringWithFormat:@"%@, %@ %@ %@", text, item[@"name"], item[@"quantity"], item[@"unit"]];
         }
-        //title.text = text;
+        card_title.text = text;
         [self setTimestamp:currEvt.getTimeText];
     }
 }

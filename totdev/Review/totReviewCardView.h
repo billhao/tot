@@ -39,6 +39,8 @@
 
     UIButton* icon_unconfirmed_button;    // use icon as the button to confirm.
     UIButton* icon_confirmed_button;  // confirmed!
+    
+    float contentYOffset; // y offset of real content in a card
 }
 
 @property (nonatomic, assign) totReviewCardView* parentView;

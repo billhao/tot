@@ -25,6 +25,7 @@
 - (id)init {
     self = [super init];
     if (self) {
+        contentYOffset = 64; // basically, this should be the y position of timeline_line
     }
     return self;
 }

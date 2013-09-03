@@ -73,7 +73,7 @@
     
     defaultTxt = @"what did the baby say?";
     
-    float margin_y = 70;
+    float margin_y = contentYOffset;
     float h = 80;
     float w = 280;
     
