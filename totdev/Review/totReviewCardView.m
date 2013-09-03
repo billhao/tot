@@ -171,6 +171,11 @@
     [title setFont:[UIFont fontWithName:@"Raleway-SemiBold" size:20]];
     [self.view addSubview:title];
     [title release];
+    
+    // since this function will always be called, add the line here.
+    UIImageView* line = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"timeline_line"]];
+    line.frame = CGRectMake(0, 60, [totSummaryCard width], line.frame.size.height);
+    [self.view addSubview:line];
 }
 
 - (void)setTimestamp {
@@ -228,10 +233,15 @@
 
 @end
 
+
+
+
 @implementation totReviewShowCardView
 
 @synthesize parentView;
 @synthesize timeline;
+@synthesize card_title;
+@synthesize description;
 
 - (id) init {
     self = [super init];
@@ -287,15 +297,26 @@
 }
 
 - (void) setTitle:(NSString *)desc {
-    title = [[UILabel alloc] initWithFrame:CGRectMake(70, 10, 150, 30)];
-    [title setText:desc];
-    [title setBackgroundColor:[UIColor clearColor]];
-    [title setTextColor:[UIColor colorWithRed:0.5f green:0.5f blue:0.5f alpha:1.0f]];
-    [title setFont:[UIFont fontWithName:@"Raleway-SemiBold" size:20]];
-    [self.view addSubview:title];
+    card_title = [[UILabel alloc] initWithFrame:CGRectMake(70, 10, 150, 30)];
+    [card_title setText:desc];
+    [card_title setBackgroundColor:[UIColor clearColor]];
+    [card_title setTextColor:[UIColor colorWithRed:0.5f green:0.5f blue:0.5f alpha:1.0f]];
+    [card_title setFont:[UIFont fontWithName:@"Raleway-SemiBold" size:20]];
+    [self.view addSubview:card_title];
 }
 
-- (void) setTimestamp {}
+- (void) setTimestamp:(NSString*)time {
+    UIButton* time_button = [UIButton buttonWithType:UIButtonTypeCustom];
+
+    // Sets hour/minute.
+    [time_button setFrame:CGRectMake(64, 30, 120, 30)];
+    [time_button setTitleColor:[UIColor colorWithRed:128.0/255 green:130.0/255 blue:130.0/255 alpha:1.0]
+                       forState:UIControlStateNormal];
+    [time_button setTitle:time forState:UIControlStateNormal];
+    [time_button.titleLabel setFont:[UIFont fontWithName:@"Raleway" size:15]];
+    [time_button setBackgroundColor:[UIColor clearColor]];
+    [self.view addSubview:time_button];
+}
 
 - (void) setBackground {
     self.view.backgroundColor = [UIColor whiteColor];
@@ -303,11 +324,13 @@
 
 - (void) dealloc {
     [super dealloc];
-    [title release];
+    [card_title release];
     [description release];
 }
 
 @end
+
+
 
 
 // ----------------- totReviewCardView -------------------

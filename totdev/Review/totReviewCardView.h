@@ -61,17 +61,20 @@
 @interface totReviewShowCardView : UIViewController {
     totReviewCardView* parentView;
     
-    UILabel* title;
+    UILabel* card_title;
     UILabel* description;
 }
 
 @property (nonatomic, assign) totReviewCardView* parentView;
 @property (nonatomic, retain) totTimeline* timeline;
+@property (nonatomic, readonly) UILabel* card_title;
+@property (nonatomic, readonly) UILabel* description;
 
 - (void) setBackground;
 
-- (void)setIcon:(NSString*)icon_name withCalendarDays:(int)days;
-- (void)setIcon:(NSString*)icon_name;
+- (void) setIcon:(NSString*)icon_name withCalendarDays:(int)days;
+- (void) setIcon:(NSString*)icon_name;
+- (void) setTimestamp:(NSString*)time;
 
 @end
 

@@ -42,8 +42,14 @@
     self = [super init];
     if (self) {
         [self setBackground];
+        [self loadIcons];
+        [self setTimestamp:@"40 Minutes ago"];
     }
     return self;
+}
+
+- (void) loadIcons {
+    [self setIcon:@"food2.png"];
 }
 
 - (void)viewDidLoad {

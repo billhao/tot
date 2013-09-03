@@ -92,7 +92,7 @@
 
 - (int) getWidth  { return 294; } // 13px for left and right margin
 - (int) getHeight { return 400; }
-+ (int) width  { return 294; }
++ (int) width  { return 308; }
 + (int) height { return 308; }
 
 - (void) loadButtons {
@@ -185,6 +185,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setBackground];
+    [self setIcon:@"height2.png" withCalendarDays:100];
+    [self setTimestamp:@"40 Minutes ago"];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -209,7 +211,7 @@
     
     if( events.count > 0 ) {
         totEvent* currEvt = [events objectAtIndex:0];
-        title.text = [NSString stringWithFormat:@"%@", currEvt.value];
+        card_title.text = [NSString stringWithFormat:@"%@", currEvt.value];
         if( events.count > 1 ) {
             totEvent* prevEvt = [events objectAtIndex:1];
             float incr = [currEvt.value floatValue] - [prevEvt.value floatValue];
