@@ -178,6 +178,7 @@
     [super viewDidLoad];
     [self setBackground];
     [self loadIcons];
+    [self setTimestamp:@"40 Minutes ago"];
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -237,7 +238,7 @@
     
     if( events.count > 0 ) {
         totEvent* currEvt = [events objectAtIndex:0];
-        title.text = [NSString stringWithFormat:@"%@", currEvt.value];
+        card_title.text = [NSString stringWithFormat:@"%@", currEvt.value];
         if( events.count > 1 ) {
             totEvent* prevEvt = [events objectAtIndex:1];
             description.text = [NSString stringWithFormat:@"The diaper last time is %@", prevEvt.value];

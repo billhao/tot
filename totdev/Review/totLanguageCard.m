@@ -192,6 +192,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self setBackground];
+    [self setIcon:@"language2.png"];
+    [self setTimestamp:@"40 Minutes ago"];
 }
 
 
@@ -209,7 +212,7 @@
     
     if( events.count > 0 ) {
         totEvent* currEvt = [events objectAtIndex:0];
-        title.text = [NSString stringWithFormat:@"%@", currEvt.value];
+        card_title.text = [NSString stringWithFormat:@"%@", currEvt.value];
         description.text = [self GetOutputStr:currEvt.value];
 
 //        if( events.count > 1 ) {

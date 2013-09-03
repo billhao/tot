@@ -202,9 +202,14 @@
     return self;
 }
 
+- (void) loadIcons {
+    [self setIcon:@"food2.png"];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setBackground];
+    [self loadIcons];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -226,7 +231,8 @@
             NSDictionary* item = list[i];
             text = [NSString stringWithFormat:@"%@, %@ %@ %@", text, item[@"name"], item[@"quantity"], item[@"unit"]];
         }
-        title.text = text;
+        //title.text = text;
+        [self setTimestamp:currEvt.getTimeText];
     }
 }
 

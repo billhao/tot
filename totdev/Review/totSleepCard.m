@@ -124,6 +124,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self setBackground];
+    [self setIcon:@"sleep2.png"];
+    [self setTimestamp:@"40 Minutes ago"];
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -174,11 +177,11 @@
             text = [NSString stringWithFormat:@"%@ slept for %d hours. Really?", global.baby.name, h];
         else
             text = [NSString stringWithFormat:@"%@ slept for %d hours %d minutes", global.baby.name, h, m];
-        title.text = text;
+        card_title.text = text;
         description.text = @"";
     }
     else {
-        title.text = @"";
+        card_title.text = @"";
         description.text = @"";
     }
 }
