@@ -23,6 +23,7 @@
     [super viewDidLoad];
     [self setBackground];
     [self loadIcons];
+    [self display];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -73,7 +74,7 @@
     
     defaultTxt = @"what did the baby say?";
     
-    float margin_y = 70;
+    float margin_y = contentYOffset;
     float h = 80;
     float w = 280;
     
@@ -150,7 +151,7 @@
         /* Get input text */
         /* Add to database */
         totModel* totModel = global.model;
-        [totModel addEvent:0 event:EVENT_BASIC_LANGUAGE datetimeString:formattedDateString value:text ];
+        [totModel addEvent:global.baby.babyID event:EVENT_BASIC_LANGUAGE datetimeString:formattedDateString value:text ];
         
         /* Clear textview text */
         textView.text = defaultTxt;
@@ -170,7 +171,7 @@
 
 #pragma mark - Helper functions
 
-- (void)Display
+- (void)display
 {
     /* Init and display textView */
     textView.text = defaultTxt;

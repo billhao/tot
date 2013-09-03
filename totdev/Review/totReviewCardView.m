@@ -27,6 +27,7 @@
     if (self) {
         timer_ = [[totTimer alloc] init];
         [timer_ setDelegate:self];
+        contentYOffset = 64; // basically, this should be the y position of timeline_line
     }
     return self;
 }

@@ -42,6 +42,7 @@
     UIButton* icon_confirmed_button;  // confirmed!
     
     totTimer* timer_;
+    float contentYOffset; // y offset of real content in a card
 }
 
 @property (nonatomic, assign) totReviewCardView* parentView;

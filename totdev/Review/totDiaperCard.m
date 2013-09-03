@@ -16,11 +16,11 @@
 - (id)init {
     self = [super init];
     if (self) {
+        margin_y = 10;
         x = 30;
-        y = 70;
+        y = contentYOffset + margin_y;
         w = 200;
         h = 20;
-        margin_y = 10;
     }
     return self;
 }
@@ -66,6 +66,11 @@
 
 
 #pragma mark - Helper functions
+
+//- (int) height { return contentYOffset + margin_y + 3*(h+margin_y); }
+//- (int) width { return 308; }
++ (int) height { return 164; }
++ (int) width { return 308; }
 
 - (void) setBackground {
     self.view.backgroundColor = [UIColor whiteColor];
@@ -121,9 +126,6 @@
     
     return wetBtn;
 }
-
-+ (int) height { return 200; }
-+ (int) width { return 308; }
 
 - (void)showSelection:(int)tag {
     int ww = h; // the check icon is a square
@@ -248,6 +250,7 @@
     if( events.count > 0 ) {
         totEvent* currEvt = [events objectAtIndex:0];
         card_title.text = [NSString stringWithFormat:@"%@", currEvt.value];
+        [self setTimestamp:currEvt.getTimeText];
         if( events.count > 1 ) {
             totEvent* prevEvt = [events objectAtIndex:1];
             description.text = [NSString stringWithFormat:@"The diaper last time is %@", prevEvt.value];
