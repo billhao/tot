@@ -243,17 +243,13 @@
 - (void) viewDidLoad {
     [self setBackground];
     
-    //title = [[UILabel alloc] initWithFrame:CGRectMake(20, 10, 260, 60)];
-    //title.text = @"title";
-    //title.layer.borderWidth = 1;
-    //title.layer.borderColor = [UIColor grayColor].CGColor;
-    //[self.view addSubview:title];
+    [self setTitle:@""];
     
-    //description = [[UILabel alloc] initWithFrame:CGRectMake(20, 80, 260, 60)];
-    //description.text = @"description";
-    //description.layer.borderWidth = 1;
-    //description.layer.borderColor = [UIColor grayColor].CGColor;
-    //[self.view addSubview:description];
+    description = [[UILabel alloc] initWithFrame:CGRectMake(20, 80, 260, 60)];
+    description.text = @"description";
+    description.layer.borderWidth = 1;
+    description.layer.borderColor = [UIColor grayColor].CGColor;
+    [self.view addSubview:description];
 }
 
 - (void) setIcon:(NSString*)icon_name withCalendarDays:(int)days {
@@ -308,6 +304,7 @@
 - (void) dealloc {
     [super dealloc];
     [title release];
+    [description release];
 }
 
 @end

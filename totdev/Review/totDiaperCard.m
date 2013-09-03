@@ -204,8 +204,6 @@
 - (void) loadIcons {
     // Load icon.
     [self setIcon:@"diaper2.png" withCalendarDays:165];
-    // Set title
-    [self setTitle:@"Diaper"];
     
     /*
     // Initialize the status label.
