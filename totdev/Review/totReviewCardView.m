@@ -20,6 +20,7 @@
 @implementation totReviewEditCardView
 
 @synthesize parentView;
+@synthesize timeline;
 
 - (id)init {
     self = [super init];
@@ -37,15 +38,97 @@
 }
 
 //
+// ------------------- Animation -------------------
+//
+- (void) secondAnimationDidStop:(NSString*)animationID finished:(NSNumber*)finished context:(void*)context {
+    [self clickOnConfirmIconButtonDelegate];
+}
+
+- (void) animationDidStart:(NSString*)animationID context:(void*)context {}
+
+- (void) animationDidStop:(NSString*)animationID finished:(NSNumber*)finished context:(void*)context {
+    int future_x = icon_confirmed_button.frame.origin.x;
+    int future_y = icon_confirmed_button.frame.origin.y;
+    int future_size = icon_confirmed_button.frame.size.width;
+    
+    // replace the gray button with colorful button.
+    [icon_confirmed_button setFrame:CGRectMake(icon_unconfirmed_button.frame.origin.x,
+                                               icon_unconfirmed_button.frame.origin.y,
+                                               icon_unconfirmed_button.frame.size.width,
+                                               icon_unconfirmed_button.frame.size.height)];
+    [icon_unconfirmed_button setHidden:YES];
+    [icon_confirmed_button setHidden:NO];
+    
+    [UIView beginAnimations:@"pop_up_button" context:nil];
+    [UIView setAnimationDuration:0.1];
+    [UIView setAnimationCurve:UIViewAnimationCurveLinear];
+    [UIView setAnimationDelegate:self];
+    [UIView setAnimationDidStopSelector:@selector(secondAnimationDidStop:finished:context:)];
+    {
+        [icon_confirmed_button setFrame:CGRectMake(future_x, future_y, future_size, future_size)];
+    }
+    [UIView commitAnimations];
+}
+
+- (void)confirmIconHandler:(UIButton*)button {
+    // Change the icon.
+    // This is a two-step animation:
+    //   1. shrink the original button to a smaller size, change the button.
+    //   2. pop it up with the original size.
+    if (icon_confirmed_button) {
+        // Shrink the original gray button.
+        [UIView beginAnimations:@"shrink_gray_button" context:nil];
+        [UIView setAnimationDuration:0.2];
+        [UIView setAnimationDelegate:self];
+        [UIView setAnimationWillStartSelector:@selector(animationDidStart:context:)];
+        [UIView setAnimationDidStopSelector:@selector(animationDidStop:finished:context:)];
+        [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+        {
+            int shrinked_size = 10;
+            int shrinked_x = icon_unconfirmed_button.frame.origin.x +
+                                 (icon_unconfirmed_button.frame.size.width - shrinked_size) / 2;
+            int shrinked_y = icon_unconfirmed_button.frame.origin.y +
+                                 (icon_unconfirmed_button.frame.size.height - shrinked_size) / 2;
+            [icon_unconfirmed_button setFrame:CGRectMake(shrinked_x, shrinked_y, shrinked_size, shrinked_size)];
+        }
+        [UIView commitAnimations];
+    }
+}
+
+
+//
 // ------------------- Layout ----------------------
 //
+- (void) setIcon:(NSString*)icon_name confirmedIcon:(NSString*)confirmed_icon_name withCalendarDays:(int)days {
+    [self setIcon:icon_name withCalendarDays:days];
+    icon_confirmed_button = [UIButton buttonWithType:UIButtonTypeCustom];
+    [icon_confirmed_button setFrame:CGRectMake(5, 5, 50, 50)];
+    [icon_confirmed_button setImage:[UIImage imageNamed:confirmed_icon_name] forState:UIControlStateNormal];
+    [icon_confirmed_button setHidden:YES];
+    [self.view addSubview:icon_confirmed_button];
+}
+
+- (void) setIcon:(NSString*)icon_name confirmedIcon:(NSString*)confirmed_icon_name {
+    [self setIcon:icon_name];
+    icon_confirmed_button = [UIButton buttonWithType:UIButtonTypeCustom];
+    [icon_confirmed_button setFrame:CGRectMake(5, 5, 50, 50)];
+    [icon_confirmed_button setImage:[UIImage imageNamed:confirmed_icon_name] forState:UIControlStateNormal];
+    [icon_confirmed_button setHidden:YES];
+    [self.view addSubview:icon_confirmed_button];
+}
 
 - (void)setIcon:(NSString*)icon_name withCalendarDays:(int)days {
     // Icon.
-    UIImageView* icon = [[UIImageView alloc] initWithFrame:CGRectMake(5, 5, 50, 50)];
-    icon.image = [UIImage imageNamed:icon_name];
-    [self.view addSubview:icon];
-    [icon release];
+    icon_unconfirmed_button = [UIButton buttonWithType:UIButtonTypeCustom];
+    [icon_unconfirmed_button setFrame:CGRectMake(5, 5, 50, 50)];
+    [icon_unconfirmed_button setImage:[UIImage imageNamed:icon_name] forState:UIControlStateNormal];
+    [icon_unconfirmed_button addTarget:self action:@selector(confirmIconHandler:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:icon_unconfirmed_button];
+    
+    //UIImageView* icon = [[UIImageView alloc] initWithFrame:CGRectMake(5, 5, 50, 50)];
+    //icon.image = [UIImage imageNamed:icon_name];
+    //[self.view addSubview:icon];
+    //[icon release];
     
     // Calendar.
     UIImageView* calendar_icon = [[UIImageView alloc] initWithFrame:CGRectMake(250, 0, 45, 50)];
@@ -57,19 +140,25 @@
 
 - (void)setIcon:(NSString*)icon_name {
     // Icon.
-    UIImageView* icon = [[UIImageView alloc] initWithFrame:CGRectMake(5, 5, 50, 50)];
-    icon.image = [UIImage imageNamed:icon_name];
-    [self.view addSubview:icon];
-    [icon release];
+    icon_unconfirmed_button = [UIButton buttonWithType:UIButtonTypeCustom];
+    [icon_unconfirmed_button setFrame:CGRectMake(5, 5, 50, 50)];
+    [icon_unconfirmed_button setImage:[UIImage imageNamed:icon_name] forState:UIControlStateNormal];
+    [icon_unconfirmed_button addTarget:self action:@selector(confirmIconHandler:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:icon_unconfirmed_button];
+    
+    //UIImageView* icon = [[UIImageView alloc] initWithFrame:CGRectMake(5, 5, 50, 50)];
+    //icon.image = [UIImage imageNamed:icon_name];
+    //[self.view addSubview:icon];
+    //[icon release];
 }
 
 - (void)setCalendarDay:(int)days {
     UILabel* label_day = [[UILabel alloc] initWithFrame:CGRectMake(253, 26, 40, 20)];
+    label_day.textAlignment = NSTextAlignmentCenter;
     [label_day setText:[NSString stringWithFormat:@"%d", days]];
     [label_day setTextColor:[UIColor colorWithRed:136/255.0 green:212/255.0 blue:173/255.0 alpha:1.0f]];
     [label_day setFont:[UIFont fontWithName:@"Raleway-SemiBold" size:16]];
     [label_day setBackgroundColor:[UIColor clearColor]];
-    label_day.textAlignment = NSTextAlignmentCenter;
     [self.view addSubview:label_day];
     [label_day release];
 }
@@ -127,6 +216,8 @@
     //[self.view addSubview:cancel_button];
 }
 
+- (void) clickOnConfirmIconButtonDelegate {}
+
 - (void)dealloc {
     [super dealloc];
     [cancel_button release];
@@ -140,32 +231,83 @@
 @implementation totReviewShowCardView
 
 @synthesize parentView;
+@synthesize timeline;
 
-- (id)init {
+- (id) init {
     self = [super init];
     if (self) {
     }
     return self;
 }
 
-- (void)viewDidLoad {
+- (void) viewDidLoad {
     [self setBackground];
-
-    title = [[UILabel alloc] initWithFrame:CGRectMake(20, 10, 260, 60)];
-    title.text = @"title";
-    title.layer.borderWidth = 1;
-    title.layer.borderColor = [UIColor grayColor].CGColor;
-    [self.view addSubview:title];
     
-    description = [[UILabel alloc] initWithFrame:CGRectMake(20, 80, 260, 60)];
-    description.text = @"description";
-    description.layer.borderWidth = 1;
-    description.layer.borderColor = [UIColor grayColor].CGColor;
-    [self.view addSubview:description];
+    //title = [[UILabel alloc] initWithFrame:CGRectMake(20, 10, 260, 60)];
+    //title.text = @"title";
+    //title.layer.borderWidth = 1;
+    //title.layer.borderColor = [UIColor grayColor].CGColor;
+    //[self.view addSubview:title];
+    
+    //description = [[UILabel alloc] initWithFrame:CGRectMake(20, 80, 260, 60)];
+    //description.text = @"description";
+    //description.layer.borderWidth = 1;
+    //description.layer.borderColor = [UIColor grayColor].CGColor;
+    //[self.view addSubview:description];
 }
+
+- (void) setIcon:(NSString*)icon_name withCalendarDays:(int)days {
+    // Icon.
+    UIImageView* icon = [[UIImageView alloc] initWithFrame:CGRectMake(5, 5, 50, 50)];
+    icon.image = [UIImage imageNamed:icon_name];
+    [self.view addSubview:icon];
+    [icon release];
+    
+    // Calendar.
+    UIImageView* calendar_icon = [[UIImageView alloc] initWithFrame:CGRectMake(250, 0, 45, 50)];
+    calendar_icon.image = [UIImage imageNamed:@"calendar.png"];
+    [self.view addSubview:calendar_icon];
+    [calendar_icon release];
+    [self setCalendarDay:days];
+}
+
+- (void) setIcon:(NSString*)icon_name {
+    // Icon.
+    UIImageView* icon = [[UIImageView alloc] initWithFrame:CGRectMake(5, 5, 50, 50)];
+    icon.image = [UIImage imageNamed:icon_name];
+    [self.view addSubview:icon];
+    [icon release];
+}
+
+- (void) setCalendarDay:(int)days {
+    UILabel* label_day = [[UILabel alloc] initWithFrame:CGRectMake(253, 26, 40, 20)];
+    label_day.textAlignment = NSTextAlignmentCenter;
+    [label_day setText:[NSString stringWithFormat:@"%d", days]];
+    [label_day setTextColor:[UIColor colorWithRed:136/255.0 green:212/255.0 blue:173/255.0 alpha:1.0f]];
+    [label_day setFont:[UIFont fontWithName:@"Raleway-SemiBold" size:16]];
+    [label_day setBackgroundColor:[UIColor clearColor]];
+    [self.view addSubview:label_day];
+    [label_day release];
+}
+
+- (void) setTitle:(NSString *)desc {
+    title = [[UILabel alloc] initWithFrame:CGRectMake(70, 10, 150, 30)];
+    [title setText:desc];
+    [title setBackgroundColor:[UIColor clearColor]];
+    [title setTextColor:[UIColor colorWithRed:0.5f green:0.5f blue:0.5f alpha:1.0f]];
+    [title setFont:[UIFont fontWithName:@"Raleway-SemiBold" size:20]];
+    [self.view addSubview:title];
+}
+
+- (void) setTimestamp {}
 
 - (void) setBackground {
     self.view.backgroundColor = [UIColor whiteColor];
+}
+
+- (void) dealloc {
+    [super dealloc];
+    [title release];
 }
 
 @end
@@ -347,13 +489,15 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
 }
 
 
+//
+// ----------------- Card Flip Animation ---------------------
+//
 - (void) animationDidStart:(NSString*)animationID context:(void*)context {
     self.associated_delete_button.hidden = YES;
 }
 - (void) animationDidStop:(NSString*)animationID finished:(NSNumber*)finished context:(void*)context {
     self.associated_delete_button.hidden = NO;
 }
-
 - (void) flip {
     [UIView beginAnimations:@"review_card_flip" context:nil];
     [UIView setAnimationDuration:0.5];

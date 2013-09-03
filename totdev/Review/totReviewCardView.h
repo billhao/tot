@@ -36,6 +36,9 @@
     
     UIButton* confirm_button;
     UIButton* cancel_button;
+
+    UIButton* icon_unconfirmed_button;    // use icon as the button to confirm.
+    UIButton* icon_confirmed_button;  // confirmed!
 }
 
 @property (nonatomic, assign) totReviewCardView* parentView;
@@ -44,24 +47,31 @@
 - (void) setBackground;
 - (void) setIcon:(NSString*)icon_name withCalendarDays:(int)days;
 - (void) setIcon:(NSString*)icon_name;
+- (void) setIcon:(NSString*)icon_name confirmedIcon:(NSString*)confirmed_icon_name withCalendarDays:(int)days;
+- (void) setIcon:(NSString*)icon_name confirmedIcon:(NSString*)confirmed_icon_name;
 - (void) setTimestamp;
 - (void) setTitle:(NSString *)desc;
 - (void) setConfirmAndCancelButtons:(int)y;
+
+- (void) clickOnConfirmIconButtonDelegate;
 
 @end
 
 // ---------------- Card in displaying mode ------------------
 @interface totReviewShowCardView : UIViewController {
     totReviewCardView* parentView;
+    
     UILabel* title;
     UILabel* description;
-    
 }
 
 @property (nonatomic, assign) totReviewCardView* parentView;
 @property (nonatomic, retain) totTimeline* timeline;
 
 - (void) setBackground;
+
+- (void)setIcon:(NSString*)icon_name withCalendarDays:(int)days;
+- (void)setIcon:(NSString*)icon_name;
 
 @end
 

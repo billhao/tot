@@ -34,7 +34,8 @@
 }
 
 - (void) loadIcons {
-    [self setIcon:@"diaper_gray.png" withCalendarDays:999];
+    //[self setIcon:@"diaper_gray.png" withCalendarDays:999];
+    [self setIcon:@"diaper_gray.png" confirmedIcon:@"diaper2.png" withCalendarDays:999];
     [self setTimestamp];
     [self setTitle:@"Diaper"];
     [self setConfirmAndCancelButtons:140];
@@ -55,9 +56,6 @@
     [self.view addSubview:wet_solid];
 }
 
-- (void) confirm: (UIButton*)btn {
-    [self.parentView flip];
-}
 - (void) cancel: (UIButton*)btn {}
 
 - (void) dealloc {
@@ -65,6 +63,10 @@
     [wet release];
     [solid release];
     [wet_solid release];
+}
+
+- (void) clickOnConfirmIconButtonDelegate {
+    [self.parentView flip];
 }
 
 @end
@@ -86,8 +88,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self loadIcons];
     [self setBackground];
+    [self loadIcons];
 }
 
 
@@ -97,24 +99,11 @@
 
 - (void) loadIcons {
     // Load icon.
-    UIImageView* icon = [[UIImageView alloc] initWithFrame:CGRectMake(5, 5, 40, 40)];
-    icon.image = [UIImage imageNamed:@"circle_icon.jpg"];
-    [self.view addSubview:icon];
-    [icon release];
+    [self setIcon:@"diaper2.png" withCalendarDays:165];
+    // Set title
+    [self setTitle:@"Diaper"];
     
-    // Load the calendar icon.
-    UIImageView* calendar = [[UIImageView alloc] initWithFrame:CGRectMake(260, 5, 40, 40)];
-    calendar.image = [UIImage imageNamed:@"circle_icon.jpg"];
-    [self.view addSubview:calendar];
-    [calendar release];
-    
-    // Initialize the days label.
-    age_in_days_label = [[UILabel alloc] initWithFrame:CGRectMake(265, 10, 20, 20)];
-    age_in_days_label.backgroundColor = [UIColor greenColor];
-    age_in_days_label.text = @"165";
-    [age_in_days_label setFont:[UIFont fontWithName:@"Roboto-Regular" size:12]];
-    [self.view addSubview:age_in_days_label];
-    
+    /*
     // Initialize the status label.
     diaper_status_label = [[UILabel alloc] initWithFrame:CGRectMake(60, 5, 70, 50)];
     diaper_status_label.text = @"Wet";
@@ -136,13 +125,12 @@
     description.text = @"This is the third time today.";
     description.backgroundColor = [UIColor grayColor];
     [self.view addSubview:description];
+     */
 }
 
 - (void) dealloc {
-    [description release];
     [timestamp_label release];
     [diaper_status_label release];
-    [age_in_days_label release];
     [super dealloc];
     
 }
