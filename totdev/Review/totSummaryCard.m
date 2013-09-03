@@ -211,9 +211,4 @@
     [headView release];
 }
 
-- (void)enableBorder:(UIView*)v {
-    v.layer.borderWidth = 1;
-    v.layer.borderColor = [UIColor grayColor].CGColor;
-}
-
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "totUtility.h"
+#import <QuartzCore/QuartzCore.h>
 
 @implementation totUtility
 
@@ -80,6 +81,12 @@
 
 void print(NSString* str) {
     NSLog(@"%@", str);
+}
+
+
++ (void)enableBorder:(UIView*)v {
+    v.layer.borderWidth = 1;
+    v.layer.borderColor = [UIColor grayColor].CGColor;
 }
 
 @end
