@@ -10,6 +10,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "Global.h"
 #import "totEventName.h"
+#import "totTimeUtil.h"
 
 // Each card will have an icon, they should share the same position info.
 #define CARD_ICON_X 5
@@ -28,32 +29,34 @@
 @class totReviewCardView;
 
 // ---------------- Card in editting mode --------------------
-@interface totReviewEditCardView : UIViewController {
+@interface totReviewEditCardView : UIViewController <totTimerDelegate> {
     totReviewCardView* parentView;
     
-    UIButton* time_button1;  // hour/minute
-    UIButton* time_button2;  // year/month/day
+    UIButton* hour_button;  // hour/minute
+    UIButton* year_button;  // year/month/day
     
     UIButton* confirm_button;
     UIButton* cancel_button;
 
     UIButton* icon_unconfirmed_button;    // use icon as the button to confirm.
     UIButton* icon_confirmed_button;  // confirmed!
+    
+    totTimer* timer_;
 }
 
 @property (nonatomic, assign) totReviewCardView* parentView;
 @property (nonatomic, retain) totTimeline* timeline;
 
 - (void) setBackground;
-- (void) setIcon:(NSString*)icon_name withCalendarDays:(int)days;
 - (void) setIcon:(NSString*)icon_name;
-- (void) setIcon:(NSString*)icon_name confirmedIcon:(NSString*)confirmed_icon_name withCalendarDays:(int)days;
 - (void) setIcon:(NSString*)icon_name confirmedIcon:(NSString*)confirmed_icon_name;
+- (void) setCalendar:(int)days;
 - (void) setTimestamp;
 - (void) setTitle:(NSString *)desc;
-- (void) setConfirmAndCancelButtons:(int)y;
+//- (void) setConfirmAndCancelButtons:(int)y;
 
-- (void) clickOnConfirmIconButtonDelegate;
+- (bool) clickOnConfirmIconButtonDelegate;
+- (NSString*) getTimestampInString;
 
 @end
 
@@ -72,9 +75,9 @@
 
 - (void) setBackground;
 
-- (void) setIcon:(NSString*)icon_name withCalendarDays:(int)days;
 - (void) setIcon:(NSString*)icon_name;
 - (void) setTimestamp:(NSString*)time;
+- (void) setCalendar:(int)days;
 
 @end
 

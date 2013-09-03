@@ -19,7 +19,8 @@
     self = [super init];
     if (self) {
         [self setBackground];
-        [self setIcon:@"food_gray.png" withCalendarDays:1000];
+        [self setIcon:@"food_gray.png"];
+        [self setCalendar:1000];
         [self setTitle:@"Breakfast"];
         [self setTimestamp];
     }

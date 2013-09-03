@@ -36,7 +36,8 @@
 - (void) loadIcons {
     [self setTimestamp];
     [self setTitle:@"New Word"];
-    [self setIcon:@"language_gray.png" withCalendarDays:99];
+    [self setIcon:@"language_gray.png"];
+    [self setCalendar:99];
     [self loadButtons];
 }
 

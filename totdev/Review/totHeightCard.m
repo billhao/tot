@@ -185,7 +185,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setBackground];
-    [self setIcon:@"height2.png" withCalendarDays:100];
+    [self setIcon:@"height2.png"];
+    [self setCalendar:166];
     [self setTimestamp:@"40 Minutes ago"];
 }
 

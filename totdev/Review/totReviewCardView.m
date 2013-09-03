@@ -25,6 +25,8 @@
 - (id)init {
     self = [super init];
     if (self) {
+        timer_ = [[totTimer alloc] init];
+        [timer_ setDelegate:self];
     }
     return self;
 }
@@ -40,9 +42,7 @@
 //
 // ------------------- Animation -------------------
 //
-- (void) secondAnimationDidStop:(NSString*)animationID finished:(NSNumber*)finished context:(void*)context {
-    [self clickOnConfirmIconButtonDelegate];
-}
+- (void) secondAnimationDidStop:(NSString*)animationID finished:(NSNumber*)finished context:(void*)context {}
 
 - (void) animationDidStart:(NSString*)animationID context:(void*)context {}
 
@@ -71,6 +71,9 @@
 }
 
 - (void)confirmIconHandler:(UIButton*)button {
+    if (![self clickOnConfirmIconButton]) {
+        return;
+    }
     // Change the icon.
     // This is a two-step animation:
     //   1. shrink the original button to a smaller size, change the button.
@@ -99,15 +102,6 @@
 //
 // ------------------- Layout ----------------------
 //
-- (void) setIcon:(NSString*)icon_name confirmedIcon:(NSString*)confirmed_icon_name withCalendarDays:(int)days {
-    [self setIcon:icon_name withCalendarDays:days];
-    icon_confirmed_button = [UIButton buttonWithType:UIButtonTypeCustom];
-    [icon_confirmed_button setFrame:CGRectMake(5, 5, 50, 50)];
-    [icon_confirmed_button setImage:[UIImage imageNamed:confirmed_icon_name] forState:UIControlStateNormal];
-    [icon_confirmed_button setHidden:YES];
-    [self.view addSubview:icon_confirmed_button];
-}
-
 - (void) setIcon:(NSString*)icon_name confirmedIcon:(NSString*)confirmed_icon_name {
     [self setIcon:icon_name];
     icon_confirmed_button = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -117,25 +111,21 @@
     [self.view addSubview:icon_confirmed_button];
 }
 
-- (void)setIcon:(NSString*)icon_name withCalendarDays:(int)days {
-    // Icon.
-    icon_unconfirmed_button = [UIButton buttonWithType:UIButtonTypeCustom];
-    [icon_unconfirmed_button setFrame:CGRectMake(5, 5, 50, 50)];
-    [icon_unconfirmed_button setImage:[UIImage imageNamed:icon_name] forState:UIControlStateNormal];
-    [icon_unconfirmed_button addTarget:self action:@selector(confirmIconHandler:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:icon_unconfirmed_button];
-    
-    //UIImageView* icon = [[UIImageView alloc] initWithFrame:CGRectMake(5, 5, 50, 50)];
-    //icon.image = [UIImage imageNamed:icon_name];
-    //[self.view addSubview:icon];
-    //[icon release];
-    
+- (void)setCalendar:(int)days {
     // Calendar.
     UIImageView* calendar_icon = [[UIImageView alloc] initWithFrame:CGRectMake(250, 0, 45, 50)];
     calendar_icon.image = [UIImage imageNamed:@"calendar.png"];
     [self.view addSubview:calendar_icon];
     [calendar_icon release];
-    [self setCalendarDay:days];
+
+    UILabel* label_day = [[UILabel alloc] initWithFrame:CGRectMake(253, 26, 40, 20)];
+    label_day.textAlignment = NSTextAlignmentCenter;
+    [label_day setText:[NSString stringWithFormat:@"%d", days]];
+    [label_day setTextColor:[UIColor colorWithRed:136/255.0 green:212/255.0 blue:173/255.0 alpha:1.0f]];
+    [label_day setFont:[UIFont fontWithName:@"Raleway-SemiBold" size:16]];
+    [label_day setBackgroundColor:[UIColor clearColor]];
+    [self.view addSubview:label_day];
+    [label_day release];
 }
 
 - (void)setIcon:(NSString*)icon_name {
@@ -145,22 +135,6 @@
     [icon_unconfirmed_button setImage:[UIImage imageNamed:icon_name] forState:UIControlStateNormal];
     [icon_unconfirmed_button addTarget:self action:@selector(confirmIconHandler:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:icon_unconfirmed_button];
-    
-    //UIImageView* icon = [[UIImageView alloc] initWithFrame:CGRectMake(5, 5, 50, 50)];
-    //icon.image = [UIImage imageNamed:icon_name];
-    //[self.view addSubview:icon];
-    //[icon release];
-}
-
-- (void)setCalendarDay:(int)days {
-    UILabel* label_day = [[UILabel alloc] initWithFrame:CGRectMake(253, 26, 40, 20)];
-    label_day.textAlignment = NSTextAlignmentCenter;
-    [label_day setText:[NSString stringWithFormat:@"%d", days]];
-    [label_day setTextColor:[UIColor colorWithRed:136/255.0 green:212/255.0 blue:173/255.0 alpha:1.0f]];
-    [label_day setFont:[UIFont fontWithName:@"Raleway-SemiBold" size:16]];
-    [label_day setBackgroundColor:[UIColor clearColor]];
-    [self.view addSubview:label_day];
-    [label_day release];
 }
 
 - (void)setTitle:(NSString *)desc {
@@ -181,30 +155,34 @@
 - (void)setTimestamp {
     // Initializes timestamp.
     Walltime now; [totTimeUtil now:&now];
+    // Right after we get the current time, start the timer, so that we
+    // can refresh the time button in time. Stop the timer when we save the
+    // entry to database or we cancel the card.
+    [timer_ startWithInternalInSeconds:60];
     
     // Inserts hour/minute button.
-    time_button1 = [UIButton buttonWithType:UIButtonTypeCustom];
+    hour_button = [UIButton buttonWithType:UIButtonTypeCustom];
     // Sets hour/minute.
-    [time_button1 setFrame:CGRectMake(55, 30, 60, 30)];
-    [time_button1 setTitleColor:[UIColor colorWithRed:128.0/255 green:130.0/255 blue:130.0/255 alpha:1.0]
-                       forState:UIControlStateNormal];
-    [time_button1 setTitle:[NSString stringWithFormat:@"%02d:%02d", now.hour, now.minute]
-                  forState:UIControlStateNormal];
-    [time_button1.titleLabel setFont:[UIFont fontWithName:@"Raleway" size:13]];
-    [time_button1 setBackgroundColor:[UIColor clearColor]];
-    [self.view addSubview:time_button1];
+    [hour_button setFrame:CGRectMake(55, 30, 60, 30)];
+    [hour_button setTitleColor:[UIColor colorWithRed:128.0/255 green:130.0/255 blue:130.0/255 alpha:1.0]
+                      forState:UIControlStateNormal];
+    [hour_button setTitle:[NSString stringWithFormat:@"%02d:%02d", now.hour, now.minute]
+                 forState:UIControlStateNormal];
+    [hour_button.titleLabel setFont:[UIFont fontWithName:@"Raleway" size:13]];
+    [hour_button setBackgroundColor:[UIColor clearColor]];
+    [self.view addSubview:hour_button];
     
     // Inserts year/month/day button.
-    time_button2 = [UIButton buttonWithType:UIButtonTypeCustom];
+    year_button = [UIButton buttonWithType:UIButtonTypeCustom];
     // Sets year/month/day.
-    [time_button2 setFrame:CGRectMake(95, 30, 100, 30)];
-    [time_button2 setTitleColor:[UIColor colorWithRed:128.0/255 green:130.0/255 blue:130.0/255 alpha:1.0]
-                       forState:UIControlStateNormal];
-    [time_button2 setTitle:[NSString stringWithFormat:@"%02d/%02d/%04d", now.month, now.day, now.year]
-                  forState:UIControlStateNormal];
-    [time_button2.titleLabel setFont:[UIFont fontWithName:@"Raleway" size:13]];
-    [time_button2 setBackgroundColor:[UIColor clearColor]];
-    [self.view addSubview:time_button2];
+    [year_button setFrame:CGRectMake(95, 30, 100, 30)];
+    [year_button setTitleColor:[UIColor colorWithRed:128.0/255 green:130.0/255 blue:130.0/255 alpha:1.0]
+                      forState:UIControlStateNormal];
+    [year_button setTitle:[NSString stringWithFormat:@"%02d/%02d/%04d", now.month, now.day, now.year]
+                 forState:UIControlStateNormal];
+    [year_button.titleLabel setFont:[UIFont fontWithName:@"Raleway" size:13]];
+    [year_button setBackgroundColor:[UIColor clearColor]];
+    [self.view addSubview:year_button];
 }
 
 - (void)setConfirmAndCancelButtons:(int)y {
@@ -221,14 +199,49 @@
     //[self.view addSubview:cancel_button];
 }
 
-- (void) clickOnConfirmIconButtonDelegate {}
+- (bool) clickOnConfirmIconButton {
+    if ([self clickOnConfirmIconButtonDelegate]) {
+        [timer_ stop];
+        return true;
+    }
+    return false;
+}
+
+- (bool) clickOnConfirmIconButtonDelegate { return true; }
+
+//
+// ---------- Time ----------------
+//
+- (NSString*) getTimestampInString {
+    NSArray* comp1   = [hour_button.titleLabel.text componentsSeparatedByString:@":"];
+    NSString* hour   = [comp1 objectAtIndex:0];
+    NSString* minute = [comp1 objectAtIndex:1];
+    
+    NSArray* comp2   = [year_button.titleLabel.text componentsSeparatedByString:@"/"];
+    NSString* month  = [comp2 objectAtIndex:0];
+    NSString* day    = [comp2 objectAtIndex:1];
+    NSString* year   = [comp2 objectAtIndex:2];
+    
+    NSString* timestamp = [NSString stringWithFormat:@"%@-%@-%@ %@:%@:%s", year, month, day, hour, minute, "00"];
+    return timestamp;
+}
+
+# pragma totTimer delegate
+- (void)timerCallback:(totTimer *)timer {
+    Walltime now; [totTimeUtil now:&now];
+    [hour_button setTitle:[NSString stringWithFormat:@"%02d:%02d", now.hour, now.minute]
+                 forState:UIControlStateNormal];
+    [year_button setTitle:[NSString stringWithFormat:@"%02d/%02d/%04d", now.month, now.day, now.year]
+                 forState:UIControlStateNormal];
+}
 
 - (void)dealloc {
     [super dealloc];
     [cancel_button release];
     [confirm_button release];
-    [time_button1 release];
-    [time_button2 release];
+    [hour_button release];
+    [year_button release];
+    [timer_ stop];
 }
 
 @end
@@ -262,30 +275,13 @@
     [self.view addSubview:description];
 }
 
-- (void) setIcon:(NSString*)icon_name withCalendarDays:(int)days {
-    // Icon.
-    UIImageView* icon = [[UIImageView alloc] initWithFrame:CGRectMake(5, 5, 50, 50)];
-    icon.image = [UIImage imageNamed:icon_name];
-    [self.view addSubview:icon];
-    [icon release];
-    
+- (void) setCalendar:(int)days {
     // Calendar.
     UIImageView* calendar_icon = [[UIImageView alloc] initWithFrame:CGRectMake(250, 0, 45, 50)];
     calendar_icon.image = [UIImage imageNamed:@"calendar.png"];
     [self.view addSubview:calendar_icon];
     [calendar_icon release];
-    [self setCalendarDay:days];
-}
-
-- (void) setIcon:(NSString*)icon_name {
-    // Icon.
-    UIImageView* icon = [[UIImageView alloc] initWithFrame:CGRectMake(5, 5, 50, 50)];
-    icon.image = [UIImage imageNamed:icon_name];
-    [self.view addSubview:icon];
-    [icon release];
-}
-
-- (void) setCalendarDay:(int)days {
+    
     UILabel* label_day = [[UILabel alloc] initWithFrame:CGRectMake(253, 26, 40, 20)];
     label_day.textAlignment = NSTextAlignmentCenter;
     [label_day setText:[NSString stringWithFormat:@"%d", days]];
@@ -296,6 +292,14 @@
     [label_day release];
 }
 
+- (void) setIcon:(NSString*)icon_name {
+    // Icon.
+    UIImageView* icon = [[UIImageView alloc] initWithFrame:CGRectMake(5, 5, 50, 50)];
+    icon.image = [UIImage imageNamed:icon_name];
+    [self.view addSubview:icon];
+    [icon release];
+}
+
 - (void) setTitle:(NSString *)desc {
     card_title = [[UILabel alloc] initWithFrame:CGRectMake(70, 10, 150, 30)];
     [card_title setText:desc];
@@ -303,6 +307,11 @@
     [card_title setTextColor:[UIColor colorWithRed:0.5f green:0.5f blue:0.5f alpha:1.0f]];
     [card_title setFont:[UIFont fontWithName:@"Raleway-SemiBold" size:20]];
     [self.view addSubview:card_title];
+    
+    // since this function will always be called, add the line here.
+    UIImageView* line = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"timeline_line"]];
+    line.frame = CGRectMake(0, 60, [totSummaryCard width], line.frame.size.height);
+    [self.view addSubview:line];
 }
 
 - (void) setTimestamp:(NSString*)time {

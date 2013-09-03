@@ -49,7 +49,10 @@
 
     [self.parentView flip];
 }
-- (void) cancel: (UIButton*)btn {}
+
+- (void) cancel: (UIButton*)btn {
+    [timer_ stop];
+}
 
 //- (void)touchesEndedDelegate:(NSSet *)touches withEvent:(UIEvent *)event from:(int)tag {
 - (void)buttonPressed:(id)sender {
@@ -69,8 +72,8 @@
 }
 
 - (void) loadIcons {
-    //[self setIcon:@"diaper_gray.png" withCalendarDays:999];
-    [self setIcon:@"diaper_gray.png" confirmedIcon:@"diaper2.png" withCalendarDays:999];
+    [self setIcon:@"diaper_gray.png" confirmedIcon:@"diaper2.png"];
+    [self setCalendar:999];
     [self setTimestamp];
     [self setTitle:@"Diaper"];
     
@@ -104,16 +107,18 @@
     UIFont* font = [UIFont fontWithName:@"Raleway" size:20.0];
     UIButton* wetBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     wetBtn.frame = CGRectMake(x, yy, w, h);
+    wetBtn.titleLabel.font = font;
+
     [wetBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
     [wetBtn setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, w-h)];
     [wetBtn setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
     [wetBtn.titleLabel setTextAlignment:NSTextAlignmentLeft];
-    wetBtn.titleLabel.font = font;
     [wetBtn setImage:[UIImage imageNamed:@"Diaper_checkbox"] forState:UIControlStateNormal];
     [wetBtn setImage:[UIImage imageNamed:@"Diaper_checkbox"] forState:UIControlStateHighlighted];
     [wetBtn setTitle:@"" forState:UIControlStateNormal];
     [wetBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     [wetBtn addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    
     return wetBtn;
 }
 
@@ -134,8 +139,7 @@
 
 // save to database.
 - (void)saveToDatabase:(int)selection {
-    // TODO get timestamp here
-    NSString * now = @"";//[NSString stringWithFormat:@"%04d-%02d-%02d %02d:%02d:%02d",mYear, mMonth, mDay, mHour, mMinute, mSecond];
+    NSString * now = [self getTimestampInString];
     printf("current time: %s selection: %d\n", [now UTF8String], selection);
     
     totModel *model = global.model;
@@ -157,8 +161,14 @@
     }
 }
 
-- (void) clickOnConfirmIconButtonDelegate {
-    [self.parentView flip];
+- (bool) clickOnConfirmIconButtonDelegate {
+    // save to database
+    if (mDiaperType != -1) {
+        [self saveToDatabase:mDiaperType];
+        [self.parentView flip];
+        return true;
+    }
+    return false;
 }
 
 @end
@@ -178,7 +188,6 @@
     [super viewDidLoad];
     [self setBackground];
     [self loadIcons];
-    [self setTimestamp:@"40 Minutes ago"];
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -204,7 +213,7 @@
 
 - (void) loadIcons {
     // Load icon.
-    [self setIcon:@"diaper2.png" withCalendarDays:165];
+    [self setIcon:@"diaper2.png"];
     
     /*
     // Initialize the status label.
@@ -243,6 +252,7 @@
             totEvent* prevEvt = [events objectAtIndex:1];
             description.text = [NSString stringWithFormat:@"The diaper last time is %@", prevEvt.value];
         }
+        [self setTimestamp:[totTimeUtil getTimeDescriptionFromNow:currEvt.datetime]];
     }
 }
 

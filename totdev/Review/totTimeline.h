@@ -31,4 +31,7 @@
 // Changes the position of the card.
 - (void) moveCard:(totReviewCardView*)card To:(int)index;
 
+// Load cards from db.
+- (void) loadCardsNumber:(int)limit startFrom:(int)start;
+
 @end

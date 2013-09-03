@@ -137,6 +137,10 @@
     [self refreshView];
 }
 
+- (void) loadCardsNumber:(int)limit startFrom:(int)start {
+    
+}
+
 - (void)dealloc {
     [super dealloc];
     [mCards release];
