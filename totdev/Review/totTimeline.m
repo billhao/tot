@@ -7,6 +7,8 @@
 //
 
 #import "totTimeline.h"
+#import "totReviewStory.h"
+#import "Global.h"
 
 #define INIT_HEIGHT 1000
 
@@ -138,7 +140,39 @@
 }
 
 - (void) loadCardsNumber:(int)limit startFrom:(int)start {
+    NSArray * events = nil;
     
+    events = [global.model getEvent:global.baby.babyID limit:limit offset:start];
+    
+    // If no more events available
+    if ([events count] == 0) {
+        return;
+    }
+    
+    for (int i = 0; i < [events count]; ++i) {
+        // parse the results from db
+        totReviewStory *story = [[totReviewStory alloc] init];
+        
+        totEvent * anEvent = (totEvent*)[events objectAtIndex:i];
+        story.mEventType = anEvent.name;
+        story.mRawContent = anEvent.value;
+        story.mWhen = anEvent.datetime;
+        story.mBabyId = anEvent.baby_id;
+        story.mEventId = anEvent.event_id;
+        
+        // add new card.
+        // change it to different type.
+        totReviewCardView* card = [totReviewCardView loadCard:SLEEP story:story timeline:self];
+        card.parent = self;
+        [mCards addObject:card];
+        [card release];
+        [self addSubview:[mCards lastObject]];
+        [self addDeleteButtonUnderCard:[mCards lastObject]];
+        
+        [story release];
+    }
+    
+    [self refreshView];
 }
 
 - (void)dealloc {

@@ -27,6 +27,7 @@
 
 @class totTimeline;
 @class totReviewCardView;
+@class totReviewStory;
 
 // ---------------- Card in editting mode --------------------
 @interface totReviewEditCardView : UIViewController <totTimerDelegate> {
@@ -67,12 +68,15 @@
     
     UILabel* card_title;
     UILabel* description;
+    
+    totReviewStory* story_;
 }
 
 @property (nonatomic, assign) totReviewCardView* parentView;
 @property (nonatomic, retain) totTimeline* timeline;
 @property (nonatomic, readonly) UILabel* card_title;
 @property (nonatomic, readonly) UILabel* description;
+@property (nonatomic, retain) totReviewStory* story_;
 
 - (void) setBackground;
 
@@ -124,5 +128,6 @@ typedef enum {
 
 + (totReviewCardView*) createEmptyCard:(ReviewCardType)type timeline:(totTimeline*)timeline;
 + (totReviewCardView*) loadCard:(ReviewCardType)type data:(NSString*)data timeline:(totTimeline*)timeline ;
++ (totReviewCardView*) loadCard:(ReviewCardType)type story:(totReviewStory*)story timeline:(totTimeline*)timeline;
 
 @end

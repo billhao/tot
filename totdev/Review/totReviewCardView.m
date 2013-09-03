@@ -256,6 +256,7 @@
 @synthesize timeline;
 @synthesize card_title;
 @synthesize description;
+@synthesize story_;
 
 - (id) init {
     self = [super init];
@@ -624,5 +625,12 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
     totReviewCardView* view = [[totReviewCardView alloc] initWithType:type andData:data timeline:timeline];
     return view;
 }
+
++ (totReviewCardView*) loadCard:(ReviewCardType)type story:(totReviewStory*)story timeline:(totTimeline*)timeline {
+    return nil;
+}
+
+
+
 
 @end

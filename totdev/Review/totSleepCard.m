@@ -130,7 +130,10 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated {
-    [self getDataFromDB];
+    // If we load card from database, should not call this function again.
+    // when loading from db, story_ will not be nil.
+    if (story_)
+        [self getDataFromDB];
 }
 
 

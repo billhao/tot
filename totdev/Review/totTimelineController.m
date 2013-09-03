@@ -37,6 +37,9 @@
 
     [timelineView addEmptyCard:SUMMARY];
     
+    // test load cards from db.
+    [timelineView loadCardsNumber:10 startFrom:0];
+    
     [self.view addSubview:timelineView];
     [timelineView release];
 }
