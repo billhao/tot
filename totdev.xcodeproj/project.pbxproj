@@ -200,6 +200,16 @@
 		3F7E655017AE19AF00C43C02 /* totMediaLibrary.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F7E654F17AE19AF00C43C02 /* totMediaLibrary.m */; };
 		3F8A45F617BB7550006A7566 /* scrapbook_option_button_pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F8A45F417BB7550006A7566 /* scrapbook_option_button_pressed@2x.png */; };
 		3F8A45F717BB7550006A7566 /* scrapbook_option_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F8A45F517BB7550006A7566 /* scrapbook_option_button@2x.png */; };
+		3F95918317D996A0003FDBC7 /* Birthday Template P1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F95917817D996A0003FDBC7 /* Birthday Template P1@2x.png */; };
+		3F95918417D996A0003FDBC7 /* Birthday Template P2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F95917917D996A0003FDBC7 /* Birthday Template P2@2x.png */; };
+		3F95918517D996A0003FDBC7 /* Birthday Template P3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F95917A17D996A0003FDBC7 /* Birthday Template P3@2x.png */; };
+		3F95918617D996A0003FDBC7 /* Birthday Template P4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F95917B17D996A0003FDBC7 /* Birthday Template P4@2x.png */; };
+		3F95918717D996A0003FDBC7 /* Birthday.tpl in Resources */ = {isa = PBXBuildFile; fileRef = 3F95917C17D996A0003FDBC7 /* Birthday.tpl */; };
+		3F95918817D996A0003FDBC7 /* First Year Template Cover@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F95917E17D996A0003FDBC7 /* First Year Template Cover@2x.png */; };
+		3F95918917D996A0003FDBC7 /* First Year Template P1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F95917F17D996A0003FDBC7 /* First Year Template P1@2x.png */; };
+		3F95918A17D996A0003FDBC7 /* First Year Template P2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F95918017D996A0003FDBC7 /* First Year Template P2@2x.png */; };
+		3F95918B17D996A0003FDBC7 /* First Year Template P3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F95918117D996A0003FDBC7 /* First Year Template P3@2x.png */; };
+		3F95918C17D996A0003FDBC7 /* First Year Template.tpl in Resources */ = {isa = PBXBuildFile; fileRef = 3F95918217D996A0003FDBC7 /* First Year Template.tpl */; };
 		3F987DCF1705717E00712A58 /* totTutorialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F987DCE1705717E00712A58 /* totTutorialViewController.m */; };
 		3FA4071616EC08D700B5B89E /* summary_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FA4071416EC08D700B5B89E /* summary_bg.png */; };
 		3FA4071716EC08D700B5B89E /* summary_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FA4071516EC08D700B5B89E /* summary_bg@2x.png */; };
@@ -368,16 +378,6 @@
 		8E61818916DFE5F50052E38E /* start_2X.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E61818616DFE5F50052E38E /* start_2X.png */; };
 		8E61818A16DFE5F50052E38E /* wakeup_2X.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E61818716DFE5F50052E38E /* wakeup_2X.png */; };
 		8E632EBD16268CD900072D89 /* totHomeDiaperView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E632EBC16268CD900072D89 /* totHomeDiaperView.m */; };
-		8E7C42F917CDC7BF004F1C78 /* Birthday Template P1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E7C42F417CDC7BF004F1C78 /* Birthday Template P1@2x.png */; };
-		8E7C42FA17CDC7BF004F1C78 /* Birthday Template P2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E7C42F517CDC7BF004F1C78 /* Birthday Template P2@2x.png */; };
-		8E7C42FB17CDC7BF004F1C78 /* Birthday Template P3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E7C42F617CDC7BF004F1C78 /* Birthday Template P3@2x.png */; };
-		8E7C42FC17CDC7BF004F1C78 /* Birthday Template P4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E7C42F717CDC7BF004F1C78 /* Birthday Template P4@2x.png */; };
-		8E7C42FD17CDC7BF004F1C78 /* Birthday.tpl in Resources */ = {isa = PBXBuildFile; fileRef = 8E7C42F817CDC7BF004F1C78 /* Birthday.tpl */; };
-		8E7C430317CDC7CC004F1C78 /* First Year Template Cover@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E7C42FE17CDC7CC004F1C78 /* First Year Template Cover@2x.png */; };
-		8E7C430417CDC7CC004F1C78 /* First Year Template P1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E7C42FF17CDC7CC004F1C78 /* First Year Template P1@2x.png */; };
-		8E7C430517CDC7CC004F1C78 /* First Year Template P2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E7C430017CDC7CC004F1C78 /* First Year Template P2@2x.png */; };
-		8E7C430617CDC7CC004F1C78 /* First Year Template P3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E7C430117CDC7CC004F1C78 /* First Year Template P3@2x.png */; };
-		8E7C430717CDC7CC004F1C78 /* First Year Template.tpl in Resources */ = {isa = PBXBuildFile; fileRef = 8E7C430217CDC7CC004F1C78 /* First Year Template.tpl */; };
 		8E7C5A8717B84E4A00A2BA61 /* circle_icon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8E7C5A8617B84E4A00A2BA61 /* circle_icon.jpg */; };
 		8E7C5A8A17B859B200A2BA61 /* totHeightCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E7C5A8917B859B100A2BA61 /* totHeightCard.m */; };
 		8E84C920174DF242004057B9 /* totBooklet.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E84C91F174DF242004057B9 /* totBooklet.m */; };
@@ -711,6 +711,16 @@
 		3F7E654F17AE19AF00C43C02 /* totMediaLibrary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totMediaLibrary.m; path = Utility/totMediaLibrary.m; sourceTree = "<group>"; };
 		3F8A45F417BB7550006A7566 /* scrapbook_option_button_pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "scrapbook_option_button_pressed@2x.png"; sourceTree = "<group>"; };
 		3F8A45F517BB7550006A7566 /* scrapbook_option_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "scrapbook_option_button@2x.png"; sourceTree = "<group>"; };
+		3F95917817D996A0003FDBC7 /* Birthday Template P1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Birthday Template P1@2x.png"; sourceTree = "<group>"; };
+		3F95917917D996A0003FDBC7 /* Birthday Template P2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Birthday Template P2@2x.png"; sourceTree = "<group>"; };
+		3F95917A17D996A0003FDBC7 /* Birthday Template P3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Birthday Template P3@2x.png"; sourceTree = "<group>"; };
+		3F95917B17D996A0003FDBC7 /* Birthday Template P4@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Birthday Template P4@2x.png"; sourceTree = "<group>"; };
+		3F95917C17D996A0003FDBC7 /* Birthday.tpl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Birthday.tpl; sourceTree = "<group>"; };
+		3F95917E17D996A0003FDBC7 /* First Year Template Cover@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "First Year Template Cover@2x.png"; sourceTree = "<group>"; };
+		3F95917F17D996A0003FDBC7 /* First Year Template P1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "First Year Template P1@2x.png"; sourceTree = "<group>"; };
+		3F95918017D996A0003FDBC7 /* First Year Template P2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "First Year Template P2@2x.png"; sourceTree = "<group>"; };
+		3F95918117D996A0003FDBC7 /* First Year Template P3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "First Year Template P3@2x.png"; sourceTree = "<group>"; };
+		3F95918217D996A0003FDBC7 /* First Year Template.tpl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "First Year Template.tpl"; sourceTree = "<group>"; };
 		3F987DCD1705717E00712A58 /* totTutorialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totTutorialViewController.h; path = Tutorial/totTutorialViewController.h; sourceTree = "<group>"; };
 		3F987DCE1705717E00712A58 /* totTutorialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totTutorialViewController.m; path = Tutorial/totTutorialViewController.m; sourceTree = "<group>"; };
 		3FA4071416EC08D700B5B89E /* summary_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = summary_bg.png; path = Resources/Home/Height/summary_bg.png; sourceTree = "<group>"; };
@@ -897,16 +907,6 @@
 		8E61818716DFE5F50052E38E /* wakeup_2X.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = wakeup_2X.png; path = Resources/Home/wakeup_2X.png; sourceTree = "<group>"; };
 		8E632EBB16268CD900072D89 /* totHomeDiaperView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totHomeDiaperView.h; path = Home/totHomeDiaperView.h; sourceTree = "<group>"; };
 		8E632EBC16268CD900072D89 /* totHomeDiaperView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totHomeDiaperView.m; path = Home/totHomeDiaperView.m; sourceTree = "<group>"; };
-		8E7C42F417CDC7BF004F1C78 /* Birthday Template P1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Birthday Template P1@2x.png"; path = "ResourcesV2/Scrapbook/Templates/Birthday/Birthday Template P1@2x.png"; sourceTree = SOURCE_ROOT; };
-		8E7C42F517CDC7BF004F1C78 /* Birthday Template P2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Birthday Template P2@2x.png"; path = "ResourcesV2/Scrapbook/Templates/Birthday/Birthday Template P2@2x.png"; sourceTree = SOURCE_ROOT; };
-		8E7C42F617CDC7BF004F1C78 /* Birthday Template P3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Birthday Template P3@2x.png"; path = "ResourcesV2/Scrapbook/Templates/Birthday/Birthday Template P3@2x.png"; sourceTree = SOURCE_ROOT; };
-		8E7C42F717CDC7BF004F1C78 /* Birthday Template P4@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Birthday Template P4@2x.png"; path = "ResourcesV2/Scrapbook/Templates/Birthday/Birthday Template P4@2x.png"; sourceTree = SOURCE_ROOT; };
-		8E7C42F817CDC7BF004F1C78 /* Birthday.tpl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Birthday.tpl; path = ResourcesV2/Scrapbook/Templates/Birthday/Birthday.tpl; sourceTree = SOURCE_ROOT; };
-		8E7C42FE17CDC7CC004F1C78 /* First Year Template Cover@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "First Year Template Cover@2x.png"; path = "ResourcesV2/Scrapbook/Templates/First Year/First Year Template Cover@2x.png"; sourceTree = SOURCE_ROOT; };
-		8E7C42FF17CDC7CC004F1C78 /* First Year Template P1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "First Year Template P1@2x.png"; path = "ResourcesV2/Scrapbook/Templates/First Year/First Year Template P1@2x.png"; sourceTree = SOURCE_ROOT; };
-		8E7C430017CDC7CC004F1C78 /* First Year Template P2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "First Year Template P2@2x.png"; path = "ResourcesV2/Scrapbook/Templates/First Year/First Year Template P2@2x.png"; sourceTree = SOURCE_ROOT; };
-		8E7C430117CDC7CC004F1C78 /* First Year Template P3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "First Year Template P3@2x.png"; path = "ResourcesV2/Scrapbook/Templates/First Year/First Year Template P3@2x.png"; sourceTree = SOURCE_ROOT; };
-		8E7C430217CDC7CC004F1C78 /* First Year Template.tpl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "First Year Template.tpl"; path = "ResourcesV2/Scrapbook/Templates/First Year/First Year Template.tpl"; sourceTree = SOURCE_ROOT; };
 		8E7C5A8617B84E4A00A2BA61 /* circle_icon.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = circle_icon.jpg; path = Resources/Review/circle_icon.jpg; sourceTree = "<group>"; };
 		8E7C5A8817B859B100A2BA61 /* totHeightCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totHeightCard.h; path = Review/totHeightCard.h; sourceTree = "<group>"; };
 		8E7C5A8917B859B100A2BA61 /* totHeightCard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totHeightCard.m; path = Review/totHeightCard.m; sourceTree = "<group>"; };
@@ -1398,10 +1398,34 @@
 		3F954A7117C079A40007C125 /* Templates */ = {
 			isa = PBXGroup;
 			children = (
-				3FD3C61017C86F9E00DB1B71 /* Birthday */,
-				3FD3C61617C86F9E00DB1B71 /* First Year */,
+				3F95917717D996A0003FDBC7 /* Birthday */,
+				3F95917D17D996A0003FDBC7 /* First Year */,
 			);
 			path = Templates;
+			sourceTree = "<group>";
+		};
+		3F95917717D996A0003FDBC7 /* Birthday */ = {
+			isa = PBXGroup;
+			children = (
+				3F95917817D996A0003FDBC7 /* Birthday Template P1@2x.png */,
+				3F95917917D996A0003FDBC7 /* Birthday Template P2@2x.png */,
+				3F95917A17D996A0003FDBC7 /* Birthday Template P3@2x.png */,
+				3F95917B17D996A0003FDBC7 /* Birthday Template P4@2x.png */,
+				3F95917C17D996A0003FDBC7 /* Birthday.tpl */,
+			);
+			path = Birthday;
+			sourceTree = "<group>";
+		};
+		3F95917D17D996A0003FDBC7 /* First Year */ = {
+			isa = PBXGroup;
+			children = (
+				3F95917E17D996A0003FDBC7 /* First Year Template Cover@2x.png */,
+				3F95917F17D996A0003FDBC7 /* First Year Template P1@2x.png */,
+				3F95918017D996A0003FDBC7 /* First Year Template P2@2x.png */,
+				3F95918117D996A0003FDBC7 /* First Year Template P3@2x.png */,
+				3F95918217D996A0003FDBC7 /* First Year Template.tpl */,
+			);
+			path = "First Year";
 			sourceTree = "<group>";
 		};
 		3FA4071816EC08F300B5B89E /* Settings */ = {
@@ -1476,32 +1500,6 @@
 				3FD29CA0168D3C0500978B51 /* Roboto-Regular.ttf */,
 			);
 			name = Fonts;
-			sourceTree = "<group>";
-		};
-		3FD3C61017C86F9E00DB1B71 /* Birthday */ = {
-			isa = PBXGroup;
-			children = (
-				8E7C42F417CDC7BF004F1C78 /* Birthday Template P1@2x.png */,
-				8E7C42F517CDC7BF004F1C78 /* Birthday Template P2@2x.png */,
-				8E7C42F617CDC7BF004F1C78 /* Birthday Template P3@2x.png */,
-				8E7C42F717CDC7BF004F1C78 /* Birthday Template P4@2x.png */,
-				8E7C42F817CDC7BF004F1C78 /* Birthday.tpl */,
-			);
-			name = Birthday;
-			path = "../../../../../../Dropbox/tot/tot version 2/Scrapbook design/Templates/Birthday";
-			sourceTree = "<group>";
-		};
-		3FD3C61617C86F9E00DB1B71 /* First Year */ = {
-			isa = PBXGroup;
-			children = (
-				8E7C42FE17CDC7CC004F1C78 /* First Year Template Cover@2x.png */,
-				8E7C42FF17CDC7CC004F1C78 /* First Year Template P1@2x.png */,
-				8E7C430017CDC7CC004F1C78 /* First Year Template P2@2x.png */,
-				8E7C430117CDC7CC004F1C78 /* First Year Template P3@2x.png */,
-				8E7C430217CDC7CC004F1C78 /* First Year Template.tpl */,
-			);
-			name = "First Year";
-			path = "../../../../../../Dropbox/tot/tot version 2/Scrapbook design/Templates/First Year";
 			sourceTree = "<group>";
 		};
 		3FD3C62617C9FC6A00DB1B71 /* Height */ = {
@@ -2537,16 +2535,6 @@
 				3FD3C73417CF389500DB1B71 /* Raleway-Light_2.ttf in Resources */,
 				3FD3C73517CF389500DB1B71 /* Raleway-Regular_2.ttf in Resources */,
 				3FD3C73617CF389500DB1B71 /* Raleway-SemiBold_2.ttf in Resources */,
-				8E7C42F917CDC7BF004F1C78 /* Birthday Template P1@2x.png in Resources */,
-				8E7C42FA17CDC7BF004F1C78 /* Birthday Template P2@2x.png in Resources */,
-				8E7C42FB17CDC7BF004F1C78 /* Birthday Template P3@2x.png in Resources */,
-				8E7C42FC17CDC7BF004F1C78 /* Birthday Template P4@2x.png in Resources */,
-				8E7C42FD17CDC7BF004F1C78 /* Birthday.tpl in Resources */,
-				8E7C430317CDC7CC004F1C78 /* First Year Template Cover@2x.png in Resources */,
-				8E7C430417CDC7CC004F1C78 /* First Year Template P1@2x.png in Resources */,
-				8E7C430517CDC7CC004F1C78 /* First Year Template P2@2x.png in Resources */,
-				8E7C430617CDC7CC004F1C78 /* First Year Template P3@2x.png in Resources */,
-				8E7C430717CDC7CC004F1C78 /* First Year Template.tpl in Resources */,
 				3F049B4E17D2F79700F05727 /* activity_bg.png in Resources */,
 				3F049B4F17D2F79700F05727 /* activity_bg@2x.png in Resources */,
 				3F049B5717D4073400F05727 /* timeline_home.png in Resources */,
@@ -2574,6 +2562,16 @@
 				8E0EA48417D54D4400C75BD3 /* weight_gray.png in Resources */,
 				3F049B6C17D49C5300F05727 /* lang_input_bg@2x.png in Resources */,
 				3F049B6F17D53FC300F05727 /* Diaper_checkbox.png in Resources */,
+				3F95918317D996A0003FDBC7 /* Birthday Template P1@2x.png in Resources */,
+				3F95918417D996A0003FDBC7 /* Birthday Template P2@2x.png in Resources */,
+				3F95918517D996A0003FDBC7 /* Birthday Template P3@2x.png in Resources */,
+				3F95918617D996A0003FDBC7 /* Birthday Template P4@2x.png in Resources */,
+				3F95918717D996A0003FDBC7 /* Birthday.tpl in Resources */,
+				3F95918817D996A0003FDBC7 /* First Year Template Cover@2x.png in Resources */,
+				3F95918917D996A0003FDBC7 /* First Year Template P1@2x.png in Resources */,
+				3F95918A17D996A0003FDBC7 /* First Year Template P2@2x.png in Resources */,
+				3F95918B17D996A0003FDBC7 /* First Year Template P3@2x.png in Resources */,
+				3F95918C17D996A0003FDBC7 /* First Year Template.tpl in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
