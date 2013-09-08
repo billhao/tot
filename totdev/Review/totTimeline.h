@@ -11,9 +11,14 @@
 
 #define GAP_BETWEEN_CARDS 5
 
-@interface totTimeline : UIScrollView {
+@class totTimelineController;
+
+@interface totTimeline : UIScrollView <UIScrollViewDelegate> {
     NSMutableArray* mCards;
+    totTimelineController* controller;
 }
+
+@property (assign, atomic) totTimelineController* controller;
 
 - (void) setBackground;
 

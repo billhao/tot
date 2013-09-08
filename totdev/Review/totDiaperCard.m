@@ -10,6 +10,7 @@
 #import "totTimeUtil.h"
 #import "totImageView.h"
 #import "totUtility.h"
+#import "totReviewStory.h"
 
 @implementation totDiaperEditCard
 
@@ -167,7 +168,7 @@
     // save to database
     if (mDiaperType != -1) {
         [self saveToDatabase:mDiaperType];
-        [self.parentView flip];
+        //[self.parentView flip];
         return true;
     }
     return false;
@@ -195,13 +196,18 @@
 -(void)viewWillAppear:(BOOL)animated {
     // If we load card from database, should not call this function again.
     // when loading from db, story_ will not be nil.
-    if (!story_)
+    if (!story_) {
         [self getDataFromDB];
+    } else {
+        card_title.text = story_.mRawContent;
+        description.text = @"";
+        [self setTimestamp:[totTimeUtil getTimeDescriptionFromNow:story_.mWhen]];
+    }
 }
 
 - (void) dealloc {
-    [timestamp_label release];
-    [diaper_status_label release];
+    //[timestamp_label release];
+    //[diaper_status_label release];
     [super dealloc];
     
 }
@@ -209,7 +215,7 @@
 
 #pragma mark - Helper functions
 
-+ (int) height { return 300; }
++ (int) height { return 130; }
 + (int) width { return 308; }
 
 - (void) setBackground {
@@ -253,10 +259,10 @@
     if( events.count > 0 ) {
         totEvent* currEvt = [events objectAtIndex:0];
         card_title.text = [NSString stringWithFormat:@"%@", currEvt.value];
-        [self setTimestamp:currEvt.getTimeText];
+        //[self setTimestamp:currEvt.getTimeText];
         if( events.count > 1 ) {
             totEvent* prevEvt = [events objectAtIndex:1];
-            description.text = [NSString stringWithFormat:@"The diaper last time is %@", prevEvt.value];
+            description.text = [NSString stringWithFormat:@"The diaper was %@ last time.", prevEvt.value];
         }
         [self setTimestamp:[totTimeUtil getTimeDescriptionFromNow:currEvt.datetime]];
     }

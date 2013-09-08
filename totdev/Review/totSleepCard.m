@@ -11,6 +11,7 @@
 #import "totReviewCardView.h"
 #import "totTimeline.h"
 #import "totUtility.h"
+#import "totReviewStory.h"
 
 @implementation totSleepEditCard
 
@@ -132,8 +133,13 @@
 -(void)viewWillAppear:(BOOL)animated {
     // If we load card from database, should not call this function again.
     // when loading from db, story_ will not be nil.
-    if (story_)
+    if (story_) {
         [self getDataFromDB];
+    } else {
+        card_title.text = story_.mRawContent;
+        description.text = @"";
+        [self setTimestamp:[totTimeUtil getTimeDescriptionFromNow:story_.mWhen]];
+    }
 }
 
 

@@ -43,7 +43,9 @@
 //
 // ------------------- Animation -------------------
 //
-- (void) secondAnimationDidStop:(NSString*)animationID finished:(NSNumber*)finished context:(void*)context {}
+- (void) secondAnimationDidStop:(NSString*)animationID finished:(NSNumber*)finished context:(void*)context {
+    [self.parentView flip];
+}
 
 - (void) animationDidStart:(NSString*)animationID context:(void*)context {}
 
@@ -268,13 +270,27 @@
 - (void) viewDidLoad {
     [self setBackground];
     
+    // add title
     [self setTitle:@""];
     
-    description = [[UILabel alloc] initWithFrame:CGRectMake(20, 80, 260, 60)];
+    // add description
+    description = [[UILabel alloc] initWithFrame:CGRectMake(8, 60, 260, 60)];
     description.text = @"description";
-    description.layer.borderWidth = 1;
-    description.layer.borderColor = [UIColor grayColor].CGColor;
+    description.textAlignment = NSTextAlignmentLeft;
+    description.backgroundColor = [UIColor clearColor];
+    [description setFont:[UIFont fontWithName:@"Raleway" size:13]];
+    [description setTextColor:[UIColor colorWithRed:0.5f green:0.5f blue:0.5f alpha:1.0f]];
+    //description.layer.borderWidth = 1;
+    //description.layer.borderColor = [UIColor grayColor].CGColor;
     [self.view addSubview:description];
+    
+    // add timestamp
+    timestamp = [[UILabel alloc] initWithFrame:CGRectMake(70, 30, 180, 30)];
+    timestamp.textAlignment = NSTextAlignmentLeft;
+    [timestamp setTextColor:[UIColor colorWithRed:128.0/255 green:130.0/255 blue:130.0/255 alpha:1.0]];
+    [timestamp setFont:[UIFont fontWithName:@"Raleway" size:15]];
+    [timestamp setBackgroundColor:[UIColor clearColor]];
+    [self.view addSubview:timestamp];
 }
 
 - (void) setCalendar:(int)days {
@@ -303,7 +319,7 @@
 }
 
 - (void) setTitle:(NSString *)desc {
-    card_title = [[UILabel alloc] initWithFrame:CGRectMake(70, 10, 150, 30)];
+    card_title = [[UILabel alloc] initWithFrame:CGRectMake(70, 10, 230, 30)];
     [card_title setText:desc];
     [card_title setBackgroundColor:[UIColor clearColor]];
     [card_title setTextColor:[UIColor colorWithRed:0.5f green:0.5f blue:0.5f alpha:1.0f]];
@@ -314,19 +330,11 @@
     UIImageView* line = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"timeline_line"]];
     line.frame = CGRectMake(0, 60, [totSummaryCard width], line.frame.size.height);
     [self.view addSubview:line];
+    [line release];
 }
 
 - (void) setTimestamp:(NSString*)time {
-    UIButton* time_button = [UIButton buttonWithType:UIButtonTypeCustom];
-
-    // Sets hour/minute.
-    [time_button setFrame:CGRectMake(64, 30, 120, 30)];
-    [time_button setTitleColor:[UIColor colorWithRed:128.0/255 green:130.0/255 blue:130.0/255 alpha:1.0]
-                       forState:UIControlStateNormal];
-    [time_button setTitle:time forState:UIControlStateNormal];
-    [time_button.titleLabel setFont:[UIFont fontWithName:@"Raleway" size:15]];
-    [time_button setBackgroundColor:[UIColor clearColor]];
-    [self.view addSubview:time_button];
+    timestamp.text = time;
 }
 
 - (void) setBackground {
@@ -351,6 +359,7 @@
 @synthesize mShowView;
 @synthesize parent;
 @synthesize associated_delete_button;
+@synthesize mMode;
 
 // Gesture delegates
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
@@ -430,6 +439,60 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
 - (id)initWithType:(ReviewCardType)type andData:(NSString*)data timeline:(totTimeline*)timeline {
     // Don't forget to register gesture recognizer.
     return nil;
+}
+
+// totReviewStory contains all necessary information to visualize a tot event.
+- (id)initWithType:(ReviewCardType)type withData:(totReviewStory*)story timeline:(totTimeline*)timeline {
+    self = [super initWithFrame:[totReviewCardView getShowCardSizeOfType:type]];
+    if (self) {
+        totReviewShowCardView* c = nil;
+        switch (type) {
+            case HEIGHT:
+            case WEIGHT:
+            case HEAD:
+            {
+                c = (totReviewShowCardView*)[[totHeightShowCard alloc] init:type];
+                break;
+            }
+            case DIAPER:
+            {
+                c = (totReviewShowCardView*)[[totDiaperShowCard alloc] init];
+                break;
+            }
+            case LANGUAGE:
+            {
+                c = (totReviewShowCardView*)[[totLanguageShowCard alloc] init];
+                break;
+            }
+            case SLEEP:
+            {
+                c = (totReviewShowCardView*)[[totSleepShowCard alloc] init];
+                break;
+            }
+            case FEEDING:
+            {
+                c = (totReviewShowCardView*)[[totFeedShowCard alloc] init];
+                break;
+            }
+            default:
+                break;
+        }
+        if (c) {
+            c.view.frame = self.bounds;
+            c.timeline = timeline;
+            c.story_ = story;
+            self.mShowView = c;
+            self.mShowView.parentView = self;
+            [c release];
+            
+            [self addSubview:self.mShowView.view];
+            mMode = SHOW;
+            
+            // Register gesture recognizer.
+            [self registerGestures];
+        }
+    }
+    return self;
 }
 
 // Creates empty card.
@@ -626,11 +689,35 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
     return view;
 }
 
-+ (totReviewCardView*) loadCard:(ReviewCardType)type story:(totReviewStory*)story timeline:(totTimeline*)timeline {
-    return nil;
++ (totReviewCardView*) loadCard:(NSString*)type story:(totReviewStory*)story timeline:(totTimeline*)timeline {
+    NSArray* tokens = [type componentsSeparatedByString:@"/"];
+    NSString* category = [tokens objectAtIndex:0];
+    
+    if ([category isEqualToString:@"basic"]) {
+        NSString* basic_type = [tokens objectAtIndex:1];
+        ReviewCardType card_type = TEST;
+        if ([basic_type isEqualToString:@"diaper"]) {
+            card_type = DIAPER;
+        } else if ([basic_type isEqualToString:@"height"]) {
+            card_type = HEIGHT;
+        } else if ([basic_type isEqualToString:@"weight"]) {
+            card_type = WEIGHT;
+        } else if ([basic_type isEqualToString:@"head"]) {
+            card_type = HEAD;
+        } else if ([basic_type isEqualToString:@"sleep"]) {
+            card_type = SLEEP;
+        } else if ([basic_type isEqualToString:@"language"]) {
+            card_type = LANGUAGE;
+        } else if ([basic_type isEqualToString:@"feeding"]) {
+            card_type = FEEDING;
+        } else {
+            return nil;
+        }
+        totReviewCardView* view = [[totReviewCardView alloc] initWithType:card_type withData:story timeline:timeline];
+        return view;
+    } else {
+        return nil;
+    }
 }
-
-
-
 
 @end

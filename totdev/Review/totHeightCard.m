@@ -7,6 +7,7 @@
 //
 
 #import "totHeightCard.h"
+#import "totReviewStory.h"
 
 @implementation totHeightEditCard
 
@@ -185,16 +186,27 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setBackground];
-    [self setIcon:@"height2.png"];
-    [self setCalendar:166];
-    [self setTimestamp:@"40 Minutes ago"];
+    if (type == HEIGHT) {
+        [self setIcon:@"height2.png"];
+    } else if (type == WEIGHT) {
+        [self setIcon:@"weight2.png"];
+    } else if (type == HEAD) {
+        [self setIcon:@"head2.png"];
+    }
 }
 
-- (void)viewDidAppear:(BOOL)animated {
+- (void)viewWillAppear:(BOOL)animated {
     // If we load card from database, should not call this function again.
     // when loading from db, story_ will not be nil.
-    if (!story_)
+    if (!story_) {
         [self getDataFromDB];
+    } else {
+        card_title.text = story_.mRawContent;
+        description.text = @"";
+        [self setTimestamp:[totTimeUtil getTimeDescriptionFromNow:story_.mWhen]];
+        // set calendar days here.
+        //[self setCalendar:166];
+    }
 }
 
 #pragma mark - Helper functions

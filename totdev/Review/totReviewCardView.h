@@ -68,6 +68,7 @@
     
     UILabel* card_title;
     UILabel* description;
+    UILabel* timestamp;
     
     totReviewStory* story_;
 }
@@ -123,11 +124,14 @@ typedef enum {
 @property (nonatomic, retain) totReviewShowCardView* mShowView;
 @property (nonatomic, assign) totTimeline* parent;
 @property (nonatomic, assign) UIButton* associated_delete_button;
+@property (nonatomic, readonly) ReviewCardMode mMode;
 
 - (void) flip;
 
+// caller needs to take ownership.
 + (totReviewCardView*) createEmptyCard:(ReviewCardType)type timeline:(totTimeline*)timeline;
 + (totReviewCardView*) loadCard:(ReviewCardType)type data:(NSString*)data timeline:(totTimeline*)timeline ;
-+ (totReviewCardView*) loadCard:(ReviewCardType)type story:(totReviewStory*)story timeline:(totTimeline*)timeline;
+// caller needs to take ownership.
++ (totReviewCardView*) loadCard:(NSString*)type story:(totReviewStory*)story timeline:(totTimeline*)timeline;
 
 @end

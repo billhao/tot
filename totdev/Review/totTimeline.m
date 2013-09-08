@@ -9,10 +9,13 @@
 #import "totTimeline.h"
 #import "totReviewStory.h"
 #import "Global.h"
+#import "totTimelineController.h"
 
 #define INIT_HEIGHT 1000
 
 @implementation totTimeline
+
+@synthesize controller;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -21,6 +24,7 @@
         self.contentSize = CGSizeMake(320, INIT_HEIGHT);
         mCards = [[NSMutableArray alloc] init];
         [self setBackground];
+        [self setDelegate:self];
     }
     return self;
 }
@@ -33,11 +37,15 @@
 - (void) addEmptyCard:(ReviewCardType)type {
     totReviewCardView* card = [totReviewCardView createEmptyCard:type timeline:self];
     card.parent = self;
-    [mCards addObject:card];
-    [card release];
-    [self addSubview:[mCards lastObject]];
+    if ([mCards count] > 0) {
+        [mCards insertObject:card atIndex:1];  // new card is always under the summary card.
+    } else {
+        [mCards addObject:card];
+    }
+    [self addSubview:card];
     [self refreshView];
-    [self addDeleteButtonUnderCard:[mCards lastObject]];
+    [self addDeleteButtonUnderCard:card];
+    [card release];
 }
 
 - (void) addCard:(ReviewCardType)type data:(NSString*)data {
@@ -162,17 +170,40 @@
         
         // add new card.
         // change it to different type.
-        totReviewCardView* card = [totReviewCardView loadCard:SLEEP story:story timeline:self];
-        card.parent = self;
-        [mCards addObject:card];
-        [card release];
-        [self addSubview:[mCards lastObject]];
-        [self addDeleteButtonUnderCard:[mCards lastObject]];
+        totReviewCardView* card = [totReviewCardView loadCard:story.mEventType story:story timeline:self];
+        if (card) {
+            card.parent = self;
+            [card.mShowView viewWillAppear:YES];
+            [mCards addObject:card];
+            [card release];
+            [self addSubview:[mCards lastObject]];
+            [self addDeleteButtonUnderCard:[mCards lastObject]];
+        }
         
         [story release];
     }
     
     [self refreshView];
+}
+
+#pragma UIScrollViewDelegate
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    // TODO(lxhuang) add loading button and wait for a second.
+    if (scrollView.contentOffset.y + 389 > scrollView.contentSize.height) {
+        int cards_num = [mCards count];
+        if (cards_num > 1) {
+            totReviewCardView* card = [mCards objectAtIndex:1];
+            cards_num--;  // don't consider the summary card
+            for (int i = 1; i < [mCards count]; ++i) {
+                if (((totReviewCardView*)[mCards objectAtIndex:i]).mMode == EDIT) {
+                    cards_num--;
+                } else {
+                    break;
+                }
+            }
+            [self.controller loadEventsFrom:cards_num limit:10];
+        }
+    }
 }
 
 - (void)dealloc {

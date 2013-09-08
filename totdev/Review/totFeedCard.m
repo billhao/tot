@@ -12,6 +12,7 @@
 #import "totHomeFeedingViewController.h"
 #import "totTimeline.h"
 #import "totUtility.h"
+#import "totReviewStory.h"
 
 @implementation totFeedEditCard
 
@@ -92,7 +93,7 @@
 - (bool)clickOnConfirmIconButtonDelegate {
     [self saveToDB];
     
-    [parentView flip];
+    //[parentView flip];
     
     return true;
 }
@@ -218,8 +219,13 @@
 - (void)viewWillAppear:(BOOL)animated {
     // If we load card from database, should not call this function again.
     // when loading from db, story_ will not be nil.
-    if (!story_)
+    if (!story_) {
         [self getDataFromDB];
+    } else {
+        card_title.text = story_.mRawContent;
+        description.text = @"";
+        [self setTimestamp:[totTimeUtil getTimeDescriptionFromNow:story_.mWhen]];
+    }
 }
 
 #pragma mark - Helper functions

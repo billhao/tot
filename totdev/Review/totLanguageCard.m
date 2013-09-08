@@ -9,6 +9,7 @@
 #import "totLanguageCard.h"
 #import "totTimeUtil.h"
 #import "totTimeline.h"
+#import "totReviewStory.h"
 
 @implementation totLanguageEditCard
 
@@ -101,7 +102,7 @@
     [self.view addSubview:textView];
 }
 
-+ (int) height { return 200; }
++ (int) height { return 150; }
 + (int) width { return 308; }
 
 - (void) dealloc {
@@ -202,8 +203,13 @@
 - (void)viewWillAppear:(BOOL)animated {
     // If we load card from database, should not call this function again.
     // when loading from db, story_ will not be nil.
-    if (!story_)
+    if (!story_) {
         [self getDataFromDB];
+    } else {
+        card_title.text = [NSString stringWithFormat:@"New word: %@", story_.mRawContent];
+        description.text = @"";
+        [self setTimestamp:[totTimeUtil getTimeDescriptionFromNow:story_.mWhen]];
+    }
 }
 
 #pragma mark - Helper functions
@@ -225,7 +231,7 @@
     }
 }
 
-+ (int) height { return 200; }
++ (int) height { return 120; }
 + (int) width { return 308; }
 
 - (NSString*) GetOutputStr: (NSString*) inputStr
