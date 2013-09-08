@@ -45,8 +45,6 @@
     [self setIcon:@"food_gray" confirmedIcon:@"food2"];
     [self setTitle:@"Feeding"];
     [self setTimestamp];
-    [self setCalendar:1000];
-    
     [self createUI];
 }
 
@@ -86,15 +84,12 @@
 }
 
 -(void)textFieldDidBeginEditing:(UITextField *)textField {
-    // move to top
     [parentView.parent moveToTop:self.parentView];
 }
 
+// Check the input. If it's valid return true, otherwise, return false.
 - (bool)clickOnConfirmIconButtonDelegate {
     [self saveToDB];
-    
-    //[parentView flip];
-    
     return true;
 }
 
@@ -116,8 +111,6 @@
     CGRect f = CGRectMake(0, yy, [totFeedEditCard width] - h - margin_x, h);
     UIView* v = [[UIView alloc] initWithFrame:f];
     v.clipsToBounds = TRUE;
-    
-    //[totUtility enableBorder:v];
 
     f = CGRectMake(x, 0, w1, h);
     [foodBoxes addObject:[self createInputBox:f parentView:v]];
@@ -201,8 +194,7 @@
 
 - (id)init {
     self = [super init];
-    if (self) {
-    }
+    if (self) {}
     return self;
 }
 

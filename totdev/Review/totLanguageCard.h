@@ -10,7 +10,6 @@
 #import "totReviewCardView.h"
 
 @interface totLanguageEditCard : totReviewEditCardView<UITextViewDelegate> {
-    //UIButton* confirm_button;
     UITextView* textView;
     NSString* defaultTxt;
 }

@@ -22,12 +22,13 @@
 
 - (void) setBackground;
 
+// Adds edit card of the specified type.
 - (void) addEmptyCard:(ReviewCardType)type;
-- (void) addCard:(ReviewCardType)type data:(NSString*)data;
 
 // Deletes the review card.
 - (void) deleteCard:(totReviewCardView*)card;
 
+// Re-adjust the size of each card.
 - (void) refreshView;
 
 // Moves the card to the top of the screen.

@@ -8,7 +8,6 @@
 
 #import "totTimeline.h"
 #import "totReviewCardView.h"
-#import "totTestCard.h"
 #import "totSummaryCard.h"
 #import "totHeightCard.h"
 #import "totDiaperCard.h"
@@ -16,6 +15,10 @@
 #import "totSleepCard.h"
 #import "totFeedCard.h"
 #import "totTimeUtil.h"
+
+// #######################################
+// #######         Edit card       #######
+// #######################################
 
 @implementation totReviewEditCardView
 
@@ -41,15 +44,18 @@
 }
 
 //
-// ------------------- Animation -------------------
+// ----------Confirm Button Animation ----------
+// This is a two-stage animation.
 //
-- (void) secondAnimationDidStop:(NSString*)animationID finished:(NSNumber*)finished context:(void*)context {
+- (void) secondAnimationDidStop:(NSString*)animationID
+                       finished:(NSNumber*)finished context:(void*)context {
     [self.parentView flip];
 }
 
-- (void) animationDidStart:(NSString*)animationID context:(void*)context {}
+- (void) firstAnimationDidStart:(NSString*)animationID context:(void*)context {}
 
-- (void) animationDidStop:(NSString*)animationID finished:(NSNumber*)finished context:(void*)context {
+- (void) firstAnimationDidStop:(NSString*)animationID
+                      finished:(NSNumber*)finished context:(void*)context {
     int future_x = icon_confirmed_button.frame.origin.x;
     int future_y = icon_confirmed_button.frame.origin.y;
     int future_size = icon_confirmed_button.frame.size.width;
@@ -74,6 +80,8 @@
 }
 
 - (void)confirmIconHandler:(UIButton*)button {
+    // Before we start the animation, do any customized things here.
+    // If success, return true, so that we can perform the animation.
     if (![self clickOnConfirmIconButton]) {
         return;
     }
@@ -86,8 +94,8 @@
         [UIView beginAnimations:@"shrink_gray_button" context:nil];
         [UIView setAnimationDuration:0.2];
         [UIView setAnimationDelegate:self];
-        [UIView setAnimationWillStartSelector:@selector(animationDidStart:context:)];
-        [UIView setAnimationDidStopSelector:@selector(animationDidStop:finished:context:)];
+        [UIView setAnimationWillStartSelector:@selector(firstAnimationDidStart:context:)];
+        [UIView setAnimationDidStopSelector:@selector(firstAnimationDidStop:finished:context:)];
         [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
         {
             int shrinked_size = 10;
@@ -105,11 +113,20 @@
 //
 // ------------------- Layout ----------------------
 //
+- (void)setIcon:(NSString*)icon_name {
+    icon_unconfirmed_button = [UIButton buttonWithType:UIButtonTypeCustom];
+    [icon_unconfirmed_button setFrame:CGRectMake(5, 5, 50, 50)];
+    [icon_unconfirmed_button setImage:[UIImage imageNamed:icon_name] forState:UIControlStateNormal];
+    [icon_unconfirmed_button addTarget:self action:@selector(confirmIconHandler:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:icon_unconfirmed_button];
+}
+
 - (void) setIcon:(NSString*)icon_name confirmedIcon:(NSString*)confirmed_icon_name {
     [self setIcon:icon_name];
     icon_confirmed_button = [UIButton buttonWithType:UIButtonTypeCustom];
     [icon_confirmed_button setFrame:CGRectMake(5, 5, 50, 50)];
-    [icon_confirmed_button setImage:[UIImage imageNamed:confirmed_icon_name] forState:UIControlStateNormal];
+    [icon_confirmed_button setImage:[UIImage imageNamed:confirmed_icon_name]
+                           forState:UIControlStateNormal];
     [icon_confirmed_button setHidden:YES];
     [self.view addSubview:icon_confirmed_button];
 }
@@ -122,22 +139,13 @@
     [calendar_icon release];
 
     UILabel* label_day = [[UILabel alloc] initWithFrame:CGRectMake(253, 26, 40, 20)];
-    label_day.textAlignment = NSTextAlignmentCenter;
+    [label_day setTextAlignment:NSTextAlignmentCenter];
     [label_day setText:[NSString stringWithFormat:@"%d", days]];
     [label_day setTextColor:[UIColor colorWithRed:136/255.0 green:212/255.0 blue:173/255.0 alpha:1.0f]];
     [label_day setFont:[UIFont fontWithName:@"Raleway-SemiBold" size:16]];
     [label_day setBackgroundColor:[UIColor clearColor]];
     [self.view addSubview:label_day];
     [label_day release];
-}
-
-- (void)setIcon:(NSString*)icon_name {
-    // Icon.
-    icon_unconfirmed_button = [UIButton buttonWithType:UIButtonTypeCustom];
-    [icon_unconfirmed_button setFrame:CGRectMake(5, 5, 50, 50)];
-    [icon_unconfirmed_button setImage:[UIImage imageNamed:icon_name] forState:UIControlStateNormal];
-    [icon_unconfirmed_button addTarget:self action:@selector(confirmIconHandler:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:icon_unconfirmed_button];
 }
 
 - (void)setTitle:(NSString *)desc {
@@ -149,10 +157,11 @@
     [self.view addSubview:title];
     [title release];
     
-    // since this function will always be called, add the line here.
+    // since this function will always be called, add the separator line here.
     UIImageView* line = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"timeline_line"]];
     line.frame = CGRectMake(0, 60, [totSummaryCard width], line.frame.size.height);
     [self.view addSubview:line];
+    [line release];
 }
 
 - (void)setTimestamp {
@@ -188,20 +197,6 @@
     [self.view addSubview:year_button];
 }
 
-- (void)setConfirmAndCancelButtons:(int)y {
-    //confirm_button = [UIButton buttonWithType:UIButtonTypeCustom];
-    //confirm_button.contentHorizontalAlignment = UIControlContentHorizontalAlignmentFill;
-    //confirm_button.contentVerticalAlignment = UIControlContentHorizontalAlignmentFill;
-    //[confirm_button setFrame:CGRectMake(260, y, 30, 30)];
-    //[confirm_button setImage:[UIImage imageNamed:@"card_confirm"] forState:UIControlStateNormal];
-    //[self.view addSubview:confirm_button];
-
-    //cancel_button = [UIButton buttonWithType:UIButtonTypeCustom];
-    //[cancel_button setImage:[UIImage imageNamed:@"card_cancel"] forState:UIControlStateNormal];
-    //[cancel_button setFrame:CGRectMake(280, y, 30, 30)];
-    //[self.view addSubview:cancel_button];
-}
-
 - (bool) clickOnConfirmIconButton {
     if ([self clickOnConfirmIconButtonDelegate]) {
         [timer_ stop];
@@ -213,7 +208,7 @@
 - (bool) clickOnConfirmIconButtonDelegate { return true; }
 
 //
-// ---------- Time ----------------
+// ---------- Time ------------
 //
 - (NSString*) getTimestampInString {
     NSArray* comp1   = [hour_button.titleLabel.text componentsSeparatedByString:@":"];
@@ -225,7 +220,8 @@
     NSString* day    = [comp2 objectAtIndex:1];
     NSString* year   = [comp2 objectAtIndex:2];
     
-    NSString* timestamp = [NSString stringWithFormat:@"%@-%@-%@ %@:%@:%s", year, month, day, hour, minute, "00"];
+    NSString* timestamp =
+        [NSString stringWithFormat:@"%@-%@-%@ %@:%@:%s", year, month, day, hour, minute, "00"];
     return timestamp;
 }
 
@@ -240,18 +236,17 @@
 
 - (void)dealloc {
     [super dealloc];
-    [cancel_button release];
-    [confirm_button release];
-    [hour_button release];
-    [year_button release];
     [timer_ stop];
+    // release the timer.
+    [timer_ release];
 }
 
 @end
 
 
-
-
+// #######################################
+// #######         Show card       #######
+// #######################################
 @implementation totReviewShowCardView
 
 @synthesize parentView;
@@ -262,8 +257,7 @@
 
 - (id) init {
     self = [super init];
-    if (self) {
-    }
+    if (self) {}
     return self;
 }
 
@@ -271,66 +265,66 @@
     [self setBackground];
     
     // add title
-    [self setTitle:@""];
-    
-    // add description
-    description = [[UILabel alloc] initWithFrame:CGRectMake(8, 60, 260, 60)];
-    description.text = @"description";
-    description.textAlignment = NSTextAlignmentLeft;
-    description.backgroundColor = [UIColor clearColor];
-    [description setFont:[UIFont fontWithName:@"Raleway" size:13]];
-    [description setTextColor:[UIColor colorWithRed:0.5f green:0.5f blue:0.5f alpha:1.0f]];
-    //description.layer.borderWidth = 1;
-    //description.layer.borderColor = [UIColor grayColor].CGColor;
-    [self.view addSubview:description];
-    
-    // add timestamp
-    timestamp = [[UILabel alloc] initWithFrame:CGRectMake(70, 30, 180, 30)];
-    timestamp.textAlignment = NSTextAlignmentLeft;
-    [timestamp setTextColor:[UIColor colorWithRed:128.0/255 green:130.0/255 blue:130.0/255 alpha:1.0]];
-    [timestamp setFont:[UIFont fontWithName:@"Raleway" size:15]];
-    [timestamp setBackgroundColor:[UIColor clearColor]];
-    [self.view addSubview:timestamp];
-}
-
-- (void) setCalendar:(int)days {
-    // Calendar.
-    UIImageView* calendar_icon = [[UIImageView alloc] initWithFrame:CGRectMake(250, 0, 45, 50)];
-    calendar_icon.image = [UIImage imageNamed:@"calendar.png"];
-    [self.view addSubview:calendar_icon];
-    [calendar_icon release];
-    
-    UILabel* label_day = [[UILabel alloc] initWithFrame:CGRectMake(253, 26, 40, 20)];
-    label_day.textAlignment = NSTextAlignmentCenter;
-    [label_day setText:[NSString stringWithFormat:@"%d", days]];
-    [label_day setTextColor:[UIColor colorWithRed:136/255.0 green:212/255.0 blue:173/255.0 alpha:1.0f]];
-    [label_day setFont:[UIFont fontWithName:@"Raleway-SemiBold" size:16]];
-    [label_day setBackgroundColor:[UIColor clearColor]];
-    [self.view addSubview:label_day];
-    [label_day release];
-}
-
-- (void) setIcon:(NSString*)icon_name {
-    // Icon.
-    UIImageView* icon = [[UIImageView alloc] initWithFrame:CGRectMake(5, 5, 50, 50)];
-    icon.image = [UIImage imageNamed:icon_name];
-    [self.view addSubview:icon];
-    [icon release];
-}
-
-- (void) setTitle:(NSString *)desc {
     card_title = [[UILabel alloc] initWithFrame:CGRectMake(70, 10, 230, 30)];
-    [card_title setText:desc];
+    [card_title setText:@""];
     [card_title setBackgroundColor:[UIColor clearColor]];
     [card_title setTextColor:[UIColor colorWithRed:0.5f green:0.5f blue:0.5f alpha:1.0f]];
     [card_title setFont:[UIFont fontWithName:@"Raleway-SemiBold" size:20]];
     [self.view addSubview:card_title];
     
-    // since this function will always be called, add the line here.
+    // add description
+    description = [[UILabel alloc] initWithFrame:CGRectMake(8, 60, 260, 60)];
+    description.text = @"";
+    description.textAlignment = NSTextAlignmentLeft;
+    description.backgroundColor = [UIColor clearColor];
+    [description setFont:[UIFont fontWithName:@"Raleway" size:13]];
+    [description setTextColor:[UIColor colorWithRed:0.5f green:0.5f blue:0.5f alpha:1.0f]];
+    [self.view addSubview:description];
+    
+    // add timestamp
+    timestamp = [[UILabel alloc] initWithFrame:CGRectMake(70, 30, 180, 30)];
+    timestamp.textAlignment = NSTextAlignmentLeft;
+    timestamp.text = @"";
+    [timestamp setTextColor:[UIColor colorWithRed:128.0/255 green:130.0/255 blue:130.0/255 alpha:1.0]];
+    [timestamp setFont:[UIFont fontWithName:@"Raleway" size:15]];
+    [timestamp setBackgroundColor:[UIColor clearColor]];
+    [self.view addSubview:timestamp];
+    
+    // add separator
     UIImageView* line = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"timeline_line"]];
     line.frame = CGRectMake(0, 60, [totSummaryCard width], line.frame.size.height);
     [self.view addSubview:line];
     [line release];
+}
+
+- (void) setCalendar:(int)days {
+    // Calendar.
+    if (calendar_icon_) {
+        calendar_icon_ = [[UIImageView alloc] initWithFrame:CGRectMake(250, 0, 45, 50)];
+        calendar_icon_.image = [UIImage imageNamed:@"calendar.png"];
+        [self.view addSubview:calendar_icon_];
+    }
+    if (calendar_text_) {
+        [calendar_text_ setText:[NSString stringWithFormat:@"%d", days]];
+    } else {
+        calendar_text_ = [[UILabel alloc] initWithFrame:CGRectMake(253, 26, 40, 20)];
+        [calendar_text_ setTextAlignment:NSTextAlignmentCenter];
+        [calendar_text_ setText:[NSString stringWithFormat:@"%d", days]];
+        [calendar_text_ setTextColor:[UIColor colorWithRed:136/255.0
+                                                     green:212/255.0
+                                                      blue:173/255.0
+                                                     alpha:1.0f]];
+        [calendar_text_ setFont:[UIFont fontWithName:@"Raleway-SemiBold" size:16]];
+        [calendar_text_ setBackgroundColor:[UIColor clearColor]];
+        [self.view addSubview:calendar_text_];
+    }
+}
+
+- (void) setIcon:(NSString*)icon_name {
+    UIImageView* icon = [[UIImageView alloc] initWithFrame:CGRectMake(5, 5, 50, 50)];
+    icon.image = [UIImage imageNamed:icon_name];
+    [self.view addSubview:icon];
+    [icon release];
 }
 
 - (void) setTimestamp:(NSString*)time {
@@ -345,14 +339,18 @@
     [super dealloc];
     [card_title release];
     [description release];
+    [timestamp release];
+    [calendar_text_ release];
+    [calendar_icon_ release];
 }
 
 @end
 
 
-
-
+// Combine the edit card and show card.
+//
 // ----------------- totReviewCardView -------------------
+//
 @implementation totReviewCardView
 
 @synthesize mEditView;
@@ -361,18 +359,22 @@
 @synthesize associated_delete_button;
 @synthesize mMode;
 
-// Gesture delegates
+//
+// ----------------- Gesture delegates --------------------
+//
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
     UIViewController* vc = (mMode==EDIT)?self.mEditView:self.mShowView;
     UIView* v = [vc.view hitTest:[gestureRecognizer locationInView:vc.view ] withEvent:nil];
     NSLog(@"%@", v.class);
+
     // add this condition to avoid moving the view while scrolling the height picker
     if( v.class == self.mEditView.class || v.class == self.mShowView.class || v.class == nil )
         return YES;
     else
         return NO;
 }
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer
+       shouldReceiveTouch:(UITouch *)touch {
     return YES;
 }
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer
@@ -385,9 +387,13 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
     [UIView setAnimationDuration:0.5f];
     [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
     if (!deleted) {
-        self.frame = CGRectMake(origin_x, self.frame.origin.y, self.frame.size.width, self.frame.size.height);
+        self.frame = CGRectMake(6,
+                                self.frame.origin.y,
+                                self.frame.size.width, self.frame.size.height);
     } else {
-        self.frame = CGRectMake(self.frame.size.width / 2, self.frame.origin.y, self.frame.size.width, self.frame.size.height);
+        self.frame = CGRectMake(self.frame.size.width / 2,
+                                self.frame.origin.y,
+                                self.frame.size.width, self.frame.size.height);
     }
     [UIView commitAnimations];
 }
@@ -403,12 +409,14 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
             if ( fabs(pos.y - touch_y) * 4 > fabs(pos.x - touch_x) )
                 return;
             float new_x = self.frame.origin.x + (pos.x - touch_x);
-            self.frame = CGRectMake(new_x, self.frame.origin.y, self.frame.size.width, self.frame.size.height);
+            self.frame = CGRectMake(new_x,
+                                    self.frame.origin.y,
+                                    self.frame.size.width, self.frame.size.height);
             touch_x = pos.x;
             touch_y = pos.y;
         }
         if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
-            printf("%f %f\n", self.frame.origin.x, self.frame.size.width);
+            printf("move the review card: %f %f\n", self.frame.origin.x, self.frame.size.width);
             if (self.frame.origin.x > self.frame.size.width / 2) {
                 [self performAnimation:YES];
             } else {
@@ -419,7 +427,6 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
 }
 
 - (void) registerGestures {
-    // Register pan gesture recognizers.
     UIPanGestureRecognizer* pan =
         [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
     [pan setDelegate:self];
@@ -433,12 +440,6 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
     self = [super initWithFrame:frame];
     if (self) { mEditView = nil; mShowView = nil; }
     return self;
-}
-
-// Loads existing card.
-- (id)initWithType:(ReviewCardType)type andData:(NSString*)data timeline:(totTimeline*)timeline {
-    // Don't forget to register gesture recognizer.
-    return nil;
 }
 
 // totReviewStory contains all necessary information to visualize a tot event.
@@ -506,8 +507,7 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
         switch (type) {
             case TEST:
             {
-                c1 = [[totTestEditCard alloc] init];
-                c2 = [[totTestShowCard alloc] init];
+                printf("Do not use test card any more.\n");
                 break;
             }
             case SUMMARY:
@@ -605,7 +605,9 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
         [mEditView.view removeFromSuperview];
         [self addSubview:mShowView.view];
         // Change the frame size.
-        CGRect f = CGRectMake(self.frame.origin.x, self.frame.origin.y, mShowView.view.frame.size.width, mShowView.view.frame.size.height);
+        CGRect f = CGRectMake(self.frame.origin.x,
+                              self.frame.origin.y,
+                              mShowView.view.frame.size.width, mShowView.view.frame.size.height);
         self.frame = f;
         mShowView.view.frame = self.bounds;
     } else {
@@ -614,7 +616,9 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
         [mShowView.view removeFromSuperview];
         [self addSubview:mEditView.view];
         // Change the frame size.
-        CGRect f = CGRectMake(self.frame.origin.x, self.frame.origin.y, mEditView.view.frame.size.width, mEditView.view.frame.size.height);
+        CGRect f = CGRectMake(self.frame.origin.x,
+                              self.frame.origin.y,
+                              mEditView.view.frame.size.width, mEditView.view.frame.size.height);
         self.frame = f;
         mEditView.view.frame = self.bounds;
     }
@@ -684,11 +688,6 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
     return view;
 }
 
-+ (totReviewCardView*) loadCard:(ReviewCardType)type data:(NSString*)data timeline:(totTimeline*)timeline {
-    totReviewCardView* view = [[totReviewCardView alloc] initWithType:type andData:data timeline:timeline];
-    return view;
-}
-
 + (totReviewCardView*) loadCard:(NSString*)type story:(totReviewStory*)story timeline:(totTimeline*)timeline {
     NSArray* tokens = [type componentsSeparatedByString:@"/"];
     NSString* category = [tokens objectAtIndex:0];
@@ -713,7 +712,9 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
         } else {
             return nil;
         }
-        totReviewCardView* view = [[totReviewCardView alloc] initWithType:card_type withData:story timeline:timeline];
+        totReviewCardView* view = [[totReviewCardView alloc] initWithType:card_type
+                                                                 withData:story
+                                                                 timeline:timeline];
         return view;
     } else {
         return nil;

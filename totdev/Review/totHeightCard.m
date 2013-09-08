@@ -33,8 +33,6 @@
     [super dealloc];
     [bgview release];
     [picker release];
-    //[confirm_button release];
-    //[cancel_button release];
 }
 
 -(void)viewDidLoad {
@@ -116,24 +114,6 @@
     selectedValueLabel.textAlignment = NSTextAlignmentCenter;
     selectedValueLabel.backgroundColor = [UIColor clearColor];
     [self.view addSubview:selectedValueLabel];
-
-    //confirm_button = [UIButton buttonWithType:UIButtonTypeCustom];
-    //confirm_button.frame = CGRectMake(self.width-20+2*(-60-10), bgview.frame.origin.y+bgview.frame.size.height+20, 60, 40);
-    //cancel_button =  [UIButton buttonWithType:UIButtonTypeCustom];
-    //cancel_button.frame = CGRectMake(self.width-20-60-10, bgview.frame.origin.y+bgview.frame.size.height+20, 60, 40);
-    
-    //self.width-20+2*(-60-10), bgview.frame.origin.y+bgview.frame.size.height+20, 60, 40)];
-    
-    //self.width-20-60-10, 350, 60, 40)];
-    //[confirm_button setImage:[UIImage imageNamed:@"icons-ok"] forState:UIControlStateNormal];
-    //[confirm_button setImage:[UIImage imageNamed:@"icons-ok_pressed"] forState:UIControlStateHighlighted];
-    //[cancel_button setImage:[UIImage imageNamed:@"icons-close"] forState:UIControlStateNormal];
-    //[cancel_button setImage:[UIImage imageNamed:@"icons-close_pressed"] forState:UIControlStateHighlighted];
-    //[confirm_button addTarget:self action:@selector(confirm:) forControlEvents:UIControlEventTouchUpInside];
-    //[cancel_button addTarget:self action:@selector(cancel:) forControlEvents:UIControlEventTouchUpInside];
-    
-    //[self.view addSubview:confirm_button];
-    //[self.view addSubview:cancel_button];
 }
 
 - (void) setBackground {
@@ -163,7 +143,6 @@
 }
 
 @end
-
 
 
 

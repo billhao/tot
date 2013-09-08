@@ -10,9 +10,7 @@
 #import "totHomeRootController.h"
 #import "totTimeline.h"
 
-@interface totTimelineController : UIViewController {
-    totTimeline* timeline_;
-}
+@interface totTimelineController : UIViewController
 
 @property(nonatomic, retain) totHomeRootController* homeController;
 @property(nonatomic, retain) totTimeline* timeline_;

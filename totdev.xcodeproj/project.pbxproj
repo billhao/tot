@@ -240,7 +240,6 @@
 		3FD3C63B17CC838300DB1B71 /* totLanguageCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD3C63217CC837F00DB1B71 /* totLanguageCard.m */; };
 		3FD3C63C17CC838300DB1B71 /* totSleepCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD3C63417CC838000DB1B71 /* totSleepCard.m */; };
 		3FD3C63D17CC838300DB1B71 /* totSummaryCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD3C63617CC838200DB1B71 /* totSummaryCard.m */; };
-		3FD3C63E17CC838300DB1B71 /* totTestCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FD3C63817CC838300DB1B71 /* totTestCard.m */; };
 		3FD3C64117CDBCA700DB1B71 /* camera_button_pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FD3C63F17CDBCA600DB1B71 /* camera_button_pressed@2x.png */; };
 		3FD3C64217CDBCA700DB1B71 /* home_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FD3C64017CDBCA600DB1B71 /* home_bg@2x.png */; };
 		3FD3C65017CDD60500DB1B71 /* activity_line.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FD3C64C17CDD60500DB1B71 /* activity_line.png */; };
@@ -760,8 +759,6 @@
 		3FD3C63417CC838000DB1B71 /* totSleepCard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totSleepCard.m; path = Review/totSleepCard.m; sourceTree = "<group>"; };
 		3FD3C63517CC838100DB1B71 /* totSummaryCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totSummaryCard.h; path = Review/totSummaryCard.h; sourceTree = "<group>"; };
 		3FD3C63617CC838200DB1B71 /* totSummaryCard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totSummaryCard.m; path = Review/totSummaryCard.m; sourceTree = "<group>"; };
-		3FD3C63717CC838200DB1B71 /* totTestCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totTestCard.h; path = Review/totTestCard.h; sourceTree = "<group>"; };
-		3FD3C63817CC838300DB1B71 /* totTestCard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totTestCard.m; path = Review/totTestCard.m; sourceTree = "<group>"; };
 		3FD3C63F17CDBCA600DB1B71 /* camera_button_pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera_button_pressed@2x.png"; sourceTree = "<group>"; };
 		3FD3C64017CDBCA600DB1B71 /* home_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home_bg@2x.png"; sourceTree = "<group>"; };
 		3FD3C64C17CDD60500DB1B71 /* activity_line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = activity_line.png; sourceTree = "<group>"; };
@@ -1733,8 +1730,6 @@
 				3FD3C63417CC838000DB1B71 /* totSleepCard.m */,
 				3FD3C63517CC838100DB1B71 /* totSummaryCard.h */,
 				3FD3C63617CC838200DB1B71 /* totSummaryCard.m */,
-				3FD3C63717CC838200DB1B71 /* totTestCard.h */,
-				3FD3C63817CC838300DB1B71 /* totTestCard.m */,
 				8E7C5A8817B859B100A2BA61 /* totHeightCard.h */,
 				8E7C5A8917B859B100A2BA61 /* totHeightCard.m */,
 				8E9815F9177F9ACD003439FD /* totReviewCardView.h */,
@@ -2647,7 +2642,6 @@
 				3FD3C63B17CC838300DB1B71 /* totLanguageCard.m in Sources */,
 				3FD3C63C17CC838300DB1B71 /* totSleepCard.m in Sources */,
 				3FD3C63D17CC838300DB1B71 /* totSummaryCard.m in Sources */,
-				3FD3C63E17CC838300DB1B71 /* totTestCard.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

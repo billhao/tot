@@ -43,33 +43,6 @@
     [self loadButtons];
 }
 
-/*
-- (void) loadInputContent {
-    //confirm_button = [UIButton buttonWithType:UIButtonTypeCustom];
-    //confirm_button.backgroundColor = [UIColor greenColor];
-    //[confirm_button setFrame:CGRectMake(10, 160, 100, 30)];
-    //[confirm_button setTitle:@"Confirm" forState:UIControlStateNormal];
-    //[confirm_button addTarget:self action:@selector(confirm:) forControlEvents:UIControlEventTouchUpInside];
-    //[self.view addSubview:confirm_button];
-    
-    // text input area
-    new_words_input = [[UITextView alloc] initWithFrame:CGRectMake(10, 100, 290, 40)];
-    new_words_input.backgroundColor = [UIColor clearColor];
-    [self.view addSubview:new_words_input];
-    // text input area background
-    UIView* background = [[UIView alloc] initWithFrame:CGRectMake(10, 100, 290, 40)];
-    background.backgroundColor = [UIColor yellowColor];
-    [self.view insertSubview:background belowSubview:new_words_input];
-    [background release];
-}
-
-- (void) confirm: (UIButton*)button {
-    [self.parentView.parent moveToTop:self.parentView];
-    [self setTitle:@"Language"];
-    [self setIcon:@"language2.png" withCalendarDays:0];
-}
- */
-
 - (void) loadButtons {
     [self setTimestamp];
     
@@ -130,7 +103,6 @@
         [textView1 resignFirstResponder];
         return NO;
     }
-    
     return YES;
 }
 
@@ -196,7 +168,6 @@
     [super viewDidLoad];
     [self setBackground];
     [self setIcon:@"language2.png"];
-    [self setTimestamp:@"40 Minutes ago"];
 }
 
 
@@ -223,7 +194,6 @@
         totEvent* currEvt = [events objectAtIndex:0];
         card_title.text = [NSString stringWithFormat:@"%@", currEvt.value];
         description.text = [self GetOutputStr:currEvt.value];
-
 //        if( events.count > 1 ) {
 //            totEvent* prevEvt = [events objectAtIndex:1];
 //            description.text = [NSString stringWithFormat:@"Learned last time: %@", prevEvt.value];
@@ -243,16 +213,22 @@
     
     // Get words learnd since the 1st day of this month
     NSDateFormatter *curDateFormatter = [[NSDateFormatter alloc] init];
+    
     [curDateFormatter setDateFormat:@"yyyy"];
     int year = [[curDateFormatter stringFromDate:[NSDate date]] intValue];  // current year
+    
     [curDateFormatter setDateFormat:@"MM"];
     int month = [[curDateFormatter stringFromDate:[NSDate date]] intValue];  // current month
     [curDateFormatter release];
+    
     NSString *curMonthStr = [NSString stringWithFormat:@"%d-%d-01 00:00:00", year, month];  // needs to fig out time zone offset
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     NSDate *firstDayThisMonth = [formatter dateFromString:curMonthStr];
-    NSMutableArray *lanEventThisMonth = [totModel getEvent:0 event:EVENT_BASIC_LANGUAGE startDate:firstDayThisMonth endDate:[NSDate date]];
+    NSMutableArray *lanEventThisMonth = [totModel getEvent:0
+                                                     event:EVENT_BASIC_LANGUAGE
+                                                 startDate:firstDayThisMonth
+                                                   endDate:[NSDate date]];
     int num_word_this_month = lanEventThisMonth.count;
     
     // Decide the output to user

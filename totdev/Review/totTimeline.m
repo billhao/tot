@@ -37,6 +37,15 @@
 - (void) addEmptyCard:(ReviewCardType)type {
     totReviewCardView* card = [totReviewCardView createEmptyCard:type timeline:self];
     card.parent = self;
+    
+    // Check whether there already existed an edit card.
+    if ([mCards count] > 1) {
+        totReviewCardView* cc = [mCards objectAtIndex:1];
+        if (cc.mMode == EDIT) {
+            [self deleteCard:cc];
+        }
+    }
+    
     if ([mCards count] > 0) {
         [mCards insertObject:card atIndex:1];  // new card is always under the summary card.
     } else {
@@ -48,21 +57,9 @@
     [card release];
 }
 
-- (void) addCard:(ReviewCardType)type data:(NSString*)data {
-    totReviewCardView* card = [totReviewCardView loadCard:type data:data timeline:self];
-    card.parent = self;
-    [mCards addObject:card];
-    [card release];
-    [self addSubview:[mCards lastObject]];
-    [self refreshView];
-    [self addDeleteButtonUnderCard:[mCards lastObject]];
-}
-
-
 - (void)animationDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context {
     totReviewCardView* cv = (totReviewCardView*)context;
     [cv.associated_delete_button removeFromSuperview];
-    //[cv.associated_delete_button release];
     [self deleteCard:cv];
 }
 
