@@ -16,6 +16,7 @@
 @implementation totTimelineController
 
 @synthesize homeController;
+@synthesize timeline_;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -32,16 +33,17 @@
 	// Do any additional setup after loading the view.
     int navbar_height = [self createNavigationBar];
     
-    
     totTimeline* timelineView = [[totTimeline alloc] initWithFrame:CGRectMake(0, navbar_height, 320, 460-navbar_height)];
-
     [timelineView addEmptyCard:SUMMARY];
-    
-    // test load cards from db.
-    //[timelineView loadCardsNumber:10 startFrom:0];
-    
+    [timelineView loadCardsNumber:10 startFrom:0];
     [self.view addSubview:timelineView];
+    self.timeline_ = timelineView;
+    self.timeline_.controller = self;
     [timelineView release];
+}
+
+- (void)loadEventsFrom:(int)start limit:(int)limit {
+    [self.timeline_ loadCardsNumber:limit startFrom:start];
 }
 
 - (void)didReceiveMemoryWarning
@@ -55,7 +57,8 @@
 
 - (void)homeButtonPressed:(id)sender {
     // go back to home page
-    [homeController switchTo:kHomeViewEntryView withContextInfo:nil];
+    if (homeController)
+        [homeController switchTo:kHomeViewEntryView withContextInfo:nil];
 }
 
 
@@ -64,7 +67,6 @@
 // return the height of the nav bar
 - (int)createNavigationBar {
     // create navigation bar
-    //UIImage* navbar_img = [UIImage imageNamed:@"timeline_navbar"];
     UIView* navbar = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 42)];
     navbar.backgroundColor = [UIColor colorWithRed:116.0/255 green:184.0/255 blue:229.0/255 alpha:1.0];
 
@@ -82,6 +84,11 @@
     [navbar release];
     
     return navbar.frame.size.height;
+}
+
+- (void)dealloc {
+    [super dealloc];
+    [timeline_ release];
 }
 
 @end

@@ -11,6 +11,7 @@
 #import "totReviewCardView.h"
 #import "totTimeline.h"
 #import "totUtility.h"
+#import "totReviewStory.h"
 
 @implementation totSleepEditCard
 
@@ -30,7 +31,6 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    //[self startSleep:nil];
 }
 
 - (void)loadIcons {
@@ -38,27 +38,28 @@
     [self setTitle:@"Sleep"];
     [self setTimestamp];
     
-//    start_button = [UIButton buttonWithType:UIButtonTypeCustom];
-//    start_button.backgroundColor = [UIColor greenColor];
-//    [start_button setTitle:@"Sleep" forState:UIControlStateNormal];
-//    [start_button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-//    [start_button setFrame:CGRectMake(200, 5, 60, 40)];
-//    [start_button addTarget:self action:@selector(startSleep:) forControlEvents:UIControlEventTouchUpInside];
-//    [self.view addSubview:start_button];
-//    
-//    stop_button = [UIButton buttonWithType:UIButtonTypeCustom];
-//    stop_button.backgroundColor = [UIColor redColor];
-//    stop_button.hidden = YES;
-//    [stop_button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-//    [stop_button setTitle:@"Wake up" forState:UIControlStateNormal];
-//    [stop_button setFrame:CGRectMake(200, 5, 80, 40)];
-//    [stop_button addTarget:self action:@selector(stopSleep:) forControlEvents:UIControlEventTouchUpInside];
-//    [self.view addSubview:stop_button];
+    start_button = [UIButton buttonWithType:UIButtonTypeCustom];
+    start_button.backgroundColor = [UIColor greenColor];
+    [start_button setTitle:@"Sleep" forState:UIControlStateNormal];
+    [start_button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [start_button setFrame:CGRectMake(200, 5, 60, 40)];
+    [start_button addTarget:self action:@selector(startSleep:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:start_button];
+    
+    stop_button = [UIButton buttonWithType:UIButtonTypeCustom];
+    stop_button.backgroundColor = [UIColor redColor];
+    stop_button.hidden = YES;
+    [stop_button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [stop_button setTitle:@"Wake up" forState:UIControlStateNormal];
+    [stop_button setFrame:CGRectMake(200, 5, 80, 40)];
+    [stop_button addTarget:self action:@selector(stopSleep:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:stop_button];
 }
 
 - (void)startSleep: (UIButton*)button {
-    //start_button.hidden = YES;
-    //stop_button.hidden = NO;
+    start_button.hidden = YES;
+    stop_button.hidden = NO;
+    
     [self.parentView.parent moveCard:self.parentView To:0];
     [self.parentView.parent moveToTop:self.parentView];
     
@@ -69,15 +70,14 @@
     // save to db
     [self saveTimeToDatabase:FALSE];
 
-    // remove this card
-    [parentView flip];
+    //[parentView flip];
+    // should be: 1. remove this card
+    // 2. add the card under the summary card
+    // 3. move the scroll view the the sleep show card.
 }
 
 - (void)dealloc {
     [super dealloc];
-    //[time_button release];
-    //[start_button release];
-    //[stop_button release];
 }
 
 #pragma mark - Helper functions
@@ -109,7 +109,6 @@
 @end
 
 
-
 @implementation totSleepShowCard
 
 + (int) height { return 70; }
@@ -126,14 +125,18 @@
     [super viewDidLoad];
     [self setBackground];
     [self setIcon:@"sleep2.png"];
-    [self setTimestamp:@"40 Minutes ago"];
 }
 
 -(void)viewWillAppear:(BOOL)animated {
     // If we load card from database, should not call this function again.
     // when loading from db, story_ will not be nil.
-    if (story_)
+    if (story_) {
         [self getDataFromDB];
+    } else {
+        card_title.text = story_.mRawContent;
+        description.text = @"";
+        [self setTimestamp:[totTimeUtil getTimeDescriptionFromNow:story_.mWhen]];
+    }
 }
 
 
@@ -144,7 +147,7 @@
     NSDate* date = [NSDate date];
     NSMutableArray* sleep = [global.model getPreviousEvent:global.baby.babyID event:EVENT_BASIC_SLEEP limit:1 current_event_date:date];
     if( sleep.count > 0 ) {
-        ////totEvent* e = sleep[0];
+        //totEvent* e = sleep[0];
         totEvent* e = [sleep objectAtIndex:0];
         //NSLog(@"%d %@ - %d %@", e.event_id, e.datetime, story.mEventId, story.mWhen);
         

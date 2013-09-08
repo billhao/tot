@@ -10,6 +10,7 @@
 #import "totTimeUtil.h"
 #import "totImageView.h"
 #import "totUtility.h"
+#import "totReviewStory.h"
 
 @implementation totDiaperEditCard
 
@@ -33,14 +34,12 @@
 
 - (void) dealloc {
     [super dealloc];
-    [confirm_button release];
-    [cancel_button release];
     [mSelectedIcon release];
 }
 
 
 #pragma mark - Event handlers
-
+/*
 - (void) confirm: (UIButton*)btn {
     // save to database
     if (mDiaperType != -1) {
@@ -53,8 +52,8 @@
 - (void) cancel: (UIButton*)btn {
     [timer_ stop];
 }
+*/
 
-//- (void)touchesEndedDelegate:(NSSet *)touches withEvent:(UIEvent *)event from:(int)tag {
 - (void)buttonPressed:(id)sender {
     int tag = ((UIButton*)sender).tag;
 
@@ -66,7 +65,6 @@
 
 
 #pragma mark - Helper functions
-
 //- (int) height { return contentYOffset + margin_y + 3*(h+margin_y); }
 //- (int) width { return 308; }
 + (int) height { return 164; }
@@ -98,8 +96,6 @@
     [self.view addSubview:wetBtn];
     [self.view addSubview:soiledBtn];
     [self.view addSubview:wetSoiledBtn];
-    
-    //[totUtility enableBorder:wetBtn];
     
     mSelectedIcon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"icons-ok"]];
     mSelectedIcon.frame = CGRectMake(-1, -1, 0, 0);
@@ -167,7 +163,7 @@
     // save to database
     if (mDiaperType != -1) {
         [self saveToDatabase:mDiaperType];
-        [self.parentView flip];
+        //[self.parentView flip];
         return true;
     }
     return false;
@@ -195,21 +191,23 @@
 -(void)viewWillAppear:(BOOL)animated {
     // If we load card from database, should not call this function again.
     // when loading from db, story_ will not be nil.
-    if (!story_)
+    if (!story_) {
         [self getDataFromDB];
+    } else {
+        card_title.text = story_.mRawContent;
+        description.text = @"";
+        [self setTimestamp:[totTimeUtil getTimeDescriptionFromNow:story_.mWhen]];
+    }
 }
 
 - (void) dealloc {
-    [timestamp_label release];
-    [diaper_status_label release];
     [super dealloc];
-    
 }
 
 
 #pragma mark - Helper functions
 
-+ (int) height { return 300; }
++ (int) height { return 130; }
 + (int) width { return 308; }
 
 - (void) setBackground {
@@ -217,32 +215,7 @@
 }
 
 - (void) loadIcons {
-    // Load icon.
     [self setIcon:@"diaper2.png"];
-    
-    /*
-    // Initialize the status label.
-    diaper_status_label = [[UILabel alloc] initWithFrame:CGRectMake(60, 5, 70, 50)];
-    diaper_status_label.text = @"Wet";
-    diaper_status_label.backgroundColor = [UIColor blueColor];
-    [diaper_status_label setTextColor:[UIColor colorWithRed:0.5f green:0.5f blue:0.5f alpha:1.0f]];
-    [diaper_status_label setFont:[UIFont fontWithName:@"Roboto-Regular" size:12]];
-    [self.view addSubview:diaper_status_label];
-    
-    // Initialize the timestamp label.
-    timestamp_label = [[UILabel alloc] initWithFrame:CGRectMake(60, 70, 60, 30)];
-    timestamp_label.text = @"50 minutes ago";
-    timestamp_label.backgroundColor = [UIColor greenColor];
-    [timestamp_label setTextColor:[UIColor colorWithRed:0.6f green:0.6f blue:0.6f alpha:1.0f]];
-    [timestamp_label setFont:[UIFont fontWithName:@"Roboto-Regular" size:12]];
-    [self.view addSubview:timestamp_label];
-    
-    // Initialize the description label.
-    description = [[UILabel alloc] initWithFrame:CGRectMake(5, 120, 300, 50)];
-    description.text = @"This is the third time today.";
-    description.backgroundColor = [UIColor grayColor];
-    [self.view addSubview:description];
-     */
 }
 
 - (void) getDataFromDB {
@@ -253,10 +226,9 @@
     if( events.count > 0 ) {
         totEvent* currEvt = [events objectAtIndex:0];
         card_title.text = [NSString stringWithFormat:@"%@", currEvt.value];
-        [self setTimestamp:currEvt.getTimeText];
         if( events.count > 1 ) {
             totEvent* prevEvt = [events objectAtIndex:1];
-            description.text = [NSString stringWithFormat:@"The diaper last time is %@", prevEvt.value];
+            description.text = [NSString stringWithFormat:@"The diaper was %@ last time.", prevEvt.value];
         }
         [self setTimestamp:[totTimeUtil getTimeDescriptionFromNow:currEvt.datetime]];
     }

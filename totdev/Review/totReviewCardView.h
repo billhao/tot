@@ -12,19 +12,6 @@
 #import "totEventName.h"
 #import "totTimeUtil.h"
 
-// Each card will have an icon, they should share the same position info.
-#define CARD_ICON_X 5
-#define CARD_ICON_Y 5
-#define CARD_ICON_W 40
-#define CARD_ICON_H 40
-
-#define TIME1_X 50
-#define TIME2_X 150
-#define TIME1_W 80
-#define TIME2_W 100
-#define TIME_H 40
-#define TIME_Y 5
-
 @class totTimeline;
 @class totReviewCardView;
 @class totReviewStory;
@@ -36,7 +23,7 @@
     UIButton* hour_button;  // hour/minute
     UIButton* year_button;  // year/month/day
     
-    UIButton* confirm_button;
+    UIButton* confirm_button;  // want to deprecate these two buttons.
     UIButton* cancel_button;
 
     UIButton* icon_unconfirmed_button;    // use icon as the button to confirm.
@@ -53,9 +40,8 @@
 - (void) setIcon:(NSString*)icon_name;
 - (void) setIcon:(NSString*)icon_name confirmedIcon:(NSString*)confirmed_icon_name;
 - (void) setCalendar:(int)days;
-- (void) setTimestamp;
+- (void) setTimestamp;  // use the current time.
 - (void) setTitle:(NSString *)desc;
-//- (void) setConfirmAndCancelButtons:(int)y;
 
 - (bool) clickOnConfirmIconButtonDelegate;
 - (NSString*) getTimestampInString;
@@ -68,6 +54,9 @@
     
     UILabel* card_title;
     UILabel* description;
+    UILabel* timestamp;
+    UIImageView* calendar_icon_;
+    UILabel* calendar_text_;
     
     totReviewStory* story_;
 }
@@ -79,7 +68,6 @@
 @property (nonatomic, retain) totReviewStory* story_;
 
 - (void) setBackground;
-
 - (void) setIcon:(NSString*)icon_name;
 - (void) setTimestamp:(NSString*)time;
 - (void) setCalendar:(int)days;
@@ -116,18 +104,20 @@ typedef enum {
     // pan gesture related
     float touch_x;
     float touch_y;
-    float origin_x;  // used to recover the position.
+    float origin_x;  // used to recover the position of the view when we finish the animation.
 }
 
 @property (nonatomic, retain) totReviewEditCardView* mEditView;
 @property (nonatomic, retain) totReviewShowCardView* mShowView;
 @property (nonatomic, assign) totTimeline* parent;
 @property (nonatomic, assign) UIButton* associated_delete_button;
+@property (nonatomic, readonly) ReviewCardMode mMode;
 
 - (void) flip;
 
+// caller needs to take ownership.
 + (totReviewCardView*) createEmptyCard:(ReviewCardType)type timeline:(totTimeline*)timeline;
-+ (totReviewCardView*) loadCard:(ReviewCardType)type data:(NSString*)data timeline:(totTimeline*)timeline ;
-+ (totReviewCardView*) loadCard:(ReviewCardType)type story:(totReviewStory*)story timeline:(totTimeline*)timeline;
+// caller needs to take ownership.
++ (totReviewCardView*) loadCard:(NSString*)type story:(totReviewStory*)story timeline:(totTimeline*)timeline;
 
 @end

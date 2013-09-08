@@ -38,10 +38,7 @@
 @end
 
 
-@interface totDiaperShowCard : totReviewShowCardView {
-    UILabel* diaper_status_label; // could be wet, solid and web&solid.
-    UILabel* timestamp_label;
-}
+@interface totDiaperShowCard : totReviewShowCardView
 
 + (int) height;
 + (int) width;

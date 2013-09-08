@@ -78,8 +78,8 @@
     NSLog(@"root vc view did appear");
     //[self presentViewController:homeEntryViewController animated:FALSE completion:nil];
     //[self presentViewController:timelineController animated:FALSE completion:nil];
-    [self switchTo:kHomeViewEntryView withContextInfo:nil];
-    //[self switchTo:kTimeline withContextInfo:nil];
+    //[self switchTo:kHomeViewEntryView withContextInfo:nil];
+    [self switchTo:kTimeline withContextInfo:nil];
 }
 
 - (UIViewController*)getViewByIndex:(int)viewIndex {

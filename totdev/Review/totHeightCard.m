@@ -7,6 +7,7 @@
 //
 
 #import "totHeightCard.h"
+#import "totReviewStory.h"
 
 @implementation totHeightEditCard
 
@@ -32,8 +33,6 @@
     [super dealloc];
     [bgview release];
     [picker release];
-    //[confirm_button release];
-    //[cancel_button release];
 }
 
 -(void)viewDidLoad {
@@ -115,24 +114,6 @@
     selectedValueLabel.textAlignment = NSTextAlignmentCenter;
     selectedValueLabel.backgroundColor = [UIColor clearColor];
     [self.view addSubview:selectedValueLabel];
-
-    //confirm_button = [UIButton buttonWithType:UIButtonTypeCustom];
-    //confirm_button.frame = CGRectMake(self.width-20+2*(-60-10), bgview.frame.origin.y+bgview.frame.size.height+20, 60, 40);
-    //cancel_button =  [UIButton buttonWithType:UIButtonTypeCustom];
-    //cancel_button.frame = CGRectMake(self.width-20-60-10, bgview.frame.origin.y+bgview.frame.size.height+20, 60, 40);
-    
-    //self.width-20+2*(-60-10), bgview.frame.origin.y+bgview.frame.size.height+20, 60, 40)];
-    
-    //self.width-20-60-10, 350, 60, 40)];
-    //[confirm_button setImage:[UIImage imageNamed:@"icons-ok"] forState:UIControlStateNormal];
-    //[confirm_button setImage:[UIImage imageNamed:@"icons-ok_pressed"] forState:UIControlStateHighlighted];
-    //[cancel_button setImage:[UIImage imageNamed:@"icons-close"] forState:UIControlStateNormal];
-    //[cancel_button setImage:[UIImage imageNamed:@"icons-close_pressed"] forState:UIControlStateHighlighted];
-    //[confirm_button addTarget:self action:@selector(confirm:) forControlEvents:UIControlEventTouchUpInside];
-    //[cancel_button addTarget:self action:@selector(cancel:) forControlEvents:UIControlEventTouchUpInside];
-    
-    //[self.view addSubview:confirm_button];
-    //[self.view addSubview:cancel_button];
 }
 
 - (void) setBackground {
@@ -165,7 +146,6 @@
 
 
 
-
 @implementation totHeightShowCard
 
 @synthesize type;
@@ -185,16 +165,27 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setBackground];
-    [self setIcon:@"height2.png"];
-    [self setCalendar:166];
-    [self setTimestamp:@"40 Minutes ago"];
+    if (type == HEIGHT) {
+        [self setIcon:@"height2.png"];
+    } else if (type == WEIGHT) {
+        [self setIcon:@"weight2.png"];
+    } else if (type == HEAD) {
+        [self setIcon:@"head2.png"];
+    }
 }
 
-- (void)viewDidAppear:(BOOL)animated {
+- (void)viewWillAppear:(BOOL)animated {
     // If we load card from database, should not call this function again.
     // when loading from db, story_ will not be nil.
-    if (!story_)
+    if (!story_) {
         [self getDataFromDB];
+    } else {
+        card_title.text = story_.mRawContent;
+        description.text = @"";
+        [self setTimestamp:[totTimeUtil getTimeDescriptionFromNow:story_.mWhen]];
+        // set calendar days here.
+        //[self setCalendar:166];
+    }
 }
 
 #pragma mark - Helper functions

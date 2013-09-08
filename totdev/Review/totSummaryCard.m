@@ -92,7 +92,6 @@
 //    [self enableBorder:label_babyName];
 //    [self enableBorder:label_babyAge];
 
-    
     // loadLabels    
     float label_h = 30;
     float label_w = 44;

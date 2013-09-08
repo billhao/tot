@@ -12,6 +12,7 @@
 #import "totHomeFeedingViewController.h"
 #import "totTimeline.h"
 #import "totUtility.h"
+#import "totReviewStory.h"
 
 @implementation totFeedEditCard
 
@@ -44,8 +45,6 @@
     [self setIcon:@"food_gray" confirmedIcon:@"food2"];
     [self setTitle:@"Feeding"];
     [self setTimestamp];
-    [self setCalendar:1000];
-    
     [self createUI];
 }
 
@@ -85,15 +84,12 @@
 }
 
 -(void)textFieldDidBeginEditing:(UITextField *)textField {
-    // move to top
     [parentView.parent moveToTop:self.parentView];
 }
 
+// Check the input. If it's valid return true, otherwise, return false.
 - (bool)clickOnConfirmIconButtonDelegate {
     [self saveToDB];
-    
-    [parentView flip];
-    
     return true;
 }
 
@@ -115,8 +111,6 @@
     CGRect f = CGRectMake(0, yy, [totFeedEditCard width] - h - margin_x, h);
     UIView* v = [[UIView alloc] initWithFrame:f];
     v.clipsToBounds = TRUE;
-    
-    //[totUtility enableBorder:v];
 
     f = CGRectMake(x, 0, w1, h);
     [foodBoxes addObject:[self createInputBox:f parentView:v]];
@@ -200,8 +194,7 @@
 
 - (id)init {
     self = [super init];
-    if (self) {
-    }
+    if (self) {}
     return self;
 }
 
@@ -218,8 +211,13 @@
 - (void)viewWillAppear:(BOOL)animated {
     // If we load card from database, should not call this function again.
     // when loading from db, story_ will not be nil.
-    if (!story_)
+    if (!story_) {
         [self getDataFromDB];
+    } else {
+        card_title.text = story_.mRawContent;
+        description.text = @"";
+        [self setTimestamp:[totTimeUtil getTimeDescriptionFromNow:story_.mWhen]];
+    }
 }
 
 #pragma mark - Helper functions
