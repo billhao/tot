@@ -11,12 +11,15 @@
 #import "totEventName.h"
 #import "totUtility.h"
 #import "totBooklet.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface totBookListViewController ()
 
 @end
 
 @implementation totBookListViewController
+
+@synthesize homeController;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -35,17 +38,18 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    self.view.backgroundColor = [UIColor redColor];
-    
     // create navigation bar
-    //navController = [[UINavigationController alloc] initWithRootViewController:self.parentViewController];
+    float navbar_height = 42;
     
     // create book list scroll view
-    [self createScrollView];
+    [self createScrollView:navbar_height];
     
     // load all books and templates
     [self loadBooksAndTemplates:TRUE];
 
+    // this is created the last because it needs to be on top of the scroll view
+    [self createNavigationBar];
+    
     // right swipe
     UISwipeGestureRecognizer* rightSwipeRecognizer = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipeGestureEvent:)];
     rightSwipeRecognizer.direction = UISwipeGestureRecognizerDirectionRight;
@@ -125,10 +129,12 @@
 // Respond to a swipe gesture
 - (IBAction)swipeGestureEvent:(UISwipeGestureRecognizer *)swipeRecognizer {
     if( swipeRecognizer.direction == UISwipeGestureRecognizerDirectionRight ) {
-        CGPoint pt = [swipeRecognizer locationInView:scrollView];
-        UIView* v = [scrollView hitTest:pt withEvent:nil];
-        if( v != scrollView ) {
-            [self deleteBook:v.tag thumbnail:v ];
+        for (UIView* v in bookBtnList) {
+            CGPoint pt = [swipeRecognizer locationInView:v];
+            if( [v pointInside:pt withEvent:nil] ) {
+                [self deleteBook:v.tag thumbnail:v ];
+                break;
+            }
         }
     }
 }
@@ -136,7 +142,7 @@
 
 - (void)bookSelected:(id)sender {
     UIButton* btn = (UIButton*)sender;
-    int bookID = btn.tag;
+    int bookID = btn.superview.tag;
     [self openBook:bookID];
 }
 
@@ -155,16 +161,21 @@
     [booksAndTemplates removeObjectAtIndex:bookID];
     
     // remove the book thumbnail from view
-    UIButton* bookBtn = bookBtnList[bookID];
+    UIView* bookView = bookBtnList[bookID];
     [UIView animateWithDuration:0.2 animations:^{
         deleteBtn.alpha = 0;
-        bookBtn.alpha = 0;
+        bookView.alpha = 0;
     } completion:^(BOOL finished) {
         [deleteBtn removeFromSuperview];
 
         [self loadBooksAndTemplates:FALSE];
     }];
     
+}
+
+- (void)homeButtonPressed:(id)sender {
+    // go back to home page
+    [homeController switchTo:kHomeViewEntryView withContextInfo:nil];
 }
 
 
@@ -194,6 +205,7 @@
     //    [books release];
     
     // load book templates from resources
+    // TODO this iterates basically all resource files (several hundreds). need to be improved
     NSString* templatePath = [[NSBundle mainBundle] resourcePath];
     NSArray* files = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:templatePath error:nil];
     for (NSString* filename in files) {
@@ -221,15 +233,15 @@
      makeObjectsPerformSelector:@selector(removeFromSuperview)];
     
     int margin_x = 20;
-    int margin_x_left = 20;
-    int margin_x_right = 20;
-    int margin_y = 20;
-    int margin_y_top = 10;
-    int margin_y_bottom = 10;
-    int icon_height = 195;
-    int icon_width = 130;
-    int label_height = 20;
-    int columns = 2;
+    float margin_x_left = 5.5; // the thumbnail size is 618
+    float margin_x_right = 5.5;
+    int margin_y = 6;
+    int margin_y_top = 8;
+    int margin_y_bottom = 8;
+    float icon_height = 200;
+    float icon_width = 309;
+    int label_height = 0;
+    int columns = 1;
     int rows = ceil((double)booksAndTemplates.count/columns);
     
     bookBtnList = [[NSMutableArray alloc] initWithCapacity:booksAndTemplates.count];
@@ -242,26 +254,42 @@
             BOOL isTemplate = [[book objectForKey:@"type"] isEqualToString:@"template"];
             NSString* bookid = [book objectForKey:@"id"];
             
+            // TOOD debug
+            //if( !isTemplate ) continue;
+
             // get the icon file names, just replace space with underscore
             NSString* bookIcon = [book objectForKey:@"name"];
-            NSString* bookIconPressed = [NSString stringWithFormat:@"activity_%@_pressed", bookIcon];
-            //bookIcon = @"book1";
-            //bookIconPressed = @"camera_button";
+            NSString* bookIconPressed = bookIcon;// [NSString stringWithFormat:@"activity_%@_pressed", bookIcon];
             
+            UIView* bookView = [[UIView alloc] init];
+            bookView.frame = CGRectMake(margin_x_left+c*(icon_width+margin_x), margin_y_top+r*(icon_height+label_height+margin_y), icon_width, icon_height);
             UIButton* bookBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-            bookBtn.frame = CGRectMake(margin_x_left+c*(icon_width+margin_x), margin_y_top+r*(icon_height+label_height+margin_y), icon_width, icon_height);
+            bookBtn.frame = bookView.bounds;
+            [bookBtn addTarget:self action:@selector(bookSelected:) forControlEvents:UIControlEventTouchUpInside];
+            [bookView addSubview:bookBtn];
+            //[totUtility enableBorder:bookBtn];
             if( isTemplate ) {
                 [bookBtn setImage:[UIImage imageNamed:bookIcon] forState:UIControlStateNormal];
                 [bookBtn setImage:[UIImage imageNamed:bookIconPressed] forState:UIControlStateHighlighted];
             }
             else {
+                // background
+                UIImageView* bg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Birthday"]];
+                [bookView addSubview:bg];
+                
+                // book thumbnail
                 UIImage* coverImg = [totBookViewController loadPageImageFromFile:bookid];
-                [bookBtn setImage:coverImg forState:UIControlStateNormal];
-                [bookBtn setImage:coverImg forState:UIControlStateHighlighted];
+                UIImageView* coverImgView = [[UIImageView alloc] initWithFrame:CGRectMake(15, 7, 278, 153)];
+                coverImgView.image = coverImg;
+                [bookView addSubview:coverImgView];
+                coverImgView.layer.borderWidth = 0.5;
+                coverImgView.layer.borderColor = [UIColor grayColor].CGColor;
+                [bookView addSubview:coverImgView];
+
+                bookBtn.backgroundColor = [UIColor clearColor];
             }
-            bookBtn.tag = i;
-            [bookBtn addTarget:self action:@selector(bookSelected:) forControlEvents:UIControlEventTouchUpInside];
-            [bookBtnList addObject:bookBtn];
+            bookView.tag = i;
+            [bookBtnList addObject:bookView];
             
             UILabel* bookLabel = [[UILabel alloc] init];
             bookLabel.frame = CGRectMake(margin_x_left+c*(icon_width+margin_x), margin_y_top+r*(icon_height+label_height+margin_y)+icon_height, icon_width, label_height);
@@ -270,29 +298,33 @@
             bookLabel.text = [book objectForKey:@"name"];
             bookLabel.tag = i;
             
-            [scrollView addSubview:bookBtn];
+            [scrollView addSubview:bookView];
             [scrollView addSubview:bookLabel];
             [bookLabel release];
+            [bookView release];
         }
     }
     scrollView.contentSize = CGSizeMake(320, margin_y_top+margin_y_bottom+rows*(icon_height+label_height+margin_y));
+    float h = scrollView.contentSize.height;
     // scroll to top
-    scrollView.contentOffset = CGPointMake(0, 0);
+//    scrollView.contentOffset = CGPointMake(0, 0);
     
     // TODO vertical scroll bar not shown after edit book & reload book list
 }
 
 // create a scroll view of books and templates
-- (void)createScrollView {
-    int scrollview_height = 420; // 480 - 20 - 40navi
+- (void)createScrollView:(float)y_offset {
+    float xx = self.view.bounds.size.height;
+    int scrollview_height = self.view.bounds.size.height - y_offset; // 480 - 20 - 40navi
     
     // create the view
-    bookListView = [[UIView alloc] initWithFrame:CGRectMake(0, 60, 320, scrollview_height)];
-    //UIImageView* bg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"activity_background"]];
+    bookListView = [[UIView alloc] initWithFrame:CGRectMake(0, y_offset, 320, scrollview_height)];
+//    UIImageView* bg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"scrapbook_bg"]];
     UIView* bg = [[UIView alloc] init];
     bg.frame = CGRectMake(0, 0, 320, scrollview_height);
-    bg.backgroundColor = [UIColor grayColor];
-    bg.alpha = 1;
+//    bg.backgroundColor = [UIColor grayColor];
+    bg.backgroundColor = [UIColor colorWithRed:240.0/255 green:240.0/255 blue:240.0/255 alpha:1.0f];
+//    bg.alpha = 1;
     [bookListView addSubview:bg];
     [bg release];
     
@@ -313,6 +345,28 @@
     [deleteBtn setImage:[UIImage imageNamed:@"delete_button"] forState:UIControlStateNormal];
     //[deleteBtn setImage:[UIImage imageNamed:@"delete_button_pressed"] forState:UIControlStateHighlighted];
     [deleteBtn addTarget:self action:@selector(deleteBookBtnSelected:) forControlEvents:UIControlEventTouchUpInside];
+}
+
+// return the height of the nav bar
+- (void)createNavigationBar {
+    // create navigation bar
+    UIImage* navbar_img = [UIImage imageNamed:@"scrapbook_navbar"];
+    UIView* navbar = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, navbar_img.size.height)];
+    //navbar.backgroundColor = [UIColor colorWithRed:116.0/255 green:184.0/255 blue:229.0/255 alpha:1.0];
+    navbar.backgroundColor = [UIColor colorWithPatternImage:navbar_img];
+    
+    // create home button
+    UIImage* homeImg = [UIImage imageNamed:@"timeline_home"];
+    UIImage* homeImgPressed = [UIImage imageNamed:@"timeline_home_pressed"];
+    UIButton* homeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    homeBtn.frame = CGRectMake(277.5, 12, homeImg.size.width, homeImg.size.height);
+    [homeBtn setImage:homeImg forState:UIControlStateNormal];
+    [homeBtn setImage:homeImgPressed forState:UIControlStateHighlighted];
+    [homeBtn addTarget:self action:@selector(homeButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [navbar addSubview:homeBtn];
+    
+    [self.view addSubview:navbar];
+    [navbar release];
 }
 
 

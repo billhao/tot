@@ -83,7 +83,7 @@
 
     // baby age
     label_babyAge = [[UILabel alloc] initWithFrame:CGRectMake(129+2, 78, 170, 14)];
-    UIFont* font2 = [UIFont fontWithName:@"Raleway" size:12];
+    UIFont* font2 = [UIFont fontWithName:@"Raleway" size:14];
     label_babyAge.font = font2;
     label_babyAge.textColor = [UIColor colorWithRed:141.0/255 green:141.0/255 blue:141.0/255 alpha:1.0];
     label_babyAge.text = @"140 days";
@@ -97,7 +97,7 @@
     float label_h = 30;
     float label_w = 44;
 
-    UIFont* font3 = [UIFont fontWithName:@"Raleway" size:8];
+    UIFont* font3 = [UIFont fontWithName:@"Raleway" size:14];
     UIColor* fontColor = [UIColor grayColor];
     
     if( physicalLabels != nil ) [physicalLabels release];

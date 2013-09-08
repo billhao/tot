@@ -61,7 +61,7 @@
     UIImage* cameraImg = [UIImage imageNamed:@"camera_button"];
     CGRect f = self.view.frame;
     int margin_x = 10;
-    int margin_y = 10;
+    int margin_y = 0;
     cameraBtn.frame = CGRectMake(f.size.width-cameraImg.size.width-margin_x, f.size.height-cameraImg.size.height-margin_y, cameraImg.size.width, cameraImg.size.height);
     [cameraBtn setImage:cameraImg forState:UIControlStateNormal];
     [cameraBtn setImage:[UIImage imageNamed:@"camera_button_pressed"] forState:UIControlStateHighlighted];
@@ -69,12 +69,13 @@
     [self.view addSubview:cameraBtn];
     
     // add scrapbook icon
-//    scrapbookBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-//    scrapbookBtn.frame = CGRectMake(0, 400, 60, 60);
-//    [scrapbookBtn setImage:[UIImage imageNamed:@"scrapbook_button"] forState:UIControlStateNormal];
-//    [scrapbookBtn setImage:[UIImage imageNamed:@"scrapbook_button_pressed"] forState:UIControlStateHighlighted];
-//    [scrapbookBtn addTarget:self action:@selector(scrapbookButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-//    [self.view addSubview:scrapbookBtn];
+    UIImage* sbImg = [UIImage imageNamed:@"scrapbook_button"];
+    scrapbookBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    scrapbookBtn.frame = CGRectMake(f.size.width-sbImg.size.width, cameraBtn.frame.origin.y-sbImg.size.height+6, sbImg.size.width, sbImg.size.height);
+    [scrapbookBtn setImage:sbImg forState:UIControlStateNormal];
+    [scrapbookBtn setImage:[UIImage imageNamed:@"scrapbook_button_pressed"] forState:UIControlStateHighlighted];
+    [scrapbookBtn addTarget:self action:@selector(scrapbookButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:scrapbookBtn];
 
     // add menu icon
 //    menuBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -123,6 +124,7 @@
     [super dealloc];
     
     if( allActivities != nil ) [allActivities release];
+    if( scrapbookListController != nil ) [scrapbookListController release];
 }
 
 - (void)viewDidUnload
@@ -153,15 +155,19 @@
     MediaInfo* m = mediaLib.currentMediaInfo;
     NSLog(@"photo event id: %ld", m.eventID);
 
-    // show photo
-    [mPhotoView imageFromFileContent:[totMediaLibrary getMediaPath:m.filename]];
-    
-    [self updateSelectedActivitesView];
     
     if( ![m isDefault] ) {
+        // show photo
+        [mPhotoView imageFromFileContent:[totMediaLibrary getMediaPath:m.filename]];
+
         // save last viewed photo
         [global.user setLastViewedPhoto:m];
     }
+    else {
+        mPhotoView.image = [UIImage imageNamed:m.filename];
+    }
+    
+    [self updateSelectedActivitesView];
 }
 
 // Load activities from the json file. Returns the json object.
@@ -314,7 +320,6 @@
     }
     else if( swipeRecognizer.direction == UISwipeGestureRecognizerDirectionUp ) {
         // show timeline
-//        [self presentViewController:(UIViewController*)homeRootController.timelineController animated:TRUE completion:nil];
         [self.homeRootController switchTo:kTimeline withContextInfo:nil];
     }
 }
@@ -342,11 +347,7 @@
 }
 
 - (void)scrapbookButtonPressed: (id)sender {
-    // show scrapbook
-    if( scrapbookListController == nil ) {
-        scrapbookListController = [[totBookListViewController alloc] init];
-    }
-    [self.view addSubview:scrapbookListController.view];
+    [self.homeRootController switchTo:kScrapbook withContextInfo:nil];
 }
 
 // add the selected activity

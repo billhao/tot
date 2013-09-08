@@ -81,23 +81,51 @@
 }
 
 - (void)launchCamera:(UIViewController*)vc {
+    [self launchCamera:vc type:UIImagePickerControllerSourceTypeCamera];
+}
+
+- (void)launchCamera:(UIViewController*)vc type:(UIImagePickerControllerSourceType)type {
+    // TODO release imagePicker first?
+    
+    hostVC = vc;
     self.view.frame = CGRectMake(0, 0, 320, 460);
-    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+    if ( (type == UIImagePickerControllerSourceTypeCamera) &&
+         [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         imagePicker = [[UIImagePickerController alloc] init];
         imagePicker.delegate = self;
         imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
         imagePicker.mediaTypes = [NSArray arrayWithObjects:(NSString*)kUTTypeMovie, (NSString*)kUTTypeImage, nil];
         imagePicker.allowsEditing = NO;
-        [vc presentModalViewController:imagePicker animated:NO];
+        
+        // create overlay button for go to photo library
+        UIImage* photoLibImg = [UIImage imageNamed:@"photo_lib"];
+        CGRect f = CGRectMake(imagePicker.view.bounds.size.width-photoLibImg.size.width-10, imagePicker.view.bounds.size.height-photoLibImg.size.height-10-54, photoLibImg.size.width, photoLibImg.size.height);
+        UIButton* overlay = [UIButton buttonWithType:UIButtonTypeCustom];
+        overlay.frame = f;
+        overlay.alpha = 0.5;
+        [overlay setImage:photoLibImg forState:UIControlStateNormal];
+        [overlay addTarget:self action:@selector(photoLibButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+        imagePicker.cameraOverlayView = overlay;
+        [vc presentViewController:imagePicker animated:TRUE completion:nil];
     }
-    else if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
+    else if ( //(type == UIImagePickerControllerSourceTypePhotoLibrary) &&
+              [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
         imagePicker = [[UIImagePickerController alloc] init];
         imagePicker.delegate = self;
         imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
         imagePicker.mediaTypes = [NSArray arrayWithObjects:(NSString*)kUTTypeMovie, (NSString*)kUTTypeImage, nil];
         imagePicker.allowsEditing = NO;
-        [vc presentModalViewController:imagePicker animated:NO];
+        [vc presentViewController:imagePicker animated:TRUE completion:nil];
     }
+}
+
+
+- (void)photoLibButtonPressed:(id)sender {
+    NSLog(@"switch to photo library");
+    [imagePicker dismissViewControllerAnimated:FALSE completion:^{
+        [imagePicker release];
+        [self launchCamera:hostVC type:UIImagePickerControllerSourceTypePhotoLibrary];
+    }];
 }
 
 - (void)imagePickerController:(UIImagePickerController*)picker didFinishPickingMediaWithInfo:(NSDictionary*)info {
@@ -156,7 +184,7 @@
 }
 
 - (void)hideCamera {
-    [imagePicker dismissModalViewControllerAnimated:YES];
+    [imagePicker dismissViewControllerAnimated:TRUE completion:nil];
     [imagePicker release];
     self.view.frame = CGRectMake(0, 0, 0, 0);
 }

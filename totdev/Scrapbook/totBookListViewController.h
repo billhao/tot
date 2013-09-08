@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "totBookViewController.h"
+#import "totHomeRootController.h"
 
 @interface totBookListViewController : UIViewController <UIScrollViewDelegate> {
     UINavigationController *navController;
@@ -21,7 +22,7 @@
     NSMutableArray* booksAndTemplates;
 }
 
-@property(strong, nonatomic) UIViewController* parentController;
+@property(nonatomic, retain) totHomeRootController* homeController;
 
 - (void)closeBook:(BOOL)modified;
 

@@ -68,7 +68,7 @@
     loginNavigationController.view.frame = self.window.bounds;
 //    loginNavigationController.view.autoresizesSubviews = false;  // for iphone 5 screen size
 
-    //self.window.rootViewController = loginNavigationController;
+    self.window.rootViewController = loginNavigationController;
     self.window.backgroundColor = [UIColor blackColor];
     // use transparent status bar
 //    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackTranslucent];

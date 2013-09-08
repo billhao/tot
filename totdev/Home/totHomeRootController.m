@@ -18,7 +18,7 @@
 
 @implementation totHomeRootController
 
-@synthesize homeEntryViewController;
+@synthesize homeEntryViewController, scrapbookListController;
 //@synthesize homeFeedingViewController;
 //@synthesize homeHeightViewController;
 //@synthesize homeActivityLabelController;
@@ -66,23 +66,11 @@
     // customize the tab bar item
     NSLog(@"%@", @"home root didload");
     
-    totHomeEntryViewController *aHomeView = [[totHomeEntryViewController alloc] init];
-    aHomeView.view.frame = self.view.frame;
-    self.homeEntryViewController = aHomeView;
-    self.homeEntryViewController.homeRootController = self;
-    [aHomeView release];
-    
-    // Create timeline. This view will be displayed when the user flip the finger up.
-    totTimelineController* tc = [[totTimelineController alloc] initWithNibName:@"Timeline" bundle:nil];
-    tc.homeController = self;
-    self.timelineController = tc;
-    [tc release];
-    
-    self.homeEntryViewController.view.frame = CGRectMake(0, 0, 320, 460);
-    self.timelineController.view.frame = CGRectMake(0, 0, 320, 460);
-    
-    // =======================================
-    
+    homeEntryViewController = [[totHomeEntryViewController alloc] init];
+    homeEntryViewController.view.frame = self.view.frame;
+    homeEntryViewController.homeRootController = self;
+    homeEntryViewController.view.frame = CGRectMake(0, 0, 320, 460);
+
     mCurrentViewIndex = kHomeViewEntryView;
 }
 
@@ -99,19 +87,9 @@
         case kHomeViewEntryView:
             return homeEntryViewController;
         case kTimeline:
-            return timelineController;
+            return [self getTimelineVC];
         case kScrapbook:
-            return nil;
-//        case kHomeViewFeedView:
-//            return homeFeedingViewController;
-//        case kHomeViewHeightView:
-//            return homeHeightViewController;
-//        case kHomeActivityLabelController:
-//            return homeActivityLabelController;
-//        case kHomeActivityBrowseController:
-//            return homeActivityBrowseController;
-//        case kHomeAlbumBrowseController:
-//            return homeAlbumBrowseController;
+            return [self getScrapbookVC];
         default:
             printf("Invalid view index\n");
             return nil;
@@ -122,17 +100,6 @@
     switch (viewIndex) {
         case kHomeViewEntryView:
             return homeEntryViewController.view.frame.origin.x;
-        
-//        case kHomeViewFeedView:
-//            return homeFeedingViewController.view.frame.origin.x;
-//        case kHomeViewHeightView:
-//            return homeHeightViewController.view.frame.origin.x;
-//        case kHomeActivityLabelController:
-//            return homeActivityLabelController.view.frame.origin.x;
-//        case kHomeActivityBrowseController:
-//            return homeActivityBrowseController.view.frame.origin.x;
-//        case kHomeAlbumBrowseController:
-//            return homeAlbumBrowseController.view.frame.origin.x;
         default:
             printf("Invalid view index\n");
             return -1;
@@ -147,79 +114,53 @@
     currentView = [self getViewByIndex:mCurrentViewIndex];
 //    nextX = [self getViewXPositionByIndex:viewIndex];
     nextView = [self getViewByIndex:viewIndex];
-    
-//    switch (viewIndex) {
-//        case kHomeViewEntryView:
-//            break;
-//        case kHomeViewFeedView:
-//            break;
-//        case kHomeViewHeightView:
-//        {
-//            // tell the height view which measurement is on the top
-//            int i = (int)info;
-//            [(totHomeHeightViewController*)nextView setInitialPicker:i];
-//            break;
-//        }
-//        case kHomeActivityLabelController:
-//            [homeActivityLabelController receiveMessage:info];
-//            break;
-//        case kHomeActivityBrowseController:
-//            [homeActivityBrowseController receiveMessage:info];
-//            break;
-//        case kHomeAlbumBrowseController:
-//            [homeAlbumBrowseController receiveMessage:info];
-//            break;
-//        default:
-//            break;
-//    }
 
     AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
     UINavigationController* nc = delegate.loginNavigationController;
-    if( viewIndex == kHomeViewEntryView ) {
-        if([nc.viewControllers containsObject:nextView]) {
-            [nc popToViewController:nextView animated:FALSE];
+
+    switch (viewIndex) {
+        case kHomeViewEntryView:
+        {
+            if([nc.viewControllers containsObject:nextView]) {
+                [nc popToViewController:nextView animated:FALSE];
+            }
+            else
+                [nc pushViewController:nextView animated:FALSE];
         }
-        else
-            [nc pushViewController:nextView animated:FALSE];
+            break;
+        case kTimeline:
+        {
+            nextView.view.frame = CGRectMake(0, 480, 320, 460);
+            [UIView animateWithDuration:0.75
+                             animations:^{
+                                 //[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+                                 [delegate.loginNavigationController pushViewController:nextView animated:FALSE];
+                                 if( currentX < nextX ) {
+                                     currentView.view.frame = CGRectMake(-320, 0, 320, 460);
+                                 } else {
+                                     currentView.view.frame = CGRectMake(320, 0, 320, 460);
+                                 }
+                                 nextView.view.frame = CGRectMake(0, 0, 320, 460);
+                                 //[UIView setAnimationTransition:UIViewAnimationTransitionCurlUp forView:delegate.loginNavigationController.view cache:NO];
+                             }];
+        }
+            break;
+        case kScrapbook:
+        {
+            nextView.view.frame = CGRectMake(320, 0, 320, 460);
+            [UIView animateWithDuration:0.5
+                             animations:^{
+                                 [delegate.loginNavigationController pushViewController:nextView animated:FALSE];
+                                 if( currentX < nextX ) {
+                                     currentView.view.frame = CGRectMake(-320, 0, 320, 460);
+                                 } else {
+                                     currentView.view.frame = CGRectMake(320, 0, 320, 460);
+                                 }
+                                 nextView.view.frame = CGRectMake(0, 0, 320, 460);
+                             }];
+        }
+            break;
     }
-    else if( viewIndex == kTimeline ) {
-        nextView.view.frame = CGRectMake(0, 480, 320, 460);
-        [UIView animateWithDuration:0.75
-                         animations:^{
-                             //[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-                             [delegate.loginNavigationController pushViewController:nextView animated:FALSE];
-                             if( currentX < nextX ) {
-                                 currentView.view.frame = CGRectMake(-320, 0, 320, 460);
-                             } else {
-                                 currentView.view.frame = CGRectMake(320, 0, 320, 460);
-                             }
-                             nextView.view.frame = CGRectMake(0, 0, 320, 460);
-                             //[UIView setAnimationTransition:UIViewAnimationTransitionCurlUp forView:delegate.loginNavigationController.view cache:NO];
-                         }];
-    }
-    
-//        [self presentViewController:nextView animated:TRUE completion:^{
-//            mCurrentViewIndex = viewIndex;
-//        }];
-//    }];
-    
-//    [UIView beginAnimations:@"swipe" context:nil];
-//    [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-//    [UIView setAnimationDuration:0.5f];
-//    
-//    [currentView viewWillDisappear:NO];
-//    
-//    if( currentX < nextX ) {
-//        currentView.view.frame = CGRectMake(-320, 0, 320, 460);
-//    } else {
-//        currentView.view.frame = CGRectMake(320, 0, 320, 460);
-//    }
-//    nextView.view.frame = CGRectMake(0, 0, 320, 460);
-//    mCurrentViewIndex = viewIndex;
-//    
-//    [nextView viewWillAppear:NO];
-//    
-//    [UIView commitAnimations];
 }
 
 - (void)viewDidUnload
@@ -227,19 +168,33 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
-    [homeEntryViewController release];
-    [timelineController release];
-//    [homeFeedingViewController release];
-//    [homeHeightViewController release];
-//    [homeActivityLabelController release];
-//    [homeActivityBrowseController release];
-//    [homeAlbumBrowseController release];
+    if(homeEntryViewController) [homeEntryViewController release];
+    if(timelineController) [timelineController release];
+    if(scrapbookListController) [scrapbookListController release];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+- (totTimelineController*)getTimelineVC {
+    if( timelineController == nil ) {
+    // Create timeline. This view will be displayed when the user flip the finger up.
+        timelineController = [[totTimelineController alloc] initWithNibName:@"Timeline" bundle:nil];
+        timelineController.homeController = self;
+    }
+    return timelineController;
+}
+
+- (totBookListViewController*)getScrapbookVC {
+    // create scrapbook
+    if( scrapbookListController == nil ) {
+        scrapbookListController = [[totBookListViewController alloc] init];
+        scrapbookListController.homeController = self;
+    }
+    return scrapbookListController;
 }
 
 @end

@@ -23,6 +23,8 @@
     UIImagePickerController *imagePicker;
     id <CameraViewDelegate> delegate;
     BOOL bPhotoCamera;
+    
+    UIViewController* hostVC; // temp
 }
 
 @property (nonatomic, retain) UIImagePickerController *imagePicker;
