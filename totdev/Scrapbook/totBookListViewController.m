@@ -319,17 +319,16 @@
     
     // create the view
     bookListView = [[UIView alloc] initWithFrame:CGRectMake(0, y_offset, 320, scrollview_height)];
-//    UIImageView* bg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"scrapbook_bg"]];
-    UIView* bg = [[UIView alloc] init];
-    bg.frame = CGRectMake(0, 0, 320, scrollview_height);
-//    bg.backgroundColor = [UIColor grayColor];
-    bg.backgroundColor = [UIColor colorWithRed:240.0/255 green:240.0/255 blue:240.0/255 alpha:1.0f];
-//    bg.alpha = 1;
-    [bookListView addSubview:bg];
-    [bg release];
+//    UIView* bg = [[UIView alloc] init];
+//    bg.frame = CGRectMake(0, 0, 320, scrollview_height);
+//    bg.backgroundColor = [UIColor colorWithRed:240.0/255 green:240.0/255 blue:240.0/255 alpha:1.0f];
+//    [bookListView addSubview:bg];
+//    [bg release];
     
     // create the scroll view
     scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, 320, scrollview_height)];
+    UIImage* scrollViewBg = [UIImage imageNamed:@"scrapbook_bg"];
+    scrollView.backgroundColor = [UIColor colorWithPatternImage:scrollViewBg];
     [bookListView addSubview:scrollView];
     
     scrollView.pagingEnabled = FALSE;

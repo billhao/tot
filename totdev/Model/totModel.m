@@ -236,7 +236,7 @@ NSMutableArray *events = [[[NSMutableArray alloc] init] autorelease];
         NSString* searchname = nil;
         if( event!=nil ) searchname = [NSString stringWithFormat:@"%@%%", event];
         //NSLog(@"%@", searchname);
-        NSString* sql_main = @"SELECT event.event_id, event.time, event.name, event.value FROM event %@ ORDER BY datetime(event.event_id) %@ %@";
+        NSString* sql_main = @"SELECT event.event_id, event.time, event.name, event.value FROM event %@ ORDER BY event.event_id %@ %@";
         NSString* sql_condition;
         if( event!=nil ) {
             if( start!=nil && end!=nil ) {
@@ -282,7 +282,7 @@ NSMutableArray *events = [[[NSMutableArray alloc] init] autorelease];
         }
         
         NSString* sql = [NSString stringWithFormat:sql_main, sql_condition, sql_order, sql_limit];
-        //NSLog(@"[db] SQL=%@", sql);
+        NSLog(@"[db] SQL=%@", sql);
         
         const char *sqlz = [sql cStringUsingEncoding:NSASCIIStringEncoding];
         if(sqlite3_prepare_v2(db, sqlz, -1, &stmt, NULL) != SQLITE_OK) {
@@ -356,7 +356,7 @@ NSMutableArray *events = [[[NSMutableArray alloc] init] autorelease];
         NSString* searchname = nil;
         if( name!=nil ) searchname = [NSString stringWithFormat:@"%@", name];
         //NSLog(@"%@", searchname);
-        NSString* sql_main = @"SELECT event.event_id, event.time, event.name, event.value FROM event %@ ORDER BY datetime(event.event_id) DESC %@";
+        NSString* sql_main = @"SELECT event.event_id, event.time, event.name, event.value FROM event %@ ORDER BY event.event_id DESC %@";
         NSString* sql_condition;
         if( name!=nil ) {
             if( start!=nil && end!=nil ) {
