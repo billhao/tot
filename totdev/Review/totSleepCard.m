@@ -156,9 +156,17 @@
     if (!story_) {
         [self getDataFromDB];
     } else {
-        card_title.text  = @"";//story_.mRawContent;
-        description.text = @"";
-        //[self setTimestamp:[totTimeUtil getTimeDescriptionFromNow:story_.mWhen]];
+        NSMutableArray* events = [global.model getEvent:global.baby.babyID event:EVENT_BASIC_SLEEP limit:1 offset:-1 startDate:nil endDate:story_.mWhen];
+        if( events.count == 1 ) {
+            totEvent* e = events[0];
+            if( [e.value isEqualToString:@"start"] ) {
+                card_title.text = [totSleepShowCard formatValue:e.datetime d2:story_.mWhen];
+                [self setTimestamp:[totTimeUtil getTimeDescriptionFromNow:e.datetime]];
+            }
+            else
+                NSLog(@"there is a problem with sleep record %d %d", story_.mEventId, e.event_id);
+            
+        }
     }
 }
 

@@ -163,6 +163,9 @@
         totReviewStory *story = [[totReviewStory alloc] init];
         
         totEvent * anEvent = (totEvent*)[events objectAtIndex:i];
+        if( [anEvent.name isEqualToString:EVENT_BASIC_SLEEP] && [anEvent.value isEqualToString:@"start"] )
+            // skip start sleep event
+            continue;
         story.mEventType = anEvent.name;
         story.mRawContent = anEvent.value;
         story.mWhen = anEvent.datetime;
