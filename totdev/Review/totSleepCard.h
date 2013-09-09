@@ -14,9 +14,6 @@
     UIButton* stop_button;
 }
 
-+ (int) height;
-+ (int) width;
-
 @end
 
 
@@ -24,9 +21,6 @@
 @interface totSleepShowCard : totReviewShowCardView {
 
 }
-
-+ (int) height;
-+ (int) width;
 
 @end
 

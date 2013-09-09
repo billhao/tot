@@ -14,14 +14,12 @@
     STHorizontalPicker* picker;
     UILabel* selectedValueLabel;
     UIImageView* bgview;
+    
 }
 
 @property(nonatomic, assign, readonly) ReviewCardType type; // height, weight or HC
 @property(nonatomic, readonly, getter=getWidth)  int width;
 @property(nonatomic, readonly, getter=getHeight) int height;
-
-+ (int) width;
-+ (int) height;
 
 - (id)init:(ReviewCardType)cardType;
 
@@ -34,9 +32,6 @@
 }
 
 @property(nonatomic, assign, readonly) ReviewCardType type; // height, weight or HC
-
-+ (int) height;
-+ (int) width;
 
 - (id) init:(ReviewCardType)cardType;
 

@@ -16,8 +16,8 @@
 
 @implementation totFeedEditCard
 
-+ (int) height { return 200; }
-+ (int) width { return 308; }
+- (int) height { return 200; }
+- (int) width { return 308; }
 
 - (id)init {
     self = [super init];
@@ -72,7 +72,7 @@
         for( int i=0; i<inputViews.count; i++ ) {
             ((UIView*)inputViews[i]).tag = i;
             int yy = y + i*(h+margin_y);
-            CGRect f = CGRectMake(0, yy, [totFeedEditCard width] - h - margin_x, h);
+            CGRect f = CGRectMake(0, yy, [self width] - h - margin_x, h);
             ((UIView*)inputViews[i]).frame = f;
         }
         // update y of add button
@@ -108,7 +108,7 @@
     int i = foodBoxes.count;
     int yy = y + i*(h+margin_y);
     
-    CGRect f = CGRectMake(0, yy, [totFeedEditCard width] - h - margin_x, h);
+    CGRect f = CGRectMake(0, yy, [self width] - h - margin_x, h);
     UIView* v = [[UIView alloc] initWithFrame:f];
     v.clipsToBounds = TRUE;
 
@@ -189,8 +189,8 @@
 
 @implementation totFeedShowCard
 
-+ (int) height { return 200; }
-+ (int) width { return 308; }
+- (int) height { return 200; }
+- (int) width { return 308; }
 
 - (id)init {
     self = [super init];

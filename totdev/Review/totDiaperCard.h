@@ -23,25 +23,14 @@
     UIImageView * mSelectedIcon;
     
     int mDiaperType;
-    
-    // position of first selection item
-    float x;
-    float y;
-    float w;
-    float h;
-    float margin_y;
-}
 
-+ (int) height;
-+ (int) width;
+    float x, y, w, h;
+}
 
 @end
 
 
 @interface totDiaperShowCard : totReviewShowCardView
-
-+ (int) height;
-+ (int) width;
 
 @end
 

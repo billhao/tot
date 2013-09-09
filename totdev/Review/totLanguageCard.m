@@ -28,7 +28,6 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-    [self.parentView.parent moveToTop:self.parentView];
 }
 
 - (void) setBackground {
@@ -38,7 +37,7 @@
 - (void) loadIcons {
     [self setTimestamp];
     [self setTitle:@"New Word"];
-    [self setIcon:@"language_gray.png"];
+    [self setIcon:@"language_gray" confirmedIcon:@"language2"];
     [self setCalendar:99];
     [self loadButtons];
 }
@@ -48,12 +47,12 @@
     
     defaultTxt = @"what did the baby say?";
     
-    float margin_y = contentYOffset;
+    float y = contentYOffset + margin_y;
     float h = 80;
     float w = 280;
     
     // add the cloud for the text
-    CGRect f = CGRectMake(([totLanguageEditCard width]-w)/2, margin_y, w, h);
+    CGRect f = CGRectMake(([self width]-w)/2, y, w, h);
     UIImage* bgImg = [UIImage imageNamed:@"lang_input_bg"];
     UIImageView* bgImgView = [[UIImageView alloc] initWithImage:bgImg];
     bgImgView.frame = f;
@@ -75,8 +74,8 @@
     [self.view addSubview:textView];
 }
 
-+ (int) height { return 150; }
-+ (int) width { return 308; }
+- (int) height { return 150; }
+- (int) width { return 308; }
 
 - (void) dealloc {
     [super dealloc];
@@ -201,8 +200,8 @@
     }
 }
 
-+ (int) height { return 120; }
-+ (int) width { return 308; }
+- (int) height { return 120; }
+- (int) width { return 308; }
 
 - (NSString*) GetOutputStr: (NSString*) inputStr
 {

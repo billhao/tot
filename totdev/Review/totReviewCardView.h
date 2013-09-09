@@ -11,6 +11,7 @@
 #import "Global.h"
 #import "totEventName.h"
 #import "totTimeUtil.h"
+#import "totUtility.h"
 
 @class totTimeline;
 @class totReviewCardView;
@@ -31,6 +32,9 @@
     
     totTimer* timer_;
     float contentYOffset; // y offset of real content in a card
+    float margin_y; // margin on y axis from y offset
+    
+    UIImageView* line;
 }
 
 @property (nonatomic, assign) totReviewCardView* parentView;
@@ -46,6 +50,9 @@
 - (bool) clickOnConfirmIconButtonDelegate;
 - (NSString*) getTimestampInString;
 
+- (int) height;
+- (int) width;
+
 @end
 
 // ---------------- Card in displaying mode ------------------
@@ -59,6 +66,8 @@
     UILabel* calendar_text_;
     
     totReviewStory* story_;
+    
+    UIImageView* line;
 }
 
 @property (nonatomic, assign) totReviewCardView* parentView;
@@ -71,6 +80,9 @@
 - (void) setIcon:(NSString*)icon_name;
 - (void) setTimestamp:(NSString*)time;
 - (void) setCalendar:(int)days;
+
+- (int) height;
+- (int) width;
 
 @end
 

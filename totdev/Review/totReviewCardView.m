@@ -30,13 +30,16 @@
     if (self) {
         timer_ = [[totTimer alloc] init];
         [timer_ setDelegate:self];
+        
         contentYOffset = 64; // basically, this should be the y position of timeline_line
+        margin_y = 10;
     }
     return self;
 }
 
 - (void)viewDidLoad {
     [self setBackground];
+    self.view.clipsToBounds = TRUE;
 }
 
 - (void) setBackground {
@@ -149,7 +152,8 @@
 }
 
 - (void)setTitle:(NSString *)desc {
-    UILabel* title = [[UILabel alloc] initWithFrame:CGRectMake(70, 10, 150, 30)];
+    UILabel* title = [[UILabel alloc] initWithFrame:CGRectMake(70, 10, 200, 30)];
+    //[totUtility enableBorder:title];
     [title setText:desc];
     [title setBackgroundColor:[UIColor clearColor]];
     [title setTextColor:[UIColor colorWithRed:0.5f green:0.5f blue:0.5f alpha:1.0f]];
@@ -158,10 +162,9 @@
     [title release];
     
     // since this function will always be called, add the separator line here.
-    UIImageView* line = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"timeline_line"]];
-    line.frame = CGRectMake(0, 60, [totSummaryCard width], line.frame.size.height);
+    line = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"timeline_line"]];
+    line.frame = CGRectMake(0, 60, line.frame.size.width, line.frame.size.height);
     [self.view addSubview:line];
-    [line release];
 }
 
 - (void)setTimestamp {
@@ -241,6 +244,9 @@
     [timer_ release];
 }
 
+- (int) height { return 0; }
+- (int) width  { return 0; }
+
 @end
 
 
@@ -263,6 +269,7 @@
 
 - (void) viewDidLoad {
     [self setBackground];
+    self.view.clipsToBounds = TRUE;
     
     // add title
     card_title = [[UILabel alloc] initWithFrame:CGRectMake(70, 10, 230, 30)];
@@ -291,10 +298,9 @@
     [self.view addSubview:timestamp];
     
     // add separator
-    UIImageView* line = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"timeline_line"]];
-    line.frame = CGRectMake(0, 60, [totSummaryCard width], line.frame.size.height);
+    line = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"timeline_line"]];
+    line.frame = CGRectMake(0, 60, line.frame.size.width, line.frame.size.height);
     [self.view addSubview:line];
-    [line release];
 }
 
 - (void) setCalendar:(int)days {
@@ -343,6 +349,9 @@
     [calendar_text_ release];
     [calendar_icon_ release];
 }
+
+- (int) height { return 0; }
+- (int) width  { return 0; }
 
 @end
 
@@ -444,7 +453,7 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
 
 // totReviewStory contains all necessary information to visualize a tot event.
 - (id)initWithType:(ReviewCardType)type withData:(totReviewStory*)story timeline:(totTimeline*)timeline {
-    self = [super initWithFrame:[totReviewCardView getShowCardSizeOfType:type]];
+    self = [super init];
     if (self) {
         totReviewShowCardView* c = nil;
         switch (type) {
@@ -479,6 +488,7 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
                 break;
         }
         if (c) {
+            self.frame = CGRectMake(0, 0, [c width], [c height]);
             c.view.frame = self.bounds;
             c.timeline = timeline;
             c.story_ = story;
@@ -500,7 +510,7 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
 // Default is edit card.
 - (id)initWithType:(ReviewCardType)type timeline:(totTimeline*)timeline {
     origin_x = GAP_BETWEEN_CARDS;
-    self = [super initWithFrame:[totReviewCardView getEditCardSizeOfType:type]];
+    self = [super init];
     if (self) {
         totReviewEditCardView* c1 = nil;
         totReviewShowCardView* c2 = nil;
@@ -514,7 +524,8 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
             {
                 totSummaryCard* c = [[totSummaryCard alloc] init];
                 c.timeline = timeline;
-                c.view.frame = self.frame;
+                self.frame = CGRectMake(0, 0, [c width], [c height]);
+                c.view.frame = self.bounds;
                 self.mShowView = c;
                 self.mShowView.parentView = self;
                 [c release];
@@ -555,8 +566,9 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
                 break;
         }
         if( c1 != nil && c2 != nil ) {
+            self.frame = CGRectMake(0, 0, [c1 width], [c1 height]);
             c1.view.frame = self.bounds;
-            c2.view.frame = [totReviewCardView getShowCardSizeOfType:type];
+            c2.view.frame = CGRectMake(0, 0, [c2 width], [c2 height]);
             c1.timeline = timeline;
             c2.timeline = timeline;
             self.mEditView = c1;
@@ -629,59 +641,59 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
 
 // Static methods.
 // Different type of cards may need different size.
-+ (CGRect) getEditCardSizeOfType:(ReviewCardType)type {
-    int w = 310, h = 100;
-    if (type == SUMMARY) {
-        w = [totSummaryCard width];
-        h = [totSummaryCard height];
-    } else if (type == HEIGHT||type == WEIGHT||type == HEAD) {
-        w = [totHeightEditCard width];
-        h = [totHeightEditCard height];
-    } else if (type == DIAPER) {
-        w = [totDiaperEditCard width];
-        h = [totDiaperEditCard height];
-    } else if (type == LANGUAGE) {
-        w = [totLanguageEditCard width];
-        h = [totLanguageEditCard height];
-    } else if (type == SLEEP) {
-        w = [totSleepEditCard width];
-        h = [totSleepEditCard height];
-    } else if (type == FEEDING) {
-        w = [totFeedEditCard width];
-        h = [totFeedEditCard height];
-    } else {
-        printf("please add size info to getEditCardSizeOfType\n");
-        exit(-1);
-    }
-    return CGRectMake(0, 0, w, h);
-}
+//+ (CGRect) getEditCardSizeOfType:(ReviewCardType)type {
+//    int w = 308, h = 100;
+//    if (type == SUMMARY) {
+//        w = [totSummaryCard width];
+//        h = [totSummaryCard height];
+//    } else if (type == HEIGHT||type == WEIGHT||type == HEAD) {
+//        w = [totHeightEditCard width];
+//        h = [totHeightEditCard height];
+//    } else if (type == DIAPER) {
+//        w = [totDiaperEditCard width];
+//        h = [totDiaperEditCard height];
+//    } else if (type == LANGUAGE) {
+//        w = [totLanguageEditCard width];
+//        h = [totLanguageEditCard height];
+//    } else if (type == SLEEP) {
+//        w = [totSleepEditCard width];
+//        h = [totSleepEditCard height];
+//    } else if (type == FEEDING) {
+//        w = [totFeedEditCard width];
+//        h = [totFeedEditCard height];
+//    } else {
+//        printf("please add size info to getEditCardSizeOfType\n");
+//        exit(-1);
+//    }
+//    return CGRectMake(0, 0, w, h);
+//}
 
-+ (CGRect) getShowCardSizeOfType:(ReviewCardType)type {
-    int w = 310, h = 100;
-    if (type == SUMMARY) {
-        w = [totSummaryCard width];
-        h = [totSummaryCard height];
-    } else if (type == HEIGHT||type == WEIGHT||type == HEAD) {
-        w = [totHeightShowCard width];
-        h = [totHeightShowCard height];
-    } else if (type == DIAPER) {
-        w = [totDiaperShowCard width];
-        h = [totDiaperShowCard height];
-    } else if (type == LANGUAGE) {
-        w = [totLanguageShowCard width];
-        h = [totLanguageShowCard height];
-    } else if (type == SLEEP) {
-        w = [totSleepShowCard width];
-        h = [totSleepShowCard height];
-    } else if (type == FEEDING) {
-        w = [totFeedShowCard width];
-        h = [totFeedShowCard height];
-    } else {
-        printf("please add size info to getShowCardSizeOfType\n");
-        exit(-1);
-    }
-    return CGRectMake(0, 0, w, h);
-}
+//+ (CGRect) getShowCardSizeOfType:(ReviewCardType)type {
+//    int w = 308, h = 100;
+//    if (type == SUMMARY) {
+//        w = [totSummaryCard width];
+//        h = [totSummaryCard height];
+//    } else if (type == HEIGHT||type == WEIGHT||type == HEAD) {
+//        w = [totHeightShowCard width];
+//        h = [totHeightShowCard height];
+//    } else if (type == DIAPER) {
+//        w = [totDiaperShowCard width];
+//        h = [totDiaperShowCard height];
+//    } else if (type == LANGUAGE) {
+//        w = [totLanguageShowCard width];
+//        h = [totLanguageShowCard height];
+//    } else if (type == SLEEP) {
+//        w = [totSleepShowCard width];
+//        h = [totSleepShowCard height];
+//    } else if (type == FEEDING) {
+//        w = [totFeedShowCard width];
+//        h = [totFeedShowCard height];
+//    } else {
+//        printf("please add size info to getShowCardSizeOfType\n");
+//        exit(-1);
+//    }
+//    return CGRectMake(0, 0, w, h);
+//}
 
 + (totReviewCardView*) createEmptyCard:(ReviewCardType)type timeline:(totTimeline*)timeline {
     totReviewCardView* view = [[totReviewCardView alloc] initWithType:type timeline:timeline];

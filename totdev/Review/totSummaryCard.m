@@ -11,8 +11,8 @@
 
 @implementation totSummaryCard
 
-+ (int) height { return 259; }
-+ (int) width { return 308; }
+- (int) height { return 259; }
+- (int) width { return 308; }
 
 - (id)init {
     self = [super init];
@@ -46,8 +46,8 @@
 - (void)setBackground {
     [self.view setBackgroundColor:[UIColor whiteColor]];
     
-    UIImageView* line = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"timeline_line"]];
-    line.frame = CGRectMake(0, 100, [totSummaryCard width], line.frame.size.height);
+    line = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"timeline_line"]];
+    line.frame = CGRectMake(0, 100, [self width], line.frame.size.height);
     [self.view addSubview:line];
 }
 
@@ -185,7 +185,13 @@
 - (void)physicalIconBtnPressed:(id)sender {
     // add a new card
     int tag = ((UIButton*)sender).tag;
-    [self.timeline addEmptyCard:tag];
+    
+    // prevent from sleeping again
+    if( tag == SLEEP && self.parentView.parent.sleeping )
+        return;
+    
+    totReviewCardView* card = [self.timeline addEmptyCard:tag];
+    [self.parentView.parent moveToTop:card]; // ask timeline to move this card to top
 }
 
 // create UI elements for basic baby info like name, photo and bday

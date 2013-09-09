@@ -17,7 +17,5 @@
     UILabel* label_babyAge;
 }
 
-+ (int) height;
-+ (int) width;
 
 @end

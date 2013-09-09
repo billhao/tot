@@ -19,11 +19,12 @@
 }
 
 @property (assign, atomic) totTimelineController* controller;
+@property (assign, atomic) BOOL sleeping; // if the baby is sleeping
 
 - (void) setBackground;
 
 // Adds edit card of the specified type.
-- (void) addEmptyCard:(ReviewCardType)type;
+- (totReviewCardView*) addEmptyCard:(ReviewCardType)type;
 
 // Deletes the review card.
 - (void) deleteCard:(totReviewCardView*)card;

@@ -15,8 +15,8 @@
 
 @implementation totSleepEditCard
 
-+ (int) height { return 70; }
-+ (int) width { return 308; }
+- (int) height { return 60; }
+- (int) width { return 308; }
 
 - (id)init {
     self = [super init];
@@ -34,24 +34,39 @@
 }
 
 - (void)loadIcons {
-    [self setIcon:@"sleep_gray.png"];
+    [self setIcon:@"sleep2"];
     [self setTitle:@"Sleep"];
     [self setTimestamp];
     
+    line.hidden = TRUE; // we don't need line for sleep;
+    
+    UIFont* font = [UIFont fontWithName:@"Raleway" size:20.0];
+    
     start_button = [UIButton buttonWithType:UIButtonTypeCustom];
-    start_button.backgroundColor = [UIColor greenColor];
-    [start_button setTitle:@"Sleep" forState:UIControlStateNormal];
+    float w = 90;
+    float h = 40;
+    float x = 210;
+    float y = ([self height]-h)/2;
+    start_button.frame = CGRectMake(x,y,w,h);
+    start_button.backgroundColor = [UIColor lightGrayColor];
+//    start_button.alpha = 0.8;
+    start_button.layer.cornerRadius = 2;
+    start_button.titleLabel.font = font;
+    [start_button setTitle:@"sleep" forState:UIControlStateNormal];
     [start_button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [start_button setFrame:CGRectMake(200, 5, 60, 40)];
     [start_button addTarget:self action:@selector(startSleep:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:start_button];
     
     stop_button = [UIButton buttonWithType:UIButtonTypeCustom];
-    stop_button.backgroundColor = [UIColor redColor];
+    stop_button.frame = CGRectMake(x,y,w,h);
+    stop_button.backgroundColor = [UIColor lightGrayColor];
+    stop_button.layer.cornerRadius = 2;
+    stop_button.titleLabel.font = font;
     stop_button.hidden = YES;
+//    start_button.alpha = 0.7;
+    start_button.titleLabel.font = font;
     [stop_button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [stop_button setTitle:@"Wake up" forState:UIControlStateNormal];
-    [stop_button setFrame:CGRectMake(200, 5, 80, 40)];
+    [stop_button setTitle:@"wake up" forState:UIControlStateNormal];
     [stop_button addTarget:self action:@selector(stopSleep:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:stop_button];
 }
@@ -60,6 +75,8 @@
     start_button.hidden = YES;
     stop_button.hidden = NO;
     
+    self.parentView.parent.sleeping = TRUE;
+    
     [self.parentView.parent moveCard:self.parentView To:0];
     [self.parentView.parent moveToTop:self.parentView];
     
@@ -67,13 +84,17 @@
 }
 
 - (void)stopSleep: (UIButton*)button {
+    self.parentView.parent.sleeping = FALSE;
+
     // save to db
     [self saveTimeToDatabase:FALSE];
 
-    //[parentView flip];
-    // should be: 1. remove this card
+    
+    // TODO should be: 1. remove this card
     // 2. add the card under the summary card
     // 3. move the scroll view the the sleep show card.
+    [self.parentView.parent moveCard:self.parentView To:1];
+    [self.parentView flip];
 }
 
 - (void)dealloc {
@@ -111,8 +132,8 @@
 
 @implementation totSleepShowCard
 
-+ (int) height { return 70; }
-+ (int) width { return 308; }
+- (int) height { return 60; }
+- (int) width { return 308; }
 
 - (id)init {
     self = [super init];
@@ -124,7 +145,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setBackground];
-    [self setIcon:@"sleep2.png"];
+    [self setIcon:@"sleep2"];
+
+    line.hidden = TRUE; // we don't need line for sleep;
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -133,9 +156,9 @@
     if (story_) {
         [self getDataFromDB];
     } else {
-        card_title.text = story_.mRawContent;
+        card_title.text  = @"";//story_.mRawContent;
         description.text = @"";
-        [self setTimestamp:[totTimeUtil getTimeDescriptionFromNow:story_.mWhen]];
+        //[self setTimestamp:[totTimeUtil getTimeDescriptionFromNow:story_.mWhen]];
     }
 }
 

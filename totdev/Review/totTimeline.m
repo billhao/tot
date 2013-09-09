@@ -10,17 +10,19 @@
 #import "totReviewStory.h"
 #import "Global.h"
 #import "totTimelineController.h"
+#import "totSummaryCard.h"
 
 #define INIT_HEIGHT 1000
 
 @implementation totTimeline
 
-@synthesize controller;
+@synthesize controller, sleeping;
 
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
+        sleeping = FALSE;
         self.contentSize = CGSizeMake(320, INIT_HEIGHT);
         mCards = [[NSMutableArray alloc] init];
         [self setBackground];
@@ -34,8 +36,8 @@
     [self setBackgroundColor:[UIColor colorWithRed:240.0/255 green:240.0/255 blue:240.0/255 alpha:1.0f]];
 }
 
-- (void) addEmptyCard:(ReviewCardType)type {
-    totReviewCardView* card = [totReviewCardView createEmptyCard:type timeline:self];
+- (totReviewCardView*) addEmptyCard:(ReviewCardType)type {
+    totReviewCardView* card = [[totReviewCardView createEmptyCard:type timeline:self] autorelease];
     card.parent = self;
     
     // Check whether there already existed an edit card.
@@ -47,14 +49,16 @@
     }
     
     if ([mCards count] > 0) {
-        [mCards insertObject:card atIndex:1];  // new card is always under the summary card.
+        int index = 1;
+        if( sleeping ) index = 2; // sleep card is on top of summary card
+        [mCards insertObject:card atIndex:index];  // new card is always under the summary card.
     } else {
         [mCards addObject:card];
     }
     [self addSubview:card];
     [self refreshView];
     [self addDeleteButtonUnderCard:card];
-    [card release];
+    return card;
 }
 
 - (void)animationDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context {

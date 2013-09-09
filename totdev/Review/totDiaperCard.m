@@ -17,7 +17,6 @@
 - (id)init {
     self = [super init];
     if (self) {
-        margin_y = 10;
         x = 30;
         y = contentYOffset + margin_y;
         w = 200;
@@ -65,20 +64,18 @@
 
 
 #pragma mark - Helper functions
-//- (int) height { return contentYOffset + margin_y + 3*(h+margin_y); }
-//- (int) width { return 308; }
-+ (int) height { return 164; }
-+ (int) width { return 308; }
+- (int) height { return contentYOffset + margin_y + 3*(h+margin_y); }
+- (int) width { return 308; }
 
 - (void) setBackground {
     self.view.backgroundColor = [UIColor whiteColor];
 }
 
 - (void) loadIcons {
-    [self setIcon:@"diaper_gray.png" confirmedIcon:@"diaper2.png"];
+    [self setIcon:@"diaper_gray" confirmedIcon:@"diaper2"];
     [self setCalendar:999];
     [self setTimestamp];
-    [self setTitle:@"Diaper"];
+    [self setTitle:@"Diaper" ];
     
     // Initializes UI.
     UIButton* wetBtn       = [self createButton:y];
@@ -207,8 +204,8 @@
 
 #pragma mark - Helper functions
 
-+ (int) height { return 130; }
-+ (int) width { return 308; }
+- (int) height { return 130; }
+- (int) width { return 308; }
 
 - (void) setBackground {
     self.view.backgroundColor = [UIColor whiteColor];

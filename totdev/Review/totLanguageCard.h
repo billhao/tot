@@ -14,16 +14,10 @@
     NSString* defaultTxt;
 }
 
-+ (int) height;
-+ (int) width;
-
 @end
 
 
 @interface totLanguageShowCard : totReviewShowCardView {}
-
-+ (int) height;
-+ (int) width;
 
 @end
 

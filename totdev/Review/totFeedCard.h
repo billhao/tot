@@ -17,18 +17,13 @@
     NSMutableArray* unitBoxes;
     NSMutableArray* inputViews;
     
-    float x;
-    float y;
     float w1;
     float w2;
     float w3;
-    float h;
     float margin_x;
-    float margin_y;
+    
+    float x, y, w, h;
 }
-
-+ (int) height;
-+ (int) width;
 
 @end
 
@@ -36,9 +31,6 @@
 @interface totFeedShowCard : totReviewShowCardView {
 
 }
-
-+ (int) height;
-+ (int) width;
 
 @end
 

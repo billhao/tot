@@ -8,7 +8,6 @@
 
 #import "totHeightCard.h"
 #import "totReviewStory.h"
-
 @implementation totHeightEditCard
 
 @synthesize type;
@@ -25,6 +24,7 @@
         // init
         type = cardType;
         picker = nil;
+        
     }
     return self;
 }
@@ -91,52 +91,58 @@
 
 - (int) getWidth  { return 294; } // 13px for left and right margin
 - (int) getHeight { return 400; }
-+ (int) width  { return 308; }
-+ (int) height { return 308; }
 
 - (void) loadButtons {
     [self setTimestamp];
     if (type == HEIGHT) {
-        [self setIcon:@"height_gray.png"];
+        [self setIcon:@"height_gray" confirmedIcon:@"height2"];
         [self setTitle:@"Height"];
     } else if (type == WEIGHT) {
-        [self setIcon:@"weight_gray.png"];
+        [self setIcon:@"weight_gray" confirmedIcon:@"weight2"];
         [self setTitle:@"Weight"];
     } else if (type == HEAD) {
-        [self setIcon:@"hc_gray.png"];
-        [self setTitle:@"HC"];
+        [self setIcon:@"hc_gray" confirmedIcon:@"hc2"];
+        [self setTitle:@"Head Circumference"];
     }
-    
-    selectedValueLabel = [[UILabel alloc] initWithFrame:CGRectMake(80, 30, 120, 30)];
-    UIFont* font = [UIFont fontWithName:@"Roboto-Regular" size:16.0];
-    selectedValueLabel.font = font;
-    selectedValueLabel.textColor = [UIColor colorWithRed:128.0/255 green:130.0/255 blue:133.0/255 alpha:1];
-    selectedValueLabel.textAlignment = NSTextAlignmentCenter;
-    selectedValueLabel.backgroundColor = [UIColor clearColor];
-    [self.view addSubview:selectedValueLabel];
 }
 
 - (void) setBackground {
     self.view.backgroundColor = [UIColor whiteColor];
 
     // add bg for the ruler
+    float y = contentYOffset + margin_y;
     UIImage* img = [UIImage imageNamed:@"height_bg"];
     bgview = [[UIImageView alloc] initWithImage:img];
     int picker_bg_x = (self.width-img.size.width)/2;
-    bgview.frame = CGRectMake(picker_bg_x, 20, img.size.width, img.size.height);
+    bgview.frame = CGRectMake(picker_bg_x, y, img.size.width, img.size.height);
     [self.view addSubview:bgview];
     [self.view sendSubviewToBack:bgview];
+    //[totUtility enableBorder:bgview];
+
+    // add label for selected value
+    selectedValueLabel = [[UILabel alloc] initWithFrame:CGRectMake(64, y+11, 170, 32)];
+    UIFont* font = [UIFont fontWithName:@"Raleway" size:24.0];
+    selectedValueLabel.font = font;
+    selectedValueLabel.textColor = [UIColor colorWithRed:128.0/255 green:130.0/255 blue:133.0/255 alpha:1];
+    selectedValueLabel.textAlignment = NSTextAlignmentCenter;
+    selectedValueLabel.backgroundColor = [UIColor clearColor];
+    [self.view addSubview:selectedValueLabel];
+    //[totUtility enableBorder:selectedValueLabel];
 }
 
-- (void)createPicker
-{
-    // viewdidload
+- (void)createPicker {
+    float x = bgview.frame.origin.x+6;
+    float yy = bgview.frame.origin.y+64;
+    float w = 190;
+    float h = 40;
+
+    // create picker
     if( type == HEIGHT )
-        picker = [STHorizontalPicker getPickerForHeight:CGRectMake(bgview.frame.origin.x+6, bgview.frame.origin.y+64, 190, 40)];
+        picker = [STHorizontalPicker getPickerForHeight:CGRectMake(x, yy, w, h)];
     else if( type == WEIGHT)
-        picker = [STHorizontalPicker getPickerForWeight:CGRectMake(20, 50, 200, 50)];
+        picker = [STHorizontalPicker getPickerForWeight:CGRectMake(x, yy, w, h)];
     else if( type == HEAD )
-        picker = [STHorizontalPicker getPickerForHeadC:CGRectMake(20, 50, 200, 50)];
+        picker = [STHorizontalPicker getPickerForHeadC :CGRectMake(x, yy, w, h)];
     [picker setDelegate:self];
     [self.view addSubview:picker];
     [self.view sendSubviewToBack:picker];
@@ -166,11 +172,11 @@
     [super viewDidLoad];
     [self setBackground];
     if (type == HEIGHT) {
-        [self setIcon:@"height2.png"];
+        [self setIcon:@"height2"];
     } else if (type == WEIGHT) {
-        [self setIcon:@"weight2.png"];
+        [self setIcon:@"weight2"];
     } else if (type == HEAD) {
-        [self setIcon:@"head2.png"];
+        [self setIcon:@"hc2"];
     }
 }
 
@@ -219,8 +225,8 @@
     self.view.backgroundColor = [UIColor whiteColor];
 }
 
-+ (int) height { return 150; }
-+ (int) width { return 308; }
+- (int) height { return 150; }
+- (int) width { return 308; }
 
 
 @end

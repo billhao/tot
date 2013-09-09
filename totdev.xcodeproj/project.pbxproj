@@ -1288,11 +1288,17 @@
 			children = (
 				3F049B6D17D53FC300F05727 /* Diaper */,
 				3F049B6A17D49C5300F05727 /* Language */,
-				3F049B6617D4572B00F05727 /* timeline_line.png */,
-				3F049B6717D4572B00F05727 /* timeline_line@2x.png */,
-				8E0EA46C17D4433200C75BD3 /* Icons */,
 				3F049B5F17D4106800F05727 /* Summary */,
 				3FD3C62617C9FC6A00DB1B71 /* Height */,
+				8E069FEB17C495B200D04FF6 /* Icons */,
+				8E0EA46C17D4433200C75BD3 /* Icons_gray */,
+				8E0EA46F17D45A8B00C75BD3 /* card_cancel.png */,
+				8E0EA47017D45A8B00C75BD3 /* card_cancel@2x.png */,
+				8E0EA47117D45A8B00C75BD3 /* card_confirm.png */,
+				8E0EA47217D45A8B00C75BD3 /* card_confirm@2x.png */,
+				8E0EA46D17D444B000C75BD3 /* calendar.png */,
+				3F049B6617D4572B00F05727 /* timeline_line.png */,
+				3F049B6717D4572B00F05727 /* timeline_line@2x.png */,
 				3F049B5117D4073400F05727 /* timeline_home.png */,
 				3F049B5217D4073400F05727 /* timeline_home@2x.png */,
 				3F049B5317D4073400F05727 /* timeline_home_pressed.png */,
@@ -1673,7 +1679,7 @@
 			name = Tests;
 			sourceTree = "<group>";
 		};
-		8E069FEB17C495B200D04FF6 /* timeline */ = {
+		8E069FEB17C495B200D04FF6 /* Icons */ = {
 			isa = PBXGroup;
 			children = (
 				8E069FEC17C495D900D04FF6 /* diaper2.png */,
@@ -1684,10 +1690,11 @@
 				8E069FF117C495D900D04FF6 /* sleep2.png */,
 				8E069FF217C495D900D04FF6 /* weight2.png */,
 			);
-			name = timeline;
+			name = Icons;
+			path = ../..;
 			sourceTree = "<group>";
 		};
-		8E0EA46C17D4433200C75BD3 /* Icons */ = {
+		8E0EA46C17D4433200C75BD3 /* Icons_gray */ = {
 			isa = PBXGroup;
 			children = (
 				8E0EA47717D54D4300C75BD3 /* diaper_gray.png */,
@@ -1697,19 +1704,13 @@
 				8E0EA47B17D54D4400C75BD3 /* language_gray.png */,
 				8E0EA47C17D54D4400C75BD3 /* sleep_gray.png */,
 				8E0EA47D17D54D4400C75BD3 /* weight_gray.png */,
-				8E0EA46F17D45A8B00C75BD3 /* card_cancel.png */,
-				8E0EA47017D45A8B00C75BD3 /* card_cancel@2x.png */,
-				8E0EA47117D45A8B00C75BD3 /* card_confirm.png */,
-				8E0EA47217D45A8B00C75BD3 /* card_confirm@2x.png */,
-				8E0EA46D17D444B000C75BD3 /* calendar.png */,
 			);
-			name = Icons;
+			name = Icons_gray;
 			sourceTree = "<group>";
 		};
 		8E46E50016A8F8BA00932B90 /* Review */ = {
 			isa = PBXGroup;
 			children = (
-				8E069FEB17C495B200D04FF6 /* timeline */,
 				8E7C5A8617B84E4A00A2BA61 /* circle_icon.jpg */,
 				3FF6C2881708F3BC007B48DA /* review-diaper.png */,
 				3FF6C2891708F3BD007B48DA /* review-feeding.png */,
