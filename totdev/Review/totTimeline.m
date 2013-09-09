@@ -166,6 +166,7 @@
         if( [anEvent.name isEqualToString:EVENT_BASIC_SLEEP] && [anEvent.value isEqualToString:@"start"] )
             // skip start sleep event
             continue;
+        
         story.mEventType = anEvent.name;
         story.mRawContent = anEvent.value;
         story.mWhen = anEvent.datetime;
@@ -177,6 +178,7 @@
         totReviewCardView* card = [totReviewCardView loadCard:story.mEventType story:story timeline:self];
         if (card) {
             card.parent = self;
+            card.mShowView.e = anEvent;
             [card.mShowView viewWillAppear:YES];
             [mCards addObject:card];
             [card release];

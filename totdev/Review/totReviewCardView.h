@@ -66,6 +66,7 @@
     UILabel* calendar_text_;
     
     totReviewStory* story_;
+    totEvent* e;
     
     UIImageView* line;
 }
@@ -75,6 +76,8 @@
 @property (nonatomic, readonly) UILabel* card_title;
 @property (nonatomic, readonly) UILabel* description;
 @property (nonatomic, retain) totReviewStory* story_;
+@property (nonatomic, retain) totEvent* e;
+
 
 - (void) setBackground;
 - (void) setIcon:(NSString*)icon_name;

@@ -259,7 +259,7 @@
 @synthesize timeline;
 @synthesize card_title;
 @synthesize description;
-@synthesize story_;
+@synthesize story_, e;
 
 - (id) init {
     self = [super init];

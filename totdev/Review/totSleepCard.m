@@ -138,6 +138,7 @@
 - (id)init {
     self = [super init];
     if (self) {
+        sleepStartEvent = nil;
     }
     return self;
 }
@@ -158,16 +159,17 @@
     } else {
         NSMutableArray* events = [global.model getEvent:global.baby.babyID event:EVENT_BASIC_SLEEP limit:1 offset:-1 startDate:nil endDate:story_.mWhen];
         if( events.count == 1 ) {
-            totEvent* e = events[0];
-            if( [e.value isEqualToString:@"start"] ) {
-                card_title.text = [totSleepShowCard formatValue:e.datetime d2:story_.mWhen];
-                [self setTimestamp:[totTimeUtil getTimeDescriptionFromNow:e.datetime]];
+            totEvent* e0 = events[0];
+            if( [e0.value isEqualToString:@"start"] ) {
+                sleepStartEvent = e0;
             }
             else
                 NSLog(@"there is a problem with sleep record %d %d", story_.mEventId, e.event_id);
             
         }
     }
+    
+    [self updateUI];
 }
 
 
@@ -176,53 +178,59 @@
 - (void)getDataFromDB {
     // query db to get how long the baby had slept
     NSDate* date = [NSDate date];
-    NSMutableArray* sleep = [global.model getPreviousEvent:global.baby.babyID event:EVENT_BASIC_SLEEP limit:1 current_event_date:date];
-    if( sleep.count > 0 ) {
-        //totEvent* e = sleep[0];
-        totEvent* e = [sleep objectAtIndex:0];
-        //NSLog(@"%d %@ - %d %@", e.event_id, e.datetime, story.mEventId, story.mWhen);
-        
-        // Get conversion to months, days, hours, minutes
-        NSCalendar *sysCalendar = [NSCalendar currentCalendar];
-        unsigned int unitFlags = NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit;
-        NSDateComponents *conversionInfo = [sysCalendar components:unitFlags fromDate:e.datetime  toDate:date options:0];
-        
-        int h = [conversionInfo hour];
-        int m = [conversionInfo minute];
-        //int s = [conversionInfo second];
-        
-        NSString* text;
-        if( h>0 && m<10 ) {
-            if( h==1 )
-                text = [NSString stringWithFormat:@"%@ slept for about an hour", global.baby.name];
-            else
-                text = [NSString stringWithFormat:@"%@ slept for about %d hours", global.baby.name, h];
+    NSMutableArray* events = [global.model getEvent:global.baby.babyID event:EVENT_BASIC_SLEEP limit:2];
+    if( events.count==2 ) {
+        totEvent* e1 = events[0];
+        totEvent* e0 = events[1];
+        if( [e1.name isEqualToString:@"end"] && [e0.name isEqualToString:@"start"] ) {
+            sleepStartEvent = e0;
+            e = e1;
         }
-        else if( m>50 ) {
-            if( h==0 )
-                text = [NSString stringWithFormat:@"%@ slept for about an hour", global.baby.name];
-            else
-                text = [NSString stringWithFormat:@"%@ slept for about %d hours", global.baby.name, h+1];
-        }
-        else if( h==0 && m==0 )
-            text = [NSString stringWithFormat:@"%@ slept for less than a minute", global.baby.name];
-        else if( h==0 && m==1 )
-            text = [NSString stringWithFormat:@"%@ slept for a minute", global.baby.name];
-        else if( h==0 && m>1 )
-            text = [NSString stringWithFormat:@"%@ slept for %d minutes", global.baby.name, m];
-        else if( h>=15 )
-            text = [NSString stringWithFormat:@"%@ slept for %d hours. Really?", global.baby.name, h];
+    }
+}
+
+- (void)updateUI {
+    if( e == nil || sleepStartEvent == nil ) return;
+    
+    // Get conversion to months, days, hours, minutes
+    NSCalendar *sysCalendar = [NSCalendar currentCalendar];
+    unsigned int unitFlags = NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit;
+    NSDateComponents *conversionInfo = [sysCalendar components:unitFlags fromDate:sleepStartEvent.datetime  toDate:e.datetime options:0];
+    
+    int h = [conversionInfo hour];
+    int m = [conversionInfo minute];
+    //int s = [conversionInfo second];
+    
+    NSString* text;
+    if( h>0 && m<10 ) {
+        if( h==1 )
+            text = [NSString stringWithFormat:@"%@ slept for about an hour", global.baby.name];
         else
-            text = [NSString stringWithFormat:@"%@ slept for %d hours %d minutes", global.baby.name, h, m];
-        card_title.font = [UIFont fontWithName:@"Raleway-SemiBold" size:14];
-        card_title.numberOfLines = 0;
-        card_title.text = text;
-        description.text = @"";
+            text = [NSString stringWithFormat:@"%@ slept for about %d hours", global.baby.name, h];
     }
-    else {
-        card_title.text = @"";
-        description.text = @"";
+    else if( m>50 ) {
+        if( h==0 )
+            text = [NSString stringWithFormat:@"%@ slept for about an hour", global.baby.name];
+        else
+            text = [NSString stringWithFormat:@"%@ slept for about %d hours", global.baby.name, h+1];
     }
+    else if( h==0 && m==0 )
+        text = [NSString stringWithFormat:@"%@ slept for less than a minute", global.baby.name];
+    else if( h==0 && m==1 )
+        text = [NSString stringWithFormat:@"%@ slept for a minute", global.baby.name];
+    else if( h==0 && m>1 )
+        text = [NSString stringWithFormat:@"%@ slept for %d minutes", global.baby.name, m];
+    else if( h>=15 )
+        text = [NSString stringWithFormat:@"%@ slept for %d hours. Really?", global.baby.name, h];
+    else
+        text = [NSString stringWithFormat:@"%@ slept for %d hours %d minutes", global.baby.name, h, m];
+    
+    card_title.font = [UIFont fontWithName:@"Raleway-SemiBold" size:14];
+    card_title.numberOfLines = 0;
+    card_title.text = text;
+    description.text = @"";
+//    card_title.text = [totSleepShowCard formatValue:sleepStartEvent.datetime d2:story_.mWhen];
+    [self setTimestamp:[totTimeUtil getTimeDescriptionFromNow:sleepStartEvent.datetime]];
 }
 
 // d2 is the later date
