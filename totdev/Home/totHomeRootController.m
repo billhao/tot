@@ -177,6 +177,15 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+- (NSUInteger)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskPortrait;
+}
+
+- (BOOL)shouldAutorotate {
+    return FALSE;
+}
+
+
 - (totTimelineController*)getTimelineVC {
     if( timelineController == nil ) {
     // Create timeline. This view will be displayed when the user flip the finger up.

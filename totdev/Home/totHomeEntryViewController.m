@@ -165,6 +165,15 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+- (NSUInteger)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskPortrait;
+}
+
+- (BOOL)shouldAutorotate {
+    return FALSE;
+}
+
+
 
 #pragma mark - Event handler
 
