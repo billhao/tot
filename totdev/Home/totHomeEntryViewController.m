@@ -185,17 +185,19 @@
     if( swipeRecognizer.direction == UISwipeGestureRecognizerDirectionLeft ) {
         // show newer photo
         //[self showNextImage:TRUE]; // show newer image
-        [mediaLib next];
-        if( mediaLib.currentMediaInfo != nil) {
+        if( [mediaLib next] )
             [self showPhoto];
+        else {
+            // TODO show "this is the newest photo"
         }
     }
     else if( swipeRecognizer.direction == UISwipeGestureRecognizerDirectionRight ) {
         // show older photo
         //[self showNextImage:FALSE]; // show older image
-        [mediaLib previous];
-        if( mediaLib.currentMediaInfo != nil) {
+        if( [mediaLib previous] )
             [self showPhoto];
+        else {
+            // TODO show "this is the oldest photo"
         }
     }
     else if( swipeRecognizer.direction == UISwipeGestureRecognizerDirectionUp ) {

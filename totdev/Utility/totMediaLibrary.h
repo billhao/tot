@@ -33,8 +33,8 @@
 @property(nonatomic, retain) MediaInfo* currentMediaInfo;
 
 - (MediaInfo*)getNewestPhoto;
-- (void)next;
-- (void)previous;
+- (BOOL)next;
+- (BOOL)previous;
 
 // save a photo or video event to db as an activity
 + (MediaInfo*)addPhoto:(NSString*)filepath dateTimeTaken:(NSDate*)dateTimeTaken;

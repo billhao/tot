@@ -282,7 +282,7 @@ NSMutableArray *events = [[[NSMutableArray alloc] init] autorelease];
         }
         
         NSString* sql = [NSString stringWithFormat:sql_main, sql_condition, sql_order, sql_limit];
-        NSLog(@"[db] SQL=%@", sql);
+        //NSLog(@"[db] SQL=%@", sql);
         
         const char *sqlz = [sql cStringUsingEncoding:NSASCIIStringEncoding];
         if(sqlite3_prepare_v2(db, sqlz, -1, &stmt, NULL) != SQLITE_OK) {

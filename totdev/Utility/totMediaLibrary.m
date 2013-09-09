@@ -76,22 +76,34 @@
     return nil;
 }
 
-- (void)next {
+- (BOOL)next {
     NSDate* dt;
     if (self.currentMediaInfo == nil)
         dt = [NSDate date];
     else
         dt = self.currentMediaInfo.dateTimeTaken;
-    self.currentMediaInfo = [self getNextMedia:FALSE datetime:dt];
+    MediaInfo* info = [self getNextMedia:FALSE datetime:dt];
+    if( info ) {
+        self.currentMediaInfo = info;
+        return TRUE;
+    }
+    else
+        return FALSE;
 }
 
-- (void)previous {
+- (BOOL)previous {
     NSDate* dt;
     if (self.currentMediaInfo == nil)
         dt = [NSDate date];
     else
         dt = self.currentMediaInfo.dateTimeTaken;
-    self.currentMediaInfo = [self getNextMedia:TRUE datetime:dt];
+    MediaInfo* info = [self getNextMedia:TRUE datetime:dt];
+    if( info ) {
+        self.currentMediaInfo = info;
+        return TRUE;
+    }
+    else
+        return FALSE;
 }
 
 
