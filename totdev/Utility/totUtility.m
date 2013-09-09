@@ -89,4 +89,9 @@ void print(NSString* str) {
     v.layer.borderColor = [UIColor grayColor].CGColor;
 }
 
++ (CGSize)getScreenSize {
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    return screenRect.size;
+}
+
 @end

@@ -16,6 +16,8 @@
 #import <CoreMedia/CMTime.h>
 #import "AppDelegate.h"
 #import "totEventName.h"
+#import "totActivityUtility.h"
+#import "totUtility.h"
 
 @implementation totCameraViewController
 
@@ -150,6 +152,8 @@
         // Save the image file and add it to cache.
         NSString* filepath = [self saveImage:photo intoFile:filename];
 
+        // TODO this may use a lot of memory. commented out for now.
+        // re-enable this when cache can release memory on memory warning
         AppDelegate *appdelegate = [[UIApplication sharedApplication] delegate];
         [appdelegate.mCache addImage:photo WithKey:filename];
         
@@ -268,11 +272,29 @@
 }
 
 - (NSString*) saveImage:(UIImage*)photo intoFile:(NSString*)filename {
-//    UIImage *resizedPhoto = [totActivityUtility imageWithImage:photo scaledToSize:CGSizeMake(320, 480)];
+    CGSize screen = [totUtility getScreenSize];
+    float ratio = screen.width/screen.height;
+    CGSize psize = photo.size;
+    float pratio = psize.width/psize.height;
+    if( pratio > ratio ) {
+        // photo is wider than screen, scale by width
+        psize = CGSizeMake(screen.width, psize.height*(screen.width/psize.width));
+    }
+    else {
+        // photo is taller than screen, scale by height
+        psize = CGSizeMake(psize.width*(screen.height/psize.height), screen.height);
+    }
+    
+    int scale = [UIScreen mainScreen].scale;
+    psize = CGSizeMake(psize.width*scale, psize.height*scale);
+    
+    UIImage *resizedPhoto = [totActivityUtility imageWithImage:photo scaledToSize:psize];
     NSString *imagePath = [totMediaLibrary getMediaPath:filename];
-    NSData *data = UIImageJPEGRepresentation(photo, 1.0);
+    NSData *data = UIImageJPEGRepresentation(resizedPhoto, 1.0);
     [data writeToFile:imagePath atomically:NO];
     return imagePath;
+    
+    // TODO need to save original image as well
 }
 
 @end

@@ -48,6 +48,9 @@ enum {
     UIImageView* selectedActivities_lineView;
     
     BOOL activity_animation_on; // activity animation is on
+    
+    // for debug
+    UILabel* photoPositionLabel;
 }
 
 @property (nonatomic, assign) totHomeRootController *homeRootController;

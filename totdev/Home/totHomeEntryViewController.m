@@ -60,8 +60,8 @@
     cameraBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     UIImage* cameraImg = [UIImage imageNamed:@"camera_button"];
     CGRect f = self.view.frame;
-    int margin_x = 10;
-    int margin_y = 0;
+    int margin_x = 14;
+    int margin_y = 4;
     cameraBtn.frame = CGRectMake(f.size.width-cameraImg.size.width-margin_x, f.size.height-cameraImg.size.height-margin_y, cameraImg.size.width, cameraImg.size.height);
     [cameraBtn setImage:cameraImg forState:UIControlStateNormal];
     [cameraBtn setImage:[UIImage imageNamed:@"camera_button_pressed"] forState:UIControlStateHighlighted];
@@ -69,14 +69,27 @@
     [self.view addSubview:cameraBtn];
     
     // add scrapbook icon
+    margin_x = margin_y;
     UIImage* sbImg = [UIImage imageNamed:@"scrapbook_button"];
     scrapbookBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    scrapbookBtn.frame = CGRectMake(f.size.width-sbImg.size.width, cameraBtn.frame.origin.y-sbImg.size.height+6, sbImg.size.width, sbImg.size.height);
+    scrapbookBtn.frame = CGRectMake(f.size.width-sbImg.size.width-margin_x, cameraBtn.frame.origin.y-sbImg.size.height+2, sbImg.size.width, sbImg.size.height);
     [scrapbookBtn setImage:sbImg forState:UIControlStateNormal];
     [scrapbookBtn setImage:[UIImage imageNamed:@"scrapbook_button_pressed"] forState:UIControlStateHighlighted];
     [scrapbookBtn addTarget:self action:@selector(scrapbookButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:scrapbookBtn];
 
+    // add photo position in db
+    int w = 36;
+    int h = 16;
+    photoPositionLabel = [[UILabel alloc] initWithFrame:CGRectMake(margin_x, self.view.bounds.size.height-h-margin_y, w, h)];
+    photoPositionLabel.alpha = 0.7;
+    photoPositionLabel.backgroundColor = [UIColor grayColor];
+    photoPositionLabel.textColor = [UIColor whiteColor];
+    photoPositionLabel.font = [UIFont fontWithName:@"Raleway" size:10.0];
+    photoPositionLabel.textAlignment = NSTextAlignmentCenter;
+    photoPositionLabel.layer.cornerRadius = 2;
+    [self.view addSubview:photoPositionLabel];
+    
     // add menu icon
 //    menuBtn = [UIButton buttonWithType:UIButtonTypeCustom];
 //    menuBtn.frame = CGRectMake(285, 10, 25, 25);
@@ -125,6 +138,7 @@
     
     if( allActivities != nil ) [allActivities release];
     if( scrapbookListController != nil ) [scrapbookListController release];
+    if( photoPositionLabel ) [photoPositionLabel release];
 }
 
 - (void)viewDidUnload
@@ -151,149 +165,6 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-- (void)showPhoto {
-    MediaInfo* m = mediaLib.currentMediaInfo;
-    NSLog(@"photo event id: %ld", m.eventID);
-
-    
-    if( ![m isDefault] ) {
-        // show photo
-        [mPhotoView imageFromFileContent:[totMediaLibrary getMediaPath:m.filename]];
-
-        // save last viewed photo
-        [global.user setLastViewedPhoto:m];
-    }
-    else {
-        mPhotoView.image = [UIImage imageNamed:m.filename];
-    }
-    
-    [self updateSelectedActivitesView];
-}
-
-// Load activities from the json file. Returns the json object.
-- (NSArray*)loadActivitiesFromFile {
-    NSString* path = [[NSBundle mainBundle] pathForResource:@"Activities" ofType:@"json"];
-    NSString* jsonStr = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:NULL];
-    return [totHomeFeedingViewController JSONToObject:jsonStr];
-}
-
-- (void)createActivityView {
-    allActivities = [[self loadActivitiesFromFile] retain];
-    
-    int numberOfIconsPerView = 4;
-    float scrollview_width = 307;
-    float icon_height = 47;
-    float icon_width  = 47;
-    float label_height  = 18;
-    float label_width = 80;
-    float margin_x_left = 18;
-    float margin_x_right = 18;
-    float margin_x = (scrollview_width-margin_x_left-margin_x_right-numberOfIconsPerView*icon_width)/(numberOfIconsPerView-1);
-    float margin_y = 12;
-    float margin_y_top = 16;
-    float margin_y_bottom = 16;
-    float margin_y_bottom_outside = 12;
-    int rows = 2;
-    int columns = ceil((float)allActivities.count/rows);
-    float scrollview_height = margin_y_top+margin_y_bottom+rows*(icon_height+label_height)+(rows-1)*margin_y;
-    
-    // create the activity view (top view)
-    CGRect f = self.view.frame;
-    activityView = [[UIView alloc] initWithFrame:CGRectMake((f.size.width-scrollview_width)/2, f.size.height-margin_y_bottom_outside-scrollview_height, scrollview_width, scrollview_height)];
-    activityView.clipsToBounds = TRUE;
-    UIImageView* bg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"activity_bg"]];
-    bg.frame = activityView.bounds;
-//    UIView* bg = [[UIView alloc] init];
-//    bg.backgroundColor = [UIColor grayColor];
-//    bg.alpha = 0.5;
-    [activityView addSubview:bg];
-    [bg release];
-    
-    // create the scroll view
-    UIScrollView* scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, scrollview_width, scrollview_height)];
-    [activityView addSubview:scrollView];
-    
-    scrollView.pagingEnabled = FALSE;
-    scrollView.showsVerticalScrollIndicator = NO;
-    scrollView.showsHorizontalScrollIndicator = NO;
-    scrollView.delegate = self;
-    
-    UIFont* font = [UIFont fontWithName:@"Raleway-SemiBold" size:14.0];
-    BOOL debug = false;
-    for (int c=0; c<columns; c++) {
-        for( int r=0; r<rows; r++) {
-            int i = c*rows+r;
-            if( i >= allActivities.count ) break;
-            // get the icon file names, just replace space with underscore
-            NSString* activity = [allActivities objectAtIndex:i];
-            NSString* tmpname = [activity stringByReplacingOccurrencesOfString:@" " withString:@"_"];
-            NSString* activityIcon = [NSString stringWithFormat:@"activity_%@", tmpname];
-            NSString* activityIconPressed = [NSString stringWithFormat:@"activity_%@_pressed", tmpname];
-            
-            UIButton* activityBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-            activityBtn.frame = CGRectMake(margin_x_left+c*(icon_width+margin_x), margin_y_top+r*(icon_height+label_height+margin_y), icon_width, icon_height);
-            [activityBtn setImage:[UIImage imageNamed:activityIcon] forState:UIControlStateNormal];
-            //[activityBtn setImage:[UIImage imageNamed:activityIconPressed] forState:UIControlStateHighlighted];
-            activityBtn.tag = i;
-            [activityBtn addTarget:self action:@selector(activityButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-            [scrollView addSubview:activityBtn];
-            if(debug) {
-                activityBtn.layer.borderColor = [UIColor blackColor].CGColor;
-                activityBtn.layer.borderWidth = 1.0;
-            }
-            
-            UIButton* activityLabel = [UIButton buttonWithType:UIButtonTypeCustom];
-            activityLabel.frame = CGRectMake(margin_x_left+c*(icon_width+margin_x)-(label_width-icon_width)/2, margin_y_top+r*(icon_height+label_height+margin_y)+icon_height, label_width, label_height);
-            activityLabel.backgroundColor = [UIColor clearColor];
-            activityLabel.alpha = 0.8;
-            activityLabel.titleLabel.font = font;
-            activityLabel.titleLabel.textAlignment = NSTextAlignmentCenter;
-            activityLabel.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
-            if(debug) {
-            activityLabel.layer.borderColor = [UIColor blackColor].CGColor;
-            activityLabel.layer.borderWidth = 1.0;
-            }
-            [activityLabel setTitle:activity forState:UIControlStateNormal];
-            activityLabel.tag = i;
-            [activityLabel addTarget:self action:@selector(activityButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-            [scrollView addSubview:activityLabel];
-        }
-    }
-    scrollView.contentSize = CGSizeMake(margin_x_left+margin_x_right+columns*icon_width+(columns-1)*margin_x,
-        scrollview_height);
-    [scrollView release];
-    
-    activityView.alpha  = 0.0;
-    activityView.hidden = TRUE;
-    [self.view addSubview:activityView];
-}
-
-- (void)toggleActivity {
-    activity_animation_on = TRUE;
-    BOOL hidden = activityView.hidden;
-    [self toggleCamera];
-    if( hidden )
-        activityView.hidden = FALSE;
-    [UIView animateWithDuration:.5 animations:^{
-        activityView.alpha = 1.0 - activityView.alpha;
-    } completion:^(BOOL finished) {
-        activityView.hidden = !hidden;
-        activity_animation_on = FALSE;
-    }];
-}
-
-- (void)toggleCamera {
-    BOOL hidden = cameraBtn.hidden;
-    if( hidden )
-        cameraBtn.hidden = FALSE;
-    [UIView animateWithDuration:.5 animations:^{
-        cameraBtn.alpha = 1.0 - cameraBtn.alpha;
-    } completion:^(BOOL finished) {
-        cameraBtn.hidden = !hidden;
-        float a  = cameraBtn.alpha;
-        float b = 0;
-    }];
-}
 
 #pragma mark - Event handler
 
@@ -329,7 +200,7 @@
     if( (!activityView.hidden) && [activityView pointInside:pt withEvent:nil] ) return; // do not respond to tap in activity view
     
     if (tapRecognizer.state == UIGestureRecognizerStateEnded) {
-        NSLog(@"tap %d", tapRecognizer.numberOfTouches);
+        //NSLog(@"tap %d", tapRecognizer.numberOfTouches);
         // show or hide activity
         if( !activity_animation_on ) {
             activity_animation_on = TRUE;
@@ -555,6 +426,152 @@
         [UIView animateWithDuration:t2 animations:^{
             selectedActivities_bgView.frame = f_bg;
         }];
+    }];
+}
+
+- (void)showPhoto {
+    MediaInfo* m = mediaLib.currentMediaInfo;
+    //NSLog(@"photo event id: %ld", m.eventID);
+    photoPositionLabel.text = [NSString stringWithFormat:@"%ld", m.eventID];
+    
+    if( ![m isDefault] ) {
+        // show photo
+        [mPhotoView imageFromFileContent:[totMediaLibrary getMediaPath:m.filename]];
+        
+        // save last viewed photo
+        [global.user setLastViewedPhoto:m];
+    }
+    else {
+        mPhotoView.image = [UIImage imageNamed:m.filename];
+    }
+    
+    [self updateSelectedActivitesView];
+}
+
+// Load activities from the json file. Returns the json object.
+- (NSArray*)loadActivitiesFromFile {
+    NSString* path = [[NSBundle mainBundle] pathForResource:@"Activities" ofType:@"json"];
+    NSString* jsonStr = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:NULL];
+    return [totHomeFeedingViewController JSONToObject:jsonStr];
+}
+
+- (void)createActivityView {
+    allActivities = [[self loadActivitiesFromFile] retain];
+    
+    int numberOfIconsPerView = 4;
+    float scrollview_width = 307;
+    float icon_height = 47;
+    float icon_width  = 47;
+    float label_height  = 18;
+    float label_width = 80;
+    float margin_x_left = 18;
+    float margin_x_right = 18;
+    float margin_x = (scrollview_width-margin_x_left-margin_x_right-numberOfIconsPerView*icon_width)/(numberOfIconsPerView-1);
+    float margin_y = 12;
+    float margin_y_top = 16;
+    float margin_y_bottom = 16;
+    float margin_y_bottom_outside = 12;
+    int rows = 2;
+    int columns = ceil((float)allActivities.count/rows);
+    float scrollview_height = margin_y_top+margin_y_bottom+rows*(icon_height+label_height)+(rows-1)*margin_y;
+    
+    // create the activity view (top view)
+    CGRect f = self.view.frame;
+    activityView = [[UIView alloc] initWithFrame:CGRectMake((f.size.width-scrollview_width)/2, f.size.height-margin_y_bottom_outside-scrollview_height, scrollview_width, scrollview_height)];
+    activityView.clipsToBounds = TRUE;
+    UIImageView* bg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"activity_bg"]];
+    bg.frame = activityView.bounds;
+    //    UIView* bg = [[UIView alloc] init];
+    //    bg.backgroundColor = [UIColor grayColor];
+    //    bg.alpha = 0.5;
+    [activityView addSubview:bg];
+    [bg release];
+    
+    // create the scroll view
+    UIScrollView* scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, scrollview_width, scrollview_height)];
+    [activityView addSubview:scrollView];
+    
+    scrollView.pagingEnabled = FALSE;
+    scrollView.showsVerticalScrollIndicator = NO;
+    scrollView.showsHorizontalScrollIndicator = NO;
+    scrollView.delegate = self;
+    
+    UIFont* font = [UIFont fontWithName:@"Raleway-SemiBold" size:14.0];
+    BOOL debug = false;
+    for (int c=0; c<columns; c++) {
+        for( int r=0; r<rows; r++) {
+            int i = c*rows+r;
+            if( i >= allActivities.count ) break;
+            // get the icon file names, just replace space with underscore
+            NSString* activity = [allActivities objectAtIndex:i];
+            NSString* tmpname = [activity stringByReplacingOccurrencesOfString:@" " withString:@"_"];
+            NSString* activityIcon = [NSString stringWithFormat:@"activity_%@", tmpname];
+            NSString* activityIconPressed = [NSString stringWithFormat:@"activity_%@_pressed", tmpname];
+            
+            UIButton* activityBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+            activityBtn.frame = CGRectMake(margin_x_left+c*(icon_width+margin_x), margin_y_top+r*(icon_height+label_height+margin_y), icon_width, icon_height);
+            [activityBtn setImage:[UIImage imageNamed:activityIcon] forState:UIControlStateNormal];
+            //[activityBtn setImage:[UIImage imageNamed:activityIconPressed] forState:UIControlStateHighlighted];
+            activityBtn.tag = i;
+            [activityBtn addTarget:self action:@selector(activityButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+            [scrollView addSubview:activityBtn];
+            if(debug) {
+                activityBtn.layer.borderColor = [UIColor blackColor].CGColor;
+                activityBtn.layer.borderWidth = 1.0;
+            }
+            
+            UIButton* activityLabel = [UIButton buttonWithType:UIButtonTypeCustom];
+            activityLabel.frame = CGRectMake(margin_x_left+c*(icon_width+margin_x)-(label_width-icon_width)/2, margin_y_top+r*(icon_height+label_height+margin_y)+icon_height, label_width, label_height);
+            activityLabel.backgroundColor = [UIColor clearColor];
+            activityLabel.alpha = 0.8;
+            activityLabel.titleLabel.font = font;
+            activityLabel.titleLabel.textAlignment = NSTextAlignmentCenter;
+            activityLabel.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+            if(debug) {
+                activityLabel.layer.borderColor = [UIColor blackColor].CGColor;
+                activityLabel.layer.borderWidth = 1.0;
+            }
+            [activityLabel setTitle:activity forState:UIControlStateNormal];
+            activityLabel.tag = i;
+            [activityLabel addTarget:self action:@selector(activityButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+            [scrollView addSubview:activityLabel];
+        }
+    }
+    scrollView.contentSize = CGSizeMake(margin_x_left+margin_x_right+columns*icon_width+(columns-1)*margin_x,
+                                        scrollview_height);
+    [scrollView release];
+    
+    activityView.alpha  = 0.0;
+    activityView.hidden = TRUE;
+    [self.view addSubview:activityView];
+}
+
+- (void)toggleActivity {
+    activity_animation_on = TRUE;
+    BOOL hidden = activityView.hidden;
+    [self toggleCamera];
+    if( hidden )
+        activityView.hidden = FALSE;
+    [UIView animateWithDuration:.5 animations:^{
+        activityView.alpha = 1.0 - activityView.alpha;
+    } completion:^(BOOL finished) {
+        activityView.hidden = !hidden;
+        activity_animation_on = FALSE;
+    }];
+}
+
+- (void)toggleCamera {
+    BOOL hidden = cameraBtn.hidden;
+    if( hidden ) {
+        cameraBtn.hidden = FALSE;
+        scrapbookBtn.hidden = FALSE;
+    }
+    [UIView animateWithDuration:.5 animations:^{
+        cameraBtn.alpha = 1.0 - cameraBtn.alpha;
+        scrapbookBtn.alpha = 1.0 - scrapbookBtn.alpha;
+    } completion:^(BOOL finished) {
+        cameraBtn.hidden = !hidden;
+        scrapbookBtn.hidden = !hidden;
     }];
 }
 

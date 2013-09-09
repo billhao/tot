@@ -21,6 +21,8 @@
 
 + (void)enableBorder:(UIView*)v;
 
++ (CGSize)getScreenSize;
+
 @end
 
 extern void print(NSString* str);
