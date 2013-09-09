@@ -204,7 +204,7 @@
 
 #pragma mark - Helper functions
 
-- (int) height { return 130; }
+- (int) height { return 120; }
 - (int) width { return 308; }
 
 - (void) setBackground {

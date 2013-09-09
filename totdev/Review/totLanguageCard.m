@@ -16,14 +16,14 @@
 - (id)init {
     self = [super init];
     if (self) {
+        [self setBackground];
+        [self loadIcons];
     }
     return self;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self setBackground];
-    [self loadIcons];
     [self display];
 }
 
@@ -74,7 +74,11 @@
     [self.view addSubview:textView];
 }
 
-- (int) height { return 150; }
+- (int) height {
+    CGRect f = textView.frame;
+    return f.origin.y + f.size.height + margin_y;
+}
+
 - (int) width { return 308; }
 
 - (void) dealloc {
@@ -106,10 +110,10 @@
 }
 
 -(void)textViewDidEndEditing:(UITextView *)textView {
-    [self confirm:nil];
+    [self clickOnConfirmIconButtonDelegate];
 }
 
-- (void) confirm: (UIButton*)button {
+- (bool) clickOnConfirmIconButtonDelegate {
     /* Save text into database */
     NSString *text = [textView.text stringByTrimmingCharactersInSet: [NSCharacterSet whitespaceCharacterSet]];
     if(textView.hasText == YES && (![text isEqualToString:defaultTxt]) ) {
@@ -136,7 +140,9 @@
         
         // TODO update summary card
         
+        return TRUE;
     } else {
+        return FALSE;
     }
 }
 

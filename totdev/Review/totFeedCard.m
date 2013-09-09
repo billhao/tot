@@ -87,6 +87,11 @@
     [parentView.parent moveToTop:self.parentView];
 }
 
+-(BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return YES;
+}
+
 // Check the input. If it's valid return true, otherwise, return false.
 - (bool)clickOnConfirmIconButtonDelegate {
     [self saveToDB];
@@ -189,7 +194,7 @@
 
 @implementation totFeedShowCard
 
-- (int) height { return 200; }
+- (int) height { return 120; }
 - (int) width { return 308; }
 
 - (id)init {
@@ -214,8 +219,7 @@
     if (!story_) {
         [self getDataFromDB];
     } else {
-        card_title.text = story_.mRawContent;
-        description.text = @"";
+        [self updateUI:story_.mRawContent];
         [self setTimestamp:[totTimeUtil getTimeDescriptionFromNow:story_.mWhen]];
     }
 }
@@ -226,20 +230,29 @@
     NSString* event = EVENT_BASIC_FEEDING;
     
     NSArray* events = [global.model getEvent:global.baby.babyID event:event limit:2];
-    
     if( events.count > 0 ) {
         totEvent* currEvt = [events objectAtIndex:0];
-        NSArray* list = [totHomeFeedingViewController JSONToObject:currEvt.value];
-        NSString* text = @"";
-        for( int i=0; i<list.count; i++ ) {
-            NSDictionary* item = list[i];
-            text = [NSString stringWithFormat:@"%@, %@ %@ %@", text, item[@"name"], item[@"quantity"], item[@"unit"]];
-        }
-        card_title.text = text;
+        [self updateUI:currEvt.value];
         [self setTimestamp:currEvt.getTimeText];
     }
 }
 
-
+- (void)updateUI:(NSString*)value {
+    NSArray* list = [totHomeFeedingViewController JSONToObject:value];
+    NSString* text = @"";
+    for( int i=0; i<list.count; i++ ) {
+        NSDictionary* item = list[i];
+        if( text.length > 0 ) text = [NSString stringWithFormat:@"%@,", text];
+        text = [NSString stringWithFormat:@"%@ %@ %@ %@", text, item[@"name"], item[@"quantity"], item[@"unit"]];
+    }
+    if( list.count > 1 ) {
+        card_title.text = @"Feeding";
+        description.text = text;
+    }
+    else {
+        card_title.text = text;
+        // TODO update self's height to 60
+    }
+}
 @end
 

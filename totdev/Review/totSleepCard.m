@@ -153,7 +153,7 @@
 -(void)viewWillAppear:(BOOL)animated {
     // If we load card from database, should not call this function again.
     // when loading from db, story_ will not be nil.
-    if (story_) {
+    if (!story_) {
         [self getDataFromDB];
     } else {
         card_title.text  = @"";//story_.mRawContent;
@@ -206,6 +206,8 @@
             text = [NSString stringWithFormat:@"%@ slept for %d hours. Really?", global.baby.name, h];
         else
             text = [NSString stringWithFormat:@"%@ slept for %d hours %d minutes", global.baby.name, h, m];
+        card_title.font = [UIFont fontWithName:@"Raleway-SemiBold" size:14];
+        card_title.numberOfLines = 0;
         card_title.text = text;
         description.text = @"";
     }

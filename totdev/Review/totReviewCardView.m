@@ -284,6 +284,7 @@
     description.text = @"";
     description.textAlignment = NSTextAlignmentLeft;
     description.backgroundColor = [UIColor clearColor];
+    description.numberOfLines = 0;
     [description setFont:[UIFont fontWithName:@"Raleway" size:13]];
     [description setTextColor:[UIColor colorWithRed:0.5f green:0.5f blue:0.5f alpha:1.0f]];
     [self.view addSubview:description];

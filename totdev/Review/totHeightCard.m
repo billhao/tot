@@ -25,6 +25,9 @@
         type = cardType;
         picker = nil;
         
+        [self setBackground];
+        [self createPicker];
+        [self loadButtons];
     }
     return self;
 }
@@ -37,9 +40,6 @@
 
 -(void)viewDidLoad {
     [super viewDidLoad];
-    [self createPicker];
-    [self setBackground];
-    [self loadButtons];
     
     // set this to last value in db
     selectedValueLabel.text = @"";
@@ -47,7 +47,7 @@
 
 #pragma mark - Event handlers
 
-- (void) confirm: (UIButton*) btn {
+- (bool) clickOnConfirmIconButtonDelegate {
     // save to db
     NSString* value = selectedValueLabel.text;
     NSString* event = nil;
@@ -58,15 +58,15 @@
     else if( type == HEAD )
         event = EVENT_BASIC_HEAD;
     else
-        return;
+        return FALSE;
     
     // TODO change the datetime to user-selected datetime
     [global.model addEvent:global.baby.babyID event:event datetime:[NSDate date] value:value];
     
     // get the event id
-
-    [parentView flip];
+    return TRUE;
 }
+
 - (void) cancel: (UIButton*) btn {
     // delete this card without save
 }
@@ -89,8 +89,11 @@
 
 #pragma mark - Helper functions
 
-- (int) getWidth  { return 294; } // 13px for left and right margin
-- (int) getHeight { return 400; }
+- (int) width  { return 308; } // 13px for left and right margin
+- (int) height {
+    CGRect f = bgview.frame;
+    return f.origin.y + f.size.height + margin_y;
+}
 
 - (void) loadButtons {
     [self setTimestamp];
@@ -113,7 +116,7 @@
     float y = contentYOffset + margin_y;
     UIImage* img = [UIImage imageNamed:@"height_bg"];
     bgview = [[UIImageView alloc] initWithImage:img];
-    int picker_bg_x = (self.width-img.size.width)/2;
+    int picker_bg_x = ([self width]-img.size.width)/2;
     bgview.frame = CGRectMake(picker_bg_x, y, img.size.width, img.size.height);
     [self.view addSubview:bgview];
     [self.view sendSubviewToBack:bgview];
@@ -215,7 +218,12 @@
         if( events.count > 1 ) {
             totEvent* prevEvt = [events objectAtIndex:1];
             float incr = [currEvt.value floatValue] - [prevEvt.value floatValue];
-            description.text = [NSString stringWithFormat:@"%@ is %.2f inches taller than last time", global.baby.name, incr];
+            if( type == HEIGHT )
+                description.text = [NSString stringWithFormat:@"%@ is %.2f inches taller than last time", global.baby.name, incr];
+            else if ( type == WEIGHT )
+                description.text = [NSString stringWithFormat:@"%@ weighs %.2f pound more than last time", global.baby.name, incr];
+            else if( type == HEAD )
+                description.text = [NSString stringWithFormat:@"%@'s head circumference is %.2f inches longer than last time", global.baby.name, incr];
         }
     }
     
@@ -225,7 +233,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
 }
 
-- (int) height { return 150; }
+- (int) height { return 120; }
 - (int) width { return 308; }
 
 
