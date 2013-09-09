@@ -182,7 +182,7 @@
     if( events.count==2 ) {
         totEvent* e1 = events[0];
         totEvent* e0 = events[1];
-        if( [e1.name isEqualToString:@"end"] && [e0.name isEqualToString:@"start"] ) {
+        if( [e1.value isEqualToString:@"end"] && [e0.value isEqualToString:@"start"] ) {
             sleepStartEvent = e0;
             e = e1;
         }
