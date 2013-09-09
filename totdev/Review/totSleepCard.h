@@ -22,6 +22,8 @@
 
 }
 
++ (NSString*)formatValue:(NSDate*)d1 d2:(NSDate*)d2;
+
 @end
 
 

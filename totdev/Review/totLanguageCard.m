@@ -206,7 +206,7 @@
     }
 }
 
-- (int) height { return 120; }
+- (int) height { return 60; }
 - (int) width { return 308; }
 
 - (NSString*) GetOutputStr: (NSString*) inputStr

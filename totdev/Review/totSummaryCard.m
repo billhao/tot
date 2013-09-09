@@ -8,6 +8,8 @@
 
 #import "totSummaryCard.h"
 #import "totTimeline.h"
+#import "totFeedCard.h"
+#import "totSleepCard.h"
 
 @implementation totSummaryCard
 
@@ -92,7 +94,7 @@
 //    [self enableBorder:label_babyName];
 //    [self enableBorder:label_babyAge];
 
-    // loadLabels    
+    // loadLabels
     float label_h = 30;
     float label_w = 44;
 
@@ -104,7 +106,13 @@
     for( int i=0; i<cnt; i++ ) {
         int label_x = icon_x[i] + 44;
         int label_y = icon_y[i] + 16;
-        UILabel *label   = [[UILabel alloc] initWithFrame:CGRectMake(label_x, label_y, label_w, label_h)];
+        float h = label_h;
+        float w = label_w;
+        if( i==cnt-1 ) {
+            // make it longer for feeding
+            w = 200;
+        }
+        UILabel *label   = [[UILabel alloc] initWithFrame:CGRectMake(label_x, label_y, w, h)];
         label.font = font3;
         label.textColor = fontColor;
         label.text = label_text[i];
@@ -148,15 +156,27 @@
     else
         [values addObject:[NSNull null]];
     
-    events = [global.model getEvent:global.baby.babyID event:EVENT_BASIC_SLEEP limit:1];
-    if( events.count == 1 )
-        [values addObject:((totEvent*)events[0]).value];
-    else
-        [values addObject:[NSNull null]];
+    // sleep
+    if( self.timeline.sleeping ) {
+        [values addObject:@"sleeping"];
+    }
+    else {
+        // get last sleep time
+        events = [global.model getEvent:global.baby.babyID event:EVENT_BASIC_SLEEP limit:2];
+        if( events.count == 2 ) {
+            NSString* str = [totSleepShowCard formatValue:((totEvent*)events[1]).datetime d2:((totEvent*)events[0]).datetime];
+            [values addObject:str];
+        }
+        else
+            [values addObject:[NSNull null]];
+    }
     
     events = [global.model getEvent:global.baby.babyID event:EVENT_BASIC_FEEDING limit:1];
-    if( events.count == 1 )
-        [values addObject:((totEvent*)events[0]).value];
+    if( events.count == 1 ) {
+        // format the values
+        NSString* str = [totFeedShowCard formatValue:((totEvent*)events[0]).value];
+        [values addObject:str];
+    }
     else
         [values addObject:[NSNull null]];
     

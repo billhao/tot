@@ -32,5 +32,7 @@
 
 }
 
++ (NSString*)formatValue:(NSString*)value;
+
 @end
 

@@ -216,5 +216,22 @@
         description.text = @"";
     }
 }
+
+// d2 is the later date
++ (NSString*)formatValue:(NSDate*)d1 d2:(NSDate*)d2 {
+    // Get conversion to months, days, hours, minutes
+    NSCalendar *sysCalendar = [NSCalendar currentCalendar];
+    unsigned int unitFlags = NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit;
+    NSDateComponents *conversionInfo = [sysCalendar components:unitFlags fromDate:d1  toDate:d2 options:0];
+    
+    int h = [conversionInfo hour];
+    int m = [conversionInfo minute];
+    
+    if( h > 0 )
+        return [NSString stringWithFormat:@"%d hr %d min", h, m];
+    else
+        return [NSString stringWithFormat:@"%d min", m];
+}
+
 @end
 

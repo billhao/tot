@@ -254,5 +254,17 @@
         // TODO update self's height to 60
     }
 }
+
++ (NSString*)formatValue:(NSString*)value {
+    NSArray* list = [totHomeFeedingViewController JSONToObject:value];
+    NSString* text = @"";
+    for( int i=0; i<list.count; i++ ) {
+        NSDictionary* item = list[i];
+        if( text.length > 0 ) text = [NSString stringWithFormat:@"%@,", text];
+        text = [NSString stringWithFormat:@"%@ %@ %@ %@", text, item[@"name"], item[@"quantity"], item[@"unit"]];
+    }
+    return text;
+}
+
 @end
 
