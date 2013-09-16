@@ -137,7 +137,7 @@
         
         // TODO update summary card
         [self.parentView.parent updateSummaryCard:LANGUAGE
-                                        withValue:[NSString stringWithFormat:@"New word: %@", text]];
+                                        withValue:[NSString stringWithFormat:@"%@", text]];
         
         return TRUE;
     } else {
@@ -155,7 +155,6 @@
 }
 
 @end
-
 
 
 
@@ -196,7 +195,7 @@
     
     if( events.count > 0 ) {
         totEvent* currEvt = [events objectAtIndex:0];
-        card_title.text = [NSString stringWithFormat:@"%@", currEvt.value];
+        card_title.text = [NSString stringWithFormat:@"New word: %@", currEvt.value];
         description.text = [self GetOutputStr:currEvt.value];
 //        if( events.count > 1 ) {
 //            totEvent* prevEvt = [events objectAtIndex:1];

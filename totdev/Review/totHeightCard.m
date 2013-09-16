@@ -79,11 +79,9 @@
     NSString* str;
     if( type == HEIGHT || type == HEAD ) {
         str = [NSString stringWithFormat:@"%.2f inches",value];
-    }
-    else if( type == WEIGHT ) {
+    } else if( type == WEIGHT ) {
         str = [NSString stringWithFormat:@"%.2f pound",value];
-    }
-    else
+    } else
         return;
     selectedValueLabel.text = str;
 }

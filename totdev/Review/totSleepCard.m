@@ -169,10 +169,9 @@
             totEvent* e0 = events[0];
             if( [e0.value isEqualToString:@"start"] ) {
                 sleepStartEvent = e0;
-            }
-            else
+            } else {
                 NSLog(@"there is a problem with sleep record %d %d", story_.mEventId, e.event_id);
-            
+            }
         }
     }
     
