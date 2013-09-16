@@ -86,15 +86,22 @@
 - (void)stopSleep: (UIButton*)button {
     self.parentView.parent.sleeping = FALSE;
 
-    // save to db
+    // Save to db.
     [self saveTimeToDatabase:FALSE];
-
     
-    // TODO should be: 1. remove this card
-    // 2. add the card under the summary card
-    // 3. move the scroll view the the sleep show card.
     [self.parentView.parent moveCard:self.parentView To:1];
     [self.parentView flip];
+    
+    // Update the summary card.
+    NSMutableArray* events = [global.model getEvent:global.baby.babyID event:EVENT_BASIC_SLEEP limit:2];
+    if( events.count==2 ) {
+        totEvent* e1 = events[0];
+        totEvent* e0 = events[1];
+        if( [e1.value isEqualToString:@"end"] && [e0.value isEqualToString:@"start"] ) {
+            NSString* label = [totSleepShowCard formatValue:e0.datetime d2:e1.datetime];
+            [self.parentView.parent updateSummaryCard:SLEEP withValue:label];
+        }
+    }
 }
 
 - (void)dealloc {
@@ -116,12 +123,12 @@
     if (isStart) {
         [model addEvent:global.baby.babyID
                   event:EVENT_BASIC_SLEEP
-         datetime:now
+               datetime:now
                   value:@"start"];
     } else {
         [model addEvent:global.baby.babyID
                   event:EVENT_BASIC_SLEEP
-         datetime:now
+               datetime:now
                   value:@"end"];
     }
 }
@@ -195,7 +202,9 @@
     // Get conversion to months, days, hours, minutes
     NSCalendar *sysCalendar = [NSCalendar currentCalendar];
     unsigned int unitFlags = NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit;
-    NSDateComponents *conversionInfo = [sysCalendar components:unitFlags fromDate:sleepStartEvent.datetime  toDate:e.datetime options:0];
+    NSDateComponents *conversionInfo = [sysCalendar components:unitFlags
+                                                      fromDate:sleepStartEvent.datetime
+                                                        toDate:e.datetime options:0];
     
     int h = [conversionInfo hour];
     int m = [conversionInfo minute];
@@ -230,6 +239,7 @@
     card_title.text = text;
     description.text = @"";
 //    card_title.text = [totSleepShowCard formatValue:sleepStartEvent.datetime d2:story_.mWhen];
+    
     [self setTimestamp:[totTimeUtil getTimeDescriptionFromNow:sleepStartEvent.datetime]];
 }
 

@@ -121,6 +121,15 @@
     }
 }
 
+- (void) updateLabel:(ReviewCardType)type withValue:(NSString*)value {
+    if (type < 0 || type >= [physicalLabels count]) {
+        printf("Invalid card type when update the summary card.\n");
+        return;
+    }
+    UILabel* label = (UILabel*)[physicalLabels objectAtIndex:type];
+    label.text = value;
+}
+
 // load data from db
 - (void) loadData {
     NSMutableArray* values = [[NSMutableArray alloc] initWithCapacity:physicalLabels.count];

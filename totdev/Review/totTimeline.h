@@ -41,4 +41,7 @@
 // Load cards from db.
 - (void) loadCardsNumber:(int)limit startFrom:(int)start;
 
+// Update the value of the specified type in summary card.
+- (void) updateSummaryCard:(ReviewCardType)type withValue:(NSString*)value;
+
 @end

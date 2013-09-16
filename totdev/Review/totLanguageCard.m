@@ -135,10 +135,9 @@
         /* Hide keyboard */
         [textView resignFirstResponder];
         
-        // flip to display card
-        [parentView flip];
-        
         // TODO update summary card
+        [self.parentView.parent updateSummaryCard:LANGUAGE
+                                        withValue:[NSString stringWithFormat:@"New word: %@", text]];
         
         return TRUE;
     } else {

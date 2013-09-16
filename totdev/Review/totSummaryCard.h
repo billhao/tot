@@ -17,5 +17,6 @@
     UILabel* label_babyAge;
 }
 
+- (void) updateLabel:(ReviewCardType)type withValue:(NSString*)value;
 
 @end

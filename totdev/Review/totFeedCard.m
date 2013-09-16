@@ -13,6 +13,7 @@
 #import "totTimeline.h"
 #import "totUtility.h"
 #import "totReviewStory.h"
+#import "totTimeline.h"
 
 @implementation totFeedEditCard
 
@@ -94,7 +95,22 @@
 
 // Check the input. If it's valid return true, otherwise, return false.
 - (bool)clickOnConfirmIconButtonDelegate {
-    [self saveToDB];
+    NSArray* foodList = [self getFoodList];
+    if ([foodList count] == 0)
+        return false;
+    
+    [self saveToDB:foodList];
+    
+    NSString* label = @"";
+    for (int i = 0; i < [foodList count]; ++i) {
+        NSDictionary* dict = (NSDictionary*)[foodList objectAtIndex:i];
+        NSString* name = [dict objectForKey:@"name"];
+        NSString* quantity = [dict objectForKey:@"quantity"];
+        NSString* unit = [dict objectForKey:@"unit"];
+        label = [label stringByAppendingFormat:@"%@ %@ %@", name, quantity, unit];
+    }
+    [self.parentView.parent updateSummaryCard:FEEDING withValue:label];
+    
     return true;
 }
 
@@ -169,11 +185,8 @@
     return textView;
 }
 
-- (void)saveToDB {
-    // TODO datetime
-    NSDate* date = [NSDate date];
-    
-    NSMutableArray* list = [[NSMutableArray alloc] init];
+- (NSMutableArray*) getFoodList {
+    NSMutableArray* list = [[[NSMutableArray alloc] init] autorelease];
     for (int i=0; i<foodBoxes.count; i++) {
         // add a food item
         NSMutableDictionary *foodItem = [[NSMutableDictionary alloc] init];
@@ -184,8 +197,14 @@
         [list addObject:foodItem];
         [foodItem release];
     }
+    return list;
+}
+
+- (void)saveToDB:(NSArray*)list {
+    // TODO datetime
+    NSDate* date = [NSDate date];
+
     NSString* json = [totHomeFeedingViewController ObjectToJSON:list];
-    [list release];
     [global.model addEvent:global.baby.babyID event:EVENT_BASIC_FEEDING datetime:date value:json];
 }
 

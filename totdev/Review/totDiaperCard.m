@@ -11,6 +11,7 @@
 #import "totImageView.h"
 #import "totUtility.h"
 #import "totReviewStory.h"
+#import "totTimeline.h"
 
 @implementation totDiaperEditCard
 
@@ -158,9 +159,17 @@
 
 - (bool) clickOnConfirmIconButtonDelegate {
     // save to database
-    if (mDiaperType != -1) {
+    if (mDiaperType != -1 && mDiaperType >= SELECTION_WET && mDiaperType <= SELECTION_WETSOILED) {
         [self saveToDatabase:mDiaperType];
-        //[self.parentView flip];
+        
+        // update the summary card.
+        if (mDiaperType == SELECTION_WET)
+            [self.parentView.parent updateSummaryCard:DIAPER withValue:@"wet"];
+        else if (mDiaperType == SELECTION_SOILED)
+            [self.parentView.parent updateSummaryCard:DIAPER withValue:@"soiled"];
+        else if (mDiaperType == SELECTION_WETSOILED)
+            [self.parentView.parent updateSummaryCard:DIAPER withValue:@"wet soiled"];
+        
         return true;
     }
     return false;

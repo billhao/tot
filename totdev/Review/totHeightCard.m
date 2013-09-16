@@ -8,6 +8,8 @@
 
 #import "totHeightCard.h"
 #import "totReviewStory.h"
+#import "totTimeline.h"
+
 @implementation totHeightEditCard
 
 @synthesize type;
@@ -63,7 +65,9 @@
     // TODO change the datetime to user-selected datetime
     [global.model addEvent:global.baby.babyID event:event datetime:[NSDate date] value:value];
     
-    // get the event id
+    // Update the summary card.
+    [self.parentView.parent updateSummaryCard:type withValue:value];
+    
     return TRUE;
 }
 
@@ -74,11 +78,9 @@
 - (void)pickerView:(STHorizontalPicker *)picker didSelectValue:(CGFloat)value {
     NSString* str;
     if( type == HEIGHT || type == HEAD ) {
-        // height or head
         str = [NSString stringWithFormat:@"%.2f inches",value];
     }
     else if( type == WEIGHT ) {
-        // weight
         str = [NSString stringWithFormat:@"%.2f pound",value];
     }
     else

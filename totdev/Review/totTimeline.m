@@ -148,6 +148,14 @@
     [self refreshView];
 }
 
+- (void) updateSummaryCard:(ReviewCardType)type withValue:(NSString*)value {
+    if ([mCards count] > 1) {
+        totReviewCardView* card = [mCards objectAtIndex:0];
+        totSummaryCard* summary_card = (totSummaryCard*)card.mShowView;
+        [summary_card updateLabel:type withValue:value];
+    }
+}
+
 - (void) loadCardsNumber:(int)limit startFrom:(int)start {
     NSArray * events = nil;
     
