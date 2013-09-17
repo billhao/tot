@@ -13,7 +13,7 @@
 
 @implementation totSummaryCard
 
-- (int) height { return 259; }
+- (int) height { return 330; }
 - (int) width { return 308; }
 
 - (id)init {
@@ -55,17 +55,18 @@
 
 - (void)loadIcons {
     // physical icons (as buttons)
-    int icon_x[] = {20, 112, 204, 20, 112, 204, 20};
-    int icon_y[] = {112, 112, 112, 162, 162, 162, 212};
+    int icon_x[] = {10, 150, 10, 150, 10, 150, 10};
+    int icon_y[] = {112, 112, 162, 162, 212, 212, 262};
     NSMutableArray* icon_img_filename = [[NSMutableArray alloc] initWithObjects:
-                                  @"height2", @"weight2", @"hc2", @"diaper2", @"language2", @"sleep2", @"food2", nil];
+                                  @"height_gray", @"weight_gray", @"hc_gray", @"diaper_gray", @"language_gray", @"sleep_gray", @"food_gray", nil];
     NSMutableArray* label_text = [[NSMutableArray alloc] initWithObjects:
-                                  @"height", @"weight", @"head", @"diaper", @"language", @"sleep", @"feeding", nil];
-    
+                                  @"N/A", @"N/A", @"N/A", @"N/A", @"N/A", @"N/A", @"N/A", nil];
     float icon_w  = 41;
     float icon_h = 41;
     int cnt = sizeof(icon_x)/sizeof(icon_x[0]);
     
+    if (physicalButtons != nil) [physicalButtons release];
+    physicalButtons = [[NSMutableArray alloc] initWithCapacity:cnt];
     for( int i=0; i<cnt; i++ ) {
         UIButton* btn = [UIButton buttonWithType:UIButtonTypeCustom];
         btn.frame = CGRectMake(icon_x[i], icon_y[i], icon_w, icon_h);
@@ -73,6 +74,7 @@
         [btn setImage:[UIImage imageNamed:icon_img_filename[i]] forState:UIControlStateNormal];
         [btn addTarget:self action:@selector(physicalIconBtnPressed:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:btn];
+        [physicalButtons addObject:btn];
     }
     
     // baby name
@@ -96,7 +98,7 @@
 
     // loadLabels
     float label_h = 30;
-    float label_w = 44;
+    float label_w = 90;
 
     UIFont* font3 = [UIFont fontWithName:@"Raleway" size:14];
     UIColor* fontColor = [UIColor grayColor];
@@ -105,20 +107,24 @@
     physicalLabels = [[NSMutableArray alloc] initWithCapacity:cnt];
     for( int i=0; i<cnt; i++ ) {
         int label_x = icon_x[i] + 44;
-        int label_y = icon_y[i] + 16;
+        int label_y = icon_y[i] + 10;
         float h = label_h;
         float w = label_w;
         if( i==cnt-1 ) {
-            // make it longer for feeding
-            w = 200;
+            w = 200;  // make it longer for feeding
         }
         UILabel *label   = [[UILabel alloc] initWithFrame:CGRectMake(label_x, label_y, w, h)];
         label.font = font3;
         label.textColor = fontColor;
         label.text = label_text[i];
+        label.backgroundColor = [UIColor clearColor];
         [self.view addSubview:label];
         [physicalLabels addObject:label];
+        [label release];
     }
+    
+    [label_text release];
+    [icon_img_filename release];
 }
 
 - (void) updateLabel:(ReviewCardType)type withValue:(NSString*)value {
@@ -168,16 +174,15 @@
     // sleep
     if( self.timeline.sleeping ) {
         [values addObject:@"sleeping"];
-    }
-    else {
+    } else {
         // get last sleep time
         events = [global.model getEvent:global.baby.babyID event:EVENT_BASIC_SLEEP limit:2];
         if( events.count == 2 ) {
             NSString* str = [totSleepShowCard formatValue:((totEvent*)events[1]).datetime d2:((totEvent*)events[0]).datetime];
             [values addObject:str];
-        }
-        else
+        } else {
             [values addObject:[NSNull null]];
+        }
     }
     
     events = [global.model getEvent:global.baby.babyID event:EVENT_BASIC_FEEDING limit:1];
@@ -185,16 +190,21 @@
         // format the values
         NSString* str = [totFeedShowCard formatValue:((totEvent*)events[0]).value];
         [values addObject:str];
-    }
-    else
+    } else {
         [values addObject:[NSNull null]];
+    }
     
+    NSMutableArray* icon_img_filename = [[NSMutableArray alloc] initWithObjects:
+                                         @"height2", @"weight2", @"hc2", @"diaper2", @"language2", @"sleep2", @"food2", nil];
     for( int i=0; i<physicalLabels.count; i++ ) {
         if( ![values[i] isKindOfClass:NSNull.class] ) {
             NSString* value = values[i];
             ((UILabel*)physicalLabels[i]).text = value;
+            [((UIButton*)physicalButtons[i]) setImage:[UIImage imageNamed:[icon_img_filename objectAtIndex:i]]
+                                             forState:UIControlStateNormal];
         }
     }
+    [icon_img_filename release];
     [values release];
 }
 
@@ -204,6 +214,10 @@
     if( physicalLabels != nil ) {
         for( UILabel* label in physicalLabels )
             [label release];
+        [physicalLabels release];
+    }
+    if (physicalButtons != nil) {
+        [physicalButtons release];
     }
 
     [label_babyName release];

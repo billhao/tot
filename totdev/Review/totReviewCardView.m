@@ -602,9 +602,11 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
 - (void) animationDidStart:(NSString*)animationID context:(void*)context {
     self.associated_delete_button.hidden = YES;
 }
+
 - (void) animationDidStop:(NSString*)animationID finished:(NSNumber*)finished context:(void*)context {
     self.associated_delete_button.hidden = NO;
 }
+
 - (void) flip {
     [UIView beginAnimations:@"review_card_flip" context:nil];
     [UIView setAnimationDuration:0.5];

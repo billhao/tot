@@ -12,6 +12,7 @@
 @interface totSummaryCard : totReviewShowCardView {
     UIImageView* icon_baby;
     NSMutableArray* physicalLabels;
+    NSMutableArray* physicalButtons;
     
     UILabel* label_babyName;
     UILabel* label_babyAge;
