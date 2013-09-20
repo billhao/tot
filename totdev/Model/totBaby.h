@@ -38,4 +38,7 @@
 // print baby info to console
 -(void) printBabyInfo;
 
+// return a pretty formatted age for summary card in timeline
+-(NSString*)formatAge;
+
 @end

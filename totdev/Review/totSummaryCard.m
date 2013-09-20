@@ -138,6 +138,13 @@
 
 // load data from db
 - (void) loadData {
+    // set baby name
+    label_babyName.text = global.baby.name;
+    
+    // set baby age
+    label_babyAge.text = [global.baby formatAge];
+    
+    // set physical values
     NSMutableArray* values = [[NSMutableArray alloc] initWithCapacity:physicalLabels.count];
     
     NSMutableArray* events;
