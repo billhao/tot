@@ -77,7 +77,7 @@
 - (void)viewDidAppear:(BOOL)animated {
     NSLog(@"root vc view did appear");
     [self switchTo:kHomeViewEntryView withContextInfo:nil];
-    [self switchTo:kTimeline withContextInfo:nil];
+//    [self switchTo:kTimeline withContextInfo:nil];
 }
 
 - (UIViewController*)getViewByIndex:(int)viewIndex {
@@ -119,45 +119,62 @@
     switch (viewIndex) {
         case kHomeViewEntryView:
         {
-            if([nc.viewControllers containsObject:nextView]) {
-                [nc popToViewController:nextView animated:FALSE];
-            }
-            else
-                [nc pushViewController:nextView animated:FALSE];
-        }
+            nextView.view.frame = CGRectMake(0, 0, 320, 460);
+            [currentView.view.superview insertSubview:nextView.view atIndex:0];
+            [UIView animateWithDuration:.5 animations:^{
+                if( mCurrentViewIndex == kTimeline ) {
+                    currentView.view.frame = CGRectMake(0, 480, 320, 460);
+                }
+                else if( mCurrentViewIndex == kScrapbook ) {
+                    currentView.view.frame = CGRectMake(320, 0, 320, 460);
+                }
+            } completion:^(BOOL finished) {
+                if([nc.viewControllers containsObject:nextView]) {
+                    [nc popToViewController:nextView animated:FALSE];
+                }
+                else {
+                    [nc pushViewController:nextView animated:FALSE];
+                }
+                mCurrentViewIndex = viewIndex;
+            }];
             break;
+        }
         case kTimeline:
         {
             nextView.view.frame = CGRectMake(0, 480, 320, 460);
             [UIView animateWithDuration:0.75
                              animations:^{
-                                 //[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-                                 [delegate.loginNavigationController pushViewController:nextView animated:FALSE];
                                  if( currentX < nextX ) {
                                      currentView.view.frame = CGRectMake(-320, 0, 320, 460);
                                  } else {
                                      currentView.view.frame = CGRectMake(320, 0, 320, 460);
                                  }
-                                 nextView.view.frame = CGRectMake(0, 0, 320, 460);
-                                 //[UIView setAnimationTransition:UIViewAnimationTransitionCurlUp forView:delegate.loginNavigationController.view cache:NO];
+                                 nextView.view.frame = CGRectMake(0, 20, 320, 460);
+                                 [delegate.loginNavigationController.view addSubview:nextView.view];
+                             } completion:^(BOOL finished) {
+                                 [delegate.loginNavigationController pushViewController:nextView animated:FALSE];
+                                 mCurrentViewIndex = viewIndex;
                              }];
-        }
             break;
+        }
         case kScrapbook:
         {
-            nextView.view.frame = CGRectMake(320, 0, 320, 460);
+            nextView.view.frame = CGRectMake(320, 20, 320, 460);
             [UIView animateWithDuration:0.5
                              animations:^{
-                                 [delegate.loginNavigationController pushViewController:nextView animated:FALSE];
                                  if( currentX < nextX ) {
-                                     currentView.view.frame = CGRectMake(-320, 0, 320, 460);
+                                     currentView.view.frame = CGRectMake(-320, 20, 320, 460);
                                  } else {
-                                     currentView.view.frame = CGRectMake(320, 0, 320, 460);
+                                     currentView.view.frame = CGRectMake(320, 20, 320, 460);
                                  }
-                                 nextView.view.frame = CGRectMake(0, 0, 320, 460);
+                                 nextView.view.frame = CGRectMake(0, 20, 320, 460);
+                                 [delegate.loginNavigationController.view addSubview:nextView.view];
+                             } completion:^(BOOL finished) {
+                                 [delegate.loginNavigationController pushViewController:nextView animated:FALSE];
+                                 mCurrentViewIndex = viewIndex;
                              }];
-        }
             break;
+        }
     }
 }
 
