@@ -147,7 +147,6 @@
 - (id)init {
     self = [super init];
     if (self) {
-        e = nil;
         sleepStartEvent = nil;
     }
     return self;
@@ -155,7 +154,6 @@
 
 -(void)dealloc {
     [super dealloc];
-    if( e ) [e release];
     if( sleepStartEvent ) [sleepStartEvent release];
 }
 

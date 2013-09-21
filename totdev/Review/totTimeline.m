@@ -125,7 +125,7 @@
             CGRectMake(x,
                        y,
                        cv.associated_delete_button.frame.size.width,
-                       cv.associated_delete_button.frame.size.height);
+                       cv.frame.size.height);
         y = y + cv.frame.size.height + GAP_BETWEEN_CARDS;
         if (y >= self.contentSize.height) {
             self.contentSize = CGSizeMake(320, y);

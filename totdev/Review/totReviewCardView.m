@@ -262,7 +262,9 @@
 
 - (id) init {
     self = [super init];
-    if (self) {}
+    if (self) {
+        e = nil;
+    }
     return self;
 }
 
@@ -348,6 +350,8 @@
     [timestamp release];
     [calendar_text_ release];
     [calendar_icon_ release];
+    
+    if( e ) [e release];
 }
 
 - (int) height { return 0; }
@@ -649,6 +653,8 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
     // Need refresh the whole timeline view.
     [self.parent refreshView];
     [UIView commitAnimations];
+    
+    
 }
 
 // Static methods.
