@@ -53,7 +53,10 @@
 - (NSMutableArray *) getPreviousEvent:(int)baby_id event:(NSString*)event limit:(int)limit current_event_date:(NSDate*)current_event_date;
 
 - (int) getEventCount:(int)baby_id event:(NSString*)event;
+// delete events by name (like)
 - (BOOL) deleteEvents:(int)baby_id event:(NSString*)event;
+// delete event by id
+- (BOOL) deleteEventById:(int)event_id;
 
 // add a system-wide preference, such as accounts
 - (BOOL) addPreferenceNoBaby:(NSString*)pref_name value:(NSString*)value;

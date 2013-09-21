@@ -12,8 +12,6 @@
 
 @implementation totHeightEditCard
 
-@synthesize type;
-
 - (id)init:(ReviewCardType)cardType
 {
     // check card type
@@ -24,7 +22,7 @@
     self = [super init];
     if (self) {
         // init
-        type = cardType;
+        self.type = cardType;
         picker = nil;
         
         [self setBackground];
@@ -53,11 +51,11 @@
     // save to db
     NSString* value = selectedValueLabel.text;
     NSString* event = nil;
-    if( type == HEIGHT )
+    if( self.type == HEIGHT )
         event = EVENT_BASIC_HEIGHT;
-    else if ( type == WEIGHT )
+    else if ( self.type == WEIGHT )
         event = EVENT_BASIC_WEIGHT;
-    else if( type == HEAD )
+    else if( self.type == HEAD )
         event = EVENT_BASIC_HEAD;
     else
         return FALSE;
@@ -66,7 +64,7 @@
     [global.model addEvent:global.baby.babyID event:event datetime:[NSDate date] value:value];
     
     // Update the summary card.
-    [self.parentView.parent updateSummaryCard:type withValue:value];
+    [self.parentView.parent updateSummaryCard:self.type withValue:value];
     
     return TRUE;
 }
@@ -77,9 +75,9 @@
 
 - (void)pickerView:(STHorizontalPicker *)picker didSelectValue:(CGFloat)value {
     NSString* str;
-    if( type == HEIGHT || type == HEAD ) {
+    if( self.type == HEIGHT || self.type == HEAD ) {
         str = [NSString stringWithFormat:@"%.2f inches",value];
-    } else if( type == WEIGHT ) {
+    } else if( self.type == WEIGHT ) {
         str = [NSString stringWithFormat:@"%.2f pound",value];
     } else
         return;
@@ -97,13 +95,13 @@
 
 - (void) loadButtons {
     [self setTimestamp];
-    if (type == HEIGHT) {
+    if (self.type == HEIGHT) {
         [self setIcon:@"height_gray" confirmedIcon:@"height2"];
         [self setTitle:@"Height"];
-    } else if (type == WEIGHT) {
+    } else if (self.type == WEIGHT) {
         [self setIcon:@"weight_gray" confirmedIcon:@"weight2"];
         [self setTitle:@"Weight"];
-    } else if (type == HEAD) {
+    } else if (self.type == HEAD) {
         [self setIcon:@"hc_gray" confirmedIcon:@"hc2"];
         [self setTitle:@"Head Circumference"];
     }
@@ -140,11 +138,11 @@
     float h = 40;
 
     // create picker
-    if( type == HEIGHT )
+    if( self.type == HEIGHT )
         picker = [STHorizontalPicker getPickerForHeight:CGRectMake(x, yy, w, h)];
-    else if( type == WEIGHT)
+    else if( self.type == WEIGHT)
         picker = [STHorizontalPicker getPickerForWeight:CGRectMake(x, yy, w, h)];
-    else if( type == HEAD )
+    else if( self.type == HEAD )
         picker = [STHorizontalPicker getPickerForHeadC :CGRectMake(x, yy, w, h)];
     [picker setDelegate:self];
     [self.view addSubview:picker];
@@ -157,12 +155,10 @@
 
 @implementation totHeightShowCard
 
-@synthesize type;
-
 - (id) init:(ReviewCardType)cardType {
     self = [super init];
     if (self) {
-        type = cardType;
+        self.type = cardType;
     }
     return self;
 }
@@ -174,11 +170,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setBackground];
-    if (type == HEIGHT) {
+    if (self.type == HEIGHT) {
         [self setIcon:@"height2"];
-    } else if (type == WEIGHT) {
+    } else if (self.type == WEIGHT) {
         [self setIcon:@"weight2"];
-    } else if (type == HEAD) {
+    } else if (self.type == HEAD) {
         [self setIcon:@"hc2"];
     }
 }
@@ -201,11 +197,11 @@
 
 - (void) getDataFromDB {
     NSString* event = nil;
-    if( type == HEIGHT )
+    if( self.type == HEIGHT )
         event = EVENT_BASIC_HEIGHT;
-    else if ( type == WEIGHT )
+    else if ( self.type == WEIGHT )
         event = EVENT_BASIC_WEIGHT;
-    else if( type == HEAD )
+    else if( self.type == HEAD )
         event = EVENT_BASIC_HEAD;
     else
         return;
@@ -218,11 +214,11 @@
         if( events.count > 1 ) {
             totEvent* prevEvt = [events objectAtIndex:1];
             float incr = [currEvt.value floatValue] - [prevEvt.value floatValue];
-            if( type == HEIGHT )
+            if( self.type == HEIGHT )
                 description.text = [NSString stringWithFormat:@"%@ is %.2f inches taller than last time", global.baby.name, incr];
-            else if ( type == WEIGHT )
+            else if ( self.type == WEIGHT )
                 description.text = [NSString stringWithFormat:@"%@ weighs %.2f pound more than last time", global.baby.name, incr];
-            else if( type == HEAD )
+            else if( self.type == HEAD )
                 description.text = [NSString stringWithFormat:@"%@'s head circumference is %.2f inches longer than last time", global.baby.name, incr];
         }
     }

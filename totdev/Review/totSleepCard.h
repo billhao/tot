@@ -19,8 +19,9 @@
 
 
 @interface totSleepShowCard : totReviewShowCardView {
-    totEvent* sleepStartEvent;
 }
+
+@property(nonatomic, retain) totEvent* sleepStartEvent;
 
 + (NSString*)formatValue:(NSDate*)d1 d2:(NSDate*)d2;
 

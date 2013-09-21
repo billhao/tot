@@ -22,8 +22,7 @@
 
 @implementation totReviewEditCardView
 
-@synthesize parentView;
-@synthesize timeline;
+@synthesize parentView, timeline, type;
 
 - (id)init {
     self = [super init];
@@ -259,7 +258,7 @@
 @synthesize timeline;
 @synthesize card_title;
 @synthesize description;
-@synthesize story_, e;
+@synthesize story_, e, type;
 
 - (id) init {
     self = [super init];
@@ -373,12 +372,14 @@
 // ----------------- Gesture delegates --------------------
 //
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
+    if( self.mShowView.type == SUMMARY ) return NO; // no delete for summary card
+    
     UIViewController* vc = (mMode==EDIT)?self.mEditView:self.mShowView;
     UIView* v = [vc.view hitTest:[gestureRecognizer locationInView:vc.view ] withEvent:nil];
     NSLog(@"%@", v.class);
 
     // add this condition to avoid moving the view while scrolling the height picker
-    if( v.class == self.mEditView.class || v.class == self.mShowView.class || v.class == nil )
+    if( v.class == self.mEditView.class || v.class == self.mShowView.class || v.class == nil || v.class == UIView.class )
         return YES;
     else
         return NO;
@@ -397,11 +398,12 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
     [UIView setAnimationDuration:0.5f];
     [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
     if (!deleted) {
-        self.frame = CGRectMake(6,
+        self.frame = CGRectMake(associated_delete_button.frame.origin.x,
                                 self.frame.origin.y,
                                 self.frame.size.width, self.frame.size.height);
     } else {
-        self.frame = CGRectMake(self.frame.size.width / 2,
+        int n = associated_delete_button.frame.origin.x + associated_delete_button.bounds.size.width;
+        self.frame = CGRectMake(n,
                                 self.frame.origin.y,
                                 self.frame.size.width, self.frame.size.height);
     }
@@ -427,7 +429,8 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
         }
         if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
             printf("move the review card: %f %f\n", self.frame.origin.x, self.frame.size.width);
-            if (self.frame.origin.x > self.frame.size.width / 2) {
+            int n = associated_delete_button.frame.origin.x + associated_delete_button.bounds.size.width;
+            if (self.frame.origin.x > n) {
                 [self performAnimation:YES];
             } else {
                 [self performAnimation:NO];
@@ -524,6 +527,7 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
             case SUMMARY:
             {
                 totSummaryCard* c = [[totSummaryCard alloc] init];
+                c.type = type;
                 c.timeline = timeline;
                 self.frame = CGRectMake(0, 0, [c width], [c height]);
                 c.view.frame = self.bounds;
@@ -570,6 +574,8 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
             self.frame = CGRectMake(0, 0, [c1 width], [c1 height]);
             c1.view.frame = self.bounds;
             c2.view.frame = CGRectMake(0, 0, [c2 width], [c2 height]);
+            c1.type = type;
+            c2.type = type;
             c1.timeline = timeline;
             c2.timeline = timeline;
             self.mEditView = c1;
@@ -595,6 +601,9 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
     return self;
 }
 
+- (void)dealloc {
+    [super dealloc];
+}
 
 //
 // ----------------- Card Flip Animation ---------------------

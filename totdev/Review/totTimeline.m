@@ -11,6 +11,7 @@
 #import "Global.h"
 #import "totTimelineController.h"
 #import "totSummaryCard.h"
+#import "totSleepCard.h"
 
 #define INIT_HEIGHT 1000
 
@@ -57,7 +58,11 @@
     }
     [self addSubview:card];
     [self refreshView];
-    [self addDeleteButtonUnderCard:card];
+    
+    // no delete for summary
+    if( type != SUMMARY )
+        [self addDeleteButtonUnderCard:card];
+    
     return card;
 }
 
@@ -81,16 +86,26 @@
             [UIView setAnimationDuration:1.0];
             [UIView setAnimationDidStopSelector:@selector(animationDidStop:finished:context:)];
                 cv.frame = CGRectMake(320, cv.frame.origin.y, cv.frame.size.width, cv.frame.size.height);
+                CGRect f = cv.associated_delete_button.frame;
+                f.origin.x = -f.size.width;
+                cv.associated_delete_button.frame = f;
             [UIView commitAnimations];
+            
+            break;
         }
     }
 }
 
 - (void) addDeleteButtonUnderCard: (totReviewCardView*)card {
-    int x = card.frame.size.width / 4;
+    int x = card.frame.origin.x;
     int y = card.frame.origin.y;
-    UIButton* delete_button = [[UIButton alloc] initWithFrame:CGRectMake(x, y, 40, 40)];
-    delete_button.backgroundColor = [UIColor redColor];
+    UIButton* delete_button = [[UIButton alloc] initWithFrame:CGRectMake(x, y, 82, card.bounds.size.height)]; // 82 is the width of delete button in ios' own message app
+    delete_button.titleLabel.font = [UIFont fontWithName:@"Raleway" size:16];
+    [delete_button setTitle:@"Delete" forState:UIControlStateNormal];
+    [delete_button setTitle:@"Delete" forState:UIControlStateHighlighted];
+    [delete_button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [delete_button setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
+    delete_button.backgroundColor = [UIColor colorWithRed:1.0 green:59/255.0 blue:48/255.0 alpha:1.0];
     [delete_button addTarget:self
                       action:@selector(handleDeleteButton:)
             forControlEvents:UIControlEventTouchUpInside];
@@ -107,7 +122,7 @@
         x = (320 - cv.frame.size.width) / 2;
         cv.frame = CGRectMake(x, y, cv.frame.size.width, cv.frame.size.height);
         cv.associated_delete_button.frame =
-            CGRectMake(cv.associated_delete_button.frame.origin.x,
+            CGRectMake(x,
                        y,
                        cv.associated_delete_button.frame.size.width,
                        cv.associated_delete_button.frame.size.height);
@@ -137,14 +152,22 @@
 }
 
 - (void) deleteCard:(totReviewCardView *)card {
-    for (int i = 0; i < [mCards count]; ++i) {
-        totReviewCardView* cv = [mCards objectAtIndex:i];
-        if (cv == card) {  // Find the to be deleted card.
-            [cv removeFromSuperview];
-            [mCards removeObjectAtIndex:i];
-            break;
+    if( card.mMode == SHOW ) {
+        // delete this record from db
+        if( card.mShowView.type == SLEEP ) {
+            // also delete last event id so delete in pair
+            int event_id = ((totSleepShowCard*)card.mShowView).sleepStartEvent.event_id;
+            [global.model deleteEventById:event_id];
         }
+        int event_id = card.mShowView.e.event_id;
+        if( event_id > 0 )
+            [global.model deleteEventById:event_id];
     }
+
+    // delete from the view
+    [card removeFromSuperview];
+    [mCards removeObject:card];
+    
     [self refreshView];
 }
 

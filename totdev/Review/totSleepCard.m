@@ -139,15 +139,24 @@
 
 @implementation totSleepShowCard
 
+@synthesize sleepStartEvent;
+
 - (int) height { return 60; }
 - (int) width { return 308; }
 
 - (id)init {
     self = [super init];
     if (self) {
+        e = nil;
         sleepStartEvent = nil;
     }
     return self;
+}
+
+-(void)dealloc {
+    [super dealloc];
+    if( e ) [e release];
+    if( sleepStartEvent ) [sleepStartEvent release];
 }
 
 - (void)viewDidLoad {
@@ -164,15 +173,7 @@
     if (!story_) {
         [self getDataFromDB];
     } else {
-        NSMutableArray* events = [global.model getEvent:global.baby.babyID event:EVENT_BASIC_SLEEP limit:1 offset:-1 startDate:nil endDate:story_.mWhen];
-        if( events.count == 1 ) {
-            totEvent* e0 = events[0];
-            if( [e0.value isEqualToString:@"start"] ) {
-                sleepStartEvent = e0;
-            } else {
-                NSLog(@"there is a problem with sleep record %d %d", story_.mEventId, e.event_id);
-            }
-        }
+        [self getSleepStart];
     }
     
     [self updateUI];
@@ -189,8 +190,20 @@
         totEvent* e1 = events[0];
         totEvent* e0 = events[1];
         if( [e1.value isEqualToString:@"end"] && [e0.value isEqualToString:@"start"] ) {
-            sleepStartEvent = e0;
-            e = e1;
+            sleepStartEvent = [e0 retain];
+            e = [e1 retain];
+        }
+    }
+}
+
+- (void)getSleepStart {
+    NSMutableArray* events = [global.model getEvent:global.baby.babyID event:EVENT_BASIC_SLEEP limit:1 offset:-1 startDate:nil endDate:story_.mWhen];
+    if( events.count == 1 ) {
+        totEvent* e0 = events[0];
+        if( [e0.value isEqualToString:@"start"] ) {
+            sleepStartEvent = [e0 retain];
+        } else {
+            NSLog(@"there is a problem with sleep record %d %d", story_.mEventId, e.event_id);
         }
     }
 }

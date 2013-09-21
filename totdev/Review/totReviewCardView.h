@@ -17,6 +17,18 @@
 @class totReviewCardView;
 @class totReviewStory;
 
+typedef enum {
+    TEST     = -1,
+    HEIGHT   = 0,
+    WEIGHT   = 1,
+    HEAD     = 2,
+    DIAPER   = 3,
+    LANGUAGE = 4,
+    SLEEP    = 5,
+    FEEDING  = 6,
+    SUMMARY  = 7,
+} ReviewCardType;
+
 // ---------------- Card in editting mode --------------------
 @interface totReviewEditCardView : UIViewController <totTimerDelegate> {
     totReviewCardView* parentView;
@@ -39,6 +51,7 @@
 
 @property (nonatomic, assign) totReviewCardView* parentView;
 @property (nonatomic, retain) totTimeline* timeline;
+@property(nonatomic, assign) ReviewCardType type; // height, weight or HC, etc
 
 - (void) setBackground;
 - (void) setIcon:(NSString*)icon_name;
@@ -77,6 +90,7 @@
 @property (nonatomic, readonly) UILabel* description;
 @property (nonatomic, retain) totReviewStory* story_;
 @property (nonatomic, retain) totEvent* e;
+@property(nonatomic, assign) ReviewCardType type; // height, weight or HC, etc
 
 
 - (void) setBackground;
@@ -96,18 +110,6 @@ typedef enum {
     EDIT = 0,
     SHOW = 1,
 } ReviewCardMode;
-
-typedef enum {
-    TEST     = -1,
-    HEIGHT   = 0,
-    WEIGHT   = 1,
-    HEAD     = 2,
-    DIAPER   = 3,
-    LANGUAGE = 4,
-    SLEEP    = 5,
-    FEEDING  = 6,
-    SUMMARY  = 7,
-} ReviewCardType;
 
 @interface totReviewCardView : UIView <UIGestureRecognizerDelegate> {
     totReviewEditCardView* mEditView;

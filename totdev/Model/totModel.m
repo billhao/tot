@@ -687,6 +687,38 @@ NSMutableArray *events = [[[NSMutableArray alloc] init] autorelease];
     }
 }
 
+// delete event by id
+- (BOOL) deleteEventById:(int)event_id {
+    BOOL re = FALSE;
+    sqlite3_stmt *stmt = nil;
+    @try {
+        if (db == nil) {
+            NSLog(@"Can't open db");
+            return re;
+        }
+        
+        const char *sql = "DELETE FROM event WHERE event_id = ?";
+        if(sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) != SQLITE_OK) {
+            NSLog(@"[db] Problem with prepare statement");
+            return re;
+        }
+        int ret = sqlite3_bind_int(stmt, 1, event_id);
+        if( ret!=SQLITE_OK ) NSLog(@"[db] deleteEventById bind_int %d", ret);
+        
+        if (sqlite3_step(stmt)!=SQLITE_DONE) {
+            int code = sqlite3_errcode(db);
+            NSLog(@"[db]Error in sqlite3_step/deleteEventById: %d %s", code, sqlite3_errmsg(db));
+        }
+    }
+    @catch (NSException *exception) {
+        NSLog(@"[db] An exception occured: %@", [exception reason]);
+    }
+    @finally {
+        if( stmt != nil ) sqlite3_finalize(stmt);
+        return TRUE;
+    }
+}
+
 // clear all records in the database
 - (BOOL) clearDB {
     BOOL re = FALSE;

@@ -17,7 +17,6 @@
     
 }
 
-@property(nonatomic, assign, readonly) ReviewCardType type; // height, weight or HC
 @property(nonatomic, readonly, getter=getWidth)  int width;
 @property(nonatomic, readonly, getter=getHeight) int height;
 
@@ -30,8 +29,6 @@
 @interface totHeightShowCard : totReviewShowCardView {
 
 }
-
-@property(nonatomic, assign, readonly) ReviewCardType type; // height, weight or HC
 
 - (id) init:(ReviewCardType)cardType;
 
