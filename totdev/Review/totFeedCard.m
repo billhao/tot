@@ -118,7 +118,9 @@
 #pragma mark - Helper functions
 
 - (void)createUI {
-    addBtn = [UIButton buttonWithType:UIButtonTypeContactAdd];
+    addBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [addBtn setImage:[UIImage imageNamed:@"feeding_add"] forState:UIControlStateNormal];
+    [addBtn setImage:[UIImage imageNamed:@"feeding_add"] forState:UIControlStateHighlighted];
     [addBtn addTarget:self action:@selector(addBtnPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:addBtn];
     
@@ -147,7 +149,9 @@
     // create delete button
     f.origin.x += w3 + margin_x;
     f.size.width = h;
-    UIButton* deleteBtn = [UIButton buttonWithType:UIButtonTypeContactAdd];
+    UIButton* deleteBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [deleteBtn setImage:[UIImage imageNamed:@"feeding_delete"] forState:UIControlStateNormal];
+    [deleteBtn setImage:[UIImage imageNamed:@"feeding_delete"] forState:UIControlStateHighlighted];
     deleteBtn.frame = f;
     [deleteBtn addTarget:self action:@selector(deleteBtnPressed:) forControlEvents:UIControlEventTouchUpInside];
     [v addSubview:deleteBtn];
