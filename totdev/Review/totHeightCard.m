@@ -149,6 +149,10 @@
     [self.view sendSubviewToBack:picker];
 }
 
+- (STHorizontalPicker*)getPicker {
+    return picker;
+}
+
 @end
 
 

@@ -446,15 +446,14 @@
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
     if( self.mShowView.type == SUMMARY ) return NO; // no delete for summary card
     
-    UIViewController* vc = (mMode==EDIT)?self.mEditView:self.mShowView;
-    UIView* v = [vc.view hitTest:[gestureRecognizer locationInView:vc.view ] withEvent:nil];
-    NSLog(@"%@", v.class);
-
-    // add this condition to avoid moving the view while scrolling the height picker
-    if( v.class == self.mEditView.class || v.class == self.mShowView.class || v.class == nil || v.class == UIView.class )
-        return YES;
-    else
-        return NO;
+    // do not allow scroll if in height/weight/head cards' picker
+    if( mMode == EDIT && (self.mEditView.type == HEIGHT || self.mEditView.type == WEIGHT || self.mEditView.type == HEAD ) ) {
+        totHeightEditCard* hcard = (totHeightEditCard*)self.mEditView;
+        STHorizontalPicker* picker = [hcard getPicker];
+        if( [picker pointInside:[gestureRecognizer locationInView:picker] withEvent:nil] )
+            return NO;
+    }
+    return YES;
 }
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer
        shouldReceiveTouch:(UITouch *)touch {
@@ -482,27 +481,39 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
     [UIView commitAnimations];
 }
 
+static int nn = 0;
 - (void) handlePan:(UIGestureRecognizer*) gestureRecognizer {
     if ([gestureRecognizer isKindOfClass:UIPanGestureRecognizer.class]) {
         UIPanGestureRecognizer* pan = (UIPanGestureRecognizer*)gestureRecognizer;
-        CGPoint pos = [pan translationInView:self];
+        CGPoint translation = [pan translationInView:self];
+        NSLog(@"%d \t tx=%d \t ty=%d \t x=%.0f y=%.0f \t %d", nn, (int)touch_x, (int)touch_y, translation.x, translation.y, gestureRecognizer.state);
+        nn++;
         if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
-            touch_x = pos.x;
-            touch_y = pos.y;
-        } else {
-            if ( fabs(pos.y - touch_y) * 4 > fabs(pos.x - touch_x) )
-                return;
-            float new_x = self.frame.origin.x + (pos.x - touch_x);
-            self.frame = CGRectMake(new_x,
-                                    self.frame.origin.y,
-                                    self.frame.size.width, self.frame.size.height);
-            touch_x = pos.x;
-            touch_y = pos.y;
+            NSLog(@"move began");
+//            touch_x = translation.x;
+//            touch_y = translation.y;
+            origin_x = self.frame.origin.x;
+            endGesture = FALSE;
+        } else
+        {
+            if ( fabs(translation.y) * 4 > fabs(translation.x) ) {
+                NSLog(@"return tx=%.1f ty=%.1f x=%.1f y=%.1f", translation.x, translation.y, touch_x, touch_y);
+                endGesture = TRUE;
+            }
+            else if( !endGesture ) {
+                CGRect f = self.frame;
+                f.origin.x = origin_x + translation.x;
+                self.frame = f;
+                //[pan setTranslation:CGPointMake(0, 0) inView:self];
+            }
+//            touch_x = translation.x;
+//            touch_y = translation.y;
         }
-        if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
+        if ( endGesture || (gestureRecognizer.state == UIGestureRecognizerStateEnded) ) {
             printf("move the review card: %f %f\n", self.frame.origin.x, self.frame.size.width);
             int n = associated_delete_button.frame.origin.x + associated_delete_button.bounds.size.width;
-            if (self.frame.origin.x > n) {
+            NSLog(@"%d %d", (int)self.frame.origin.x, n);
+            if (self.frame.origin.x >= n) {
                 [self performAnimation:YES];
             } else {
                 [self performAnimation:NO];
@@ -519,6 +530,7 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
     [pan release];
     
     touch_x = -1.0f;
+    endGesture = FALSE;
 }
 
 - (id)initWithFrame:(CGRect)frame {

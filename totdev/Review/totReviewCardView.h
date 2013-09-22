@@ -129,6 +129,7 @@ typedef enum {
     float touch_x;
     float touch_y;
     float origin_x;  // used to recover the position of the view when we finish the animation.
+    BOOL endGesture; // ends the gesture when vertical movement is greater than horizontal movement
 }
 
 @property (nonatomic, retain) totReviewEditCardView* mEditView;

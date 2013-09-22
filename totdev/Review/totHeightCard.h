@@ -21,6 +21,7 @@
 @property(nonatomic, readonly, getter=getHeight) int height;
 
 - (id)init:(ReviewCardType)cardType;
+- (STHorizontalPicker*)getPicker;
 
 @end
 
