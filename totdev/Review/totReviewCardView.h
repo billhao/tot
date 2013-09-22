@@ -69,6 +69,8 @@ typedef enum {
 - (bool) clickOnConfirmIconButtonDelegate;
 - (NSString*) getTimestampInString;
 
+- (void)confirmIconHandler:(UIButton*)button;
+
 - (int) height;
 - (int) width;
 

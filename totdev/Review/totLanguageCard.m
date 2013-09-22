@@ -24,10 +24,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self display];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
+    [self display];
 }
 
 - (void) setBackground {
@@ -102,13 +102,13 @@
 - (BOOL)textView:(UITextView*)textView1 shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
     if( [text isEqualToString:@"\n"] ) {
         [textView1 resignFirstResponder];
+        [super confirmIconHandler:nil]; // pretend the user clicked on the confirm button
         return NO;
     }
     return YES;
 }
 
 -(void)textViewDidEndEditing:(UITextView *)textView {
-    [self clickOnConfirmIconButtonDelegate];
 }
 
 - (bool) clickOnConfirmIconButtonDelegate {
@@ -132,7 +132,6 @@
         return FALSE;
     }
 }
-
 
 #pragma mark - Helper functions
 
