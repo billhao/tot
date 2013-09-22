@@ -144,11 +144,11 @@
             nextView.view.frame = CGRectMake(0, 480, 320, 460);
             [UIView animateWithDuration:0.75
                              animations:^{
-                                 if( currentX < nextX ) {
-                                     currentView.view.frame = CGRectMake(-320, 0, 320, 460);
-                                 } else {
-                                     currentView.view.frame = CGRectMake(320, 0, 320, 460);
-                                 }
+//                                 if( currentX < nextX ) {
+//                                     currentView.view.frame = CGRectMake(-320, 0, 320, 460);
+//                                 } else {
+//                                     currentView.view.frame = CGRectMake(320, 0, 320, 460);
+//                                 }
                                  nextView.view.frame = CGRectMake(0, 20, 320, 460);
                                  [delegate.loginNavigationController.view addSubview:nextView.view];
                              } completion:^(BOOL finished) {
@@ -162,11 +162,11 @@
             nextView.view.frame = CGRectMake(320, 20, 320, 460);
             [UIView animateWithDuration:0.5
                              animations:^{
-                                 if( currentX < nextX ) {
-                                     currentView.view.frame = CGRectMake(-320, 20, 320, 460);
-                                 } else {
-                                     currentView.view.frame = CGRectMake(320, 20, 320, 460);
-                                 }
+//                                 if( currentX < nextX ) {
+//                                     currentView.view.frame = CGRectMake(-320, 20, 320, 460);
+//                                 } else {
+//                                     currentView.view.frame = CGRectMake(320, 20, 320, 460);
+//                                 }
                                  nextView.view.frame = CGRectMake(0, 20, 320, 460);
                                  [delegate.loginNavigationController.view addSubview:nextView.view];
                              } completion:^(BOOL finished) {

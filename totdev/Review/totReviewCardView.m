@@ -465,8 +465,13 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
 }
 
 - (void) performAnimation: (bool)deleted {
+    float d;
+    if (!deleted)
+        d = 0.3;
+    else
+        d = 0.5;
     [UIView beginAnimations:@"review_card_animation" context:&deleted];
-    [UIView setAnimationDuration:0.5f];
+    [UIView setAnimationDuration:d];
     [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
     if (!deleted) {
         self.frame = CGRectMake(associated_delete_button.frame.origin.x,
@@ -481,13 +486,13 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
     [UIView commitAnimations];
 }
 
-static int nn = 0;
+//static int nn = 0;
 - (void) handlePan:(UIGestureRecognizer*) gestureRecognizer {
     if ([gestureRecognizer isKindOfClass:UIPanGestureRecognizer.class]) {
         UIPanGestureRecognizer* pan = (UIPanGestureRecognizer*)gestureRecognizer;
         CGPoint translation = [pan translationInView:self];
-        NSLog(@"%d \t tx=%d \t ty=%d \t x=%.0f y=%.0f \t %d", nn, (int)touch_x, (int)touch_y, translation.x, translation.y, gestureRecognizer.state);
-        nn++;
+        //NSLog(@"%d \t tx=%d \t ty=%d \t x=%.0f y=%.0f \t %d", nn, (int)touch_x, (int)touch_y, translation.x, translation.y, gestureRecognizer.state);
+        //nn++;
         if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
             NSLog(@"move began");
 //            touch_x = translation.x;
@@ -497,7 +502,7 @@ static int nn = 0;
         } else
         {
             if ( fabs(translation.y) * 4 > fabs(translation.x) ) {
-                NSLog(@"return tx=%.1f ty=%.1f x=%.1f y=%.1f", translation.x, translation.y, touch_x, touch_y);
+                //NSLog(@"return tx=%.1f ty=%.1f x=%.1f y=%.1f", translation.x, translation.y, touch_x, touch_y);
                 endGesture = TRUE;
             }
             else if( !endGesture ) {
@@ -512,7 +517,6 @@ static int nn = 0;
         if ( endGesture || (gestureRecognizer.state == UIGestureRecognizerStateEnded) ) {
             printf("move the review card: %f %f\n", self.frame.origin.x, self.frame.size.width);
             int n = associated_delete_button.frame.origin.x + associated_delete_button.bounds.size.width;
-            NSLog(@"%d %d", (int)self.frame.origin.x, n);
             if (self.frame.origin.x >= n) {
                 [self performAnimation:YES];
             } else {
