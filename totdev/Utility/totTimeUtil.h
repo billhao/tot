@@ -20,6 +20,9 @@ typedef struct {
 + (void) now: (Walltime*)wall_time;
 + (NSString*) getTimeDescriptionFromNow : (NSDate*)event_time;
 
++(NSString*) getTimeString:(NSDate*)datetime;
++(NSString*) getDateString:(NSDate*)datetime;
+
 @end
 
 

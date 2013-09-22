@@ -25,10 +25,10 @@ enum {
     kPickerDay
 };
 
-enum {
+typedef enum {
     kDate = 0,
     kTime
-};
+} DATETIMEPICKERMODE;
 
 @protocol totTimerControllerDelegate <NSObject>
 
@@ -54,6 +54,7 @@ enum {
     // keep the superview and hidden textview on the superview so we can use its InputView and InputAccessoryView
     UIView* mSuperView;
     UITextView* mHiddenText;
+    
 }
 
 @property (nonatomic, readonly) int mMode;
@@ -67,6 +68,7 @@ enum {
 @property (nonatomic, assign) int mHeight;
 @property (nonatomic, retain) id<totTimerControllerDelegate> delegate;
 @property (nonatomic, retain) UIPickerView *mTimePicker;
+@property (nonatomic, retain) NSDate* datetime;
 
 // must init with a super view
 - (id)init:(UIView*)superView;

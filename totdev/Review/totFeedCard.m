@@ -205,11 +205,8 @@
 }
 
 - (void)saveToDB:(NSArray*)list {
-    // TODO datetime
-    NSDate* date = [NSDate date];
-
     NSString* json = [totHomeFeedingViewController ObjectToJSON:list];
-    [global.model addEvent:global.baby.babyID event:EVENT_BASIC_FEEDING datetime:date value:json];
+    [global.model addEvent:global.baby.babyID event:EVENT_BASIC_FEEDING datetime:self.timeStamp value:json];
 }
 
 @end
@@ -256,6 +253,7 @@
     if( events.count > 0 ) {
         totEvent* currEvt = [events objectAtIndex:0];
         self.e = [currEvt retain];
+        [self setTimestampWithDate:currEvt.datetime];
         [self updateUI:currEvt.value];
         [self setTimestamp:currEvt.getTimeText];
     }

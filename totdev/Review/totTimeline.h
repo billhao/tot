@@ -8,10 +8,10 @@
 
 #import "totReviewCardView.h"
 #import <UIKit/UIKit.h>
+#import "totTimerController.h"
+#import "totTimelineController.h"
 
 #define GAP_BETWEEN_CARDS 5
-
-@class totTimelineController;
 
 @interface totTimeline : UIScrollView <UIScrollViewDelegate> {
     NSMutableArray* mCards;

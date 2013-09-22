@@ -16,15 +16,22 @@
 @implementation totTimelineController
 
 @synthesize homeController;
-@synthesize timeline_;
+@synthesize timeline_, mClock;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        mClock = nil;
     }
     return self;
+}
+
+- (void)dealloc {
+    [super dealloc];
+    [timeline_ release];
+    if( mClock ) [mClock release];
 }
 
 - (void)viewDidLoad
@@ -40,6 +47,8 @@
     self.timeline_ = timelineView;
     self.timeline_.controller = self;
     [timelineView release];
+
+    [self addDateTimePicker];
 }
 
 - (void)loadEventsFrom:(int)start limit:(int)limit {
@@ -86,9 +95,27 @@
     return navbar.frame.size.height;
 }
 
-- (void)dealloc {
-    [super dealloc];
-    [timeline_ release];
+#pragma mark - date time picker
+- (void)addDateTimePicker {
+    mClock = [[totTimerController alloc] init:self.view];
+    CGRect f = self.view.frame;
+    mClock.view.frame = CGRectMake((f.size.width-mClock.mWidth)/2, f.size.height, mClock.mWidth, mClock.mHeight);
+    mClock.view.hidden = TRUE;
+    [self.view addSubview:mClock.view];
+}
+
+- (void)showTimePicker:(totReviewEditCardView*)editCard mode:(DATETIMEPICKERMODE)mode datetime:(NSDate*)datetime {
+    [mClock setMode:mode];
+    mClock.datetime = datetime;
+    [mClock setDelegate:editCard];
+    [mClock setCurrentTime];
+    mClock.view.hidden = FALSE;
+    [mClock show];
+}
+
+- (void)hideTimePicker {
+    [mClock dismiss];
+    mClock.view.hidden = TRUE;
 }
 
 @end

@@ -11,11 +11,14 @@
 @implementation totTimeUtil
 
 + (void) now: (Walltime*)wall_time {
-    NSDate* now = [NSDate date];
+    return [self getDateTimeString:[NSDate date] wall_time:wall_time];
+}
+
++ (void)getDateTimeString:(NSDate*)date wall_time:(Walltime*)wall_time {
     NSDateFormatter* date_formatter = [[NSDateFormatter alloc] init];
     [date_formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     
-    NSArray* tokens = [[date_formatter stringFromDate:now] componentsSeparatedByString:@" "];
+    NSArray* tokens = [[date_formatter stringFromDate:date] componentsSeparatedByString:@" "];
     NSArray* part1 = [[tokens objectAtIndex:0] componentsSeparatedByString:@"-"];
     NSArray* part2 = [[tokens objectAtIndex:1] componentsSeparatedByString:@":"];
     
@@ -85,6 +88,29 @@
     [date_formatter release];
     
     return time_desc;
+}
+
++(NSString*) getTimeString:(NSDate*)datetime {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    
+    [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
+    
+    NSString *formattedDateString = [dateFormatter stringFromDate:datetime];
+    formattedDateString = [formattedDateString lowercaseString];
+    [dateFormatter release];
+    
+    return formattedDateString;
+}
+
++(NSString*) getDateString:(NSDate*)datetime {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    
+    [dateFormatter setDateStyle:NSDateFormatterShortStyle];
+    
+    NSString *formattedDateString = [dateFormatter stringFromDate:datetime];
+    [dateFormatter release];
+    
+    return formattedDateString;
 }
 
 @end

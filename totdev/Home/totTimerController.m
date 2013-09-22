@@ -29,7 +29,7 @@
 @synthesize mWidth;
 @synthesize mHeight;
 @synthesize delegate;
-@synthesize mTimePicker;
+@synthesize mTimePicker, datetime;
 
 - (id)init:(UIView*)superView {
     self = [super init];
@@ -170,7 +170,11 @@
 }
 */
 
-- (void)setMode:(int)m { mMode = m; }
+- (void)setMode:(int)m {
+    mMode = m;
+    // need to reload all components
+    [mTimePicker reloadAllComponents];
+}
 
 - (void)setCurrentHour:(int)h andMinute:(int)m andAmPm:(int)ap {
     if( 1 <= h && h <= 12 ) {
@@ -209,39 +213,38 @@
     int tag = btn.tag;
     if( tag == kButtonOK ) {
         if( [delegate respondsToSelector:@selector(saveCurrentTime:datetime:)] ) {
-            NSString *time = nil;
-            NSDate* date = nil;
             NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+            NSString* dt;
             if( mMode == kTime ) {
                 // prepare the string object for the delegate
-                time = [[NSString alloc] initWithFormat:@"%s:%s %s",
-                        [[mHour objectAtIndex:mCurrentHourIdx] UTF8String],
-                        [[mMinute objectAtIndex:mCurrentMinuteIdx] UTF8String],
-                        [[mAmPm objectAtIndex:mCurrentAmPm] UTF8String]];
+                dt = [NSString stringWithFormat:@"%@:%@ %@",
+                        [mHour objectAtIndex:mCurrentHourIdx],
+                        [mMinute objectAtIndex:mCurrentMinuteIdx],
+                        [mAmPm objectAtIndex:mCurrentAmPm]];
                 
                 // prepare the NSDate object for the delegate
                 // set the date to today because a NSDate object must have a date component
                 [dateFormatter setDateStyle:NSDateFormatterShortStyle];
                 [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
-                NSString* datetime = [NSString stringWithFormat:@"%@ %@", [dateFormatter stringFromDate:[NSDate date]], time];
-                [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
-                date = [dateFormatter dateFromString:datetime];
+                dt = [NSString stringWithFormat:@"%@ %@", [dateFormatter stringFromDate:datetime], dt];
             } else {
-                // prepare the string object for the delegate
-                int m = [[mMonth objectAtIndex:mCurrentMonthIdx] intValue];
-                time = [[NSString alloc] initWithFormat:@"%s %s, %s",
-                        [[totTimerController getMonthString:m] UTF8String],
-                        [[mDay objectAtIndex:mCurrentDayIdx] UTF8String],
-                        [[mYear objectAtIndex:mCurrentYearIdx] UTF8String]];
-
                 // prepare the NSDate object for the delegate
-                [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
-                date = [dateFormatter dateFromString:time];
+                [dateFormatter setDateStyle:NSDateFormatterNoStyle];
+                [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
+
+                // prepare the string object for the delegate
+                dt = [NSString stringWithFormat:@"%@/%@/%@ %@",
+                        [mMonth objectAtIndex:mCurrentMonthIdx],
+                        [mDay objectAtIndex:mCurrentDayIdx],
+                        [mYear objectAtIndex:mCurrentYearIdx],
+                        [dateFormatter stringFromDate:datetime]];
             }
 
+            [dateFormatter setDateFormat:@"MM/dd/yy h:m a"];
+            NSDate* date = [dateFormatter dateFromString:dt];
+
             // call the delegate
-            [delegate saveCurrentTime:time datetime:date];
-            [time release];
+            [delegate saveCurrentTime:dt datetime:date];
             [dateFormatter release];
         }
     } else if( tag == kButtonCancel ) {

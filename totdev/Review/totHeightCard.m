@@ -60,8 +60,8 @@
     else
         return FALSE;
     
-    // TODO change the datetime to user-selected datetime
-    [global.model addEvent:global.baby.babyID event:event datetime:[NSDate date] value:value];
+    // save to db
+    [global.model addEvent:global.baby.babyID event:event datetime:self.timeStamp value:value];
     
     // Update the summary card.
     [self.parentView.parent updateSummaryCard:self.type withValue:value];
@@ -211,6 +211,7 @@
     if( events.count > 0 ) {
         totEvent* currEvt = [events objectAtIndex:0];
         card_title.text = [NSString stringWithFormat:@"%@", currEvt.value];
+        [self setTimestampWithDate:currEvt.datetime];
         if( events.count > 1 ) {
             totEvent* prevEvt = [events objectAtIndex:1];
             float incr = [currEvt.value floatValue] - [prevEvt.value floatValue];

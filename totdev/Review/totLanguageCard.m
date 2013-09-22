@@ -42,9 +42,7 @@
     [self loadButtons];
 }
 
-- (void) loadButtons {
-    [self setTimestamp];
-    
+- (void) loadButtons {    
     defaultTxt = @"what did the baby say?";
     
     float y = contentYOffset + margin_y;
@@ -117,25 +115,15 @@
     /* Save text into database */
     NSString *text = [textView.text stringByTrimmingCharactersInSet: [NSCharacterSet whitespaceCharacterSet]];
     if(textView.hasText == YES && (![text isEqualToString:defaultTxt]) ) {
-        /* Get current date */
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-        NSDate* curDate = [NSDate date];
-        NSString *formattedDateString = [dateFormatter stringFromDate:curDate];
-        [dateFormatter release];
-        
         /* Get input text */
         /* Add to database */
         totModel* totModel = global.model;
-        [totModel addEvent:global.baby.babyID event:EVENT_BASIC_LANGUAGE datetimeString:formattedDateString value:text ];
-        
-        /* Clear textview text */
-        textView.text = defaultTxt;
+        [totModel addEvent:global.baby.babyID event:EVENT_BASIC_LANGUAGE datetime:self.timeStamp value:text ];
         
         /* Hide keyboard */
         [textView resignFirstResponder];
         
-        // TODO update summary card
+        // update summary card
         [self.parentView.parent updateSummaryCard:LANGUAGE
                                         withValue:[NSString stringWithFormat:@"%@", text]];
         
@@ -196,6 +184,7 @@
     if( events.count > 0 ) {
         totEvent* currEvt = [events objectAtIndex:0];
         card_title.text = [NSString stringWithFormat:@"New word: %@", currEvt.value];
+        [self setTimestampWithDate:currEvt.datetime];
         description.text = [self GetOutputStr:currEvt.value];
 //        if( events.count > 1 ) {
 //            totEvent* prevEvt = [events objectAtIndex:1];

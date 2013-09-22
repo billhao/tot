@@ -32,6 +32,12 @@
     return self;
 }
 
+- (void)dealloc {
+    [super dealloc];
+    [mCards release];
+}
+
+
 // Change the background of the timeline
 - (void) setBackground {
     [self setBackgroundColor:[UIColor colorWithRed:240.0/255 green:240.0/255 blue:240.0/255 alpha:1.0f]];
@@ -126,6 +132,8 @@
                        y,
                        cv.associated_delete_button.frame.size.width,
                        cv.frame.size.height);
+//        NSLog(@"%.0f %.0f %.0f", cv.frame.size.height,
+//              cv.mEditView.view.frame.size.height, cv.mShowView.view.frame.size.height);        
         y = y + cv.frame.size.height + GAP_BETWEEN_CARDS;
         if (y >= self.contentSize.height) {
             self.contentSize = CGSizeMake(320, y);
@@ -243,9 +251,5 @@
     }
 }
 
-- (void)dealloc {
-    [super dealloc];
-    [mCards release];
-}
 
 @end

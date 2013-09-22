@@ -12,6 +12,7 @@
 #import "totEventName.h"
 #import "totTimeUtil.h"
 #import "totUtility.h"
+#import "totTimerController.h"
 
 @class totTimeline;
 @class totReviewCardView;
@@ -30,11 +31,12 @@ typedef enum {
 } ReviewCardType;
 
 // ---------------- Card in editting mode --------------------
-@interface totReviewEditCardView : UIViewController <totTimerDelegate> {
+@interface totReviewEditCardView : UIViewController <totTimerDelegate, totTimerControllerDelegate> {
     totReviewCardView* parentView;
     
     UIButton* hour_button;  // hour/minute
     UIButton* year_button;  // year/month/day
+    UILabel* title;
     
     UIButton* confirm_button;  // want to deprecate these two buttons.
     UIButton* cancel_button;
@@ -42,22 +44,26 @@ typedef enum {
     UIButton* icon_unconfirmed_button;    // use icon as the button to confirm.
     UIButton* icon_confirmed_button;  // confirmed!
     
-    totTimer* timer_;
     float contentYOffset; // y offset of real content in a card
     float margin_y; // margin on y axis from y offset
     
     UIImageView* line;
+
+    // timer stuff
+    totTimer* timer_;
+    BOOL userHasSetDateTime; // flag for if the user has modified the date or time, do not respond to time if true
 }
 
-@property (nonatomic, assign) totReviewCardView* parentView;
-@property (nonatomic, retain) totTimeline* timeline;
+@property(nonatomic, assign) totReviewCardView* parentView;
+@property(nonatomic, retain) totTimeline* timeline;
 @property(nonatomic, assign) ReviewCardType type; // height, weight or HC, etc
+@property(nonatomic, retain) NSDate* timeStamp; // the official time of this event
 
 - (void) setBackground;
 - (void) setIcon:(NSString*)icon_name;
 - (void) setIcon:(NSString*)icon_name confirmedIcon:(NSString*)confirmed_icon_name;
 - (void) setCalendar:(int)days;
-- (void) setTimestamp;  // use the current time.
+- (void) setTimestamp;
 - (void) setTitle:(NSString *)desc;
 
 - (bool) clickOnConfirmIconButtonDelegate;
@@ -96,6 +102,7 @@ typedef enum {
 - (void) setBackground;
 - (void) setIcon:(NSString*)icon_name;
 - (void) setTimestamp:(NSString*)time;
+- (void) setTimestampWithDate:(NSDate*)datetime;
 - (void) setCalendar:(int)days;
 
 - (int) height;

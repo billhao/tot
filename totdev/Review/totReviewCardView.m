@@ -22,11 +22,16 @@
 
 @implementation totReviewEditCardView
 
-@synthesize parentView, timeline, type;
+@synthesize parentView, timeline, type, timeStamp;
 
 - (id)init {
     self = [super init];
     if (self) {
+        hour_button = nil;
+        year_button = nil;
+        timeStamp = nil;
+        userHasSetDateTime = FALSE;
+        
         timer_ = [[totTimer alloc] init];
         [timer_ setDelegate:self];
         
@@ -34,6 +39,15 @@
         margin_y = 10;
     }
     return self;
+}
+
+-(void)dealloc {
+    [super dealloc];
+    
+    [timer_ stop];
+    // release the timer.
+    [timer_ release];
+    if(timeStamp) [timeStamp release];
 }
 
 - (void)viewDidLoad {
@@ -151,52 +165,72 @@
 }
 
 - (void)setTitle:(NSString *)desc {
-    UILabel* title = [[UILabel alloc] initWithFrame:CGRectMake(70, 10, 200, 30)];
-    //[totUtility enableBorder:title];
-    [title setText:desc];
-    [title setBackgroundColor:[UIColor clearColor]];
-    [title setTextColor:[UIColor colorWithRed:0.5f green:0.5f blue:0.5f alpha:1.0f]];
-    [title setFont:[UIFont fontWithName:@"Raleway-SemiBold" size:20]];
-    [self.view addSubview:title];
-    [title release];
-    
-    // since this function will always be called, add the separator line here.
-    line = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"timeline_line"]];
-    line.frame = CGRectMake(0, 60, line.frame.size.width, line.frame.size.height);
-    [self.view addSubview:line];
+    if(!title) {
+        title = [[UILabel alloc] initWithFrame:CGRectMake(70, 10, 200, 30)];
+        //[totUtility enableBorder:title];
+        [title setBackgroundColor:[UIColor clearColor]];
+        [title setTextColor:[UIColor colorWithRed:0.5f green:0.5f blue:0.5f alpha:1.0f]];
+        [title setFont:[UIFont fontWithName:@"Raleway-SemiBold" size:20]];
+        [self.view addSubview:title];
+        
+        // since this function will always be called, add the separator line here.
+        line = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"timeline_line"]];
+        line.frame = CGRectMake(0, 60, line.frame.size.width, line.frame.size.height);
+        [self.view addSubview:line];
+        [line release];
+    }
+    title.text = desc;
 }
 
 - (void)setTimestamp {
-    // Initializes timestamp.
-    Walltime now; [totTimeUtil now:&now];
     // Right after we get the current time, start the timer, so that we
     // can refresh the time button in time. Stop the timer when we save the
     // entry to database or we cancel the card.
-    [timer_ startWithInternalInSeconds:60];
+    [timer_ startWithInternalInSeconds:1];
     
+    int x = 70; // align with title vertically
+    int y = 30;
+    int w = 60;
+    int h = 30;
+    int margin_x = 0;
     // Inserts hour/minute button.
-    hour_button = [UIButton buttonWithType:UIButtonTypeCustom];
-    // Sets hour/minute.
-    [hour_button setFrame:CGRectMake(55, 30, 60, 30)];
-    [hour_button setTitleColor:[UIColor colorWithRed:128.0/255 green:130.0/255 blue:130.0/255 alpha:1.0]
-                      forState:UIControlStateNormal];
-    [hour_button setTitle:[NSString stringWithFormat:@"%02d:%02d", now.hour, now.minute]
-                 forState:UIControlStateNormal];
-    [hour_button.titleLabel setFont:[UIFont fontWithName:@"Raleway" size:13]];
-    [hour_button setBackgroundColor:[UIColor clearColor]];
-    [self.view addSubview:hour_button];
+    if(!hour_button) {
+        hour_button = [UIButton buttonWithType:UIButtonTypeCustom];
+        // Sets hour/minute.
+        [hour_button setFrame:CGRectMake(x, y, w, h)];
+        [hour_button setTitleColor:[UIColor colorWithRed:128.0/255 green:130.0/255 blue:130.0/255 alpha:1.0]
+                          forState:UIControlStateNormal];
+        [hour_button.titleLabel setFont:[UIFont fontWithName:@"Raleway" size:13]];
+        hour_button.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+        hour_button.titleLabel.textAlignment = NSTextAlignmentLeft;
+        [hour_button setBackgroundColor:[UIColor clearColor]];
+        [hour_button addTarget:self action:@selector(timeStampButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:hour_button];
+    }
     
+    x += w + margin_x;
+    w = 100;
     // Inserts year/month/day button.
-    year_button = [UIButton buttonWithType:UIButtonTypeCustom];
-    // Sets year/month/day.
-    [year_button setFrame:CGRectMake(95, 30, 100, 30)];
-    [year_button setTitleColor:[UIColor colorWithRed:128.0/255 green:130.0/255 blue:130.0/255 alpha:1.0]
-                      forState:UIControlStateNormal];
-    [year_button setTitle:[NSString stringWithFormat:@"%02d/%02d/%04d", now.month, now.day, now.year]
-                 forState:UIControlStateNormal];
-    [year_button.titleLabel setFont:[UIFont fontWithName:@"Raleway" size:13]];
-    [year_button setBackgroundColor:[UIColor clearColor]];
-    [self.view addSubview:year_button];
+    if(!year_button) {
+        year_button = [UIButton buttonWithType:UIButtonTypeCustom];
+        // Sets year/month/day.
+        [year_button setFrame:CGRectMake(x, y, w, h)];
+        [year_button setTitleColor:[UIColor colorWithRed:128.0/255 green:130.0/255 blue:130.0/255 alpha:1.0]
+                          forState:UIControlStateNormal];
+        [year_button.titleLabel setFont:[UIFont fontWithName:@"Raleway" size:13]];
+        year_button.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+        year_button.titleLabel.textAlignment = NSTextAlignmentLeft;
+        [year_button setBackgroundColor:[UIColor clearColor]];
+        [year_button addTarget:self action:@selector(timeStampButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:year_button];
+    }
+    
+    self.timeStamp = [NSDate date];
+    [self updateDate];
+    [self updateTime];
+    
+    // reset
+    userHasSetDateTime = FALSE;
 }
 
 - (bool) clickOnConfirmIconButton {
@@ -208,6 +242,43 @@
 }
 
 - (bool) clickOnConfirmIconButtonDelegate { return true; }
+
+- (void)timeStampButtonPressed:(id)sender {
+    userHasSetDateTime = TRUE;
+    [timer_ stop];
+    UIButton* btn = (UIButton*)sender;
+    if( btn == hour_button ) {
+        [parentView.parent.controller showTimePicker:self mode:kTime datetime:timeStamp];
+    }
+    else if( btn == year_button ) {
+        [parentView.parent.controller showTimePicker:self mode:kDate datetime:timeStamp];
+    }
+}
+
+#pragma mark - totTimerControllerDelegate
+-(void)saveCurrentTime:(NSString*)time datetime:(NSDate*)datetime {
+    NSLog(@"%@", time);
+    self.timeStamp = datetime;
+    if( parentView.parent.controller.mClock.mMode == kDate ) {
+        [self updateDate];
+    }
+    else if( parentView.parent.controller.mClock.mMode == kTime ) {
+        [self updateTime];
+    }
+    [parentView.parent.controller hideTimePicker];
+}
+
+-(void)cancelCurrentTime {
+    [parentView.parent.controller hideTimePicker];
+}
+
+- (void)updateDate {
+    [year_button setTitle:[totTimeUtil getDateString:timeStamp] forState:UIControlStateNormal];
+}
+
+- (void)updateTime {
+    [hour_button setTitle:[totTimeUtil getTimeString:timeStamp] forState:UIControlStateNormal];
+}
 
 //
 // ---------- Time ------------
@@ -229,18 +300,11 @@
 
 # pragma totTimer delegate
 - (void)timerCallback:(totTimer *)timer {
-    Walltime now; [totTimeUtil now:&now];
-    [hour_button setTitle:[NSString stringWithFormat:@"%02d:%02d", now.hour, now.minute]
-                 forState:UIControlStateNormal];
-    [year_button setTitle:[NSString stringWithFormat:@"%02d/%02d/%04d", now.month, now.day, now.year]
-                 forState:UIControlStateNormal];
-}
-
-- (void)dealloc {
-    [super dealloc];
-    [timer_ stop];
-    // release the timer.
-    [timer_ release];
+    if( userHasSetDateTime ) return; // do not respond if user has modified date or time
+    
+    self.timeStamp = [NSDate date];
+    [self updateDate];
+    [self updateTime];
 }
 
 - (int) height { return 0; }
@@ -337,6 +401,10 @@
 
 - (void) setTimestamp:(NSString*)time {
     timestamp.text = time;
+}
+
+- (void) setTimestampWithDate:(NSDate*)datetime {
+    timestamp.text = [totTimeUtil getTimeDescriptionFromNow:datetime];
 }
 
 - (void) setBackground {

@@ -139,22 +139,17 @@
     printf("current time: %s selection: %d\n", [now UTF8String], selection);
     
     totModel *model = global.model;
+    NSString* diaper;
     if (selection == SELECTION_WET) {
-        [model addEvent:global.baby.babyID
-                  event:EVENT_BASIC_DIAPER
-         datetimeString:now
-                  value:@"wet"];
+        diaper = @"wet";
     } else if (selection == SELECTION_SOILED) {
-        [model addEvent:global.baby.babyID
-                  event:EVENT_BASIC_DIAPER
-         datetimeString:now
-                  value:@"soiled"];
+        diaper = @"soiled";
     } else if (selection == SELECTION_WETSOILED) {
-        [model addEvent:global.baby.babyID
-                  event:EVENT_BASIC_DIAPER
-         datetimeString:now
-                  value:@"wet soiled"];
+        diaper = @"wet soiled";
     }
+    else
+        return;
+    [model addEvent:global.baby.babyID event:EVENT_BASIC_DIAPER datetime:self.timeStamp value:diaper];
 }
 
 - (bool) clickOnConfirmIconButtonDelegate {
@@ -232,6 +227,7 @@
     if( events.count > 0 ) {
         totEvent* currEvt = [events objectAtIndex:0];
         card_title.text = [NSString stringWithFormat:@"%@", currEvt.value];
+        [self setTimestampWithDate:currEvt.datetime];
         if( events.count > 1 ) {
             totEvent* prevEvt = [events objectAtIndex:1];
             description.text = [NSString stringWithFormat:@"The diaper was %@ last time.", prevEvt.value];

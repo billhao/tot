@@ -8,10 +8,13 @@
 
 #import "totReviewCardView.h"
 #import <UIKit/UIKit.h>
+#import "totTimeUtil.h"
 
-@interface totSleepEditCard : totReviewEditCardView {
+@interface totSleepEditCard : totReviewEditCardView<totTimerDelegate> {
     UIButton* start_button;
     UIButton* stop_button;
+
+    NSDate* startSleepTime; // save the timestamp when start sleep
 }
 
 @end

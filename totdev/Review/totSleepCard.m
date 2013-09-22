@@ -21,6 +21,7 @@
 - (id)init {
     self = [super init];
     if (self) {
+        startSleepTime = nil;
     }
     return self;
 }
@@ -76,16 +77,20 @@
     stop_button.hidden = NO;
     
     self.parentView.parent.sleeping = TRUE;
+    startSleepTime = [self.timeStamp retain];
     
     [self.parentView.parent moveCard:self.parentView To:0];
     [self.parentView.parent moveToTop:self.parentView];
     
     [self saveTimeToDatabase:TRUE];
+    
+    [self setTimestamp];
+    [self updateSleepTime];
 }
 
 - (void)stopSleep: (UIButton*)button {
     self.parentView.parent.sleeping = FALSE;
-
+    
     // Save to db.
     [self saveTimeToDatabase:FALSE];
     
@@ -106,9 +111,46 @@
 
 - (void)dealloc {
     [super dealloc];
+    if( startSleepTime ) [startSleepTime release];
+}
+
+#pragma mark - Timer delegate
+- (void) timerCallback: (totTimer*)timer {
+    [super timerCallback:timer];
+    
+    if( self.parentView.parent.sleeping) {
+        [self updateSleepTime];
+    }
 }
 
 #pragma mark - Helper functions
+
+- (void)updateSleepTime {
+    NSString* str = [self formatSleepTime];
+    if( str.length > 0 )
+        [self setTitle:[NSString stringWithFormat:@"%@", str]];
+    else
+        [self setTitle:@"just now"];
+}
+
+- (NSString*)formatSleepTime {
+    // Get conversion to months, days, hours, minutes
+    NSCalendar *sysCalendar = [NSCalendar currentCalendar];
+    unsigned int unitFlags = NSHourCalendarUnit | NSMinuteCalendarUnit;
+    NSDateComponents* c = [sysCalendar components:unitFlags fromDate:startSleepTime toDate:[NSDate date] options:0];
+    
+    int h = c.hour;
+    int m = c.minute;
+    
+    NSString* hour = @"";
+    NSString* min = @"";
+    NSString* text;
+    if( h > 0 )
+        hour = [NSString stringWithFormat:@"%d hr ", h];
+    if( m > 0 )
+        min = [NSString stringWithFormat:@"%d min ", m];
+    return [NSString stringWithFormat:@"%@%@", hour, min];
+}
 
 // save the start time to db
 - (void)saveTimeToDatabase:(BOOL)isStart {
@@ -123,12 +165,12 @@
     if (isStart) {
         [model addEvent:global.baby.babyID
                   event:EVENT_BASIC_SLEEP
-               datetime:now
+               datetime:self.timeStamp
                   value:@"start"];
     } else {
         [model addEvent:global.baby.babyID
                   event:EVENT_BASIC_SLEEP
-               datetime:now
+               datetime:self.timeStamp
                   value:@"end"];
     }
 }
