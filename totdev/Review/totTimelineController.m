@@ -8,6 +8,7 @@
 
 #import "totTimelineController.h"
 #import "totTimeline.h"
+#import "totSleepCard.h"
 
 @interface totTimelineController ()
 
@@ -42,6 +43,15 @@
     
     totTimeline* timelineView = [[totTimeline alloc] initWithFrame:CGRectMake(0, navbar_height, 320, 460-navbar_height)];
     [timelineView addEmptyCard:SUMMARY];
+    
+    // check for sleep here, if it was a "start" then continue sleep
+    totEvent* sleepEvent = [totSleepEditCard wasSleeping];
+    if(sleepEvent != nil ) {
+        // add the sleep card and continue sleep
+        totReviewCardView* sleepCard = [timelineView addEmptyCard:SLEEP];
+        [(totSleepEditCard*)sleepCard.mEditView beginSleep:sleepEvent.datetime];
+    }
+    
     [timelineView loadCardsNumber:10 startFrom:0];
     [self.view addSubview:timelineView];
     self.timeline_ = timelineView;

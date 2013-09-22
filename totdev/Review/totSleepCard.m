@@ -15,6 +15,8 @@
 
 @implementation totSleepEditCard
 
+//@synthesize sleepStartEvent;
+
 - (int) height { return 60; }
 - (int) width { return 308; }
 
@@ -72,17 +74,23 @@
     [self.view addSubview:stop_button];
 }
 
+// start sleep by the user
 - (void)startSleep: (UIButton*)button {
+    [self saveTimeToDatabase:TRUE];
+    
+    [self beginSleep:self.timeStamp];
+}
+
+// use this function to continue sleep from last state
+- (void)beginSleep:(NSDate*)startTime {
     start_button.hidden = YES;
     stop_button.hidden = NO;
     
     self.parentView.parent.sleeping = TRUE;
-    startSleepTime = [self.timeStamp retain];
+    startSleepTime = [startTime retain];
     
     [self.parentView.parent moveCard:self.parentView To:0];
     [self.parentView.parent moveToTop:self.parentView];
-    
-    [self saveTimeToDatabase:TRUE];
     
     [self setTimestamp];
     [self updateSleepTime];
@@ -175,6 +183,17 @@
     }
 }
 
+
+// query db to get the last sleep record and check if it is a "start" event
++ (totEvent*)wasSleeping {
+    NSMutableArray* events = [global.model getEvent:global.baby.babyID event:EVENT_BASIC_SLEEP limit:1];
+    if( events.count==1 ) {
+        totEvent* e = events[0];
+        if( [e.value isEqualToString:@"start"] )
+            return [[e retain] autorelease];
+    }
+    return nil;
+}
 
 @end
 

@@ -17,6 +17,14 @@
     NSDate* startSleepTime; // save the timestamp when start sleep
 }
 
+//@property(nonatomic, retain) totEvent* sleepStartEvent;
+
+// query db to get the last sleep record and check if it is a "start" event
++ (totEvent*)wasSleeping;
+
+// use this function to continue sleep from last state
+- (void)beginSleep:(NSDate*)startTime;
+
 @end
 
 
