@@ -52,6 +52,8 @@ typedef enum {
     // timer stuff
     totTimer* timer_;
     BOOL userHasSetDateTime; // flag for if the user has modified the date or time, do not respond to time if true
+    
+    
 }
 
 @property(nonatomic, assign) totReviewCardView* parentView;
@@ -132,6 +134,7 @@ typedef enum {
     float touch_y;
     float origin_x;  // used to recover the position of the view when we finish the animation.
     BOOL endGesture; // ends the gesture when vertical movement is greater than horizontal movement
+    
 }
 
 @property (nonatomic, retain) totReviewEditCardView* mEditView;
@@ -139,6 +142,9 @@ typedef enum {
 @property (nonatomic, assign) totTimeline* parent;
 @property (nonatomic, assign) UIButton* associated_delete_button;
 @property (nonatomic, readonly) ReviewCardMode mMode;
+
+// save the event_id from edit card, show card can take this and display it
+@property (nonatomic, assign) int event_id;
 
 - (void) flip;
 

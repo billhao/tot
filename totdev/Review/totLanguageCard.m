@@ -118,7 +118,7 @@
         /* Get input text */
         /* Add to database */
         totModel* totModel = global.model;
-        [totModel addEvent:global.baby.babyID event:EVENT_BASIC_LANGUAGE datetime:self.timeStamp value:text ];
+        self.parentView.event_id = [totModel addEvent:global.baby.babyID event:EVENT_BASIC_LANGUAGE datetime:self.timeStamp value:text ];
         
         /* Hide keyboard */
         [textView resignFirstResponder];
@@ -167,7 +167,7 @@
     if (!story_) {
         [self getDataFromDB];
     } else {
-        card_title.text = [NSString stringWithFormat:@"New word: %@", story_.mRawContent];
+        card_title.text = [NSString stringWithFormat:@"%@", story_.mRawContent];
         description.text = @"";
         [self setTimestamp:[totTimeUtil getTimeDescriptionFromNow:story_.mWhen]];
     }
@@ -178,18 +178,30 @@
 - (void) getDataFromDB {
     NSString* event = EVENT_BASIC_LANGUAGE;
     
-    NSArray* events = [global.model getEvent:global.baby.babyID event:event limit:2];
-    
-    if( events.count > 0 ) {
-        totEvent* currEvt = [events objectAtIndex:0];
-        card_title.text = [NSString stringWithFormat:@"New word: %@", currEvt.value];
-        [self setTimestampWithDate:currEvt.datetime];
-        description.text = [self GetOutputStr:currEvt.value];
-//        if( events.count > 1 ) {
-//            totEvent* prevEvt = [events objectAtIndex:1];
-//            description.text = [NSString stringWithFormat:@"Learned last time: %@", prevEvt.value];
-//        }
+    // get the events
+    totEvent* e0 = nil;
+    if( parentView.event_id != NO_EVENT ) {
+        e = [global.model getEventByID:parentView.event_id];
     }
+    else {
+        NSArray* events = [global.model getEvent:global.baby.babyID event:event limit:2];
+        if( events.count > 0 ) {
+            e = [events objectAtIndex:0];
+//            if( events.count > 1 )
+//                e0 = [events objectAtIndex:1];
+        }
+    }
+    
+    // update UI
+    if( e ) {
+        card_title.text = [NSString stringWithFormat:@"%@", e.value];
+        [self setTimestampWithDate:e.datetime];
+        description.text = [self GetOutputStr:e.value];
+    }
+    if( e0 ) {
+        description.text = [NSString stringWithFormat:@"Learned last time: %@", e0.value];
+    }
+
 }
 
 - (int) height { return 60; }

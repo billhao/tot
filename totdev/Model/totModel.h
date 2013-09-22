@@ -6,6 +6,8 @@
 #import <sqlite3.h>
 #import "totEvent.h"
 
+#define NO_EVENT -1
+
 @interface totModel : NSObject {
     NSString *dbfile;
     sqlite3 *db;
@@ -18,8 +20,9 @@
 - (void) dealloc;
 
 // add an event
-- (Boolean) addEvent:(int)baby_id event:(NSString*)event datetimeString:(NSString*)datetime value:(NSString*)value;
-- (Boolean) addEvent:(int)baby_id event:(NSString*)event datetime:(NSDate*)datetime value:(NSString*)value;
+// return -1 if failed, otherwise return a positive number for event_id
+- (int) addEvent:(int)baby_id event:(NSString*)event datetimeString:(NSString*)datetime value:(NSString*)value;
+- (int) addEvent:(int)baby_id event:(NSString*)event datetime:(NSDate*)datetime value:(NSString*)value;
 
 // get a list of events that contain the string in name
 - (NSMutableArray *) getEvent:(int)baby_id event:(NSString*)event;

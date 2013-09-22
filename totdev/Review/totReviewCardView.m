@@ -438,7 +438,7 @@
 @synthesize mShowView;
 @synthesize parent;
 @synthesize associated_delete_button;
-@synthesize mMode;
+@synthesize mMode, event_id;
 
 //
 // ----------------- Gesture delegates --------------------
@@ -494,7 +494,7 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
         //NSLog(@"%d \t tx=%d \t ty=%d \t x=%.0f y=%.0f \t %d", nn, (int)touch_x, (int)touch_y, translation.x, translation.y, gestureRecognizer.state);
         //nn++;
         if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
-            NSLog(@"move began");
+//            NSLog(@"move began");
 //            touch_x = translation.x;
 //            touch_y = translation.y;
             origin_x = self.frame.origin.x;
@@ -602,6 +602,7 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
 // Default is edit card.
 - (id)initWithType:(ReviewCardType)type timeline:(totTimeline*)timeline {
     origin_x = GAP_BETWEEN_CARDS;
+    event_id = NO_EVENT; // no event associated
     self = [super init];
     if (self) {
         totReviewEditCardView* c1 = nil;

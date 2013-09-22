@@ -86,7 +86,7 @@
     return homeDir;
 }
 
-- (Boolean) addEvent:(int)baby_id event:(NSString*)event datetime:(NSDate*)datetime value:(NSString*)value {
+- (int) addEvent:(int)baby_id event:(NSString*)event datetime:(NSDate*)datetime value:(NSString*)value {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     NSString *formattedDateString = [dateFormatter stringFromDate:datetime];
@@ -95,12 +95,14 @@
     return [self addEvent:baby_id event:event datetimeString:formattedDateString value:value];
 }
 
-- (Boolean) addEvent:(int)baby_id event:(NSString*)event datetimeString:(NSString*)datetime value:(NSString*)value {
+// return -1 if failed, otherwise return a positive number for event_id
+- (int) addEvent:(int)baby_id event:(NSString*)event datetimeString:(NSString*)datetime value:(NSString*)value {
     if (db == nil) {
         NSLog(@"Can't open db");
         return false;
     }
 
+    int re = NO_EVENT;
     sqlite3_stmt *stmt = nil;
     @try {
         const char *sql = "Insert into event (baby_id, time, name, value) VALUES (?,?,?,?)";
@@ -115,17 +117,20 @@
             ret = sqlite3_step(stmt);
             if( ret != SQLITE_DONE ) {
                 NSLog(@"[db] addEvent step return %d", ret);
-                return false;
+            }
+            else {
+                // get the event id
+                int event_id = sqlite3_last_insert_rowid(db);
+                if( re != 0 ) re = event_id; // if last id is 0 it is failure
             }
         }
     }
     @catch (NSException *exception) {
         NSLog(@"[db] An exception occured: %@", [exception reason]);
-        return false;
     }
     @finally {
         if( stmt != nil ) sqlite3_finalize(stmt);
-        return true;
+        return re;
     }
 }
 
@@ -555,13 +560,14 @@ NSMutableArray *events = [[[NSMutableArray alloc] init] autorelease];
 // get event by event_id
 - (totEvent *) getEventByID:(int)event_id {
     sqlite3_stmt *stmt = nil;
+    totEvent* e = nil;
     @try {
         if (db == nil) {
             NSLog(@"Can't open db");
             return nil;
         }
         
-        NSString* sql = [NSString stringWithFormat:@"SELECT event.event_id, event.time, event.name, event.value FROM event WHERE event_id=%d", event_id];
+        NSString* sql = [NSString stringWithFormat:@"SELECT event.event_id, event.time, event.name, event.value, event.baby_id FROM event WHERE event_id=%d", event_id];
         
         const char *sqlz = [sql cStringUsingEncoding:NSASCIIStringEncoding];
         if(sqlite3_prepare_v2(db, sqlz, -1, &stmt, NULL) != SQLITE_OK) {
@@ -574,25 +580,25 @@ NSMutableArray *events = [[[NSMutableArray alloc] init] autorelease];
             NSString *time  = [NSString stringWithUTF8String:(char *) sqlite3_column_text(stmt, 1)];
             NSString *name  = [NSString stringWithUTF8String:(char *) sqlite3_column_text(stmt, 2)];
             NSString *value = [NSString stringWithUTF8String:(char *) sqlite3_column_text(stmt, 3)];
+            int baby_id = sqlite3_column_int(stmt, 4);;
             //NSLog(@"[db] record, %d, %@", i, value);
             
-            totEvent* e = [[[totEvent alloc] init] autorelease];
+            e = [[[totEvent alloc] init] autorelease];
             e.event_id = i;
-            e.baby_id = -1;
+            e.baby_id = baby_id;
             e.name = name;
             e.value = value;
             //NSLog(@"model setTimeFromText %@", time);
             [e setTimeFromText:time];
-            return e;
+            break;
         }
-        return nil;
     }
     @catch (NSException *exception) {
         NSLog(@"[db] An exception occured: %@", [exception reason]);
     }
     @finally {
         if( stmt != nil ) sqlite3_finalize(stmt);
-        return nil;
+        return e;
     }
 }
 
