@@ -24,8 +24,16 @@ enum {
     kBasicHead=7
 };
 
+typedef enum {
+    Animation_None,
+    Animation_Left_To_Right,
+    Animation_Right_To_Left,
+    Animation_Fade_And_Scale
+} ANIMATIONTYPE;
+
 @interface totHomeEntryViewController : UIViewController <CameraViewDelegate, UIScrollViewDelegate> {
-    totImageView* mPhotoView;
+    totImageView* mPhotoViewA;
+    totImageView* mPhotoViewB;
     UIView* activityView;
     
     UIButton* cameraBtn;
@@ -51,6 +59,9 @@ enum {
     
     // for debug
     UILabel* photoPositionLabel;
+    
+    // auto play
+    BOOL autoPlay;
 }
 
 @property (nonatomic, assign) totHomeRootController *homeRootController;

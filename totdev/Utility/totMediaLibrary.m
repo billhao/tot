@@ -87,8 +87,17 @@
         self.currentMediaInfo = info;
         return TRUE;
     }
-    else
-        return FALSE;
+    else {
+        // go back to first photo if enabled
+        dt = [NSDate dateWithTimeIntervalSince1970:0];
+        MediaInfo* info = [self getNextMedia:FALSE datetime:dt];
+        if( info ) {
+            self.currentMediaInfo = info;
+            return TRUE;
+        }
+        else
+            return FALSE;
+    }
 }
 
 - (BOOL)previous {

@@ -93,8 +93,13 @@
             mImage.image = img;
             [self addSubview:mImage];
         } else {
+            UIImage* img = [UIImage imageNamed:@"add_image"];
             mImage = [[UIImageView alloc] initWithFrame:self.frame];
-            mImage.image = [UIImage imageNamed:@"add_image.png"];  // default.
+            mImage.contentMode = UIViewContentModeCenter;
+            mImage.image = img;  // default.
+            CGSize s = img.size;
+            CGRect f = mImage.frame;
+            s = mImage.image.size;
             [self addSubview:mImage];
         }
         [self setStyle:TRUE];

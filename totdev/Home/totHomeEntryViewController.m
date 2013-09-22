@@ -40,6 +40,8 @@
         allActivities = nil;
         
         MAX_SELECTED_ACTIVITIES = 3;
+        
+        autoPlay = FALSE;
     }
     return self;
 }
@@ -53,8 +55,10 @@
     [self.view setMultipleTouchEnabled:TRUE];
     
     // add photo view
-    mPhotoView = [[totImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
-    [self.view addSubview:mPhotoView];
+    mPhotoViewA = [[totImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
+    [self.view addSubview:mPhotoViewA];
+    mPhotoViewB = [[totImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
+    [self.view addSubview:mPhotoViewB];
     
     // add camera icon
     cameraBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -77,6 +81,15 @@
     [scrapbookBtn setImage:[UIImage imageNamed:@"scrapbook_button_pressed"] forState:UIControlStateHighlighted];
     [scrapbookBtn addTarget:self action:@selector(scrapbookButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:scrapbookBtn];
+
+    // add auto play icon
+    margin_x = margin_y;
+    UIButton* autoplayBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    autoplayBtn.frame = CGRectMake(f.size.width-sbImg.size.width-margin_x, cameraBtn.frame.origin.y-2*sbImg.size.height+2, sbImg.size.width, sbImg.size.height);
+    autoplayBtn.backgroundColor = [UIColor clearColor];
+    [autoplayBtn addTarget:self action:@selector(autoPlayButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:autoplayBtn];
+    //[totUtility enableBorder:autoplayBtn];
 
     // add photo position in db
     int w = 36;
@@ -130,7 +143,7 @@
     [self.view addGestureRecognizer:tapRecognizer];
     
     // show the most recent photo
-    [self showPhoto];
+    [self showPhoto:Animation_None];
 }
 
 - (void)dealloc {
@@ -146,7 +159,7 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
-    [mPhotoView release];
+    [mPhotoViewA release];
     
     [mMessage release];
 }
@@ -186,7 +199,7 @@
         // show newer photo
         //[self showNextImage:TRUE]; // show newer image
         if( [mediaLib next] )
-            [self showPhoto];
+            [self showPhoto:Animation_Right_To_Left];
         else {
             // TODO show "this is the newest photo"
         }
@@ -195,7 +208,7 @@
         // show older photo
         //[self showNextImage:FALSE]; // show older image
         if( [mediaLib previous] )
-            [self showPhoto];
+            [self showPhoto:Animation_Left_To_Right];
         else {
             // TODO show "this is the oldest photo"
         }
@@ -230,6 +243,11 @@
 
 - (void)scrapbookButtonPressed: (id)sender {
     [self.homeRootController switchTo:kScrapbook withContextInfo:nil];
+}
+
+- (void)autoPlayButtonPressed: (id)sender {
+    autoPlay = !autoPlay;
+    if(autoPlay) [self autoPlay];
 }
 
 // add the selected activity
@@ -288,7 +306,7 @@
     mediaLib.currentMediaInfo = mediaInfo;
     NSLog(@"%@", mediaInfo.filename);
 
-    [self showPhoto];
+    [self showPhoto:Animation_None];
     [self toggleActivity];
 }
 
@@ -440,20 +458,32 @@
     }];
 }
 
-- (void)showPhoto {
+- (void)showPhoto:(ANIMATIONTYPE)animation {
     MediaInfo* m = mediaLib.currentMediaInfo;
     //NSLog(@"photo event id: %ld", m.eventID);
     photoPositionLabel.text = [NSString stringWithFormat:@"%ld", m.eventID];
     
     if( ![m isDefault] ) {
         // show photo
-        [mPhotoView imageFromFileContent:[totMediaLibrary getMediaPath:m.filename]];
+        
+        switch (animation) {
+            case Animation_None:
+                [mPhotoViewA imageFromFileContent:[totMediaLibrary getMediaPath:m.filename]];
+                break;
+            case Animation_Left_To_Right:
+            case Animation_Right_To_Left:
+                [self animateLeftRight:m direction:animation];
+                break;
+            case Animation_Fade_And_Scale:
+                [self animateFadeAndScale:m];
+                break;
+        }
         
         // save last viewed photo
         [global.user setLastViewedPhoto:m];
     }
     else {
-        mPhotoView.image = [UIImage imageNamed:m.filename];
+        mPhotoViewA.image = [UIImage imageNamed:m.filename];
     }
     
     [self updateSelectedActivitesView];
@@ -584,6 +614,81 @@
         cameraBtn.hidden = !hidden;
         scrapbookBtn.hidden = !hidden;
     }];
+}
+
+- (void)animateFadeAndScale:(MediaInfo*)m {
+    // prepare animation
+    CGRect f = CGRectMake(0, 0, 320, 480);
+    float c = .1;
+    f.origin.x = -f.size.width*c;
+    f.origin.y = -f.size.height*c;
+    f.size.height = (1+c*2)*f.size.height;
+    f.size.width  = (1+c*2)*f.size.width;
+    mPhotoViewB.frame = f;
+    mPhotoViewB.alpha = 0;
+    mPhotoViewB.hidden = FALSE;
+    [mPhotoViewB imageFromFileContent:[totMediaLibrary getMediaPath:m.filename]];
+    
+    // fade out previous one
+    [UIView animateWithDuration:1 animations:^{
+        mPhotoViewA.alpha = 0;
+        mPhotoViewB.alpha = 1;
+    } completion:^(BOOL finished) {
+    }];
+    // show next one
+    [UIView animateWithDuration:6.0 animations:^{
+        CGRect f = CGRectMake(0, 0, 320, 480);
+        mPhotoViewB.frame = f;
+    } completion:^(BOOL finished) {
+        // hide the other one
+        mPhotoViewA.hidden = TRUE;
+        // switch the two
+        totImageView* v = mPhotoViewB;
+        mPhotoViewB = mPhotoViewA;
+        mPhotoViewA = v;
+
+        [self autoPlay];
+    }];
+}
+
+- (void)animateLeftRight:(MediaInfo*)m direction:(ANIMATIONTYPE)direction {
+    // prepare animation
+    CGRect f;
+    if( direction == Animation_Left_To_Right )
+        f = CGRectMake(-330, 0, 320, 480);
+    else
+        f = CGRectMake(330, 0, 320, 480);
+    mPhotoViewB.frame = f;
+    mPhotoViewB.alpha = 1;
+    mPhotoViewB.hidden = FALSE;
+    [mPhotoViewB imageFromFileContent:[totMediaLibrary getMediaPath:m.filename]];
+    
+    // show next one
+    [UIView animateWithDuration:1.0 animations:^{
+        CGRect f = CGRectMake(0, 0, 320, 480);
+        mPhotoViewB.frame = f;
+        if( direction == Animation_Left_To_Right )
+            mPhotoViewA.frame = CGRectMake(330, 0, 320, 480);
+        else
+            mPhotoViewA.frame = CGRectMake(-330, 0, 320, 480);
+    } completion:^(BOOL finished) {
+        // hide the other one
+        mPhotoViewA.hidden = TRUE;
+        // switch the two
+        totImageView* v = mPhotoViewB;
+        mPhotoViewB = mPhotoViewA;
+        mPhotoViewA = v;
+        
+        [self autoPlay];
+    }];
+}
+
+// auto play
+- (void)autoPlay {
+    if( autoPlay ) {
+        if( [mediaLib next] )
+            [self showPhoto:Animation_Fade_And_Scale];
+    }
 }
 
 @end
