@@ -43,7 +43,7 @@ typedef struct {
     id<totTimerDelegate> delegate;
 }
 
-@property (nonatomic, retain) id<totTimerDelegate> delegate;
+@property (nonatomic, assign) id<totTimerDelegate> delegate;
 
 - (void) startWithInternalInSeconds: (int)interval;
 - (void) stop;

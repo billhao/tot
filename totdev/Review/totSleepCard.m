@@ -110,8 +110,10 @@
 }
 
 - (void)dealloc {
+    [startSleepTime release];
+    startSleepTime = nil;
+
     [super dealloc];
-    if( startSleepTime ) [startSleepTime release];
 }
 
 #pragma mark - Timer delegate
@@ -157,8 +159,6 @@
 //    char now[256] = {0};
 //    sprintf(now, "%04d-%02d-%02d %02d:%02d:%02d", mYear, mMonth, mDay, mHour, mMinute, mSecond);
 //    printf("current time: %s\n", now);
-    
-    NSDate* now = [NSDate date];
     
     totModel *model = global.model;
     
@@ -224,7 +224,6 @@
 
 - (void)getDataFromDB {
     // query db to get how long the baby had slept
-    NSDate* date = [NSDate date];
     NSMutableArray* events = [global.model getEvent:global.baby.babyID event:EVENT_BASIC_SLEEP limit:2];
     if( events.count==2 ) {
         totEvent* e1 = events[0];

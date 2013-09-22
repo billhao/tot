@@ -69,19 +69,17 @@
     if( type != SUMMARY )
         [self addDeleteButtonUnderCard:card];
     
-    return card;
+    return [[card retain] autorelease];
 }
 
 - (void)animationDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context {
     totReviewCardView* cv = (totReviewCardView*)context;
-    [cv.associated_delete_button removeFromSuperview];
     [self deleteCard:cv];
 }
 
 - (void) handleDeleteButton: (id)button {
     printf("Click delete button\n");
     UIButton* btn = (UIButton*)button;
-    int y = btn.frame.origin.y;
     for (int i = 0; i < [mCards count]; ++i) {
         totReviewCardView* cv = [mCards objectAtIndex:i];
         if (cv.associated_delete_button == btn) {
@@ -143,7 +141,6 @@
 
 - (void) moveToTop:(totReviewCardView *)card {
     float card_y = card.frame.origin.y;
-    float view_y = self.contentOffset.y;
     [self setContentOffset:CGPointMake(0, card_y-4) animated:YES];
 }
 
@@ -174,6 +171,7 @@
 
     // delete from the view
     [card removeFromSuperview];
+    [card.associated_delete_button removeFromSuperview];
     [mCards removeObject:card];
     
     [self refreshView];
@@ -220,7 +218,6 @@
             card.mShowView.e = anEvent;
             [card.mShowView viewWillAppear:YES];
             [mCards addObject:card];
-            [card release];
             [self addSubview:[mCards lastObject]];
             [self addDeleteButtonUnderCard:[mCards lastObject]];
         }

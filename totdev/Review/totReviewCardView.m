@@ -32,9 +32,6 @@
         timeStamp = nil;
         userHasSetDateTime = FALSE;
         
-        timer_ = [[totTimer alloc] init];
-        [timer_ setDelegate:self];
-        
         contentYOffset = 64; // basically, this should be the y position of timeline_line
         margin_y = 10;
     }
@@ -42,17 +39,20 @@
 }
 
 -(void)dealloc {
-    [super dealloc];
-    
     [timer_ stop];
-    // release the timer.
     [timer_ release];
-    if(timeStamp) [timeStamp release];
+    timer_ = nil;
+    [timeStamp release];
+
+    [super dealloc];
 }
 
 - (void)viewDidLoad {
     [self setBackground];
     self.view.clipsToBounds = TRUE;
+
+    timer_ = [[totTimer alloc] init];
+    [timer_ setDelegate:self];
 }
 
 - (void) setBackground {
@@ -515,7 +515,7 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
 //            touch_y = translation.y;
         }
         if ( endGesture || (gestureRecognizer.state == UIGestureRecognizerStateEnded) ) {
-            printf("move the review card: %f %f\n", self.frame.origin.x, self.frame.size.width);
+            //printf("move the review card: %f %f\n", self.frame.origin.x, self.frame.size.width);
             int n = associated_delete_button.frame.origin.x + associated_delete_button.bounds.size.width;
             if (self.frame.origin.x >= n) {
                 [self performAnimation:YES];
@@ -658,7 +658,7 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
             default:
                 break;
         }
-        if( c1 != nil && c2 != nil ) {
+        if( type != SUMMARY ) {
             self.frame = CGRectMake(0, 0, [c1 width], [c1 height]);
             c1.view.frame = self.bounds;
             c2.view.frame = CGRectMake(0, 0, [c2 width], [c2 height]);
@@ -666,10 +666,10 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
             c2.type = type;
             c1.timeline = timeline;
             c2.timeline = timeline;
+            c1.parentView = self;
+            c2.parentView = self;
             self.mEditView = c1;
             self.mShowView = c2;
-            self.mEditView.parentView = self;
-            self.mShowView.parentView = self;
             [c1 release];
             [c2 release];
         }
@@ -677,10 +677,10 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
         // When creating a new card, the default view is editting view.
         // except for summary card.
         if (type == SUMMARY) {
-            [self addSubview:self.mShowView.view];
+            [self addSubview:mShowView.view];
             mMode = SHOW;
         } else {
-            [self addSubview:self.mEditView.view];
+            [self addSubview:mEditView.view];
             mMode = EDIT;
         }
         // Register gesture recognizer.
@@ -690,6 +690,12 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
 }
 
 - (void)dealloc {
+    [mEditView release];
+    mEditView = nil;
+    
+    [mShowView release];
+    mShowView = nil;
+    
     [super dealloc];
 }
 
@@ -829,7 +835,7 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
         totReviewCardView* view = [[totReviewCardView alloc] initWithType:card_type
                                                                  withData:story
                                                                  timeline:timeline];
-        return view;
+        return [view autorelease];
     } else {
         return nil;
     }
