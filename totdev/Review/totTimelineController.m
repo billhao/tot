@@ -61,10 +61,6 @@
     [self addDateTimePicker];
 }
 
-- (void)loadEventsFrom:(int)start limit:(int)limit {
-    [self.timeline_ loadCardsNumber:limit startFrom:start];
-}
-
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

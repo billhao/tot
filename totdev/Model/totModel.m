@@ -230,7 +230,13 @@
 }
 
 - (NSMutableArray *) getEvent:(int)baby_id event:(NSString*)event limit:(int)limit offset:(int)offset startDate:(NSDate*)start endDate:(NSDate*)end orderByDesc:(BOOL)orderByDesc {
-NSMutableArray *events = [[[NSMutableArray alloc] init] autorelease];
+    return [self getEvent:baby_id event:event limit:limit offset:offset startDate:start endDate:end orderByDesc:TRUE min_event_id:-1 max_event_id:-1];
+}
+
+// TODO assume no two events have same datetime. otherwise some events may be missed when end date is specified
+- (NSMutableArray *) getEvent:(int)baby_id event:(NSString*)event limit:(int)limit offset:(int)offset startDate:(NSDate*)start endDate:(NSDate*)end orderByDesc:(BOOL)orderByDesc min_event_id:(int)min_event_id max_event_id:(int)max_event_id {
+
+    NSMutableArray *events = [[[NSMutableArray alloc] init] autorelease];
     sqlite3_stmt *stmt = nil;
     @try {
         if (db == nil) {
@@ -241,7 +247,7 @@ NSMutableArray *events = [[[NSMutableArray alloc] init] autorelease];
         NSString* searchname = nil;
         if( event!=nil ) searchname = [NSString stringWithFormat:@"%@%%", event];
         //NSLog(@"%@", searchname);
-        NSString* sql_main = @"SELECT event.event_id, event.time, event.name, event.value FROM event %@ ORDER BY datetime(event.time) %@ %@";
+        NSString* sql_main = @"SELECT event.event_id, event.time, event.name, event.value FROM event %@ ORDER BY datetime(event.time) %@, event.event_id %@ %@";
         NSString* sql_condition;
         if( event!=nil ) {
             if( start!=nil && end!=nil ) {
@@ -271,6 +277,19 @@ NSMutableArray *events = [[[NSMutableArray alloc] init] autorelease];
                 sql_condition = @"";
             }
         }
+        if( min_event_id > -1 || max_event_id > -1 ) {
+            if( sql_condition.length == 0 )
+                sql_condition = @"WHERE ";
+            else
+                sql_condition = [NSString stringWithFormat:@"%@ AND", sql_condition];
+            
+            if( min_event_id > -1 && max_event_id > -1 )
+                sql_condition = [NSString stringWithFormat:@"%@ event.event_id > %d AND event.event_id < %d", sql_condition, min_event_id, max_event_id];
+            else if( min_event_id > -1 )
+                sql_condition = [NSString stringWithFormat:@"%@ event.event_id > %d", sql_condition, min_event_id];
+            else if( max_event_id > -1 )
+                sql_condition = [NSString stringWithFormat:@"%@ event.event_id < %d", sql_condition, max_event_id];
+        }
         
         NSString* sql_order = @"";
         if( orderByDesc )
@@ -286,7 +305,7 @@ NSMutableArray *events = [[[NSMutableArray alloc] init] autorelease];
                 sql_limit = @"LIMIT ?";
         }
         
-        NSString* sql = [NSString stringWithFormat:sql_main, sql_condition, sql_order, sql_limit];
+        NSString* sql = [NSString stringWithFormat:sql_main, sql_condition, sql_order, sql_order, sql_limit];
         //NSLog(@"[db] SQL=%@", sql);
         
         const char *sqlz = [sql cStringUsingEncoding:NSASCIIStringEncoding];
@@ -347,6 +366,16 @@ NSMutableArray *events = [[[NSMutableArray alloc] init] autorelease];
         return events;
     }
 }
+
+// getEvent with pagination. do not use limit and offset, which has performance issues with sqlite
+// see http://www.sqlite.org/cvstrac/wiki?p=ScrollingCursor
+- (NSMutableArray *) getEventWithPagination:(int)baby_id limit:(int)limit startFrom:(totEvent*)lastEvent {
+    int event_id = -1;
+    if( lastEvent ) event_id = lastEvent.event_id;
+    return [self getEvent:baby_id event:nil limit:limit offset:-1 startDate:nil endDate:lastEvent.datetime orderByDesc:TRUE];
+}
+
+
 
 // this is copied from getEvent, the difference is that this function return exact matches, not LIKE
 - (NSMutableArray *) getItem:(int)baby_id name:(NSString*)name limit:(int)limit offset:(int)offset startDate:(NSDate*)start endDate:(NSDate*)end {

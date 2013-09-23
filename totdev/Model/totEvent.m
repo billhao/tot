@@ -66,4 +66,14 @@
     [value release];
 }
 
+- (id)copy {
+    totEvent* e = [[totEvent alloc] init];
+    e.event_id = event_id;
+    e.baby_id = baby_id;
+    e.datetime = datetime;
+    e.name = name;
+    e.value = value;
+    return e;
+}
+
 @end

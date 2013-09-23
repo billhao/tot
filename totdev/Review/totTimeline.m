@@ -24,6 +24,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         sleeping = FALSE;
+        lastLoadedEvent = nil;
         self.contentSize = CGSizeMake(320, INIT_HEIGHT);
         mCards = [[NSMutableArray alloc] init];
         [self setBackground];
@@ -35,6 +36,7 @@
 - (void)dealloc {
     [super dealloc];
     [mCards release];
+    [lastLoadedEvent release];
 }
 
 
@@ -185,21 +187,31 @@
     }
 }
 
-- (void) loadCardsNumber:(int)limit startFrom:(int)start {
+- (void) loadCardsNumber:(int)limit startFrom:(totEvent*)lastEvent {
     NSArray * events = nil;
     
-    events = [global.model getEvent:global.baby.babyID limit:limit offset:start];
+    // get events older than last event in both event_id and datetime
+    events = [global.model getEventWithPagination:global.baby.babyID limit:limit startFrom:lastEvent];
     
+    int cnt = [events count];
     // If no more events available
-    if ([events count] == 0) {
+    if (cnt == 0) {
         return;
     }
+    // save the last event
+    lastLoadedEvent = [events[cnt-1] copy];
     
     for (int i = 0; i < [events count]; ++i) {
         // parse the results from db
         totReviewStory *story = [[totReviewStory alloc] init];
         
         totEvent * anEvent = (totEvent*)[events objectAtIndex:i];
+        NSLog(@"load event %d", anEvent.event_id);
+        
+        // this event should have already been fetched if datetime is the same as last one and event_id is greater than last one
+        if( [anEvent.datetime isEqualToDate:lastEvent.datetime] && anEvent.event_id > lastEvent.event_id )
+            continue;
+        
         if( [anEvent.name isEqualToString:EVENT_BASIC_SLEEP] && [anEvent.value isEqualToString:@"start"] )
             // skip start sleep event
             continue;
@@ -228,25 +240,35 @@
     [self refreshView];
 }
 
-#pragma UIScrollViewDelegate
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    // TODO(lxhuang) add loading button and wait for a second.
+#pragma mark - UIScrollViewDelegate
+
+// this is not needed any more. moved to scrollViewWillBeginDecelerating (Hao)
+//- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+//    NSLog(@"scroll view scroll");
+//    // TODO(lxhuang) add loading button and wait for a second.
+//    if (scrollView.contentOffset.y + 389 > scrollView.contentSize.height) {
+//        [self loadCardsNumber:10 startFrom:lastLoadedEvent];
+//        
+//
+//        int cards_num = [mCards count];
+//        if (cards_num > 1) {
+//            totReviewCardView* card = [mCards objectAtIndex:1];
+//            cards_num--;  // don't consider the summary card
+//            for (int i = 1; i < [mCards count]; ++i) {
+//                if (((totReviewCardView*)[mCards objectAtIndex:i]).mMode == EDIT) {
+//                    cards_num--;
+//                } else {
+//                    break;
+//                }
+//            }
+//        }
+//    }
+//}
+
+-(void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView {
     if (scrollView.contentOffset.y + 389 > scrollView.contentSize.height) {
-        int cards_num = [mCards count];
-        if (cards_num > 1) {
-            totReviewCardView* card = [mCards objectAtIndex:1];
-            cards_num--;  // don't consider the summary card
-            for (int i = 1; i < [mCards count]; ++i) {
-                if (((totReviewCardView*)[mCards objectAtIndex:i]).mMode == EDIT) {
-                    cards_num--;
-                } else {
-                    break;
-                }
-            }
-            [self.controller loadEventsFrom:cards_num limit:10];
-        }
+        [self loadCardsNumber:10 startFrom:lastLoadedEvent];
     }
 }
-
 
 @end

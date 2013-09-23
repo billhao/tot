@@ -39,6 +39,12 @@
 // get events with all sorts of parameters (offset starts at 1)
 - (NSMutableArray *) getEvent:(int)baby_id event:(NSString*)event limit:(int)limit offset:(int)offset startDate:(NSDate*)start endDate:(NSDate*)end;
 - (NSMutableArray *) getEvent:(int)baby_id event:(NSString*)event limit:(int)limit offset:(int)offset startDate:(NSDate*)start endDate:(NSDate*)end orderByDesc:(BOOL)orderByDesc;
+- (NSMutableArray *) getEvent:(int)baby_id event:(NSString*)event limit:(int)limit offset:(int)offset startDate:(NSDate*)start endDate:(NSDate*)end orderByDesc:(BOOL)orderByDesc min_event_id:(int)min_event_id max_event_id:(int)max_event_id;
+
+// getEvent with pagination. do not use limit and offset, which has performance issues with sqlite
+// see http://www.sqlite.org/cvstrac/wiki?p=ScrollingCursor
+- (NSMutableArray *) getEventWithPagination:(int)baby_id limit:(int)limit startFrom:(totEvent*)lastEvent;
+
 
 // this is copied from getEvent, the difference is that this function return exact matches, not LIKE
 // return an array of totEvent

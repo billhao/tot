@@ -16,6 +16,9 @@
 @interface totTimeline : UIScrollView <UIScrollViewDelegate> {
     NSMutableArray* mCards;
     totTimelineController* controller;
+    
+    // save last loaded timeline event
+    totEvent* lastLoadedEvent;
 }
 
 @property (assign, atomic) totTimelineController* controller;
@@ -39,7 +42,7 @@
 - (void) moveCard:(totReviewCardView*)card To:(int)index;
 
 // Load cards from db.
-- (void) loadCardsNumber:(int)limit startFrom:(int)start;
+- (void) loadCardsNumber:(int)limit startFrom:(totEvent*)lastEvent;
 
 // Update the value of the specified type in summary card.
 - (void) updateSummaryCard:(ReviewCardType)type withValue:(NSString*)value;

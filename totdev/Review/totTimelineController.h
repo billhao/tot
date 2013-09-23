@@ -17,8 +17,6 @@
 @property(nonatomic, retain) totHomeRootController* homeController;
 @property(nonatomic, retain) totTimeline* timeline_;
 
-- (void) loadEventsFrom:(int)start limit:(int)limit;
-
 // date time picker
 @property(nonatomic, retain) totTimerController *mClock;
 - (void)showTimePicker:(totReviewEditCardView*)editCard mode:(DATETIMEPICKERMODE)mode datetime:(NSDate*)datetime;
