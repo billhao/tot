@@ -77,6 +77,10 @@
 - (void)animationDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context {
     totReviewCardView* cv = (totReviewCardView*)context;
     [self deleteCard:cv];
+    
+    // auto load some cards if # of cards is too few after deletion
+    if( [mCards count] < 3 )
+        [self loadCardsNumber:10 startFrom:lastLoadedEvent];
 }
 
 - (void) handleDeleteButton: (id)button {
