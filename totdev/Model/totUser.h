@@ -23,6 +23,8 @@
 // add a new user
 +(totUser*) newUser:(NSString*)email password:(NSString*)pwd;
 
++(BOOL)verifyPassword:(NSString*)pwd email:(NSString*)email;
+
 // return total # user accounts in db
 +(int) getTotalAccountCount;
 

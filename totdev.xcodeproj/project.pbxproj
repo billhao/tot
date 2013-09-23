@@ -245,6 +245,14 @@
 		3FC1B6FC1543680300295447 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FC1B6FB1543680300295447 /* libsqlite3.dylib */; };
 		3FC1B7061543841800295447 /* totModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FC1B7051543841800295447 /* totModel.m */; };
 		3FC1B7091544F19700295447 /* totEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FC1B7081544F19600295447 /* totEvent.m */; };
+		3FC63DB217F00B6C003EA9D9 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FC63DB117F00B6B003EA9D9 /* Security.framework */; };
+		3FC63DC617F00D72003EA9D9 /* RNCryptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FC63DB917F00D72003EA9D9 /* RNCryptor.m */; };
+		3FC63DC717F00D72003EA9D9 /* RNCryptorEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FC63DBB17F00D72003EA9D9 /* RNCryptorEngine.m */; };
+		3FC63DC817F00D72003EA9D9 /* RNDecryptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FC63DBD17F00D72003EA9D9 /* RNDecryptor.m */; };
+		3FC63DC917F00D72003EA9D9 /* RNEncryptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FC63DBF17F00D72003EA9D9 /* RNEncryptor.m */; };
+		3FC63DCA17F00D72003EA9D9 /* RNOpenSSLCryptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FC63DC117F00D72003EA9D9 /* RNOpenSSLCryptor.m */; };
+		3FC63DCB17F00D72003EA9D9 /* RNOpenSSLDecryptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FC63DC317F00D72003EA9D9 /* RNOpenSSLDecryptor.m */; };
+		3FC63DCC17F00D72003EA9D9 /* RNOpenSSLEncryptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FC63DC517F00D72003EA9D9 /* RNOpenSSLEncryptor.m */; };
 		3FCA8975157AE42600B087D7 /* totSettingEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FCA8973157AE42600B087D7 /* totSettingEntryViewController.m */; };
 		3FCA8976157AE42600B087D7 /* SettingEntryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FCA8974157AE42600B087D7 /* SettingEntryView.xib */; };
 		3FD29CA1168D3C0500978B51 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3FD29C9E168D3C0500978B51 /* Roboto-Bold.ttf */; };
@@ -784,6 +792,23 @@
 		3FC1B7051543841800295447 /* totModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totModel.m; path = totdev/Model/totModel.m; sourceTree = "<group>"; };
 		3FC1B7071544F19600295447 /* totEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totEvent.h; path = totdev/Model/totEvent.h; sourceTree = "<group>"; };
 		3FC1B7081544F19600295447 /* totEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totEvent.m; path = totdev/Model/totEvent.m; sourceTree = "<group>"; };
+		3FC63DB117F00B6B003EA9D9 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		3FC63DB617F00D72003EA9D9 /* RNCryptor+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RNCryptor+Private.h"; sourceTree = "<group>"; };
+		3FC63DB717F00D72003EA9D9 /* RNCryptor-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RNCryptor-Prefix.pch"; sourceTree = "<group>"; };
+		3FC63DB817F00D72003EA9D9 /* RNCryptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNCryptor.h; sourceTree = "<group>"; };
+		3FC63DB917F00D72003EA9D9 /* RNCryptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNCryptor.m; sourceTree = "<group>"; };
+		3FC63DBA17F00D72003EA9D9 /* RNCryptorEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNCryptorEngine.h; sourceTree = "<group>"; };
+		3FC63DBB17F00D72003EA9D9 /* RNCryptorEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNCryptorEngine.m; sourceTree = "<group>"; };
+		3FC63DBC17F00D72003EA9D9 /* RNDecryptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNDecryptor.h; sourceTree = "<group>"; };
+		3FC63DBD17F00D72003EA9D9 /* RNDecryptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNDecryptor.m; sourceTree = "<group>"; };
+		3FC63DBE17F00D72003EA9D9 /* RNEncryptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNEncryptor.h; sourceTree = "<group>"; };
+		3FC63DBF17F00D72003EA9D9 /* RNEncryptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNEncryptor.m; sourceTree = "<group>"; };
+		3FC63DC017F00D72003EA9D9 /* RNOpenSSLCryptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNOpenSSLCryptor.h; sourceTree = "<group>"; };
+		3FC63DC117F00D72003EA9D9 /* RNOpenSSLCryptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNOpenSSLCryptor.m; sourceTree = "<group>"; };
+		3FC63DC217F00D72003EA9D9 /* RNOpenSSLDecryptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNOpenSSLDecryptor.h; sourceTree = "<group>"; };
+		3FC63DC317F00D72003EA9D9 /* RNOpenSSLDecryptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNOpenSSLDecryptor.m; sourceTree = "<group>"; };
+		3FC63DC417F00D72003EA9D9 /* RNOpenSSLEncryptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNOpenSSLEncryptor.h; sourceTree = "<group>"; };
+		3FC63DC517F00D72003EA9D9 /* RNOpenSSLEncryptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNOpenSSLEncryptor.m; sourceTree = "<group>"; };
 		3FCA8972157AE42600B087D7 /* totSettingEntryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totSettingEntryViewController.h; path = Setting/totSettingEntryViewController.h; sourceTree = "<group>"; };
 		3FCA8973157AE42600B087D7 /* totSettingEntryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totSettingEntryViewController.m; path = Setting/totSettingEntryViewController.m; sourceTree = "<group>"; };
 		3FCA8974157AE42600B087D7 /* SettingEntryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SettingEntryView.xib; path = totdev/Setting/SettingEntryView.xib; sourceTree = "<group>"; };
@@ -1127,6 +1152,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3FC63DB217F00B6C003EA9D9 /* Security.framework in Frameworks */,
 				3FC1B6FC1543680300295447 /* libsqlite3.dylib in Frameworks */,
 				EF238829153E1A0D00B9C8BD /* QuartzCore.framework in Frameworks */,
 				EF238826153E19E800B9C8BD /* MediaPlayer.framework in Frameworks */,
@@ -1572,6 +1598,30 @@
 			path = ..;
 			sourceTree = "<group>";
 		};
+		3FC63DB517F00D72003EA9D9 /* RNCryptor */ = {
+			isa = PBXGroup;
+			children = (
+				3FC63DB617F00D72003EA9D9 /* RNCryptor+Private.h */,
+				3FC63DB717F00D72003EA9D9 /* RNCryptor-Prefix.pch */,
+				3FC63DB817F00D72003EA9D9 /* RNCryptor.h */,
+				3FC63DB917F00D72003EA9D9 /* RNCryptor.m */,
+				3FC63DBA17F00D72003EA9D9 /* RNCryptorEngine.h */,
+				3FC63DBB17F00D72003EA9D9 /* RNCryptorEngine.m */,
+				3FC63DBC17F00D72003EA9D9 /* RNDecryptor.h */,
+				3FC63DBD17F00D72003EA9D9 /* RNDecryptor.m */,
+				3FC63DBE17F00D72003EA9D9 /* RNEncryptor.h */,
+				3FC63DBF17F00D72003EA9D9 /* RNEncryptor.m */,
+				3FC63DC017F00D72003EA9D9 /* RNOpenSSLCryptor.h */,
+				3FC63DC117F00D72003EA9D9 /* RNOpenSSLCryptor.m */,
+				3FC63DC217F00D72003EA9D9 /* RNOpenSSLDecryptor.h */,
+				3FC63DC317F00D72003EA9D9 /* RNOpenSSLDecryptor.m */,
+				3FC63DC417F00D72003EA9D9 /* RNOpenSSLEncryptor.h */,
+				3FC63DC517F00D72003EA9D9 /* RNOpenSSLEncryptor.m */,
+			);
+			name = RNCryptor;
+			path = Utility/RNCryptor;
+			sourceTree = "<group>";
+		};
 		3FD29C96168D3B7000978B51 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -1876,6 +1926,7 @@
 		EF6283661536674B004031D6 = {
 			isa = PBXGroup;
 			children = (
+				3FC63DB117F00B6B003EA9D9 /* Security.framework */,
 				3F686AEC17B84C730018BE6E /* ResourcesV2 */,
 				3FE9B5F4154A2FCF00199AAF /* Tests */,
 				EF62838C153667BD004031D6 /* resources */,
@@ -2109,6 +2160,7 @@
 		EF97E7C1153B43DD0037E52D /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				3FC63DB517F00D72003EA9D9 /* RNCryptor */,
 				3F7E654E17AE19AF00C43C02 /* totMediaLibrary.h */,
 				3F7E654F17AE19AF00C43C02 /* totMediaLibrary.m */,
 				24C98C2216F2C0EF00541492 /* totQuantityController.h */,
@@ -2755,6 +2807,13 @@
 				3FD3C63B17CC838300DB1B71 /* totLanguageCard.m in Sources */,
 				3FD3C63C17CC838300DB1B71 /* totSleepCard.m in Sources */,
 				3FD3C63D17CC838300DB1B71 /* totSummaryCard.m in Sources */,
+				3FC63DC617F00D72003EA9D9 /* RNCryptor.m in Sources */,
+				3FC63DC717F00D72003EA9D9 /* RNCryptorEngine.m in Sources */,
+				3FC63DC817F00D72003EA9D9 /* RNDecryptor.m in Sources */,
+				3FC63DC917F00D72003EA9D9 /* RNEncryptor.m in Sources */,
+				3FC63DCA17F00D72003EA9D9 /* RNOpenSSLCryptor.m in Sources */,
+				3FC63DCB17F00D72003EA9D9 /* RNOpenSSLDecryptor.m in Sources */,
+				3FC63DCC17F00D72003EA9D9 /* RNOpenSSLEncryptor.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

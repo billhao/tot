@@ -105,7 +105,7 @@
     NSString* account_pref = [NSString stringWithFormat:PREFERENCE_ACCOUNT, email];
     NSString* pwd_db = [model getPreferenceNoBaby:account_pref];
     
-    if( (pwd_db!=nil) && ([pwd compare:pwd_db]==NSOrderedSame) ) {
+    if( (pwd_db!=nil) && ([totUser verifyPassword:pwd email:email]) ) {
         totUser* user = [[totUser alloc] initWithID:email];
         global.user = user;
         if( global.baby != nil ) {
@@ -169,7 +169,7 @@
         }
         [user release];
     }
-    else if( [pwd compare:pwd_db]==NSOrderedSame ) {
+    else if( [totUser verifyPassword:pwd email:email] ) {
         totUser* user = [[totUser alloc] initWithID:email];
         global.user = user;
         if( global.baby != nil ) {

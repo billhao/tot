@@ -9,6 +9,7 @@
 #import "totUser.h"
 #import "totEventName.h"
 #import "Global.h"
+#import "RNEncryptor.h"
 
 @implementation totUser
 
@@ -32,12 +33,63 @@ static totModel* _model;
 // add a new user
 +(totUser*) newUser:(NSString*)email password:(NSString*)pwd {
     NSString* account_pref = [NSString stringWithFormat:PREFERENCE_ACCOUNT, email];
-    BOOL re = [_model addPreferenceNoBaby:account_pref value:pwd];
+    
+    NSString* pwdhash = [self getPasswordHash:pwd salt:nil];
+    
+    BOOL re = [_model addPreferenceNoBaby:account_pref value:pwdhash];
     if( re )
         return [[totUser alloc] initWithID:email];
     else
         return nil;
 }
+
++(BOOL)verifyPassword:(NSString*)pwd email:(NSString*)email {
+    NSString* pwdhash_db = @"";
+    
+    NSString* account_pref = [NSString stringWithFormat:PREFERENCE_ACCOUNT, email];
+    pwdhash_db = [global.model getPreferenceNoBaby:account_pref];
+
+    NSData* salt = [self HexString2Data:[pwdhash_db substringToIndex:2*kRNCryptorAES256Settings.keySettings.saltSize]];
+    NSString* pwdhash = [self getPasswordHash:pwd salt:salt];
+    
+    return [pwdhash_db isEqualToString:pwdhash];
+}
+
+// concatenate salt and hash of pwd to the final string, which will be stored
++(NSString*)getPasswordHash:(NSString*)pwd salt:(NSData*)salt {
+    // hash the password
+    if( salt == nil ) {
+        salt = [RNEncryptor randomDataOfLength:kRNCryptorAES256Settings.keySettings.saltSize];
+    }
+    NSData* data = [RNEncryptor keyForPassword:pwd salt:salt settings:kRNCryptorAES256Settings.keySettings];
+    NSString* hash = [self toHexString:data];
+    NSString* saltStr = [self toHexString:salt];
+    NSString* finalStr = [NSString stringWithFormat:@"%@%@", saltStr, hash];
+    return finalStr;
+}
+
++ (NSString*) toHexString:(NSData*)data {
+    const unsigned char* bytes = (const unsigned char*)[data bytes];
+	NSMutableString* str = [[[NSMutableString alloc] initWithCapacity:data.length*2] autorelease];
+	for (unsigned int i = 0; i < data.length; i++) {
+		[str appendFormat:@"%02x", bytes[i]];
+	}
+	return str;
+}
+
++ (NSData*) HexString2Data:(NSString*)str {
+	NSMutableData* data = [[NSMutableData alloc] initWithCapacity:str.length/2];
+	unsigned char wholeByte;
+    char bytes[3] = {'\0','\0','\0'};
+    for (unsigned int i = 0; i < str.length/2; i++) {
+		bytes[0] = [str characterAtIndex:i*2];
+		bytes[1] = [str characterAtIndex:i*2+1];
+        wholeByte = strtol(bytes, NULL, 16);
+        [data appendBytes:&wholeByte length:1];
+	}
+	return data;
+}
+
 
 // return total # user accounts in db
 +(int) getTotalAccountCount {

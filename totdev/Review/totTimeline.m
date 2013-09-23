@@ -210,7 +210,7 @@
         totReviewStory *story = [[totReviewStory alloc] init];
         
         totEvent * anEvent = (totEvent*)[events objectAtIndex:i];
-        NSLog(@"load event %d", anEvent.event_id);
+        //NSLog(@"load event %d", anEvent.event_id);
         
         // this event should have already been fetched if datetime is the same as last one and event_id is greater than last one
         if( [anEvent.datetime isEqualToDate:lastEvent.datetime] && anEvent.event_id > lastEvent.event_id )
