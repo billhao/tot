@@ -132,8 +132,20 @@
         printf("Invalid card type when update the summary card.\n");
         return;
     }
-    UILabel* label = (UILabel*)[physicalLabels objectAtIndex:type];
-    label.text = value;
+    
+    // Update the icon if necessary.
+    int i = (int)type;
+    UILabel* curr_label = (UILabel*)[physicalLabels objectAtIndex:i];
+    if ([curr_label.text isEqualToString:@"N/A"]) {
+        UIButton* curr_button = (UIButton*)[physicalButtons objectAtIndex:i];
+        NSMutableArray* icon_img_filename = [[NSMutableArray alloc] initWithObjects:
+                                             @"height2", @"weight2", @"hc2", @"diaper2", @"language2", @"sleep2", @"food2", nil];
+        [curr_button setImage:[UIImage imageNamed:[icon_img_filename objectAtIndex:i]]
+                     forState:UIControlStateNormal];
+        [icon_img_filename release];
+    }
+    
+    curr_label.text = value;
 }
 
 // load data from db
