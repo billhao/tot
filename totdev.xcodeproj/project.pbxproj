@@ -253,6 +253,7 @@
 		3FC63DCB17F00D72003EA9D9 /* RNOpenSSLDecryptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FC63DC317F00D72003EA9D9 /* RNOpenSSLDecryptor.m */; };
 		3FC63DCC17F00D72003EA9D9 /* RNOpenSSLEncryptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FC63DC517F00D72003EA9D9 /* RNOpenSSLEncryptor.m */; };
 		3FC63DCE17F12954003EA9D9 /* scrapbook_option_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FC63DCD17F12953003EA9D9 /* scrapbook_option_button.png */; };
+		3FC63DD517F16F81003EA9D9 /* totServerCommController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FC63DD417F16F81003EA9D9 /* totServerCommController.m */; };
 		3FCA8975157AE42600B087D7 /* totSettingEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FCA8973157AE42600B087D7 /* totSettingEntryViewController.m */; };
 		3FCA8976157AE42600B087D7 /* SettingEntryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FCA8974157AE42600B087D7 /* SettingEntryView.xib */; };
 		3FD29CA1168D3C0500978B51 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3FD29C9E168D3C0500978B51 /* Roboto-Bold.ttf */; };
@@ -809,6 +810,8 @@
 		3FC63DC417F00D72003EA9D9 /* RNOpenSSLEncryptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNOpenSSLEncryptor.h; sourceTree = "<group>"; };
 		3FC63DC517F00D72003EA9D9 /* RNOpenSSLEncryptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNOpenSSLEncryptor.m; sourceTree = "<group>"; };
 		3FC63DCD17F12953003EA9D9 /* scrapbook_option_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = scrapbook_option_button.png; sourceTree = "<group>"; };
+		3FC63DD317F16F81003EA9D9 /* totServerCommController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = totServerCommController.h; sourceTree = "<group>"; };
+		3FC63DD417F16F81003EA9D9 /* totServerCommController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = totServerCommController.m; sourceTree = "<group>"; };
 		3FCA8972157AE42600B087D7 /* totSettingEntryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totSettingEntryViewController.h; path = Setting/totSettingEntryViewController.h; sourceTree = "<group>"; };
 		3FCA8973157AE42600B087D7 /* totSettingEntryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totSettingEntryViewController.m; path = Setting/totSettingEntryViewController.m; sourceTree = "<group>"; };
 		3FCA8974157AE42600B087D7 /* SettingEntryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SettingEntryView.xib; path = totdev/Setting/SettingEntryView.xib; sourceTree = "<group>"; };
@@ -1622,6 +1625,15 @@
 			path = Utility/RNCryptor;
 			sourceTree = "<group>";
 		};
+		3FC63DD217F16F7F003EA9D9 /* Server */ = {
+			isa = PBXGroup;
+			children = (
+				3FC63DD317F16F81003EA9D9 /* totServerCommController.h */,
+				3FC63DD417F16F81003EA9D9 /* totServerCommController.m */,
+			);
+			path = Server;
+			sourceTree = "<group>";
+		};
 		3FD29C96168D3B7000978B51 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -1964,6 +1976,7 @@
 		EF62837B1536674B004031D6 /* totdev */ = {
 			isa = PBXGroup;
 			children = (
+				3FC63DD217F16F7F003EA9D9 /* Server */,
 				8E84C91D174C80A6004057B9 /* Scrapbook */,
 				3F63C227170537140014E8C7 /* Tutorial */,
 				EF62837C1536674C004031D6 /* Supporting Files */,
@@ -2814,6 +2827,7 @@
 				3FC63DCA17F00D72003EA9D9 /* RNOpenSSLCryptor.m in Sources */,
 				3FC63DCB17F00D72003EA9D9 /* RNOpenSSLDecryptor.m in Sources */,
 				3FC63DCC17F00D72003EA9D9 /* RNOpenSSLEncryptor.m in Sources */,
+				3FC63DD517F16F81003EA9D9 /* totServerCommController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2860,7 +2874,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "totdev/totdev-Prefix.pch";
 				INFOPLIST_FILE = "totdev/totdev-Info.plist";
@@ -2950,7 +2964,7 @@
 		EF62838B1536674C004031D6 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "totdev/totdev-Prefix.pch";
 				INFOPLIST_FILE = "totdev/totdev-Info.plist";
