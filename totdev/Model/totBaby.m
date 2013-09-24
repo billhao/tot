@@ -127,9 +127,9 @@
     else
         year = [NSString stringWithFormat:@"%d years", components.year];
     
-    if( components.year == 0 && components.month == 0 && components.day == 1 ) {
+    if( components.year == 0 && components.month == 0 && components.day == 0 ) {
         // first day
-        str = [NSString stringWithFormat:@"first day"];
+        str = [NSString stringWithFormat:@"first day!"];
     }
     else if( components.day == 0 && components.month == 0 ) {
         // today is birthday

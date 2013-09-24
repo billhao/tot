@@ -54,9 +54,10 @@
     
     // add scrapbook option menu button
     optionMenuBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    optionMenuBtn.frame = CGRectMake(fullPageFrame.size.width-50, fullPageFrame.size.height-50, 50, 50);
+    CGRect f = CGRectMake(fullPageFrame.size.width-50, fullPageFrame.size.height-50, 50, 50);
+    f = CGRectMake(399, 245, 64, 64);
+    optionMenuBtn.frame = f;
     [optionMenuBtn setImage:[UIImage imageNamed:@"scrapbook_option_button"] forState:UIControlStateNormal];
-    [optionMenuBtn setImage:[UIImage imageNamed:@"scrapbook_option_button_pressed"] forState:UIControlStateHighlighted];
     //optionBtn.backgroundColor = [UIColor blueColor];
     [optionMenuBtn addTarget:self action:@selector(optionMenuButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:optionMenuBtn];
@@ -414,18 +415,13 @@
 - (void)createOptionMenu {
     if( optionView ) return;
     
-    optionView = [[UIView alloc] init];
-    // TODO orientation
-    optionView.backgroundColor = [UIColor clearColor];
-    //optionView.alpha = 0.8;
-    
     NSMutableArray* buttons = [[NSMutableArray alloc] initWithObjects:
-                               @"sb_add",
-                               @"sb_delete",
-                               @"sb_edit",
-                               @"sb_exit",
+                               @"add page",
+                               @"delete page",
+                               @"book name",
+                               @"close book",
                                nil];
-    
+
     int margin_x_left = 0;
     int margin_x_right = 0;
     int margin_y = 0;
@@ -434,27 +430,49 @@
     int icon_height = 38;
     int icon_width = 132;
     
-    int i = 0;
-    for (NSString* button in buttons) {
-        UIButton* btn = [UIButton buttonWithType:UIButtonTypeCustom];
-        btn.frame = CGRectMake(margin_x_left, margin_y_top+i*(icon_height+margin_y), icon_width, icon_height);
-        btn.titleLabel.text = button;
-        btn.tag = i;
-        btn.backgroundColor = [UIColor clearColor];
-        NSString* button_pressed = [NSString stringWithFormat:@"%@_pressed", button];
-        [btn setImage:[UIImage imageNamed:button] forState:UIControlStateNormal];
-        [btn setImage:[UIImage imageNamed:button_pressed] forState:UIControlStateHighlighted];
-        [btn addTarget:self action:@selector(optionButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-        i++;
-        [optionView addSubview:btn];
-    }
-    [buttons release];
-    
+    // create option view
+    optionView = [[UIView alloc] init];
+    // TODO orientation
+    optionView.backgroundColor = [UIColor whiteColor];
+    optionView.alpha = 0.9;
+    optionView.layer.cornerRadius = 6;
+
     int w = margin_x_left+margin_x_right+icon_width;
     int h = buttons.count*(icon_height+margin_y)-margin_y+margin_y_top+margin_y_bottom;
     CGSize size = self.view.bounds.size;
     optionView.frame = CGRectMake(size.width-10-w, size.height-10-h, w, h);
     optionView.hidden = TRUE;
+    
+    // create the buttons
+    for( int i=0; i<buttons.count; i++ ) {
+        NSString* button = buttons[i];
+        int y = margin_y_top+i*(icon_height+margin_y);
+
+        // draw the separation line
+        if( i != 0 ) {
+        UIView* line = [[UIView alloc] initWithFrame:CGRectMake(0, y, w, .5)];
+        line.backgroundColor = [UIColor lightGrayColor];
+        [optionView addSubview:line];
+        [line release];
+        }
+
+        UIButton* btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        btn.frame = CGRectMake(margin_x_left, y, icon_width, icon_height);
+        [btn setTitle:button forState:UIControlStateNormal];
+        [btn setTitleColor:[UIColor colorWithRed:0 green:122/255.0 blue:1 alpha:1] forState:UIControlStateNormal];
+        btn.titleLabel.font = [UIFont fontWithName:@"Raleway" size:16];
+        //btn.titleLabel.textColor = [UIColor colorWithRed:0 green:122/255.0 blue:1 alpha:1];
+        btn.tag = i;
+        btn.backgroundColor = [UIColor clearColor];
+//        NSString* button_pressed = [NSString stringWithFormat:@"%@_pressed", button];
+//        [btn setImage:[UIImage imageNamed:button] forState:UIControlStateNormal];
+//        [btn setImage:[UIImage imageNamed:button_pressed] forState:UIControlStateHighlighted];
+        [btn addTarget:self action:@selector(optionButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+
+        [optionView addSubview:btn];
+    }
+    [buttons release];
+    
     [self.view addSubview:optionView];
 }
 

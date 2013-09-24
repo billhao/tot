@@ -198,7 +198,6 @@
 		3F79A42817180453004E96F6 /* tutorial_3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F79A42617180453004E96F6 /* tutorial_3@2x.png */; };
 		3F7CDB5D157ABDCE009CD3D7 /* totdb.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 3F7CDB5C157ABDCE009CD3D7 /* totdb.sqlite */; };
 		3F7E655017AE19AF00C43C02 /* totMediaLibrary.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F7E654F17AE19AF00C43C02 /* totMediaLibrary.m */; };
-		3F8A45F617BB7550006A7566 /* scrapbook_option_button_pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F8A45F417BB7550006A7566 /* scrapbook_option_button_pressed@2x.png */; };
 		3F8A45F717BB7550006A7566 /* scrapbook_option_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F8A45F517BB7550006A7566 /* scrapbook_option_button@2x.png */; };
 		3F95918317D996A0003FDBC7 /* Birthday Template P1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F95917817D996A0003FDBC7 /* Birthday Template P1@2x.png */; };
 		3F95918417D996A0003FDBC7 /* Birthday Template P2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F95917917D996A0003FDBC7 /* Birthday Template P2@2x.png */; };
@@ -253,6 +252,7 @@
 		3FC63DCA17F00D72003EA9D9 /* RNOpenSSLCryptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FC63DC117F00D72003EA9D9 /* RNOpenSSLCryptor.m */; };
 		3FC63DCB17F00D72003EA9D9 /* RNOpenSSLDecryptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FC63DC317F00D72003EA9D9 /* RNOpenSSLDecryptor.m */; };
 		3FC63DCC17F00D72003EA9D9 /* RNOpenSSLEncryptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FC63DC517F00D72003EA9D9 /* RNOpenSSLEncryptor.m */; };
+		3FC63DCE17F12954003EA9D9 /* scrapbook_option_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FC63DCD17F12953003EA9D9 /* scrapbook_option_button.png */; };
 		3FCA8975157AE42600B087D7 /* totSettingEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FCA8973157AE42600B087D7 /* totSettingEntryViewController.m */; };
 		3FCA8976157AE42600B087D7 /* SettingEntryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FCA8974157AE42600B087D7 /* SettingEntryView.xib */; };
 		3FD29CA1168D3C0500978B51 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3FD29C9E168D3C0500978B51 /* Roboto-Bold.ttf */; };
@@ -742,7 +742,6 @@
 		3F7CDB5C157ABDCE009CD3D7 /* totdb.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = totdb.sqlite; sourceTree = "<group>"; };
 		3F7E654E17AE19AF00C43C02 /* totMediaLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totMediaLibrary.h; path = Utility/totMediaLibrary.h; sourceTree = "<group>"; };
 		3F7E654F17AE19AF00C43C02 /* totMediaLibrary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totMediaLibrary.m; path = Utility/totMediaLibrary.m; sourceTree = "<group>"; };
-		3F8A45F417BB7550006A7566 /* scrapbook_option_button_pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "scrapbook_option_button_pressed@2x.png"; sourceTree = "<group>"; };
 		3F8A45F517BB7550006A7566 /* scrapbook_option_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "scrapbook_option_button@2x.png"; sourceTree = "<group>"; };
 		3F95917817D996A0003FDBC7 /* Birthday Template P1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Birthday Template P1@2x.png"; sourceTree = "<group>"; };
 		3F95917917D996A0003FDBC7 /* Birthday Template P2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Birthday Template P2@2x.png"; sourceTree = "<group>"; };
@@ -809,6 +808,7 @@
 		3FC63DC317F00D72003EA9D9 /* RNOpenSSLDecryptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNOpenSSLDecryptor.m; sourceTree = "<group>"; };
 		3FC63DC417F00D72003EA9D9 /* RNOpenSSLEncryptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNOpenSSLEncryptor.h; sourceTree = "<group>"; };
 		3FC63DC517F00D72003EA9D9 /* RNOpenSSLEncryptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNOpenSSLEncryptor.m; sourceTree = "<group>"; };
+		3FC63DCD17F12953003EA9D9 /* scrapbook_option_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = scrapbook_option_button.png; sourceTree = "<group>"; };
 		3FCA8972157AE42600B087D7 /* totSettingEntryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totSettingEntryViewController.h; path = Setting/totSettingEntryViewController.h; sourceTree = "<group>"; };
 		3FCA8973157AE42600B087D7 /* totSettingEntryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totSettingEntryViewController.m; path = Setting/totSettingEntryViewController.m; sourceTree = "<group>"; };
 		3FCA8974157AE42600B087D7 /* SettingEntryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SettingEntryView.xib; path = totdev/Setting/SettingEntryView.xib; sourceTree = "<group>"; };
@@ -1478,8 +1478,8 @@
 				3FD3C5E617C75BDE00DB1B71 /* delete_button@2x.png */,
 				3F954A7117C079A40007C125 /* Templates */,
 				3F686B2217B84CC30018BE6E /* Templates_thumbnails */,
-				3F8A45F417BB7550006A7566 /* scrapbook_option_button_pressed@2x.png */,
 				3FEC0F4917BB7D0700EBBA92 /* scrapbook_option_menu_background@2x.png */,
+				3FC63DCD17F12953003EA9D9 /* scrapbook_option_button.png */,
 				3F8A45F517BB7550006A7566 /* scrapbook_option_button@2x.png */,
 				3F686AFC17B84C730018BE6E /* add_image.png */,
 				3FFD356517EE88E500C36504 /* add_image@2x.png */,
@@ -1926,7 +1926,6 @@
 		EF6283661536674B004031D6 = {
 			isa = PBXGroup;
 			children = (
-				3FC63DB117F00B6B003EA9D9 /* Security.framework */,
 				3F686AEC17B84C730018BE6E /* ResourcesV2 */,
 				3FE9B5F4154A2FCF00199AAF /* Tests */,
 				EF62838C153667BD004031D6 /* resources */,
@@ -1949,6 +1948,7 @@
 			isa = PBXGroup;
 			children = (
 				3FC1B6FB1543680300295447 /* libsqlite3.dylib */,
+				3FC63DB117F00B6B003EA9D9 /* Security.framework */,
 				EF238828153E1A0C00B9C8BD /* QuartzCore.framework */,
 				EF238824153E19E700B9C8BD /* MediaPlayer.framework */,
 				EF238825153E19E800B9C8BD /* MobileCoreServices.framework */,
@@ -2601,7 +2601,6 @@
 				3F686B1617B84C730018BE6E /* book1@2x.png in Resources */,
 				3F686B1717B84C730018BE6E /* book2@2x.png in Resources */,
 				3F686B2417B84CE60018BE6E /* First Year Template@2x.png in Resources */,
-				3F8A45F617BB7550006A7566 /* scrapbook_option_button_pressed@2x.png in Resources */,
 				3F8A45F717BB7550006A7566 /* scrapbook_option_button@2x.png in Resources */,
 				3FEC0F4A17BB7D0700EBBA92 /* scrapbook_option_menu_background@2x.png in Resources */,
 				3FD3C5E717C75BDE00DB1B71 /* delete_button_pressed@2x.png in Resources */,
@@ -2732,6 +2731,7 @@
 				3FFD356317ED932B00C36504 /* feeding_add.png in Resources */,
 				3FFD356417ED932B00C36504 /* feeding_delete.png in Resources */,
 				3FFD356617EE88E500C36504 /* add_image@2x.png in Resources */,
+				3FC63DCE17F12954003EA9D9 /* scrapbook_option_button.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
