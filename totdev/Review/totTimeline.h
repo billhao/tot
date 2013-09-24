@@ -10,15 +10,18 @@
 #import <UIKit/UIKit.h>
 #import "totTimerController.h"
 #import "totTimelineController.h"
+#import "totTimerController.h"
 
 #define GAP_BETWEEN_CARDS 5
 
-@interface totTimeline : UIScrollView <UIScrollViewDelegate> {
+@interface totTimeline : UIScrollView <UIScrollViewDelegate, totTimerDelegate> {
     NSMutableArray* mCards;
     totTimelineController* controller;
     
     // save last loaded timeline event
     totEvent* lastLoadedEvent;
+    
+    totTimer* timer;
 }
 
 @property (assign, atomic) totTimelineController* controller;

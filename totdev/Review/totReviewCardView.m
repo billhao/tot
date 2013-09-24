@@ -280,6 +280,11 @@
     [hour_button setTitle:[totTimeUtil getTimeString:timeStamp] forState:UIControlStateNormal];
 }
 
+// called by a timer in totTimeline, update the timestamp in this card
+- (void)updateCard {
+    // does nothing here. should be override by subclasses
+}
+
 //
 // ---------- Time ------------
 //
@@ -409,6 +414,11 @@
 
 - (void) setBackground {
     self.view.backgroundColor = [UIColor whiteColor];
+}
+
+// called by a timer in totTimeline, update the timestamp in this card
+- (void)updateCard {
+    // does nothing here. should be override by subclasses
 }
 
 - (void) dealloc {

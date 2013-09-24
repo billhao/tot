@@ -29,11 +29,17 @@
         mCards = [[NSMutableArray alloc] init];
         [self setBackground];
         [self setDelegate:self];
+        [self setupTimer];
     }
     return self;
 }
 
 - (void)dealloc {
+    // stop and release timer
+    [timer stop];
+    [timer release];
+    timer = nil;
+
     [super dealloc];
     [mCards release];
     [lastLoadedEvent release];
@@ -273,6 +279,27 @@
     if (scrollView.contentOffset.y + 389 > scrollView.contentSize.height) {
         [self loadCardsNumber:10 startFrom:lastLoadedEvent];
     }
+}
+
+#pragma mark - Timer delegate
+
+- (void)timerCallback: (totTimer*)timer {
+    for (int i = 0; i < [mCards count]; ++i) {
+        totReviewCardView* cv = [mCards objectAtIndex:i];
+        // update
+        if( cv.mMode == EDIT && cv.mEditView != nil) {
+            [cv.mEditView updateCard];
+        }
+        else if( cv.mMode == SHOW && cv.mShowView != nil) {
+            [cv.mShowView updateCard];
+        }
+    }
+}
+
+- (void)setupTimer {
+    timer = [[totTimer alloc] init];
+    [timer setDelegate:self];
+    [timer startWithInternalInSeconds:60];
 }
 
 @end

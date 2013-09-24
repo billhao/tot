@@ -73,6 +73,9 @@ typedef enum {
 
 - (void)confirmIconHandler:(UIButton*)button;
 
+// called by a timer in totTimeline, update the timestamp in this card
+- (void)updateCard;
+
 - (int) height;
 - (int) width;
 
@@ -108,6 +111,9 @@ typedef enum {
 - (void) setTimestamp:(NSString*)time;
 - (void) setTimestampWithDate:(NSDate*)datetime;
 - (void) setCalendar:(int)days;
+
+// called by a timer in totTimeline, update the timestamp in this card
+- (void)updateCard;
 
 - (int) height;
 - (int) width;
