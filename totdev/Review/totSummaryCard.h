@@ -18,6 +18,7 @@
     
     UILabel* label_babyName;
     UILabel* label_babyAge;
+    UIImageView* sexImgView;
     
     UIView* headView;
     totImageView* headImg;

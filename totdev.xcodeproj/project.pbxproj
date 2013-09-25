@@ -266,6 +266,8 @@
 		3FC63DF817F18477003EA9D9 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FC63DF717F18476003EA9D9 /* StoreKit.framework */; };
 		3FC63DFA17F1847D003EA9D9 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FC63DF917F1847C003EA9D9 /* SystemConfiguration.framework */; };
 		3FC63DFC17F185E3003EA9D9 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FC63DFB17F185E2003EA9D9 /* AssetsLibrary.framework */; };
+		3FC63E0317F2C22D003EA9D9 /* female@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FC63E0117F2C22D003EA9D9 /* female@2x.png */; };
+		3FC63E0417F2C22D003EA9D9 /* male@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FC63E0217F2C22D003EA9D9 /* male@2x.png */; };
 		3FCA8975157AE42600B087D7 /* totSettingEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FCA8973157AE42600B087D7 /* totSettingEntryViewController.m */; };
 		3FCA8976157AE42600B087D7 /* SettingEntryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FCA8974157AE42600B087D7 /* SettingEntryView.xib */; };
 		3FD29CA1168D3C0500978B51 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3FD29C9E168D3C0500978B51 /* Roboto-Bold.ttf */; };
@@ -845,6 +847,8 @@
 		3FC63DF717F18476003EA9D9 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		3FC63DF917F1847C003EA9D9 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		3FC63DFB17F185E2003EA9D9 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		3FC63E0117F2C22D003EA9D9 /* female@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "female@2x.png"; sourceTree = "<group>"; };
+		3FC63E0217F2C22D003EA9D9 /* male@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "male@2x.png"; sourceTree = "<group>"; };
 		3FCA8972157AE42600B087D7 /* totSettingEntryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totSettingEntryViewController.h; path = Setting/totSettingEntryViewController.h; sourceTree = "<group>"; };
 		3FCA8973157AE42600B087D7 /* totSettingEntryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totSettingEntryViewController.m; path = Setting/totSettingEntryViewController.m; sourceTree = "<group>"; };
 		3FCA8974157AE42600B087D7 /* SettingEntryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SettingEntryView.xib; path = totdev/Setting/SettingEntryView.xib; sourceTree = "<group>"; };
@@ -1391,6 +1395,8 @@
 		3F049B5F17D4106800F05727 /* Summary */ = {
 			isa = PBXGroup;
 			children = (
+				3FC63E0117F2C22D003EA9D9 /* female@2x.png */,
+				3FC63E0217F2C22D003EA9D9 /* male@2x.png */,
 				3F049B6417D438D600F05727 /* summary_head_default@2x.png */,
 				3F049B6217D4108700F05727 /* summary_head_bg@2x.png */,
 			);
@@ -2835,6 +2841,8 @@
 				3FFD356617EE88E500C36504 /* add_image@2x.png in Resources */,
 				3FC63DCE17F12954003EA9D9 /* scrapbook_option_button.png in Resources */,
 				3FC63DEA17F1827A003EA9D9 /* AviarySDKResources.bundle in Resources */,
+				3FC63E0317F2C22D003EA9D9 /* female@2x.png in Resources */,
+				3FC63E0417F2C22D003EA9D9 /* male@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

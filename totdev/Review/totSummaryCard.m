@@ -87,6 +87,10 @@
     label_babyName.text = @"Grace";
     [self.view addSubview:label_babyName];
 
+    // sex
+    sexImgView = [[UIImageView alloc] init];
+    [self.view addSubview:sexImgView];
+
     // baby age
     label_babyAge = [[UILabel alloc] initWithFrame:CGRectMake(129+2, 78, 170, 14)];
     UIFont* font2 = [UIFont fontWithName:@"Raleway" size:14];
@@ -154,7 +158,18 @@
 - (void) loadData {
     // set baby name
     label_babyName.text = global.baby.name;
+    [label_babyName sizeToFit];
     
+    // set sex
+    UIImage* sexImg;
+    if( global.baby.sex == MALE )
+        sexImg = [UIImage imageNamed:@"male"];
+    else
+        sexImg = [UIImage imageNamed:@"female"];
+    sexImgView.image = sexImg;
+    CGRect f = label_babyName.frame;
+    sexImgView.frame = CGRectMake(f.origin.x+f.size.width, f.origin.y, sexImg.size.width, sexImg.size.height);
+
     // set baby age
     label_babyAge.text = [global.baby formatAge];
     
