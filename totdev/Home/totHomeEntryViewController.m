@@ -56,8 +56,12 @@
     
     // add photo view
     mPhotoViewA = [[totImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
+    mPhotoViewA.contentMode = UIViewContentModeScaleAspectFit;
+    mPhotoViewA.backgroundColor = [UIColor clearColor];
     [self.view addSubview:mPhotoViewA];
     mPhotoViewB = [[totImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
+    mPhotoViewB.contentMode = UIViewContentModeScaleAspectFit;
+    mPhotoViewB.backgroundColor = [UIColor clearColor];
     [self.view addSubview:mPhotoViewB];
     
     // add camera icon
@@ -110,9 +114,6 @@
 //    [menuBtn setImage:[UIImage imageNamed:@"menu_button_pressed"] forState:UIControlStateHighlighted];
 //    [menuBtn addTarget:self action:@selector(menuButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
 //    [self.view addSubview:menuBtn];
-    
-    // add the camera view to window
-    [self.view addSubview:global.cameraView.view];
     
     // add activity
     [self createActivityView];
@@ -235,7 +236,7 @@
 
 - (void)cameraButtonPressed: (id)sender {
     [global.cameraView setDelegate:self];
-    [global.cameraView launchCamera:self];
+    [global.cameraView launchCamera:self withEditing:TRUE];
 }
 
 - (void)menuButtonPressed: (id)sender {

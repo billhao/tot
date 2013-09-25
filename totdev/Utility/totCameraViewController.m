@@ -21,8 +21,7 @@
 
 @implementation totCameraViewController
 
-@synthesize imagePicker;
-@synthesize delegate;
+@synthesize imagePicker, delegate, cropWidth, cropHeight;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -31,6 +30,13 @@
         // Custom initialization
     }
     return self;
+}
+
+-(void)dealloc {
+    [editor release];
+    editor = nil;
+    
+    [super dealloc];
 }
 
 - (void)didReceiveMemoryWarning
@@ -82,13 +88,15 @@
     }
 }
 
-- (void)launchCamera:(UIViewController*)vc {
-    [self launchCamera:vc type:UIImagePickerControllerSourceTypeCamera];
+// if editing is true go to editor after select a image or take a picture
+- (void)launchCamera:(UIViewController*)vc withEditing:(BOOL)withEditing {
+    [self launchCamera:vc type:UIImagePickerControllerSourceTypeCamera withEditing:withEditing];
 }
 
-- (void)launchCamera:(UIViewController*)vc type:(UIImagePickerControllerSourceType)type {
+- (void)launchCamera:(UIViewController*)vc type:(UIImagePickerControllerSourceType)type withEditing:(BOOL)withEditing {
     // TODO release imagePicker first?
     
+    editing = withEditing;
     hostVC = vc;
     self.view.frame = CGRectMake(0, 0, 320, 460);
     if ( (type == UIImagePickerControllerSourceTypeCamera) &&
@@ -126,74 +134,106 @@
     NSLog(@"switch to photo library");
     [imagePicker dismissViewControllerAnimated:FALSE completion:^{
         [imagePicker release];
-        [self launchCamera:hostVC type:UIImagePickerControllerSourceTypePhotoLibrary];
+        [self launchCamera:hostVC type:UIImagePickerControllerSourceTypePhotoLibrary withEditing:TRUE];
     }];
 }
 
 - (void)imagePickerController:(UIImagePickerController*)picker didFinishPickingMediaWithInfo:(NSDictionary*)info {
-    MediaInfo* mediaInfo = [[[MediaInfo alloc] init] autorelease];
-    
+
+    // save original
     NSString* mediaType = [info objectForKey:UIImagePickerControllerMediaType];
     if ([mediaType isEqualToString:(NSString*)kUTTypeImage]) {
-        UIImage *photo = (UIImage*)[info objectForKey:@"UIImagePickerControllerOriginalImage"];
-
         // only save the image to camera roll if it is from the camera
         // do not save an image from photo library or camera roll
         if( picker.sourceType == UIImagePickerControllerSourceTypeCamera ) {
+            UIImage *photo = (UIImage*)[info objectForKey:@"UIImagePickerControllerOriginalImage"];
             UIImageWriteToSavedPhotosAlbum(photo, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
         }
-        
-        // generate a filename for the image
-        NSDate* today = [NSDate date];
-        NSTimeInterval interval = [today timeIntervalSince1970];
-        NSString *filename = [[NSString alloc] initWithFormat:@"%d.jpg", (int)interval];
-        mediaInfo.filename = [NSString stringWithString:filename];
-
-        // Save the image file and add it to cache.
-        NSString* filepath = [self saveImage:photo intoFile:filename];
-
-        // TODO this may use a lot of memory. commented out for now.
-        // re-enable this when cache can release memory on memory warning
-        AppDelegate *appdelegate = [[UIApplication sharedApplication] delegate];
-        [appdelegate.mCache addImage:photo WithKey:filename];
-        
-        if( [delegate respondsToSelector:@selector(cameraView:didFinishSavingImageToAlbum:image:)] ) {
-            [delegate cameraView:self didFinishSavingImageToAlbum:filepath image:photo];
-        }
-        [filename release];
     }
     else if ([mediaType isEqualToString:(NSString*)kUTTypeMovie]) {
-        // TODO check where video is saved (should be in media dir)
-        NSString* filepath = [(NSURL*)[info valueForKey:UIImagePickerControllerMediaURL] absoluteString];
-        filepath = [filepath substringFromIndex:16];
-        // Check if the video file can be saved to camera roll.
-        if (UIVideoAtPathIsCompatibleWithSavedPhotosAlbum(filepath)){
-            // YES. Copy it to the camera roll.
-            UISaveVideoAtPathToSavedPhotosAlbum(filepath, self, @selector(video:didFinishSavingWithError:contextInfo:), filepath);
+        if( picker.sourceType == UIImagePickerControllerSourceTypeCamera ) {
+            // TODO check where video is saved (should be in media dir)
+            NSString* filepath = [(NSURL*)[info valueForKey:UIImagePickerControllerMediaURL] absoluteString];
+            filepath = [filepath substringFromIndex:16];
+            // Check if the video file can be saved to camera roll.
+            if (UIVideoAtPathIsCompatibleWithSavedPhotosAlbum(filepath)){
+                // YES. Copy it to the camera roll.
+                UISaveVideoAtPathToSavedPhotosAlbum(filepath, self, @selector(video:didFinishSavingWithError:contextInfo:), filepath);
+            }
         }
-        mediaInfo.filename = [NSString stringWithString:filepath];
     }
     else
         return;
     
-    mediaInfo.dateTimeTaken = [NSDate date];
-    mediaInfo.activities = [[[NSMutableArray alloc] init] autorelease];
-    [totMediaLibrary addPhoto:mediaInfo];
+    [imagePicker dismissViewControllerAnimated:FALSE completion:^{
+        if ([mediaType isEqualToString:(NSString*)kUTTypeImage]) {
+            NSURL* assetURL = [info objectForKey:UIImagePickerControllerReferenceURL];
+            if( editing ) {
+                // call photo editor
+                if(!editor) editor = [[AviaryPhotoEditor alloc] init:nil];
+                editor.vc = hostVC;
+                editor.delegate = self;
+                editor.cropWidth = cropWidth;
+                editor.cropHeight = cropHeight;
+                [editor launchEditorWithAssetURL:assetURL];
+            }
+            else {
+                UIImage *img = (UIImage*)[info objectForKey:@"UIImagePickerControllerOriginalImage"];
+                img = [editor editingResImageForAssetURL:assetURL];
+                [self saveImage:img];
+            }
+        }
+        else if ([mediaType isEqualToString:(NSString*)kUTTypeMovie]) {
+            // do nothing right now
+        }
+    }];
+    [self hideCamera];
+}
 
+// This is called when the user taps "Done" in the photo editor.
+- (void) photoEditor:(AFPhotoEditorController *)editor finishedWithImage:(UIImage *)image {
+    [self saveImage:image];
+}
+
+- (void)saveImage:(UIImage*)image {
+    MediaInfo* mediaInfo = [[[MediaInfo alloc] init] autorelease];
+    
+    // generate a filename for the image
+    NSDate* today = [NSDate date];
+    NSTimeInterval interval = [today timeIntervalSince1970];
+    NSString *filename = [NSString stringWithFormat:@"%d.jpg", (int)interval];
+    mediaInfo.filename = [NSString stringWithString:filename];
+    
+    // Save the image file and add it to cache.
+    NSString* filepath = [self saveImage:image intoFile:filename];
+    
+//    // TODO this may use a lot of memory. commented out for now.
+//    // re-enable this when cache can release memory on memory warning
+//    AppDelegate *appdelegate = [[UIApplication sharedApplication] delegate];
+//    [appdelegate.mCache addImage:image WithKey:filename];
+//    
+//    if( [delegate respondsToSelector:@selector(cameraView:didFinishSavingImageToAlbum:image:)] ) {
+//        [delegate cameraView:self didFinishSavingImageToAlbum:filepath image:image];
+//    }
+//    [filename release];
+    
+    mediaInfo.dateTimeTaken = today;
+    [totMediaLibrary addPhoto:mediaInfo];
+    
     if( [delegate respondsToSelector:@selector(cameraView:didFinishSavingMedia:)] ) {
         [delegate cameraView:self didFinishSavingMedia:mediaInfo];
     }
     
-    [self hideCamera];
 }
 
 - (void)hideCamera {
-    [imagePicker dismissViewControllerAnimated:TRUE completion:nil];
     [imagePicker release];
+    imagePicker = nil;
     self.view.frame = CGRectMake(0, 0, 0, 0);
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController*)picker {
+    [imagePicker dismissViewControllerAnimated:TRUE completion:nil];
     [self hideCamera];
 }
 

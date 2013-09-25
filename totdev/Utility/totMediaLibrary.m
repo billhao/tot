@@ -13,13 +13,26 @@
 
 @implementation MediaInfo
 
+@synthesize assetURL, activities;
+
+- (id)init {
+    self = [super init];
+    if (self) {
+        self.activities = [[[NSMutableArray alloc] init] autorelease];
+    }
+    return self;
+}
+
 - (id)initWithJSON:(NSString*)jsonData {
     self = [super init];
     if (self) {
         NSMutableDictionary* obj = (NSMutableDictionary*)[totHomeFeedingViewController JSONToObject:jsonData];
         self.filename = [obj objectForKey:@"filename"];
+        NSString* assetURLStr = [obj objectForKey:@"assetURL"];
+        if( assetURLStr )
+            assetURL = [[[NSURL alloc] initWithString:assetURLStr] autorelease];
         self.dateTimeTaken = [totEvent dateFromString:[obj objectForKey:@"datetime_taken"]];
-        NSMutableArray* activities = [obj objectForKey:@"activities"];
+        self.activities = [obj objectForKey:@"activities"];
         if( !activities )
             activities = [[NSMutableArray alloc] init];
         self.activities = activities;
@@ -27,11 +40,22 @@
     return self;
 }
 
+-(void)dealloc {
+    [assetURL release];
+    assetURL = nil;
+    
+    [activities release];
+    activities = nil;
+    
+    [super dealloc];
+}
+
 // save this media info to db
 - (void)save {
     // add a record to db
     NSMutableDictionary* imageData = [[NSMutableDictionary alloc] init];
     [imageData setValue:self.filename forKey:@"filename"];
+    [imageData setValue:[self.assetURL absoluteString] forKey:@"assetURL"];
     [imageData setValue:[totEvent formatTime:self.dateTimeTaken] forKey:@"datetime_taken"];
     [imageData setValue:self.activities forKey:@"activities"];
 
@@ -42,6 +66,7 @@
 // datetime is nil for default media
 + (MediaInfo*)getDefault {
     MediaInfo* m = [[MediaInfo alloc] init];
+    m.assetURL = nil;
     m.filename = @"home_bg";
     m.dateTimeTaken = nil;
     m.activities = [[NSMutableArray alloc] init];

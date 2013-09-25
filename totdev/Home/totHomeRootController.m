@@ -15,6 +15,7 @@
 #import "totHomeAlbumBrowseController.h"
 #import "totTimelineController.h"
 #import "AppDelegate.h"
+#import "Global.h"
 
 @implementation totHomeRootController
 
@@ -32,9 +33,9 @@
     if (self) {
         // Custom initialization
         NSLog(@"%@", @"home init");
-        self.tabBarItem.title = @"Home";
-        [[self tabBarItem] setFinishedSelectedImage:[UIImage imageNamed:@"home_selected"] withFinishedUnselectedImage:[UIImage imageNamed:@"home"]];
-        [[self tabBarItem] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor grayColor], UITextAttributeTextColor, nil] forState:UIControlStateSelected];
+//        self.tabBarItem.title = @"Home";
+//        [[self tabBarItem] setFinishedSelectedImage:[UIImage imageNamed:@"home_selected"] withFinishedUnselectedImage:[UIImage imageNamed:@"home"]];
+//        [[self tabBarItem] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor grayColor], UITextAttributeTextColor, nil] forState:UIControlStateSelected];
         //[[self tabBarItem] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor grayColor], UITextAttributeTextColor, nil]  forState:UIControlStateNormal];
     }
     return self;

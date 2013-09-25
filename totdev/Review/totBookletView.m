@@ -89,7 +89,9 @@
         NSString* image_path = [self.mData getResource:[totPageElement image]];
         if (image_path) {
             mImage = [[UIImageView alloc] initWithFrame:self.frame];
+            mImage.backgroundColor = [UIColor clearColor];
             UIImage* img = [UIImage imageWithContentsOfFile:image_path];
+            mImage.contentMode = UIViewContentModeScaleAspectFit;
             mImage.image = img;
             [self addSubview:mImage];
         } else {
@@ -241,6 +243,7 @@ static BOOL bAnimationStarted = NO;
     [UIView setAnimationDidStopSelector:@selector(animationDidStop:finished:context:)];
     if (bIsFullPage) {
         [self setFrame:CGRectMake(mView.mData.x, mView.mData.y, mView.mData.w, mView.mData.h)];
+        mView.backgroundColor = [UIColor clearColor];
         [mView resizeTo:CGRectMake(0, 0, mView.mData.w, mView.mData.h)];
         [mView rotateTo:mView.mData.radians];
         [bookvc hideOptionMenuAndButton:FALSE];
@@ -251,6 +254,7 @@ static BOOL bAnimationStarted = NO;
         [superview exchangeSubviewAtIndex:myIndexInSuperview withSubviewAtIndex:superview.subviews.count-1];
 
         [mView rotateTo:0];
+        mView.backgroundColor = [UIColor colorWithRed:.1 green:.1 blue:.1 alpha:0.95];
         [mView resizeTo:CGRectMake(0, 0, FULL_PAGE_W, FULL_PAGE_H)];
         [self setFrame:CGRectMake(0, 0, FULL_PAGE_W, FULL_PAGE_H)];
         [bookvc hideOptionMenuAndButton:TRUE];
@@ -298,20 +302,25 @@ static BOOL bAnimationStarted = NO;
 //    [appDelegate.mainTabController.cameraView setDelegate:self];
 //    [appDelegate.mainTabController.cameraView launchCamera];
     [global.cameraView setDelegate:self];
-    [global.cameraView launchCamera:self.bookvc];
+    // f is frame after rotate
+    CGRect f = mView.frame;
+    global.cameraView.cropWidth = f.size.width;// self.mView.mData.w;
+    global.cameraView.cropHeight = f.size.height;// self.mView.mData.h;
+    [global.cameraView launchCamera:self.bookvc withEditing:TRUE];
 }
 
 - (void) launchVideo:(id)sender {
 //    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
 //    [appDelegate.mainTabController.cameraView setDelegate:self];
 //    [appDelegate.mainTabController.cameraView launchCamera];
-    [global.cameraView setDelegate:self];
-    [global.cameraView launchCamera:self.bookvc];
+    global.cameraView.delegate = self;
+    [global.cameraView launchCamera:self.bookvc withEditing:TRUE];
 }
 
 #pragma mark - CameraViewDelegate
 - (void) cameraView:(id)cameraView didFinishSavingMedia:(MediaInfo*)mediaInfo {
     NSLog(@"%@", mediaInfo.filename);
+    
     //currentPhoto = mediaInfo;
     // update data
     [mView.mData addResource:[totPageElement image] withPath:[totMediaLibrary getMediaPath:mediaInfo.filename]];

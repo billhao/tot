@@ -10,6 +10,8 @@
 #import "totTimeline.h"
 #import "totFeedCard.h"
 #import "totSleepCard.h"
+#import "Global.h"
+#import "totImageView.h"
 
 @implementation totSummaryCard
 
@@ -228,8 +230,6 @@
 }
 
 - (void) dealloc {
-    [super dealloc];
-    
     if( physicalLabels != nil ) {
         for( UILabel* label in physicalLabels )
             [label release];
@@ -241,7 +241,43 @@
 
     [label_babyName release];
     [label_babyAge release];
+
+    [headView release];
+    headView = nil;
+
+    [headImg release];
+    headImg = nil;
+    [super dealloc];
 }
+
+// create UI elements for basic baby info like name, photo and bday
+- (void)createBabyInfo {
+    headView = [[UIView alloc] initWithFrame:CGRectMake(21, 6, 88, 88)];
+    
+    UIImage* defaultHeadImg = [[UIImage imageNamed:@"summary_head_default"] retain];
+    headImg = [[[totImageView alloc] initWithImage:defaultHeadImg] autorelease];
+    headImg.frame = headView.bounds;
+    headImg.layer.masksToBounds = TRUE;
+    headImg.layer.cornerRadius = headImg.frame.size.width/2;
+    [headView addSubview:headImg];
+    
+    UIImage* headImgBg = [UIImage imageNamed:@"summary_head_bg"];
+    UIImageView* headBgView = [[UIImageView alloc] initWithImage:headImgBg];
+    headBgView.frame = headView.bounds;
+    [headView addSubview:headBgView];
+    
+    UIButton* headBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    headBtn.frame = CGRectMake(0, 0, 88, 88);
+    headBtn.backgroundColor = [UIColor clearColor];
+    [headBtn addTarget:self action:@selector(headButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [headView addSubview:headBtn];
+    
+    [self.view addSubview:headView];
+    [headBgView release];
+}
+
+
+#pragma mark - Event handlers
 
 // tap this icon to add a new card
 - (void)physicalIconBtnPressed:(id)sender {
@@ -256,26 +292,19 @@
     [self.parentView.parent moveToTop:card]; // ask timeline to move this card to top
 }
 
-// create UI elements for basic baby info like name, photo and bday
-- (void)createBabyInfo {
-    UIView* headView = [[UIView alloc] initWithFrame:CGRectMake(21, 6, 88, 88)];
-    
-    UIImage* defaultHeadImg = [UIImage imageNamed:@"summary_head_default"];
-    UIImageView* headImg = [[UIImageView alloc] initWithImage:defaultHeadImg];
-    headImg.frame = headView.bounds;
-    headImg.layer.masksToBounds = TRUE;
-    headImg.layer.cornerRadius = headImg.frame.size.width/2;
-    [headView addSubview:headImg];
-    
-    UIImage* headImgBg = [UIImage imageNamed:@"summary_head_bg"];
-    UIImageView* headBgView = [[UIImageView alloc] initWithImage:headImgBg];
-    headBgView.frame = headView.bounds;
-//    headBgView.backgroundColor = [UIColor greenColor];
-    [headView addSubview:headBgView];
-    
-    [self.view addSubview:headView];
-    [headBgView release];
-    [headView release];
+- (void)headButtonPressed:(id)sender {
+    [global.cameraView setDelegate:self];
+    global.cameraView.cropWidth  = headView.frame.size.width;
+    global.cameraView.cropHeight = headView.frame.size.height;
+    [global.cameraView launchCamera:self.parentView.parent.controller withEditing:TRUE];
+}
+
+#pragma mark - CameraViewDelegate
+
+- (void) cameraView:(id)cameraView didFinishSavingMedia:(MediaInfo*)mediaInfo {
+    [headImg imageFromFileContent:[totMediaLibrary getMediaPath:mediaInfo.filename]];
+
+    // save the image filename to db
 }
 
 @end

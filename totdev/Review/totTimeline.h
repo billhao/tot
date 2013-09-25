@@ -16,7 +16,6 @@
 
 @interface totTimeline : UIScrollView <UIScrollViewDelegate, totTimerDelegate> {
     NSMutableArray* mCards;
-    totTimelineController* controller;
     
     // save last loaded timeline event
     totEvent* lastLoadedEvent;

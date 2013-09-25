@@ -14,6 +14,7 @@
 @property long eventID;
 @property(nonatomic, retain) NSDate* dateTimeTaken;
 @property(nonatomic, retain) NSString* filename;
+@property(nonatomic, retain) NSURL* assetURL;
 @property(nonatomic, retain) NSMutableArray* activities;
 
 - (id)initWithJSON:(NSString*)jsonData;

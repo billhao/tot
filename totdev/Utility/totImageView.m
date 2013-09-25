@@ -30,7 +30,7 @@
 
 - (void)imageFromFileContent:(NSString*)path {
     UIImage *background = [UIImage imageWithContentsOfFile:path];
-    [self setImage:background];
+    self.image = background;
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {}

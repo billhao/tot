@@ -8,14 +8,19 @@
 
 #import <UIKit/UIKit.h>
 #import "totReviewCardView.h"
+#import "totCameraViewController.h"
+#import "totImageView.h"
 
-@interface totSummaryCard : totReviewShowCardView {
+@interface totSummaryCard : totReviewShowCardView <CameraViewDelegate> {
     UIImageView* icon_baby;
     NSMutableArray* physicalLabels;
     NSMutableArray* physicalButtons;
     
     UILabel* label_babyName;
     UILabel* label_babyAge;
+    
+    UIView* headView;
+    totImageView* headImg;
 }
 
 - (void) updateLabel:(ReviewCardType)type withValue:(NSString*)value;
