@@ -54,9 +54,10 @@
     
     // add scrapbook option menu button
     optionMenuBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    CGRect f = CGRectMake(fullPageFrame.size.width-50, fullPageFrame.size.height-50, 50, 50);
-    f = CGRectMake(399, 245, 64, 64);
+    CGRect f = CGRectMake(fullPageFrame.size.width-66, fullPageFrame.size.height-66, 56, 56);
+    //f = CGRectMake(420, 255, 56, 56);
     optionMenuBtn.frame = f;
+    optionMenuBtn.alpha = 0.7;
     [optionMenuBtn setImage:[UIImage imageNamed:@"scrapbook_option_button"] forState:UIControlStateNormal];
     //optionBtn.backgroundColor = [UIColor blueColor];
     [optionMenuBtn addTarget:self action:@selector(optionMenuButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
