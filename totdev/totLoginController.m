@@ -150,7 +150,8 @@
     
     if( pwd_db == nil ) {
         // if no, add email and pwd to db, go to home view
-        totUser* user =[totUser newUser:email password:pwd];
+        NSString* msg = nil;
+        totUser* user =[totUser newUser:email password:pwd message:&msg];
         if( user != nil ) {
             global.user = user;
             if( global.baby != nil ) {
@@ -164,7 +165,10 @@
         }
         else {
             // prompt fail to add user
-            [self showAlert:@"Fail to add user"];
+            if( msg )
+                [self showAlert:msg];
+            else
+                [self showAlert:@"Fail to add user"];
             return;
         }
         [user release];

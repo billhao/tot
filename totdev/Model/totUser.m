@@ -10,6 +10,7 @@
 #import "totEventName.h"
 #import "Global.h"
 #import "RNEncryptor.h"
+#import "totServerCommController.h"
 
 @implementation totUser
 
@@ -31,16 +32,27 @@ static totModel* _model;
 }
 
 // add a new user
-+(totUser*) newUser:(NSString*)email password:(NSString*)pwd {
++(totUser*) newUser:(NSString*)email password:(NSString*)pwd message:(NSString**)message {
     NSString* account_pref = [NSString stringWithFormat:PREFERENCE_ACCOUNT, email];
     
     NSString* pwdhash = [self getPasswordHash:pwd salt:nil];
     
-    BOOL re = [_model addPreferenceNoBaby:account_pref value:pwdhash];
-    if( re )
-        return [[totUser alloc] initWithID:email];
-    else
+    // register with server
+    totServerCommController* server = [[totServerCommController alloc] init];
+    int retCode = [server sendRegInfo:@"" withEmail:email withPasscode:pwdhash returnMessage:message];
+    if( retCode == SERVER_RESPONSE_CODE_SUCCESS ) {
+        BOOL re = [_model addPreferenceNoBaby:account_pref value:pwdhash];
+        if( re )
+            return [[totUser alloc] initWithID:email];
+        else {
+            *message = [[[NSString alloc] initWithString:@"Cannot add user to database"] autorelease];
+            // TODO should we delete this user from server? otherwise it wouldn't be possible to create the user next time
+            return nil;
+        }
+    }
+    else {
         return nil;
+    }
 }
 
 +(BOOL)verifyPassword:(NSString*)pwd email:(NSString*)email {

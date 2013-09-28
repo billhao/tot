@@ -21,7 +21,7 @@
 +(void) setModel:(totModel*)model;
 
 // add a new user
-+(totUser*) newUser:(NSString*)email password:(NSString*)pwd;
++(totUser*) newUser:(NSString*)email password:(NSString*)pwd message:(NSString**)message;
 
 +(BOOL)verifyPassword:(NSString*)pwd email:(NSString*)email;
 

@@ -11,7 +11,7 @@
 // class extention for private method declaration
 @interface totServerCommController()
 
-- (NSString *) sendStr: (NSString*) str toURL: (NSString *) dest_url;
+- (int) sendStr: (NSString*) post toURL: (NSString *) dest_url returnMessage: (NSString**)message;
 
 @end
 
@@ -43,7 +43,7 @@
 //    -> call sendUsrName to send the usr reg info
 //       to reg handler on server side
 // -----------------------------------------------
-- (NSString *) sendRegInfo: (NSString*) usrname withEmail: (NSString*) email withPasscode: (NSString*) passcode
+- (int) sendRegInfo: (NSString*) usrname withEmail: (NSString*) email withPasscode: (NSString*) passcode returnMessage:(NSString**)message
 {
     NSString* regInfo = @"name=";
     regInfo = [regInfo stringByAppendingString:usrname];
@@ -51,8 +51,7 @@
     regInfo = [regInfo stringByAppendingString:email];
     regInfo = [regInfo stringByAppendingString:@"&passcode="];
     regInfo = [regInfo stringByAppendingString:passcode];
-    NSString *response = [self sendStr:regInfo toURL:m_reg_url];
-    return response;
+    return [self sendStr:regInfo toURL:m_reg_url returnMessage:message];
 }
 
 // -----------------------------------------------
@@ -60,21 +59,21 @@
 //    -> call sendUsrName to send the usr login
 //       info to login handler on server side
 // -----------------------------------------------
-- (NSString *) sendLoginInfo: (NSString*) email withPasscode: (NSString*) passcode {
+- (int) sendLoginInfo: (NSString*) email withPasscode: (NSString*) passcode returnMessage:(NSString**)message {
     NSString* loginInfo = @"email=";
     loginInfo = [loginInfo stringByAppendingString:email];
     loginInfo = [loginInfo stringByAppendingString:@"&passcode="];
     loginInfo = [loginInfo stringByAppendingString:passcode];
-    NSString *response = [self sendStr:loginInfo toURL:m_login_url];
-    return response;
+    return [self sendStr:loginInfo toURL:m_login_url returnMessage:message];
 }
 
 // -----------------------------------------------
 //  change passcode
 // -----------------------------------------------
-- (NSString *) sendResetPasscodeForUser: (NSString*) email
+- (int) sendResetPasscodeForUser: (NSString*) email
                                    from: (NSString*) old_passcode
                                      to: (NSString*) new_passcode
+                          returnMessage: (NSString**)message
 {
     NSString* loginInfo = @"email=";
     loginInfo = [loginInfo stringByAppendingString:email];
@@ -82,26 +81,25 @@
     loginInfo = [loginInfo stringByAppendingString:old_passcode];
     loginInfo = [loginInfo stringByAppendingString:@"&new_passcode="];
     loginInfo = [loginInfo stringByAppendingString:new_passcode];
-    NSString *response = [self sendStr:loginInfo toURL:m_changePasscode_url];
-    return response;
+    return [self sendStr:loginInfo toURL:m_changePasscode_url returnMessage:message];
 }
 
 // -----------------------------------------------
 //   send forget passcode request to server
 // -----------------------------------------------
-- (NSString *) sendForgetPasscodeforUser: (NSString*) email {
+- (int) sendForgetPasscodeforUser: (NSString*) email returnMessage:(NSString**)message {
     NSString* loginInfo = @"email=";
     loginInfo = [loginInfo stringByAppendingString:email];
-    NSString *response = [self sendStr:loginInfo toURL:m_forgetPasscode_url];
-    return response;
+    return [self sendStr:loginInfo toURL:m_forgetPasscode_url returnMessage:message];
 }
 // -----------------------------------------------
 //  basic func to send POST req to server
 //    -> remember to check whether the return is nil
 // -----------------------------------------------
-- (NSString *) sendStr: (NSString*) post toURL: (NSString *) dest_url
-{
+- (int) sendStr: (NSString*) post toURL: (NSString *) dest_url returnMessage: (NSString**)message {
     NSLog(@"post string: %@", post);
+    
+    // TODO add try catch here
     
     // Construct a HTTP POST req
     NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
@@ -132,7 +130,16 @@
     } else {
         NSLog(@"post response: %@", strReply);
     }
-    return strReply;
+    int ret = SERVER_RESPONSE_CODE_FAIL;
+    NSArray* ss = [strReply componentsSeparatedByString:@"::"];
+    if( ss.count > 0 ) {
+        if( ss.count > 1 ) {
+            ret = [(NSString*)ss[0] intValue];
+            if (ss.count == 2 )
+                *message = [[(NSString*)ss[1] retain] autorelease];
+        }
+    }
+    return ret;
 }
 
 @end
