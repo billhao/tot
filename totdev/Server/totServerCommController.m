@@ -29,10 +29,10 @@
 - (id) init {
     self = [super init];
     if (self) {
-        m_reg_url = @"https://www.gettot.com/m/reg";
-        m_login_url = @"https://www.gettot.com/m/login";
-        m_changePasscode_url = @"https://www.gettot.com/m/reset";
-        m_forgetPasscode_url = @"https://www.gettot.com/m/forget";
+        m_reg_url            = [NSString stringWithFormat:@"%@/m/reg",    HOSTNAME];
+        m_login_url          = [NSString stringWithFormat:@"%@/m/login",  HOSTNAME];
+        m_changePasscode_url = [NSString stringWithFormat:@"%@/m/reset",  HOSTNAME];
+        m_forgetPasscode_url = [NSString stringWithFormat:@"%@/m/forget", HOSTNAME];
     }
     return self;
 }
@@ -89,11 +89,9 @@
 // -----------------------------------------------
 //   send forget passcode request to server
 // -----------------------------------------------
-- (NSString *) sendForgetPasscodeforUser: (NSString*) email withPasscode: (NSString*) passcode {
+- (NSString *) sendForgetPasscodeforUser: (NSString*) email {
     NSString* loginInfo = @"email=";
     loginInfo = [loginInfo stringByAppendingString:email];
-    loginInfo = [loginInfo stringByAppendingString:@"&passcode="];
-    loginInfo = [loginInfo stringByAppendingString:passcode];
     NSString *response = [self sendStr:loginInfo toURL:m_forgetPasscode_url];
     return response;
 }

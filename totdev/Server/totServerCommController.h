@@ -17,7 +17,11 @@
 
 #import <Foundation/Foundation.h>
 
+#define HOSTNAME @"https://www.gettot.com"
+
 @interface totServerCommController : NSObject {
+    
+    NSString *hostName;
     NSString *m_reg_url;  // url to the registration handler
     NSString *m_login_url; // url to the login handler
     NSString *m_changePasscode_url;  // url to the change passcode handler
@@ -34,7 +38,7 @@
                                    from: (NSString*) old_passcode
                                      to: (NSString*) new_passcode;
 
-- (NSString *) sendForgetPasscodeforUser: (NSString*) usrname withPasscode: (NSString*) passcode;
+- (NSString *) sendForgetPasscodeforUser: (NSString*) usrname;
 
 //- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response;
 
