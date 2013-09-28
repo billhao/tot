@@ -6,6 +6,15 @@
 //  Copyright (c) 2013年 tot. All rights reserved.
 //
 
+/*
+ 
+ response_code = {  'login_success': 0, 'login_unmatch': 1, 'login_no_usr': 2,
+                    'reg_success': 10, 'reg_usr_exist': 11,
+                    'reset_success': 20, 'reset_old_pc_wrong': 21, 'reset_no_usr': 22,
+                    'retrieve_link_snd': 30, 'retrieve_fail': 31
+                    }
+ */
+
 #import <Foundation/Foundation.h>
 
 @interface totServerCommController : NSObject {
@@ -25,7 +34,7 @@
                                    from: (NSString*) old_passcode
                                      to: (NSString*) new_passcode;
 
-- (NSString *) sendForgetPasscodeforUser: (NSString*) usrname;
+- (NSString *) sendForgetPasscodeforUser: (NSString*) usrname withPasscode: (NSString*) passcode;
 
 //- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response;
 

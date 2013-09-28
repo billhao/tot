@@ -15,6 +15,11 @@
 
 @end
 
+@interface NSURLRequest (DummyInterface)
++ (BOOL)allowsAnyHTTPSCertificateForHost:(NSString*)host;
++ (void)setAllowsAnyHTTPSCertificate:(BOOL)allow forHost:(NSString*)host;
+@end
+
 @implementation totServerCommController
 
 // -----------------------------------------------
@@ -24,8 +29,10 @@
 - (id) init {
     self = [super init];
     if (self) {
-        m_reg_url = @"http://www.gettot.com/m/reg";
-        m_login_url = @"http://www.gettot.com/m/login";
+        m_reg_url = @"https://www.gettot.com/m/reg";
+        m_login_url = @"https://www.gettot.com/m/login";
+        m_changePasscode_url = @"https://www.gettot.com/m/reset";
+        m_forgetPasscode_url = @"https://www.gettot.com/m/forget";
     }
     return self;
 }
@@ -82,9 +89,11 @@
 // -----------------------------------------------
 //   send forget passcode request to server
 // -----------------------------------------------
-- (NSString *) sendForgetPasscodeforUser: (NSString*) email {
+- (NSString *) sendForgetPasscodeforUser: (NSString*) email withPasscode: (NSString*) passcode {
     NSString* loginInfo = @"email=";
     loginInfo = [loginInfo stringByAppendingString:email];
+    loginInfo = [loginInfo stringByAppendingString:@"&passcode="];
+    loginInfo = [loginInfo stringByAppendingString:passcode];
     NSString *response = [self sendStr:loginInfo toURL:m_forgetPasscode_url];
     return response;
 }
@@ -105,6 +114,10 @@
     [request setValue:postLen forHTTPHeaderField:@"Content-Length"];
     [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
     [request setHTTPBody:postData];
+    
+    // ignore SSL certificate error
+    NSURL* destURL = [NSURL URLWithString:dest_url];
+    [NSURLRequest setAllowsAnyHTTPSCertificate:YES forHost:[destURL host]];
     
     // Send the req syncrhonously [will be async later]
     NSURLResponse *response;
