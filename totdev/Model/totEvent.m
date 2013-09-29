@@ -47,11 +47,11 @@
     NSDate *date = [dateFormatter dateFromString:datetime];
     [dateFormatter release];
     
-    return date;
+    return [[date retain] autorelease];
 }
 
 -(NSDate*) setTimeFromText:(NSString*)dt {
-    datetime = [totEvent dateFromString:dt];
+    self.datetime = [totEvent dateFromString:dt];
     return datetime;
 }
 

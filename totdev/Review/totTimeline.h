@@ -24,6 +24,7 @@
 
 @property (assign, atomic) totTimelineController* controller;
 @property (assign, atomic) BOOL sleeping; // if the baby is sleeping
+@property (nonatomic, retain) totReviewCardView* summaryCard;
 
 - (void) setBackground;
 

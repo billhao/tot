@@ -13,11 +13,9 @@
 #import "totSummaryCard.h"
 #import "totSleepCard.h"
 
-#define INIT_HEIGHT 1000
-
 @implementation totTimeline
 
-@synthesize controller, sleeping;
+@synthesize controller, sleeping, summaryCard;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -27,7 +25,8 @@
         
         lastLoadedEvent = nil;
         
-        self.contentSize = CGSizeMake(320, INIT_HEIGHT);
+        int h = [UIScreen mainScreen].bounds.size.height;
+        self.contentSize = CGSizeMake(320, h);
         mCards = [[NSMutableArray alloc] init];
         [self setBackground];
         [self setDelegate:self];
@@ -198,17 +197,18 @@
 
 - (void) updateSummaryCard:(ReviewCardType)type withValue:(NSString*)value {
     if ([mCards count] > 1) {
-        totReviewCardView* card = [mCards objectAtIndex:0];
-        totSummaryCard* summary_card = (totSummaryCard*)card.mShowView;
+        totSummaryCard* summary_card = (totSummaryCard*)summaryCard.mShowView;
         [summary_card updateLabel:type withValue:value];
     }
 }
 
 - (int)getSummaryCardIndex {
     // get summary card index
-    int index = 0;
-    if( sleeping ) index = 1; // sleep card is on top of summary card
-    return index;
+    for( int i=0; i<mCards.count; i++ ) {
+        if( summaryCard == mCards[i] )
+            return i;
+    }
+    return -1;
 }
 
 // load limit number of cards starting from an event
@@ -322,8 +322,11 @@
 
 - (totEvent*)getFirstEventInTimeline {
     int index = [self getSummaryCardIndex] + 1;
-    if( mCards.count > index )
+    if( mCards.count > index ) {
+        totReviewCardView* c = (totReviewCardView*)mCards[index];
+        totEvent* e = c.mShowView.e;
         return ((totReviewCardView*)mCards[index]).mShowView.e;
+    }
     else
         return nil;
 }
