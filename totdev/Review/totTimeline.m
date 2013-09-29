@@ -135,19 +135,22 @@
     int y = GAP_BETWEEN_CARDS;  // start from the top.
     for (int i = 0; i < [mCards count]; ++i) {
         totReviewCardView* cv = [mCards objectAtIndex:i];
-        x = (320 - cv.frame.size.width) / 2;
-        cv.frame = CGRectMake(x, y, cv.frame.size.width, cv.frame.size.height);
+        int w = [cv width];
+        int h = [cv height];
+        
+        x = (320 - w) / 2;
+        cv.frame = CGRectMake(x, y, w, h);
         cv.associated_delete_button.frame =
             CGRectMake(x,
                        y,
                        cv.associated_delete_button.frame.size.width,
-                       cv.frame.size.height);
+                       h);
 //        NSLog(@"%.0f %.0f %.0f", cv.frame.size.height,
 //              cv.mEditView.view.frame.size.height, cv.mShowView.view.frame.size.height);        
-        y = y + cv.frame.size.height + GAP_BETWEEN_CARDS;
-        if (y >= self.contentSize.height) {
-            self.contentSize = CGSizeMake(320, y);
-        }
+        y = y + h + GAP_BETWEEN_CARDS;
+    }
+    if (y >= self.contentSize.height) {
+        self.contentSize = CGSizeMake(320, y);
     }
 }
 
