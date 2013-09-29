@@ -61,6 +61,8 @@
 
     NSString* activityName = [NSString stringWithFormat:ACTIVITY_PHOTO_REPLACABLE, self.filename];
     [global.model setItem:global.baby.babyID name:activityName value:imageData];
+    
+    [imageData release];
 }
 
 // datetime is nil for default media
@@ -160,6 +162,7 @@
     [imageData setValue:[totEvent formatTime:mediaInfo.dateTimeTaken] forKey:@"datetime_taken"];
     NSString* activityName = [NSString stringWithFormat:ACTIVITY_PHOTO_REPLACABLE, mediaInfo.filename];
     [global.model setItem:global.baby.babyID name:activityName value:imageData];
+    [imageData release];
     return mediaInfo;
 }
 
