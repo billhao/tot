@@ -76,4 +76,14 @@
     return e;
 }
 
+- (BOOL)isEqual:(id)object {
+    if( ![object isKindOfClass:totEvent.class] ) return FALSE;
+    
+    totEvent* e1 = (totEvent*)object;
+    if( event_id == e1.event_id && [datetime isEqualToDate:e1.datetime] )
+        return TRUE;
+    else
+        return FALSE;
+}
+
 @end

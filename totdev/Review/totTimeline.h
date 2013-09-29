@@ -17,10 +17,9 @@
 @interface totTimeline : UIScrollView <UIScrollViewDelegate, totTimerDelegate> {
     NSMutableArray* mCards;
     
-    // save last loaded timeline event
-    totEvent* lastLoadedEvent;
-    
     totTimer* timer;
+    
+    totEvent* lastLoadedEvent; // keep the last loaded event because some events may not be parsed/loaded as a card. need to skip those events
 }
 
 @property (assign, atomic) totTimelineController* controller;
@@ -43,8 +42,11 @@
 // Changes the position of the card.
 - (void) moveCard:(totReviewCardView*)card To:(int)index;
 
-// Load cards from db.
-- (void) loadCardsNumber:(int)limit startFrom:(totEvent*)lastEvent;
+// Load cards from db and append to timeline
+- (void) loadCardsNumber:(int)limit;
+
+// load cards that are newer than the first event in timeline and insert to the front of the line
+- (void) refreshNewCards;
 
 // Update the value of the specified type in summary card.
 - (void) updateSummaryCard:(ReviewCardType)type withValue:(NSString*)value;

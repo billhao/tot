@@ -52,7 +52,9 @@
         [(totSleepEditCard*)sleepCard.mEditView beginSleep:sleepEvent.datetime];
     }
     
-    [timelineView loadCardsNumber:10 startFrom:0];
+    // load new cards
+    [timelineView loadCardsNumber:10];
+
     [self.view addSubview:timelineView];
     self.timeline_ = timelineView;
     self.timeline_.controller = self;
@@ -62,7 +64,10 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    
+    // update existing cards
+
+    // add any new cards (probably photo cards)
+    [self.timeline_ refreshNewCards];
 }
 
 - (void)didReceiveMemoryWarning
