@@ -120,7 +120,7 @@
             }
             else {
                 // get the event id
-                int event_id = sqlite3_last_insert_rowid(db);
+                int event_id = (int)sqlite3_last_insert_rowid(db);
                 if( re != 0 ) re = event_id; // if last id is 0 it is failure
             }
         }

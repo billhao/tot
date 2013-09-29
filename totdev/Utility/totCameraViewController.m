@@ -62,6 +62,7 @@
 //    }
 //}
 
+// Deprecated?
 - (void)launchPhotoCamera {
     bPhotoCamera = YES;
     self.view.frame = CGRectMake(0, 0, 320, 460);
@@ -75,6 +76,7 @@
     }
 }
 
+// Deprecated?
 - (void)launchVideoCamera {
     bPhotoCamera = NO;
     self.view.frame = CGRectMake(0, 0, 320, 460);
@@ -94,14 +96,14 @@
 }
 
 - (void)launchCamera:(UIViewController*)vc type:(UIImagePickerControllerSourceType)type withEditing:(BOOL)withEditing {
-    // TODO release imagePicker first?
-    
+    if (!imagePicker) {
+        imagePicker = [[UIImagePickerController alloc] init];
+    }
     editing = withEditing;
     hostVC = vc;
     self.view.frame = CGRectMake(0, 0, 320, 460);
     if ( (type == UIImagePickerControllerSourceTypeCamera) &&
          [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-        imagePicker = [[UIImagePickerController alloc] init];
         imagePicker.delegate = self;
         imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
         imagePicker.mediaTypes = [NSArray arrayWithObjects:(NSString*)kUTTypeMovie, (NSString*)kUTTypeImage, nil];
@@ -109,7 +111,10 @@
         
         // create overlay button for go to photo library
         UIImage* photoLibImg = [UIImage imageNamed:@"photo_lib"];
-        CGRect f = CGRectMake(imagePicker.view.bounds.size.width-photoLibImg.size.width-10, imagePicker.view.bounds.size.height-photoLibImg.size.height-10-54, photoLibImg.size.width, photoLibImg.size.height);
+        CGRect f = CGRectMake(imagePicker.view.bounds.size.width-photoLibImg.size.width-10,
+                              imagePicker.view.bounds.size.height-photoLibImg.size.height-10-54,
+                              photoLibImg.size.width,
+                              photoLibImg.size.height);
         UIButton* overlay = [UIButton buttonWithType:UIButtonTypeCustom];
         overlay.frame = f;
         overlay.alpha = 0.5;
@@ -120,7 +125,6 @@
     }
     else if ( //(type == UIImagePickerControllerSourceTypePhotoLibrary) &&
               [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
-        imagePicker = [[UIImagePickerController alloc] init];
         imagePicker.delegate = self;
         imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
         imagePicker.mediaTypes = [NSArray arrayWithObjects:(NSString*)kUTTypeMovie, (NSString*)kUTTypeImage, nil];
@@ -134,19 +138,20 @@
     NSLog(@"switch to photo library");
     [imagePicker dismissViewControllerAnimated:FALSE completion:^{
         [imagePicker release];
+        imagePicker = nil;
+
         [self launchCamera:hostVC type:UIImagePickerControllerSourceTypePhotoLibrary withEditing:TRUE];
     }];
 }
 
 - (void)imagePickerController:(UIImagePickerController*)picker didFinishPickingMediaWithInfo:(NSDictionary*)info {
-
     // save original
     NSString* mediaType = [info objectForKey:UIImagePickerControllerMediaType];
     if ([mediaType isEqualToString:(NSString*)kUTTypeImage]) {
         // only save the image to camera roll if it is from the camera
         // do not save an image from photo library or camera roll
         if( picker.sourceType == UIImagePickerControllerSourceTypeCamera ) {
-            UIImage *photo = (UIImage*)[info objectForKey:@"UIImagePickerControllerOriginalImage"];
+            UIImage* photo = (UIImage*)[info objectForKey:@"UIImagePickerControllerOriginalImage"];
             UIImageWriteToSavedPhotosAlbum(photo, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
         }
     }
@@ -170,12 +175,19 @@
             NSURL* assetURL = [info objectForKey:UIImagePickerControllerReferenceURL];
             if( editing ) {
                 // call photo editor
-                if(!editor) editor = [[AviaryPhotoEditor alloc] init:nil];
+                if (!editor) editor = [[AviaryPhotoEditor alloc] init:nil];
                 editor.vc = hostVC;
                 editor.delegate = self;
                 editor.cropWidth = cropWidth;
                 editor.cropHeight = cropHeight;
-                [editor launchEditorWithAssetURL:assetURL];
+                if (assetURL) {
+                    [editor launchEditorWithAssetURL:assetURL];
+                } else {
+                    UIImage* photo = (UIImage*)[info objectForKey:@"UIImagePickerControllerOriginalImage"];
+                    if (photo) {
+                        [editor launchPhotoEditorWithImage:photo highResolutionImage:photo];
+                    }
+                }
             }
             else {
                 UIImage *img = (UIImage*)[info objectForKey:@"UIImagePickerControllerOriginalImage"];
@@ -183,9 +195,7 @@
                 [self saveImage:img];
             }
         }
-        else if ([mediaType isEqualToString:(NSString*)kUTTypeMovie]) {
-            // do nothing right now
-        }
+        else if ([mediaType isEqualToString:(NSString*)kUTTypeMovie]) {}
     }];
     [self hideCamera];
 }
@@ -238,8 +248,7 @@
 }
 
 
-- (void)image: (UIImage*)image didFinishSavingWithError:(NSError*)error contextInfo:(void*)contextInfo {
-}
+- (void)image: (UIImage*)image didFinishSavingWithError:(NSError*)error contextInfo:(void*)contextInfo {}
 
 - (void)video: (NSString*)videoPath didFinishSavingWithError:(NSError*)error contextInfo:(NSString*)contextInfo {
     if( [delegate respondsToSelector:@selector(cameraView:didFinishSavingVideoToAlbum:)] ) {
@@ -263,7 +272,6 @@
         }
         [self hideCamera];
         [thumbnail release];
-        CGImageRelease(im);
         [generator release];
         
         /*
@@ -283,6 +291,7 @@
         [generator generateCGImagesAsynchronouslyForTimes:[NSArray arrayWithObject:[NSValue valueWithCMTime:thumbnailTime]] 
                                         completionHandler:handler];
         */
+        CGImageRelease(im);
     }
     
     [asset release];
