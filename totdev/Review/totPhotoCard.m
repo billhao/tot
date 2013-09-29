@@ -100,7 +100,7 @@
                 activityView.backgroundColor = [UIColor clearColor];
             }
             else {
-                activityView.backgroundColor = [UIColor colorWithRed:.5 green:.5 blue:.5 alpha:.5];
+                activityView.backgroundColor = [UIColor colorWithRed:.8 green:.8 blue:.8 alpha:.3];
                 activityView.layer.cornerRadius = 2;
             }
             activityView.frame = f;
