@@ -28,6 +28,7 @@ typedef enum {
     SLEEP    = 5,
     FEEDING  = 6,
     SUMMARY  = 7,
+    PHOTO    = 8
 } ReviewCardType;
 
 // ---------------- Card in editting mode --------------------
@@ -153,6 +154,10 @@ typedef enum {
 @property (nonatomic, assign) int event_id;
 
 - (void) flip;
+
+// return the width and height of the edit or show card depending on mode
+- (int) height;
+- (int) width;
 
 // caller needs to take ownership.
 + (totReviewCardView*) createEmptyCard:(ReviewCardType)type timeline:(totTimeline*)timeline;

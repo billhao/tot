@@ -138,8 +138,16 @@
         self.currentMediaInfo = info;
         return TRUE;
     }
-    else
+    else {
+        // go back to last photo if enabled
+        dt = [NSDate date];
+        MediaInfo* info = [self getNextMedia:TRUE datetime:dt];
+        if( info ) {
+            self.currentMediaInfo = info;
+            return TRUE;
+        }
         return FALSE;
+    }
 }
 
 
@@ -177,6 +185,13 @@
         return mediaInfo;
     }
     return nil;
+}
+
++ (MediaInfo*)getMediaFromEvent:(totEvent*)event {
+        // TODO release???
+    MediaInfo* mediaInfo = [[[MediaInfo alloc] initWithJSON:event.value] autorelease];
+    mediaInfo.eventID = event.event_id;
+    return mediaInfo;
 }
 
 #pragma mark - Utility functions for media directory

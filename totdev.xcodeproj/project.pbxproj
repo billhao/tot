@@ -116,6 +116,7 @@
 		3F049B6917D4572C00F05727 /* timeline_line@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F049B6717D4572B00F05727 /* timeline_line@2x.png */; };
 		3F049B6C17D49C5300F05727 /* lang_input_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F049B6B17D49C5300F05727 /* lang_input_bg@2x.png */; };
 		3F049B6F17D53FC300F05727 /* Diaper_checkbox.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F049B6E17D53FC300F05727 /* Diaper_checkbox.png */; };
+		3F11384D17F76CF300CE7ABF /* totPhotoCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F11384C17F76CF300CE7ABF /* totPhotoCard.m */; };
 		3F1331A416968F7400A39F41 /* Global.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F1331A316968F7400A39F41 /* Global.m */; };
 		3F1331AD169FB9C200A39F41 /* text_hc_grey@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F1331AA169FB9C000A39F41 /* text_hc_grey@2x.png */; };
 		3F1331AE169FB9C200A39F41 /* text_height_grey@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F1331AB169FB9C100A39F41 /* text_height_grey@2x.png */; };
@@ -664,6 +665,8 @@
 		3F049B6717D4572B00F05727 /* timeline_line@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "timeline_line@2x.png"; sourceTree = "<group>"; };
 		3F049B6B17D49C5300F05727 /* lang_input_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "lang_input_bg@2x.png"; sourceTree = "<group>"; };
 		3F049B6E17D53FC300F05727 /* Diaper_checkbox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Diaper_checkbox.png; sourceTree = "<group>"; };
+		3F11384B17F76CF300CE7ABF /* totPhotoCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totPhotoCard.h; path = Review/totPhotoCard.h; sourceTree = "<group>"; };
+		3F11384C17F76CF300CE7ABF /* totPhotoCard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totPhotoCard.m; path = Review/totPhotoCard.m; sourceTree = "<group>"; };
 		3F1331A216968F7300A39F41 /* Global.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Global.h; path = totdev/Model/Global.h; sourceTree = "<group>"; };
 		3F1331A316968F7400A39F41 /* Global.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Global.m; path = totdev/Model/Global.m; sourceTree = "<group>"; };
 		3F1331AA169FB9C000A39F41 /* text_hc_grey@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "text_hc_grey@2x.png"; path = "Resources/Home/Height/text_hc_grey@2x.png"; sourceTree = "<group>"; };
@@ -1972,6 +1975,8 @@
 				8E981600177FA6DB003439FD /* totTimeline.m */,
 				8E981604177FA838003439FD /* totTimelineController.h */,
 				8E981605177FA838003439FD /* totTimelineController.m */,
+				3F11384B17F76CF300CE7ABF /* totPhotoCard.h */,
+				3F11384C17F76CF300CE7ABF /* totPhotoCard.m */,
 			);
 			name = Timeline;
 			sourceTree = "<group>";
@@ -2927,6 +2932,7 @@
 				3FC63DCC17F00D72003EA9D9 /* RNOpenSSLEncryptor.m in Sources */,
 				3FC63DD517F16F81003EA9D9 /* totServerCommController.m in Sources */,
 				3FC63DE817F1827A003EA9D9 /* AviaryPhotoEditor.m in Sources */,
+				3F11384D17F76CF300CE7ABF /* totPhotoCard.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2977,7 +2983,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "totdev/totdev-Prefix.pch";
 				INFOPLIST_FILE = "totdev/totdev-Info.plist";
@@ -3068,7 +3074,7 @@
 		EF62838A1536674C004031D6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "totdev/totdev-Prefix.pch";
 				INFOPLIST_FILE = "totdev/totdev-Info.plist";
@@ -3094,7 +3100,7 @@
 		EF62838B1536674C004031D6 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "totdev/totdev-Prefix.pch";
 				INFOPLIST_FILE = "totdev/totdev-Info.plist";

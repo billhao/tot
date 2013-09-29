@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+@class totEvent;
+
 @interface MediaInfo : NSObject
 
 @property long mediaID;
@@ -41,6 +43,7 @@
 + (MediaInfo*)addPhoto:(NSString*)filepath dateTimeTaken:(NSDate*)dateTimeTaken;
 + (MediaInfo*)addPhoto:(MediaInfo*)mediaInfo;
 
++ (MediaInfo*)getMediaFromEvent:(totEvent*)event;
 + (NSString*)getMediaDirectory;
 + (NSString*)getMediaPath:(NSString*)filename;
 + (void)checkMediaDirectory;

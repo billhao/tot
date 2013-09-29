@@ -15,6 +15,7 @@
 #import "totSleepCard.h"
 #import "totFeedCard.h"
 #import "totTimeUtil.h"
+#import "totPhotoCard.h"
 
 // #######################################
 // #######         Edit card       #######
@@ -586,6 +587,11 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
                 c = (totReviewShowCardView*)[[totFeedShowCard alloc] init];
                 break;
             }
+            case PHOTO:
+            {
+                c = (totReviewShowCardView*)[[totPhotoShowCard alloc] init];
+                break;
+            }
             default:
                 break;
         }
@@ -814,42 +820,53 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
 //    return CGRectMake(0, 0, w, h);
 //}
 
+// return the width and height of the edit or show card depending on mode
+- (int) height {
+    if( mMode == EDIT )
+        return [mEditView height];
+    else
+        return [mShowView height];
+}
+
+- (int) width {
+    if( mMode == EDIT )
+        return [mEditView width];
+    else
+        return [mShowView width];
+}
+
 + (totReviewCardView*) createEmptyCard:(ReviewCardType)type timeline:(totTimeline*)timeline {
     totReviewCardView* view = [[totReviewCardView alloc] initWithType:type timeline:timeline];
     return view;
 }
 
 + (totReviewCardView*) loadCard:(NSString*)type story:(totReviewStory*)story timeline:(totTimeline*)timeline {
-    NSArray* tokens = [type componentsSeparatedByString:@"/"];
-    NSString* category = [tokens objectAtIndex:0];
-    
-    if ([category isEqualToString:@"basic"]) {
-        NSString* basic_type = [tokens objectAtIndex:1];
-        ReviewCardType card_type = TEST;
-        if ([basic_type isEqualToString:@"diaper"]) {
-            card_type = DIAPER;
-        } else if ([basic_type isEqualToString:@"height"]) {
-            card_type = HEIGHT;
-        } else if ([basic_type isEqualToString:@"weight"]) {
-            card_type = WEIGHT;
-        } else if ([basic_type isEqualToString:@"head"]) {
-            card_type = HEAD;
-        } else if ([basic_type isEqualToString:@"sleep"]) {
-            card_type = SLEEP;
-        } else if ([basic_type isEqualToString:@"language"]) {
-            card_type = LANGUAGE;
-        } else if ([basic_type isEqualToString:@"feeding"]) {
-            card_type = FEEDING;
-        } else {
-            return nil;
-        }
-        totReviewCardView* view = [[totReviewCardView alloc] initWithType:card_type
-                                                                 withData:story
-                                                                 timeline:timeline];
-        return [view autorelease];
+    ReviewCardType card_type = TEST;
+
+    if( [type isEqualToString:EVENT_BASIC_DIAPER] ) {
+        card_type = DIAPER;
+    } else if ( [type isEqualToString:EVENT_BASIC_HEIGHT] ) {
+        card_type = HEIGHT;
+    } else if ( [type isEqualToString:EVENT_BASIC_WEIGHT ]) {
+        card_type = WEIGHT;
+    } else if (  [type isEqualToString:EVENT_BASIC_HEAD] ) {
+        card_type = HEAD;
+    } else if ( [type isEqualToString:EVENT_BASIC_SLEEP] ) {
+        card_type = SLEEP;
+    } else if ( [type isEqualToString:EVENT_BASIC_LANGUAGE] ) {
+        card_type = LANGUAGE;
+    } else if ( [type isEqualToString:EVENT_BASIC_FEEDING] ) {
+        card_type = FEEDING;
+    } else if ( [type hasPrefix:ACTIVITY_PHOTO] ) {
+        card_type = PHOTO;
     } else {
         return nil;
     }
+    
+    totReviewCardView* view = [[totReviewCardView alloc] initWithType:card_type
+                                                             withData:story
+                                                             timeline:timeline];
+    return [view autorelease];
 }
 
 @end

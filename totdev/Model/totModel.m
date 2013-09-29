@@ -230,7 +230,7 @@
 }
 
 - (NSMutableArray *) getEvent:(int)baby_id event:(NSString*)event limit:(int)limit offset:(int)offset startDate:(NSDate*)start endDate:(NSDate*)end orderByDesc:(BOOL)orderByDesc {
-    return [self getEvent:baby_id event:event limit:limit offset:offset startDate:start endDate:end orderByDesc:TRUE min_event_id:-1 max_event_id:-1];
+    return [self getEvent:baby_id event:event limit:limit offset:offset startDate:start endDate:end orderByDesc:orderByDesc min_event_id:-1 max_event_id:-1];
 }
 
 // TODO assume no two events have same datetime. otherwise some events may be missed when end date is specified

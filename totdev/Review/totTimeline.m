@@ -135,19 +135,22 @@
     int y = GAP_BETWEEN_CARDS;  // start from the top.
     for (int i = 0; i < [mCards count]; ++i) {
         totReviewCardView* cv = [mCards objectAtIndex:i];
-        x = (320 - cv.frame.size.width) / 2;
-        cv.frame = CGRectMake(x, y, cv.frame.size.width, cv.frame.size.height);
+        int w = [cv width];
+        int h = [cv height];
+        
+        x = (320 - w) / 2;
+        cv.frame = CGRectMake(x, y, w, h);
         cv.associated_delete_button.frame =
             CGRectMake(x,
                        y,
                        cv.associated_delete_button.frame.size.width,
-                       cv.frame.size.height);
+                       h);
 //        NSLog(@"%.0f %.0f %.0f", cv.frame.size.height,
 //              cv.mEditView.view.frame.size.height, cv.mShowView.view.frame.size.height);        
-        y = y + cv.frame.size.height + GAP_BETWEEN_CARDS;
-        if (y >= self.contentSize.height) {
-            self.contentSize = CGSizeMake(320, y);
-        }
+        y = y + h + GAP_BETWEEN_CARDS;
+    }
+    if (y >= self.contentSize.height) {
+        self.contentSize = CGSizeMake(320, y);
     }
 }
 
@@ -200,52 +203,60 @@
 - (void) loadCardsNumber:(int)limit startFrom:(totEvent*)lastEvent {
     NSArray * events = nil;
     
-    // get events older than last event in both event_id and datetime
-    events = [global.model getEventWithPagination:global.baby.babyID limit:limit startFrom:lastEvent];
+    int displayed_cnt = 0;
+    totEvent* newLastEvent = lastEvent;
     
-    int cnt = [events count];
-    // If no more events available
-    if (cnt == 0) {
-        return;
-    }
-    // save the last event
-    lastLoadedEvent = [events[cnt-1] copy];
-    
-    for (int i = 0; i < [events count]; ++i) {
-        // parse the results from db
-        totReviewStory *story = [[totReviewStory alloc] init];
+    while( displayed_cnt < limit ) {
+        // get events older than last event in both event_id and datetime
+        events = [global.model getEventWithPagination:global.baby.babyID limit:limit startFrom:newLastEvent];
         
-        totEvent * anEvent = (totEvent*)[events objectAtIndex:i];
-        //NSLog(@"load event %d", anEvent.event_id);
+        int cnt = [events count];
+        // If no more events available
+        if (cnt == 0)
+            break;
         
-        // this event should have already been fetched if datetime is the same as last one and event_id is greater than last one
-        if( [anEvent.datetime isEqualToDate:lastEvent.datetime] && anEvent.event_id > lastEvent.event_id )
-            continue;
-        
-        if( [anEvent.name isEqualToString:EVENT_BASIC_SLEEP] && [anEvent.value isEqualToString:@"start"] )
-            // skip start sleep event
-            continue;
-        
-        story.mEventType = anEvent.name;
-        story.mRawContent = anEvent.value;
-        story.mWhen = anEvent.datetime;
-        story.mBabyId = anEvent.baby_id;
-        story.mEventId = anEvent.event_id;
-        
-        // add new card.
-        // change it to different type.
-        totReviewCardView* card = [totReviewCardView loadCard:story.mEventType story:story timeline:self];
-        if (card) {
-            card.parent = self;
-            card.mShowView.e = anEvent;
-            [card.mShowView viewWillAppear:YES];
-            [mCards addObject:card];
-            [self addSubview:[mCards lastObject]];
-            [self addDeleteButtonUnderCard:[mCards lastObject]];
+        for (int i = 0; i<[events count] && displayed_cnt<limit; ++i) {
+            // parse the results from db
+            totReviewStory *story = [[totReviewStory alloc] init];
+            
+            totEvent * anEvent = (totEvent*)[events objectAtIndex:i];
+            //NSLog(@"load event %d", anEvent.event_id);
+            
+            newLastEvent = anEvent;
+            
+            // this event should have already been fetched if datetime is the same as last one and event_id is greater than last one
+            if( [anEvent.datetime isEqualToDate:lastEvent.datetime] && anEvent.event_id > lastEvent.event_id )
+                continue;
+            
+            if( [anEvent.name isEqualToString:EVENT_BASIC_SLEEP] && [anEvent.value isEqualToString:@"start"] )
+                // skip start sleep event
+                continue;
+            
+            story.mEventType = anEvent.name;
+            story.mRawContent = anEvent.value;
+            story.mWhen = anEvent.datetime;
+            story.mBabyId = anEvent.baby_id;
+            story.mEventId = anEvent.event_id;
+            
+            // add new card.
+            // change it to different type.
+            totReviewCardView* card = [totReviewCardView loadCard:story.mEventType story:story timeline:self];
+            if (card) {
+                card.parent = self;
+                card.mShowView.e = anEvent;
+                [card.mShowView viewWillAppear:YES];
+                [mCards addObject:card];
+                [self addSubview:[mCards lastObject]];
+                [self addDeleteButtonUnderCard:[mCards lastObject]];
+                displayed_cnt++;
+            }
+            [story release];
         }
-        
-        [story release];
     }
+    
+    // save the last event
+    if( newLastEvent != nil )
+        lastLoadedEvent = [newLastEvent copy];
     
     [self refreshView];
 }
