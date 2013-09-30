@@ -113,7 +113,8 @@
                 activityBtn.frame = CGRectMake(internal_margin_x+i*(internal_margin_x+icon_width), internal_margin_y, icon_width, icon_height);
                 activityBtn.tag = i;
                 [activityBtn setImage:[UIImage imageNamed:activityIconName] forState:UIControlStateNormal];
-                [activityBtn addTarget:self action:@selector(selectedActivityButtonPressed:) forControlEvents:UIControlEventTouchDown];
+                // TODO
+                //[activityBtn addTarget:self action:@selector(selectedActivityButtonPressed:) forControlEvents:UIControlEventTouchDown];
                 [activityView addSubview:activityBtn];
             }
             [self.view addSubview:activityView];
