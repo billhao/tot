@@ -42,7 +42,7 @@
     int navbar_height = [self createNavigationBar];
     
     totTimeline* timelineView = [[totTimeline alloc] initWithFrame:CGRectMake(0, navbar_height, 320, 460-navbar_height)];
-    [timelineView addEmptyCard:SUMMARY];
+    timelineView.summaryCard = [timelineView addEmptyCard:SUMMARY];
     
     // check for sleep here, if it was a "start" then continue sleep
     totEvent* sleepEvent = [totSleepEditCard wasSleeping];
@@ -52,7 +52,9 @@
         [(totSleepEditCard*)sleepCard.mEditView beginSleep:sleepEvent.datetime];
     }
     
-    [timelineView loadCardsNumber:10 startFrom:0];
+    // load new cards
+    [timelineView loadCardsNumber:10];
+
     [self.view addSubview:timelineView];
     self.timeline_ = timelineView;
     self.timeline_.controller = self;
@@ -62,7 +64,10 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    
+    // update existing cards
+
+    // add any new cards (probably photo cards)
+    [self.timeline_ refreshNewCards];
 }
 
 - (void)didReceiveMemoryWarning

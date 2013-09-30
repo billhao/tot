@@ -100,7 +100,7 @@
                 activityView.backgroundColor = [UIColor clearColor];
             }
             else {
-                activityView.backgroundColor = [UIColor colorWithRed:.5 green:.5 blue:.5 alpha:.5];
+                activityView.backgroundColor = [UIColor colorWithRed:.8 green:.8 blue:.8 alpha:.3];
                 activityView.layer.cornerRadius = 2;
             }
             activityView.frame = f;
@@ -113,8 +113,6 @@
                 activityBtn.frame = CGRectMake(internal_margin_x+i*(internal_margin_x+icon_width), internal_margin_y, icon_width, icon_height);
                 activityBtn.tag = i;
                 [activityBtn setImage:[UIImage imageNamed:activityIconName] forState:UIControlStateNormal];
-                // TODO
-                //[activityBtn addTarget:self action:@selector(selectedActivityButtonPressed:) forControlEvents:UIControlEventTouchDown];
                 [activityView addSubview:activityBtn];
             }
             [self.view addSubview:activityView];

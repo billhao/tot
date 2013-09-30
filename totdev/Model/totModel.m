@@ -370,9 +370,12 @@
 // getEvent with pagination. do not use limit and offset, which has performance issues with sqlite
 // see http://www.sqlite.org/cvstrac/wiki?p=ScrollingCursor
 - (NSMutableArray *) getEventWithPagination:(int)baby_id limit:(int)limit startFrom:(totEvent*)lastEvent {
-    int event_id = -1;
-    if( lastEvent ) event_id = lastEvent.event_id;
-    return [self getEvent:baby_id event:nil limit:limit offset:-1 startDate:nil endDate:lastEvent.datetime orderByDesc:TRUE];
+    NSDate* enddate;
+    if( lastEvent )
+        enddate = lastEvent.datetime;
+    else
+        enddate = [NSDate date];
+    return [self getEvent:baby_id event:nil limit:limit offset:-1 startDate:nil endDate:enddate orderByDesc:TRUE];
 }
 
 

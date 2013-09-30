@@ -235,8 +235,8 @@
 }
 
 - (void)cameraButtonPressed: (id)sender {
-    global.cameraView.cropWidth = [UIScreen mainScreen].bounds.size.width;
-    global.cameraView.cropHeight = [UIScreen mainScreen].bounds.size.height;
+    global.cameraView.cropWidth  = -1;
+    global.cameraView.cropHeight = -1;
     [global.cameraView setDelegate:self];
     [global.cameraView launchCamera:self withEditing:TRUE];
 }

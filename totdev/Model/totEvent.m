@@ -47,11 +47,11 @@
     NSDate *date = [dateFormatter dateFromString:datetime];
     [dateFormatter release];
     
-    return date;
+    return [[date retain] autorelease];
 }
 
 -(NSDate*) setTimeFromText:(NSString*)dt {
-    datetime = [totEvent dateFromString:dt];
+    self.datetime = [totEvent dateFromString:dt];
     return datetime;
 }
 
@@ -74,6 +74,16 @@
     e.name = name;
     e.value = value;
     return e;
+}
+
+- (BOOL)isEqual:(id)object {
+    if( ![object isKindOfClass:totEvent.class] ) return FALSE;
+    
+    totEvent* e1 = (totEvent*)object;
+    if( event_id == e1.event_id && [datetime isEqualToDate:e1.datetime] )
+        return TRUE;
+    else
+        return FALSE;
 }
 
 @end

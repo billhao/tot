@@ -13,19 +13,20 @@
 #import "totSummaryCard.h"
 #import "totSleepCard.h"
 
-#define INIT_HEIGHT 1000
-
 @implementation totTimeline
 
-@synthesize controller, sleeping;
+@synthesize controller, sleeping, summaryCard;
 
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
         sleeping = FALSE;
+        
         lastLoadedEvent = nil;
-        self.contentSize = CGSizeMake(320, INIT_HEIGHT);
+        
+        int h = [UIScreen mainScreen].bounds.size.height;
+        self.contentSize = CGSizeMake(320, h);
         mCards = [[NSMutableArray alloc] init];
         [self setBackground];
         [self setDelegate:self];
@@ -39,10 +40,12 @@
     [timer stop];
     [timer release];
     timer = nil;
+    
+    [lastLoadedEvent release];
+    lastLoadedEvent = nil;
 
     [super dealloc];
     [mCards release];
-    [lastLoadedEvent release];
 }
 
 
@@ -86,7 +89,7 @@
     
     // auto load some cards if # of cards is too few after deletion
     if( [mCards count] < 3 )
-        [self loadCardsNumber:10 startFrom:lastLoadedEvent];
+        [self loadCardsNumber:10];
 }
 
 - (void) handleDeleteButton: (id)button {
@@ -194,21 +197,32 @@
 
 - (void) updateSummaryCard:(ReviewCardType)type withValue:(NSString*)value {
     if ([mCards count] > 1) {
-        totReviewCardView* card = [mCards objectAtIndex:0];
-        totSummaryCard* summary_card = (totSummaryCard*)card.mShowView;
+        totSummaryCard* summary_card = (totSummaryCard*)summaryCard.mShowView;
         [summary_card updateLabel:type withValue:value];
     }
 }
 
-- (void) loadCardsNumber:(int)limit startFrom:(totEvent*)lastEvent {
+- (int)getSummaryCardIndex {
+    // get summary card index
+    for( int i=0; i<mCards.count; i++ ) {
+        if( summaryCard == mCards[i] )
+            return i;
+    }
+    return -1;
+}
+
+// load limit number of cards starting from an event
+// if start event is nil, insert cards after summary card
+- (void) loadCardsNumber:(int)limit {
     NSArray * events = nil;
     
     int displayed_cnt = 0;
-    totEvent* newLastEvent = lastEvent;
-    
+    totEvent* nextStartEvent = lastLoadedEvent;
+
+    int index = mCards.count;
     while( displayed_cnt < limit ) {
         // get events older than last event in both event_id and datetime
-        events = [global.model getEventWithPagination:global.baby.babyID limit:limit startFrom:newLastEvent];
+        events = [global.model getEventWithPagination:global.baby.babyID limit:limit startFrom:nextStartEvent];
         
         int cnt = [events count];
         // If no more events available
@@ -217,48 +231,109 @@
         
         for (int i = 0; i<[events count] && displayed_cnt<limit; ++i) {
             // parse the results from db
-            totReviewStory *story = [[totReviewStory alloc] init];
             
             totEvent * anEvent = (totEvent*)[events objectAtIndex:i];
             //NSLog(@"load event %d", anEvent.event_id);
             
-            newLastEvent = anEvent;
+            nextStartEvent = anEvent;
             
-            // this event should have already been fetched if datetime is the same as last one and event_id is greater than last one
-            if( [anEvent.datetime isEqualToDate:lastEvent.datetime] && anEvent.event_id > lastEvent.event_id )
-                continue;
+//            // this event should have already been fetched if datetime is the same as last one and event_id is greater than last one
+//            if( [anEvent.datetime isEqualToDate:startEvent.datetime] && anEvent.event_id > startEvent.event_id )
+//                continue;
             
             if( [anEvent.name isEqualToString:EVENT_BASIC_SLEEP] && [anEvent.value isEqualToString:@"start"] )
                 // skip start sleep event
                 continue;
             
-            story.mEventType = anEvent.name;
-            story.mRawContent = anEvent.value;
-            story.mWhen = anEvent.datetime;
-            story.mBabyId = anEvent.baby_id;
-            story.mEventId = anEvent.event_id;
-            
-            // add new card.
-            // change it to different type.
-            totReviewCardView* card = [totReviewCardView loadCard:story.mEventType story:story timeline:self];
-            if (card) {
-                card.parent = self;
-                card.mShowView.e = anEvent;
-                [card.mShowView viewWillAppear:YES];
-                [mCards addObject:card];
-                [self addSubview:[mCards lastObject]];
-                [self addDeleteButtonUnderCard:[mCards lastObject]];
+            if( [self addCard:anEvent index:index] ) {
+                index++;
                 displayed_cnt++;
             }
-            [story release];
         }
     }
     
-    // save the last event
-    if( newLastEvent != nil )
-        lastLoadedEvent = [newLastEvent copy];
+    if( nextStartEvent )
+        lastLoadedEvent = [nextStartEvent copy];
     
     [self refreshView];
+}
+
+- (void) refreshNewCards {
+    NSArray * events = nil;
+    
+    NSDate* startdate;
+    totEvent* firstEvent = [self getFirstEventInTimeline];
+    if( firstEvent )
+        startdate = firstEvent.datetime;
+    else
+        startdate = [NSDate dateWithTimeIntervalSince1970:0];
+
+    // get events older than last event in both event_id and datetime
+    events = [global.model getEvent:global.baby.babyID startDate:startdate endDate:[NSDate date]];
+    
+    int index = [self getSummaryCardIndex] + 1;
+    for (int i = 0; i<events.count; ++i) {
+        // parse the results from db
+        totEvent * anEvent = (totEvent*)[events objectAtIndex:i];
+        //NSLog(@"load event %d", anEvent.event_id);
+        
+        if( [anEvent.name isEqualToString:EVENT_BASIC_SLEEP] && [anEvent.value isEqualToString:@"start"] )
+            // skip start sleep event
+            continue;
+        
+        if( anEvent.event_id == firstEvent.event_id )
+            continue;
+        
+        if( [self addCard:anEvent index:index] )
+            index++;
+    }
+    
+    [self refreshView];
+}
+
+// add a new card
+- (totReviewCardView*)addCard:(totEvent*)e index:(int)index {
+    // for debug
+    //NSLog(@"counts = %d, index = %d, eid = %d", mCards.count, index, e.event_id);
+    
+    totReviewStory *story = [[totReviewStory alloc] init];
+    story.mEventType = e.name;
+    story.mRawContent = e.value;
+    story.mWhen = e.datetime;
+    story.mBabyId = e.baby_id;
+    story.mEventId = e.event_id;
+    
+    // change it to different type.
+    totReviewCardView* card = [totReviewCardView loadCard:story.mEventType story:story timeline:self];
+    if (card) {
+        card.parent = self;
+        card.mShowView.e = e;
+        [card.mShowView viewWillAppear:YES];
+        [self addSubview:card];
+        [self addDeleteButtonUnderCard:card];
+        [mCards insertObject:card atIndex:index];
+    }
+    else {
+        NSLog(@"[Timeline] Cannot load card %d %@", e.event_id, e.name);
+    }
+    [story release];
+    return card;
+}
+
+- (totEvent*)getFirstEventInTimeline {
+    int index = [self getSummaryCardIndex] + 1;
+    if( mCards.count > index ) {
+        totReviewCardView* c = (totReviewCardView*)mCards[index];
+        totEvent* e = c.mShowView.e;
+        return ((totReviewCardView*)mCards[index]).mShowView.e;
+    }
+    else
+        return nil;
+}
+
+- (totEvent*)getLastEventInTimeline {
+    int index = mCards.count - 1;
+    return ((totReviewCardView*)mCards[index]).mShowView.e;
 }
 
 #pragma mark - UIScrollViewDelegate
@@ -288,7 +363,7 @@
 
 -(void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView {
     if (scrollView.contentOffset.y + 389 > scrollView.contentSize.height) {
-        [self loadCardsNumber:10 startFrom:lastLoadedEvent];
+        [self loadCardsNumber:10];
     }
 }
 

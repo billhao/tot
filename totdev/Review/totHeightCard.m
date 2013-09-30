@@ -61,7 +61,8 @@
         return FALSE;
     
     // save to db
-    [global.model addEvent:global.baby.babyID event:event datetime:self.timeStamp value:value];
+    int event_id = [global.model addEvent:global.baby.babyID event:event datetime:self.timeStamp value:value];
+    self.parentView.mShowView.e = [global.model getEventByID:event_id];
     
     // Update the summary card.
     [self.parentView.parent updateSummaryCard:self.type withValue:value];
