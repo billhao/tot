@@ -155,7 +155,7 @@
 
 - (NSString*) getPreference:(int)baby_id preference:(NSString*)pref_name {
     NSMutableArray* array = [self getItem:baby_id name:pref_name limit:-1 offset:-1 startDate:nil endDate:nil];
-    if( array.count == 1 ) {
+    if( array.count > 0 ) {
         totEvent* e = [array objectAtIndex:0];
         return e.value;
     }

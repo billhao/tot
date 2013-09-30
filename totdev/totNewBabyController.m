@@ -51,6 +51,7 @@
     [mName setDelegate:self];
     [mBDay addTarget:self action:@selector(BDayButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [mBDay setDelegate:self];
+    mPrivacy.hidden = TRUE;
     
     mPicker.date = [NSDate date];
 	//[mPicker addTarget:self action:@selector(changeDateInLabel:) forControlEvents:UIControlEventValueChanged];

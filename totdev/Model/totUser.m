@@ -67,6 +67,17 @@ static totModel* _model;
     return [pwdhash_db isEqualToString:pwdhash];
 }
 
+// request the server to reset password
++(BOOL)forgotPassword:(NSString*)email message:(NSString**)message {
+    totServerCommController* server = [[totServerCommController alloc] init];
+    int retCode = [server sendForgetPasscodeforUser:email returnMessage:message];
+    if( retCode == SERVER_RESPONSE_CODE_SUCCESS ) {
+        return TRUE;
+    }
+    else
+        return FALSE;
+}
+
 // concatenate salt and hash of pwd to the final string, which will be stored
 +(NSString*)getPasswordHash:(NSString*)pwd salt:(NSData*)salt {
     // hash the password

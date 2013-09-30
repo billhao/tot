@@ -43,6 +43,8 @@
     [mLogin addTarget:self action:@selector(LoginButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [mNewuser addTarget:self action:@selector(NewUserButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [mPrivacy addTarget:self action:@selector(PrivacyButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    mPrivacy.hidden = TRUE;
+    [mForgotPwd addTarget:self action:@selector(ForgotPwdButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [mEmail setDelegate:self];
     [mPwd setDelegate:self];
 }
@@ -191,6 +193,16 @@
         // if yes and pwd doesn't match, prompt for pwd
         [self showAlert:@"User already exists"];
     }
+}
+
+- (void)ForgotPwdButtonClicked: (UIButton *)button {
+    NSString* email = mEmail.text;
+    NSString* msg = nil;
+    BOOL re = [totUser forgotPassword:email message:&msg];
+    if( msg )
+        [self showAlert:msg];
+    else
+        [self showAlert:@"Cannot reset password"];
 }
 
 - (void)showAlert:(NSString*)text {

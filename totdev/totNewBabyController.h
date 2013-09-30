@@ -17,6 +17,7 @@
     IBOutlet UIButton *mBoy, *mGirl, *mSave, *mExistingAccount;
     IBOutlet UIImageView *mBoyImg, *mGirlImg;
     IBOutlet UIDatePicker *mPicker;
+    IBOutlet UIButton*    mPrivacy;
     UIView *inputAccView;
     UIButton *btnDone;
     UIImage *mBoySelected, *mGirlSelected;

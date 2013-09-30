@@ -132,13 +132,13 @@
     }
     int ret = SERVER_RESPONSE_CODE_FAIL;
     NSArray* ss = [strReply componentsSeparatedByString:@"::"];
-    if( ss.count > 0 ) {
-        if( ss.count > 1 ) {
-            ret = [(NSString*)ss[0] intValue];
-            if (ss.count == 2 )
-                *message = [[(NSString*)ss[1] retain] autorelease];
-        }
+    if( ss.count == 2 ) {
+        ret = [(NSString*)ss[0] intValue];
+        *message = [[(NSString*)ss[1] retain] autorelease];
     }
+    else
+        *message = @"Cannot understand server's response";
+
     return ret;
 }
 
