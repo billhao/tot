@@ -172,6 +172,9 @@
 
     self.view.userInteractionEnabled = YES;
     
+    // this is important. without this the system will auto resize this view to keyboard size
+    self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    
     int buttonWidth = BUTTON_WIDTH, 
         buttonHeight = BUTTON_HEIGHT;
     
@@ -180,16 +183,13 @@
     for ( double i = MIN_QUANTITY; i <= MAX_QUANTITY; i += QUANTITY_RESOLUTION )
         [mQuantity addObject:[NSString stringWithFormat:@"%g", i]];
     
-    mQuantityPicker = [[UIPickerView alloc] initWithFrame:CGRectMake(0, -10, mWidth, mComponentHeight)];
+    mQuantityPicker = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 0, mWidth, mComponentHeight)];
     mQuantityPicker.dataSource = self;
     mQuantityPicker.delegate = self;
     mQuantityPicker.showsSelectionIndicator = YES;
-    
     [self.view addSubview:mQuantityPicker];
-    
-    // set the size of this picker, x and y doesn't really matter here, it seems ios sets y accordingly
-    //self.view.frame = CGRectMake(0, 0, 320, 200);
 
+    
     // create a hidden text view, the input view of which is associated with this picker
     if( mTextField ) {
         mTextField.inputView = self.view;
@@ -204,6 +204,11 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated {
+    // this is important. it sets the height of this view according to picker height
+    CGRect f = self.view.frame;
+    f.size.height = mQuantityPicker.frame.size.height;
+    self.view.frame = f;
+    
     // reset selection
     [mQuantityPicker selectRow:0 inComponent:0 animated:FALSE];
     [mQuantityPicker selectRow:0 inComponent:1 animated:FALSE];

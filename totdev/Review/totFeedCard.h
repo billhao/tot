@@ -17,7 +17,7 @@
     
     NSMutableArray* foodBoxes;
     NSMutableArray* quanBoxes;
-    NSMutableArray* unitBoxes;
+//    NSMutableArray* unitBoxes;
     NSMutableArray* inputViews;
     
     float w1;

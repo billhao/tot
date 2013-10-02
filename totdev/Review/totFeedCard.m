@@ -15,9 +15,15 @@
 #import "totReviewStory.h"
 #import "totTimeline.h"
 
+#define DEFAULT_HEIGHT 200
+
 @implementation totFeedEditCard
 
-- (int) height { return 200; }
+- (int) height {
+    CGRect f = addBtn.frame;
+    int hh = f.origin.y + f.size.height + margin_y;
+    return MAX(DEFAULT_HEIGHT, hh);
+}
 - (int) width { return 308; }
 
 - (id)init {
@@ -59,6 +65,12 @@
 
 - (void)addBtnPressed:(id)sender {
     [self addNewInputBox];
+    
+    CGRect f = addBtn.frame;
+    if( f.origin.y+f.size.height > self.view.bounds.size.height ) {
+        // refresh the timeline to reflect height change
+        [self.parentView.parent refreshView];
+    }
 }
 
 - (void)deleteBtnPressed:(id)sender {
@@ -81,6 +93,7 @@
             int yy = y + i*(h+margin_y);
             CGRect f = CGRectMake(0, yy, [self width] - h - margin_x, h);
             ((UIView*)inputViews[i]).frame = f;
+            ((UITextField*)quanBoxes[i]).tag = i;
         }
         // update y of add button
         int yy = y + (inputViews.count-1)*(h+margin_y);
@@ -88,10 +101,20 @@
         CGRect f = CGRectMake(xx, yy, h, h);
         addBtn.frame = f;
     }
+    
+    // keep space for at least 3 rows
+    if( foodBoxes.count >= 3 ) {
+        // refresh the timeline to reflect height change
+        [self.parentView.parent refreshView];
+    }
 }
 
 -(void)textFieldDidBeginEditing:(UITextField *)textField {
-    [parentView.parent moveToTop:self.parentView];
+    //if( textField.tag > 1 )
+    {
+        int i = textField.tag;
+        [self ensureVisible:((UIView*)inputViews[i]).frame];
+    }
     
     // this is a quantity text field
     if( textField.inputView == mQuantity.view ) {
@@ -105,11 +128,33 @@
     return YES;
 }
 
+- (void)ensureVisible:(CGRect)f {
+    // scroll it up
+    float yy = self.parentView.frame.origin.y;
+    float offset = self.parentView.parent.contentOffset.y;
+    float navbar_h = 42;
+    float y1 = f.origin.y;
+    float h1 = f.size.height;
+    float bottom = yy - offset + y1 + h1 + navbar_h;
+    
+    float inputview_top = 160;
+    float d = bottom - inputview_top;
+    offset = yy + (y1+h1+margin_y - inputview_top);
+    NSLog(@"textfield bottom = %.0f, inputview = %.0f, d = %.0f, offset = %0.f", bottom, inputview_top, d, offset);
+    //if( d > 0 )
+    {
+        CGPoint pt = CGPointMake(0, offset);
+        [parentView.parent setContentOffset:pt animated:TRUE];
+    }
+}
+
 // Check the input. If it's valid return true, otherwise, return false.
 - (bool)clickOnConfirmIconButtonDelegate {
     NSArray* foodList = [self getFoodList];
-    if( (!foodList) || ([foodList count] == 0) )
+    if( (!foodList) || ([foodList count] == 0) ) {
+        [totUtility showAlert:@"Type in food name and choose quantity to continue"];
         return false; // invalid input
+    }
     
     NSString* json = [self saveToDB:foodList];
     
@@ -130,7 +175,6 @@
     
     // initialize quantity picker.
     mQuantity = [[totQuantityController alloc] init:self.view];
-    CGSize s = self.timeline.controller.view.bounds.size;
     mQuantity.view.frame = CGRectMake(0, 480, mQuantity.mWidth, mQuantity.mHeight);
     [mQuantity setDelegate:self];
     [self.timeline.controller.view addSubview:mQuantity.view];
@@ -152,6 +196,7 @@
     f.origin.x += w1 + margin_x;
     f.size.width = w2;
     UITextField* quan = [self createInputBox:f parentView:v];
+    quan.tag = i;
     quan.inputView = mQuantity.view;
     quan.inputAccessoryView = mQuantity.inputAccessoryView;
     [quanBoxes addObject:quan];
@@ -214,7 +259,6 @@
         food = [food stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
         quantity = [quantity stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
         if( food.length == 0 || quantity.length == 0 ) {
-            [totUtility showAlert:@"Type in food name and choose quantity to continue"];
             continue;
         }
         
