@@ -27,17 +27,23 @@
         margin_y = 10;
         x = 20;
         y = contentYOffset + margin_y;
-        w1 = 120;
-        w2 = 40;
-        w3 = 40;
+        w1 = 140;
+        w2 = 60;
+//        w3 = 40;
         h = 30;
         
         foodBoxes = [[NSMutableArray alloc] init];
         quanBoxes = [[NSMutableArray alloc] init];
-        unitBoxes = [[NSMutableArray alloc] init];
+//        unitBoxes = [[NSMutableArray alloc] init];
         inputViews = [[NSMutableArray alloc] init];
     }
     return self;
+}
+
+- (void)dealloc {
+    [mQuantity release];
+    
+    [super dealloc];
 }
 
 - (void)viewDidLoad {
@@ -63,7 +69,7 @@
     // delete the text fields
     [foodBoxes removeObjectAtIndex:tag];
     [quanBoxes removeObjectAtIndex:tag];
-    [unitBoxes removeObjectAtIndex:tag];
+//    [unitBoxes removeObjectAtIndex:tag];
     [inputViews removeObjectAtIndex:tag];
     
     if( inputViews.count == 0 )
@@ -78,7 +84,7 @@
         }
         // update y of add button
         int yy = y + (inputViews.count-1)*(h+margin_y);
-        int xx = x + w1 + w2 + w3 + h + 3*margin_x;
+        int xx = x + w1 + w2 + h + 3*margin_x;
         CGRect f = CGRectMake(xx, yy, h, h);
         addBtn.frame = f;
     }
@@ -86,9 +92,15 @@
 
 -(void)textFieldDidBeginEditing:(UITextField *)textField {
     [parentView.parent moveToTop:self.parentView];
+    
+    // this is a quantity text field
+    if( textField.inputView == mQuantity.view ) {
+        currentEditingQuantityTextField = textField;
+    }
 }
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField {
+    currentEditingQuantityTextField = nil;
     [textField resignFirstResponder];
     return YES;
 }
@@ -96,20 +108,12 @@
 // Check the input. If it's valid return true, otherwise, return false.
 - (bool)clickOnConfirmIconButtonDelegate {
     NSArray* foodList = [self getFoodList];
-    if ([foodList count] == 0)
-        return false;
+    if( (!foodList) || ([foodList count] == 0) )
+        return false; // invalid input
     
-    [self saveToDB:foodList];
+    NSString* json = [self saveToDB:foodList];
     
-    NSString* label = @"";
-    for (int i = 0; i < [foodList count]; ++i) {
-        NSDictionary* dict = (NSDictionary*)[foodList objectAtIndex:i];
-        NSString* name = [dict objectForKey:@"name"];
-        NSString* quantity = [dict objectForKey:@"quantity"];
-        NSString* unit = [dict objectForKey:@"unit"];
-        label = [label stringByAppendingFormat:@"%@ %@ %@", name, quantity, unit];
-    }
-    [self.parentView.parent updateSummaryCard:FEEDING withValue:label];
+    [self.parentView.parent updateSummaryCard:FEEDING withValue:[totFeedShowCard formatValue:json]];
     
     return true;
 }
@@ -124,6 +128,13 @@
     [addBtn addTarget:self action:@selector(addBtnPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:addBtn];
     
+    // initialize quantity picker.
+    mQuantity = [[totQuantityController alloc] init:self.view];
+    CGSize s = self.timeline.controller.view.bounds.size;
+    mQuantity.view.frame = CGRectMake(0, 480, mQuantity.mWidth, mQuantity.mHeight);
+    [mQuantity setDelegate:self];
+    [self.timeline.controller.view addSubview:mQuantity.view];
+
     [self addNewInputBox];
 }
 
@@ -140,14 +151,17 @@
 
     f.origin.x += w1 + margin_x;
     f.size.width = w2;
-    [quanBoxes addObject:[self createInputBox:f parentView:v]];
+    UITextField* quan = [self createInputBox:f parentView:v];
+    quan.inputView = mQuantity.view;
+    quan.inputAccessoryView = mQuantity.inputAccessoryView;
+    [quanBoxes addObject:quan];
 
-    f.origin.x += w2 + margin_x;
-    f.size.width = w3;
-    [unitBoxes addObject:[self createInputBox:f parentView:v]];
+//    f.origin.x += w2 + margin_x;
+//    f.size.width = w3;
+//    [unitBoxes addObject:[self createInputBox:f parentView:v]];
     
     // create delete button
-    f.origin.x += w3 + margin_x;
+    f.origin.x += w2 + margin_x;
     f.size.width = h;
     UIButton* deleteBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [deleteBtn setImage:[UIImage imageNamed:@"feeding_delete"] forState:UIControlStateNormal];
@@ -161,7 +175,7 @@
     [self.view addSubview:v];
 
     yy = y + i*(h+margin_y);
-    int xx = x + w1 + w2 + w3 + h + 3*margin_x;
+    int xx = x + w1 + w2 + h + 3*margin_x;
     f = CGRectMake(xx, yy, h, h);
     addBtn.frame = f;
 }
@@ -177,6 +191,7 @@
     UITextField* textView = [[UITextField alloc] initWithFrame:f];
     textView.delegate = self;
     textView.textAlignment = UITextAlignmentCenter;
+    textView.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     textView.backgroundColor = [UIColor clearColor];
     textView.font = [UIFont fontWithName:@"Raleway" size:16.0];
     textView.textColor = [UIColor colorWithRed:100.0/255 green:100.0/255 blue:100.0/255 alpha:1.0];
@@ -192,11 +207,22 @@
 - (NSMutableArray*) getFoodList {
     NSMutableArray* list = [[[NSMutableArray alloc] init] autorelease];
     for (int i=0; i<foodBoxes.count; i++) {
-        // add a food item
+        // check if input is valid
+        NSString* food = ((UITextField*)foodBoxes[i]).text;
+        NSString* quantity = ((UITextField*)quanBoxes[i]).text;
+        // remove whitespaces
+        food = [food stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        quantity = [quantity stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        if( food.length == 0 || quantity.length == 0 ) {
+            [totUtility showAlert:@"Type in food name and choose quantity to continue"];
+            continue;
+        }
+        
+        // add this food item
         NSMutableDictionary *foodItem = [[NSMutableDictionary alloc] init];
-        [foodItem setObject:((UITextField*)foodBoxes[i]).text forKey:@"name"];
-        [foodItem setObject:((UITextField*)quanBoxes[i]).text forKey:@"quantity"];
-        [foodItem setObject:((UITextField*)unitBoxes[i]).text forKey:@"unit"];
+        [foodItem setObject:food forKey:@"name"];
+        [foodItem setObject:quantity forKey:@"quantity"];
+//        [foodItem setObject:((UITextField*)unitBoxes[i]).text forKey:@"unit"];
         [foodItem setObject:@"" forKey:@"category"];
         [list addObject:foodItem];
         [foodItem release];
@@ -204,9 +230,19 @@
     return list;
 }
 
-- (void)saveToDB:(NSArray*)list {
+- (NSString*)saveToDB:(NSArray*)list {
     NSString* json = [totHomeFeedingViewController ObjectToJSON:list];
     [global.model addEvent:global.baby.babyID event:EVENT_BASIC_FEEDING datetime:self.timeStamp value:json];
+    return json;
+}
+
+-(void)saveQuantity:(NSString *)qu{
+    currentEditingQuantityTextField.text = qu;
+    [currentEditingQuantityTextField resignFirstResponder];
+}
+
+-(void)cancelQuantity {
+    [currentEditingQuantityTextField resignFirstResponder];
 }
 
 @end
@@ -260,14 +296,8 @@
 }
 
 - (void)updateUI:(NSString*)value {
-    NSArray* list = [totHomeFeedingViewController JSONToObject:value];
-    NSString* text = @"";
-    for( int i=0; i<list.count; i++ ) {
-        NSDictionary* item = list[i];
-        if( text.length > 0 ) text = [NSString stringWithFormat:@"%@,", text];
-        text = [NSString stringWithFormat:@"%@ %@ %@ %@", text, item[@"name"], item[@"quantity"], item[@"unit"]];
-    }
-    if( list.count > 1 ) {
+    NSString* text = [totFeedShowCard formatValue:value];
+    if( text.length > 0 ) {
         card_title.text = @"Feeding";
         description.text = text;
     }
@@ -283,7 +313,7 @@
     for( int i=0; i<list.count; i++ ) {
         NSDictionary* item = list[i];
         if( text.length > 0 ) text = [NSString stringWithFormat:@"%@,", text];
-        text = [NSString stringWithFormat:@"%@ %@ %@ %@", text, item[@"name"], item[@"quantity"], item[@"unit"]];
+        text = [NSString stringWithFormat:@"%@ %@ %@", text, item[@"name"], item[@"quantity"]];
     }
     return text;
 }

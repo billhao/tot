@@ -14,15 +14,9 @@
 #define BUTTON_WIDTH           90
 #define BUTTON_HEIGHT          50
 
-#define UNIT_NUMBER 4
 #define QUANTITY_RESOLUTION 0.5
 #define MIN_QUANTITY 0.5
 #define MAX_QUANTITY 30
-
-#define UNIT1 "oz"
-#define UNIT2 "ct"
-#define UNIT3 "lb"
-#define UNIT4 "g"
 
 
 @implementation totQuantityController
@@ -32,7 +26,7 @@
 @synthesize delegate;
 @synthesize mQuantityPicker;
 @synthesize mCurrentQuantityIdx;
-@synthesize mCurrentUnitIdx;
+@synthesize mCurrentUnitIdx, inputAccessoryView;
 
 - (id)init:(UIView*)superView {
     self = [super init];
@@ -43,18 +37,40 @@
         mHeight= mComponentHeight;//+10+BUTTON_HEIGHT;
         
         mSuperView = [superView retain];
+        
+        mHiddenText = nil;
+        mTextField = nil;
+        inputAccessoryView = [self createInputAccessoryView];
+        
+        // all possible units
+        mUnit = [[NSMutableArray alloc] initWithObjects:@"oz", @"pc", @"lb", @"ct", nil];
     }
     return self;
 }
 
+// use super's own textField instead of creating a hidden UITextView
+- (id)init:(UIView*)superView textField:(UITextField*)textField {
+    self = [self init:superView];
+    if( self ) {
+        mTextField = textField;
+    }
+    return self;
+}
+
+-(void)dealloc {
+    [inputAccessoryView release];
+    
+    [super dealloc];
+}
+
 // show this picker
 - (void)show {
-    [mHiddenText becomeFirstResponder];
+    if(mHiddenText) [mHiddenText becomeFirstResponder];
 }
 
 // dismiss this picker
 - (void)dismiss {
-    [mHiddenText resignFirstResponder];
+    if(mHiddenText) [mHiddenText resignFirstResponder];
 }
 
 - (void)didReceiveMemoryWarning
@@ -115,14 +131,14 @@
         [mQuantityPicker selectRow:q inComponent:kPickerQuantity animated:NO];
     }
     
-    if( u >= 0 && u <= UNIT_NUMBER-1 ) {
+    if( u >= 0 && u <= mUnit.count-1 ) {
         mCurrentUnitIdx = u;
         [mQuantityPicker selectRow:u inComponent:kPickerUnit animated:NO];
     }
 }
 
 
-// call delegate saveCurrentTime with date/time in both string and NSDate formats
+// call delegate
 - (void)buttonPressed: (id)sender {
     UIButton *btn = (UIButton*)sender;
     int tag = btn.tag;
@@ -145,22 +161,8 @@
     }
 }
 
-+ (NSString*)getUnitString:(int)u {
-    switch (u) {
-        case 1:
-            return @UNIT1;
-            break;
-        case 2:
-            return @UNIT2;
-            break;
-        case 3:
-            return @UNIT3;
-            break;
-        case 4:
-            return @UNIT4;
-            break;
-    }
-    return @"";
+- (NSString*)getUnitString:(int)i {
+    return mUnit[i];
 }
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
@@ -178,12 +180,6 @@
     for ( double i = MIN_QUANTITY; i <= MAX_QUANTITY; i += QUANTITY_RESOLUTION )
         [mQuantity addObject:[NSString stringWithFormat:@"%g", i]];
     
-    mUnit = [[NSMutableArray alloc] init];
-    [mUnit addObject:[NSString stringWithFormat:@UNIT1]];
-    [mUnit addObject:[NSString stringWithFormat:@UNIT2]];
-    [mUnit addObject:[NSString stringWithFormat:@UNIT3]];
-    [mUnit addObject:[NSString stringWithFormat:@UNIT4]];
-
     mQuantityPicker = [[UIPickerView alloc] initWithFrame:CGRectMake(0, -10, mWidth, mComponentHeight)];
     mQuantityPicker.dataSource = self;
     mQuantityPicker.delegate = self;
@@ -195,10 +191,24 @@
     //self.view.frame = CGRectMake(0, 0, 320, 200);
 
     // create a hidden text view, the input view of which is associated with this picker
-    mHiddenText = [[UITextView alloc]initWithFrame:CGRectMake(-1, -1, 0, 0)];
-    [mSuperView addSubview:mHiddenText];
-    mHiddenText.inputView = self.view;
-    mHiddenText.inputAccessoryView = [self createInputAccessoryView];
+    if( mTextField ) {
+        mTextField.inputView = self.view;
+        mTextField.inputAccessoryView = inputAccessoryView;
+    }
+    else {
+        mHiddenText = [[UITextView alloc]initWithFrame:CGRectMake(-1, -1, 0, 0)];
+        [mSuperView addSubview:mHiddenText];
+        mHiddenText.inputView = self.view;
+        mHiddenText.inputAccessoryView = inputAccessoryView;
+    }
+}
+
+-(void)viewWillAppear:(BOOL)animated {
+    // reset selection
+    [mQuantityPicker selectRow:0 inComponent:0 animated:FALSE];
+    [mQuantityPicker selectRow:0 inComponent:1 animated:FALSE];
+    mCurrentQuantityIdx = 0;
+    mCurrentUnitIdx = 0;
 }
 
 - (void)viewDidUnload
@@ -211,7 +221,7 @@
     [mQuantity release];
     [mUnit release];
     
-    [mHiddenText release];
+    if(mHiddenText) [mHiddenText release];
     [mSuperView release];
 }
 

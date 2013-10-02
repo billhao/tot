@@ -8,9 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "totReviewCardView.h"
+#import "totQuantityController.h"
 
-@interface totFeedEditCard : totReviewEditCardView<UITextFieldDelegate> {
+@interface totFeedEditCard : totReviewEditCardView<UITextFieldDelegate, totQuantityControllerDelegate> {
     UIButton* addBtn;
+    totQuantityController* mQuantity;
+    UITextField* currentEditingQuantityTextField;
     
     NSMutableArray* foodBoxes;
     NSMutableArray* quanBoxes;
@@ -19,7 +22,7 @@
     
     float w1;
     float w2;
-    float w3;
+//    float w3;
     float margin_x;
     
     float x, y, w, h;

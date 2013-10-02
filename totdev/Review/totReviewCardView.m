@@ -676,15 +676,17 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
                 break;
         }
         if( type != SUMMARY ) {
-            self.frame = CGRectMake(0, 0, [c1 width], [c1 height]);
-            c1.view.frame = self.bounds;
-            c2.view.frame = CGRectMake(0, 0, [c2 width], [c2 height]);
+            // the order is important here. set type, timeline and parentview first
             c1.type = type;
             c2.type = type;
             c1.timeline = timeline;
             c2.timeline = timeline;
             c1.parentView = self;
             c2.parentView = self;
+            // this may trigger viewDidLoad so this cannot be moved before assignment of type, timeline and parentview
+            self.frame = CGRectMake(0, 0, [c1 width], [c1 height]);
+            c1.view.frame = self.bounds;
+            c2.view.frame = CGRectMake(0, 0, [c2 width], [c2 height]);
             self.mEditView = c1;
             self.mShowView = c2;
             [c1 release];
