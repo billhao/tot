@@ -137,7 +137,9 @@
     float h1 = f.size.height;
     float bottom = yy - offset + y1 + h1 + navbar_h;
     
-    float inputview_top = 160;
+    float h2 = mQuantity.mQuantityPicker.frame.size.height;
+    float h3 = mQuantity.inputAccessoryView.frame.size.height;
+    float inputview_top = self.parentView.parent.frame.size.height - h2 - h3;
     float d = bottom - inputview_top;
     offset = yy + (y1+h1+margin_y - inputview_top);
     NSLog(@"textfield bottom = %.0f, inputview = %.0f, d = %.0f, offset = %0.f", bottom, inputview_top, d, offset);
