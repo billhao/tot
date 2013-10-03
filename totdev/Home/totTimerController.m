@@ -14,7 +14,7 @@
 #define BUTTON_WIDTH           90
 #define BUTTON_HEIGHT          50
 
-#define START_YEAR             2012
+#define START_YEAR             2013
 #define END_YEAR               2020
 
 @implementation totTimerController
@@ -303,7 +303,10 @@
 
     self.view.userInteractionEnabled = YES;
     
-    int buttonWidth = BUTTON_WIDTH, 
+    // this is important. without this the system will auto resize this view to keyboard size
+    self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+
+    int buttonWidth = BUTTON_WIDTH,
         buttonHeight = BUTTON_HEIGHT;
     // use am pm symbol from current local
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -329,7 +332,7 @@
     for( int i = 1; i <= 31; i++ ) 
         [mDay addObject:[NSString stringWithFormat:@"%02d", i]];
     
-    mTimePicker = [[UIPickerView alloc] initWithFrame:CGRectMake(0, -10, mWidth, mComponentHeight)];
+    mTimePicker = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 0, mWidth, mComponentHeight)];
     mTimePicker.dataSource = self;
     mTimePicker.delegate = self;
     mTimePicker.showsSelectionIndicator = YES;
@@ -344,6 +347,15 @@
     [mSuperView addSubview:mHiddenText];
     mHiddenText.inputView = self.view;
     mHiddenText.inputAccessoryView = [self createInputAccessoryView];
+}
+
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    // this is important. it sets the height of this view according to picker height
+    CGRect f = self.view.frame;
+    f.size.height = mTimePicker.frame.size.height;
+    self.view.frame = f;
 }
 
 - (void)viewDidUnload

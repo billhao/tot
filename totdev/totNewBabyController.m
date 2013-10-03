@@ -180,7 +180,7 @@
     keyboardDoneButtonView.tintColor	= nil;
     [keyboardDoneButtonView sizeToFit];
     
-    UIBarButtonItem* doneButton    = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleBordered  target:self action:@selector(pickerDoneClicked:)];
+    UIBarButtonItem* doneButton    = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleDone  target:self action:@selector(pickerDoneClicked:)];
     
     // I put the spacers in to push the doneButton to the right side of the picker view
     UIBarButtonItem *spacer1    = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace

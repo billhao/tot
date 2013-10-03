@@ -204,6 +204,8 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+
     // this is important. it sets the height of this view according to picker height
     CGRect f = self.view.frame;
     f.size.height = mQuantityPicker.frame.size.height;
