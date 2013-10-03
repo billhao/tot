@@ -64,6 +64,9 @@
 #pragma mark - Event handlers
 
 - (void)addBtnPressed:(id)sender {
+    if( currentEditingQuantityTextField )
+        [self textFieldShouldReturn:currentEditingQuantityTextField];
+    
     [self addNewInputBox];
     
     CGRect f = addBtn.frame;
@@ -71,9 +74,16 @@
         // refresh the timeline to reflect height change
         [self.parentView.parent refreshView];
     }
+    
+    f.origin.y += self.parentView.frame.origin.y;
+    f.size.height += margin_y;
+    [self.parentView.parent scrollRectToVisible:f animated:TRUE];
 }
 
 - (void)deleteBtnPressed:(id)sender {
+    if( currentEditingQuantityTextField )
+        [self textFieldShouldReturn:currentEditingQuantityTextField];
+
     int tag = ((UIButton*)sender).superview.tag;
     // delete input boxes at i
     [((UIView*)inputViews[tag]) removeFromSuperview];
@@ -107,6 +117,19 @@
         // refresh the timeline to reflect height change
         [self.parentView.parent refreshView];
     }
+    
+    // scroll the inputview above into view
+    if( tag > 0) tag--;
+    if( tag == 0 ) {
+        // move to top
+        [self.parentView.parent moveToTop:self.parentView];
+    }
+    else {
+        // scroll down
+        CGRect f = ((UIView*)inputViews[tag]).frame;
+        f.origin.y = self.parentView.frame.origin.y + f.origin.y - margin_y;
+        [self.parentView.parent scrollRectToVisible:f animated:TRUE];
+    }
 }
 
 -(void)textFieldDidBeginEditing:(UITextField *)textField {
@@ -129,23 +152,44 @@
 }
 
 - (void)ensureVisible:(CGRect)f {
-    // scroll it up
     float yy = self.parentView.frame.origin.y;
     float offset = self.parentView.parent.contentOffset.y;
     float navbar_h = 42;
     float y1 = f.origin.y;
     float h1 = f.size.height;
-    float bottom = yy - offset + y1 + h1 + navbar_h;
+    float top = yy - offset + y1;
+    float bottom = top + (h1+margin_y)*2; // the bottom of the inputview below current one
     
     float h2 = mQuantity.mQuantityPicker.frame.size.height;
     float h3 = mQuantity.inputAccessoryView.frame.size.height;
     float inputview_top = self.parentView.parent.frame.size.height - h2 - h3;
     float d = bottom - inputview_top;
-    offset = yy + (y1+h1+margin_y - inputview_top);
-    NSLog(@"textfield bottom = %.0f, inputview = %.0f, d = %.0f, offset = %0.f", bottom, inputview_top, d, offset);
-    //if( d > 0 )
-    {
-        CGPoint pt = CGPointMake(0, offset);
+    float new_offset = -1;
+    NSString* direction = @"";
+    if( d > 0 ) {
+        // scroll it up
+        direction = @"up";
+        new_offset = yy + (y1+ (h1+margin_y)*2 - inputview_top);
+    }
+    else if( top <= margin_y ) {
+        // scroll it down
+        direction = @"down";
+        new_offset = yy + y1 - margin_y;
+        new_offset = new_offset - h1 - margin_y; // scroll it down a little bit more so inputview about the current one can also be seen
+        if( new_offset < yy + contentYOffset ) {
+            // simply move the card to top
+            direction = @"move to top";
+            new_offset = -1;
+            [self.parentView.parent moveToTop:self.parentView];
+        }
+        else {
+            new_offset = MAX(new_offset, yy);
+        }
+    }
+    NSLog(@"textfield top = %.0f, bottom = %.0f, inputview = %.0f, d = %.0f, offset = %0.f, newoffset = %0.f, direction = %@", top, bottom, inputview_top, d, offset, new_offset, direction);
+    
+    if( new_offset > 0 ) {
+        CGPoint pt = CGPointMake(0, new_offset);
         [parentView.parent setContentOffset:pt animated:TRUE];
     }
 }
