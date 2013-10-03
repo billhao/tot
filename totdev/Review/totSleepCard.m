@@ -102,7 +102,15 @@
     // Save to db.
     [self saveTimeToDatabase:FALSE];
     
-    [self.parentView.parent moveCard:self.parentView To:1];
+    int index = [self.parentView.parent getEditCardIndex];
+    if( index == -1 ) {
+        index = [self.parentView.parent getSummaryCardIndex];
+        [self.parentView.parent moveCard:self.parentView To:index+1];
+    }
+    else {
+        [self.parentView.parent moveCard:self.parentView To:index+1];
+        [self.parentView.parent moveToTop:self.parentView];
+    }
     [self.parentView flip];
     
     // Update the summary card.
