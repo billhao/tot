@@ -33,6 +33,9 @@ static totModel* _model;
 
 // add a new user
 +(totUser*) newUser:(NSString*)email password:(NSString*)pwd message:(NSString**)message {
+    // clean the email
+    email = [email stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    
     NSString* account_pref = [NSString stringWithFormat:PREFERENCE_ACCOUNT, email];
     
     NSString* pwdhash = [self getPasswordHash:pwd salt:nil];

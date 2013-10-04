@@ -134,7 +134,7 @@
     }
     else {
         // if yes and pwd doesn't match, prompt for pwd
-        [self showAlert:@"User does not exist or password doesn't match"];
+        [self showAlert:@"Email address or password does not match"];
     }
 }
 
@@ -230,20 +230,34 @@
 - (void)PrivacyButtonClicked: (UIButton *)button {
 }
 
+// check email against a regex
 - (BOOL)checkEmail {
     NSString* email = mEmail.text;
-    if( email.length == 0 ) {
-        // prompt for a valid email
+    email = [email stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    
+    // check
+    NSString *emailRegEx = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
+    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegEx];
+    
+    if ([emailTest evaluateWithObject:email] == NO) {
+        [self showAlert:@"Invalid email address"];
         return FALSE;
     }
     
     return TRUE;
 }
 
+// password needs to be 4 chars or more
 - (BOOL)checkPwd {
     NSString* pwd = mPwd.text;
-    if( pwd.length == 0 ) {
+    NSString* pwd1 = [pwd stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    if( pwd.length != pwd1.length ) {
+        [self showAlert:@"Password cannot start or end with space"];
+        return FALSE;
+    }
+    else if( pwd.length < 4 ) {
         // prompt for a valid pwd
+        [self showAlert:@"Password must be at least 4 characters"];
         return FALSE;
     }
     
