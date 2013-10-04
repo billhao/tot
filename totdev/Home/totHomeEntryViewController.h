@@ -51,7 +51,9 @@ typedef enum {
     
     // activity related stuff
     NSArray* allActivities;             // all available activities
-
+    NSMutableArray* activityButtons;    // hold all the actual buttons
+    NSMutableArray* grayImages;
+    
     UIView* selectedActivities_bgView;
     UIImageView* selectedActivities_lineView;
     
@@ -62,6 +64,9 @@ typedef enum {
     
     // auto play
     BOOL autoPlay;
+    
+    // icon size change when switch between selected and not selected
+    CGSize activityIconSizeChange;
 }
 
 @property (nonatomic, assign) totHomeRootController *homeRootController;

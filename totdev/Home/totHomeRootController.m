@@ -78,7 +78,7 @@
 - (void)viewDidAppear:(BOOL)animated {
     NSLog(@"root vc view did appear");
     [self switchTo:kHomeViewEntryView withContextInfo:nil];
-    [self switchTo:kTimeline withContextInfo:nil];
+    //[self switchTo:kTimeline withContextInfo:nil];
     //[self switchTo:kScrapbook withContextInfo:nil];
 }
 
