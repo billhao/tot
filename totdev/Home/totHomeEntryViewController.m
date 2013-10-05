@@ -613,7 +613,6 @@
     scrollView.showsHorizontalScrollIndicator = NO;
     scrollView.delegate = self;
     
-    grayImages = [[NSMutableArray alloc] initWithCapacity:allActivities.count];
     activityButtons = [[NSMutableArray alloc] initWithCapacity:allActivities.count];
     UIFont* font = [UIFont fontWithName:@"Raleway-SemiBold" size:14.0];
     BOOL debug = false;
@@ -625,13 +624,11 @@
             NSString* activity = [allActivities objectAtIndex:i];
             NSString* tmpname = [activity stringByReplacingOccurrencesOfString:@" " withString:@"_"];
             NSString* activityIcon = [NSString stringWithFormat:@"activity_%@", tmpname];
-            NSString* activityIconGray = [NSString stringWithFormat:@"activity_%@_gray", tmpname];
             
             UIButton* activityBtn = [UIButton buttonWithType:UIButtonTypeCustom];
             activityBtn.frame = CGRectMake(margin_x_left+c*(icon_width+margin_x), margin_y_top+r*(icon_height+label_height+margin_y), icon_width, icon_height);
             [activityBtn setImage:[UIImage imageNamed:activityIcon] forState:UIControlStateNormal];
             [activityBtn setImage:[UIImage imageNamed:activityIcon] forState:UIControlStateHighlighted];
-            [grayImages addObject:[UIImage imageNamed:activityIconGray]];
             activityBtn.tag = i;
             [activityBtn addTarget:self action:@selector(activityButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
             [scrollView addSubview:activityBtn];
