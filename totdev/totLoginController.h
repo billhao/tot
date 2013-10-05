@@ -17,6 +17,7 @@
     IBOutlet UIButton*    mLogin;
     IBOutlet UIButton*    mNewuser;
     IBOutlet UIButton*    mPrivacy;
+    IBOutlet UIButton*    mForgotPwd;
 
     totModel* model;
 }

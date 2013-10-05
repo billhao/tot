@@ -300,8 +300,12 @@
     int tag = ((UIButton*)sender).tag;
     
     // prevent from sleeping again
-    if( tag == SLEEP && self.parentView.parent.sleeping )
+    if( tag == SLEEP && self.parentView.parent.sleeping ) {
+        totReviewCardView* sleepcard = [self.parentView.parent getSleepCard];
+        if( sleepcard )
+            [self.parentView.parent moveToTop:sleepcard]; // ask timeline to move sleep card to top
         return;
+    }
     
     totReviewCardView* card = [self.timeline addEmptyCard:tag];
     [self.parentView.parent moveToTop:card]; // ask timeline to move this card to top

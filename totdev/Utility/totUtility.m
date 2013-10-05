@@ -94,4 +94,14 @@ void print(NSString* str) {
     return screenRect.size;
 }
 
++ (void)showAlert:(NSString*)text {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@""
+                                                    message:text
+                                                   delegate:nil
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil];
+    [alert show];
+    [alert release];
+}
+
 @end

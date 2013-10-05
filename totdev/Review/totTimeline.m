@@ -59,16 +59,14 @@
     card.parent = self;
     
     // Check whether there already existed an edit card.
-    if ([mCards count] > 1) {
-        totReviewCardView* cc = [mCards objectAtIndex:1];
-        if (cc.mMode == EDIT) {
-            [self deleteCard:cc];
-        }
+    int editCardIndex = [self getEditCardIndex];
+    if ( editCardIndex > -1 ) {
+        totReviewCardView* cc = [mCards objectAtIndex:editCardIndex];
+        [self deleteCard:cc];
     }
     
+    int index = [self getSummaryCardIndex] + 1;
     if ([mCards count] > 0) {
-        int index = 1;
-        if( sleeping ) index = 2; // sleep card is on top of summary card
         [mCards insertObject:card atIndex:index];  // new card is always under the summary card.
     } else {
         [mCards addObject:card];
@@ -167,6 +165,7 @@
         totReviewCardView* cv = [mCards objectAtIndex:i];
         if (cv == card) {
             [mCards removeObjectAtIndex:i];
+            if( i < index ) index--; // because all indexes after i have decreased by one
             [mCards insertObject:cv atIndex:index];
             break;
         }
@@ -209,6 +208,27 @@
             return i;
     }
     return -1;
+}
+
+// return -1 if no edit card
+- (int)getEditCardIndex {
+    int index = [self getSummaryCardIndex] + 1;
+    if ([mCards count] > index) {
+        totReviewCardView* cc = [mCards objectAtIndex:index];
+        if (cc.mMode == EDIT) {
+            return index;
+        }
+    }
+    return -1;
+}
+
+- (totReviewCardView*)getSleepCard {
+    for( int i=0; i<mCards.count; i++ ) {
+        totReviewCardView* card = mCards[i];
+        if( card.mMode == EDIT && card.mEditView.type == SLEEP )
+            return [[card retain] autorelease];
+    }
+    return nil;
 }
 
 // load limit number of cards starting from an event

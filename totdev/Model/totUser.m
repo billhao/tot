@@ -33,6 +33,9 @@ static totModel* _model;
 
 // add a new user
 +(totUser*) newUser:(NSString*)email password:(NSString*)pwd message:(NSString**)message {
+    // clean the email
+    email = [email stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    
     NSString* account_pref = [NSString stringWithFormat:PREFERENCE_ACCOUNT, email];
     
     NSString* pwdhash = [self getPasswordHash:pwd salt:nil];
@@ -65,6 +68,17 @@ static totModel* _model;
     NSString* pwdhash = [self getPasswordHash:pwd salt:salt];
     
     return [pwdhash_db isEqualToString:pwdhash];
+}
+
+// request the server to reset password
++(BOOL)forgotPassword:(NSString*)email message:(NSString**)message {
+    totServerCommController* server = [[totServerCommController alloc] init];
+    int retCode = [server sendForgetPasscodeforUser:email returnMessage:message];
+    if( retCode == SERVER_RESPONSE_CODE_SUCCESS ) {
+        return TRUE;
+    }
+    else
+        return FALSE;
 }
 
 // concatenate salt and hash of pwd to the final string, which will be stored

@@ -52,4 +52,8 @@
 // Update the value of the specified type in summary card.
 - (void) updateSummaryCard:(ReviewCardType)type withValue:(NSString*)value;
 
+- (int)getSummaryCardIndex;
+- (int)getEditCardIndex;
+- (totReviewCardView*)getSleepCard;
+
 @end

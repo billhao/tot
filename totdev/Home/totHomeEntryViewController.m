@@ -38,6 +38,7 @@
 //        mMessage = [[NSMutableDictionary alloc] init];
         
         allActivities = nil;
+        activityButtons = nil;
         
         MAX_SELECTED_ACTIVITIES = 3;
         
@@ -158,6 +159,7 @@
     [super dealloc];
     
     if( allActivities != nil ) [allActivities release];
+    [activityButtons release];
     if( scrapbookListController != nil ) [scrapbookListController release];
     if( photoPositionLabel ) [photoPositionLabel release];
 }
@@ -267,23 +269,35 @@
 // add the selected activity
 - (void)activityButtonPressed: (id)sender {
     UIButton* btn = (UIButton*)sender;
-    NSLog(@"%d", btn.tag);
+    //NSLog(@"%d", btn.tag);
+    int tag = btn.tag;
     
-    // check if this activity has already been added
-    
-    // max icons in tag = 4, remove the first one if more than that
     MediaInfo* m = mediaLib.currentMediaInfo;
     NSMutableArray* selectedActivities = m.activities;
-    if( selectedActivities.count >= 3 )
-        [selectedActivities removeObjectAtIndex:0];
-    
-    // add this activity
-    int i = btn.tag;
-    [selectedActivities addObject:allActivities[i]];
-    
-    // remove this activity from list
-    
 
+    // check if this activity has already been added
+    BOOL selected = FALSE;
+    int selectedIndex = -1;
+    for( int i=0; i<selectedActivities.count; i++ ) {
+        if( [selectedActivities[i] isEqualToString:allActivities[tag]] ) {
+            selectedIndex = i;
+            selected = TRUE;
+            break;
+        }
+    }
+    
+    if( !selected ) {
+        // max icons in tag = 3, remove the first one if more than that
+        if( selectedActivities.count >= 3 ) {
+            [self removeSelectedActivity:0];
+        }
+        
+        [self addToSelectedActivity:tag];
+    }
+    else {
+        [self removeSelectedActivity:selectedIndex];
+    }
+    
     // update db if not default
     if( ![m isDefault] )
         [m save];
@@ -292,20 +306,79 @@
     [self updateSelectedActivitesView];
 }
 
+// parameter is the index in all activities
+- (void)addToSelectedActivity:(int)index {
+    // add this activity
+    MediaInfo* m = mediaLib.currentMediaInfo;
+    NSMutableArray* selectedActivities = m.activities;
+    [selectedActivities addObject:allActivities[index]];
+    
+    // change icon to small size
+    UIButton* btn = activityButtons[index];
+    CGRect f = btn.frame;
+    float sizechange_x = activityIconSizeChange.width;
+    float sizechange_y = activityIconSizeChange.height;
+    f.origin.x += sizechange_x/2;
+    f.origin.y += sizechange_y/2;
+    f.size.width  -= sizechange_x;
+    f.size.height -= sizechange_y;
+    
+    btn.layer.shadowColor = [UIColor whiteColor].CGColor;
+    btn.layer.shadowOffset = CGSizeMake(0, 0);
+    btn.layer.shadowRadius = 6;
+    
+    float t1 = .5; // same as animation for selected activity
+    [UIView animateWithDuration:t1 animations:^{
+        btn.frame = f;
+        btn.layer.shadowOpacity = 1.0;
+    }];
+}
+
+// parameter is the index in selected activities
+- (void)removeSelectedActivity:(int)selectedIndex {
+    MediaInfo* m = mediaLib.currentMediaInfo;
+    NSMutableArray* selectedActivities = m.activities;
+    
+    // get index in all activities
+    int index = [self getActivityIndex:selectedActivities[selectedIndex]];
+    
+    [selectedActivities removeObjectAtIndex:selectedIndex];
+
+    // change icon to original size
+    UIButton* btn = activityButtons[index];
+    CGRect f = btn.frame;
+    float sizechange_x = activityIconSizeChange.width;
+    float sizechange_y = activityIconSizeChange.height;
+    f.origin.x -= sizechange_x/2;
+    f.origin.y -= sizechange_y/2;
+    f.size.width  += sizechange_x;
+    f.size.height += sizechange_y;
+
+    float t1 = .5; // same as animation for selected activity
+    [UIView animateWithDuration:t1 animations:^{
+        btn.frame = f;
+        btn.layer.shadowOpacity = 0.0;
+    }];
+}
+
+- (int)getActivityIndex:(NSString*)activity {
+    for( int i=0; i<allActivities.count; i++ ) {
+        if( [allActivities[i] isEqualToString:activity] ) {
+            return i;
+        }
+    }
+    return -1;
+}
+
 // remove this selected activity
 - (void)selectedActivityButtonPressed: (id)sender {
     UIButton* btn = (UIButton*)sender;
     int i = btn.tag;
     
-    MediaInfo* m = mediaLib.currentMediaInfo;
-    NSMutableArray* selectedActivities = m.activities;
-    
-    // remove from selected list
-    [selectedActivities removeObjectAtIndex:i];
-
-    // add to all list
+    [self removeSelectedActivity:i];
     
     // update db if not default
+    MediaInfo* m = mediaLib.currentMediaInfo;
     if( ![m isDefault] )
         [m save];
     
@@ -551,6 +624,7 @@
     scrollView.showsHorizontalScrollIndicator = NO;
     scrollView.delegate = self;
     
+    activityButtons = [[NSMutableArray alloc] initWithCapacity:allActivities.count];
     UIFont* font = [UIFont fontWithName:@"Raleway-SemiBold" size:14.0];
     BOOL debug = false;
     for (int c=0; c<columns; c++) {
@@ -561,18 +635,24 @@
             NSString* activity = [allActivities objectAtIndex:i];
             NSString* tmpname = [activity stringByReplacingOccurrencesOfString:@" " withString:@"_"];
             NSString* activityIcon = [NSString stringWithFormat:@"activity_%@", tmpname];
-            NSString* activityIconPressed = [NSString stringWithFormat:@"activity_%@_pressed", tmpname];
             
             UIButton* activityBtn = [UIButton buttonWithType:UIButtonTypeCustom];
             activityBtn.frame = CGRectMake(margin_x_left+c*(icon_width+margin_x), margin_y_top+r*(icon_height+label_height+margin_y), icon_width, icon_height);
             [activityBtn setImage:[UIImage imageNamed:activityIcon] forState:UIControlStateNormal];
-            //[activityBtn setImage:[UIImage imageNamed:activityIconPressed] forState:UIControlStateHighlighted];
+            [activityBtn setImage:[UIImage imageNamed:activityIcon] forState:UIControlStateHighlighted];
             activityBtn.tag = i;
             [activityBtn addTarget:self action:@selector(activityButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
             [scrollView addSubview:activityBtn];
+            [activityButtons addObject:activityBtn];
             if(debug) {
                 activityBtn.layer.borderColor = [UIColor blackColor].CGColor;
                 activityBtn.layer.borderWidth = 1.0;
+            }
+            
+            if( i == 0 ) {
+                // save default activity icon size
+                CGRect f = activityBtn.frame;
+                activityIconSizeChange = CGSizeMake(f.size.width/4, f.size.height/4);
             }
             
             UIButton* activityLabel = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -703,6 +783,31 @@
         if( [mediaLib next] )
             [self showPhoto:Animation_Fade_And_Scale];
     }
+}
+
+-(UIImage *)convertOriginalImageToBWImage:(UIImage *)originalImage
+{
+    UIImage *newImage;
+    
+    CGColorSpaceRef colorSapce = CGColorSpaceCreateDeviceGray();
+    CGContextRef context = CGBitmapContextCreate(nil, originalImage.size.width * originalImage.scale, originalImage.size.height * originalImage.scale, 8, originalImage.size.width * originalImage.scale, colorSapce, kCGImageAlphaNone);
+    CGContextSetInterpolationQuality(context, kCGInterpolationHigh);
+    CGContextSetShouldAntialias(context, NO);
+    CGContextDrawImage(context, CGRectMake(0, 0, originalImage.size.width, originalImage.size.height), [originalImage CGImage]);
+    
+    CGImageRef bwImage = CGBitmapContextCreateImage(context);
+    CGContextRelease(context);
+    CGColorSpaceRelease(colorSapce);
+    
+    UIImage *resultImage = [UIImage imageWithCGImage:bwImage];
+    CGImageRelease(bwImage);
+    
+    UIGraphicsBeginImageContextWithOptions(originalImage.size, NO, originalImage.scale);
+    [resultImage drawInRect:CGRectMake(0.0, 0.0, originalImage.size.width, originalImage.size.height)];
+    newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return newImage;
 }
 
 @end

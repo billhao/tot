@@ -23,6 +23,8 @@
 
 + (CGSize)getScreenSize;
 
++ (void)showAlert:(NSString*)text;
+
 @end
 
 extern void print(NSString* str);

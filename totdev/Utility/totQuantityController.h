@@ -40,6 +40,7 @@ enum {
     // keep the superview and hidden textview on the superview so we can use its InputView and InputAccessoryView
     UIView* mSuperView;
     UITextView* mHiddenText;
+    UITextField* mTextField;
 }
 
 @property (nonatomic, readonly) int mCurrentQuantityIdx;
@@ -48,15 +49,18 @@ enum {
 @property (nonatomic, assign) int mHeight;
 @property (nonatomic, retain) id<totQuantityControllerDelegate> delegate;
 @property (nonatomic, retain) UIPickerView *mQuantityPicker;
+@property (nonatomic, retain) UIView* inputAccessoryView;
 
 // must init with a super view
 - (id)init:(UIView*)superView;
+// use super's own textField instead of creating a hidden UITextView
+- (id)init:(UIView*)superView textField:(UITextField*)textField;
 
 // set the current value
 - (void)setQuantityPicked:(int)q andUnitPicked:(int)u;
 
 // return "May" from 5
-+ (NSString*)getUnitString:(int)u;
+- (NSString*)getUnitString:(int)i;
 
 // for the ok and cancel button
 - (UIView*)createInputAccessoryView;
