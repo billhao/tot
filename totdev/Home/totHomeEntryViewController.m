@@ -64,6 +64,13 @@
     mPhotoViewB.backgroundColor = [UIColor clearColor];
     [self.view addSubview:mPhotoViewB];
     
+    // add setting icon
+    UIButton* settingBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    settingBtn.frame = CGRectMake(270, 0, 30, 60);
+    settingBtn.backgroundColor = [UIColor colorWithRed:159.0/255.0 green:198.0/255.0 blue:231.0/255.0 alpha:1.0f];
+    [settingBtn addTarget:self action:@selector(settingButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:settingBtn];
+    
     // add camera icon
     cameraBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     UIImage* cameraImg = [UIImage imageNamed:@"camera_button"];
@@ -246,6 +253,10 @@
 
 - (void)scrapbookButtonPressed: (id)sender {
     [self.homeRootController switchTo:kScrapbook withContextInfo:nil];
+}
+
+- (void)settingButtonPressed: (id)sender {
+    [self.homeRootController switchTo:kSetting withContextInfo:nil];
 }
 
 - (void)autoPlayButtonPressed: (id)sender {

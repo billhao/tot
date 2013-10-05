@@ -39,7 +39,10 @@
     
     // Do any additional setup after loading the view from its nib.
     
+    self.view.backgroundColor = [UIColor blueColor];
+    
     // add bg
+    /*
     UIImage* img = [UIImage imageNamed:@"settings_bg"];
     UIImageView* bgview = [[UIImageView alloc] initWithImage:img];
     bgview.frame = CGRectMake(0, 0, img.size.width, img.size.height);
@@ -72,6 +75,7 @@
     [mClearDBButton addTarget:self action:@selector(ClearDBButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [mSignOutButton addTarget:self action:@selector(SignOutButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [mTutorialButton addTarget:self action:@selector(TutorialButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+     */
 }
 
 - (void)viewDidUnload
@@ -109,8 +113,7 @@
     return [[UIApplication sharedApplication] delegate];
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }

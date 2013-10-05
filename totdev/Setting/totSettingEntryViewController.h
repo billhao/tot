@@ -10,9 +10,9 @@
 #import "totModel.h"
 
 @interface totSettingEntryViewController : UIViewController {
-    IBOutlet UIButton* mSignOutButton;
-    IBOutlet UIButton* mClearDBButton;
-    IBOutlet UIButton* mTutorialButton;
+    UIButton* mSignOutButton;
+    UIButton* mClearDBButton;
+    UIButton* mTutorialButton;
 }
 
 @end

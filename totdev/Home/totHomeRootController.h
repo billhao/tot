@@ -12,11 +12,13 @@
 @class totHomeEntryViewController;
 @class totTimelineController;
 @class totBookListViewController;
+@class totSettingRootController;
 
 enum {
     kHomeViewEntryView  = 0,
     kTimeline           = 1,
     kScrapbook          = 2,
+    kSetting            = 3,
 };
 
 @interface totHomeRootController : UIViewController {
@@ -33,6 +35,7 @@ enum {
 @property (nonatomic, retain) totHomeEntryViewController* homeEntryViewController;
 @property (nonatomic, retain) totTimelineController* timelineController;
 @property (nonatomic, retain) totBookListViewController* scrapbookListController;
+@property (nonatomic, retain) totSettingRootController* settingController;
                             
 //@property (nonatomic, retain) totHomeFeedingViewController* homeFeedingViewController;
 //@property (nonatomic, retain) totHomeHeightViewController* homeHeightViewController;

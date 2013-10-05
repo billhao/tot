@@ -8,11 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "totSettingEntryViewController.h"
+#import "totHomeRootController.h"
 
 @interface totSettingRootController : UIViewController {
     totSettingEntryViewController* mEntryView;
 }
 
 @property (nonatomic, retain) totSettingEntryViewController* mEntryView;
+@property (nonatomic, assign) totHomeRootController* homeController;
 
 @end

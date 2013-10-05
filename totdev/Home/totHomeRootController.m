@@ -13,13 +13,14 @@
 #import "totHomeActivityBrowseController.h"
 #import "totHomeActivityLabelController.h"
 #import "totHomeAlbumBrowseController.h"
+#import "totSettingRootController.h"
 #import "totTimelineController.h"
 #import "AppDelegate.h"
 #import "Global.h"
 
 @implementation totHomeRootController
 
-@synthesize homeEntryViewController, scrapbookListController;
+@synthesize homeEntryViewController, scrapbookListController, settingController;
 //@synthesize homeFeedingViewController;
 //@synthesize homeHeightViewController;
 //@synthesize homeActivityLabelController;
@@ -90,6 +91,8 @@
             return [self getTimelineVC];
         case kScrapbook:
             return [self getScrapbookVC];
+        case kSetting:
+            return [self getSettingVC];
         default:
             printf("Invalid view index\n");
             return nil;
@@ -128,7 +131,10 @@
                     currentView.view.frame = CGRectMake(0, 480, 320, 460);
                 }
                 else if( mCurrentViewIndex == kScrapbook ) {
-                    currentView.view.frame = CGRectMake(320, 0, 320, 460);
+                    currentView.view.frame = CGRectMake(320, 20, 320, 460);
+                }
+                else if( mCurrentViewIndex == kSetting ) {
+                    currentView.view.frame = CGRectMake(320, 20, 320, 460);
                 }
             } completion:^(BOOL finished) {
                 if([nc.viewControllers containsObject:nextView]) {
@@ -177,6 +183,19 @@
                              }];
             break;
         }
+        case kSetting:
+        {
+            nextView.view.frame = CGRectMake(320, 20, 320, 460);
+            [UIView animateWithDuration:0.5
+                             animations:^{
+                                 nextView.view.frame = CGRectMake(0, 20, 320, 460);
+                                 [delegate.loginNavigationController.view addSubview:nextView.view];
+                             } completion:^(BOOL finished){
+                                 [delegate.loginNavigationController pushViewController:nextView animated:FALSE];
+                                 mCurrentViewIndex = viewIndex;
+                             }];
+            break;
+        }
     }
 }
 
@@ -188,6 +207,7 @@
     if(homeEntryViewController) [homeEntryViewController release];
     if(timelineController) [timelineController release];
     if(scrapbookListController) [scrapbookListController release];
+    if(settingController) [settingController release];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -221,6 +241,14 @@
         scrapbookListController.homeController = self;
     }
     return scrapbookListController;
+}
+
+- (totSettingRootController*)getSettingVC {
+    if (settingController == nil) {
+        settingController = [[totSettingRootController alloc] init];
+        settingController.homeController = self;
+    }
+    return settingController;
 }
 
 @end

@@ -7,10 +7,11 @@
 //
 
 #import "totSettingRootController.h"
-#
+
 @implementation totSettingRootController
 
 @synthesize mEntryView;
+@synthesize homeController;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -18,9 +19,10 @@
     if (self) {
         // Custom initialization
         // customize the tab bar item
-        self.tabBarItem.title = @"Settings";
-        [[self tabBarItem] setFinishedSelectedImage:[UIImage imageNamed:@"setting_selected"] withFinishedUnselectedImage:[UIImage imageNamed:@"setting"]];
-        [[self tabBarItem] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor grayColor], UITextAttributeTextColor, nil] forState:UIControlStateSelected];
+        //self.tabBarItem.title = @"Settings";
+        //[[self tabBarItem] setFinishedSelectedImage:[UIImage imageNamed:@"setting_selected"]
+        //                withFinishedUnselectedImage:[UIImage imageNamed:@"setting"]];
+        //[[self tabBarItem] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor grayColor], UITextAttributeTextColor, nil] forState:UIControlStateSelected];
     }
     return self;
 }
@@ -38,8 +40,7 @@
 /*
 // Implement loadView to create a view hierarchy programmatically, without using a nib.
 - (void)loadView
-{
-}
+{}
 */
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
@@ -50,8 +51,10 @@
     self.view.frame = CGRectMake(0, 20, 320, 460);
 
     // add the entry view
-    mEntryView = [[totSettingEntryViewController alloc] initWithNibName:@"SettingEntryView" bundle:nil];
-    [self.view addSubview:mEntryView.view];
+    totSettingEntryViewController* settingController = [[totSettingEntryViewController alloc] initWithNibName:@"SettingEntryView" bundle:nil];
+    self.mEntryView = settingController;
+    [self.view addSubview:settingController.view];
+    [settingController release];
 }
 
 - (void)viewDidUnload
@@ -60,6 +63,7 @@
     
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
+    [self.mEntryView release];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
