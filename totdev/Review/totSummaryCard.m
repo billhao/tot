@@ -323,7 +323,7 @@
 - (void) cameraView:(id)cameraView didFinishSavingMedia:(MediaInfo*)mediaInfo {
     [headImg imageFromFileContent:[totMediaLibrary getMediaPath:mediaInfo.filename]];
 
-    // save the image filename to db
+    // TODO save the image filename to db
 }
 
 @end
