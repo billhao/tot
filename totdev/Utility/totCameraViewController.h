@@ -33,6 +33,7 @@
 
 @property (nonatomic, retain) UIImagePickerController *imagePicker;
 @property (nonatomic, retain) id<CameraViewDelegate> delegate;
+@property (nonatomic, assign) BOOL saveToDB; // whether save the image to db after camera or photo editor
 
 // for photo editor
 @property (nonatomic, assign) float cropWidth;

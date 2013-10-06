@@ -14,7 +14,7 @@
 
 @implementation totBaby
 
-@synthesize babyID = _babyID, name = _name, sex = _sex, birthday = _birthday;
+@synthesize babyID = _babyID, name = _name, sex = _sex, birthday = _birthday, avatar;
 
 // initializer
 //
@@ -145,4 +145,30 @@
     return str;
 }
 
+// get avatar from db or return the default one if nil
+- (UIImage*)avatar {
+    UIImage* img = nil;
+    NSString* filename = [global.model getPreference:global.baby.babyID preference:PREFERENCE_BABY_AVATAR];
+    if( filename ) {
+        NSString* filepath = [totMediaLibrary getMediaPath:filename];
+        img = [UIImage imageWithContentsOfFile:filepath];
+    }
+    else {
+        img = [UIImage imageNamed:@"summary_head_default"];
+    }
+    
+    if( img )
+        return [[img retain] autorelease];
+    else
+        return nil;
+}
+
 @end
+
+
+
+
+
+
+
+

@@ -21,6 +21,7 @@
 @property(nonatomic, retain) NSString* name;
 @property(nonatomic, assign) enum SEX sex;
 @property(nonatomic, retain) NSDate* birthday;
+@property(nonatomic, retain) UIImage* avatar;
 
 // initializer
 -(id) initWithID:(int)babyID;    // init to an existing baby

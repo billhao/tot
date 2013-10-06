@@ -107,7 +107,8 @@
     NSString* account_pref = [NSString stringWithFormat:PREFERENCE_ACCOUNT, email];
     NSString* pwd_db = [model getPreferenceNoBaby:account_pref];
     
-    if( (pwd_db!=nil) && ([totUser verifyPassword:pwd email:email]) ) {
+    NSString* msg = nil;
+    if( (pwd_db!=nil) && ([totUser verifyPassword:pwd email:email message:&msg]) ) {
         totUser* user = [[totUser alloc] initWithID:email];
         global.user = user;
         if( global.baby != nil ) {
@@ -134,7 +135,10 @@
     }
     else {
         // if yes and pwd doesn't match, prompt for pwd
-        [self showAlert:@"Email address or password does not match"];
+        if( msg )
+            [self showAlert:msg];
+        else
+            [self showAlert:@"Email address or password does not match"];
     }
 }
 
@@ -150,9 +154,9 @@
     NSString* account_pref = [NSString stringWithFormat:PREFERENCE_ACCOUNT, email];
     NSString* pwd_db = [model getPreferenceNoBaby:account_pref];
     
+    NSString* msg = nil;
     if( pwd_db == nil ) {
         // if no, add email and pwd to db, go to home view
-        NSString* msg = nil;
         totUser* user =[totUser newUser:email password:pwd message:&msg];
         if( user != nil ) {
             global.user = user;
@@ -175,23 +179,28 @@
         }
         [user release];
     }
-    else if( [totUser verifyPassword:pwd email:email] ) {
-        totUser* user = [[totUser alloc] initWithID:email];
-        global.user = user;
-        if( global.baby != nil ) {
-            // add new baby's id to this user
-            [user addBabyToUser:global.baby];
-            [user setDefaultBaby:global.baby];
-        }
-        [user release];
-        // if yes and pwd matches, go to home view
-        [self backgroundTap:nil]; // dismiss keyboard
-        [self setLoggedIn:email];
-        [self showHomeView];
-    }
     else {
-        // if yes and pwd doesn't match, prompt for pwd
-        [self showAlert:@"User already exists"];
+        BOOL re = [totUser verifyPassword:pwd email:email message:&msg];
+        if( re ) {
+            totUser* user = [[totUser alloc] initWithID:email];
+            global.user = user;
+            if( global.baby != nil ) {
+                // add new baby's id to this user
+                [user addBabyToUser:global.baby];
+                [user setDefaultBaby:global.baby];
+            }
+            [user release];
+            // if yes and pwd matches, go to home view
+            [self backgroundTap:nil]; // dismiss keyboard
+            [self setLoggedIn:email];
+            [self showHomeView];
+        }
+        else {
+            if( msg )
+                [self showAlert:msg];
+            else
+                [self showAlert:@"Email address already exists but password does not match"];
+        }
     }
 }
 

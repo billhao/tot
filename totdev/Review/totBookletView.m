@@ -304,6 +304,7 @@ static BOOL bAnimationStarted = NO;
     [global.cameraView setDelegate:self];
     // f is frame after rotate
     CGRect f = mView.frame;
+    global.cameraView.saveToDB = TRUE;
     global.cameraView.cropWidth = f.size.width;// self.mView.mData.w;
     global.cameraView.cropHeight = f.size.height;// self.mView.mData.h;
     [global.cameraView launchCamera:self.bookvc withEditing:TRUE];
@@ -314,6 +315,7 @@ static BOOL bAnimationStarted = NO;
 //    [appDelegate.mainTabController.cameraView setDelegate:self];
 //    [appDelegate.mainTabController.cameraView launchCamera];
     global.cameraView.delegate = self;
+    global.cameraView.saveToDB = TRUE;
     [global.cameraView launchCamera:self.bookvc withEditing:TRUE];
 }
 
