@@ -60,6 +60,8 @@ typedef enum {
 + (NSString*) image;
 + (NSString*) video;
 + (NSString*) audio;
++ (NSString*) text;
+
 // NOTE: (x, y) is the top-left corner of the element.
 + (void)initPageElement:(totPageElement*)e
                       x:(float)x

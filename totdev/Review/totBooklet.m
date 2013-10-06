@@ -39,6 +39,7 @@
 + (NSString*) image { return @"image"; }
 + (NSString*) video { return @"video"; }
 + (NSString*) audio { return @"audio"; }
++ (NSString*) text  { return @"text";  }
 
 + (void)initPageElement:(totPageElement*)e
                       x:(float)x

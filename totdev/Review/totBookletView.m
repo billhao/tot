@@ -85,7 +85,8 @@
 }
 
 - (void)display {
-    if (self.mData) {
+    if (!self.mData) return;
+    if (self.mData.type == IMAGE ){
         NSString* image_path = [self.mData getResource:[totPageElement image]];
         if (image_path) {
             mImage = [[UIImageView alloc] initWithFrame:self.frame];
@@ -105,6 +106,17 @@
             [self addSubview:mImage];
         }
         [self setStyle:TRUE];
+    }
+    else if( self.mData.type == TEXT ) {
+        NSString* text = [self.mData getResource:[totPageElement text]];
+        UITextView* textView = [[UITextView alloc] initWithFrame:self.bounds];
+        textView.backgroundColor = [UIColor clearColor];
+        textView.delegate = self;
+        if( text ) textView.text = text;
+        textView.layer.borderColor = [UIColor grayColor].CGColor;
+        textView.layer.borderWidth = 0.5;
+        textView.layer.cornerRadius = 2;
+        [self addSubview:textView];
     }
 }
 
@@ -141,6 +153,18 @@
     [super dealloc];
     [mData release];
     [mImage release];
+}
+
+- (BOOL)textView:(UITextView*)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    if( [text isEqualToString:@"\n"] ) {
+        [textView resignFirstResponder];
+
+        // update data
+        [mData addResource:[totPageElement text] withPath:textView.text];
+        
+        return NO;
+    }
+    return YES;
 }
 
 @end
@@ -223,7 +247,8 @@ static BOOL bAnimationStarted = NO;
     if (bIsFullPage) {
         // bring this view to original z-index
         UIView* superview = self.superview;
-        [superview exchangeSubviewAtIndex:myIndexInSuperview withSubviewAtIndex:superview.subviews.count-1];
+        //[superview exchangeSubviewAtIndex:myIndexInSuperview withSubviewAtIndex:superview.subviews.count-1];
+        [superview insertSubview:self atIndex:myIndexInSuperview];
 
         [mView setStyle:TRUE];
     }
@@ -251,7 +276,8 @@ static BOOL bAnimationStarted = NO;
         // put this view to top
         UIView* superview = [self superview];
         myIndexInSuperview = [superview.subviews indexOfObject:self];
-        [superview exchangeSubviewAtIndex:myIndexInSuperview withSubviewAtIndex:superview.subviews.count-1];
+        [superview bringSubviewToFront:self];
+        //[superview exchangeSubviewAtIndex:myIndexInSuperview withSubviewAtIndex:superview.subviews.count-1];
 
         [mView rotateTo:0];
         mView.backgroundColor = [UIColor colorWithRed:.1 green:.1 blue:.1 alpha:0.95];
@@ -453,7 +479,12 @@ static BOOL bAnimationStarted = NO;
         [elementView release];
     }
     for (totPageElementView* view in mElementsView) {
-        [self insertSubview:view belowSubview:mBackground];
+        if( view.mView.mData.type == TEXT ) {
+            [self insertSubview:view aboveSubview:mBackground];
+        }
+        else {
+            [self insertSubview:view belowSubview:mBackground];
+        }
     }
 }
 
