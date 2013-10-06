@@ -264,7 +264,7 @@
             NSString* bookIconPressed = bookIcon;// [NSString stringWithFormat:@"activity_%@_pressed", bookIcon];
             
             UIView* bookView = [[UIView alloc] init];
-            bookView.frame = CGRectMake(margin_x_left+c*(icon_width+margin_x), margin_y_top+r*(icon_height+label_height+margin_y), icon_width, icon_height);
+            bookView.frame = CGRectMake(margin_x_left+c*(icon_width+margin_x), margin_y_top+r*(icon_height+margin_y), icon_width, icon_height);
             UIButton* bookBtn = [UIButton buttonWithType:UIButtonTypeCustom];
             bookBtn.frame = bookView.bounds;
             [bookBtn addTarget:self action:@selector(bookSelected:) forControlEvents:UIControlEventTouchUpInside];
@@ -313,7 +313,7 @@
             [bookView release];
         }
     }
-    scrollView.contentSize = CGSizeMake(320, margin_y_top+margin_y_bottom+rows*(icon_height+label_height+margin_y));
+    scrollView.contentSize = CGSizeMake(320, margin_y_top+margin_y_bottom+rows*(icon_height+margin_y));
     float h = scrollView.contentSize.height;
     // scroll to top
 //    scrollView.contentOffset = CGPointMake(0, 0);
