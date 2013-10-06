@@ -167,7 +167,10 @@
         
         return true;
     }
-    return false;
+    else {
+        [totUtility showAlert:@"Anything on the diaper?"];
+        return false;
+    }
 }
 
 @end
