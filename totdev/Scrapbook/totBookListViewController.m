@@ -240,10 +240,12 @@
     int margin_y_bottom = 8;
     float icon_height = 200;
     float icon_width = 309;
-    int label_height = 0;
+    int label_height = 24;
     int columns = 1;
     int rows = ceil((double)booksAndTemplates.count/columns);
-    
+    UIFont* font1 = [UIFont fontWithName:@"Raleway-Medium" size:18];
+    UIColor* color1 = [UIColor colorWithRed:102.0/255 green:102.0/255 blue:102.0/255 alpha:1.0];
+
     bookBtnList = [[NSMutableArray alloc] initWithCapacity:booksAndTemplates.count];
     for (int r=0; r<rows; r++) {
         for( int c=0; c<columns; c++) {
@@ -274,7 +276,7 @@
             }
             else {
                 // background
-                UIImageView* bg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Birthday"]];
+                UIImageView* bg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"sb_book_bg"]];
                 [bookView addSubview:bg];
                 
                 // book thumbnail
@@ -292,11 +294,18 @@
             [bookBtnList addObject:bookView];
             
             UILabel* bookLabel = [[UILabel alloc] init];
-            bookLabel.frame = CGRectMake(margin_x_left+c*(icon_width+margin_x), margin_y_top+r*(icon_height+label_height+margin_y)+icon_height, icon_width, label_height);
+            bookLabel.frame = CGRectMake(margin_x_left+c*(icon_width+margin_x)+15, margin_y_top+r*(icon_height+label_height+margin_y)+170, icon_width-30, label_height);
             bookLabel.backgroundColor = [UIColor clearColor];
             bookLabel.alpha = 0.8;
             bookLabel.text = [book objectForKey:@"name"];
             bookLabel.tag = i;
+            bookLabel.font = font1;
+            bookLabel.textColor = color1;
+            [bookLabel sizeToFit];
+            
+            // TODO in the release, thumbnails for templates should be the same as books
+            if( isTemplate )
+                bookLabel.hidden = TRUE;
             
             [scrollView addSubview:bookView];
             [scrollView addSubview:bookLabel];

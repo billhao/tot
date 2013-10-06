@@ -132,6 +132,7 @@ typedef enum {
 
 + (totBook*) loadFromDB:(NSString*)bookid bookname:(NSString*)bookname;
 - (void) saveToDB; // save the book as a json string in db
+- (void)deleteBook; // delete the book from db
 
 - (totPage*) getPage:(NSString*)name;
 - (totPage*) getPageWithIndex:(int)pageIndex;

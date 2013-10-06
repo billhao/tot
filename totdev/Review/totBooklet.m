@@ -509,6 +509,10 @@
     
 }
 
+- (void)deleteBook {
+    [totBook deleteBook:bookid bookname:bookname];
+}
+
 + (void) deleteBook:(NSString*)bookid bookname:(NSString*)bookname {
     NSString* dbid = [NSString stringWithFormat:SCRAPBOOK_REPLACABLE, bookid, bookname];
     NSLog(@"delete book %@ from db", dbid);
