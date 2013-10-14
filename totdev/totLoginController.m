@@ -108,7 +108,8 @@
     NSString* pwd_db = [model getPreferenceNoBaby:account_pref];
     
     NSString* msg = nil;
-    if( (pwd_db!=nil) && ([totUser verifyPassword:pwd email:email message:&msg]) ) {
+    if( [totUser verifyPassword:pwd email:email message:&msg] ) {
+        // TODO add this user's info to local db if she has never used on this phone before, such as after a phone change
         totUser* user = [[totUser alloc] initWithID:email];
         global.user = user;
         if( global.baby != nil ) {
@@ -205,6 +206,8 @@
 }
 
 - (void)ForgotPwdButtonClicked: (UIButton *)button {
+    if( ![self checkEmail] ) return;
+
     NSString* email = mEmail.text;
     NSString* msg = nil;
     BOOL re = [totUser forgotPassword:email message:&msg];

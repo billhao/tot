@@ -88,10 +88,10 @@
 //   send forget passcode request to server
 // -----------------------------------------------
 - (int) sendForgetPasscodeforUser: (NSString*) email returnMessage:(NSString**)message {
-    NSString* loginInfo = @"email=";
-    loginInfo = [loginInfo stringByAppendingString:email];
+    NSString* loginInfo = [NSString stringWithFormat:@"email=%@",email];
     return [self sendStr:loginInfo toURL:m_forgetPasscode_url returnMessage:message];
 }
+
 // -----------------------------------------------
 //  basic func to send POST req to server
 //    -> remember to check whether the return is nil
@@ -132,9 +132,11 @@
     }
     int ret = SERVER_RESPONSE_CODE_FAIL;
     NSArray* ss = [strReply componentsSeparatedByString:@"::"];
-    if( ss.count == 2 ) {
+    if( ss.count >= 1 && ss.count <= 2 ) {
         ret = [(NSString*)ss[0] intValue];
-        *message = [[(NSString*)ss[1] retain] autorelease];
+        if( ss.count == 2 ) {
+            *message = [[(NSString*)ss[1] retain] autorelease];
+        }
     }
     else
         *message = @"Cannot understand server's response";

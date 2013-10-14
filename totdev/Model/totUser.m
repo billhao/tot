@@ -43,7 +43,7 @@ static totModel* _model;
     // register with server
     totServerCommController* server = [[totServerCommController alloc] init];
     int retCode = [server sendRegInfo:@"" withEmail:email withPasscode:pwdhash returnMessage:message];
-    if( TRUE || retCode == SERVER_RESPONSE_CODE_SUCCESS ) {
+    if( retCode == SERVER_RESPONSE_CODE_SUCCESS ) {
         BOOL re = [_model addPreferenceNoBaby:account_pref value:pwdhash];
         if( re )
             return [[totUser alloc] initWithID:email];
