@@ -32,7 +32,7 @@
 // ---------------------------------totPageElementViewInternal---------------------------------------
 
 // Represents the view of basic page element.
-@interface totPageElementViewInternal : totBookBasicView {
+@interface totPageElementViewInternal : totBookBasicView<UITextViewDelegate> {
     // Data
     totPageElement* mData;
     // Subviews

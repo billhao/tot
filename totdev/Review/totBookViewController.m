@@ -189,6 +189,7 @@
 
 // change the book name
 - (void)editBookName {
+    // show the input window
     UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Edit book name" message:@"What is the new book name?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
     alert.alertViewStyle = UIAlertViewStylePlainTextInput;
     [alert textFieldAtIndex:0].text = mBook.bookname;
@@ -405,7 +406,13 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     NSLog(@"Entered: %@",[[alertView textFieldAtIndex:0] text]);
     if( buttonIndex == 1 ) {
+        // delete the book
+        [mBook deleteBook];
+
         mBook.bookname = [alertView textFieldAtIndex:0].text;
+        
+        // save to db with the new name
+        [mBook saveToDB];
     }
 }
 

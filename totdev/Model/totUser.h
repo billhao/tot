@@ -23,7 +23,7 @@
 // add a new user
 +(totUser*) newUser:(NSString*)email password:(NSString*)pwd message:(NSString**)message;
 
-+(BOOL)verifyPassword:(NSString*)pwd email:(NSString*)email;
++(BOOL)verifyPassword:(NSString*)pwd email:(NSString*)email message:(NSString**)message;
 
 // request the server to reset password
 +(BOOL)forgotPassword:(NSString*)email message:(NSString**)message;

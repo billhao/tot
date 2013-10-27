@@ -39,6 +39,7 @@
 + (NSString*) image { return @"image"; }
 + (NSString*) video { return @"video"; }
 + (NSString*) audio { return @"audio"; }
++ (NSString*) text  { return @"text";  }
 
 + (void)initPageElement:(totPageElement*)e
                       x:(float)x
@@ -507,6 +508,10 @@
 
 - (void)loadBook:(NSString*)bookid bookname:(NSString*)bookname {
     
+}
+
+- (void)deleteBook {
+    [totBook deleteBook:bookid bookname:bookname];
 }
 
 + (void) deleteBook:(NSString*)bookid bookname:(NSString*)bookname {

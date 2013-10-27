@@ -43,7 +43,7 @@ static totModel* _model;
     // register with server
     totServerCommController* server = [[totServerCommController alloc] init];
     int retCode = [server sendRegInfo:@"" withEmail:email withPasscode:pwdhash returnMessage:message];
-    if( TRUE || retCode == SERVER_RESPONSE_CODE_SUCCESS ) {
+    if( retCode == SERVER_RESPONSE_CODE_SUCCESS ) {
         BOOL re = [_model addPreferenceNoBaby:account_pref value:pwdhash];
         if( re )
             return [[totUser alloc] initWithID:email];
@@ -58,7 +58,7 @@ static totModel* _model;
     }
 }
 
-+(BOOL)verifyPassword:(NSString*)pwd email:(NSString*)email {
++(BOOL)verifyPassword:(NSString*)pwd email:(NSString*)email message:(NSString**)message {
     NSString* pwdhash_db = @"";
     
     NSString* account_pref = [NSString stringWithFormat:PREFERENCE_ACCOUNT, email];
@@ -67,7 +67,12 @@ static totModel* _model;
     NSData* salt = [self HexString2Data:[pwdhash_db substringToIndex:2*kRNCryptorAES256Settings.keySettings.saltSize]];
     NSString* pwdhash = [self getPasswordHash:pwd salt:salt];
     
-    return [pwdhash_db isEqualToString:pwdhash];
+    totServerCommController* server = [[totServerCommController alloc] init];
+    int ret = [server sendLoginInfo:email withPasscode:pwdhash returnMessage:message];
+    if( ret == SERVER_RESPONSE_CODE_SUCCESS )
+        return TRUE;
+    else
+        return FALSE;
 }
 
 // request the server to reset password

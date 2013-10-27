@@ -48,8 +48,14 @@
 #pragma mark - Event handlers
 
 - (bool) clickOnConfirmIconButtonDelegate {
-    // save to db
+    // verify input
     NSString* value = selectedValueLabel.text;
+    if( value.length == 0 ) {
+        [totUtility showAlert:@"Move the slider to select a number"];
+        return false;
+    }
+    
+    // save to db
     NSString* event = nil;
     if( self.type == HEIGHT )
         event = EVENT_BASIC_HEIGHT;

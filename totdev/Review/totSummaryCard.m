@@ -156,6 +156,9 @@
 
 // load data from db
 - (void) loadData {
+    // set baby avatar
+    headImg.image = global.baby.avatar;
+    
     // set baby name
     label_babyName.text = global.baby.name;
     [label_babyName sizeToFit];
@@ -269,7 +272,7 @@
 - (void)createBabyInfo {
     headView = [[UIView alloc] initWithFrame:CGRectMake(21, 6, 88, 88)];
     
-    UIImage* defaultHeadImg = [[UIImage imageNamed:@"summary_head_default"] retain];
+    UIImage* defaultHeadImg = global.baby.avatar;
     headImg = [[[totImageView alloc] initWithImage:defaultHeadImg] autorelease];
     headImg.frame = headView.bounds;
     headImg.layer.masksToBounds = TRUE;
@@ -313,6 +316,7 @@
 
 - (void)headButtonPressed:(id)sender {
     [global.cameraView setDelegate:self];
+    global.cameraView.saveToDB = FALSE;
     global.cameraView.cropWidth  = headView.frame.size.width;
     global.cameraView.cropHeight = headView.frame.size.height;
     [global.cameraView launchCamera:self.parentView.parent.controller withEditing:TRUE];
@@ -324,6 +328,7 @@
     [headImg imageFromFileContent:[totMediaLibrary getMediaPath:mediaInfo.filename]];
 
     // save the image filename to db
+    [global.model updatePreference:global.baby.babyID preference:PREFERENCE_BABY_AVATAR value:mediaInfo.filename];
 }
 
 @end

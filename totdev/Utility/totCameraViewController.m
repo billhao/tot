@@ -21,7 +21,7 @@
 
 @implementation totCameraViewController
 
-@synthesize imagePicker, delegate, cropWidth, cropHeight;
+@synthesize imagePicker, delegate, cropWidth, cropHeight, saveToDB;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -228,7 +228,10 @@
 //    [filename release];
     
     mediaInfo.dateTimeTaken = today;
-    [totMediaLibrary addPhoto:mediaInfo];
+    
+    if( saveToDB ) {
+        [totMediaLibrary addPhoto:mediaInfo];
+    }
     
     if( [delegate respondsToSelector:@selector(cameraView:didFinishSavingMedia:)] ) {
         [delegate cameraView:self didFinishSavingMedia:mediaInfo];

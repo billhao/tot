@@ -247,6 +247,7 @@
     global.cameraView.cropWidth  = -1;
     global.cameraView.cropHeight = -1;
     [global.cameraView setDelegate:self];
+    global.cameraView.saveToDB = TRUE;
     [global.cameraView launchCamera:self withEditing:TRUE];
 }
 

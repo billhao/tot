@@ -129,6 +129,7 @@
         
         return TRUE;
     } else {
+        [totUtility showAlert:@"What did the baby say?"];
         return FALSE;
     }
 }

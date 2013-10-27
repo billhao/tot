@@ -23,7 +23,6 @@ enum SERVER_RESPONSE_CODE {
     SERVER_RESPONSE_CODE_FAIL = -1,
     SERVER_RESPONSE_CODE_SUCCESS = 0,
     SERVER_RESPONSE_CODE_REG_USER_EXIST = 1,
-    
 };
 
 @interface totServerCommController : NSObject {
