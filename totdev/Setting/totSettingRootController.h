@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "totSettingEntryViewController.h"
 #import "totHomeRootController.h"
+
+@class totSettingEntryViewController;
 
 @interface totSettingRootController : UIViewController {
     totSettingEntryViewController* mEntryView;

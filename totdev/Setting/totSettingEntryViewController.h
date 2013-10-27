@@ -9,10 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "totModel.h"
 
-@interface totSettingEntryViewController : UIViewController {
-    UIButton* mSignOutButton;
-    UIButton* mClearDBButton;
-    UIButton* mTutorialButton;
-}
+@class totHomeRootController;
+
+@interface totSettingEntryViewController : UIViewController <UIAlertViewDelegate> {}
+
+@property (nonatomic, assign) totHomeRootController* homeController;
 
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "totSettingRootController.h"
+#import "totSettingEntryViewController.h"
 
 @implementation totSettingRootController
 
@@ -51,8 +52,10 @@
     self.view.frame = CGRectMake(0, 20, 320, 460);
 
     // add the entry view
-    totSettingEntryViewController* settingController = [[totSettingEntryViewController alloc] initWithNibName:@"SettingEntryView" bundle:nil];
+    totSettingEntryViewController* settingController =
+        [[totSettingEntryViewController alloc] initWithNibName:@"SettingEntryView" bundle:nil];
     self.mEntryView = settingController;
+    self.mEntryView.homeController = self.homeController;
     [self.view addSubview:settingController.view];
     [settingController release];
 }

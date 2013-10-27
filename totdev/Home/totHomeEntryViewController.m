@@ -67,8 +67,9 @@
     
     // add setting icon
     UIButton* settingBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    settingBtn.frame = CGRectMake(270, 0, 30, 60);
-    settingBtn.backgroundColor = [UIColor colorWithRed:159.0/255.0 green:198.0/255.0 blue:231.0/255.0 alpha:1.0f];
+    settingBtn.frame = CGRectMake(270, 0, 35, 50);
+    settingBtn.backgroundColor = [UIColor clearColor];
+    [settingBtn setImage:[UIImage imageNamed:@"setting_2"] forState:UIControlStateNormal];
     [settingBtn addTarget:self action:@selector(settingButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:settingBtn];
     
@@ -131,24 +132,28 @@
     
     // bind gesture events
     // left swipe
-    UISwipeGestureRecognizer* leftSwipeRecognizer = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipeGestureEvent:)];
+    UISwipeGestureRecognizer* leftSwipeRecognizer = [[UISwipeGestureRecognizer alloc]initWithTarget:self
+                                                                                             action:@selector(swipeGestureEvent:)];
     leftSwipeRecognizer.direction = UISwipeGestureRecognizerDirectionLeft;
     [self.view addGestureRecognizer:leftSwipeRecognizer];
     [leftSwipeRecognizer release];
     
     // right swipe
-    UISwipeGestureRecognizer* rightSwipeRecognizer = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipeGestureEvent:)];
+    UISwipeGestureRecognizer* rightSwipeRecognizer = [[UISwipeGestureRecognizer alloc]initWithTarget:self
+                                                                                              action:@selector(swipeGestureEvent:)];
     rightSwipeRecognizer.direction = UISwipeGestureRecognizerDirectionRight;
     [self.view addGestureRecognizer:rightSwipeRecognizer];
     [rightSwipeRecognizer release];
 
     // up swipe
-    UISwipeGestureRecognizer* upSwipeRecognizer = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipeGestureEvent:)];
+    UISwipeGestureRecognizer* upSwipeRecognizer = [[UISwipeGestureRecognizer alloc]initWithTarget:self
+                                                                                           action:@selector(swipeGestureEvent:)];
     upSwipeRecognizer.direction = UISwipeGestureRecognizerDirectionUp;
     [self.view addGestureRecognizer:upSwipeRecognizer];
     [upSwipeRecognizer release];
     
-    UITapGestureRecognizer* tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapEvent:)];
+    UITapGestureRecognizer* tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                                    action:@selector(tapEvent:)];
     [self.view addGestureRecognizer:tapRecognizer];
     
     // show the most recent photo

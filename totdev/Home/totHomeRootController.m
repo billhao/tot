@@ -134,7 +134,7 @@
                     currentView.view.frame = CGRectMake(320, 20, 320, 460);
                 }
                 else if( mCurrentViewIndex == kSetting ) {
-                    currentView.view.frame = CGRectMake(320, 20, 320, 460);
+                    currentView.view.frame = CGRectMake(320, 0, 320, 460);
                 }
             } completion:^(BOOL finished) {
                 if([nc.viewControllers containsObject:nextView]) {

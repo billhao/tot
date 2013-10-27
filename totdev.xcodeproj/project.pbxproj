@@ -427,6 +427,7 @@
 		8E4D50E41614CC3A00890621 /* boy.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8E4D50E21614CC3A00890621 /* boy.jpg */; };
 		8E4D50E51614CC3A00890621 /* girl.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 8E4D50E31614CC3A00890621 /* girl.jpg */; };
 		8E5692F117B9FE63001686CB /* totTimeUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E5692F017B9FE63001686CB /* totTimeUtil.m */; };
+		8E5D4320181CD08300297D51 /* setting_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E5D431F181CD08300297D51 /* setting_2.png */; };
 		8E61818816DFE5F50052E38E /* edit_2X.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E61818516DFE5F50052E38E /* edit_2X.png */; };
 		8E61818916DFE5F50052E38E /* start_2X.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E61818616DFE5F50052E38E /* start_2X.png */; };
 		8E61818A16DFE5F50052E38E /* wakeup_2X.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E61818716DFE5F50052E38E /* wakeup_2X.png */; };
@@ -1027,6 +1028,7 @@
 		8E4D50E31614CC3A00890621 /* girl.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = girl.jpg; path = Resources/Home/girl.jpg; sourceTree = "<group>"; };
 		8E5692EF17B9FE63001686CB /* totTimeUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totTimeUtil.h; path = Utility/totTimeUtil.h; sourceTree = "<group>"; };
 		8E5692F017B9FE63001686CB /* totTimeUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totTimeUtil.m; path = Utility/totTimeUtil.m; sourceTree = "<group>"; };
+		8E5D431F181CD08300297D51 /* setting_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = setting_2.png; path = Setting/setting_2.png; sourceTree = "<group>"; };
 		8E61818516DFE5F50052E38E /* edit_2X.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = edit_2X.png; path = Resources/Home/edit_2X.png; sourceTree = "<group>"; };
 		8E61818616DFE5F50052E38E /* start_2X.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = start_2X.png; path = Resources/Home/start_2X.png; sourceTree = "<group>"; };
 		8E61818716DFE5F50052E38E /* wakeup_2X.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = wakeup_2X.png; path = Resources/Home/wakeup_2X.png; sourceTree = "<group>"; };
@@ -1493,6 +1495,7 @@
 		3F686AEC17B84C730018BE6E /* ResourcesV2 */ = {
 			isa = PBXGroup;
 			children = (
+				8E5D431E181CD06C00297D51 /* Setting */,
 				3F049B5017D4073400F05727 /* Timeline */,
 				3FD3C73017CF382B00DB1B71 /* Fonts */,
 				3FD3C64317CDBCE400DB1B71 /* Activity */,
@@ -1927,6 +1930,14 @@
 				8E920F89161903D700725971 /* icons-sleep-start.png */,
 			);
 			name = Sleep;
+			sourceTree = "<group>";
+		};
+		8E5D431E181CD06C00297D51 /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				8E5D431F181CD08300297D51 /* setting_2.png */,
+			);
+			name = Setting;
 			sourceTree = "<group>";
 		};
 		8E632EBF16268D8500072D89 /* Diaper */ = {
@@ -2707,6 +2718,7 @@
 				3FF6C2951708F3C1007B48DA /* review-medical.png in Resources */,
 				3FF6C2961708F3C1007B48DA /* review-sleep.png in Resources */,
 				3FF6C2971708F3C1007B48DA /* review-weight.png in Resources */,
+				8E5D4320181CD08300297D51 /* setting_2.png in Resources */,
 				3F2CC24F17120EA9001EDD75 /* tutorial_1.png in Resources */,
 				3F2CC25017120EA9001EDD75 /* tutorial_2.png in Resources */,
 				3F2CC25417120ED2001EDD75 /* tutorial_0@2x.png in Resources */,
