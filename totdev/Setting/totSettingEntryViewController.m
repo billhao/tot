@@ -6,8 +6,9 @@
 //  Copyright (c) 2012 USC. All rights reserved.
 //
 
-#import "totSettingEntryViewController.h"
+#import <QuartzCore/QuartzCore.h>
 #import "../AppDelegate.h"
+#import "totSettingEntryViewController.h"
 #import "totEventName.h"
 #import "totTutorialViewController.h"
 #import "totUtility.h"
@@ -44,7 +45,7 @@
 {
     [super viewDidLoad];
     
-    self.view.backgroundColor = [UIColor whiteColor];
+    [self.view setBackgroundColor:[UIColor colorWithRed:220.0/255 green:220.0/255 blue:220.0/255 alpha:1.0f]];
     
     // Creats the navigation bar.
     UIView* navbar = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 42)];
@@ -64,35 +65,53 @@
     [self.view addSubview:navbar];
     [navbar release];
     
+
+    // Creates the background.
+    UIView* background = [[UIView alloc] initWithFrame:CGRectMake(10, 60, 300, 86)];
+    background.layer.cornerRadius = 5;
+    background.layer.masksToBounds = YES;
+    [background setBackgroundColor:[UIColor whiteColor]];
+    
+    UIView* separator = [[UIView alloc] initWithFrame:CGRectMake(0, 43, 300, 1)];
+    [separator setBackgroundColor:[UIColor colorWithRed:0.9f green:0.9f blue:0.9f alpha:1.0f]];
+    [background addSubview:separator];
+    [separator release];
+    
+    // Creates the tutorial button.
+    UIButton* tutorialButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [tutorialButton setFrame:CGRectMake(0, 0, 300, 43)];
+    [tutorialButton setBackgroundColor:[UIColor clearColor]];
+    [tutorialButton setTitle:@"Tutorial" forState:UIControlStateNormal];
+    [tutorialButton setTitleColor:[UIColor colorWithRed:0.4f green:0.4f blue:0.4f alpha:1.0f] forState:UIControlStateNormal];
+    [tutorialButton.titleLabel setFont:[UIFont fontWithName:@"Raleway-SemiBold_2" size:18.0f]];
+    [tutorialButton addTarget:self action:@selector(startTutorial:) forControlEvents:UIControlEventTouchUpInside];
+    [background addSubview:tutorialButton];
+    
+    // Creates the clear button.
+    UIButton* clearButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [clearButton setFrame:CGRectMake(0, 43, 300, 43)];
+    [clearButton setBackgroundColor:[UIColor clearColor]];
+    [clearButton setTitle:@"Clear data" forState:UIControlStateNormal];
+    [clearButton setTitleColor:[UIColor colorWithRed:0.4f green:0.4f blue:0.4f alpha:1.0f] forState:UIControlStateNormal];
+    [clearButton.titleLabel setFont:[UIFont fontWithName:@"Raleway-SemiBold_2" size:18.0f]];
+    [clearButton addTarget:self action:@selector(clearData:) forControlEvents:UIControlEventTouchUpInside];
+    [background addSubview:clearButton];
+    
+    [self.view addSubview:background];
+    [background release];
+    
+    
     // Creates logout button.
     UIButton* logoutBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [logoutBtn setFrame:CGRectMake(60, 300, 200, 50)];
+    logoutBtn.layer.cornerRadius = 5;
+    logoutBtn.layer.masksToBounds = YES;
+    [logoutBtn setFrame:CGRectMake(10, 166, 300, 43)];
     [logoutBtn setBackgroundColor:[UIColor colorWithRed:245/255.0f green:73/255.0 blue:82/255.0 alpha:1.0f]];
     [logoutBtn setTitle:@"Log out" forState:UIControlStateNormal];
     [logoutBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [logoutBtn.titleLabel setFont:[UIFont fontWithName:@"Raleway-SemiBold_2" size:18.0f]];
     [logoutBtn addTarget:self action:@selector(logout:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:logoutBtn];
-    
-    // Creates the clear button.
-    UIButton* clearButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [clearButton setFrame:CGRectMake(60, 200, 200, 50)];
-    [clearButton setBackgroundColor:[UIColor colorWithRed:245/255.0f green:73/255.0 blue:82/255.0 alpha:1.0f]];
-    [clearButton setTitle:@"Clear data" forState:UIControlStateNormal];
-    [clearButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [clearButton.titleLabel setFont:[UIFont fontWithName:@"Raleway-SemiBold_2" size:18.0f]];
-    [clearButton addTarget:self action:@selector(clearData:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:clearButton];
-    
-    // Creates the tutorial button.
-    UIButton* tutorialButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [tutorialButton setFrame:CGRectMake(60, 100, 200, 50)];
-    [tutorialButton setBackgroundColor:[UIColor colorWithRed:29/255.0f green:209/255.0 blue:41/255.0 alpha:1.0f]];
-    [tutorialButton setTitle:@"Tutorial" forState:UIControlStateNormal];
-    [tutorialButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [tutorialButton.titleLabel setFont:[UIFont fontWithName:@"Raleway-SemiBold_2" size:18.0f]];
-    [tutorialButton addTarget:self action:@selector(startTutorial:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:tutorialButton];
 }
 
 - (void)logout: (id)sender {}

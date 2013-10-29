@@ -51,7 +51,8 @@
     [self createNavigationBar];
     
     // right swipe
-    UISwipeGestureRecognizer* rightSwipeRecognizer = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipeGestureEvent:)];
+    UISwipeGestureRecognizer* rightSwipeRecognizer = [[UISwipeGestureRecognizer alloc]initWithTarget:self
+                                                                                              action:@selector(swipeGestureEvent:)];
     rightSwipeRecognizer.direction = UISwipeGestureRecognizerDirectionRight;
     [scrollView addGestureRecognizer:rightSwipeRecognizer];
     [rightSwipeRecognizer release];
@@ -229,8 +230,7 @@
     }
         
     // remove any view already there
-    [[scrollView subviews]
-     makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    [[scrollView subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
     
     int margin_x = 20;
     float margin_x_left = 5.5; // the thumbnail size is 618
@@ -264,7 +264,10 @@
             NSString* bookIconPressed = bookIcon;// [NSString stringWithFormat:@"activity_%@_pressed", bookIcon];
             
             UIView* bookView = [[UIView alloc] init];
-            bookView.frame = CGRectMake(margin_x_left+c*(icon_width+margin_x), margin_y_top+r*(icon_height+margin_y), icon_width, icon_height);
+            bookView.frame = CGRectMake(margin_x_left+c*(icon_width+margin_x),
+                                        margin_y_top+r*(icon_height+margin_y),
+                                        icon_width,
+                                        icon_height);
             UIButton* bookBtn = [UIButton buttonWithType:UIButtonTypeCustom];
             bookBtn.frame = bookView.bounds;
             [bookBtn addTarget:self action:@selector(bookSelected:) forControlEvents:UIControlEventTouchUpInside];
@@ -273,8 +276,7 @@
             if( isTemplate ) {
                 [bookBtn setImage:[UIImage imageNamed:bookIcon] forState:UIControlStateNormal];
                 [bookBtn setImage:[UIImage imageNamed:bookIconPressed] forState:UIControlStateHighlighted];
-            }
-            else {
+            } else {
                 // background
                 UIImageView* bg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"sb_book_bg"]];
                 [bookView addSubview:bg];
@@ -294,7 +296,7 @@
             [bookBtnList addObject:bookView];
             
             UILabel* bookLabel = [[UILabel alloc] init];
-            bookLabel.frame = CGRectMake(margin_x_left+c*(icon_width+margin_x)+15, margin_y_top+r*(icon_height+label_height+margin_y)+170, icon_width-30, label_height);
+            bookLabel.frame = CGRectMake(15, 165, icon_height - 30, label_height);
             bookLabel.backgroundColor = [UIColor clearColor];
             bookLabel.alpha = 0.8;
             bookLabel.text = [book objectForKey:@"name"];
@@ -308,7 +310,8 @@
                 bookLabel.hidden = TRUE;
             
             [scrollView addSubview:bookView];
-            [scrollView addSubview:bookLabel];
+            [bookView addSubview:bookLabel];
+            
             [bookLabel release];
             [bookView release];
         }
