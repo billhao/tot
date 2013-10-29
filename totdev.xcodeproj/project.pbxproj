@@ -249,6 +249,7 @@
 		3FC1B6FC1543680300295447 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FC1B6FB1543680300295447 /* libsqlite3.dylib */; };
 		3FC1B7061543841800295447 /* totModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FC1B7051543841800295447 /* totModel.m */; };
 		3FC1B7091544F19700295447 /* totEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FC1B7081544F19600295447 /* totEvent.m */; };
+		3FC56715181F8CDA00A5AD65 /* Base64Encoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FC56714181F8CDA00A5AD65 /* Base64Encoder.m */; };
 		3FC63DB217F00B6C003EA9D9 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FC63DB117F00B6B003EA9D9 /* Security.framework */; };
 		3FC63DC617F00D72003EA9D9 /* RNCryptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FC63DB917F00D72003EA9D9 /* RNCryptor.m */; };
 		3FC63DC717F00D72003EA9D9 /* RNCryptorEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FC63DBB17F00D72003EA9D9 /* RNCryptorEngine.m */; };
@@ -818,6 +819,8 @@
 		3FC1B7051543841800295447 /* totModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totModel.m; path = totdev/Model/totModel.m; sourceTree = "<group>"; };
 		3FC1B7071544F19600295447 /* totEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totEvent.h; path = totdev/Model/totEvent.h; sourceTree = "<group>"; };
 		3FC1B7081544F19600295447 /* totEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totEvent.m; path = totdev/Model/totEvent.m; sourceTree = "<group>"; };
+		3FC56713181F8CDA00A5AD65 /* Base64Encoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base64Encoder.h; sourceTree = "<group>"; };
+		3FC56714181F8CDA00A5AD65 /* Base64Encoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Base64Encoder.m; sourceTree = "<group>"; };
 		3FC63DB117F00B6B003EA9D9 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		3FC63DB617F00D72003EA9D9 /* RNCryptor+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RNCryptor+Private.h"; sourceTree = "<group>"; };
 		3FC63DB717F00D72003EA9D9 /* RNCryptor-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RNCryptor-Prefix.pch"; sourceTree = "<group>"; };
@@ -1694,6 +1697,8 @@
 		3FC63DD217F16F7F003EA9D9 /* Server */ = {
 			isa = PBXGroup;
 			children = (
+				3FC56713181F8CDA00A5AD65 /* Base64Encoder.h */,
+				3FC56714181F8CDA00A5AD65 /* Base64Encoder.m */,
 				3FC63DD317F16F81003EA9D9 /* totServerCommController.h */,
 				3FC63DD417F16F81003EA9D9 /* totServerCommController.m */,
 			);
@@ -2910,6 +2915,7 @@
 				3FE9B5F7154A303100199AAF /* test_Model.m in Sources */,
 				3FE9B5FA154A313700199AAF /* totSliderView.m in Sources */,
 				15414FDF154CCB8900C3C828 /* totUtility.m in Sources */,
+				3FC56715181F8CDA00A5AD65 /* Base64Encoder.m in Sources */,
 				CE5C09FC154CCFDB00D41114 /* moviePlayerViewController.m in Sources */,
 				CE5C09FD154CCFDB00D41114 /* totAlbumViewController.m in Sources */,
 				EFA1DE32154DF41F00970F0C /* totActivityUtility.m in Sources */,

@@ -7,6 +7,7 @@
 //
 
 #import "totServerCommController.h"
+#import "Base64Encoder.h"
 
 // class extention for private method declaration
 @interface totServerCommController()
@@ -110,11 +111,21 @@
     [request setValue:postLen forHTTPHeaderField:@"Content-Length"];
     [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
     [request setHTTPBody:postData];
+    [request setCachePolicy:NSURLCacheStorageNotAllowed];
+    [request setTimeoutInterval:20.0];
     
     // ignore SSL certificate error
     NSURL* destURL = [NSURL URLWithString:dest_url];
     [NSURLRequest setAllowsAnyHTTPSCertificate:YES forHost:[destURL host]];
     
+    
+    // add HTTP basic authentication header to the request
+    NSString *authStr = [NSString stringWithFormat:@"%@:%@", @"totdev", @"0000"];
+    NSData *authStrData = [authStr dataUsingEncoding:NSASCIIStringEncoding];
+    NSString *authStrDataEncoded = [Base64Encoder encode:authStrData];
+    NSString *authValue = [NSString stringWithFormat:@"Basic %@", authStrDataEncoded];
+    [request setValue:authValue forHTTPHeaderField:@"Authorization"];
+
     // Send the req syncrhonously [will be async later]
     NSURLResponse *response;
     NSData *POSTReply = [NSURLConnection sendSynchronousRequest:request

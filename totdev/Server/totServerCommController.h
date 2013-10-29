@@ -6,7 +6,7 @@
 //  Copyright (c) 2013年 tot. All rights reserved.
 //
 
-/*
+/* For reference
  
  response_code = {  'login_success': 0, 'login_unmatch': 1, 'login_no_usr': 2,
                     'reg_success': 10, 'reg_usr_exist': 11,
@@ -26,7 +26,6 @@ enum SERVER_RESPONSE_CODE {
 };
 
 @interface totServerCommController : NSObject {
-    
     NSString *m_reg_url;  // url to the registration handler
     NSString *m_login_url; // url to the login handler
     NSString *m_changePasscode_url;  // url to the change passcode handler
@@ -37,7 +36,5 @@ enum SERVER_RESPONSE_CODE {
 - (int) sendLoginInfo: (NSString*) email withPasscode: (NSString*) passcode returnMessage:(NSString**)message;
 - (int) sendResetPasscodeForUser: (NSString*) email from: (NSString*) old_passcode to: (NSString*) new_passcode returnMessage: (NSString**)message;
 - (int) sendForgetPasscodeforUser: (NSString*) email returnMessage:(NSString**)message;
-
-//- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response;
 
 @end
