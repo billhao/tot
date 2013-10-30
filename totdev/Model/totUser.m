@@ -42,7 +42,7 @@ static totModel* _model;
     
     // register with server
     totServerCommController* server = [[totServerCommController alloc] init];
-    int retCode = [server sendRegInfo:@"" withEmail:email withPasscode:pwdhash returnMessage:message];
+    int retCode = [server sendRegInfo:@"" withEmail:email withPasscode:pwd returnMessage:message];
     if( retCode == SERVER_RESPONSE_CODE_SUCCESS ) {
         BOOL re = [_model addPreferenceNoBaby:account_pref value:pwdhash];
         if( re )
@@ -59,16 +59,16 @@ static totModel* _model;
 }
 
 +(BOOL)verifyPassword:(NSString*)pwd email:(NSString*)email message:(NSString**)message {
-    NSString* pwdhash_db = @"";
+//    NSString* pwdhash_db = @"";
     
-    NSString* account_pref = [NSString stringWithFormat:PREFERENCE_ACCOUNT, email];
-    pwdhash_db = [global.model getPreferenceNoBaby:account_pref];
+//    NSString* account_pref = [NSString stringWithFormat:PREFERENCE_ACCOUNT, email];
+//    pwdhash_db = [global.model getPreferenceNoBaby:account_pref];
 
-    NSData* salt = [self HexString2Data:[pwdhash_db substringToIndex:2*kRNCryptorAES256Settings.keySettings.saltSize]];
-    NSString* pwdhash = [self getPasswordHash:pwd salt:salt];
+//    NSData* salt = [self HexString2Data:[pwdhash_db substringToIndex:2*kRNCryptorAES256Settings.keySettings.saltSize]];
+//    NSString* pwdhash = [self getPasswordHash:pwd salt:salt];
     
     totServerCommController* server = [[totServerCommController alloc] init];
-    int ret = [server sendLoginInfo:email withPasscode:pwdhash returnMessage:message];
+    int ret = [server sendLoginInfo:email withPasscode:pwd returnMessage:message];
     if( ret == SERVER_RESPONSE_CODE_SUCCESS )
         return TRUE;
     else
