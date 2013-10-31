@@ -221,7 +221,7 @@
     
     if( events.count > 0 ) {
         totEvent* currEvt = [events objectAtIndex:0];
-        self.e = [currEvt retain];
+        self.e = currEvt;
         card_title.text = [NSString stringWithFormat:@"%@", currEvt.value];
         [self setTimestampWithDate:currEvt.datetime];
         if( events.count > 1 ) {

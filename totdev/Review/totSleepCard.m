@@ -257,7 +257,7 @@
         totEvent* e0 = events[1];
         if( [e1.value isEqualToString:@"end"] && [e0.value isEqualToString:@"start"] ) {
             sleepStartEvent = [e0 retain];
-            e = [e1 retain];
+            self.e = [e1 retain];
         }
     }
 }
@@ -275,7 +275,7 @@
 }
 
 - (void)updateUI {
-    if( e == nil || sleepStartEvent == nil ) return;
+    if( self.e == nil || sleepStartEvent == nil ) return;
     
     // Get conversion to months, days, hours, minutes
     NSCalendar *sysCalendar = [NSCalendar currentCalendar];

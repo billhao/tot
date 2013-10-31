@@ -378,7 +378,7 @@
     NSArray* events = [global.model getEvent:global.baby.babyID event:event limit:2];
     if( events.count > 0 ) {
         totEvent* currEvt = [events objectAtIndex:0];
-        self.e = [currEvt retain];
+        self.e = currEvt;
         [self setTimestampWithDate:currEvt.datetime];
         [self updateUI:currEvt.value];
         [self setTimestamp:currEvt.getTimeText];
