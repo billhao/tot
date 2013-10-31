@@ -337,5 +337,7 @@
         return [NSString stringWithFormat:@"%d min", m];
 }
 
+- (void) updateCard { [self setTimestampWithDate:self.e.datetime]; }
+
 @end
 

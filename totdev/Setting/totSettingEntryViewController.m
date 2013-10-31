@@ -67,15 +67,15 @@
     
 
     // Creates the background.
-    UIView* background = [[UIView alloc] initWithFrame:CGRectMake(10, 60, 300, 86)];
+    UIView* background = [[UIView alloc] initWithFrame:CGRectMake(10, 60, 300, 43)];
     background.layer.cornerRadius = 5;
     background.layer.masksToBounds = YES;
     [background setBackgroundColor:[UIColor whiteColor]];
     
-    UIView* separator = [[UIView alloc] initWithFrame:CGRectMake(0, 43, 300, 1)];
-    [separator setBackgroundColor:[UIColor colorWithRed:0.9f green:0.9f blue:0.9f alpha:1.0f]];
-    [background addSubview:separator];
-    [separator release];
+    //UIView* separator = [[UIView alloc] initWithFrame:CGRectMake(0, 43, 300, 1)];
+    //[separator setBackgroundColor:[UIColor colorWithRed:0.9f green:0.9f blue:0.9f alpha:1.0f]];
+    //[background addSubview:separator];
+    //[separator release];
     
     // Creates the tutorial button.
     UIButton* tutorialButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -87,25 +87,32 @@
     [tutorialButton addTarget:self action:@selector(startTutorial:) forControlEvents:UIControlEventTouchUpInside];
     [background addSubview:tutorialButton];
     
+    [self.view addSubview:background];
+    [background release];
+    
+    UIView* background1 = [[UIView alloc] initWithFrame:CGRectMake(10, 123, 300, 43)];
+    background1.layer.cornerRadius = 5;
+    background1.layer.masksToBounds = YES;
+    [background1 setBackgroundColor:[UIColor whiteColor]];
+    
     // Creates the clear button.
     UIButton* clearButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [clearButton setFrame:CGRectMake(0, 43, 300, 43)];
+    [clearButton setFrame:CGRectMake(0, 0, 300, 43)];
     [clearButton setBackgroundColor:[UIColor clearColor]];
     [clearButton setTitle:@"Clear data" forState:UIControlStateNormal];
     [clearButton setTitleColor:[UIColor colorWithRed:0.4f green:0.4f blue:0.4f alpha:1.0f] forState:UIControlStateNormal];
     [clearButton.titleLabel setFont:[UIFont fontWithName:@"Raleway-SemiBold_2" size:18.0f]];
     [clearButton addTarget:self action:@selector(clearData:) forControlEvents:UIControlEventTouchUpInside];
-    [background addSubview:clearButton];
+    [background1 addSubview:clearButton];
     
-    [self.view addSubview:background];
-    [background release];
-    
+    [self.view addSubview:background1];
+    [background1 release];
     
     // Creates logout button.
     UIButton* logoutBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     logoutBtn.layer.cornerRadius = 5;
     logoutBtn.layer.masksToBounds = YES;
-    [logoutBtn setFrame:CGRectMake(10, 166, 300, 43)];
+    [logoutBtn setFrame:CGRectMake(10, 186, 300, 43)];
     [logoutBtn setBackgroundColor:[UIColor colorWithRed:245/255.0f green:73/255.0 blue:82/255.0 alpha:1.0f]];
     [logoutBtn setTitle:@"Log out" forState:UIControlStateNormal];
     [logoutBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];

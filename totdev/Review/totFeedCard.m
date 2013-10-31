@@ -408,5 +408,7 @@
     return text;
 }
 
+- (void) updateCard { [self setTimestampWithDate:self.e.datetime]; }
+
 @end
 

@@ -125,7 +125,7 @@
     if (!timer_) {
         timer_ = [NSTimer scheduledTimerWithTimeInterval:interval
                                                   target:self
-                                                selector:@selector(timerHandler)
+                                                selector:@selector(timerHandler:)
                                                 userInfo:nil
                                                  repeats:YES];
     }
@@ -138,7 +138,7 @@
     }
 }
 
-- (void) timerHandler {
+- (void) timerHandler:(NSTimer*)timer {
     if (delegate && [delegate respondsToSelector:@selector(timerCallback:)]) {
         [delegate timerCallback:self];
     }

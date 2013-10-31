@@ -47,6 +47,6 @@ typedef struct {
 
 - (void) startWithInternalInSeconds: (int)interval;
 - (void) stop;
-- (void) timerHandler;
+- (void) timerHandler:(NSTimer*)timer;
 
 @end

@@ -182,22 +182,22 @@
     // get the events
     totEvent* e0 = nil;
     if( parentView.event_id != NO_EVENT ) {
-        e = [global.model getEventByID:parentView.event_id];
+        self.e = [global.model getEventByID:parentView.event_id];
     }
     else {
         NSArray* events = [global.model getEvent:global.baby.babyID event:event limit:2];
         if( events.count > 0 ) {
-            e = [events objectAtIndex:0];
+            self.e = [events objectAtIndex:0];
 //            if( events.count > 1 )
 //                e0 = [events objectAtIndex:1];
         }
     }
     
     // update UI
-    if( e ) {
+    if( self.e ) {
         card_title.text = [NSString stringWithFormat:@"%@", e.value];
         [self setTimestampWithDate:e.datetime];
-        description.text = [self GetOutputStr:e.value];
+        description.text = [self GetOutputStr:self.e.value];
     }
     if( e0 ) {
         description.text = [NSString stringWithFormat:@"Learned last time: %@", e0.value];
@@ -252,6 +252,7 @@
     return outputStr;
 }
 
+- (void) updateCard { [self setTimestampWithDate:self.e.datetime]; }
 
 @end
 

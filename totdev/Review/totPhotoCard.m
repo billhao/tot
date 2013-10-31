@@ -149,5 +149,7 @@
 }
 - (int) width { return 308; }
 
+- (void) updateCard { [self setTimestampWithDate:self.e.datetime]; }
+
 @end
 

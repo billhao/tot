@@ -229,6 +229,7 @@
     
     if( events.count > 0 ) {
         totEvent* currEvt = [events objectAtIndex:0];
+        self.e = [currEvt retain];
         card_title.text = [NSString stringWithFormat:@"%@", currEvt.value];
         [self setTimestampWithDate:currEvt.datetime];
         if( events.count > 1 ) {
@@ -239,6 +240,7 @@
     }
 }
 
+- (void) updateCard { [self setTimestampWithDate:self.e.datetime]; }
 
 @end
 
