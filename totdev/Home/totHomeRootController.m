@@ -223,7 +223,7 @@
 - (totTimelineController*)getTimelineVC {
     if( timelineController == nil ) {
     // Create timeline. This view will be displayed when the user flip the finger up.
-        timelineController = [[totTimelineController alloc] initWithNibName:@"Timeline" bundle:nil];
+        timelineController = [[totTimelineController alloc] init];
         timelineController.homeController = self;
     }
     return timelineController;
