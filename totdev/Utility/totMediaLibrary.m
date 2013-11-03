@@ -9,7 +9,7 @@
 #import "totMediaLibrary.h"
 #import "Global.h"
 #import "totEventName.h"
-#import "totHomeFeedingViewController.h"
+#import "totUtility.h"
 
 @implementation MediaInfo
 
@@ -26,7 +26,7 @@
 - (id)initWithJSON:(NSString*)jsonData {
     self = [super init];
     if (self) {
-        NSMutableDictionary* obj = (NSMutableDictionary*)[totHomeFeedingViewController JSONToObject:jsonData];
+        NSMutableDictionary* obj = (NSMutableDictionary*)[totUtility JSONToObject:jsonData];
         self.filename = [obj objectForKey:@"filename"];
         NSString* assetURLStr = [obj objectForKey:@"assetURL"];
         if( assetURLStr )

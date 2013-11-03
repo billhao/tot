@@ -11,7 +11,6 @@
 #import "totBooklet.h"
 #import <QuartzCore/QuartzCore.h>
 #import "AppDelegate.h"
-#import "totUITabBarController.h"
 
 
 #define FULL_PAGE_W 480.0f

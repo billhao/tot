@@ -104,4 +104,32 @@ void print(NSString* str) {
     [alert release];
 }
 
++ (UIImage*)imageWithImage:(UIImage*)image scaledToSize:(CGSize)newSize {
+    UIGraphicsBeginImageContext( newSize );
+    [image drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
+    UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return newImage;
+}
+
+// convert a json string to json object
++ (NSArray*)JSONToObject:(NSString*) jsonstring {
+    NSError* e = [[NSError alloc] init];
+    NSArray* json = [NSJSONSerialization JSONObjectWithData: [jsonstring dataUsingEncoding:NSUTF8StringEncoding] options: NSJSONReadingMutableContainers error: &e];
+    [e release];
+    return json;
+}
+
++ (NSString*)ObjectToJSON:(id)obj {
+    NSError* e = [[NSError alloc] init];
+    NSData* jsonData = [NSJSONSerialization dataWithJSONObject:obj
+                                                       options:NSJSONWritingPrettyPrinted error:&e];
+    
+    NSString* jsonstr = [[[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding] autorelease];
+    [e release];
+    return jsonstr;
+}
+
+
 @end

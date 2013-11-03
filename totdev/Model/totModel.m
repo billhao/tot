@@ -6,7 +6,7 @@
 
 #import "totModel.h"
 #import "totEventName.h"
-#import "totHomeFeedingViewController.h"
+#import "totUtility.h"
 
 @implementation totModel
 
@@ -505,7 +505,7 @@
 // unlike updatePreference, this function does not update event.time
 // a shortcut to getItem, limit=-1, offset=-1, start and end date = nil
 - (BOOL) setItem:(int)baby_id name:(NSString*)name value:(NSDictionary*)dict {
-    NSString* jsonstr = [totHomeFeedingViewController ObjectToJSON:dict];
+    NSString* jsonstr = [totUtility ObjectToJSON:dict];
 
     int cnt = [self getEventCount:baby_id event:name];
     if( cnt == 0 ) {

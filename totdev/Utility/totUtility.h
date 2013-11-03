@@ -25,6 +25,13 @@
 
 + (void)showAlert:(NSString*)text;
 
++ (UIImage*)imageWithImage:(UIImage*)image scaledToSize:(CGSize)newSize;
+
+// json string to object
++ (NSArray*)JSONToObject:(NSString*) jsonstring;
+// object to json string
++ (NSString*)ObjectToJSON:(id)obj;
+
 @end
 
 extern void print(NSString* str);

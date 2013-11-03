@@ -6,20 +6,15 @@
 //  Copyright (c) 2012 USC. All rights reserved.
 //
 
+#import <QuartzCore/QuartzCore.h>
 #import "AppDelegate.h"
-#import "totUITabBarController.h"
 #import "totHomeEntryViewController.h"
-#import "totHomeSleepingView.h"
-#import "totLanguageInputViewController.h"
 #import "totHomeRootController.h"
-#import "totHomeDiaperView.h"
-#import "../Utility/totImageView.h"
-#import "../Activity/totActivityUtility.h"
 #import "totEventName.h"
 #import "totUtility.h"
 #import "../Utility/totMediaLibrary.h"
-#import "totHomeFeedingViewController.h"
-#import <QuartzCore/QuartzCore.h>
+#import "../Utility/totImageView.h"
+
 
 @implementation totHomeEntryViewController
 
@@ -405,7 +400,7 @@
 
 
 - (void) saveImage:(UIImage*)photo intoFile:(NSString*)filename {
-    UIImage *resizedPhoto = [totActivityUtility imageWithImage:photo scaledToSize:CGSizeMake(320, 480)];
+    UIImage *resizedPhoto = [totUtility imageWithImage:photo scaledToSize:CGSizeMake(320, 480)];
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentDirectory = [paths objectAtIndex:0];
     NSString *imagePath = [documentDirectory stringByAppendingPathComponent:filename];
@@ -586,7 +581,7 @@
 - (NSArray*)loadActivitiesFromFile {
     NSString* path = [[NSBundle mainBundle] pathForResource:@"Activities" ofType:@"json"];
     NSString* jsonStr = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:NULL];
-    return [totHomeFeedingViewController JSONToObject:jsonStr];
+    return [totUtility JSONToObject:jsonStr];
 }
 
 - (void)createActivityView {

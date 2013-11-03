@@ -9,7 +9,6 @@
 #import "totFeedCard.h"
 #import "totReviewCardView.h"
 #import "totTimeUtil.h"
-#import "totHomeFeedingViewController.h"
 #import "totTimeline.h"
 #import "totUtility.h"
 #import "totReviewStory.h"
@@ -321,7 +320,7 @@
 }
 
 - (NSString*)saveToDB:(NSArray*)list {
-    NSString* json = [totHomeFeedingViewController ObjectToJSON:list];
+    NSString* json = [totUtility ObjectToJSON:list];
     [global.model addEvent:global.baby.babyID event:EVENT_BASIC_FEEDING datetime:self.timeStamp value:json];
     return json;
 }
@@ -398,7 +397,7 @@
 }
 
 + (NSString*)formatValue:(NSString*)value {
-    NSArray* list = [totHomeFeedingViewController JSONToObject:value];
+    NSArray* list = [totUtility JSONToObject:value];
     NSString* text = @"";
     for( int i=0; i<list.count; i++ ) {
         NSDictionary* item = list[i];

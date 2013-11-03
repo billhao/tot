@@ -16,7 +16,6 @@
 #import <CoreMedia/CMTime.h>
 #import "AppDelegate.h"
 #import "totEventName.h"
-#import "totActivityUtility.h"
 #import "totUtility.h"
 
 @implementation totCameraViewController
@@ -340,7 +339,7 @@
     int scale = [UIScreen mainScreen].scale;
     psize = CGSizeMake(psize.width*scale, psize.height*scale);
     
-    UIImage *resizedPhoto = [totActivityUtility imageWithImage:photo scaledToSize:psize];
+    UIImage *resizedPhoto = [totUtility imageWithImage:photo scaledToSize:psize];
     NSString *imagePath = [totMediaLibrary getMediaPath:filename];
     NSData *data = UIImageJPEGRepresentation(resizedPhoto, 1.0);
     [data writeToFile:imagePath atomically:NO];

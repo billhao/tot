@@ -8,11 +8,6 @@
 
 #import "totHomeRootController.h"
 #import "totHomeEntryViewController.h"
-#import "totHomeHeightViewController.h"
-#import "totHomeFeedingViewController.h"
-#import "totHomeActivityBrowseController.h"
-#import "totHomeActivityLabelController.h"
-#import "totHomeAlbumBrowseController.h"
 #import "totSettingRootController.h"
 #import "totTimelineController.h"
 #import "AppDelegate.h"
