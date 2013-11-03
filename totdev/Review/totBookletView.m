@@ -114,7 +114,7 @@
         textView.delegate = self;
         if( text ) textView.text = text;
         textView.layer.borderColor = [UIColor grayColor].CGColor;
-        textView.layer.borderWidth = 0.5;
+        textView.layer.borderWidth = 0;  // hide the border.
         textView.layer.cornerRadius = 2;
         [self addSubview:textView];
     }

@@ -361,7 +361,7 @@
     [self.view addSubview:description];
     
     // add timestamp
-    timestamp = [[UILabel alloc] initWithFrame:CGRectMake(70, 30, 180, 30)];
+    timestamp = [[UILabel alloc] initWithFrame:CGRectMake(70, 30, 240, 30)];
     timestamp.textAlignment = NSTextAlignmentLeft;
     timestamp.text = @"";
     [timestamp setTextColor:[UIColor colorWithRed:128.0/255 green:130.0/255 blue:130.0/255 alpha:1.0]];
