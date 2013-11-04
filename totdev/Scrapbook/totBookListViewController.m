@@ -29,7 +29,14 @@
         mCurrentBook = nil;
         booksAndTemplates = nil;
         deleteBtn = nil;
-    }
+
+        navbarHeight = 36;
+        shadowHeight = 3; // the height of shadow of navbar background
+        
+        // this property is new in ios 7. disable it so scrapbook scrollview works correctly.
+        if( [self respondsToSelector:@selector(automaticallyAdjustsScrollViewInsets)] )
+            self.automaticallyAdjustsScrollViewInsets = NO;
+}
     return self;
 }
 
@@ -38,11 +45,12 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    // create navigation bar
-    float navbar_height = 42;
+    int statusBarHeight = 0;
+    if( SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0") )
+        statusBarHeight = [UIApplication sharedApplication].statusBarFrame.size.height;
     
     // create book list scroll view
-    [self createScrollView:navbar_height];
+    [self createScrollView:navbarHeight+statusBarHeight];
     
     // load all books and templates
     [self loadBooksAndTemplates:TRUE];
@@ -326,8 +334,7 @@
 
 // create a scroll view of books and templates
 - (void)createScrollView:(float)y_offset {
-    float xx = self.view.bounds.size.height;
-    int scrollview_height = self.view.bounds.size.height - y_offset; // 480 - 20 - 40navi
+    int scrollview_height = self.view.bounds.size.height - y_offset ; // 480 - 20 - 40navi
     
     // create the view
     bookListView = [[UIView alloc] initWithFrame:CGRectMake(0, y_offset, 320, scrollview_height)];
@@ -341,14 +348,14 @@
     scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, 320, scrollview_height)];
     UIImage* scrollViewBg = [UIImage imageNamed:@"scrapbook_bg"];
     scrollView.backgroundColor = [UIColor colorWithPatternImage:scrollViewBg];
-    [bookListView addSubview:scrollView];
-    
     scrollView.pagingEnabled = FALSE;
     scrollView.showsVerticalScrollIndicator = TRUE;
     scrollView.showsHorizontalScrollIndicator = FALSE;
     scrollView.delegate = self;
+    [bookListView addSubview:scrollView];
     
     [self.view addSubview:bookListView];
+
 }
 
 - (void)createDeleteButton {
@@ -359,25 +366,53 @@
 }
 
 // return the height of the nav bar
-- (void)createNavigationBar {
+- (int)createNavigationBar {
+    int statusBarHeight = 0;
+    if( SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0") )
+        statusBarHeight = [UIApplication sharedApplication].statusBarFrame.size.height;
+
     // create navigation bar
-    UIImage* navbar_img = [UIImage imageNamed:@"scrapbook_navbar"];
-    UIView* navbar = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, navbar_img.size.height)];
+    CGRect frame = self.view.frame;
+    
+    UIView* navbar = [[UIView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, navbarHeight+shadowHeight+statusBarHeight)];
+    navbar.clipsToBounds = TRUE;
     //navbar.backgroundColor = [UIColor colorWithRed:116.0/255 green:184.0/255 blue:229.0/255 alpha:1.0];
-    navbar.backgroundColor = [UIColor colorWithPatternImage:navbar_img];
+    //navbar.backgroundColor = [UIColor colorWithPatternImage:navbar_img];
+    
+    UIImage* navbar_img = [UIImage imageNamed:@"scrapbook_navbar"];
+    UIImageView* navbar_imgview = [[UIImageView alloc] initWithImage:navbar_img];
+    navbar_imgview.frame = CGRectMake(0, -(navbar_img.size.height-navbarHeight-shadowHeight-statusBarHeight), navbar_img.size.width, navbar_img.size.height);
+    [navbar addSubview:navbar_imgview];
     
     // create home button
     UIImage* homeImg = [UIImage imageNamed:@"timeline_home"];
     UIImage* homeImgPressed = [UIImage imageNamed:@"timeline_home_pressed"];
     UIButton* homeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    homeBtn.frame = CGRectMake(277.5-12, 12-12, homeImg.size.width+24, homeImg.size.height+24); // make the button 24px wider and longer
+    homeBtn.frame = CGRectMake(277.5-12, (navbarHeight-homeImg.size.height-24)/2+statusBarHeight, homeImg.size.width+24, homeImg.size.height+24); // make the button 24px wider and longer
     [homeBtn setImage:homeImg forState:UIControlStateNormal];
     [homeBtn setImage:homeImgPressed forState:UIControlStateHighlighted];
     [homeBtn addTarget:self action:@selector(homeButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [navbar addSubview:homeBtn];
     
+    // title for scrapbook
+    UILabel* title = [[UILabel alloc] init];
+    title.font = [UIFont fontWithName:@"Helvetica" size:24];
+    title.text = @"Scrapbook";
+    title.backgroundColor = [UIColor clearColor];
+    title.textColor = [UIColor whiteColor];
+    [title sizeToFit];
+    CGRect f = title.frame;
+    f.origin.x = (frame.size.width-f.size.width)/2;
+    f.origin.y = (navbarHeight-f.size.height)/2 + statusBarHeight;
+    title.frame = f;
+    [navbar addSubview:title];
+//    [totUtility enableBorder:title];
+//    [totUtility enableBorder:homeBtn];
+
     [self.view addSubview:navbar];
     [navbar release];
+    
+    return navbarHeight+shadowHeight;
 }
 
 

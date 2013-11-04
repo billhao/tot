@@ -8,6 +8,7 @@
 
 #import "totUtility.h"
 #import <QuartzCore/QuartzCore.h>
+#import "AppDelegate.h"
 
 @implementation totUtility
 
@@ -92,6 +93,10 @@ void print(NSString* str) {
 + (CGSize)getScreenSize {
     CGRect screenRect = [[UIScreen mainScreen] bounds];
     return screenRect.size;
+}
+
++ (CGRect)getWindowRect {
+    return CGRectMake(WINDOW_X, WINDOW_Y, WINDOW_W, WINDOW_H);
 }
 
 + (void)showAlert:(NSString*)text {

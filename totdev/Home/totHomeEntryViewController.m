@@ -38,6 +38,8 @@
         MAX_SELECTED_ACTIVITIES = 3;
         
         autoPlay = FALSE;
+        
+//        self.wantsFullScreenLayout = TRUE; // only applies to ios6 or below
     }
     return self;
 }
@@ -50,15 +52,20 @@
     
     [self.view setMultipleTouchEnabled:TRUE];
     
+    self.view.backgroundColor = [UIColor yellowColor];
+        
     // add photo view
     mPhotoViewA = [[totImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
-    mPhotoViewA.contentMode = UIViewContentModeScaleAspectFit;
+    mPhotoViewA.contentMode = UIViewContentModeScaleAspectFill;
     mPhotoViewA.backgroundColor = [UIColor clearColor];
     [self.view addSubview:mPhotoViewA];
+    [totUtility enableBorder:mPhotoViewA];
+    
     mPhotoViewB = [[totImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
-    mPhotoViewB.contentMode = UIViewContentModeScaleAspectFit;
+    mPhotoViewB.contentMode = UIViewContentModeScaleAspectFill;
     mPhotoViewB.backgroundColor = [UIColor clearColor];
     [self.view addSubview:mPhotoViewB];
+    
     
     // add setting icon
     UIButton* settingBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -67,6 +74,7 @@
     [settingBtn setImage:[UIImage imageNamed:@"setting_2"] forState:UIControlStateNormal];
     [settingBtn addTarget:self action:@selector(settingButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:settingBtn];
+    
     
     // add camera icon
     cameraBtn = [UIButton buttonWithType:UIButtonTypeCustom];

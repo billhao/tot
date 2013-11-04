@@ -22,6 +22,7 @@
 + (void)enableBorder:(UIView*)v;
 
 + (CGSize)getScreenSize;
++ (CGRect)getWindowRect;
 
 + (void)showAlert:(NSString*)text;
 

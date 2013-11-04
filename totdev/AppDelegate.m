@@ -50,6 +50,17 @@
         windowFrame.size.height = currentAppHeight;
     }
 
+    if( SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0") ) {
+        windowFrame = CGRectMake(0, 0, 320, 480);
+    }
+    else {
+        // for anything below ios7
+        windowFrame = CGRectMake(0, 0, 320, 480);
+        // use transparent status bar
+//        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackTranslucent];
+//        loginNavigationController.wantsFullScreenLayout = TRUE;
+    }
+    
     self.window = [[[UIWindow alloc] initWithFrame:windowFrame] autorelease];
 
     // Override point for customization after application launch.
@@ -66,14 +77,15 @@
     loginNavigationController.navigationBarHidden = TRUE;
     loginNavigationController.view.frame = self.window.bounds;
 //    loginNavigationController.view.autoresizesSubviews = false;  // for iphone 5 screen size
-
+    
     self.window.rootViewController = loginNavigationController;
-    self.window.backgroundColor = [UIColor blackColor];
-    // use transparent status bar
-//    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackTranslucent];
+    //self.window.backgroundColor = [UIColor darkGrayColor];
+    self.window.clipsToBounds = false;
 
     [self showFirstView];
     [self.window makeKeyAndVisible];
+    
+    
     return YES;
 }
 
@@ -156,15 +168,13 @@
     // remove all previous views
     //[loginNavigationController setViewControllers:nil];
     // show home view
-    
+    //loginNavigationController.view.backgroundColor = [UIColor blueColor];
+
     CGRect frame = self.window.bounds;
     
     self.homeController = [[totHomeRootController alloc] init];
-    self.homeController.view.backgroundColor = [UIColor grayColor];
-    self.homeController.view.frame = CGRectMake(0, 0, frame.size.width, frame.size.height);
-    self.window.rootViewController = loginNavigationController;// self.homeController;
+    //self.homeController.view.backgroundColor = [UIColor grayColor];
     [loginNavigationController pushViewController:self.homeController animated:TRUE];
-    
 
     //totBookListViewController* book = [[totBookListViewController alloc] init];
     //book.view.frame = CGRectMake(0, 0, frame.size.width, frame.size.height);

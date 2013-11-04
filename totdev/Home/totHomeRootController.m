@@ -12,6 +12,7 @@
 #import "totTimelineController.h"
 #import "AppDelegate.h"
 #import "Global.h"
+#import "totUtility.h"
 
 @implementation totHomeRootController
 
@@ -62,11 +63,10 @@
 
     // customize the tab bar item
     NSLog(@"%@", @"home root didload");
-    
+
     homeEntryViewController = [[totHomeEntryViewController alloc] init];
-    homeEntryViewController.view.frame = self.view.frame;
+//    homeEntryViewController.view.frame = CGRectMake(0, 20, 320, 460);
     homeEntryViewController.homeRootController = self;
-    homeEntryViewController.view.frame = CGRectMake(0, 0, 320, 460);
 
     mCurrentViewIndex = kHomeViewEntryView;
 }
@@ -116,35 +116,43 @@
     AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
     UINavigationController* nc = delegate.loginNavigationController;
 
+    int statusBarOffset = 20;
+    if( SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0") )
+        statusBarOffset = 0;
+    
     switch (viewIndex) {
         case kHomeViewEntryView:
         {
-            nextView.view.frame = CGRectMake(0, 0, 320, 460);
-            [currentView.view.superview insertSubview:nextView.view atIndex:0];
+            CGRect f = currentView.view.frame;
+            nextView.view.frame = f;//CGRectMake(0, -statusBarOffset, 320, 480);
+            [currentView.view.superview insertSubview:nextView.view belowSubview:currentView.view];
+            //[nc.view insertSubview:nextView.view atIndex:0];
             [UIView animateWithDuration:.5 animations:^{
                 if( mCurrentViewIndex == kTimeline ) {
-                    currentView.view.frame = CGRectMake(0, 480, 320, 460);
+                    currentView.view.frame = CGRectMake(0, 480, 320, 480-statusBarOffset);
                 }
                 else if( mCurrentViewIndex == kScrapbook ) {
-                    currentView.view.frame = CGRectMake(320, 0, 320, 460);
+                    currentView.view.frame = CGRectMake(320, 0, 320, 480-statusBarOffset);
                 }
                 else if( mCurrentViewIndex == kSetting ) {
-                    currentView.view.frame = CGRectMake(320, 0, 320, 460);
+                    currentView.view.frame = CGRectMake(320, 0, 320, 480-statusBarOffset);
                 }
             } completion:^(BOOL finished) {
+                nextView.view.frame = CGRectMake(0, statusBarOffset, 320, 480-statusBarOffset);
                 if([nc.viewControllers containsObject:nextView]) {
                     [nc popToViewController:nextView animated:FALSE];
                 }
                 else {
                     [nc pushViewController:nextView animated:FALSE];
                 }
+//                NSLog([totUtility getFrameString:nextView.view.frame]);
                 mCurrentViewIndex = viewIndex;
             }];
             break;
         }
         case kTimeline:
         {
-            nextView.view.frame = CGRectMake(0, 480, 320, 460);
+            nextView.view.frame = CGRectMake(0, 480, 320, 480-statusBarOffset);
             [UIView animateWithDuration:0.75
                              animations:^{
 //                                 if( currentX < nextX ) {
@@ -152,17 +160,17 @@
 //                                 } else {
 //                                     currentView.view.frame = CGRectMake(320, 0, 320, 460);
 //                                 }
-                                 nextView.view.frame = CGRectMake(0, 20, 320, 460);
-                                 [delegate.loginNavigationController.view addSubview:nextView.view];
+                                 nextView.view.frame = CGRectMake(0, statusBarOffset, 320, 480-statusBarOffset);
+                                 [nc.view addSubview:nextView.view];
                              } completion:^(BOOL finished) {
-                                 [delegate.loginNavigationController pushViewController:nextView animated:FALSE];
+                                 [nc pushViewController:nextView animated:FALSE];
                                  mCurrentViewIndex = viewIndex;
                              }];
             break;
         }
         case kScrapbook:
         {
-            nextView.view.frame = CGRectMake(320, 20, 320, 460);
+            nextView.view.frame = CGRectMake(320, statusBarOffset, 320, 480-statusBarOffset);
             [UIView animateWithDuration:0.5
                              animations:^{
 //                                 if( currentX < nextX ) {
@@ -170,20 +178,20 @@
 //                                 } else {
 //                                     currentView.view.frame = CGRectMake(320, 20, 320, 460);
 //                                 }
-                                 nextView.view.frame = CGRectMake(0, 20, 320, 460);
-                                 [delegate.loginNavigationController.view addSubview:nextView.view];
+                                 nextView.view.frame = CGRectMake(0, statusBarOffset, 320, 480-statusBarOffset);
+                                 [nc.view addSubview:nextView.view];
                              } completion:^(BOOL finished) {
-                                 [delegate.loginNavigationController pushViewController:nextView animated:FALSE];
+                                 [nc pushViewController:nextView animated:FALSE];
                                  mCurrentViewIndex = viewIndex;
                              }];
             break;
         }
         case kSetting:
         {
-            nextView.view.frame = CGRectMake(320, 20, 320, 460);
+            nextView.view.frame = CGRectMake(320, statusBarOffset, 320, 480-statusBarOffset);
             [UIView animateWithDuration:0.5
                              animations:^{
-                                 nextView.view.frame = CGRectMake(0, 20, 320, 460);
+                                 nextView.view.frame = CGRectMake(0, statusBarOffset, 320, 480-statusBarOffset);
                                  [delegate.loginNavigationController.view addSubview:nextView.view];
                              } completion:^(BOOL finished){
                                  [delegate.loginNavigationController pushViewController:nextView animated:FALSE];

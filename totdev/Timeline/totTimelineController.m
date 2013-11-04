@@ -9,6 +9,7 @@
 #import "totTimelineController.h"
 #import "totTimeline.h"
 #import "totSleepCard.h"
+#import "AppDelegate.h"
 
 @interface totTimelineController ()
 
@@ -41,7 +42,8 @@
 	// Do any additional setup after loading the view.
     int navbar_height = [self createNavigationBar];
     
-    totTimeline* timelineView = [[totTimeline alloc] initWithFrame:CGRectMake(0, navbar_height, 320, 460-navbar_height)];
+    CGRect f = self.view.bounds;
+    totTimeline* timelineView = [[totTimeline alloc] initWithFrame:CGRectMake(0, navbar_height, f.size.width, f.size.height-navbar_height)];
     timelineView.summaryCard = [timelineView addEmptyCard:SUMMARY];
     
     // check for sleep here, if it was a "start" then continue sleep
@@ -90,23 +92,44 @@
 
 // return the height of the nav bar
 - (int)createNavigationBar {
+    int statusBarHeight = 0;
+    if( SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0") )
+        statusBarHeight = [UIApplication sharedApplication].statusBarFrame.size.height;
+    
     // create navigation bar
-    UIView* navbar = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 42)];
+    int navbarHeight = 36;
+    UIView* navbar = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, navbarHeight+statusBarHeight)];
     navbar.backgroundColor = [UIColor colorWithRed:116.0/255 green:184.0/255 blue:229.0/255 alpha:1.0];
 
     // create home button
     UIImage* homeImg = [UIImage imageNamed:@"timeline_home"];
     UIImage* homeImgPressed = [UIImage imageNamed:@"timeline_home_pressed"];
     UIButton* homeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    homeBtn.frame = CGRectMake(277.5-12, 12-12, homeImg.size.width+24, homeImg.size.height+24); // make the button 24px wider and longer
+    homeBtn.frame = CGRectMake(277.5-12, (navbarHeight-homeImg.size.height-24)/2+statusBarHeight, homeImg.size.width+24, homeImg.size.height+24); // make the button 24px wider and longer
     [homeBtn setImage:homeImg forState:UIControlStateNormal];
     [homeBtn setImage:homeImgPressed forState:UIControlStateHighlighted];
     [homeBtn addTarget:self action:@selector(homeButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [navbar addSubview:homeBtn];
     
-    [self.view addSubview:navbar];
-    [navbar release];
+    // title for timeline
+    UILabel* title = [[UILabel alloc] init];
+    title.font = [UIFont fontWithName:@"Helvetica" size:24];
+    title.text = @"Timeline";
+    title.backgroundColor = [UIColor clearColor];
+    title.textColor = [UIColor whiteColor];
+    [title sizeToFit];
+    CGRect frame = self.view.frame;
+    CGRect f = title.frame;
+    f.origin.x = (frame.size.width-f.size.width)/2;
+    f.origin.y = (navbarHeight-f.size.height)/2 + statusBarHeight;
+    title.frame = f;
+    [navbar addSubview:title];
+//    [totUtility enableBorder:title];
+//    [totUtility enableBorder:homeBtn];
     
+    [self.view addSubview:navbar];
+
+    [navbar release];
     return navbar.frame.size.height;
 }
 

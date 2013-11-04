@@ -20,6 +20,9 @@
     totBookViewController* mCurrentBook;
     
     NSMutableArray* booksAndTemplates;
+    
+    int navbarHeight;
+    int shadowHeight; // the height of shadow of navbar background
 }
 
 @property(nonatomic, retain) totHomeRootController* homeController;
