@@ -31,7 +31,7 @@ Global* global = nil;
         self.user = nil;
         
         // init camera
-        self.cameraView = [[totCameraViewController alloc] initWithNibName:@"CameraView" bundle:nil];
+        self.cameraView = [[totCameraViewController alloc] init];
         self.cameraView.view.frame = CGRectMake(0, 0, 0, 0);
     }
     return self;
