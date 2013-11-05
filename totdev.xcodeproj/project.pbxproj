@@ -219,6 +219,15 @@
 		3FD3C73417CF389500DB1B71 /* Raleway-Light_2.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3FD3C73117CF389500DB1B71 /* Raleway-Light_2.ttf */; };
 		3FD3C73517CF389500DB1B71 /* Raleway-Regular_2.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3FD3C73217CF389500DB1B71 /* Raleway-Regular_2.ttf */; };
 		3FD3C73617CF389500DB1B71 /* Raleway-SemiBold_2.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3FD3C73317CF389500DB1B71 /* Raleway-SemiBold_2.ttf */; };
+		3FE46FFB1828D126005F9D5B /* First Year Template P1@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FE46FF21828D126005F9D5B /* First Year Template P1@1x.png */; };
+		3FE46FFC1828D126005F9D5B /* First Year Template P4@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FE46FF31828D126005F9D5B /* First Year Template P4@1x.png */; };
+		3FE46FFD1828D126005F9D5B /* First Year Template P4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FE46FF41828D126005F9D5B /* First Year Template P4@2x.png */; };
+		3FE46FFE1828D126005F9D5B /* First Year Template P5@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FE46FF51828D126005F9D5B /* First Year Template P5@1x.png */; };
+		3FE46FFF1828D126005F9D5B /* First Year Template P5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FE46FF61828D126005F9D5B /* First Year Template P5@2x.png */; };
+		3FE470001828D126005F9D5B /* First Year Template P6@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FE46FF71828D126005F9D5B /* First Year Template P6@1x.png */; };
+		3FE470011828D126005F9D5B /* First Year Template P6@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FE46FF81828D126005F9D5B /* First Year Template P6@2x.png */; };
+		3FE470021828D126005F9D5B /* First Year Template P7@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FE46FF91828D126005F9D5B /* First Year Template P7@1x.png */; };
+		3FE470031828D126005F9D5B /* First Year Template P7@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FE46FFA1828D126005F9D5B /* First Year Template P7@2x.png */; };
 		3FE62AF815E8A6E50079CE54 /* totNewBabyController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FE62AF615E8A6E50079CE54 /* totNewBabyController.m */; };
 		3FE62AF915E8A6E50079CE54 /* totNewBabyController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FE62AF715E8A6E50079CE54 /* totNewBabyController.xib */; };
 		3FE9B5F7154A303100199AAF /* test_Model.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FE9B5F6154A303100199AAF /* test_Model.m */; };
@@ -539,6 +548,15 @@
 		3FD3C73117CF389500DB1B71 /* Raleway-Light_2.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Raleway-Light_2.ttf"; path = "Fonts/Raleway-Light_2.ttf"; sourceTree = "<group>"; };
 		3FD3C73217CF389500DB1B71 /* Raleway-Regular_2.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Raleway-Regular_2.ttf"; path = "Fonts/Raleway-Regular_2.ttf"; sourceTree = "<group>"; };
 		3FD3C73317CF389500DB1B71 /* Raleway-SemiBold_2.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Raleway-SemiBold_2.ttf"; path = "Fonts/Raleway-SemiBold_2.ttf"; sourceTree = "<group>"; };
+		3FE46FF21828D126005F9D5B /* First Year Template P1@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "First Year Template P1@1x.png"; sourceTree = "<group>"; };
+		3FE46FF31828D126005F9D5B /* First Year Template P4@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "First Year Template P4@1x.png"; sourceTree = "<group>"; };
+		3FE46FF41828D126005F9D5B /* First Year Template P4@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "First Year Template P4@2x.png"; sourceTree = "<group>"; };
+		3FE46FF51828D126005F9D5B /* First Year Template P5@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "First Year Template P5@1x.png"; sourceTree = "<group>"; };
+		3FE46FF61828D126005F9D5B /* First Year Template P5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "First Year Template P5@2x.png"; sourceTree = "<group>"; };
+		3FE46FF71828D126005F9D5B /* First Year Template P6@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "First Year Template P6@1x.png"; sourceTree = "<group>"; };
+		3FE46FF81828D126005F9D5B /* First Year Template P6@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "First Year Template P6@2x.png"; sourceTree = "<group>"; };
+		3FE46FF91828D126005F9D5B /* First Year Template P7@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "First Year Template P7@1x.png"; sourceTree = "<group>"; };
+		3FE46FFA1828D126005F9D5B /* First Year Template P7@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "First Year Template P7@2x.png"; sourceTree = "<group>"; };
 		3FE62AF515E8A6E50079CE54 /* totNewBabyController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = totNewBabyController.h; sourceTree = "<group>"; };
 		3FE62AF615E8A6E50079CE54 /* totNewBabyController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = totNewBabyController.m; sourceTree = "<group>"; };
 		3FE62AF715E8A6E50079CE54 /* totNewBabyController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = totNewBabyController.xib; path = totdev/totNewBabyController.xib; sourceTree = "<group>"; };
@@ -866,6 +884,15 @@
 		3F95917D17D996A0003FDBC7 /* First Year */ = {
 			isa = PBXGroup;
 			children = (
+				3FE46FF21828D126005F9D5B /* First Year Template P1@1x.png */,
+				3FE46FF31828D126005F9D5B /* First Year Template P4@1x.png */,
+				3FE46FF41828D126005F9D5B /* First Year Template P4@2x.png */,
+				3FE46FF51828D126005F9D5B /* First Year Template P5@1x.png */,
+				3FE46FF61828D126005F9D5B /* First Year Template P5@2x.png */,
+				3FE46FF71828D126005F9D5B /* First Year Template P6@1x.png */,
+				3FE46FF81828D126005F9D5B /* First Year Template P6@2x.png */,
+				3FE46FF91828D126005F9D5B /* First Year Template P7@1x.png */,
+				3FE46FFA1828D126005F9D5B /* First Year Template P7@2x.png */,
 				3F95917E17D996A0003FDBC7 /* First Year Template Cover@2x.png */,
 				3F95917F17D996A0003FDBC7 /* First Year Template P1@2x.png */,
 				3F95918017D996A0003FDBC7 /* First Year Template P2@2x.png */,
@@ -1488,6 +1515,7 @@
 				3F63C22E170539D90014E8C7 /* tutorial_1@2x.png in Resources */,
 				3F63C22F170539D90014E8C7 /* tutorial_2@2x.png in Resources */,
 				3FF6C2691708E7B2007B48DA /* icons-ok@2x.png in Resources */,
+				3FE46FFF1828D126005F9D5B /* First Year Template P5@2x.png in Resources */,
 				3FF6C2871708E889007B48DA /* Logo@2x.png in Resources */,
 				8E5D4320181CD08300297D51 /* setting_2.png in Resources */,
 				3F2CC24F17120EA9001EDD75 /* tutorial_1.png in Resources */,
@@ -1554,6 +1582,7 @@
 				3FD3C71717CF36DC00DB1B71 /* activity_mirror@2x.png in Resources */,
 				3FD3C71817CF36DC00DB1B71 /* activity_pointing.png in Resources */,
 				3FD3C71917CF36DC00DB1B71 /* activity_pointing@2x.png in Resources */,
+				3FE470011828D126005F9D5B /* First Year Template P6@2x.png in Resources */,
 				3FD3C71A17CF36DC00DB1B71 /* activity_roll_over.png in Resources */,
 				3FD3C71B17CF36DC00DB1B71 /* activity_roll_over@2x.png in Resources */,
 				3FD3C71C17CF36DC00DB1B71 /* activity_run.png in Resources */,
@@ -1567,6 +1596,7 @@
 				3FD3C72417CF36DC00DB1B71 /* activity_stand.png in Resources */,
 				3FD3C72517CF36DC00DB1B71 /* activity_stand@2x.png in Resources */,
 				3FD3C72617CF36DC00DB1B71 /* activity_suck_thumb.png in Resources */,
+				3FE470021828D126005F9D5B /* First Year Template P7@1x.png in Resources */,
 				3FD3C72717CF36DC00DB1B71 /* activity_suck_thumb@2x.png in Resources */,
 				8E32868918271C10006E8F38 /* icons-language@2x.png in Resources */,
 				3FD3C72817CF36DC00DB1B71 /* activity_suck_toe.png in Resources */,
@@ -1580,6 +1610,7 @@
 				3FD3C73417CF389500DB1B71 /* Raleway-Light_2.ttf in Resources */,
 				3FD3C73517CF389500DB1B71 /* Raleway-Regular_2.ttf in Resources */,
 				3FD3C73617CF389500DB1B71 /* Raleway-SemiBold_2.ttf in Resources */,
+				3FE46FFC1828D126005F9D5B /* First Year Template P4@1x.png in Resources */,
 				3F049B4E17D2F79700F05727 /* activity_bg.png in Resources */,
 				3F049B4F17D2F79700F05727 /* activity_bg@2x.png in Resources */,
 				3F049B5717D4073400F05727 /* timeline_home.png in Resources */,
@@ -1599,6 +1630,7 @@
 				8E0EA47517D45A8B00C75BD3 /* card_confirm.png in Resources */,
 				8E0EA47617D45A8B00C75BD3 /* card_confirm@2x.png in Resources */,
 				8E0EA47E17D54D4400C75BD3 /* diaper_gray.png in Resources */,
+				3FE470001828D126005F9D5B /* First Year Template P6@1x.png in Resources */,
 				8E0EA47F17D54D4400C75BD3 /* food_gray.png in Resources */,
 				8E0EA48017D54D4400C75BD3 /* hc_gray.png in Resources */,
 				8E0EA48117D54D4400C75BD3 /* height_gray.png in Resources */,
@@ -1613,6 +1645,7 @@
 				3F95918617D996A0003FDBC7 /* Birthday Template P4@2x.png in Resources */,
 				3F95918717D996A0003FDBC7 /* Birthday.tpl in Resources */,
 				3F95918817D996A0003FDBC7 /* First Year Template Cover@2x.png in Resources */,
+				3FE470031828D126005F9D5B /* First Year Template P7@2x.png in Resources */,
 				3F95918917D996A0003FDBC7 /* First Year Template P1@2x.png in Resources */,
 				3F95918A17D996A0003FDBC7 /* First Year Template P2@2x.png in Resources */,
 				3F95918B17D996A0003FDBC7 /* First Year Template P3@2x.png in Resources */,
@@ -1635,18 +1668,21 @@
 				3F9591B317DD31A9003FDBC7 /* sb_edit_pressed.png in Resources */,
 				3F9591B417DD31A9003FDBC7 /* sb_edit_pressed@2x.png in Resources */,
 				3F9591B517DD31A9003FDBC7 /* sb_edit.png in Resources */,
+				3FE46FFB1828D126005F9D5B /* First Year Template P1@1x.png in Resources */,
 				3F9591B617DD31A9003FDBC7 /* sb_edit@2x.png in Resources */,
 				3F9591B717DD31A9003FDBC7 /* sb_exit_pressed.png in Resources */,
 				3F9591B817DD31A9003FDBC7 /* sb_exit_pressed@2x.png in Resources */,
 				3F9591B917DD31A9003FDBC7 /* sb_exit.png in Resources */,
 				3F9591BA17DD31A9003FDBC7 /* sb_exit@2x.png in Resources */,
 				3FFD356317ED932B00C36504 /* feeding_add.png in Resources */,
+				3FE46FFE1828D126005F9D5B /* First Year Template P5@1x.png in Resources */,
 				3FFD356417ED932B00C36504 /* feeding_delete.png in Resources */,
 				3FFD356617EE88E500C36504 /* add_image@2x.png in Resources */,
 				3FC63DCE17F12954003EA9D9 /* scrapbook_option_button.png in Resources */,
 				3FC63DEA17F1827A003EA9D9 /* AviarySDKResources.bundle in Resources */,
 				3FC63E0317F2C22D003EA9D9 /* female@2x.png in Resources */,
 				3FC63E0417F2C22D003EA9D9 /* male@2x.png in Resources */,
+				3FE46FFD1828D126005F9D5B /* First Year Template P4@2x.png in Resources */,
 				3F11385017F926C300CE7ABF /* btn_forgotpwd.png in Resources */,
 				3F11385117F926C300CE7ABF /* btn_forgotpwd@2x.png in Resources */,
 				3FA793E818011BCA005632F8 /* sb_book_bg@2x.png in Resources */,
