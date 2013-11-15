@@ -31,7 +31,11 @@
 
     // tutorial
     
+    float gap = 10;
+    _frame.origin.x = -gap;
+    _frame.size.width += gap*2;
     tutorialScrollView = [[UIScrollView alloc] initWithFrame:_frame];
+    tutorialScrollView.backgroundColor = [UIColor blackColor];
     tutorialScrollView.pagingEnabled = true;
     tutorialScrollView.showsVerticalScrollIndicator = NO;
     tutorialScrollView.showsHorizontalScrollIndicator = NO;
@@ -48,7 +52,8 @@
         if( img == nil ) break;
         
         UIImageView* imgView = [[UIImageView alloc] initWithImage:img];
-        imgView.frame = CGRectMake(x, y, width, height);
+        imgView.backgroundColor = [UIColor blackColor];
+        imgView.frame = CGRectMake(x+gap, y, img.size.width, height);
         [tutorialScrollView addSubview:imgView];
         [imgView release];
         x += width;
@@ -63,6 +68,12 @@
     pageControl.numberOfPages = image_cnt;
     pageControl.currentPage = 0;
     [self.view addSubview:pageControl];
+}
+
+-(void)viewDidLayoutSubviews {
+    // changes need for ios7 for work properly. without these, the scrollview will be able scroll vertically
+    tutorialScrollView.contentOffset = CGPointMake(0, 0);
+    tutorialScrollView.contentInset = UIEdgeInsetsZero;
 }
 
 //- (void)viewWillAppear:(BOOL)animated {

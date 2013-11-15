@@ -192,7 +192,10 @@
 
 - (void)showTutorial {
     CGRect frame = self.window.bounds;
-    frame.size.height = 460;
+    if( !SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0") ) {
+        float statusBarHeight = [UIApplication sharedApplication].statusBarFrame.size.height;
+        frame.size.height -= statusBarHeight;
+    }
     totTutorialViewController* ttVC = [[totTutorialViewController alloc] initWithFrame:frame];
     [loginNavigationController pushViewController:ttVC animated:TRUE];
     [ttVC release];
