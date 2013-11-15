@@ -140,10 +140,16 @@
 - (void)showNewBabyView {
     // remove all previous views
     //[loginNavigationController setViewControllers:nil];
+    
     // show new baby
-    totNewBabyController* newbabyController = [[totNewBabyController alloc] initWithNibName:@"totNewBabyController" bundle:nil];
     CGRect frame = self.window.bounds;
-    newbabyController.view.frame = CGRectMake(0, 20, frame.size.width, frame.size.height);
+    if( !SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0") ) {
+        float statusBarHeight = [UIApplication sharedApplication].statusBarFrame.size.height;
+        frame.size.height -= statusBarHeight;
+    }
+
+    totNewBabyController* newbabyController = [[totNewBabyController alloc] initWithNibName:@"totNewBabyController" bundle:nil];
+    newbabyController.view.frame = frame;
     [loginNavigationController pushViewController:newbabyController animated:TRUE];
     [newbabyController release];
 }
@@ -151,10 +157,15 @@
 - (void)showLoginView {
     // remove all previous views
     //[loginNavigationController setViewControllers:nil];
+
     // show login
     totLoginController* loginController = [[totLoginController alloc] initWithNibName:@"totLoginController" bundle:nil];
     CGRect frame = self.window.bounds;
-    loginController.view.frame = CGRectMake(0, 20, frame.size.width, frame.size.height);
+    if( !SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0") ) {
+        float statusBarHeight = [UIApplication sharedApplication].statusBarFrame.size.height;
+        frame.size.height -= statusBarHeight;
+    }
+    loginController.view.frame = frame;
     if( global.baby==nil || global.baby.babyID == -1 )
         loginController.newuser = FALSE;
     else {
