@@ -1,5 +1,6 @@
 {
   "template_name" : "First Year",
+  "orientation": "landscape",
 
   "pages" : [
     {

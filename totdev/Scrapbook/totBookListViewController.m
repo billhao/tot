@@ -397,7 +397,7 @@
     // title for scrapbook
     UILabel* title = [[UILabel alloc] init];
     title.font = [UIFont fontWithName:@"Helvetica" size:24];
-    title.text = @"Scrapbook";
+    title.text = @"Scrapbooks";
     title.backgroundColor = [UIColor clearColor];
     title.textColor = [UIColor whiteColor];
     [title sizeToFit];

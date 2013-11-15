@@ -466,7 +466,7 @@ static BOOL bAnimationStarted = NO;
     self.clipsToBounds = TRUE;
     
     // Setup the background image
-    mBackground = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 480, 320)];
+    mBackground = [[UIImageView alloc] initWithFrame:self.bounds];
     mBackground.image = [UIImage imageNamed:self.mPage.templateFilename];
     [self addSubview:mBackground];
     

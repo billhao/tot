@@ -52,17 +52,6 @@
     
     [self.view addSubview:bookview];
     
-    // add scrapbook option menu button
-    optionMenuBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    CGRect f = CGRectMake(fullPageFrame.size.width-66, fullPageFrame.size.height-66, 56, 56);
-    //f = CGRectMake(420, 255, 56, 56);
-    optionMenuBtn.frame = f;
-    optionMenuBtn.alpha = 0.7;
-    [optionMenuBtn setImage:[UIImage imageNamed:@"scrapbook_option_button"] forState:UIControlStateNormal];
-    //optionBtn.backgroundColor = [UIColor blueColor];
-    [optionMenuBtn addTarget:self action:@selector(optionMenuButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:optionMenuBtn];
-    
     // bind gesture events
     // left swipe
     UISwipeGestureRecognizer* leftSwipeRecognizer = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipeGestureEvent:)];
@@ -120,11 +109,17 @@
 
 - (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {
     NSLog(@"bookvc preferredInterfaceOrientationForPresentation");
-    return UIInterfaceOrientationLandscapeRight;
+    if( [mBook orientationLandscape] )
+        return UIInterfaceOrientationLandscapeRight;
+    else
+        return UIInterfaceOrientationPortrait;
 }
 
 - (NSUInteger)supportedInterfaceOrientations {
-    return UIInterfaceOrientationMaskLandscapeLeft | UIInterfaceOrientationMaskLandscapeRight;
+    if( [mBook orientationLandscape] )
+        return UIInterfaceOrientationMaskLandscapeLeft | UIInterfaceOrientationMaskLandscapeRight;
+    else
+        return UIInterfaceOrientationMaskPortrait;
 }
 
 - (BOOL)shouldAutorotate {
@@ -148,6 +143,7 @@
         mBook = [[totBook alloc] init];
         mBook.bookname = mTemplateBook.templateName;
         mBook.templateName = bookname;
+        mBook.orientationLandscape = mTemplateBook.orientationLandscape;
 
         // add all pages from template to book
         // TODO in future this block should move to the copy function of totBook
@@ -166,6 +162,21 @@
         // load template
         [self loadTemplateFile:mBook.templateName]; // template has to be loaded anyway
     }
+    
+    // rotate the coordinates for window if landscape
+    CGRect f = [totUtility getWindowRect];
+    if( mBook.orientationLandscape ) {
+        int k = f.origin.x;
+        f.origin.x = f.origin.y;
+        f.origin.y = k;
+        k = f.size.width;
+        f.size.width = f.size.height;
+        f.size.height = k;
+    }
+    fullPageFrame = f;
+    
+    // set up option button. its position depends on orientation
+    [self setupOptionButton];
     
     // set up the views
     bookview = [[totBookView alloc] initWithFrame:fullPageFrame];
@@ -419,6 +430,21 @@
 
 
 #pragma mark - Helper functions
+
+- (void)setupOptionButton {
+    // add scrapbook option menu button
+    if( !optionMenuBtn ) {
+        optionMenuBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        optionMenuBtn.alpha = 0.7;
+        [optionMenuBtn setImage:[UIImage imageNamed:@"scrapbook_option_button"] forState:UIControlStateNormal];
+        //optionBtn.backgroundColor = [UIColor blueColor];
+        [optionMenuBtn addTarget:self action:@selector(optionMenuButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:optionMenuBtn];
+    }
+    CGRect f = CGRectMake(fullPageFrame.size.width-66, fullPageFrame.size.height-66, 56, 56);
+    //f = CGRectMake(420, 255, 56, 56);
+    optionMenuBtn.frame = f;
+}
 
 - (void)createOptionMenu {
     if( optionView ) return;

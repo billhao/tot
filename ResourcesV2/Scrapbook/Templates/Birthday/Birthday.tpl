@@ -5,6 +5,7 @@
 
 {
   "template_name" : "Birthday",
+  "orientation": "landscape",
 
   "pages" : [
     {

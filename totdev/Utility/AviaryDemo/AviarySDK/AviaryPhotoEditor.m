@@ -71,7 +71,7 @@
         [self setPhotoEditorCustomizationOptions];
     });
     
-    [self setCropAspectRatio];
+    [self setCropAspectRatio:(float)highResImage.size.width/highResImage.size.height];
     
     // If a high res image is passed, create the high res context with the image and the photo editor.
     if (highResImage) {
@@ -117,12 +117,26 @@
     }
 }
 
-- (void)setCropAspectRatio {
+// imageRation = width/height of the image
+- (void)setCropAspectRatio:(float)imageRatio {
     // Set Custom Crop Sizes
     if( cropWidth>0 && cropHeight>0 ) {
         [AFPhotoEditorCustomization setCropToolCustomEnabled:NO];
         [AFPhotoEditorCustomization setCropToolOriginalEnabled:NO];
-        NSDictionary * customCrop = @{kAFCropPresetName: [NSString stringWithFormat:@"%d x %d", (int)cropWidth, (int)cropHeight], kAFCropPresetHeight : @(cropHeight), kAFCropPresetWidth : @(cropWidth)};
+        
+        float w = cropWidth;
+        float h = cropHeight;
+/*
+        BOOL orientation1 = imageRatio>1?TRUE:FALSE;
+        BOOL orientation2 = cropWidth>cropHeight?TRUE:FALSE;
+        // switch crop w & h if orientation different
+        if( orientation1^orientation2 ) {
+            w = cropHeight;
+            h = cropWidth;
+        }
+*/
+        
+        NSDictionary * customCrop = @{kAFCropPresetName: [NSString stringWithFormat:@"%d x %d", (int)cropWidth, (int)cropHeight], kAFCropPresetHeight : @(h), kAFCropPresetWidth : @(w)};
         [AFPhotoEditorCustomization setCropToolPresets:@[customCrop]];
     }
     else {

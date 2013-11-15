@@ -119,6 +119,7 @@ typedef enum {
 @property (nonatomic, retain) NSString* bookid; // a unique id. book name may not be unique
 @property (nonatomic, retain) NSString* bookname; // may not be unique
 @property (nonatomic, retain) NSString* templateName;
+@property (nonatomic, assign) BOOL orientationLandscape; // true for landscape, false for portrait
 
 - (void) loadFromTemplateFile:(NSString*)filename;  // result in an empty book.
 - (void) loadFromJSONString: (NSString*)json;  // json represents the book.

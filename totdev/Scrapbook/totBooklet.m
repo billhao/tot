@@ -297,7 +297,7 @@
 ////////////////////////////////////////////////////////////////
 @implementation totBook
 
-@synthesize bookid, bookname, templateName;
+@synthesize bookid, bookname, templateName, orientationLandscape;
 
 - (id) init {
     if (self = [super init]) {
@@ -341,6 +341,10 @@
     for (id key in object) {
         if ([key isEqualToString:@"template_name"]) {
             self.templateName = [object objectForKey:key];
+        }
+        else if ([key isEqualToString:@"orientation"]) {
+            NSString* orientation = [object objectForKey:key];
+            orientationLandscape = [orientation isEqualToString:@"landscape"];
         } else if ([key isEqualToString:@"pages"]) {
             // NSArray contains page objects.
             NSArray* page_json_objects = [object objectForKey:key];
@@ -417,6 +421,8 @@
 - (void)loadFromDictionary:(NSDictionary *)dict {
     self.bookname = [dict objectForKey:@"bookname"];
     self.templateName = [dict objectForKey:@"template"];
+    NSString* orientation = [[dict objectForKey:@"orientation"] lowercaseString];
+    orientationLandscape = [orientation isEqualToString:@"landscape"];
 
     NSArray* pp = [dict objectForKey:@"pages"];
     [pages removeAllObjects];

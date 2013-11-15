@@ -52,21 +52,21 @@
     
     [self.view setMultipleTouchEnabled:TRUE];
     
-    self.view.backgroundColor = [UIColor yellowColor];
-        
+//    self.view.backgroundColor = [UIColor yellowColor];
+    
     // add photo view
     mPhotoViewA = [[totImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
     mPhotoViewA.contentMode = UIViewContentModeScaleAspectFill;
     mPhotoViewA.backgroundColor = [UIColor clearColor];
     [self.view addSubview:mPhotoViewA];
-    [totUtility enableBorder:mPhotoViewA];
+    //[totUtility enableBorder:mPhotoViewA];
     
     mPhotoViewB = [[totImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
     mPhotoViewB.contentMode = UIViewContentModeScaleAspectFill;
     mPhotoViewB.backgroundColor = [UIColor clearColor];
     [self.view addSubview:mPhotoViewB];
     
-    
+    /*
     // add setting icon
     UIButton* settingBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     settingBtn.frame = CGRectMake(270, 0, 35, 50);
@@ -74,7 +74,7 @@
     [settingBtn setImage:[UIImage imageNamed:@"setting_2"] forState:UIControlStateNormal];
     [settingBtn addTarget:self action:@selector(settingButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:settingBtn];
-    
+    */
     
     // add camera icon
     cameraBtn = [UIButton buttonWithType:UIButtonTypeCustom];

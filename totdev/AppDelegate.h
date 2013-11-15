@@ -27,7 +27,7 @@
 #define WINDOW_X 0
 #define WINDOW_Y 0
 #define WINDOW_W 320
-#define WINDOW_H 460
+#define WINDOW_H 480
 
 @class totUITabBarController;
 @class totHomeRootController;
