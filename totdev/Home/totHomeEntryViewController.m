@@ -65,7 +65,7 @@
     mPhotoViewB.contentMode = UIViewContentModeScaleAspectFill;
     mPhotoViewB.backgroundColor = [UIColor clearColor];
     [self.view addSubview:mPhotoViewB];
-    
+
     /*
     // add setting icon
     UIButton* settingBtn = [UIButton buttonWithType:UIButtonTypeCustom];

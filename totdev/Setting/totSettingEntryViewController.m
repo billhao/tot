@@ -37,7 +37,7 @@
 
 - (void)homeButtonPressed:(id)sender {
     if (self.homeController) {
-        [self.homeController switchTo:kHomeViewEntryView withContextInfo:nil];
+        [self.homeController switchTo:kTimeline withContextInfo:nil];
     }
 }
 
@@ -61,7 +61,7 @@
     UIImage* homeImgPressed = [UIImage imageNamed:@"timeline_home_pressed"];
     UIButton* homeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     
-    homeBtn.frame = CGRectMake(277.5-12, (navbarHeight-homeImg.size.height-24)/2+statusBarHeight, homeImg.size.width+24, homeImg.size.height+24); // make the button 24px wider and longer
+    homeBtn.frame = CGRectMake(9, (navbarHeight-homeImg.size.height-24)/2+statusBarHeight, homeImg.size.width+24, homeImg.size.height+24); // make the button 24px wider and longer
     [homeBtn setImage:homeImg forState:UIControlStateNormal];
     [homeBtn setImage:homeImgPressed forState:UIControlStateHighlighted];
     [homeBtn addTarget:self action:@selector(homeButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
@@ -85,8 +85,12 @@
     [navbar addSubview:title];
 //    [totUtility enableBorder:title];
 
+    float y = 80;
+    float gap = 63;
+    
+    
     // Creates the background.
-    UIView* background = [[UIView alloc] initWithFrame:CGRectMake(10, 60, 300, 43)];
+    UIView* background = [[UIView alloc] initWithFrame:CGRectMake(10, y, 300, 43)];
     background.layer.cornerRadius = 5;
     background.layer.masksToBounds = YES;
     [background setBackgroundColor:[UIColor whiteColor]];
@@ -109,7 +113,9 @@
     [self.view addSubview:background];
     [background release];
     
-    UIView* background1 = [[UIView alloc] initWithFrame:CGRectMake(10, 123, 300, 43)];
+    /*
+    y += gap;
+    UIView* background1 = [[UIView alloc] initWithFrame:CGRectMake(10, y, 300, 43)];
     background1.layer.cornerRadius = 5;
     background1.layer.masksToBounds = YES;
     [background1 setBackgroundColor:[UIColor whiteColor]];
@@ -126,12 +132,14 @@
     
     [self.view addSubview:background1];
     [background1 release];
+    */
     
     // Creates logout button.
     UIButton* logoutBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     logoutBtn.layer.cornerRadius = 5;
     logoutBtn.layer.masksToBounds = YES;
-    [logoutBtn setFrame:CGRectMake(10, 186, 300, 43)];
+    y += gap;
+    [logoutBtn setFrame:CGRectMake(10, y, 300, 43)];
     [logoutBtn setBackgroundColor:[UIColor colorWithRed:245/255.0f green:73/255.0 blue:82/255.0 alpha:1.0f]];
     [logoutBtn setTitle:@"Log out" forState:UIControlStateNormal];
     [logoutBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];

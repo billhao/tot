@@ -87,6 +87,10 @@
         [homeController switchTo:kHomeViewEntryView withContextInfo:nil];
 }
 
+- (void)settingButtonPressed:(id)sender {
+    if (homeController)
+        [homeController switchTo:kSetting withContextInfo:nil];
+}
 
 #pragma mark - Helper functions
 
@@ -102,15 +106,31 @@
     navbar.backgroundColor = [UIColor colorWithRed:116.0/255 green:184.0/255 blue:229.0/255 alpha:1.0];
 
     // create home button
+    // assume home button and setting have the same size
     UIImage* homeImg = [UIImage imageNamed:@"timeline_home"];
     UIImage* homeImgPressed = [UIImage imageNamed:@"timeline_home_pressed"];
     UIButton* homeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    homeBtn.frame = CGRectMake(277.5-12, (navbarHeight-homeImg.size.height-24)/2+statusBarHeight, homeImg.size.width+24, homeImg.size.height+24); // make the button 24px wider and longer
+    float width = homeImg.size.width+24;
+    float height = homeImg.size.height+24;
+    homeBtn.frame = CGRectMake(9, (navbarHeight-height)/2+statusBarHeight, width, height); // make the button 24px wider and longer
     [homeBtn setImage:homeImg forState:UIControlStateNormal];
     [homeBtn setImage:homeImgPressed forState:UIControlStateHighlighted];
     [homeBtn addTarget:self action:@selector(homeButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [navbar addSubview:homeBtn];
+//    [totUtility enableBorder:homeBtn];
+
+    // setting button
+    UIImage* settingImg = [UIImage imageNamed:@"settings"];
+    UIImage* settingImgPressed = [UIImage imageNamed:@"settings"];
+    UIButton* settingBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    settingBtn.frame = CGRectMake(self.view.frame.size.width-9-width, (navbarHeight-height)/2+statusBarHeight, width, height); // make the button 24px wider and longer
+    [settingBtn setImage:settingImg forState:UIControlStateNormal];
+    [settingBtn setImage:settingImgPressed forState:UIControlStateHighlighted];
+    [settingBtn addTarget:self action:@selector(settingButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [navbar addSubview:settingBtn];
+//    [totUtility enableBorder:settingBtn];
     
+
     // title for timeline
     UILabel* title = [[UILabel alloc] init];
     title.font = [UIFont fontWithName:@"Helvetica" size:24];

@@ -152,18 +152,28 @@
         }
         case kTimeline:
         {
-            nextView.view.frame = CGRectMake(0, 480, 320, 480-statusBarOffset);
+            if( mCurrentViewIndex != kSetting ) {
+                nextView.view.frame = CGRectMake(0, 480, 320, 480-statusBarOffset);
+            }
+            else {
+                [currentView.view.superview insertSubview:nextView.view belowSubview:currentView.view];
+            }
             [UIView animateWithDuration:0.75
                              animations:^{
-//                                 if( currentX < nextX ) {
-//                                     currentView.view.frame = CGRectMake(-320, 0, 320, 460);
-//                                 } else {
-//                                     currentView.view.frame = CGRectMake(320, 0, 320, 460);
-//                                 }
-                                 nextView.view.frame = CGRectMake(0, statusBarOffset, 320, 480-statusBarOffset);
-                                 [nc.view addSubview:nextView.view];
+                                 if( mCurrentViewIndex == kSetting ) {
+                                     currentView.view.frame = CGRectMake(320, 0, 320, 480-statusBarOffset);
+                                 }
+                                 else {
+                                     nextView.view.frame = CGRectMake(0, statusBarOffset, 320, 480-statusBarOffset);
+                                     [nc.view addSubview:nextView.view];
+                                 }
                              } completion:^(BOOL finished) {
-                                 [nc pushViewController:nextView animated:FALSE];
+                                 if([nc.viewControllers containsObject:nextView]) {
+                                     [nc popToViewController:nextView animated:FALSE];
+                                 }
+                                 else {
+                                     [nc pushViewController:nextView animated:FALSE];
+                                 }
                                  mCurrentViewIndex = viewIndex;
                              }];
             break;
@@ -181,7 +191,12 @@
                                  nextView.view.frame = CGRectMake(0, statusBarOffset, 320, 480-statusBarOffset);
                                  [nc.view addSubview:nextView.view];
                              } completion:^(BOOL finished) {
-                                 [nc pushViewController:nextView animated:FALSE];
+                                 if([nc.viewControllers containsObject:nextView]) {
+                                     [nc popToViewController:nextView animated:FALSE];
+                                 }
+                                 else {
+                                     [nc pushViewController:nextView animated:FALSE];
+                                 }
                                  mCurrentViewIndex = viewIndex;
                              }];
             break;
@@ -194,7 +209,12 @@
                                  nextView.view.frame = CGRectMake(0, statusBarOffset, 320, 480-statusBarOffset);
                                  [delegate.loginNavigationController.view addSubview:nextView.view];
                              } completion:^(BOOL finished){
-                                 [delegate.loginNavigationController pushViewController:nextView animated:FALSE];
+                                 if([nc.viewControllers containsObject:nextView]) {
+                                     [nc popToViewController:nextView animated:FALSE];
+                                 }
+                                 else {
+                                     [nc pushViewController:nextView animated:FALSE];
+                                 }
                                  mCurrentViewIndex = viewIndex;
                              }];
             break;

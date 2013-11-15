@@ -53,7 +53,7 @@
 
     // add the entry view
     totSettingEntryViewController* settingController =
-        [[totSettingEntryViewController alloc] initWithNibName:@"SettingEntryView" bundle:nil];
+        [[totSettingEntryViewController alloc] init];
     self.mEntryView = settingController;
     self.mEntryView.homeController = self.homeController;
     [self.view addSubview:settingController.view];
