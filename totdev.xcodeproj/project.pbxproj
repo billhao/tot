@@ -273,6 +273,7 @@
 		8E3286851827135F006E8F38 /* totBookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E3286811827135F006E8F38 /* totBookViewController.m */; };
 		8E32868818271C10006E8F38 /* icons-language.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E32868618271C10006E8F38 /* icons-language.png */; };
 		8E32868918271C10006E8F38 /* icons-language@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E32868718271C10006E8F38 /* icons-language@2x.png */; };
+		8E42F11718389DC9006DB992 /* totResetPasswordView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E42F11618389DC9006DB992 /* totResetPasswordView.m */; };
 		8E5692F117B9FE63001686CB /* totTimeUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E5692F017B9FE63001686CB /* totTimeUtil.m */; };
 		8E5D4320181CD08300297D51 /* setting_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E5D431F181CD08300297D51 /* setting_2.png */; };
 		CE5C09FC154CCFDB00D41114 /* moviePlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5C09F9154CCFDB00D41114 /* moviePlayerViewController.m */; };
@@ -619,6 +620,8 @@
 		8E3286811827135F006E8F38 /* totBookViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totBookViewController.m; path = Scrapbook/totBookViewController.m; sourceTree = "<group>"; };
 		8E32868618271C10006E8F38 /* icons-language.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icons-language.png"; sourceTree = "<group>"; };
 		8E32868718271C10006E8F38 /* icons-language@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icons-language@2x.png"; sourceTree = "<group>"; };
+		8E42F11518389DC9006DB992 /* totResetPasswordView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totResetPasswordView.h; path = Setting/totResetPasswordView.h; sourceTree = "<group>"; };
+		8E42F11618389DC9006DB992 /* totResetPasswordView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totResetPasswordView.m; path = Setting/totResetPasswordView.m; sourceTree = "<group>"; };
 		8E5692EF17B9FE63001686CB /* totTimeUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totTimeUtil.h; path = Utility/totTimeUtil.h; sourceTree = "<group>"; };
 		8E5692F017B9FE63001686CB /* totTimeUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totTimeUtil.m; path = Utility/totTimeUtil.m; sourceTree = "<group>"; };
 		8E5D431F181CD08300297D51 /* setting_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = setting_2.png; path = Setting/setting_2.png; sourceTree = "<group>"; };
@@ -1361,6 +1364,8 @@
 				EF6283A015366DE4004031D6 /* totSettingRootController.m */,
 				3FCA8972157AE42600B087D7 /* totSettingEntryViewController.h */,
 				3FCA8973157AE42600B087D7 /* totSettingEntryViewController.m */,
+				8E42F11518389DC9006DB992 /* totResetPasswordView.h */,
+				8E42F11618389DC9006DB992 /* totResetPasswordView.m */,
 			);
 			name = Setting;
 			sourceTree = "<group>";
@@ -1730,6 +1735,7 @@
 				3F277109164F6F6100DF84EF /* totLoginNavigationController.m in Sources */,
 				3F1331A416968F7400A39F41 /* Global.m in Sources */,
 				24C98C2416F2C0EF00541492 /* totQuantityController.m in Sources */,
+				8E42F11718389DC9006DB992 /* totResetPasswordView.m in Sources */,
 				3F987DCF1705717E00712A58 /* totTutorialViewController.m in Sources */,
 				8E3286791827134A006E8F38 /* totTimelineController.m in Sources */,
 				8E3286721827134A006E8F38 /* totLanguageCard.m in Sources */,
