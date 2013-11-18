@@ -37,9 +37,14 @@
     totPageElement* mData;
     // Subviews
     UIImageView *mImage;
+    UITextView* mTextView;
+
+    totPageView* mParentView;
 }
 
 @property (nonatomic, retain) totPageElement* mData;
+@property (nonatomic, assign) totPageView* mParentView;
+@property (nonatomic, assign) UITextView* mTextView;
 
 - (id)initWithElement:(totPageElement*)data;
 - (void)display;
@@ -66,24 +71,30 @@
 
 - (id)initWithElementData:(totPageElement*)data bookvc:(totBookViewController*)bookvc;
 - (void)setPageElementData:(totPageElement*)data;
+- (void)setPageView:(totPageView*)pageView;
 
 @end
 
 // ---------------------------------totPageView---------------------------------------
 
 // Page View
-@interface totPageView : UIView {
+@interface totPageView : UIView <UITextFieldDelegate> {
     // Data
     totPage* mPage;
     
     // Subviews
     NSMutableArray* mElementsView;
     UIImageView* mBackground;
-
+    UIView* mPopupTextInputView;
+    UITextField* mTextInput;
+    
+    // If input text view pops up
+    totPageElementViewInternal* mCurrentActivePageElement;
 }
 
-@property(nonatomic, retain) totBookViewController* bookvc;
+@property (nonatomic, retain) totBookViewController* bookvc;
 @property (nonatomic, retain) totPage* mPage;
+@property (nonatomic, assign) totPageElementViewInternal* mCurrentActivePageElement;
 
 // Loads the template data.
 // data should be [totPage toDictionary];
@@ -92,6 +103,9 @@
 
 // save the view to an image
 - (UIImage*)renderToImage;
+
+// Pop up the input text view.
+- (void)showInputTextView;
 
 @end
 
