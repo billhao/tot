@@ -433,6 +433,7 @@
 		3F2CC24C17120EA9001EDD75 /* tutorial_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tutorial_2.png; path = Resources/Tutorial/tutorial_2.png; sourceTree = "<group>"; };
 		3F2CC25317120ED2001EDD75 /* tutorial_0@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tutorial_0@2x.png"; path = "Resources/Tutorial/tutorial_0@2x.png"; sourceTree = "<group>"; };
 		3F2CC25517120F88001EDD75 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		3F4D0F81183B471B00754E4E /* Logo-120x120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Logo-120x120.png"; path = "Resources/Logo-120x120.png"; sourceTree = "<group>"; };
 		3F63C22C170539D90014E8C7 /* tutorial_1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tutorial_1@2x.png"; path = "Resources/Tutorial/tutorial_1@2x.png"; sourceTree = "<group>"; };
 		3F63C22D170539D90014E8C7 /* tutorial_2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tutorial_2@2x.png"; path = "Resources/Tutorial/tutorial_2@2x.png"; sourceTree = "<group>"; };
 		3F65ABA2182E01A000FF27CC /* Birthday.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Birthday.png; sourceTree = "<group>"; };
@@ -1548,6 +1549,7 @@
 				3FF2AA5516A8F8FE0023162E /* Default-568h@2x.png */,
 				EFBE580A1565A8FC003433D6 /* Logo.png */,
 				3FF6C2861708E889007B48DA /* Logo@2x.png */,
+				3F4D0F81183B471B00754E4E /* Logo-120x120.png */,
 				EF6283A215366DF1004031D6 /* Image */,
 				3FE62AF715E8A6E50079CE54 /* totNewBabyController.xib */,
 				3F2216DD1571758F000E86F3 /* totLoginController.xib */,
