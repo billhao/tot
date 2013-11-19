@@ -13,6 +13,7 @@
 #import "totTutorialViewController.h"
 #import "totUtility.h"
 #import "totHomeRootController.h"
+#import "totResetPasswordView.h"
 
 @implementation totSettingEntryViewController
 
@@ -84,6 +85,7 @@
     title.frame = f;
     [navbar addSubview:title];
 //    [totUtility enableBorder:title];
+    [title release];
 
     float y = 80;
     float gap = 63;
@@ -134,6 +136,24 @@
     [background1 release];
     */
     
+    // Creates the reset password button.
+    UIView* background2 = [[UIView alloc] initWithFrame:CGRectMake(10, 186, 300, 43)];
+    background2.layer.cornerRadius = 5;
+    background2.layer.masksToBounds = YES;
+    [background2 setBackgroundColor:[UIColor whiteColor]];
+    
+    UIButton* passwordBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [passwordBtn setFrame:CGRectMake(0, 0, 300, 43)];
+    [passwordBtn setBackgroundColor:[UIColor clearColor]];
+    [passwordBtn setTitle:@"Reset Password" forState:UIControlStateNormal];
+    [passwordBtn setTitleColor:[UIColor colorWithRed:0.4f green:0.4f blue:0.4f alpha:1.0f] forState:UIControlStateNormal];
+    [passwordBtn.titleLabel setFont:[UIFont fontWithName:@"RaleWay-SemiBold_2" size:18.0f]];
+    [passwordBtn addTarget:self action:@selector(resetPassword:) forControlEvents:UIControlEventTouchUpInside];
+    [background2 addSubview:passwordBtn];
+    
+    [self.view addSubview:background2];
+    [background2 release];
+    
     // Creates logout button.
     UIButton* logoutBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     logoutBtn.layer.cornerRadius = 5;
@@ -146,6 +166,20 @@
     [logoutBtn.titleLabel setFont:[UIFont fontWithName:@"Raleway-SemiBold_2" size:18.0f]];
     [logoutBtn addTarget:self action:@selector(logout:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:logoutBtn];
+    
+    // Reset password view.
+    resetPasswordView = [[totResetPasswordView alloc] initWithFrame:CGRectMake(320, 0, 320, 480)];
+    [self.view addSubview:resetPasswordView];
+}
+
+- (void)resetPassword: (id)sender {
+    [UIView beginAnimations:@"show_reset_password" context:nil];
+    [UIView setAnimationDuration:0.5];
+    [UIView setAnimationCurve:UIViewAnimationCurveLinear];
+    {
+        resetPasswordView.frame = CGRectMake(0, 0, 320, 480);
+    }
+    [UIView commitAnimations];
 }
 
 - (void)logout: (id)sender {}
@@ -174,6 +208,7 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
+    [resetPasswordView release];
 }
 
 -(AppDelegate*) getAppDelegate {

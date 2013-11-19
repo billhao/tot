@@ -10,8 +10,11 @@
 #import "totModel.h"
 
 @class totHomeRootController;
+@class totResetPasswordView;
 
-@interface totSettingEntryViewController : UIViewController <UIAlertViewDelegate> {}
+@interface totSettingEntryViewController : UIViewController <UIAlertViewDelegate> {
+    totResetPasswordView* resetPasswordView;
+}
 
 @property (nonatomic, assign) totHomeRootController* homeController;
 

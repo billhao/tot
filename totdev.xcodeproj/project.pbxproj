@@ -332,6 +332,7 @@
 		8E3286851827135F006E8F38 /* totBookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E3286811827135F006E8F38 /* totBookViewController.m */; };
 		8E32868818271C10006E8F38 /* icons-language.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E32868618271C10006E8F38 /* icons-language.png */; };
 		8E32868918271C10006E8F38 /* icons-language@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E32868718271C10006E8F38 /* icons-language@2x.png */; };
+		8E42F11718389DC9006DB992 /* totResetPasswordView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E42F11618389DC9006DB992 /* totResetPasswordView.m */; };
 		8E5692F117B9FE63001686CB /* totTimeUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E5692F017B9FE63001686CB /* totTimeUtil.m */; };
 		8E5D4320181CD08300297D51 /* setting_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E5D431F181CD08300297D51 /* setting_2.png */; };
 		CE5C09FC154CCFDB00D41114 /* moviePlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5C09F9154CCFDB00D41114 /* moviePlayerViewController.m */; };
@@ -487,7 +488,6 @@
 		3FC1B7081544F19600295447 /* totEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totEvent.m; path = totdev/Model/totEvent.m; sourceTree = "<group>"; };
 		3FC56713181F8CDA00A5AD65 /* Base64Encoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base64Encoder.h; sourceTree = "<group>"; };
 		3FC56714181F8CDA00A5AD65 /* Base64Encoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Base64Encoder.m; sourceTree = "<group>"; };
-		3FC5671618222DFA00A5AD65 /* Reveal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Reveal.framework; path = "../../../Downloads/Reveal.app/Contents/SharedSupport/iOS-Libraries/Reveal.framework"; sourceTree = "<group>"; };
 		3FC63DB117F00B6B003EA9D9 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		3FC63DB617F00D72003EA9D9 /* RNCryptor+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RNCryptor+Private.h"; sourceTree = "<group>"; };
 		3FC63DB717F00D72003EA9D9 /* RNCryptor-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RNCryptor-Prefix.pch"; sourceTree = "<group>"; };
@@ -741,6 +741,8 @@
 		8E3286811827135F006E8F38 /* totBookViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totBookViewController.m; path = Scrapbook/totBookViewController.m; sourceTree = "<group>"; };
 		8E32868618271C10006E8F38 /* icons-language.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icons-language.png"; sourceTree = "<group>"; };
 		8E32868718271C10006E8F38 /* icons-language@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icons-language@2x.png"; sourceTree = "<group>"; };
+		8E42F11518389DC9006DB992 /* totResetPasswordView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totResetPasswordView.h; path = Setting/totResetPasswordView.h; sourceTree = "<group>"; };
+		8E42F11618389DC9006DB992 /* totResetPasswordView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totResetPasswordView.m; path = Setting/totResetPasswordView.m; sourceTree = "<group>"; };
 		8E5692EF17B9FE63001686CB /* totTimeUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totTimeUtil.h; path = Utility/totTimeUtil.h; sourceTree = "<group>"; };
 		8E5692F017B9FE63001686CB /* totTimeUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totTimeUtil.m; path = Utility/totTimeUtil.m; sourceTree = "<group>"; };
 		8E5D431F181CD08300297D51 /* setting_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = setting_2.png; path = Setting/setting_2.png; sourceTree = "<group>"; };
@@ -1482,7 +1484,6 @@
 		EF6283741536674B004031D6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				3FC5671618222DFA00A5AD65 /* Reveal.framework */,
 				3FC63DFB17F185E2003EA9D9 /* AssetsLibrary.framework */,
 				3FC63DF917F1847C003EA9D9 /* SystemConfiguration.framework */,
 				3FC63DF717F18476003EA9D9 /* StoreKit.framework */,
@@ -1577,6 +1578,8 @@
 				EF6283A015366DE4004031D6 /* totSettingRootController.m */,
 				3FCA8972157AE42600B087D7 /* totSettingEntryViewController.h */,
 				3FCA8973157AE42600B087D7 /* totSettingEntryViewController.m */,
+				8E42F11518389DC9006DB992 /* totResetPasswordView.h */,
+				8E42F11618389DC9006DB992 /* totResetPasswordView.m */,
 			);
 			name = Setting;
 			sourceTree = "<group>";
@@ -2005,6 +2008,7 @@
 				3F277109164F6F6100DF84EF /* totLoginNavigationController.m in Sources */,
 				3F1331A416968F7400A39F41 /* Global.m in Sources */,
 				24C98C2416F2C0EF00541492 /* totQuantityController.m in Sources */,
+				8E42F11718389DC9006DB992 /* totResetPasswordView.m in Sources */,
 				3F987DCF1705717E00712A58 /* totTutorialViewController.m in Sources */,
 				8E3286791827134A006E8F38 /* totTimelineController.m in Sources */,
 				8E3286721827134A006E8F38 /* totLanguageCard.m in Sources */,
@@ -2074,10 +2078,6 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"/Users/hao/projects/tot/Reveal.app/Contents/SharedSupport/iOS-Libraries",
-				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "totdev/totdev-Prefix.pch";
 				INFOPLIST_FILE = "totdev/totdev-Info.plist";
@@ -2085,12 +2085,6 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/totdev/Utility/AviaryDemo/AviarySDK\"",
-				);
-				OTHER_LDFLAGS = (
-					"-ObjC",
-					"-framework",
-					Reveal,
-					"-all_load",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -2171,10 +2165,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"/Users/hao/projects/tot/Reveal.app/Contents/SharedSupport/iOS-Libraries",
-				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "totdev/totdev-Prefix.pch";
 				INFOPLIST_FILE = "totdev/totdev-Info.plist";
@@ -2182,12 +2172,6 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/totdev/Utility/AviaryDemo/AviarySDK\"",
-				);
-				OTHER_LDFLAGS = (
-					"-ObjC",
-					"-framework",
-					Reveal,
-					"-all_load",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -2203,10 +2187,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"/Users/hao/projects/tot/Reveal.app/Contents/SharedSupport/iOS-Libraries",
-				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "totdev/totdev-Prefix.pch";
 				INFOPLIST_FILE = "totdev/totdev-Info.plist";
@@ -2214,12 +2194,6 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/totdev/Utility/AviaryDemo/AviarySDK\"",
-				);
-				OTHER_LDFLAGS = (
-					"-ObjC",
-					"-framework",
-					Reveal,
-					"-all_load",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

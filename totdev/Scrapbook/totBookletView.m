@@ -55,6 +55,8 @@
 @implementation totPageElementViewInternal
 
 @synthesize mData;
+@synthesize mParentView;
+@synthesize mTextView;
 
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
@@ -108,14 +110,14 @@
     }
     else if( self.mData.type == TEXT ) {
         NSString* text = [self.mData getResource:[totPageElement text]];
-        UITextView* textView = [[UITextView alloc] initWithFrame:self.bounds];
-        textView.backgroundColor = [UIColor clearColor];
-        textView.delegate = self;
-        if( text ) textView.text = text;
-        textView.layer.borderColor = [UIColor grayColor].CGColor;
-        textView.layer.borderWidth = 0;  // hide the border.
-        textView.layer.cornerRadius = 2;
-        [self addSubview:textView];
+        mTextView = [[UITextView alloc] initWithFrame:self.bounds];
+        mTextView.backgroundColor = [UIColor clearColor];
+        mTextView.delegate = self;
+        if( text ) mTextView.text = text;
+        mTextView.layer.borderColor = [UIColor grayColor].CGColor;
+        mTextView.layer.borderWidth = 0;  // hide the border.
+        mTextView.layer.cornerRadius = 2;
+        [self addSubview:mTextView];
     }
 }
 
@@ -152,16 +154,21 @@
     [super dealloc];
     [mData release];
     [mImage release];
+    [mTextView release];
+}
+
+- (BOOL)textViewShouldBeginEditing:(UITextField *)textField {
+    if (mParentView) {
+        mParentView.mCurrentActivePageElement = self; [mParentView showInputTextView];
+    }
+    return YES;
 }
 
 - (BOOL)textView:(UITextView*)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
     if( [text isEqualToString:@"\n"] ) {
-        [textView resignFirstResponder];
-
-        // update data
-        [mData addResource:[totPageElement text] withPath:textView.text];
-        
-        return NO;
+        //[textView resignFirstResponder];
+        //[mData addResource:[totPageElement text] withPath:textView.text];  // update data.
+        //return NO;
     }
     return YES;
 }
@@ -171,6 +178,10 @@
 @implementation totPageElementView
 
 @synthesize mView, bookvc;
+
+- (void)setPageView:(totPageView*)pageView {
+    self.mView.mParentView = pageView;
+}
 
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
@@ -423,6 +434,7 @@ static BOOL bAnimationStarted = NO;
 @implementation totPageView
 
 @synthesize mPage;
+@synthesize mCurrentActivePageElement;
 
 //- (id)initWithFrame:(CGRect)frame andPageTemplateData:(NSDictionary *)data bookvc:(totBookViewController*)bookvc {
 //    self = [super initWithFrame:frame];
@@ -456,6 +468,8 @@ static BOOL bAnimationStarted = NO;
     [mBackground release];
     [mPage release];
     [mElementsView release];
+    [mTextInput release];
+    [mPopupTextInputView release];
 }
 
 - (CGPoint)fullPageSize {
@@ -474,6 +488,7 @@ static BOOL bAnimationStarted = NO;
     mElementsView = [[NSMutableArray alloc] init];
     for (int i = 0; i < [mPage elementCount]; ++i) {
         totPageElementView* elementView = [[totPageElementView alloc] initWithElementData:[mPage getPageElementAtIndex:i] bookvc:self.bookvc];
+        [elementView setPageView:self];
         [mElementsView addObject:elementView];
         [elementView release];
     }
@@ -485,9 +500,21 @@ static BOOL bAnimationStarted = NO;
             [self insertSubview:view belowSubview:mBackground];
         }
     }
+    
+    // Pop up the text input view.
+    mTextInput = [[UITextField alloc] initWithFrame:CGRectMake(30, 40, 420, 86)];
+    mTextInput.borderStyle = UITextBorderStyleRoundedRect;
+    mTextInput.backgroundColor = [UIColor whiteColor];
+    mTextInput.delegate = self;
+    
+    mPopupTextInputView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 480, 240)];
+    mPopupTextInputView.backgroundColor = [UIColor colorWithRed:0.4f green:0.4f blue:0.4f alpha:0.7f];
+    mPopupTextInputView.hidden = YES;
+    [mPopupTextInputView addSubview:mTextInput];
+    [self addSubview:mPopupTextInputView];
 }
 
-// save the view to an image
+// save the view to an image.
 - (UIImage*)renderToImage
 {
     // IMPORTANT: using weak link on UIKit
@@ -502,6 +529,24 @@ static BOOL bAnimationStarted = NO;
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     return image;
+}
+
+// Pop up the input text view.
+- (void)showInputTextView {
+    mPopupTextInputView.hidden = NO;
+}
+
+#pragma UITextField delegate
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [mPopupTextInputView setHidden:YES];
+    [mTextInput resignFirstResponder];
+    if (mCurrentActivePageElement) {
+        if (mCurrentActivePageElement.mTextView) {
+            [mCurrentActivePageElement.mTextView setText:textField.text];
+            [mCurrentActivePageElement.mData addResource:[totPageElement text] withPath:textField.text];  // update data.
+        }
+    }
+    return YES;
 }
 
 @end
@@ -544,9 +589,6 @@ static BOOL bAnimationStarted = NO;
         }
     }
 }
-
-
-
 
 - (void)swipeViews:(totPageView*)view1 view2:(totPageView*)view2 leftToRight:(BOOL)leftToRight {
     int width = self.frame.size.width;
