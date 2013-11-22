@@ -281,25 +281,27 @@
             [bookBtn addTarget:self action:@selector(bookSelected:) forControlEvents:UIControlEventTouchUpInside];
             [bookView addSubview:bookBtn];
             //[totUtility enableBorder:bookBtn];
-            if( isTemplate ) {
-                [bookBtn setImage:[UIImage imageNamed:bookIcon] forState:UIControlStateNormal];
-                [bookBtn setImage:[UIImage imageNamed:bookIconPressed] forState:UIControlStateHighlighted];
-            } else {
-                // background
-                UIImageView* bg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"sb_book_bg"]];
-                [bookView addSubview:bg];
-                
-                // book thumbnail
-                UIImage* coverImg = [totBookViewController loadPageImageFromFile:bookid];
-                UIImageView* coverImgView = [[UIImageView alloc] initWithFrame:CGRectMake(15, 7, 278, 153)];
-                coverImgView.image = coverImg;
-                [bookView addSubview:coverImgView];
-                coverImgView.layer.borderWidth = 0.5;
-                coverImgView.layer.borderColor = [UIColor grayColor].CGColor;
-                [bookView addSubview:coverImgView];
 
-                bookBtn.backgroundColor = [UIColor clearColor];
+            // background
+            UIImageView* bg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"sb_book_bg"]];
+            [bookView addSubview:bg];
+            
+            UIImage* coverImg;
+            if( isTemplate ) {
+                coverImg = [UIImage imageNamed:bookIcon];
+            } else {
+                // book thumbnail
+                coverImg = [totBookViewController loadPageImageFromFile:bookid];
             }
+            
+            UIImageView* coverImgView = [[UIImageView alloc] initWithFrame:CGRectMake(15, 7, 278, 153)];
+            coverImgView.image = coverImg;
+            [bookView addSubview:coverImgView];
+//            coverImgView.layer.borderWidth = 0.5;
+//            coverImgView.layer.borderColor = [UIColor grayColor].CGColor;
+            [bookView addSubview:coverImgView];
+            bookBtn.backgroundColor = [UIColor clearColor];
+
             bookView.tag = i;
             [bookBtnList addObject:bookView];
             
