@@ -234,8 +234,16 @@
 }
 
 - (void)showHomeView {
-    // go to home view
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+
+    // show tutorial if this is the first time
+    totEvent* e = [global.model getItem:PREFERENCE_NO_BABY name:EVENT_TUTORIAL_SHOW];
+    if ( e == nil ) {
+        [appDelegate showTutorial];
+        return;
+    }
+
+    // go to home view
     [appDelegate showHomeView];
 }
 

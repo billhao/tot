@@ -70,6 +70,14 @@
 		3F2CC24F17120EA9001EDD75 /* tutorial_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F2CC24B17120EA9001EDD75 /* tutorial_1.png */; };
 		3F2CC25017120EA9001EDD75 /* tutorial_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F2CC24C17120EA9001EDD75 /* tutorial_2.png */; };
 		3F2CC25417120ED2001EDD75 /* tutorial_0@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F2CC25317120ED2001EDD75 /* tutorial_0@2x.png */; };
+		3F4D0F87183F359600754E4E /* Logo-29x29.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F4D0F82183F359600754E4E /* Logo-29x29.png */; };
+		3F4D0F88183F359600754E4E /* Logo-57x57.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F4D0F83183F359600754E4E /* Logo-57x57.png */; };
+		3F4D0F89183F359600754E4E /* Logo-58x58.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F4D0F84183F359600754E4E /* Logo-58x58.png */; };
+		3F4D0F8A183F359600754E4E /* Logo-80x80.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F4D0F85183F359600754E4E /* Logo-80x80.png */; };
+		3F4D0F8B183F359600754E4E /* Logo-114x114.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F4D0F86183F359600754E4E /* Logo-114x114.png */; };
+		3F4D0F8F183F396400754E4E /* tutorial_4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F4D0F8C183F396400754E4E /* tutorial_4@2x.png */; };
+		3F4D0F90183F396400754E4E /* tutorial_5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F4D0F8D183F396400754E4E /* tutorial_5@2x.png */; };
+		3F4D0F91183F396400754E4E /* tutorial_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F4D0F8E183F396400754E4E /* tutorial_bg@2x.png */; };
 		3F63C22E170539D90014E8C7 /* tutorial_1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F63C22C170539D90014E8C7 /* tutorial_1@2x.png */; };
 		3F63C22F170539D90014E8C7 /* tutorial_2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F63C22D170539D90014E8C7 /* tutorial_2@2x.png */; };
 		3F65ABA6182E01A000FF27CC /* Birthday.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F65ABA2182E01A000FF27CC /* Birthday.png */; };
@@ -435,6 +443,15 @@
 		3F2CC25317120ED2001EDD75 /* tutorial_0@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tutorial_0@2x.png"; path = "Resources/Tutorial/tutorial_0@2x.png"; sourceTree = "<group>"; };
 		3F2CC25517120F88001EDD75 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		3F4D0F81183B471B00754E4E /* Logo-120x120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Logo-120x120.png"; path = "Resources/Logo-120x120.png"; sourceTree = "<group>"; };
+		3F4D0F82183F359600754E4E /* Logo-29x29.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Logo-29x29.png"; path = "Resources/Logo-29x29.png"; sourceTree = "<group>"; };
+		3F4D0F83183F359600754E4E /* Logo-57x57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Logo-57x57.png"; path = "Resources/Logo-57x57.png"; sourceTree = "<group>"; };
+		3F4D0F84183F359600754E4E /* Logo-58x58.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Logo-58x58.png"; path = "Resources/Logo-58x58.png"; sourceTree = "<group>"; };
+		3F4D0F85183F359600754E4E /* Logo-80x80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Logo-80x80.png"; path = "Resources/Logo-80x80.png"; sourceTree = "<group>"; };
+		3F4D0F86183F359600754E4E /* Logo-114x114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Logo-114x114.png"; path = "Resources/Logo-114x114.png"; sourceTree = "<group>"; };
+		3F4D0F8C183F396400754E4E /* tutorial_4@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tutorial_4@2x.png"; path = "Resources/Tutorial/tutorial_4@2x.png"; sourceTree = "<group>"; };
+		3F4D0F8D183F396400754E4E /* tutorial_5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tutorial_5@2x.png"; path = "Resources/Tutorial/tutorial_5@2x.png"; sourceTree = "<group>"; };
+		3F4D0F8E183F396400754E4E /* tutorial_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tutorial_bg@2x.png"; path = "Resources/Tutorial/tutorial_bg@2x.png"; sourceTree = "<group>"; };
+		3F4D0F92183F3E5500754E4E /* Reveal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Reveal.framework; path = "totdev/Utility/Reveal.app/Contents/SharedSupport/iOS-Libraries/Reveal.framework"; sourceTree = "<group>"; };
 		3F63C22C170539D90014E8C7 /* tutorial_1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tutorial_1@2x.png"; path = "Resources/Tutorial/tutorial_1@2x.png"; sourceTree = "<group>"; };
 		3F63C22D170539D90014E8C7 /* tutorial_2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tutorial_2@2x.png"; path = "Resources/Tutorial/tutorial_2@2x.png"; sourceTree = "<group>"; };
 		3F65ABA2182E01A000FF27CC /* Birthday.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Birthday.png; sourceTree = "<group>"; };
@@ -905,6 +922,9 @@
 				3F63C22C170539D90014E8C7 /* tutorial_1@2x.png */,
 				3F63C22D170539D90014E8C7 /* tutorial_2@2x.png */,
 				3F79A42617180453004E96F6 /* tutorial_3@2x.png */,
+				3F4D0F8C183F396400754E4E /* tutorial_4@2x.png */,
+				3F4D0F8D183F396400754E4E /* tutorial_5@2x.png */,
+				3F4D0F8E183F396400754E4E /* tutorial_bg@2x.png */,
 			);
 			name = Tutorial;
 			sourceTree = "<group>";
@@ -1484,6 +1504,7 @@
 		EF6283741536674B004031D6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3F4D0F92183F3E5500754E4E /* Reveal.framework */,
 				3FC63DFB17F185E2003EA9D9 /* AssetsLibrary.framework */,
 				3FC63DF917F1847C003EA9D9 /* SystemConfiguration.framework */,
 				3FC63DF717F18476003EA9D9 /* StoreKit.framework */,
@@ -1545,12 +1566,17 @@
 		EF62838C153667BD004031D6 /* resources */ = {
 			isa = PBXGroup;
 			children = (
+				EFBE580A1565A8FC003433D6 /* Logo.png */,
+				3FF6C2861708E889007B48DA /* Logo@2x.png */,
+				3F4D0F82183F359600754E4E /* Logo-29x29.png */,
+				3F4D0F83183F359600754E4E /* Logo-57x57.png */,
+				3F4D0F84183F359600754E4E /* Logo-58x58.png */,
+				3F4D0F85183F359600754E4E /* Logo-80x80.png */,
+				3F4D0F86183F359600754E4E /* Logo-114x114.png */,
+				3F4D0F81183B471B00754E4E /* Logo-120x120.png */,
 				3F2688ED171799FE00CC5A2E /* Default.png */,
 				3F2CC25517120F88001EDD75 /* Default@2x.png */,
 				3FF2AA5516A8F8FE0023162E /* Default-568h@2x.png */,
-				EFBE580A1565A8FC003433D6 /* Logo.png */,
-				3FF6C2861708E889007B48DA /* Logo@2x.png */,
-				3F4D0F81183B471B00754E4E /* Logo-120x120.png */,
 				EF6283A215366DF1004031D6 /* Image */,
 				3FE62AF715E8A6E50079CE54 /* totNewBabyController.xib */,
 				3F2216DD1571758F000E86F3 /* totLoginController.xib */,
@@ -1727,6 +1753,7 @@
 				3F2770EA164E274100DF84EF /* input@2x.png in Resources */,
 				3FE47076182B6D3E005F9D5B /* Color Play.tpl in Resources */,
 				3FE470D8182B8962005F9D5B /* Color Play P6.png in Resources */,
+				3F4D0F8F183F396400754E4E /* tutorial_4@2x.png in Resources */,
 				3FE470B1182B8955005F9D5B /* Color Year P2.png in Resources */,
 				3F277101164EDFF900DF84EF /* bg_login.png in Resources */,
 				3F277102164EDFF900DF84EF /* bg_login@2x.png in Resources */,
@@ -1757,6 +1784,7 @@
 				3F79A42717180453004E96F6 /* tutorial_3.png in Resources */,
 				3F79A42817180453004E96F6 /* tutorial_3@2x.png in Resources */,
 				8E069FF317C495D900D04FF6 /* diaper2.png in Resources */,
+				3F4D0F87183F359600754E4E /* Logo-29x29.png in Resources */,
 				8E069FF417C495D900D04FF6 /* food2.png in Resources */,
 				8E069FF517C495D900D04FF6 /* hc2.png in Resources */,
 				3FE470D2182B8962005F9D5B /* Color Play P3.png in Resources */,
@@ -1816,9 +1844,11 @@
 				3FE470AD182B8955005F9D5B /* Color Year Cover.png in Resources */,
 				3FD3C70A17CF36DC00DB1B71 /* activity_fear.png in Resources */,
 				3FD3C70B17CF36DC00DB1B71 /* activity_fear@2x.png in Resources */,
+				3F4D0F8A183F359600754E4E /* Logo-80x80.png in Resources */,
 				3FD3C70C17CF36DC00DB1B71 /* activity_happy.png in Resources */,
 				3FE47062182B6D3E005F9D5B /* Birthday Template P6@2x.png in Resources */,
 				3FD3C70D17CF36DC00DB1B71 /* activity_happy@2x.png in Resources */,
+				3F4D0F8B183F359600754E4E /* Logo-114x114.png in Resources */,
 				3FE4709B182B6D3E005F9D5B /* Flowers Template P7@2x.png in Resources */,
 				3FE4705E182B6D3E005F9D5B /* Birthday Template P2@2x.png in Resources */,
 				3FE4708D182B6D3E005F9D5B /* First Year Template P4@2x.png in Resources */,
@@ -1835,6 +1865,7 @@
 				3FE47063182B6D3E005F9D5B /* Birthday Template P7@2x.png in Resources */,
 				3F65ABA7182E01A000FF27CC /* Birthday@2x.png in Resources */,
 				3FD3C71517CF36DC00DB1B71 /* activity_lift_neck@2x.png in Resources */,
+				3F4D0F91183F396400754E4E /* tutorial_bg@2x.png in Resources */,
 				3FD3C71617CF36DC00DB1B71 /* activity_mirror.png in Resources */,
 				3FD3C71717CF36DC00DB1B71 /* activity_mirror@2x.png in Resources */,
 				3FD3C71817CF36DC00DB1B71 /* activity_pointing.png in Resources */,
@@ -1862,6 +1893,7 @@
 				3FD3C72917CF36DC00DB1B71 /* activity_suck_toe@2x.png in Resources */,
 				3FE47065182B6D3E005F9D5B /* Birthday.tpl in Resources */,
 				3FD3C72A17CF36DC00DB1B71 /* activity_surprise.png in Resources */,
+				3F4D0F89183F359600754E4E /* Logo-58x58.png in Resources */,
 				3FE470D1182B8962005F9D5B /* Color Play P2@2x.png in Resources */,
 				3FD3C72B17CF36DC00DB1B71 /* activity_surprise@2x.png in Resources */,
 				3FE47060182B6D3E005F9D5B /* Birthday Template P4@2x.png in Resources */,
@@ -1897,6 +1929,7 @@
 				3FE470D5182B8962005F9D5B /* Color Play P4@2x.png in Resources */,
 				3F049B6317D4108700F05727 /* summary_head_bg@2x.png in Resources */,
 				3F049B6517D438D600F05727 /* summary_head_default@2x.png in Resources */,
+				3F4D0F90183F396400754E4E /* tutorial_5@2x.png in Resources */,
 				3F049B6817D4572C00F05727 /* timeline_line.png in Resources */,
 				3F049B6917D4572C00F05727 /* timeline_line@2x.png in Resources */,
 				8E0EA46E17D444B000C75BD3 /* calendar.png in Resources */,
@@ -1941,6 +1974,7 @@
 				3FE47097182B6D3E005F9D5B /* Flowers Template P3@2x.png in Resources */,
 				3F9591B617DD31A9003FDBC7 /* sb_edit@2x.png in Resources */,
 				3F65ABA9182E01A000FF27CC /* First Year@2x.png in Resources */,
+				3F4D0F88183F359600754E4E /* Logo-57x57.png in Resources */,
 				3F9591B717DD31A9003FDBC7 /* sb_exit_pressed.png in Resources */,
 				3FE47092182B6D3E005F9D5B /* First Year Template P7@1x.png in Resources */,
 				3F9591B817DD31A9003FDBC7 /* sb_exit_pressed@2x.png in Resources */,
@@ -2078,6 +2112,10 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/hao/projects/tot/workspace/totdev/Utility/Reveal.app/Contents/SharedSupport/iOS-Libraries",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "totdev/totdev-Prefix.pch";
 				INFOPLIST_FILE = "totdev/totdev-Info.plist";
@@ -2085,6 +2123,11 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/totdev/Utility/AviaryDemo/AviarySDK\"",
+				);
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-framework",
+					Reveal,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -2165,6 +2208,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/hao/projects/tot/workspace/totdev/Utility/Reveal.app/Contents/SharedSupport/iOS-Libraries",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "totdev/totdev-Prefix.pch";
 				INFOPLIST_FILE = "totdev/totdev-Info.plist";
@@ -2172,6 +2219,11 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/totdev/Utility/AviaryDemo/AviarySDK\"",
+				);
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-framework",
+					Reveal,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -2187,6 +2239,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/hao/projects/tot/workspace/totdev/Utility/Reveal.app/Contents/SharedSupport/iOS-Libraries",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "totdev/totdev-Prefix.pch";
 				INFOPLIST_FILE = "totdev/totdev-Info.plist";
@@ -2194,6 +2250,11 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/totdev/Utility/AviaryDemo/AviarySDK\"",
+				);
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-framework",
+					Reveal,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

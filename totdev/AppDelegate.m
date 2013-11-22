@@ -94,12 +94,6 @@
     
     //[loginNavigationController setViewControllers:nil];
     
-    int db_event_count = [global.model getDBCount];
-    if (db_event_count == 0) {
-        [self showTutorial];
-        return YES;
-    }
-    
     // get # accounts in db
     int account = [totUser getTotalAccountCount];
 

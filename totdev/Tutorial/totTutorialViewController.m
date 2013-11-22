@@ -31,11 +31,17 @@
 
     // tutorial
     
+    UIImage* bgImg = [UIImage imageNamed:@"tutorial_bg"];
+    UIImageView* bgImgView = [[UIImageView alloc] initWithImage:bgImg];
+    bgImgView.frame = self.view.bounds;
+    [self.view addSubview:bgImgView];
+    [bgImgView release];
+    
     float gap = 10;
     _frame.origin.x = -gap;
     _frame.size.width += gap*2;
     tutorialScrollView = [[UIScrollView alloc] initWithFrame:_frame];
-    tutorialScrollView.backgroundColor = [UIColor blackColor];
+    tutorialScrollView.backgroundColor = [UIColor clearColor];
     tutorialScrollView.pagingEnabled = true;
     tutorialScrollView.showsVerticalScrollIndicator = NO;
     tutorialScrollView.showsHorizontalScrollIndicator = NO;
@@ -52,7 +58,7 @@
         if( img == nil ) break;
         
         UIImageView* imgView = [[UIImageView alloc] initWithImage:img];
-        imgView.backgroundColor = [UIColor blackColor];
+        imgView.backgroundColor = [UIColor clearColor];
         imgView.frame = CGRectMake(x+gap, y, img.size.width, height);
         [tutorialScrollView addSubview:imgView];
         [imgView release];
@@ -65,6 +71,8 @@
     
     pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
     pageControl.frame = CGRectMake(0, (height - 30), width, 15);
+    pageControl.pageIndicatorTintColor = [UIColor colorWithRed:158.0/255 green:158.0/255 blue:158.0/255 alpha:0.8];
+    pageControl.currentPageIndicatorTintColor = [UIColor colorWithRed:130/255.0 green:185/255.0 blue:221/255.0 alpha:0.8];
     pageControl.numberOfPages = image_cnt;
     pageControl.currentPage = 0;
     [self.view addSubview:pageControl];

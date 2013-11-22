@@ -21,6 +21,11 @@
 		<dict>
 			<key>CFBundleIconFiles</key>
 			<array>
+				<string>Logo-58x58</string>
+				<string>Logo-80x80</string>
+				<string>Logo-29x29</string>
+				<string>Logo-114x114</string>
+				<string>Logo-57x57</string>
 				<string>Logo-120x120</string>
 				<string>Logo@2x_120x120</string>
 				<string>Logo.png</string>
