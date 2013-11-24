@@ -45,9 +45,9 @@
         UIImage* homeImg = [UIImage imageNamed:@"timeline_home"];
         UIImage* homeImgPressed = [UIImage imageNamed:@"timeline_home_pressed"];
         UIButton* homeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-
-        homeBtn.frame = CGRectMake(277.5-12, (navbarHeight-homeImg.size.height-24)/2+statusBarHeight,
-                                   homeImg.size.width+24, homeImg.size.height+24); // make the button 24px wider and longer
+        float width = homeImg.size.width+24;
+        float height = homeImg.size.height+24;
+        homeBtn.frame = CGRectMake(9, (navbarHeight-height)/2+statusBarHeight, width, height); // make the button 24px wider and longer
         [homeBtn setImage:homeImg forState:UIControlStateNormal];
         [homeBtn setImage:homeImgPressed forState:UIControlStateHighlighted];
         [homeBtn addTarget:self action:@selector(homeButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
