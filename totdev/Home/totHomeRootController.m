@@ -13,16 +13,16 @@
 #import "AppDelegate.h"
 #import "Global.h"
 #import "totUtility.h"
+#import "totTutorialViewController.h"
 
 @implementation totHomeRootController
 
-@synthesize homeEntryViewController, scrapbookListController, settingController;
+@synthesize homeEntryViewController, scrapbookListController, settingController, tutorialController, timelineController;
 //@synthesize homeFeedingViewController;
 //@synthesize homeHeightViewController;
 //@synthesize homeActivityLabelController;
 //@synthesize homeActivityBrowseController;
 //@synthesize homeAlbumBrowseController;
-@synthesize timelineController;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -88,6 +88,8 @@
             return [self getScrapbookVC];
         case kSetting:
             return [self getSettingVC];
+        case KTutorial:
+            return [self getTutorialVC];
         default:
             printf("Invalid view index\n");
             return nil;
@@ -219,7 +221,33 @@
                              }];
             break;
         }
+        case KTutorial:
+        {
+            statusBarOffset = 0; // always 0 for ios 6 & 7 because tutorial is full screen
+            nextView.view.alpha = 0;
+            nextView.view.frame = CGRectMake(0, statusBarOffset, 320, 480-statusBarOffset);
+            [UIView animateWithDuration:.5 delay:0 options:UIViewAnimationOptionTransitionCrossDissolve
+                             animations:^{
+                                 nextView.view.alpha = 1;
+                                 [delegate.loginNavigationController.view addSubview:nextView.view];
+                             } completion:^(BOOL finished){
+                                 if([nc.viewControllers containsObject:nextView]) {
+                                     [nc popToViewController:nextView animated:FALSE];
+                                 }
+                                 else {
+                                     [nc pushViewController:nextView animated:FALSE];
+                                 }
+                                 mCurrentViewIndex = viewIndex;
+                             }];
+            break;
+        }
     }
+}
+
+- (void)popup {
+    AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+    UINavigationController* nc = delegate.loginNavigationController;
+    [nc popViewControllerAnimated:NO];
 }
 
 - (void)viewDidUnload
@@ -272,6 +300,32 @@
         settingController.homeController = self;
     }
     return settingController;
+}
+
+- (totTutorialViewController*)getTutorialVC {
+//    CGRect frame = self.view.bounds;
+//    if( !SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0") ) {
+//        float statusBarHeight = [UIApplication sharedApplication].statusBarFrame.size.height;
+//        frame.size.height -= statusBarHeight;
+//    }
+    if( tutorialController == nil ) {
+        CGRect window = [totUtility getWindowRect];
+        tutorialController = [[totTutorialViewController alloc] initWithFrame:window];
+        tutorialController.homeController = self;
+    }
+    return tutorialController;
+}
+
+// release all views when log out
+- (void)releaseAllViews {
+    [homeEntryViewController release];
+    homeEntryViewController = nil;
+    [timelineController release];
+    timelineController = nil;
+    [settingController release];
+    settingController = nil;
+    [tutorialController release];
+    tutorialController = nil;
 }
 
 @end

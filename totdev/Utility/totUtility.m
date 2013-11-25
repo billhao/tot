@@ -8,7 +8,6 @@
 
 #import "totUtility.h"
 #import <QuartzCore/QuartzCore.h>
-#import "AppDelegate.h"
 
 @implementation totUtility
 
@@ -137,4 +136,7 @@ void print(NSString* str) {
 }
 
 
++ (AppDelegate*)getAppDelegate {
+    return [[UIApplication sharedApplication] delegate];
+}
 @end

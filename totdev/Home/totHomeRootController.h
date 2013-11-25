@@ -13,22 +13,17 @@
 @class totTimelineController;
 @class totBookListViewController;
 @class totSettingRootController;
+@class totTutorialViewController;
 
 enum {
     kHomeViewEntryView  = 0,
     kTimeline           = 1,
     kScrapbook          = 2,
     kSetting            = 3,
+    KTutorial           = 4
 };
 
 @interface totHomeRootController : UIViewController {
-    totHomeEntryViewController* homeEntryViewController;
-//    totHomeFeedingViewController* homeFeedingViewController;
-//    totHomeHeightViewController* homeHeightViewController;
-//    totHomeActivityLabelController* homeActivityLabelController;
-//    totHomeActivityBrowseController* homeActivityBrowseController;
-//    totHomeAlbumBrowseController* homeAlbumBrowseController;
-    
     int mCurrentViewIndex;
 }
 
@@ -36,14 +31,12 @@ enum {
 @property (nonatomic, retain) totTimelineController* timelineController;
 @property (nonatomic, retain) totBookListViewController* scrapbookListController;
 @property (nonatomic, retain) totSettingRootController* settingController;
-                            
-//@property (nonatomic, retain) totHomeFeedingViewController* homeFeedingViewController;
-//@property (nonatomic, retain) totHomeHeightViewController* homeHeightViewController;
-//@property (nonatomic, retain) totHomeActivityLabelController* homeActivityLabelController;
-//@property (nonatomic, retain) totHomeActivityBrowseController* homeActivityBrowseController;
-//@property (nonatomic, retain) totHomeAlbumBrowseController* homeAlbumBrowseController;
+@property (nonatomic, retain) totTutorialViewController* tutorialController;
 
 
 - (void) switchTo:(int)viewIndex withContextInfo:(NSMutableDictionary*)info;
+
+// release all views when log out
+- (void)releaseAllViews;
 
 @end

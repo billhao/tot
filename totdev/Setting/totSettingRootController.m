@@ -49,11 +49,10 @@
 {
     [super viewDidLoad];
     
-//    self.view.frame = CGRectMake(0, 20, 320, 460);
-
     // add the entry view
     totSettingEntryViewController* settingController =
         [[totSettingEntryViewController alloc] init];
+    settingController.view.frame = self.view.bounds;
     self.mEntryView = settingController;
     self.mEntryView.homeController = self.homeController;
     [self.view addSubview:settingController.view];

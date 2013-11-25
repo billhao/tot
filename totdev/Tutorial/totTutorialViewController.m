@@ -14,6 +14,8 @@
 
 @implementation totTutorialViewController
 
+@synthesize homeController;
+
 - (id)initWithFrame:(CGRect)frame {
     self = [super init];
     if( self ) {
@@ -30,10 +32,9 @@
     //NSLog(@"%@", [totUtility getFrameString:self.view.bounds]);
 
     // tutorial
-    
     UIImage* bgImg = [UIImage imageNamed:@"tutorial_bg"];
     UIImageView* bgImgView = [[UIImageView alloc] initWithImage:bgImg];
-    bgImgView.frame = self.view.bounds;
+    bgImgView.frame = _frame;
     [self.view addSubview:bgImgView];
     [bgImgView release];
     
@@ -78,6 +79,18 @@
     [self.view addSubview:pageControl];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [UIApplication sharedApplication].statusBarHidden = YES;
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [UIApplication sharedApplication].statusBarHidden = NO;
+}
+
+- (BOOL)prefersStatusBarHidden {
+    return YES;
+}
+
 -(void)viewDidLayoutSubviews {
     // changes need for ios7 for work properly. without these, the scrollview will be able scroll vertically
     tutorialScrollView.contentOffset = CGPointMake(0, 0);
@@ -113,10 +126,17 @@
         // now the tutorial has been shown, mark in db, never show it again
         [global.model addEvent:PREFERENCE_NO_BABY event:EVENT_TUTORIAL_SHOW datetime:[NSDate date] value:@"true"];
         
-        [[self getAppDelegate] popup];
-        
-        // stop tutorial, go to main view
-        [[self getAppDelegate] showFirstView];
+        if( homeController ) {
+            // tutorial was invoked from setting page
+            [homeController popup];
+        }
+        else {
+            // tutorial was invoked after registration for the first time
+            [[self getAppDelegate] popup];
+            
+            // stop tutorial, go to main view
+            [[self getAppDelegate] showFirstView];
+        }
     }
 }
 

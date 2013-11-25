@@ -87,8 +87,8 @@
 //    [totUtility enableBorder:title];
     [title release];
 
-    float y = 80;
     float gap = 63;
+    float y = gap + statusBarHeight;
     
     
     // Creates the background.
@@ -185,7 +185,18 @@
     [resetPasswordView release];
 }
 
-- (void)logout: (id)sender {}
+- (void)logout: (id)sender {
+    // remove loggedin in db
+    [global.model deletePreferenceNoBaby:PREFERENCE_LOGGED_IN];
+    
+    // show login screen
+    global.baby = nil;
+    global.user = nil;
+    [[totUtility getAppDelegate] showFirstView];
+    
+    // unload all the views: home, timeline, scrapbook
+    [[totUtility getAppDelegate].homeController releaseAllViews];
+}
 
 - (void)clearData: (id)sender {
     UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"Warning"
@@ -196,7 +207,9 @@
     [alert show];
 }
 
-- (void)startTutorial: (id)sender {}
+- (void)startTutorial: (id)sender {
+    [self.homeController switchTo:KTutorial withContextInfo:nil];
+}
 
 #pragma UIAlertView delegate
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {

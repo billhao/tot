@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "AppDelegate.h"
 
 @interface totUtility : NSObject
 
@@ -32,6 +33,8 @@
 + (NSArray*)JSONToObject:(NSString*) jsonstring;
 // object to json string
 + (NSString*)ObjectToJSON:(id)obj;
+
++ (AppDelegate*)getAppDelegate;
 
 @end
 

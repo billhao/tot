@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+@class totHomeRootController;
+
 @interface totTutorialViewController : UIViewController <UIScrollViewDelegate> {
     UIScrollView* tutorialScrollView;
     UIPageControl* pageControl;
@@ -16,6 +18,8 @@
     BOOL scrollCanceled;
     CGRect _frame;
 }
+
+@property (nonatomic, retain) totHomeRootController* homeController;
 
 - (id)initWithFrame:(CGRect)frame;
 
