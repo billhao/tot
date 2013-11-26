@@ -28,6 +28,9 @@
 // request the server to reset password
 +(BOOL)forgotPassword:(NSString*)email message:(NSString**)message;
 
+// change to a new ped
++(BOOL)changePassword:(NSString*)newPasswd message:(NSString**)message;
+
 // return total # user accounts in db
 +(int) getTotalAccountCount;
 

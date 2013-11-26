@@ -28,7 +28,7 @@
 - (IBAction) backgroundTap:(id) sender;
 
 - (BOOL)checkEmail;
-- (BOOL)checkPwd;
++ (BOOL)checkPwd:(NSString*)pwd;
 
 - (void)setLoggedIn:(NSString*)email;
 - (void)showHomeView;

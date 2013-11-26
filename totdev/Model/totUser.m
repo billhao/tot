@@ -86,6 +86,18 @@ static totModel* _model;
         return FALSE;
 }
 
+// change to a new ped
++(BOOL)changePassword:(NSString*)newPasswd message:(NSString**)message {
+    totServerCommController* server = [[totServerCommController alloc] init];
+    int retCode = [server sendResetPasscodeForUser:global.user.email from:@"" to:newPasswd returnMessage:message ];
+    if( retCode == SERVER_RESPONSE_CODE_SUCCESS ) {
+        return TRUE;
+    }
+    else {
+        return FALSE;
+    }
+}
+
 // concatenate salt and hash of pwd to the final string, which will be stored
 +(NSString*)getPasswordHash:(NSString*)pwd salt:(NSData*)salt {
     // hash the password

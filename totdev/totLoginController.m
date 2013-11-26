@@ -9,6 +9,7 @@
 #import "totLoginController.h"
 #import "AppDelegate.h"
 #import "totEventName.h"
+#import "totUtility.h"
 
 @implementation totLoginController
 
@@ -95,14 +96,14 @@
 }
 
 - (void)LoginButtonClicked: (UIButton *)button {
-    // check validity of email and pwd
-    if( ![self checkEmail] ) return;
-    if( ![self checkPwd] ) return;
-
     // check if email and pwd matches db
     NSString* email = mEmail.text;
     NSString* pwd = mPwd.text;
     
+    // check validity of email and pwd
+    if( ![self checkEmail] ) return;
+    if( ![totLoginController checkPwd:pwd] ) return;
+
     // check if email exists
     NSString* account_pref = [NSString stringWithFormat:PREFERENCE_ACCOUNT, email];
     NSString* pwd_db = [model getPreferenceNoBaby:account_pref];
@@ -144,12 +145,12 @@
 }
 
 - (void)NewUserButtonClicked: (UIButton *)button {
-    // check validity of email and pwd
-    if( ![self checkEmail] ) return;
-    if( ![self checkPwd] ) return;
-
     NSString* email = mEmail.text;
     NSString* pwd = mPwd.text;
+    
+    // check validity of email and pwd
+    if( ![self checkEmail] ) return;
+    if( ![totLoginController checkPwd:pwd] ) return;
 
     // check if email exists
     NSString* account_pref = [NSString stringWithFormat:PREFERENCE_ACCOUNT, email];
@@ -268,16 +269,15 @@
 }
 
 // password needs to be 4 chars or more
-- (BOOL)checkPwd {
-    NSString* pwd = mPwd.text;
++ (BOOL)checkPwd:(NSString*)pwd {
     NSString* pwd1 = [pwd stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     if( pwd.length != pwd1.length ) {
-        [self showAlert:@"Password cannot start or end with space"];
+        [totUtility showAlert:@"Password cannot start or end with space"];
         return FALSE;
     }
     else if( pwd.length < 4 ) {
         // prompt for a valid pwd
-        [self showAlert:@"Password must be at least 4 characters"];
+        [totUtility showAlert:@"Password must be at least 4 characters"];
         return FALSE;
     }
     

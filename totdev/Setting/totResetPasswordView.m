@@ -8,6 +8,8 @@
 
 #import "totResetPasswordView.h"
 #import "AppDelegate.h"
+#import "totServerCommController.h"
+#import "totUtility.h"
 
 @implementation totResetPasswordView
 
@@ -23,7 +25,20 @@
 
 // Reset the password.
 - (void)reset: (id)sender {
+    NSString* oldpwd = oldPasswordTextField.text;
+    NSString* newpwd = newPasswordTextField.text;
 
+    NSString* msg = nil;
+    if( ![totUser verifyPassword:oldpwd email:global.user.email message:&msg] ) {
+        [totUtility showAlert:msg];
+        return;
+    }
+    
+    if( ![totLoginController checkPwd:newpwd] ) return;
+    
+    msg = nil;
+    BOOL re = [totUser changePassword:newpwd message:&msg];
+    [totUtility showAlert:msg];
 }
 
 - (id)initWithFrame:(CGRect)frame {
@@ -71,37 +86,53 @@
         [navbar addSubview:title];
         [title release];
 
-        UILabel* oldPassword = [[UILabel alloc] initWithFrame:CGRectMake(10, 70, 300, 30)];
-        oldPassword.text = @"Old Password";
-        [oldPassword setFont:[UIFont fontWithName:@"Raleway-SemiBold_2" size:18]];
-        [oldPassword setTextColor:[UIColor colorWithRed:0.4f green:0.4f blue:0.4f alpha:1.0f]];
-        [self addSubview:oldPassword];
-        [oldPassword release];
+//        UILabel* oldPassword = [[UILabel alloc] initWithFrame:CGRectMake(10, 70, 300, 30)];
+//        oldPassword.text = @"Old Password";
+//        [oldPassword setFont:[UIFont fontWithName:@"Raleway-SemiBold_2" size:18]];
+//        [oldPassword setTextColor:[UIColor colorWithRed:0.4f green:0.4f blue:0.4f alpha:1.0f]];
+//        [self addSubview:oldPassword];
+//        [oldPassword release];
 
-        oldPasswordTextField = [[UITextField alloc] initWithFrame:CGRectMake(10, 100, 300, 40)];
+        float gap = 63;
+        float y = gap + statusBarHeight;
+        
+        oldPasswordTextField = [[UITextField alloc] initWithFrame:CGRectMake(10, y, 300, 40)];
         oldPasswordTextField.borderStyle = UITextBorderStyleRoundedRect;
         oldPasswordTextField.backgroundColor = [UIColor whiteColor];
+        oldPasswordTextField.placeholder = @"old password";
+        oldPasswordTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+        oldPasswordTextField.autocorrectionType = UITextAutocorrectionTypeNo;
+        oldPasswordTextField.returnKeyType = UIReturnKeyDone;
+        oldPasswordTextField.secureTextEntry = TRUE;
+        newPasswordTextField.delegate = self;
         oldPasswordTextField.delegate = self;
 
-        UILabel* newPassword = [[UILabel alloc] initWithFrame:CGRectMake(10, 160, 300, 30)];
-        newPassword.text = @"New Password";
-        [newPassword setFont:[UIFont fontWithName:@"Raleway-SemiBold_2" size:18]];
-        [newPassword setTextColor:[UIColor colorWithRed:0.4f green:0.4f blue:0.4f alpha:1.0f]];
-        [self addSubview:newPassword];
-        [newPassword release];
+//        UILabel* newPassword = [[UILabel alloc] initWithFrame:CGRectMake(10, 160, 300, 30)];
+//        newPassword.text = @"New Password";
+//        [newPassword setFont:[UIFont fontWithName:@"Raleway-SemiBold_2" size:18]];
+//        [newPassword setTextColor:[UIColor colorWithRed:0.4f green:0.4f blue:0.4f alpha:1.0f]];
+//        [self addSubview:newPassword];
+//        [newPassword release];
 
-        newPasswordTextField = [[UITextField alloc] initWithFrame:CGRectMake(10, 190, 300, 40)];
+        y += gap;
+        newPasswordTextField = [[UITextField alloc] initWithFrame:CGRectMake(10, y, 300, 40)];
         newPasswordTextField.borderStyle = UITextBorderStyleRoundedRect;
         newPasswordTextField.backgroundColor = [UIColor whiteColor];
+        newPasswordTextField.placeholder = @"new password";
+        newPasswordTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+        newPasswordTextField.autocorrectionType = UITextAutocorrectionTypeNo;
+        newPasswordTextField.returnKeyType = UIReturnKeyDone;
+        newPasswordTextField.secureTextEntry = TRUE;
         newPasswordTextField.delegate = self;
 
         [self addSubview:oldPasswordTextField];
         [self addSubview:newPasswordTextField];
 
+        y += gap;
         UIButton* resetBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         resetBtn.layer.cornerRadius = 5;
         resetBtn.layer.masksToBounds = YES;
-        [resetBtn setFrame:CGRectMake(10, 280, 300, 43)];
+        [resetBtn setFrame:CGRectMake(10, y, 300, 43)];
         [resetBtn setBackgroundColor:[UIColor colorWithRed:245/255.0f green:73/255.0 blue:82/255.0 alpha:1.0f]];
         [resetBtn setTitle:@"Reset" forState:UIControlStateNormal];
         [resetBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
