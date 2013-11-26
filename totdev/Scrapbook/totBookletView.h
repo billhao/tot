@@ -59,7 +59,7 @@
 
 // Wrapper of the basic page element. (To make the rotation work..)
 // And deal with other touch events.
-@interface totPageElementView : UIView <UIGestureRecognizerDelegate, CameraViewDelegate> {
+@interface totPageElementView : UIView <UIGestureRecognizerDelegate, CameraViewDelegate, UIActionSheetDelegate> {
     totPageElementViewInternal* mView;
     CGPoint mTouchLastTime;
     

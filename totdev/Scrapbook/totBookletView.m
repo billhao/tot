@@ -199,6 +199,11 @@
         [tap setDelegate:self];
         [self addGestureRecognizer:tap];
         [tap release];
+        // long press
+        UILongPressGestureRecognizer* longpress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
+        longpress.delegate = self;
+        [self addGestureRecognizer:longpress];
+        [longpress release];
         // Register pan gesture recognizers.
         UIPanGestureRecognizer* pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
         pan.minimumNumberOfTouches = pan.maximumNumberOfTouches = 2;
@@ -329,6 +334,31 @@ static BOOL bAnimationStarted = NO;
             }
         }
     }
+}
+
+- (void)handleLongPress:(UIGestureRecognizer*)gestureRecognizer {
+    UILongPressGestureRecognizer* longpress = (UILongPressGestureRecognizer*)gestureRecognizer;
+    if( longpress.state == UIGestureRecognizerStateBegan )
+        [self showPopupMenu];
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    NSLog(@"%d", buttonIndex);
+    if( buttonIndex == 0 ) {
+        // replace photo
+    }
+    else if( buttonIndex == 1 ) {
+        // remove photo
+    }
+}
+
+- (void)showPopupMenu {
+    NSLog(@"show popup");
+    UIActionSheet *popup = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel"
+        destructiveButtonTitle:nil otherButtonTitles:@"Replace photo", @"Remove photo", nil];
+    popup.actionSheetStyle = UIActionSheetStyleDefault;
+    [popup showInView:self];
+    [popup release];
 }
 
 // copied from totactivityviewcontroller
