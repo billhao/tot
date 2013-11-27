@@ -309,15 +309,18 @@
             bookLabel.frame = CGRectMake(15, 165, icon_height - 30, label_height);
             bookLabel.backgroundColor = [UIColor clearColor];
             bookLabel.alpha = 0.8;
-            bookLabel.text = [book objectForKey:@"name"];
             bookLabel.tag = i;
             bookLabel.font = font1;
             bookLabel.textColor = color1;
-            [bookLabel sizeToFit];
             
             // TODO in the release, thumbnails for templates should be the same as books
-            if( isTemplate )
-                bookLabel.hidden = TRUE;
+            if( isTemplate ) {
+                bookLabel.text = [NSString stringWithFormat:@"%@ (template)", [book objectForKey:@"name"]];
+            }
+            else {
+                bookLabel.text = [book objectForKey:@"name"];
+            }
+            [bookLabel sizeToFit];
             
             [scrollView addSubview:bookView];
             [bookView addSubview:bookLabel];

@@ -11,7 +11,7 @@
 #import "totBooklet.h"
 #import <QuartzCore/QuartzCore.h>
 #import "AppDelegate.h"
-
+#import "totUtility.h"
 
 #define FULL_PAGE_W 480.0f
 #define FULL_PAGE_H 320.0f
@@ -87,6 +87,7 @@
 
 - (void)display {
     if (!self.mData) return;
+    [totUtility enableBorder:self];
     if (self.mData.type == IMAGE ){
         NSString* image_path = [self.mData getResource:[totPageElement image]];
         if (image_path) {
