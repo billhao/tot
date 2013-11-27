@@ -200,6 +200,8 @@
 		3FD3C73517CF389500DB1B71 /* Raleway-Regular_2.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3FD3C73217CF389500DB1B71 /* Raleway-Regular_2.ttf */; };
 		3FD3C73617CF389500DB1B71 /* Raleway-SemiBold_2.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3FD3C73317CF389500DB1B71 /* Raleway-SemiBold_2.ttf */; };
 		3FE2881D1845DA0D00BBFB61 /* add_text@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FE2881C1845DA0D00BBFB61 /* add_text@2x.png */; };
+		3FE2882018467C5700BBFB61 /* Animals@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FE2881E18467C5700BBFB61 /* Animals@2x.png */; };
+		3FE2882118467C5700BBFB61 /* Flowers@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FE2881F18467C5700BBFB61 /* Flowers@2x.png */; };
 		3FE47054182B6D3E005F9D5B /* Animals Template P1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FE47005182B6D3E005F9D5B /* Animals Template P1@2x.png */; };
 		3FE47055182B6D3E005F9D5B /* Animals Template P2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FE47006182B6D3E005F9D5B /* Animals Template P2@2x.png */; };
 		3FE47056182B6D3E005F9D5B /* Animals Template P3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FE47007182B6D3E005F9D5B /* Animals Template P3@2x.png */; };
@@ -579,6 +581,8 @@
 		3FD3C73217CF389500DB1B71 /* Raleway-Regular_2.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Raleway-Regular_2.ttf"; path = "Fonts/Raleway-Regular_2.ttf"; sourceTree = "<group>"; };
 		3FD3C73317CF389500DB1B71 /* Raleway-SemiBold_2.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Raleway-SemiBold_2.ttf"; path = "Fonts/Raleway-SemiBold_2.ttf"; sourceTree = "<group>"; };
 		3FE2881C1845DA0D00BBFB61 /* add_text@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "add_text@2x.png"; sourceTree = "<group>"; };
+		3FE2881E18467C5700BBFB61 /* Animals@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Animals@2x.png"; sourceTree = "<group>"; };
+		3FE2881F18467C5700BBFB61 /* Flowers@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Flowers@2x.png"; sourceTree = "<group>"; };
 		3FE47005182B6D3E005F9D5B /* Animals Template P1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Animals Template P1@2x.png"; sourceTree = "<group>"; };
 		3FE47006182B6D3E005F9D5B /* Animals Template P2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Animals Template P2@2x.png"; sourceTree = "<group>"; };
 		3FE47007182B6D3E005F9D5B /* Animals Template P3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Animals Template P3@2x.png"; sourceTree = "<group>"; };
@@ -886,6 +890,8 @@
 		3F65ABA1182E01A000FF27CC /* Templates_thumbnails */ = {
 			isa = PBXGroup;
 			children = (
+				3FE2881E18467C5700BBFB61 /* Animals@2x.png */,
+				3FE2881F18467C5700BBFB61 /* Flowers@2x.png */,
 				3F4D0F95183F462700754E4E /* color play.png */,
 				3F4D0F96183F462700754E4E /* color play@2x.png */,
 				3F4D0F97183F462700754E4E /* colorful year.png */,
@@ -1877,6 +1883,7 @@
 				3FE470D6182B8962005F9D5B /* Color Play P5.png in Resources */,
 				3FE470B4182B8955005F9D5B /* Color Year P3@2x.png in Resources */,
 				3FE47087182B6D3E005F9D5B /* First Year Template Cover@2x.png in Resources */,
+				3FE2882018467C5700BBFB61 /* Animals@2x.png in Resources */,
 				8E0EA48317D54D4400C75BD3 /* sleep_gray.png in Resources */,
 				3FE470DE182CDC31005F9D5B /* settings.png in Resources */,
 				8E0EA48417D54D4400C75BD3 /* weight_gray.png in Resources */,
@@ -1895,6 +1902,7 @@
 				3FE47097182B6D3E005F9D5B /* Flowers Template P3@2x.png in Resources */,
 				3F65ABA9182E01A000FF27CC /* First Year@2x.png in Resources */,
 				3F4D0F88183F359600754E4E /* Logo-57x57.png in Resources */,
+				3FE2882118467C5700BBFB61 /* Flowers@2x.png in Resources */,
 				3FE47092182B6D3E005F9D5B /* First Year Template P7@1x.png in Resources */,
 				3FFD356317ED932B00C36504 /* feeding_add.png in Resources */,
 				3FFD356417ED932B00C36504 /* feeding_delete.png in Resources */,
