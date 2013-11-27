@@ -113,11 +113,23 @@
         mTextView = [[UITextView alloc] initWithFrame:self.bounds];
         mTextView.backgroundColor = [UIColor clearColor];
         mTextView.delegate = self;
-        if( text ) mTextView.text = text;
         mTextView.layer.borderColor = [UIColor grayColor].CGColor;
         mTextView.layer.borderWidth = 0;  // hide the border.
         mTextView.layer.cornerRadius = 2;
         [self addSubview:mTextView];
+        if( text ) {
+            mTextView.text = text;
+        }
+        else{
+            UIImage* img = [UIImage imageNamed:@"add_text"];
+            mImage = [[UIImageView alloc] initWithFrame:self.frame];
+            mImage.contentMode = UIViewContentModeCenter;
+            mImage.image = img;  // default.
+            CGSize s = img.size;
+            CGRect f = mImage.frame;
+            s = mImage.image.size;
+            [self addSubview:mImage];
+        }
     }
 }
 
