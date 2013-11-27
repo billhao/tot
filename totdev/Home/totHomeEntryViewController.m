@@ -767,7 +767,7 @@
     [mPhotoViewB imageFromFileContent:[totMediaLibrary getMediaPath:m.filename]];
     
     // show next one
-    [UIView animateWithDuration:1.0 animations:^{
+    [UIView animateWithDuration:0.5 animations:^{
         CGRect f = CGRectMake(0, 0, 320, 480);
         mPhotoViewB.frame = f;
         if( direction == Animation_Left_To_Right )
