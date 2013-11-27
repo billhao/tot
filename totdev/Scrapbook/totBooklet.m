@@ -84,6 +84,12 @@
     }
 }
 
+- (void)removeResource:(NSString*)key {
+    if(resources) {
+        [resources removeObjectForKey:key];
+    }
+}
+
 - (NSString*) getResource:(NSString *)key {
     if (resources)
         return [resources objectForKey:key];
@@ -407,6 +413,10 @@
     if (templateName && [templateName length] > 0) {
         [output setObject:templateName forKey:@"template"];
     }
+    if( orientationLandscape )
+        [output setObject:@"landscape" forKey:@"orientation"];
+    else
+        [output setObject:@"portrait"  forKey:@"orientation"];
     if (pages && [pages count] > 0) {
         NSMutableArray* pp = [[NSMutableArray alloc] init];
         for (int i = 0; i < [pages count]; ++i) {

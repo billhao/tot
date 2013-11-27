@@ -326,7 +326,7 @@ static BOOL bAnimationStarted = NO;
             }
             else if( self.mView.mData.type == IMAGE ) {
                 NSLog(@"Page element tap: show image selector");
-                [self launchCamera:nil];
+                [self selectPhoto];
             }
             else if( self.mView.mData.type == VIDEO ) {
                 NSLog(@"Page element tap: show video selector");
@@ -338,17 +338,20 @@ static BOOL bAnimationStarted = NO;
 
 - (void)handleLongPress:(UIGestureRecognizer*)gestureRecognizer {
     UILongPressGestureRecognizer* longpress = (UILongPressGestureRecognizer*)gestureRecognizer;
-    if( longpress.state == UIGestureRecognizerStateBegan )
+    if( (longpress.state == UIGestureRecognizerStateBegan) && (![mView isEmpty]) ) {
         [self showPopupMenu];
+    }
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
     NSLog(@"%d", buttonIndex);
     if( buttonIndex == 0 ) {
         // replace photo
+        [self selectPhoto];
     }
     else if( buttonIndex == 1 ) {
         // remove photo
+        [self removePhoto:TRUE];
     }
 }
 
@@ -359,6 +362,22 @@ static BOOL bAnimationStarted = NO;
     popup.actionSheetStyle = UIActionSheetStyleDefault;
     [popup showInView:self];
     [popup release];
+}
+
+- (void)removePhoto:(BOOL)save {
+    [mView.mData removeResource:[totPageElement image]];
+    
+    if( save ) {
+        // update view
+        [self setPageElementData:mView.mData];
+        
+        // save the data
+        [self savePageData];
+    }
+}
+
+- (void)selectPhoto {
+    [self launchCamera:nil];
 }
 
 // copied from totactivityviewcontroller

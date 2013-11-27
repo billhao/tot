@@ -51,6 +51,7 @@ typedef enum {
 
 - (void) addResource:(NSString*)key withPath:(NSString*)path;
 - (NSString*) getResource:(NSString*)key;
+- (void)removeResource:(NSString*)key;
 - (BOOL) isEmpty;  // whether contains any resources or not.
 
 - (NSDictionary*) toDictionary;
