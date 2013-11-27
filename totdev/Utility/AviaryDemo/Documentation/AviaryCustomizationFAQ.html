@@ -1,0 +1,123 @@
+<html>
+<head>
+<link href='assets/style.css' type='text/css' rel='stylesheet' />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+<link href='http://fonts.googleapis.com/css?family=Lato:300,400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Source+Code+Pro:400,700' rel='stylesheet' type='text/css'>
+<link type="text/css" href="http://www.aviary.com/Content/css/prettify.css" rel="stylesheet" />
+<script type="text/javascript" src="http://www.aviary.com/Content/js/prettify.js"></script>
+</head>
+
+<body>
+<div class="container">
+<div class="documentation"><h1>Aviary Customization FAQ</h1>
+
+<p><br/></p>
+
+<p><strong>Q: How do I change the overall appearance of the Photo Editor to fit my app?</strong></p>
+
+<p><strong>A:</strong> Use the AviarySDKCustomizer app, which is included in the distributed package. It allows you to customize the color of most elements and text.</p>
+
+<p><br/>
+<strong>Q: I understand that I can customize all colors with the Aviary SDK Customizer, but I want to use my own elements in certain places.</strong></p>
+
+<p><strong>A:</strong> If you are a premium partner, you can override the following elements:</p>
+
+<ol>
+<li><p>Navigation Bar Background Image</p>
+
+<pre class="prettyprint"><code>[AFPhotoEditorCustomization setNavBarImage:image];
+</code></pre></li>
+<li><p>Bar Button Background Images</p>
+
+<pre class="prettyprint"><code>[AFPhotoEditorCustomization setApplyButtonBackgroundImage:image];
+[AFPhotoEditorCustomization setBackButtonBackgroundImage:image];
+[AFPhotoEditorCustomization setCancelButtonBackgroundImage:image];
+</code></pre></li>
+<li><p>Back Button Image</p>
+
+<pre class="prettyprint"><code>[AFPhotoEditorCustomization setBackButtonForegroundImage:image];
+</code></pre></li>
+<li><p>Tool Icons </p>
+
+<pre class="prettyprint"><code>[AFPhotoEditorCustomization setIconImage:image forTool:kAFBrightness forState:AFPhotoEditorIconStateDefault];
+[AFPhotoEditorCustomization setIconImage:image forTool:kAFBrightness forState:AFPhotoEditorIconStateSelected];
+</code></pre></li>
+</ol>
+
+<p><br/>
+<strong>Q: I don't like the "Cancel" and "Apply" titles on the main Photo Editor screen. How do I change them?</strong></p>
+
+<p><strong>A:</strong> You may choose from "Cancel", "Back", and "Exit" for the left button and "Done", "Save", "Next", and "Send" for the right button. Set your preferences as follows:</p>
+
+<pre class="prettyprint"><code>[AFPhotoEditorCustomization setLeftNavigationBarButtonTitle:kAFLeftNavigationTitlePresetExit];
+[AFPhotoEditorCustomization setRightNavigationBarButtonTitle:kAFRightNavigationTitlePresetSave];
+</code></pre>
+
+<p><br/>
+<strong>Q: I don't like the default tool order. I want to remove some tools control the order of the tools I want. How do I do this?</strong></p>
+
+<p><strong>A:</strong> Make the following call:</p>
+
+<pre class="prettyprint"><code>// Set the tools to Contrast, Brightness, Enhance, and Crop (to be displayed in that order).
+[AFPhotoEditorCustomization setToolOrder:@[kAFContrast, kAFBrightness, kAFEnhance, kAFCrop]];
+</code></pre>
+
+<p><br/>
+<strong>Q: The crop tool's default configuration does not suit my app. Can I modify its settings?</strong></p>
+
+<p><strong>A:</strong> Yes! Here's an example that includes all possible modifications to the crop tool:</p>
+
+<pre class="prettyprint"><code>// Disable the Custom and Original crop options, and do not allow the user to invert the settings.
+[AFPhotoEditorCustomization setCropToolCustomEnabled:NO];
+[AFPhotoEditorCustomization setCropToolInvertEnabled:NO];
+[AFPhotoEditorCustomization setCropToolOriginalEnabled:NO];
+
+// Create two custom presets displayed to the user as "Option1" and "Option2" with 3:7 and 4:11 aspect ratios, respectively.
+[AFPhotoEditorCustomization setCropToolPresets:@[@{kAFCropPresetName:@"Option1", kAFCropPresetWidth:@3, kAFCropPresetHeight:@7},@{kAFCropPresetName:@"Option2", kAFCropPresetWidth:@4, kAFCropPresetHeight:@11}]];
+
+// Set the display width of the cells for all of the presented options.
+[AFPhotoEditorCustomization setCropToolCellWidth:150.f];
+</code></pre>
+
+<p><br/>
+<strong>Q: I'm a Premium Content Network partner, and I want to preview the content that will be in the Photo Editor rather than look at the live content that is available now. Can I do this?</strong></p>
+
+<p><strong>A:</strong> To point the Photo Editor at the Premium Content Network staging environment, make the following call:</p>
+
+<pre class="prettyprint"><code>[AFPhotoEditorCustomization usePCNStagingEnvironment:YES];
+</code></pre>
+
+<p>It is important that you don't deploy your app with this line of code, so the Photo Editor will warn you on each first launch within an app session that you are pointing at the staging environment.  </p>
+
+<p><br/>
+<strong>Q: My app uses a lot of memory, and I don't anticipate a user using the Photo Editor all that often. Can I do anything to further reduce Aviary's memory footprint?</strong></p>
+
+<p><strong>A:</strong> By default, the Photo Editor retains a small amount of GPU data (almost entirely shader programs) to optimize launch speed and user experience. You may disable this behavior as follows:</p>
+
+<pre class="prettyprint"><code>[AFPhotoEditorCustomization purgeGPUMemoryWhenPossible:YES];
+</code></pre>
+
+<p><br/>
+<strong>Q: How do I change the supported orientations for the editor?</strong></p>
+
+<p><strong>A:</strong> On the iPhone form factor, the Editor is restricted to Portrait presentation only. To change the orientations for iPad, make the following call:</p>
+
+<pre class="prettyprint"><code>[AFPhotoEditorCustomization setSupportedIpadOrientations:@[@(UIInterfaceOrientationLandscapeLeft), @(UIInterfaceOrientationLandscapeRight), @(UIInterfaceOrientationPortrait)]];
+</code></pre>
+
+<p><br/>
+<strong>Q: How do I turn on in-app purchases?</strong></p>
+
+<p><strong>A:</strong> In app purchases are currently only available to Premium partners. There are a number of steps you need to take. Please review the Aviary In-App Purchase guide. As it indicates, you will need to make the following customization call at some point in your code:</p>
+
+<pre class="prettyprint"><code>[AFPhotoEditorCustomization enableInAppPurchases:YES];
+</code></pre>
+</div>
+</div>
+<script>
+	$(function(){
+    	prettyPrint();
+	})
+</script>
+</body>

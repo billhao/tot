@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/AFPhotoEditorSession.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/AFPhotoEditorSession</TokenIdentifier>
+			<Abstract type="html">Photo Editor Sessions are obtained from instances of AFPhotoEditorController through the session property. A session tracks and stores all user
+actions taken in the AFPhotoEditorController it was obtained from.</Abstract>
+			<DeclaredIn>AFPhotoEditorSession.h</DeclaredIn>
+			
+			<NodeRef refid="6"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/AFPhotoEditorSession/setOpen:</TokenIdentifier>
+			<Abstract type="html">Specifies whether the session is still open.</Abstract>
+			<DeclaredIn>AFPhotoEditorSession.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign, readonly, getter=isOpen) BOOL open</Declaration>
+			
+			
+			<Anchor>//api/name/open</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/AFPhotoEditorSession/open</TokenIdentifier>
+			<Abstract type="html">Specifies whether the session is still open.</Abstract>
+			<DeclaredIn>AFPhotoEditorSession.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign, readonly, getter=isOpen) BOOL open</Declaration>
+			
+			
+			<Anchor>//api/name/open</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/AFPhotoEditorSession/setCancelled:</TokenIdentifier>
+			<Abstract type="html">Specifies if the session has been cancelled.</Abstract>
+			<DeclaredIn>AFPhotoEditorSession.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign, readonly, getter=isCancelled) BOOL cancelled</Declaration>
+			
+			
+			<Anchor>//api/name/cancelled</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/AFPhotoEditorSession/cancelled</TokenIdentifier>
+			<Abstract type="html">Specifies if the session has been cancelled.</Abstract>
+			<DeclaredIn>AFPhotoEditorSession.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign, readonly, getter=isCancelled) BOOL cancelled</Declaration>
+			
+			
+			<Anchor>//api/name/cancelled</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/AFPhotoEditorSession/setModified:</TokenIdentifier>
+			<Abstract type="html">Specifies whether the session contains any actions.</Abstract>
+			<DeclaredIn>AFPhotoEditorSession.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign, readonly, getter=isModified) BOOL modified</Declaration>
+			
+			
+			<Anchor>//api/name/modified</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/AFPhotoEditorSession/modified</TokenIdentifier>
+			<Abstract type="html">Specifies whether the session contains any actions.</Abstract>
+			<DeclaredIn>AFPhotoEditorSession.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign, readonly, getter=isModified) BOOL modified</Declaration>
+			
+			
+			<Anchor>//api/name/modified</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/AFPhotoEditorSession/createContextWithImage:</TokenIdentifier>
+			<Abstract type="html">Generates a new AFPhotoEditorContext.</Abstract>
+			<DeclaredIn>AFPhotoEditorSession.h</DeclaredIn>			
+			
+			<Declaration>- (AFPhotoEditorContext *)createContextWithImage:(UIImage *)image</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>image</Name>
+					<Abstract type="html">The image to generate the context with.</Abstract>
+				</Parameter>
+			</Parameters>
+			<ReturnValue><Abstract type="html">A new photo editor context.</Abstract></ReturnValue>
+			<Anchor>//api/name/createContextWithImage:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/AFPhotoEditorSession/createContextWithImage:maxSize:</TokenIdentifier>
+			<Abstract type="html">Generates a new AFPhotoEditorContext with a maximum size.</Abstract>
+			<DeclaredIn>AFPhotoEditorSession.h</DeclaredIn>			
+			
+			<Declaration>- (AFPhotoEditorContext *)createContextWithImage:(UIImage *)image maxSize:(CGSize)size</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>image</Name>
+					<Abstract type="html">The image to generate the context with.</Abstract>
+				</Parameter><Parameter>
+					<Name>size</Name>
+					<Abstract type="html">The maximum size the context should render the image at.</Abstract>
+				</Parameter>
+			</Parameters>
+			<ReturnValue><Abstract type="html">A new photo editor context that can be used to replay the session&apos;s actions. See AFPhotoEditorContext.</Abstract></ReturnValue>
+			<Anchor>//api/name/createContextWithImage:maxSize:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/AFPhotoEditorSession/createContext</TokenIdentifier>
+			<Abstract type="html">Deprecated.</Abstract>
+			<DeclaredIn>AFPhotoEditorSession.h</DeclaredIn>			
+			
+			<Declaration>- (AFPhotoEditorContext *)createContext</Declaration>
+			
+			
+			<Anchor>//api/name/createContext</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/AFPhotoEditorSession/createContextWithSize:</TokenIdentifier>
+			<Abstract type="html">  Deprecated. </Abstract>
+			<DeclaredIn>AFPhotoEditorSession.h</DeclaredIn>			
+			
+			<Declaration>- (AFPhotoEditorContext *)createContextWithSize:(CGSize)size</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>size</Name>
+					<Abstract type="html">The size of the context.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/createContextWithSize:</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

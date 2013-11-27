@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/AFOpenGLManager.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/AFOpenGLManager</TokenIdentifier>
+			<Abstract type="html">Aviary products process images using OpenGL when possible. Before this happens, some OpenGL must be loaded, which takes some time. This class
+provides a few class methods to help control that loading and unloading behavior.</Abstract>
+			<DeclaredIn>AFOpenGLManager.h</DeclaredIn>
+			
+			<NodeRef refid="1"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/AFOpenGLManager/beginOpenGLLoad</TokenIdentifier>
+			<Abstract type="html">If necessary OpenGL data has not been loaded, this call begins the OpenGL load process.</Abstract>
+			<DeclaredIn>AFOpenGLManager.h</DeclaredIn>			
+			
+			<Declaration>+ (void)beginOpenGLLoad</Declaration>
+			
+			
+			<Anchor>//api/name/beginOpenGLLoad</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/AFOpenGLManager/requestOpenGLDataPurge</TokenIdentifier>
+			<Abstract type="html">Sets a flag that tells the current OpenGL data to be unloaded when possible.</Abstract>
+			<DeclaredIn>AFOpenGLManager.h</DeclaredIn>			
+			
+			<Declaration>+ (void)requestOpenGLDataPurge</Declaration>
+			
+			
+			<Anchor>//api/name/requestOpenGLDataPurge</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/AFOpenGLManager/cancelOpenGLDataPurgeRequest</TokenIdentifier>
+			<Abstract type="html">If a call has been made to requestOpenGLDataPurge and OpenGL data has not yet been unloaded, this method causes the request to be cancelled.</Abstract>
+			<DeclaredIn>AFOpenGLManager.h</DeclaredIn>			
+			
+			<Declaration>+ (void)cancelOpenGLDataPurgeRequest</Declaration>
+			
+			
+			<Anchor>//api/name/cancelOpenGLDataPurgeRequest</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

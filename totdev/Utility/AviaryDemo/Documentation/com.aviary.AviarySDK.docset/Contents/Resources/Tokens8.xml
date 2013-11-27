@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Protocols/AFInAppPurchaseManagerDelegate.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intf/AFInAppPurchaseManagerDelegate</TokenIdentifier>
+			<Abstract type="html">A protocol that aids in IAP management for premium partners. Parterns should implement inAppPurchaseManager:productIdentifierForProduct:
+if they wish to provide custom product identifiers for their IAP&apos;s in their app. See the Aviary iOS SDK In-App Purchase Guide for more details.</Abstract>
+			<DeclaredIn>AFPhotoEditorController+InAppPurchase.h</DeclaredIn>
+			
+			<NodeRef refid="8"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/AFInAppPurchaseManagerDelegate/inAppPurchaseManager:productIdentifierForProduct:</TokenIdentifier>
+			<Abstract type="html">Deprecated.</Abstract>
+			<DeclaredIn>AFPhotoEditorController+InAppPurchase.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/cl/AFPhotoEditorProduct</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>- (NSString *)inAppPurchaseManager:(id&lt;AFInAppPurchaseManager&gt;)manager productIdentifierForProduct:(AFPhotoEditorProduct *)product</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>manager</Name>
+					<Abstract type="html">The in app purchase manager.</Abstract>
+				</Parameter><Parameter>
+					<Name>product</Name>
+					<Abstract type="html">The product for which to return the product identifier
+registered in iTunes Connect.</Abstract>
+				</Parameter>
+			</Parameters>
+			<ReturnValue><Abstract type="html">The product identifier registered in iTunes Connect.</Abstract></ReturnValue>
+			<Anchor>//api/name/inAppPurchaseManager:productIdentifierForProduct:</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

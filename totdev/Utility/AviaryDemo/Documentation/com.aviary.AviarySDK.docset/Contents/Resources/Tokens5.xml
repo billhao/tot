@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/AFPhotoEditorProduct.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/AFPhotoEditorProduct</TokenIdentifier>
+			<Abstract type="html">This class encapsulates information about non-consumable, in-app
+purchaseable products produced by Aviary and made available to users. This
+class is used in conjunction with the AFPhotoEditorInAppPurchaseDelegate
+protocol methods.</Abstract>
+			<DeclaredIn>AFPhotoEditorProduct.h</DeclaredIn>
+			
+			<NodeRef refid="5"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/AFPhotoEditorProduct/setProductName:</TokenIdentifier>
+			<Abstract type="html">The name of the product in English.</Abstract>
+			<DeclaredIn>AFPhotoEditorProduct.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, copy, readonly) NSString *productName</Declaration>
+			
+			
+			<Anchor>//api/name/productName</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/AFPhotoEditorProduct/productName</TokenIdentifier>
+			<Abstract type="html">The name of the product in English.</Abstract>
+			<DeclaredIn>AFPhotoEditorProduct.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, copy, readonly) NSString *productName</Declaration>
+			
+			
+			<Anchor>//api/name/productName</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/AFPhotoEditorProduct/setProductDescription:</TokenIdentifier>
+			<Abstract type="html">The description of the product in English.</Abstract>
+			<DeclaredIn>AFPhotoEditorProduct.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, copy, readonly) NSString *productDescription</Declaration>
+			
+			
+			<Anchor>//api/name/productDescription</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/AFPhotoEditorProduct/productDescription</TokenIdentifier>
+			<Abstract type="html">The description of the product in English.</Abstract>
+			<DeclaredIn>AFPhotoEditorProduct.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, copy, readonly) NSString *productDescription</Declaration>
+			
+			
+			<Anchor>//api/name/productDescription</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/AFPhotoEditorProduct/setInternalProductIdentifier:</TokenIdentifier>
+			<Abstract type="html">The internal product identifier.</Abstract>
+			<DeclaredIn>AFPhotoEditorProduct.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, copy, readonly) NSString *internalProductIdentifier</Declaration>
+			
+			
+			<Anchor>//api/name/internalProductIdentifier</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/AFPhotoEditorProduct/internalProductIdentifier</TokenIdentifier>
+			<Abstract type="html">The internal product identifier.</Abstract>
+			<DeclaredIn>AFPhotoEditorProduct.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, copy, readonly) NSString *internalProductIdentifier</Declaration>
+			
+			
+			<Anchor>//api/name/internalProductIdentifier</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

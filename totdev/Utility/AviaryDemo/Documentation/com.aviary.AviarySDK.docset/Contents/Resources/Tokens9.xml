@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Protocols/AFPhotoEditorControllerDelegate.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intf/AFPhotoEditorControllerDelegate</TokenIdentifier>
+			<Abstract type="html">Implement this protocol to be notified when the user is done using the editor.
+You are responsible for dismissing the editor when you (and/or your user) are
+finished with it.</Abstract>
+			<DeclaredIn>AFPhotoEditorController.h</DeclaredIn>
+			
+			<NodeRef refid="9"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/AFPhotoEditorControllerDelegate/photoEditor:finishedWithImage:</TokenIdentifier>
+			<Abstract type="html">Implement this method to be notified when the user presses the &quot;Done&quot; button.</Abstract>
+			<DeclaredIn>AFPhotoEditorController.h</DeclaredIn>			
+			
+			<Declaration>- (void)photoEditor:(AFPhotoEditorController *)editor finishedWithImage:(UIImage *)image</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>editor</Name>
+					<Abstract type="html">The photo editor controller.</Abstract>
+				</Parameter><Parameter>
+					<Name>image</Name>
+					<Abstract type="html">The edited image.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/photoEditor:finishedWithImage:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/AFPhotoEditorControllerDelegate/photoEditorCanceled:</TokenIdentifier>
+			<Abstract type="html">Implement this method to be notified when the user presses the &quot;Cancel&quot; button.</Abstract>
+			<DeclaredIn>AFPhotoEditorController.h</DeclaredIn>			
+			
+			<Declaration>- (void)photoEditorCanceled:(AFPhotoEditorController *)editor</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>editor</Name>
+					<Abstract type="html">The photo editor controller.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/photoEditorCanceled:</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

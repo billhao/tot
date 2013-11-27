@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/AFPhotoEditorController.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/AFPhotoEditorController</TokenIdentifier>
+			<Abstract type="html">This class encapsulates the Aviary SDK&apos;s photo editor. Present this view controller to provide the user with a fast
+and powerful image editor. Be sure that you don&apos;t forget to set the delegate property
+to an object that conforms to the AFPhotoEditorControllerDelegate protocol.</Abstract>
+			<DeclaredIn>AFPhotoEditorController.h</DeclaredIn>
+			
+			<NodeRef refid="3"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/AFPhotoEditorController/setDelegate:</TokenIdentifier>
+			<Abstract type="html">The photo editor&apos;s delegate.</Abstract>
+			<DeclaredIn>AFPhotoEditorController.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, weak) id&lt;AFPhotoEditorControllerDelegate&gt; delegate</Declaration>
+			
+			
+			<Anchor>//api/name/delegate</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/AFPhotoEditorController/delegate</TokenIdentifier>
+			<Abstract type="html">The photo editor&apos;s delegate.</Abstract>
+			<DeclaredIn>AFPhotoEditorController.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, weak) id&lt;AFPhotoEditorControllerDelegate&gt; delegate</Declaration>
+			
+			
+			<Anchor>//api/name/delegate</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/AFPhotoEditorController/setSession:</TokenIdentifier>
+			<Abstract type="html">An AFPhotoEditorSession instance that tracks user actions within the photo editor. This can be used for high-resolution
+processing.</Abstract>
+			<DeclaredIn>AFPhotoEditorController.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong, readonly) AFPhotoEditorSession *session</Declaration>
+			
+			
+			<Anchor>//api/name/session</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/AFPhotoEditorController/session</TokenIdentifier>
+			<Abstract type="html">An AFPhotoEditorSession instance that tracks user actions within the photo editor. This can be used for high-resolution
+processing.</Abstract>
+			<DeclaredIn>AFPhotoEditorController.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, strong, readonly) AFPhotoEditorSession *session</Declaration>
+			
+			
+			<Anchor>//api/name/session</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/AFPhotoEditorController/initWithImage:options:</TokenIdentifier>
+			<Abstract type="html">Deprecated</Abstract>
+			<DeclaredIn>AFPhotoEditorController.h</DeclaredIn>			
+			
+			<Declaration>- (id)initWithImage:(UIImage *)image options:(NSDictionary *)options</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>image</Name>
+					<Abstract type="html">The image to edit.</Abstract>
+				</Parameter><Parameter>
+					<Name>options</Name>
+					<Abstract type="html">(optional) Additional configuration options. See
+AFPhotoEditorControllerOptions for more information.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/initWithImage:options:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/AFPhotoEditorController/initWithImage:</TokenIdentifier>
+			<Abstract type="html">Initialize the photo editor controller with an image.</Abstract>
+			<DeclaredIn>AFPhotoEditorController.h</DeclaredIn>			
+			
+			<Declaration>- (id)initWithImage:(UIImage *)image</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>image</Name>
+					<Abstract type="html">The image to edit.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/initWithImage:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/AFPhotoEditorController/versionString</TokenIdentifier>
+			<Abstract type="html">The SDK version number.</Abstract>
+			<DeclaredIn>AFPhotoEditorController.h</DeclaredIn>			
+			
+			<Declaration>+ (NSString *)versionString</Declaration>
+			
+			<ReturnValue><Abstract type="html">The SDK version number.</Abstract></ReturnValue>
+			<Anchor>//api/name/versionString</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/AFPhotoEditorController/inAppPurchaseManager</TokenIdentifier>
+			<Abstract type="html">The handler object for purchasing consumable content. In order for in-app
+purchase to function correctly, you must add the object returned by this method
+as an observer of the default SKPaymentQueue. In your app delegate&apos;s
+-finishedLaunchingWithOptions: method, you should call startObservingTransactions
+on the in app purchase manager.</Abstract>
+			<DeclaredIn>AFPhotoEditorController+InAppPurchase.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/intfm/AFInAppPurchaseManager/stopObservingTransactions</TokenIdentifier>
+		<TokenIdentifier>//apple_ref/occ/cl/AFPhotoEditorCustomization</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>+ (id&lt;AFInAppPurchaseManager&gt;)inAppPurchaseManager</Declaration>
+			
+			<ReturnValue><Abstract type="html">The manager.</Abstract></ReturnValue>
+			<Anchor>//api/name/inAppPurchaseManager</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/AFPhotoEditorController/fetchContent</TokenIdentifier>
+			<Abstract type="html">    This method is used to force the SDK to begin downloading content from the Aviary
+    Content Delivery System and register purchasable content packs with Apple.</Abstract>
+			<DeclaredIn>AFPhotoEditorController+InAppPurchase.h</DeclaredIn>			
+			
+			<Declaration>+ (void)fetchContent</Declaration>
+			
+			
+			<Anchor>//api/name/fetchContent</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

@@ -1,0 +1,49 @@
+<html>
+<head>
+<link href='assets/style.css' type='text/css' rel='stylesheet' />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+<link href='http://fonts.googleapis.com/css?family=Lato:300,400,700|Source+Code+Pro' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Source+Code+Pro:400,700' rel='stylesheet' type='text/css'>
+<link type="text/css" href="http://www.aviary.com/Content/css/prettify.css" rel="stylesheet" />
+<script type="text/javascript" src="http://www.aviary.com/Content/js/prettify.js"></script>
+</head>
+
+<body>
+<div class="container">
+<div class="documentation"><h1>Premium Content Network Transition Guide</h1>
+
+<p>IMPORTANT: If you have previously sold In-App purchases in the Aviary SDK, please read the following carefully. If not, please disregard.</p>
+
+<p>While enabling dynamic IAPS in the Aviary iOS SDK, we made changes to the way that in-app purchase product identifiers are generated. Previously, the delegate callback of <code>AFInAppPurchaseManager</code>, <code>-inAppPurchaseManager:productIdentifierForProduct:</code>, returned your app's product identifier for a particular product. Beginning with version 2.7.0 of the editor, <code>-inAppPurchaseManager:productIdentifierForProduct:</code> has been deprecated and the default product identifier will be of the form: <code>&lt;Your App's Bundle Identifier&gt;.aviary.&lt;Product Type&gt;.&lt;Pack Type&gt;</code>. If your bundle identifier were com.Company.App, a possible effect pack product identifier might be: <code>com.Company.App.aviary.effectpack.01</code>. </p>
+
+<p>However, to preserve your customer's ability to restore purchases of Content Packs already in your app, you must continue to implement <code>-inAppPurchaseManager:productIdentifierForProduct:</code> . </p>
+
+<pre class="prettyprint"><code>Here is a sample implementation of the `-inAppPurchaseManager:productIdentifierForProduct:` delegate method:
+
+    - (NSString *)inAppPurchaseManager:(id&lt;AFInAppPurchaseManager&gt;)manager productIdentifierForProduct:(AFPhotoEditorProduct *)product
+    {
+        NSString *internalID = [product internalProductIdentifier];
+        if ([internalID isEqualToString:kAFProductEffectsGrunge]) {
+            return @"&lt;Your Grunge Identifier&gt;";
+        }
+        if ([internalID isEqualToString:kAFProductEffectsNostalgia]) {
+            return @"&lt;Your Nostalgia Identifier&gt;";
+        }
+        if ([internalID isEqualToString:kAFProductEffectsViewfinder]) {
+            return @"&lt;Your Viewfinder Identifier&gt;";
+        }
+        return nil;
+    }
+
+The product constants referenced above are defined in `AFPhotoEditorProduct.h`.
+</code></pre>
+
+<p>It is important that the delegate method return nil if the internalID is not equal to one of the product constants. Otherwise, the automatic product identifier generation will no longer work.</p>
+</div>
+</div>
+<script>
+	$(function(){
+    	prettyPrint();
+	})
+</script>
+</body>

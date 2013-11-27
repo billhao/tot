@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Protocols/AFInAppPurchaseManager.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intf/AFInAppPurchaseManager</TokenIdentifier>
+			<Abstract type="html">This protocol is implemented by the object returned by
+[AFPhotoEditorController inAppPurchaseManager]. You should call these
+methods to activate and deactivate in-app purchase.</Abstract>
+			<DeclaredIn>AFPhotoEditorController+InAppPurchase.h</DeclaredIn>
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/cl/AFPhotoEditorController</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<NodeRef refid="7"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/AFInAppPurchaseManager/setDelegate:</TokenIdentifier>
+			<Abstract type="html">Deprecated.</Abstract>
+			<DeclaredIn>AFPhotoEditorController+InAppPurchase.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/intf/AFInAppPurchaseManagerDelegate</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>@property (nonatomic, weak) id&lt;AFInAppPurchaseManagerDelegate&gt; delegate</Declaration>
+			
+			
+			<Anchor>//api/name/delegate</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfp/AFInAppPurchaseManager/delegate</TokenIdentifier>
+			<Abstract type="html">Deprecated.</Abstract>
+			<DeclaredIn>AFPhotoEditorController+InAppPurchase.h</DeclaredIn>			
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/intf/AFInAppPurchaseManagerDelegate</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<Declaration>@property (nonatomic, weak) id&lt;AFInAppPurchaseManagerDelegate&gt; delegate</Declaration>
+			
+			
+			<Anchor>//api/name/delegate</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/AFInAppPurchaseManager/setObservingTransactions:</TokenIdentifier>
+			<Abstract type="html">Indicates whether manager is observing transactions.</Abstract>
+			<DeclaredIn>AFPhotoEditorController+InAppPurchase.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign, readonly, getter=isObservingTransactions) BOOL observingTransactions</Declaration>
+			
+			<ReturnValue><Abstract type="html">YES if the in-app purchase manager is observing transactions (in-app
+purchase is enabled), NO otherwise.</Abstract></ReturnValue>
+			<Anchor>//api/name/observingTransactions</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfp/AFInAppPurchaseManager/observingTransactions</TokenIdentifier>
+			<Abstract type="html">Indicates whether manager is observing transactions.</Abstract>
+			<DeclaredIn>AFPhotoEditorController+InAppPurchase.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign, readonly, getter=isObservingTransactions) BOOL observingTransactions</Declaration>
+			
+			<ReturnValue><Abstract type="html">YES if the in-app purchase manager is observing transactions (in-app
+purchase is enabled), NO otherwise.</Abstract></ReturnValue>
+			<Anchor>//api/name/observingTransactions</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/AFInAppPurchaseManager/startObservingTransactions</TokenIdentifier>
+			<Abstract type="html">Call this method to start observing transactions. After calling this method,
+isObservingTransactions will return YES.</Abstract>
+			<DeclaredIn>AFPhotoEditorController+InAppPurchase.h</DeclaredIn>			
+			
+			<Declaration>- (void)startObservingTransactions</Declaration>
+			
+			
+			<Anchor>//api/name/startObservingTransactions</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/AFInAppPurchaseManager/stopObservingTransactions</TokenIdentifier>
+			<Abstract type="html">Call this method to stop observing transactions. After calling this method,
+isObservingTransactions will return NO.</Abstract>
+			<DeclaredIn>AFPhotoEditorController+InAppPurchase.h</DeclaredIn>			
+			
+			<Declaration>- (void)stopObservingTransactions</Declaration>
+			
+			
+			<Anchor>//api/name/stopObservingTransactions</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>
