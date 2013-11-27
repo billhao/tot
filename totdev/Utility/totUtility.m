@@ -139,4 +139,20 @@ void print(NSString* str) {
 + (AppDelegate*)getAppDelegate {
     return [[UIApplication sharedApplication] delegate];
 }
+
+// crop image
++ (UIImage *)crop:(UIImage*)image rect:(CGRect)rect {
+    float scale = image.scale;
+    rect = CGRectMake(rect.origin.x * scale,
+                      rect.origin.y * scale,
+                      rect.size.width * scale,
+                      rect.size.height * scale);
+    
+    CGImageRef imageRef = CGImageCreateWithImageInRect(image.CGImage, rect);
+    UIImage *result = [UIImage imageWithCGImage:imageRef scale:image.scale orientation:image.imageOrientation];
+    CGImageRelease(imageRef);
+    return result;
+}
+
+
 @end

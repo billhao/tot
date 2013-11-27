@@ -36,6 +36,9 @@
 
 + (AppDelegate*)getAppDelegate;
 
+// crop image
++ (UIImage *)crop:(UIImage*)image rect:(CGRect)rect;
+
 @end
 
 extern void print(NSString* str);

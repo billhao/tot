@@ -528,6 +528,22 @@
 
 + (void)savePageImageToFile:(NSString*)bookid page:(totPageView*)page {
     UIImage* img = [page renderToImage];
+    
+    // crop the screenshot by ratio of book preview size
+    float crop_w = img.size.width;
+    float crop_h = img.size.height;
+    float ratio = 153/278.0; // height/width of the book preview area size
+    if( crop_h > crop_w ) {
+        // portrait, take the top section
+        crop_h = ratio * crop_w;
+        img = [totUtility crop:img rect:CGRectMake(0, 0, crop_w, crop_h)];
+    }
+    else {
+        // landscape, take the middle section
+        crop_h = ratio * crop_w;
+        img = [totUtility crop:img rect:CGRectMake(0, (img.size.height-crop_h)/2, crop_w, crop_h)];
+    }
+    
     NSData* imgData = UIImagePNGRepresentation(img);
     NSString* imagePath = [[totModel GetDocumentDirectory] stringByAppendingPathComponent:[NSString stringWithFormat:@"scrapbookCover/%@.png", bookid]];
 
