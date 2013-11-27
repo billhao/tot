@@ -13,9 +13,6 @@
 #import "AppDelegate.h"
 #import "totUtility.h"
 
-#define FULL_PAGE_W 480.0f
-#define FULL_PAGE_H 320.0f
-
 @implementation totBookBasicView
 
 - (id)initWithFrame:(CGRect)frame {
@@ -309,8 +306,9 @@ static BOOL bAnimationStarted = NO;
 
         [mView rotateTo:0];
         mView.backgroundColor = [UIColor colorWithRed:.1 green:.1 blue:.1 alpha:0.95];
-        [mView resizeTo:CGRectMake(0, 0, FULL_PAGE_W, FULL_PAGE_H)];
-        [self setFrame:CGRectMake(0, 0, FULL_PAGE_W, FULL_PAGE_H)];
+        CGRect window = [totUtility getWindowRect];
+        [mView resizeTo:window];
+        [self setFrame:window];
         [bookvc hideOptionMenuAndButton:TRUE];
     }
     [UIView commitAnimations];
@@ -532,10 +530,6 @@ static BOOL bAnimationStarted = NO;
     [mElementsView release];
     [mTextInput release];
     [mPopupTextInputView release];
-}
-
-- (CGPoint)fullPageSize {
-    return CGPointMake(FULL_PAGE_W, FULL_PAGE_W);
 }
 
 - (void)setup {
