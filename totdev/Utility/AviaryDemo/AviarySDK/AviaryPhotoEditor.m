@@ -108,6 +108,7 @@
     NSArray * toolOrder = @[kAFCrop, kAFEffects];
     [AFPhotoEditorCustomization setToolOrder:toolOrder];
     
+    [AFPhotoEditorCustomization setCropToolInvertEnabled:FALSE];
     [AFPhotoEditorCustomization setCropToolCellWidth:120];
     
     // Set Supported Orientations
@@ -126,16 +127,7 @@
         
         float w = cropWidth;
         float h = cropHeight;
-/*
-        BOOL orientation1 = imageRatio>1?TRUE:FALSE;
-        BOOL orientation2 = cropWidth>cropHeight?TRUE:FALSE;
-        // switch crop w & h if orientation different
-        if( orientation1^orientation2 ) {
-            w = cropHeight;
-            h = cropWidth;
-        }
-*/
-        
+
         NSDictionary * customCrop = @{kAFCropPresetName: [NSString stringWithFormat:@"%d x %d", (int)cropWidth, (int)cropHeight], kAFCropPresetHeight : @(h), kAFCropPresetWidth : @(w)};
         [AFPhotoEditorCustomization setCropToolPresets:@[customCrop]];
     }

@@ -341,11 +341,12 @@
     
     UIImage *resizedPhoto = [totUtility imageWithImage:photo scaledToSize:psize];
     NSString *imagePath = [totMediaLibrary getMediaPath:filename];
-    NSData *data = UIImageJPEGRepresentation(resizedPhoto, 1.0);
+    NSData *data = UIImageJPEGRepresentation(resizedPhoto, 0.8);
+    //NSData *data = UIImagePNGRepresentation(resizedPhoto);
     [data writeToFile:imagePath atomically:NO];
     return imagePath;
     
-    // TODO need to save original image as well
+    // note that original image is saved in AviaryPhotoEditor.m:setupHighResContextForPhotoEditor
 }
 
 @end
