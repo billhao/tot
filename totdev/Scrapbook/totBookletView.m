@@ -306,7 +306,7 @@ static BOOL bAnimationStarted = NO;
 
         [mView rotateTo:0];
         mView.backgroundColor = [UIColor colorWithRed:.1 green:.1 blue:.1 alpha:0.95];
-        CGRect window = [totUtility getWindowRect];
+        CGRect window = bookvc.fullPageFrame;
         [mView resizeTo:window];
         [self setFrame:window];
         [bookvc hideOptionMenuAndButton:TRUE];

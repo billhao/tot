@@ -1,5 +1,5 @@
 {
-  "template_name" : "Colorful Play",
+  "template_name" : "Color Play",
   "orientation": "landscape",
 
   "pages" : [
