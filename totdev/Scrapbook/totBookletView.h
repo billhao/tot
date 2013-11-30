@@ -45,6 +45,7 @@
 @property (nonatomic, retain) totPageElement* mData;
 @property (nonatomic, assign) totPageView* mParentView;
 @property (nonatomic, assign) UITextView* mTextView;
+@property (nonatomic, assign) UIImageView* mImage;
 
 - (id)initWithElement:(totPageElement*)data;
 - (void)display;
