@@ -20,7 +20,7 @@
 
 @implementation totBookViewController
 
-@synthesize fullPageFrame;
+@synthesize fullPageFrame, disablePageSwipe;
 
 //- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 - (id)init:(totBookListViewController*)vc
@@ -40,6 +40,7 @@
         bookListVC = vc;
         
         fullPageFrame = CGRectMake(0, 0, 480, 320);
+        disablePageSwipe = FALSE;
     }
     return self;
 }
@@ -353,6 +354,8 @@
 
 // Respond to a swipe gesture
 - (IBAction)swipeGestureEvent:(UISwipeGestureRecognizer *)swipeRecognizer {
+    if( disablePageSwipe ) return;
+    
     [self hideOptionMenu:TRUE];
     // Get the location of the gesture
     CGPoint location = [swipeRecognizer locationInView:self.view];

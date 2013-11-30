@@ -84,11 +84,11 @@
 
 - (void)display {
     if (!self.mData) return;
-    [totUtility enableBorder:self];
+    //[totUtility enableBorder:self];
     if (self.mData.type == IMAGE ){
         NSString* image_path = [self.mData getResource:[totPageElement image]];
         if (image_path) {
-            mImage = [[UIImageView alloc] initWithFrame:self.frame];
+            if(!mImage) mImage = [[UIImageView alloc] initWithFrame:self.frame];
             mImage.backgroundColor = [UIColor clearColor];
             UIImage* img = [UIImage imageWithContentsOfFile:image_path];
             mImage.contentMode = UIViewContentModeScaleAspectFit;
@@ -96,7 +96,7 @@
             [self addSubview:mImage];
         } else {
             UIImage* img = [UIImage imageNamed:@"add_image"];
-            mImage = [[UIImageView alloc] initWithFrame:self.frame];
+            if(!mImage) mImage = [[UIImageView alloc] initWithFrame:self.frame];
             mImage.contentMode = UIViewContentModeCenter;
             mImage.image = img;  // default.
             CGSize s = img.size;
@@ -108,25 +108,26 @@
     }
     else if( self.mData.type == TEXT ) {
         NSString* text = [self.mData getResource:[totPageElement text]];
-        mTextView = [[UITextView alloc] initWithFrame:self.bounds];
+        if(!mTextView) mTextView = [[UITextView alloc] initWithFrame:self.bounds];
         mTextView.backgroundColor = [UIColor clearColor];
         mTextView.delegate = self;
         mTextView.layer.borderColor = [UIColor grayColor].CGColor;
         mTextView.layer.borderWidth = 0;  // hide the border.
         mTextView.layer.cornerRadius = 2;
         [self addSubview:mTextView];
+
+        UIImage* img = [UIImage imageNamed:@"add_text"];
+        if(!mImage) mImage = [[UIImageView alloc] initWithFrame:self.frame];
+        mImage.contentMode = UIViewContentModeCenter;
+        mImage.image = img;  // default.
+        CGSize s = img.size;
+        CGRect f = mImage.frame;
+        s = mImage.image.size;
+        [self addSubview:mImage];
+
         if( text ) {
             mTextView.text = text;
-        }
-        else{
-            UIImage* img = [UIImage imageNamed:@"add_text"];
-            mImage = [[UIImageView alloc] initWithFrame:self.frame];
-            mImage.contentMode = UIViewContentModeCenter;
-            mImage.image = img;  // default.
-            CGSize s = img.size;
-            CGRect f = mImage.frame;
-            s = mImage.image.size;
-            [self addSubview:mImage];
+            mImage.hidden = TRUE;
         }
     }
 }
@@ -170,6 +171,7 @@
 - (BOOL)textViewShouldBeginEditing:(UITextField *)textField {
     if (mParentView) {
         mParentView.mCurrentActivePageElement = self; [mParentView showInputTextView];
+        mParentView.bookvc.disablePageSwipe = TRUE;
     }
     return YES;
 }
@@ -602,6 +604,7 @@ static BOOL bAnimationStarted = NO;
             [mCurrentActivePageElement.mData addResource:[totPageElement text] withPath:textField.text];  // update data.
         }
     }
+    mCurrentActivePageElement.mParentView.bookvc.disablePageSwipe = FALSE;
     return YES;
 }
 
