@@ -2038,7 +2038,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Users/hao/projects/tot/workspace/totdev/Utility/Reveal.app/Contents/SharedSupport/iOS-Libraries",
+					"totdev/Utility/Reveal.app/Contents/SharedSupport/iOS-Libraries",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "totdev/totdev-Prefix.pch";
@@ -2134,7 +2134,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Users/hao/projects/tot/workspace/totdev/Utility/Reveal.app/Contents/SharedSupport/iOS-Libraries",
+					"totdev/Utility/Reveal.app/Contents/SharedSupport/iOS-Libraries",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "totdev/totdev-Prefix.pch";
@@ -2165,7 +2165,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Users/hao/projects/tot/workspace/totdev/Utility/Reveal.app/Contents/SharedSupport/iOS-Libraries",
+					"totdev/Utility/Reveal.app/Contents/SharedSupport/iOS-Libraries",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "totdev/totdev-Prefix.pch";
