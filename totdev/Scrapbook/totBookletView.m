@@ -54,6 +54,7 @@
 @synthesize mData;
 @synthesize mParentView;
 @synthesize mTextView;
+@synthesize mImage;
 
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
@@ -170,10 +171,11 @@
 
 - (BOOL)textViewShouldBeginEditing:(UITextField *)textField {
     if (mParentView) {
+        [mTextView resignFirstResponder];
         mParentView.mCurrentActivePageElement = self; [mParentView showInputTextView];
         mParentView.bookvc.disablePageSwipe = TRUE;
     }
-    return YES;
+    return FALSE;
 }
 
 - (BOOL)textView:(UITextView*)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
@@ -576,8 +578,7 @@ static BOOL bAnimationStarted = NO;
 - (UIImage*)renderToImage
 {
     // IMPORTANT: using weak link on UIKit
-    if(UIGraphicsBeginImageContextWithOptions != NULL)
-    {
+    if(UIGraphicsBeginImageContextWithOptions != NULL) {
         UIGraphicsBeginImageContextWithOptions(self.frame.size, NO, 0.0);
     } else {
         UIGraphicsBeginImageContext(self.frame.size);
@@ -592,6 +593,8 @@ static BOOL bAnimationStarted = NO;
 // Pop up the input text view.
 - (void)showInputTextView {
     mPopupTextInputView.hidden = NO;
+    mTextInput.text = mCurrentActivePageElement.mTextView.text;
+    [mTextInput becomeFirstResponder];
 }
 
 #pragma UITextField delegate
@@ -602,6 +605,11 @@ static BOOL bAnimationStarted = NO;
         if (mCurrentActivePageElement.mTextView) {
             [mCurrentActivePageElement.mTextView setText:textField.text];
             [mCurrentActivePageElement.mData addResource:[totPageElement text] withPath:textField.text];  // update data.
+        }
+        if ([textField.text length] > 0) {
+            mCurrentActivePageElement.mImage.hidden = YES;
+        } else {
+            mCurrentActivePageElement.mImage.hidden = NO;
         }
     }
     mCurrentActivePageElement.mParentView.bookvc.disablePageSwipe = FALSE;
