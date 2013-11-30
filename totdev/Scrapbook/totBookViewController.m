@@ -20,6 +20,8 @@
 
 @implementation totBookViewController
 
+@synthesize fullPageFrame;
+
 //- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 - (id)init:(totBookListViewController*)vc
 {
