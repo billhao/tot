@@ -80,6 +80,8 @@
     
     // Present the photo editor.
     [vc presentViewController:photoEditor animated:YES completion:nil];
+
+    [photoEditor release]; // this was causing the GC raster data memory leak
 }
 
 #pragma Photo Editor Delegate Methods
