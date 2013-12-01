@@ -146,7 +146,7 @@
     UIButton* passwordBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [passwordBtn setFrame:CGRectMake(0, 0, 300, 43)];
     [passwordBtn setBackgroundColor:[UIColor clearColor]];
-    [passwordBtn setTitle:@"Reset Password" forState:UIControlStateNormal];
+    [passwordBtn setTitle:@"Change password" forState:UIControlStateNormal];
     [passwordBtn setTitleColor:[UIColor colorWithRed:0.4f green:0.4f blue:0.4f alpha:1.0f] forState:UIControlStateNormal];
     [passwordBtn.titleLabel setFont:[UIFont fontWithName:@"RaleWay-SemiBold_2" size:18.0f]];
     [passwordBtn addTarget:self action:@selector(resetPassword:) forControlEvents:UIControlEventTouchUpInside];

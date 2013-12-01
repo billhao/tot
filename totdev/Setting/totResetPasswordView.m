@@ -74,7 +74,7 @@
         // Title for settings.
         UILabel* title = [[UILabel alloc] init];
         title.font = [UIFont fontWithName:@"Helvetica" size:24];
-        title.text = @"Reset Password";
+        title.text = @"Change Password";
         title.backgroundColor = [UIColor clearColor];
         title.textColor = [UIColor whiteColor];
         [title sizeToFit];
@@ -134,7 +134,7 @@
         resetBtn.layer.masksToBounds = YES;
         [resetBtn setFrame:CGRectMake(10, y, 300, 43)];
         [resetBtn setBackgroundColor:[UIColor colorWithRed:245/255.0f green:73/255.0 blue:82/255.0 alpha:1.0f]];
-        [resetBtn setTitle:@"Reset" forState:UIControlStateNormal];
+        [resetBtn setTitle:@"Go" forState:UIControlStateNormal];
         [resetBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [resetBtn.titleLabel setFont:[UIFont fontWithName:@"Raleway-SemiBold_2" size:18.0f]];
         [resetBtn addTarget:self action:@selector(reset:) forControlEvents:UIControlEventTouchUpInside];
