@@ -28,6 +28,7 @@
 		3F0B45251849BEDF00A87429 /* Color Play@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F0B45211849BEDF00A87429 /* Color Play@2x.png */; };
 		3F0B45261849BEDF00A87429 /* Colorful Year.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F0B45221849BEDF00A87429 /* Colorful Year.png */; };
 		3F0B45271849BEDF00A87429 /* Colorful Year@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F0B45231849BEDF00A87429 /* Colorful Year@2x.png */; };
+		3F0B452C184B2AD700A87429 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FC63DF717F18476003EA9D9 /* StoreKit.framework */; };
 		3F11385017F926C300CE7ABF /* btn_forgotpwd.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F11384E17F926BE00CE7ABF /* btn_forgotpwd.png */; };
 		3F11385117F926C300CE7ABF /* btn_forgotpwd@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F11384F17F926C100CE7ABF /* btn_forgotpwd@2x.png */; };
 		3F1331A416968F7400A39F41 /* Global.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F1331A316968F7400A39F41 /* Global.m */; };
@@ -128,7 +129,6 @@
 		3FC63DF217F18459003EA9D9 /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FC63DF117F18458003EA9D9 /* libz.1.2.5.dylib */; };
 		3FC63DF417F18466003EA9D9 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FC63DF317F18465003EA9D9 /* MessageUI.framework */; };
 		3FC63DF617F1846E003EA9D9 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FC63DF517F1846C003EA9D9 /* OpenGLES.framework */; };
-		3FC63DF817F18477003EA9D9 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FC63DF717F18476003EA9D9 /* StoreKit.framework */; };
 		3FC63DFA17F1847D003EA9D9 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FC63DF917F1847C003EA9D9 /* SystemConfiguration.framework */; };
 		3FC63DFC17F185E3003EA9D9 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FC63DFB17F185E2003EA9D9 /* AssetsLibrary.framework */; };
 		3FC63E0317F2C22D003EA9D9 /* female@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FC63E0117F2C22D003EA9D9 /* female@2x.png */; };
@@ -433,7 +433,6 @@
 		3F4D0F8C183F396400754E4E /* tutorial_4@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tutorial_4@2x.png"; path = "Resources/Tutorial/tutorial_4@2x.png"; sourceTree = "<group>"; };
 		3F4D0F8D183F396400754E4E /* tutorial_5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tutorial_5@2x.png"; path = "Resources/Tutorial/tutorial_5@2x.png"; sourceTree = "<group>"; };
 		3F4D0F8E183F396400754E4E /* tutorial_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tutorial_bg@2x.png"; path = "Resources/Tutorial/tutorial_bg@2x.png"; sourceTree = "<group>"; };
-		3F4D0F92183F3E5500754E4E /* Reveal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Reveal.framework; path = "totdev/Utility/Reveal.app/Contents/SharedSupport/iOS-Libraries/Reveal.framework"; sourceTree = "<group>"; };
 		3F4D0F9D183F472300754E4E /* Colorful Year.tpl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Colorful Year.tpl"; sourceTree = "<group>"; };
 		3F63C22C170539D90014E8C7 /* tutorial_1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tutorial_1@2x.png"; path = "Resources/Tutorial/tutorial_1@2x.png"; sourceTree = "<group>"; };
 		3F63C22D170539D90014E8C7 /* tutorial_2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tutorial_2@2x.png"; path = "Resources/Tutorial/tutorial_2@2x.png"; sourceTree = "<group>"; };
@@ -769,12 +768,12 @@
 			files = (
 				3FC63DFC17F185E3003EA9D9 /* AssetsLibrary.framework in Frameworks */,
 				3FC63DFA17F1847D003EA9D9 /* SystemConfiguration.framework in Frameworks */,
-				3FC63DF817F18477003EA9D9 /* StoreKit.framework in Frameworks */,
 				3FC63DF617F1846E003EA9D9 /* OpenGLES.framework in Frameworks */,
 				3FC63DF417F18466003EA9D9 /* MessageUI.framework in Frameworks */,
 				3FC63DF217F18459003EA9D9 /* libz.1.2.5.dylib in Frameworks */,
 				3FC63DF017F18445003EA9D9 /* CoreText.framework in Frameworks */,
 				3FC63DEE17F1843C003EA9D9 /* CoreData.framework in Frameworks */,
+				3F0B452C184B2AD700A87429 /* StoreKit.framework in Frameworks */,
 				3FC63DEC17F18425003EA9D9 /* Accelerate.framework in Frameworks */,
 				3FC63DB217F00B6C003EA9D9 /* Security.framework in Frameworks */,
 				3FC1B6FC1543680300295447 /* libsqlite3.dylib in Frameworks */,
@@ -1449,7 +1448,6 @@
 		EF6283741536674B004031D6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				3F4D0F92183F3E5500754E4E /* Reveal.framework */,
 				3FC63DFB17F185E2003EA9D9 /* AssetsLibrary.framework */,
 				3FC63DF917F1847C003EA9D9 /* SystemConfiguration.framework */,
 				3FC63DF717F18476003EA9D9 /* StoreKit.framework */,
@@ -1632,6 +1630,11 @@
 				TargetAttributes = {
 					EF6283701536674B004031D6 = {
 						DevelopmentTeam = HZEE45B54F;
+						SystemCapabilities = {
+							com.apple.InAppPurchase = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -2036,10 +2039,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"totdev/Utility/Reveal.app/Contents/SharedSupport/iOS-Libraries",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "totdev/totdev-Prefix.pch";
 				INFOPLIST_FILE = "totdev/totdev-Info.plist";
@@ -2048,11 +2048,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/totdev/Utility/AviaryDemo/AviarySDK\"",
 				);
-				OTHER_LDFLAGS = (
-					"-ObjC",
-					"-framework",
-					Reveal,
-				);
+				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
@@ -2132,10 +2128,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"totdev/Utility/Reveal.app/Contents/SharedSupport/iOS-Libraries",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "totdev/totdev-Prefix.pch";
 				INFOPLIST_FILE = "totdev/totdev-Info.plist";
@@ -2144,11 +2137,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/totdev/Utility/AviaryDemo/AviarySDK\"",
 				);
-				OTHER_LDFLAGS = (
-					"-ObjC",
-					"-framework",
-					Reveal,
-				);
+				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
@@ -2163,10 +2152,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"totdev/Utility/Reveal.app/Contents/SharedSupport/iOS-Libraries",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "totdev/totdev-Prefix.pch";
 				INFOPLIST_FILE = "totdev/totdev-Info.plist";
@@ -2175,11 +2161,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/totdev/Utility/AviaryDemo/AviarySDK\"",
 				);
-				OTHER_LDFLAGS = (
-					"-ObjC",
-					"-framework",
-					Reveal,
-				);
+				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
