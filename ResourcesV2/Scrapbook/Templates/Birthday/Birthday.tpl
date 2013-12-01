@@ -1,8 +1,3 @@
-// This is the description of a template file
-// Template description language
-// Author: Lixing Huang
-// Date: 08/21/2013
-
 {
   "template_name" : "Birthday",
   "orientation": "landscape",
@@ -23,13 +18,17 @@
           "name": "cover",
         },
         {
-          "x": 193,
-          "y": 161,
-          "w": 102,
-          "h": 31,
+          "x": 415.5,
+          "y": 320.75,
+          "w": 150,
+          "h": 46.47,
           "radius": 0,
           "type": "text",
           "name": "cover",
+          "font-name": "Chalkboard",
+          "font-color": "187,167,121",
+          "font-size": 20,
+          "alignment": "center"
         },
         {
           "x": 323,
@@ -54,43 +53,63 @@
           "h": 258,
           "radius": 0,
           "type": "image",
-          "name": "P5",
-        },
-        {
-          "x": 301,
-          "y": 140,
-          "w": 76,
-          "h": 26,
-          "radius": 0,
-          "type": "text",
-          "name": "P5",
+          "name": "P2",
         },
         {
           "x": 298,
-          "y": 173,
-          "w": 80,
-          "h": 18,
+          "y": 142.625,
+          "w": 79.5,
+          "h": 21.375,
           "radius": 0,
           "type": "text",
-          "name": "P5",
+          "name": "P2",
+          "font-name": "Raleway",
+          "font-color": "102,69,67",
+          "font-size": 20,
+          "alignment": "center"
+
+        },
+        {
+          "x": 298,
+          "y": 175,
+          "w": 79.21,
+          "h": 21.375,
+          "radius": 0,
+          "type": "text",
+          "name": "P2",
+          "font-name": "Chalkboard",
+          "font-color": "102,69,67",
+          "font-size": 16,
+          "alignment": "left"
+
         },
         {          
           "x": 298,
-          "y": 197,
-          "w": 80,
-          "h": 18,
+          "y": 197.5,
+          "w": 79.21,
+          "h": 21.375,
           "radius": 0,
           "type": "text",
-          "name": "P5", 
+          "name": "P2", 
+          "font-name": "Chalkboard",
+          "font-color": "102,69,67",
+          "font-size": 16,
+          "alignment": "left"
+
         },
         {
           "x": 298,
-          "y": 221,
-          "w": 80,
-          "h": 18,
+          "y": 221.5,
+          "w": 79.21,
+          "h": 21.375,
           "radius": 0,
           "type": "text",
-          "name": "P5",
+          "name": "P2",
+          "font-name": "Chalkboard",
+          "font-color": "102,69,67",
+          "font-size": 16,
+          "alignment": "left"
+
         }
       ]
     },
@@ -106,7 +125,7 @@
           "h": 150,
           "radius": 0,
           "type": "image",
-          "name": "cover",
+          "name": "P3",
         },
         
         {
@@ -116,7 +135,7 @@
           "h": 150,
           "radius": 0,
           "type": "image",
-          "name": "cover",
+          "name": "P3",
         }      
       ]
     },
@@ -132,37 +151,100 @@
           "h": 298,
           "radius": 0,
           "type": "image",
-          "name": "P7",
+          "name": "P4",
+          
         },
         {
           "x": 26,
           "y": 157,
           "w": 79,
-          "h": 27,
+          "h": 154.485,
           "radius": 0,
           "type": "text",
-          "name": "p7",
+          "name": "p4",
+          "font-name": "Chalkboard",
+          "font-color": "103,36,36",
+          "font-size": 20,
+          "alignment": "left"
+
+        }
+      ]
+    },
+{
+      "template_path": "Birthday Template P5",
+      "meta": "page",
+      "name": "Birthday Template P5",
+      "elements": [
+        {
+          "x": 99,
+          "y": 12.5,
+          "w": 224.5,
+          "h": 217,
+          "radius": 0,
+          "type": "image",
+          "name": "P5",
+        }
+      ]
+    },
+{
+      "template_path": "Birthday Template P6",
+      "meta": "page",
+      "name": "Birthday Template P6",
+      "elements": [
+        {
+          "x": 48.45,
+          "y": 41.13,
+          "w": 118.13,
+          "h": 143.715,
+          "radius": -10,
+          "type": "image",
+          "name": "P6",
         },
         {
-          "x": 26,
-          "y": 194,
-          "w": 79,
-          "h": 25,
+          "x": 325.74,
+          "y": 64.385,
+          "w": 98.02,
+          "h": 118.73,
+          "radius": 4.53,
+          "type": "image",
+          "name": "P6",
+        }
+
+      ]
+    },
+{
+      "template_path": "Birthday Template P7",
+      "meta": "page",
+      "name": "Birthday Template P7",
+      "elements": [
+        {
+          "x": 18,
+          "y": 24.5,
+          "w": 230,
+          "h": 263,
           "radius": 0,
-          "type": "text",
+          "type": "image",
           "name": "P7",
-        },
+        }
+      ]
+    },
+{
+      "template_path": "Birthday Template P8",
+      "meta": "page",
+      "name": "Birthday Template P8",
+      "elements": [
         {
-          "x": 26,
-          "y": 230,
-          "w": 79,
-          "h": 78,
+          "x": 109,
+          "y": 66.5,
+          "w": 261.5,
+          "h": 185,
           "radius": 0,
-          "type": "text",
-          "name": "P7", 
+          "type": "image",
+          "name": "P8",
         }
       ]
     }
+
   ]
 }
 
