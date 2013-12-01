@@ -109,17 +109,41 @@
     }
     else if( self.mData.type == TEXT ) {
         NSString* text = [self.mData getResource:[totPageElement text]];
+        
         mTextView = [[UITextView alloc] initWithFrame:self.bounds];
         mTextView.backgroundColor = [UIColor clearColor];
         mTextView.delegate = self;
         mTextView.layer.borderColor = [UIColor grayColor].CGColor;
         mTextView.layer.borderWidth = 0;  // hide the border.
         mTextView.layer.cornerRadius = 2;
+        
+        if (self.mData.fontName) {
+            int r = 0, g = 0, b = 0;
+            if (self.mData.colorDescription) {
+                NSArray* tokens = [self.mData.colorDescription componentsSeparatedByString:@","];
+                if ([tokens count] != 3) {
+                    printf("font-color in template must have 3 numbers.\n");
+                    exit(-1);
+                }
+                NSString* t = nil;
+                t = [[tokens objectAtIndex:0] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+                r = [t intValue];
+                t = [[tokens objectAtIndex:1] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+                g = [t intValue];
+                t = [[tokens objectAtIndex:2] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+                b = [t intValue];
+            }
+            if (self.mData.fontSize > 0) {
+                UIFont* font = [UIFont fontWithName:self.mData.fontName size:self.mData.fontSize];
+                [mTextView setTextColor:[UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:1.0f]];
+                [mTextView setFont:font];
+            }
+        }
+        
         [self addSubview:mTextView];
         if( text ) {
             mTextView.text = text;
-        }
-        else{
+        } else {
             UIImage* img = [UIImage imageNamed:@"add_text"];
             mImage = [[UIImageView alloc] initWithFrame:self.frame];
             mImage.contentMode = UIViewContentModeCenter;
@@ -212,7 +236,8 @@
         [self addGestureRecognizer:tap];
         [tap release];
         // long press
-        UILongPressGestureRecognizer* longpress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
+        UILongPressGestureRecognizer* longpress = [[UILongPressGestureRecognizer alloc] initWithTarget:self
+                                                                                                action:@selector(handleLongPress:)];
         longpress.delegate = self;
         [self addGestureRecognizer:longpress];
         [longpress release];
@@ -228,7 +253,8 @@
         [self addGestureRecognizer:pinch];
         [pinch release];
         // Register rotate gesture recognizers.
-        UIRotationGestureRecognizer* rotate = [[UIRotationGestureRecognizer alloc] initWithTarget:self action:@selector(handleRotate:)];
+        UIRotationGestureRecognizer* rotate = [[UIRotationGestureRecognizer alloc] initWithTarget:self
+                                                                                           action:@selector(handleRotate:)];
         [rotate setDelegate:self];
         [self addGestureRecognizer:rotate];
         [rotate release];

@@ -23,6 +23,9 @@
 @synthesize radians;
 @synthesize type;
 @synthesize name, resources;
+@synthesize fontName;
+@synthesize fontSize;
+@synthesize colorDescription;
 
 - (id) init:(totPage*)page {
     if (self = [super init]) {
@@ -62,6 +65,9 @@
 - (id)copy:(totPage*)page
 {
     totPageElement* e = [[totPageElement alloc] init:self.page];
+    e.fontSize = self.fontSize;
+    e.fontName = self.fontName;
+    e.colorDescription = self.colorDescription;
     e.x = self.x;
     e.y = self.y;
     e.w = self.w;
@@ -115,6 +121,15 @@
     if (resources && [resources count] > 0) {
         [output setObject:resources forKey:@"resources"];
     }
+    if (self.fontName) {
+        [output setObject:self.fontName forKey:@"font-name"];
+    }
+    if (self.colorDescription) {
+        [output setObject:self.colorDescription forKey:@"font-color"];
+    }
+    if (self.fontSize > 0) {
+        [output setObject:[NSNumber numberWithInt:self.fontSize] forKey:@"font-size"];
+    }
     return output;
 }
 
@@ -135,6 +150,12 @@
 }
 
 - (void) loadFromDictionary:(NSDictionary *)dict {
+    if ([dict objectForKey:@"font-name"]) {
+        self.fontName = [dict objectForKey:@"font-name"];
+        self.colorDescription = [dict objectForKey:@"font-color"];
+        self.fontSize = [self getIntValue:@"font-size" fromObject:dict];
+    }
+    
     self.x = [self getFloatValue:@"x" fromObject:dict];
     self.y = [self getFloatValue:@"y" fromObject:dict];
     self.w = [self getFloatValue:@"w" fromObject:dict];
@@ -248,6 +269,12 @@
             }
         } else if ([element_attr isEqualToString:@"name"]) {
             new_element.name = [element_object objectForKey:element_attr];
+        } else if ([element_attr isEqualToString:@"font-name"]) {
+            new_element.fontName = [element_object objectForKey:element_attr];
+        } else if ([element_attr isEqualToString:@"font-color"]) {
+            new_element.colorDescription = [element_object objectForKey:element_attr];
+        } else if ([element_attr isEqualToString:@"font-size"]) {
+            new_element.fontSize = [[element_object objectForKey:element_attr] intValue];
         }
     }
     [pageElements addObject:new_element];
