@@ -25,6 +25,11 @@ typedef enum {
 // Represents each element on the page. The element could be txt, image, or video.
 @interface totPageElement : NSObject
 
+// Font-related attributes
+@property (nonatomic, retain) NSString* fontName;
+@property (nonatomic, retain) NSString* colorDescription;
+@property (nonatomic, assign) int fontSize;
+
 // the top-left point
 @property (nonatomic, assign) float x;
 @property (nonatomic, assign) float y;
