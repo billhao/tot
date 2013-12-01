@@ -58,13 +58,12 @@
     navbar.backgroundColor = [UIColor colorWithRed:116.0/255 green:184.0/255 blue:229.0/255 alpha:1.0];
     
     // Creates home button
-    UIImage* homeImg = [UIImage imageNamed:@"timeline_home"];
-    UIImage* homeImgPressed = [UIImage imageNamed:@"timeline_home_pressed"];
+    UIImage* homeImg = [UIImage imageNamed:@"setting_back"];
     UIButton* homeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     
     homeBtn.frame = CGRectMake(9, (navbarHeight-homeImg.size.height-24)/2+statusBarHeight, homeImg.size.width+24, homeImg.size.height+24); // make the button 24px wider and longer
     [homeBtn setImage:homeImg forState:UIControlStateNormal];
-    [homeBtn setImage:homeImgPressed forState:UIControlStateHighlighted];
+    [homeBtn setImage:homeImg forState:UIControlStateHighlighted];
     [homeBtn addTarget:self action:@selector(homeButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [navbar addSubview:homeBtn];
     

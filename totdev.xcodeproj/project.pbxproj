@@ -84,6 +84,8 @@
 		3F4D0F9E183F472300754E4E /* Colorful Year.tpl in Resources */ = {isa = PBXBuildFile; fileRef = 3F4D0F9D183F472300754E4E /* Colorful Year.tpl */; };
 		3F50B9EC184B3097001E8ED0 /* libAviarySDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F0B4537184B2D3A00A87429 /* libAviarySDK.a */; };
 		3F50B9EF184B318D001E8ED0 /* AviaryPhotoEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F50B9EE184B318D001E8ED0 /* AviaryPhotoEditor.m */; };
+		3F50B9F2184C0229001E8ED0 /* setting_back.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F50B9F0184C0229001E8ED0 /* setting_back.png */; };
+		3F50B9F3184C0229001E8ED0 /* setting_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F50B9F1184C0229001E8ED0 /* setting_back@2x.png */; };
 		3F63C22E170539D90014E8C7 /* tutorial_1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F63C22C170539D90014E8C7 /* tutorial_1@2x.png */; };
 		3F63C22F170539D90014E8C7 /* tutorial_2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F63C22D170539D90014E8C7 /* tutorial_2@2x.png */; };
 		3F65ABA6182E01A000FF27CC /* Birthday.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F65ABA2182E01A000FF27CC /* Birthday.png */; };
@@ -324,7 +326,6 @@
 		8E32868918271C10006E8F38 /* icons-language@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E32868718271C10006E8F38 /* icons-language@2x.png */; };
 		8E42F11718389DC9006DB992 /* totResetPasswordView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E42F11618389DC9006DB992 /* totResetPasswordView.m */; };
 		8E5692F117B9FE63001686CB /* totTimeUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E5692F017B9FE63001686CB /* totTimeUtil.m */; };
-		8E5D4320181CD08300297D51 /* setting_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E5D431F181CD08300297D51 /* setting_2.png */; };
 		CE5C09FC154CCFDB00D41114 /* moviePlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5C09F9154CCFDB00D41114 /* moviePlayerViewController.m */; };
 		CEDB78B9155107C300805CC8 /* totImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDB78B8155107C300805CC8 /* totImageCache.m */; };
 		EF0D6BEA1555CCD00027F012 /* totTimerController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF0D6BE91555CCD00027F012 /* totTimerController.m */; };
@@ -446,6 +447,8 @@
 		3F4D0F9D183F472300754E4E /* Colorful Year.tpl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Colorful Year.tpl"; sourceTree = "<group>"; };
 		3F50B9ED184B318D001E8ED0 /* AviaryPhotoEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AviaryPhotoEditor.h; sourceTree = "<group>"; };
 		3F50B9EE184B318D001E8ED0 /* AviaryPhotoEditor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AviaryPhotoEditor.m; sourceTree = "<group>"; };
+		3F50B9F0184C0229001E8ED0 /* setting_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = setting_back.png; path = Setting/setting_back.png; sourceTree = "<group>"; };
+		3F50B9F1184C0229001E8ED0 /* setting_back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "setting_back@2x.png"; path = "Setting/setting_back@2x.png"; sourceTree = "<group>"; };
 		3F63C22C170539D90014E8C7 /* tutorial_1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tutorial_1@2x.png"; path = "Resources/Tutorial/tutorial_1@2x.png"; sourceTree = "<group>"; };
 		3F63C22D170539D90014E8C7 /* tutorial_2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "tutorial_2@2x.png"; path = "Resources/Tutorial/tutorial_2@2x.png"; sourceTree = "<group>"; };
 		3F65ABA2182E01A000FF27CC /* Birthday.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Birthday.png; sourceTree = "<group>"; };
@@ -724,7 +727,6 @@
 		8E42F11618389DC9006DB992 /* totResetPasswordView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totResetPasswordView.m; path = Setting/totResetPasswordView.m; sourceTree = "<group>"; };
 		8E5692EF17B9FE63001686CB /* totTimeUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totTimeUtil.h; path = Utility/totTimeUtil.h; sourceTree = "<group>"; };
 		8E5692F017B9FE63001686CB /* totTimeUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totTimeUtil.m; path = Utility/totTimeUtil.m; sourceTree = "<group>"; };
-		8E5D431F181CD08300297D51 /* setting_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = setting_2.png; path = Setting/setting_2.png; sourceTree = "<group>"; };
 		CE5C09F8154CCFDB00D41114 /* moviePlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = moviePlayerViewController.h; path = Utility/moviePlayerViewController.h; sourceTree = "<group>"; };
 		CE5C09F9154CCFDB00D41114 /* moviePlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = moviePlayerViewController.m; path = Utility/moviePlayerViewController.m; sourceTree = "<group>"; };
 		CEDB78B7155107C300805CC8 /* totImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = totImageCache.h; sourceTree = "<group>"; };
@@ -1356,7 +1358,8 @@
 		8E5D431E181CD06C00297D51 /* Setting */ = {
 			isa = PBXGroup;
 			children = (
-				8E5D431F181CD08300297D51 /* setting_2.png */,
+				3F50B9F0184C0229001E8ED0 /* setting_back.png */,
+				3F50B9F1184C0229001E8ED0 /* setting_back@2x.png */,
 			);
 			name = Setting;
 			sourceTree = "<group>";
@@ -1721,7 +1724,6 @@
 				3F63C22E170539D90014E8C7 /* tutorial_1@2x.png in Resources */,
 				3F63C22F170539D90014E8C7 /* tutorial_2@2x.png in Resources */,
 				3FF6C2691708E7B2007B48DA /* icons-ok@2x.png in Resources */,
-				8E5D4320181CD08300297D51 /* setting_2.png in Resources */,
 				3F2CC25417120ED2001EDD75 /* tutorial_0@2x.png in Resources */,
 				3F79A42817180453004E96F6 /* tutorial_3@2x.png in Resources */,
 				8E069FF317C495D900D04FF6 /* diaper2.png in Resources */,
@@ -1760,6 +1762,7 @@
 				3FD3C64217CDBCA700DB1B71 /* home_bg@2x.png in Resources */,
 				3FD3C65017CDD60500DB1B71 /* activity_line.png in Resources */,
 				3FD3C65117CDD60500DB1B71 /* activity_line@2x.png in Resources */,
+				3F50B9F2184C0229001E8ED0 /* setting_back.png in Resources */,
 				3FD3C65217CDD60500DB1B71 /* activity_tag.png in Resources */,
 				3FE470B8182B8955005F9D5B /* Color Year P6.png in Resources */,
 				3FD3C65317CDD60500DB1B71 /* activity_tag@2x.png in Resources */,
@@ -1881,6 +1884,7 @@
 				8E0EA47517D45A8B00C75BD3 /* card_confirm.png in Resources */,
 				8E0EA47617D45A8B00C75BD3 /* card_confirm@2x.png in Resources */,
 				8E0EA47E17D54D4400C75BD3 /* diaper_gray.png in Resources */,
+				3F50B9F3184C0229001E8ED0 /* setting_back@2x.png in Resources */,
 				8E0EA47F17D54D4400C75BD3 /* food_gray.png in Resources */,
 				8E0EA48017D54D4400C75BD3 /* hc_gray.png in Resources */,
 				3FE4708A182B6D3E005F9D5B /* First Year Template P2@2x.png in Resources */,
