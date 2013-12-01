@@ -605,6 +605,7 @@ static BOOL bAnimationStarted = NO;
         if (mCurrentActivePageElement.mTextView) {
             [mCurrentActivePageElement.mTextView setText:textField.text];
             [mCurrentActivePageElement.mData addResource:[totPageElement text] withPath:textField.text];  // update data.
+            [mCurrentActivePageElement.mData.page.book saveToDB];
         }
         if ([textField.text length] > 0) {
             mCurrentActivePageElement.mImage.hidden = YES;
