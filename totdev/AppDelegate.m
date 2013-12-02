@@ -180,6 +180,7 @@
     if( !homeController )
         homeController = [[totHomeRootController alloc] init];
     [loginNavigationController pushViewController:self.homeController animated:animated];
+    [homeController switchTo:kHomeViewEntryView withContextInfo:nil];
     //self.homeController.view.backgroundColor = [UIColor grayColor];
 
     //totBookListViewController* book = [[totBookListViewController alloc] init];
