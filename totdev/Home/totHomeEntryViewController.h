@@ -66,6 +66,8 @@ typedef enum {
     
     // icon size change when switch between selected and not selected
     CGSize activityIconSizeChange;
+    CGSize unselectedActivityIconSize; // original icon size
+    CGSize selectedActivityIconSize;   // icon size after selected
 }
 
 @property (nonatomic, assign) totHomeRootController *homeRootController;

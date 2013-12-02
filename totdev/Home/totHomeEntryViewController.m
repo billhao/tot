@@ -315,70 +315,6 @@
     [self updateSelectedActivitesView];
 }
 
-// parameter is the index in all activities
-- (void)addToSelectedActivity:(int)index {
-    // add this activity
-    MediaInfo* m = mediaLib.currentMediaInfo;
-    NSMutableArray* selectedActivities = m.activities;
-    [selectedActivities addObject:allActivities[index]];
-    
-    // change icon to small size
-    UIButton* btn = activityButtons[index];
-    CGRect f = btn.frame;
-    float sizechange_x = activityIconSizeChange.width;
-    float sizechange_y = activityIconSizeChange.height;
-    f.origin.x += sizechange_x/2;
-    f.origin.y += sizechange_y/2;
-    f.size.width  -= sizechange_x;
-    f.size.height -= sizechange_y;
-    
-    btn.layer.shadowColor = [UIColor whiteColor].CGColor;
-    btn.layer.shadowOffset = CGSizeMake(0, 0);
-    btn.layer.shadowRadius = 6;
-    
-    float t1 = .5; // same as animation for selected activity
-    [UIView animateWithDuration:t1 animations:^{
-        btn.frame = f;
-        btn.layer.shadowOpacity = 1.0;
-    }];
-}
-
-// parameter is the index in selected activities
-- (void)removeSelectedActivity:(int)selectedIndex {
-    MediaInfo* m = mediaLib.currentMediaInfo;
-    NSMutableArray* selectedActivities = m.activities;
-    
-    // get index in all activities
-    int index = [self getActivityIndex:selectedActivities[selectedIndex]];
-    
-    [selectedActivities removeObjectAtIndex:selectedIndex];
-
-    // change icon to original size
-    UIButton* btn = activityButtons[index];
-    CGRect f = btn.frame;
-    float sizechange_x = activityIconSizeChange.width;
-    float sizechange_y = activityIconSizeChange.height;
-    f.origin.x -= sizechange_x/2;
-    f.origin.y -= sizechange_y/2;
-    f.size.width  += sizechange_x;
-    f.size.height += sizechange_y;
-
-    float t1 = .5; // same as animation for selected activity
-    [UIView animateWithDuration:t1 animations:^{
-        btn.frame = f;
-        btn.layer.shadowOpacity = 0.0;
-    }];
-}
-
-- (int)getActivityIndex:(NSString*)activity {
-    for( int i=0; i<allActivities.count; i++ ) {
-        if( [allActivities[i] isEqualToString:activity] ) {
-            return i;
-        }
-    }
-    return -1;
-}
-
 // remove this selected activity
 - (void)selectedActivityButtonPressed: (id)sender {
     UIButton* btn = (UIButton*)sender;
@@ -499,8 +435,8 @@
 }
 
 - (void)updateSelectedActivitesView {
-    float t1 = .5;
-    float t2 = .5;
+    float t1 = .1;
+    float t2 = .4;
     if( selectedActivities_bgView.hidden )
         t1 = 0.0;
     
@@ -512,7 +448,8 @@
     } completion:^(BOOL finished) {
         // return if no selected activity
         NSMutableArray* selectedActivities = mediaLib.currentMediaInfo.activities;
-        if( selectedActivities.count == 0 ){
+        int cnt = selectedActivities.count;
+        if( cnt == 0 ){
             selectedActivities_bgView.hidden = TRUE;
             return;
         }
@@ -527,7 +464,6 @@
         int icon_height = 30;
         int margin_x = 6;
         
-        int cnt = selectedActivities.count;
         CGRect f_line = selectedActivities_lineView.frame;
         CGRect f_bg = selectedActivities_bgView.frame;
         float w = cnt*(icon_width+margin_x)+margin_x*2+f_line.size.width;
@@ -586,6 +522,7 @@
         mPhotoViewA.image = [UIImage imageNamed:m.filename];
     }
     
+    [self updateActivityBox];
     [self updateSelectedActivitesView];
 }
 
@@ -666,6 +603,11 @@
                 // save default activity icon size
                 CGRect f = activityBtn.frame;
                 activityIconSizeChange = CGSizeMake(f.size.width/4, f.size.height/4);
+                
+                float sizechange_x = activityIconSizeChange.width;
+                float sizechange_y = activityIconSizeChange.height;
+                unselectedActivityIconSize = CGSizeMake(f.size.width, f.size.height);
+                selectedActivityIconSize   = CGSizeMake(f.size.width  - sizechange_x, f.size.height - sizechange_y);
             }
             
             UIButton* activityLabel = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -822,5 +764,109 @@
     
     return newImage;
 }
+
+// parameter is the index in all activities
+- (void)addToSelectedActivity:(int)index {
+    // add this activity
+    MediaInfo* m = mediaLib.currentMediaInfo;
+    NSMutableArray* selectedActivities = m.activities;
+    [selectedActivities addObject:allActivities[index]];
+    
+    [self selectActivity:index];
+}
+
+// parameter is the index in selected activities
+- (void)removeSelectedActivity:(int)selectedIndex {
+    MediaInfo* m = mediaLib.currentMediaInfo;
+    NSMutableArray* selectedActivities = m.activities;
+    
+    // get index in all activities
+    int index = [self getActivityIndex:selectedActivities[selectedIndex]];
+    
+    [selectedActivities removeObjectAtIndex:selectedIndex];
+    
+    [self deselectActivity:index];
+}
+
+- (void)selectActivity:(int)index {
+    UIButton* btn = activityButtons[index];
+    if( [self compareSize:btn.frame.size size2:selectedActivityIconSize] ) return; // already selected
+    
+    // change icon to small size
+    CGRect f = btn.frame;
+    float sizechange_x = activityIconSizeChange.width;
+    float sizechange_y = activityIconSizeChange.height;
+    f.origin.x += sizechange_x/2;
+    f.origin.y += sizechange_y/2;
+    f.size.width  = selectedActivityIconSize.width;
+    f.size.height = selectedActivityIconSize.height;
+    
+    btn.layer.shadowColor = [UIColor whiteColor].CGColor;
+    btn.layer.shadowOffset = CGSizeMake(0, 0);
+    btn.layer.shadowRadius = 6;
+    
+    float t1 = .5; // same as animation for selected activity
+    [UIView animateWithDuration:t1 animations:^{
+        btn.frame = f;
+        btn.layer.shadowOpacity = 1.0;
+    }];
+}
+
+- (void)deselectActivity:(int)index {
+    UIButton* btn = activityButtons[index];
+    if( [self compareSize:btn.frame.size size2:unselectedActivityIconSize] ) return; // already unselected
+    
+    // change icon to original size
+    CGRect f = btn.frame;
+    float sizechange_x = activityIconSizeChange.width;
+    float sizechange_y = activityIconSizeChange.height;
+    f.origin.x -= sizechange_x/2;
+    f.origin.y -= sizechange_y/2;
+    f.size.width  = unselectedActivityIconSize.width;
+    f.size.height = unselectedActivityIconSize.height;
+    
+    float t1 = .5; // same as animation for selected activity
+    [UIView animateWithDuration:t1 animations:^{
+        btn.frame = f;
+        btn.layer.shadowOpacity = 0.0;
+    }];
+}
+
+// deselect everything in the activity box
+- (void)updateActivityBox {
+    // update the selection box
+    // deselect all first
+    int cnt = allActivities.count;
+    for( int i=0; i<cnt; i++ ) {
+        [self deselectActivity:i];
+    }
+
+    // then select selected
+    NSMutableArray* selectedActivities = mediaLib.currentMediaInfo.activities;
+    cnt = selectedActivities.count;
+    for( int i=0; i<cnt; i++ ) {
+        // get index in all activities
+        int index = [self getActivityIndex:selectedActivities[i]];
+        [self selectActivity:index];
+    }
+}
+
+- (int)getActivityIndex:(NSString*)activity {
+    for( int i=0; i<allActivities.count; i++ ) {
+        if( [allActivities[i] isEqualToString:activity] ) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+// compare two sizes
+- (BOOL)compareSize:(CGSize)size1 size2:(CGSize)size2 {
+    if( size1.width == size2.width && size1.height == size2.height )
+        return TRUE;
+    else
+        return FALSE;
+}
+
 
 @end
