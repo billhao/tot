@@ -421,8 +421,10 @@
 
 - (void)createSelectedActivitesView {
     float statusBarHeight = 0;
-    if( SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0") )
+    if( SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0") ) {
         statusBarHeight = [UIApplication sharedApplication].statusBarFrame.size.height;
+        if( statusBarHeight == 0 ) statusBarHeight = 20;
+    }
     
     float y = 7 + statusBarHeight;
     UIImage* bg = [UIImage imageNamed:@"activity_tag"];
