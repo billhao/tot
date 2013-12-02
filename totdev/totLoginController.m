@@ -238,15 +238,16 @@
 - (void)showHomeView {
     AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
 
-    // show tutorial if this is the first time
+    BOOL showTutorial = FALSE;
     totEvent* e = [global.model getItem:PREFERENCE_NO_BABY name:EVENT_TUTORIAL_SHOW];
     if ( e == nil ) {
+        // show tutorial if this is the first time
         [appDelegate showTutorial];
         return;
     }
-
+    
     // go to home view
-    [appDelegate showHomeView];
+    [appDelegate showHomeView:TRUE];
 }
 
 - (void)PrivacyButtonClicked: (UIButton *)button {

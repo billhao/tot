@@ -7,6 +7,7 @@
 #import "../AppDelegate.h"
 #import "../Model/totEventName.h"
 #import "totUtility.h"
+#import "totHomeRootController.h"
 
 @interface totTutorialViewController ()
 
@@ -14,12 +15,13 @@
 
 @implementation totTutorialViewController
 
-@synthesize homeController;
+@synthesize homeController, nextview;
 
 - (id)initWithFrame:(CGRect)frame {
     self = [super init];
     if( self ) {
         _frame = frame;
+        nextview = kHomeViewEntryView; // switch to the next view, default to home
     }
     return self;
 }
@@ -80,6 +82,7 @@
     [UIApplication sharedApplication].statusBarHidden = YES;
     tutorialScrollView.contentOffset = CGPointMake(0, 0);
     pageControl.currentPage = 0;
+    scrollCanceled = false;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -125,19 +128,8 @@
         // now the tutorial has been shown, mark in db, never show it again
         [global.model addEvent:PREFERENCE_NO_BABY event:EVENT_TUTORIAL_SHOW datetime:[NSDate date] value:@"true"];
         
-        if( homeController ) {
-            // tutorial was invoked from setting page
-            [homeController popup];
-        }
-        else {
-            // tutorial was invoked after registration for the first time
-            [[self getAppDelegate] popup];
-            
-            // stop tutorial, go to main view
-            [[self getAppDelegate] showHomeView];
-            
-            // TODO release tutorial controller after showing
-        }
+        // switch to home or setting depending on where it was invoked from
+        [homeController switchTo:nextview withContextInfo:nil];
     }
 }
 

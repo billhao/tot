@@ -20,7 +20,7 @@
 
 @implementation AppDelegate
 
-@synthesize window, mCache, loginNavigationController;
+@synthesize window, mCache, loginNavigationController, homeController;
 
 - (void)alloc {
     loginNavigationController = nil;
@@ -121,7 +121,7 @@
             }
             [global.baby printBabyInfo];
 
-            [self showHomeView];
+            [self showHomeView:TRUE];
         }
         else {
             [self showLoginView];
@@ -169,17 +169,18 @@
     [loginController release];
 }
 
-- (void)showHomeView {
+- (void)showHomeView:(BOOL)animated {
     // remove all previous views
     //[loginNavigationController setViewControllers:nil];
     // show home view
     //loginNavigationController.view.backgroundColor = [UIColor blueColor];
 
-    CGRect frame = self.window.bounds;
+//    CGRect frame = self.window.bounds;
     
-    self.homeController = [[totHomeRootController alloc] init];
+    if( !homeController )
+        homeController = [[totHomeRootController alloc] init];
+    [loginNavigationController pushViewController:self.homeController animated:animated];
     //self.homeController.view.backgroundColor = [UIColor grayColor];
-    [loginNavigationController pushViewController:self.homeController animated:TRUE];
 
     //totBookListViewController* book = [[totBookListViewController alloc] init];
     //book.view.frame = CGRectMake(0, 0, frame.size.width, frame.size.height);
@@ -196,6 +197,12 @@
 }
 
 - (void)showTutorial {
+    if( !homeController )
+        homeController = [[totHomeRootController alloc] init];
+    [loginNavigationController pushViewController:self.homeController animated:FALSE];
+    [homeController switchTo:KTutorial withContextInfo:nil];
+    return;
+    
     CGRect frame = self.window.bounds;
     if( !SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0") ) {
         float statusBarHeight = [UIApplication sharedApplication].statusBarFrame.size.height;

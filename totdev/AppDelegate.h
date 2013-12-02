@@ -40,7 +40,7 @@
     totImageCache *mCache;
 
 }
-@property (strong, nonatomic) totLoginNavigationController *loginNavigationController;
+@property (strong, nonatomic) UINavigationController *loginNavigationController;
 @property (retain, nonatomic) totHomeRootController* homeController;
 @property (retain, nonatomic) totUITabBarController* mainTabController;
 @property (retain, nonatomic) totImageCache *mCache;
@@ -50,7 +50,7 @@
 - (BOOL)showFirstView;
 
 - (void)showLoginView;
-- (void)showHomeView;
+- (void)showHomeView:(BOOL)animated;
 - (void)showTutorial;
 - (void)popup;
 

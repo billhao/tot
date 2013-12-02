@@ -17,9 +17,11 @@
     int image_cnt;
     BOOL scrollCanceled;
     CGRect _frame;
+    
 }
 
 @property (nonatomic, retain) totHomeRootController* homeController;
+@property (nonatomic, assign) int nextview; // switch to the next view, default to home
 
 - (id)initWithFrame:(CGRect)frame;
 

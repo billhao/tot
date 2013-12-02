@@ -18,22 +18,12 @@
 @implementation totHomeRootController
 
 @synthesize homeEntryViewController, scrapbookListController, settingController, tutorialController, timelineController;
-//@synthesize homeFeedingViewController;
-//@synthesize homeHeightViewController;
-//@synthesize homeActivityLabelController;
-//@synthesize homeActivityBrowseController;
-//@synthesize homeAlbumBrowseController;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (id)init
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    self = [super init];
     if (self) {
         // Custom initialization
-        NSLog(@"%@", @"home init");
-//        self.tabBarItem.title = @"Home";
-//        [[self tabBarItem] setFinishedSelectedImage:[UIImage imageNamed:@"home_selected"] withFinishedUnselectedImage:[UIImage imageNamed:@"home"]];
-//        [[self tabBarItem] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor grayColor], UITextAttributeTextColor, nil] forState:UIControlStateSelected];
-        //[[self tabBarItem] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor grayColor], UITextAttributeTextColor, nil]  forState:UIControlStateNormal];
     }
     return self;
 }
@@ -48,14 +38,6 @@
 
 #pragma mark - View lifecycle
 
-/*
-// Implement loadView to create a view hierarchy programmatically, without using a nib.
-- (void)loadView
-{
-}
-*/
-
-
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
@@ -64,16 +46,12 @@
     // customize the tab bar item
     NSLog(@"%@", @"home root didload");
 
-    homeEntryViewController = [[totHomeEntryViewController alloc] init];
-//    homeEntryViewController.view.frame = CGRectMake(0, 20, 320, 460);
-    homeEntryViewController.homeRootController = self;
-
-    mCurrentViewIndex = kHomeViewEntryView;
+    mCurrentViewIndex = -1;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-    NSLog(@"root vc view did appear");
-    [self switchTo:kHomeViewEntryView withContextInfo:nil];
+//    NSLog(@"root vc view did appear");
+//    [self switchTo:kHomeViewEntryView withContextInfo:nil];
     //[self switchTo:kTimeline withContextInfo:nil];
     //[self switchTo:kScrapbook withContextInfo:nil];
 }
@@ -81,7 +59,7 @@
 - (UIViewController*)getViewByIndex:(int)viewIndex {
     switch (viewIndex) {
         case kHomeViewEntryView:
-            return homeEntryViewController;
+            return [self getHomeVC];
         case kTimeline:
             return [self getTimelineVC];
         case kScrapbook:
@@ -147,7 +125,8 @@
                 else {
                     [nc pushViewController:nextView animated:FALSE];
                 }
-//                NSLog([totUtility getFrameString:nextView.view.frame]);
+                if( mCurrentViewIndex == KTutorial )
+                    [self releaseTutorial];
                 mCurrentViewIndex = viewIndex;
             }];
             break;
@@ -205,11 +184,15 @@
         }
         case kSetting:
         {
-            nextView.view.frame = CGRectMake(320, statusBarOffset, 320, 480-statusBarOffset);
+            if( mCurrentViewIndex != KTutorial ) {
+                nextView.view.frame = CGRectMake(320, statusBarOffset, 320, 480-statusBarOffset);
+            }
             [UIView animateWithDuration:0.5
                              animations:^{
-                                 nextView.view.frame = CGRectMake(0, statusBarOffset, 320, 480-statusBarOffset);
-                                 [delegate.loginNavigationController.view addSubview:nextView.view];
+                                 if( mCurrentViewIndex != KTutorial ) {
+                                     nextView.view.frame = CGRectMake(0, statusBarOffset, 320, 480-statusBarOffset);
+                                     [delegate.loginNavigationController.view addSubview:nextView.view];
+                                 }
                              } completion:^(BOOL finished){
                                  if([nc.viewControllers containsObject:nextView]) {
                                      [nc popToViewController:nextView animated:FALSE];
@@ -217,14 +200,21 @@
                                  else {
                                      [nc pushViewController:nextView animated:FALSE];
                                  }
+                                 if( mCurrentViewIndex == KTutorial )
+                                     [self releaseTutorial];
                                  mCurrentViewIndex = viewIndex;
                              }];
             break;
         }
         case KTutorial:
         {
+            // tutorial will switch back to this view when done
+            if( mCurrentViewIndex == kSetting )
+                tutorialController.nextview = kSetting;
+            else
+                tutorialController.nextview = kHomeViewEntryView;
             statusBarOffset = 0; // always 0 for ios 6 & 7 because tutorial is full screen
-            nextView.view.alpha = 0;
+            nextView.view.alpha = 0.5;
             nextView.view.frame = CGRectMake(0, statusBarOffset, 320, 480-statusBarOffset);
             [UIView animateWithDuration:.5 delay:0 options:UIViewAnimationOptionTransitionCrossDissolve
                              animations:^{
@@ -247,7 +237,11 @@
 - (void)popup {
     AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
     UINavigationController* nc = delegate.loginNavigationController;
-    [nc popViewControllerAnimated:NO];
+    UIViewController* vc = [nc popViewControllerAnimated:NO];
+    if( vc == tutorialController ) {
+        [tutorialController release];
+        tutorialController = nil;
+    }
 }
 
 - (void)viewDidUnload
@@ -275,6 +269,13 @@
     return FALSE;
 }
 
+- (totHomeEntryViewController*)getHomeVC {
+    if( !homeEntryViewController ) {
+        homeEntryViewController = [[totHomeEntryViewController alloc] init];
+        homeEntryViewController.homeRootController = self;
+    }
+    return homeEntryViewController;
+}
 
 - (totTimelineController*)getTimelineVC {
     if( timelineController == nil ) {
@@ -314,6 +315,11 @@
         tutorialController.homeController = self;
     }
     return tutorialController;
+}
+
+- (void)releaseTutorial {
+    [tutorialController release];
+    tutorialController = nil;
 }
 
 // release all views when log out
