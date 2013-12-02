@@ -44,7 +44,7 @@
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        int statusBarHeight = 0;
+        float statusBarHeight = 0;
         if( SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0") )
             statusBarHeight = [UIApplication sharedApplication].statusBarFrame.size.height;
 

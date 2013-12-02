@@ -48,7 +48,7 @@
     
     [self.view setBackgroundColor:[UIColor colorWithRed:220.0/255 green:220.0/255 blue:220.0/255 alpha:1.0f]];
     
-    int statusBarHeight = 0;
+    float statusBarHeight = 0;
     if( SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0") )
         statusBarHeight = [UIApplication sharedApplication].statusBarFrame.size.height;
 

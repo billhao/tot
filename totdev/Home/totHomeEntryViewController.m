@@ -481,7 +481,11 @@
 #pragma mark - Helper functions
 
 - (void)createSelectedActivitesView {
-    float y = 7;
+    float statusBarHeight = 0;
+    if( SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0") )
+        statusBarHeight = [UIApplication sharedApplication].statusBarFrame.size.height;
+    
+    float y = 7 + statusBarHeight;
     UIImage* bg = [UIImage imageNamed:@"activity_tag"];
     UIImage* line = [UIImage imageNamed:@"activity_line"];
     selectedActivities_bgView = [[UIView alloc] initWithFrame:CGRectMake(0, y, bg.size.width, bg.size.height)];

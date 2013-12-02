@@ -45,7 +45,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    int statusBarHeight = 0;
+    float statusBarHeight = 0;
     if( SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0") )
         statusBarHeight = [UIApplication sharedApplication].statusBarFrame.size.height;
     
@@ -372,7 +372,7 @@
 
 // return the height of the nav bar
 - (int)createNavigationBar {
-    int statusBarHeight = 0;
+    float statusBarHeight = 0;
     if( SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0") )
         statusBarHeight = [UIApplication sharedApplication].statusBarFrame.size.height;
 
