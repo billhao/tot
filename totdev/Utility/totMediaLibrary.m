@@ -23,15 +23,16 @@
     return self;
 }
 
-- (id)initWithJSON:(NSString*)jsonData {
+- (id)initWithEvent:(totEvent*)event {
     self = [super init];
     if (self) {
+        NSString* jsonData = event.value;
         NSMutableDictionary* obj = (NSMutableDictionary*)[totUtility JSONToObject:jsonData];
         self.filename = [obj objectForKey:@"filename"];
         NSString* assetURLStr = [obj objectForKey:@"assetURL"];
         if( assetURLStr )
             assetURL = [[[NSURL alloc] initWithString:assetURLStr] autorelease];
-        self.dateTimeTaken = [totEvent dateFromString:[obj objectForKey:@"datetime_taken"]];
+        self.dateTimeTaken = event.datetime; // [totEvent dateFromString:[obj objectForKey:@"datetime_taken"]];
         self.activities = [obj objectForKey:@"activities"];
         if( !activities )
             activities = [[NSMutableArray alloc] init];
@@ -179,7 +180,7 @@
     if( events.count > 0 ) {
         // TODO release???
         totEvent* event = [events objectAtIndex:0];
-        MediaInfo* mediaInfo = [[[MediaInfo alloc] initWithJSON:event.value] autorelease];
+        MediaInfo* mediaInfo = [[[MediaInfo alloc] initWithEvent:event] autorelease];
         mediaInfo.eventID = event.event_id;
 //        mediaInfo.eventName = [NSString stringWithString:event.name];
         return mediaInfo;
@@ -189,7 +190,7 @@
 
 + (MediaInfo*)getMediaFromEvent:(totEvent*)event {
         // TODO release???
-    MediaInfo* mediaInfo = [[[MediaInfo alloc] initWithJSON:event.value] autorelease];
+    MediaInfo* mediaInfo = [[[MediaInfo alloc] initWithEvent:event] autorelease];
     mediaInfo.eventID = event.event_id;
     return mediaInfo;
 }

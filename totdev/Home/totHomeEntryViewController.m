@@ -340,6 +340,7 @@
     mediaLib.currentMediaInfo = mediaInfo;
     NSLog(@"%@", mediaInfo.filename);
 
+    [self resetActivityBox]; // reset without animation
     [self showPhoto:Animation_None];
     [self toggleActivity];
 }
@@ -524,7 +525,7 @@
         mPhotoViewA.image = [UIImage imageNamed:m.filename];
     }
     
-    [self updateActivityBox];
+    [self updateActivityBox:TRUE];
     [self updateSelectedActivitesView];
 }
 
@@ -787,7 +788,7 @@
     
     [selectedActivities removeObjectAtIndex:selectedIndex];
     
-    [self deselectActivity:index];
+    [self deselectActivity:index animated:TRUE];
 }
 
 - (void)selectActivity:(int)index {
@@ -814,7 +815,7 @@
     }];
 }
 
-- (void)deselectActivity:(int)index {
+- (void)deselectActivity:(int)index animated:(BOOL)animated {
     UIButton* btn = activityButtons[index];
     if( [self compareSize:btn.frame.size size2:unselectedActivityIconSize] ) return; // already unselected
     
@@ -827,20 +828,26 @@
     f.size.width  = unselectedActivityIconSize.width;
     f.size.height = unselectedActivityIconSize.height;
     
-    float t1 = .5; // same as animation for selected activity
-    [UIView animateWithDuration:t1 animations:^{
+    if( animated ) {
+        float t1 = .5; // same as animation for selected activity
+        [UIView animateWithDuration:t1 animations:^{
+            btn.frame = f;
+            btn.layer.shadowOpacity = 0.0;
+        }];
+    }
+    else {
         btn.frame = f;
         btn.layer.shadowOpacity = 0.0;
-    }];
+    }
 }
 
 // deselect everything in the activity box
-- (void)updateActivityBox {
+- (void)updateActivityBox:(BOOL)animated {
     // update the selection box
     // deselect all first
     int cnt = allActivities.count;
     for( int i=0; i<cnt; i++ ) {
-        [self deselectActivity:i];
+        [self deselectActivity:i animated:animated];
     }
 
     // then select selected
@@ -850,6 +857,15 @@
         // get index in all activities
         int index = [self getActivityIndex:selectedActivities[i]];
         [self selectActivity:index];
+    }
+}
+
+// deselect all without animation
+- (void)resetActivityBox {
+    // deselect all first
+    int cnt = allActivities.count;
+    for( int i=0; i<cnt; i++ ) {
+        [self deselectActivity:i animated:FALSE];
     }
 }
 

@@ -19,7 +19,7 @@
 @property(nonatomic, retain) NSURL* assetURL;
 @property(nonatomic, retain) NSMutableArray* activities;
 
-- (id)initWithJSON:(NSString*)jsonData;
+- (id)initWithEvent:(totEvent*)event;
 - (void)save;
 - (BOOL)isDefault; // if the current media is default photo for home page
 

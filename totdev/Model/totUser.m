@@ -191,7 +191,7 @@ static totModel* _model;
     totEvent* e = [_model getItem:global.baby.babyID name:activityName];
     if( e == nil ) return nil;
     
-    MediaInfo* mediaInfo = [[[MediaInfo alloc] initWithJSON:e.value] autorelease];
+    MediaInfo* mediaInfo = [[[MediaInfo alloc] initWithEvent:e] autorelease];
     mediaInfo.eventID = e.event_id;
     return mediaInfo;
 }
