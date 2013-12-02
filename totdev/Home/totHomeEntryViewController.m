@@ -58,12 +58,14 @@
     mPhotoViewA = [[totImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
     mPhotoViewA.contentMode = UIViewContentModeScaleAspectFill;
     mPhotoViewA.backgroundColor = [UIColor clearColor];
+    mPhotoViewA.clipsToBounds = TRUE;
     [self.view addSubview:mPhotoViewA];
     //[totUtility enableBorder:mPhotoViewA];
     
     mPhotoViewB = [[totImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
     mPhotoViewB.contentMode = UIViewContentModeScaleAspectFill;
     mPhotoViewB.backgroundColor = [UIColor clearColor];
+    mPhotoViewB.clipsToBounds = TRUE;
     [self.view addSubview:mPhotoViewB];
 
     /*
