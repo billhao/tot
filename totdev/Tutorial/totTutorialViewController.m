@@ -135,7 +135,7 @@
             [[self getAppDelegate] popup];
             
             // stop tutorial, go to main view
-            [[self getAppDelegate] showFirstView];
+            [[self getAppDelegate] showHomeView];
         }
     }
 }

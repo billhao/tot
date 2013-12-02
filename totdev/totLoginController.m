@@ -64,7 +64,8 @@
     
     if( newuser ) {
         //mLogin.hidden = TRUE;
-        mNewuser.frame = CGRectMake(47, mNewuser.frame.origin.y, mNewuser.frame.size.width, mNewuser.frame.size.height);
+        //mNewuser.frame = CGRectMake(47, mNewuser.frame.origin.y, mNewuser.frame.size.width, mNewuser.frame.size.height);
+        
         //set background
         UIColor* bg = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"bg_registration"]];
         self.view.backgroundColor = bg;
