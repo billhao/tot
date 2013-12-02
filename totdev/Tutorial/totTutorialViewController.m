@@ -39,9 +39,7 @@
     [bgImgView release];
     
     float gap = 10;
-    _frame.origin.x = -gap;
-    _frame.size.width += gap*2;
-    tutorialScrollView = [[UIScrollView alloc] initWithFrame:_frame];
+    tutorialScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(-gap, _frame.origin.y, _frame.size.width + gap*2, _frame.size.height)];
     tutorialScrollView.backgroundColor = [UIColor clearColor];
     tutorialScrollView.pagingEnabled = true;
     tutorialScrollView.showsVerticalScrollIndicator = NO;
@@ -50,7 +48,7 @@
 
     int x = 0;
     int y = 0;
-    int width  = _frame.size.width;
+    int width  = _frame.size.width + gap*2;
     int height = _frame.size.height;
     image_cnt = 0;
     while( image_cnt < 20 ) {
@@ -70,8 +68,7 @@
     tutorialScrollView.contentSize = CGSizeMake(width * (image_cnt), height);
     [self.view addSubview:tutorialScrollView];
     
-    pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
-    pageControl.frame = CGRectMake(0, (height - 30), width, 15);
+    pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(0, _frame.size.height - 30, _frame.size.width, 15)];
     pageControl.pageIndicatorTintColor = [UIColor colorWithRed:158.0/255 green:158.0/255 blue:158.0/255 alpha:0.8];
     pageControl.currentPageIndicatorTintColor = [UIColor colorWithRed:130/255.0 green:185/255.0 blue:221/255.0 alpha:0.8];
     pageControl.numberOfPages = image_cnt;
@@ -81,6 +78,8 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [UIApplication sharedApplication].statusBarHidden = YES;
+    tutorialScrollView.contentOffset = CGPointMake(0, 0);
+    pageControl.currentPage = 0;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -136,6 +135,8 @@
             
             // stop tutorial, go to main view
             [[self getAppDelegate] showHomeView];
+            
+            // TODO release tutorial controller after showing
         }
     }
 }
