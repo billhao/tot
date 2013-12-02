@@ -748,7 +748,7 @@
     UIImage *newImage;
     
     CGColorSpaceRef colorSapce = CGColorSpaceCreateDeviceGray();
-    CGContextRef context = CGBitmapContextCreate(nil, originalImage.size.width * originalImage.scale, originalImage.size.height * originalImage.scale, 8, originalImage.size.width * originalImage.scale, colorSapce, kCGImageAlphaNone);
+    CGContextRef context = CGBitmapContextCreate(nil, originalImage.size.width * originalImage.scale, originalImage.size.height * originalImage.scale, 8, originalImage.size.width * originalImage.scale, colorSapce, (CGBitmapInfo)kCGImageAlphaNone);
     CGContextSetInterpolationQuality(context, kCGInterpolationHigh);
     CGContextSetShouldAntialias(context, NO);
     CGContextDrawImage(context, CGRectMake(0, 0, originalImage.size.width, originalImage.size.height), [originalImage CGImage]);
