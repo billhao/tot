@@ -1,12 +1,12 @@
 {
-  "template_name" : "Colorful Year",
+  "template_name" : "Color Year",
   "orientation": "portrait",
 
   "pages" : [
     {
-      "template_path": "Color Year Cover.png",
+      "template_path": "Colorful Year Cover",
       "meta": "cover",
-      "name": "Color Year Cover",
+      "name": "Colorful Year Cover",
       "elements": [
         {
           "x": 72,
@@ -32,9 +32,9 @@
       ]
     },
     {
-      "template_path": "Color Year P1.png",
+      "template_path": "Colorful Year P1",
       "meta": "page",
-      "name": "Color Year P1",
+      "name": "Colorful Year P1",
       "elements": [
         {
           "x": 16,
@@ -57,9 +57,9 @@
       ]
     },
     {
-      "template_path": "Color Year P2.png",
+      "template_path": "Colorful Year P2",
       "meta": "page",
-      "name": "Color Year P2",
+      "name": "Colorful Year P2",
       "elements": [
         {
           "x": 29,
@@ -85,9 +85,9 @@
       ]
     },
     {
-      "template_path": "Color Year P3.png",
+      "template_path": "Colorful Year P3",
       "meta": "page",
-      "name": "Color Year P3",
+      "name": "Colorful Year P3",
       "elements": [
         {
           "x": 30,
@@ -99,10 +99,10 @@
           "name": "P3",
         },
         {
-          "x": 185,
-          "y": 356,
-          "w": 116,
-          "h": 116,
+          "x": 186,
+          "y": 356.89,
+          "w": 114.99,
+          "h": 119.11,
           "radius": 0,
           "type": "image",
           "name": "P3",
@@ -110,9 +110,9 @@
       ]
     },
     {
-        "template_path": "Color Year P4.png",
+        "template_path": "Colorful Year P4",
       "meta": "page",
-      "name": "Color Year P4",
+      "name": "Colorful Year P4",
       "elements": [
         {
            "x": 0,
@@ -126,9 +126,9 @@
       ]
     },
     {
-        "template_path": "Color Year P5.png",
+        "template_path": "Colorful Year P5",
       "meta": "page",
-      "name": "Color Year P5",
+      "name": "Colorful Year P5",
       "elements": [
         {
           "x": 53,
@@ -154,9 +154,9 @@
       ]
     },
     {
-        "template_path": "Color Year P6.png",
+        "template_path": "Colorful Year P6",
       "meta": "page",
-      "name": "Color Year P6",
+      "name": "Colorful Year P6",
       "elements": [
         {
           "x": 0,
@@ -209,9 +209,9 @@
       ]
     },
     {
-        "template_path": "Color Year P7.png",
+        "template_path": "Colorful Year P7",
       "meta": "page",
-      "name": "Color Year P7",
+      "name": "Colorful Year P7",
       "elements": [
         {
           "x": 20,
