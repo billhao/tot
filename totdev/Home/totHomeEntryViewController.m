@@ -82,6 +82,13 @@
     cameraBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     UIImage* cameraImg = [UIImage imageNamed:@"camera_button"];
     CGRect f = self.view.frame;
+    // special handling here because self.view.frame is 480 in height after showing tutorial
+    // utimately setting buttons' frame should be in viewWillAppear
+    if( !SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0") ) {
+        if( f.size.height == 480 )
+            f.size.height -= 20;
+    }
+    
     int margin_x = 14;
     int margin_y = 4;
     cameraBtn.frame = CGRectMake(f.size.width-cameraImg.size.width-margin_x, f.size.height-cameraImg.size.height-margin_y, cameraImg.size.width, cameraImg.size.height);
