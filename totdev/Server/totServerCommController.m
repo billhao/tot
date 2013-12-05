@@ -78,9 +78,9 @@
 {
     NSString* loginInfo = @"email=";
     loginInfo = [loginInfo stringByAppendingString:email];
-    loginInfo = [loginInfo stringByAppendingString:@"&old_passcode="];
+    loginInfo = [loginInfo stringByAppendingString:@"&oldpasscode="];
     loginInfo = [loginInfo stringByAppendingString:old_passcode];
-    loginInfo = [loginInfo stringByAppendingString:@"&new_passcode="];
+    loginInfo = [loginInfo stringByAppendingString:@"&newpasscode="];
     loginInfo = [loginInfo stringByAppendingString:new_passcode];
     return [self sendStr:loginInfo toURL:m_changePasscode_url returnMessage:message];
 }
