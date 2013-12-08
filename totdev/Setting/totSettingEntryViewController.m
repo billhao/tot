@@ -112,7 +112,7 @@
     // Creates the reset password button.
     y += gap; [self addButton:@"Change password" position:y select:@selector(resetPassword:)];
     // Creates the rating button
-    y += gap; [self addButton:@"Help rate the app" position:y select:@selector(rate:)];
+    y += gap; [self addButton:@"Review on app store" position:y select:@selector(rate:)];
     // Creates the contact button
     y += gap; [self addButton:@"Contact us" position:y select:@selector(contact:)];
 
