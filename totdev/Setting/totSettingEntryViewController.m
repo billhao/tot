@@ -17,17 +17,13 @@
 
 @implementation totSettingEntryViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
+    if (self) {}
     return self;
 }
 
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning {
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
     
@@ -42,12 +38,31 @@
     }
 }
 
-- (void)viewDidLoad
-{
+- (void)addButton:(NSString*)name position:(int)y select:(SEL)action {
+    // Creates the background.
+    UIView* background = [[UIView alloc] initWithFrame:CGRectMake(10, y, 300, 43)];
+    [background.layer setCornerRadius:5];
+    [background.layer setMasksToBounds:YES];
+    [background setBackgroundColor:[UIColor whiteColor]];
+    
+    // Creates the tutorial button.
+    UIButton* button = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button setFrame:CGRectMake(0, 0, 300, 43)];
+    [button setBackgroundColor:[UIColor clearColor]];
+    [button setTitle:name forState:UIControlStateNormal];
+    [button setTitleColor:[UIColor colorWithRed:0.4f green:0.4f blue:0.4f alpha:1.0f] forState:UIControlStateNormal];
+    [button.titleLabel setFont:[UIFont fontWithName:@"Raleway-SemiBold_2" size:18.0f]];
+    [button addTarget:self action:action forControlEvents:UIControlEventTouchUpInside];
+    [background addSubview:button];
+    
+    [self.view addSubview:background];
+    [background release];
+}
+
+- (void)viewDidLoad {
     [super viewDidLoad];
-    
     [self.view setBackgroundColor:[UIColor colorWithRed:220.0/255 green:220.0/255 blue:220.0/255 alpha:1.0f]];
-    
+
     float statusBarHeight = 0;
     if( SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0") )
         statusBarHeight = [UIApplication sharedApplication].statusBarFrame.size.height;
@@ -55,13 +70,18 @@
     // Creats the navigation bar.
     int navbarHeight = 36;
     UIView* navbar = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, navbarHeight+statusBarHeight)];
-    navbar.backgroundColor = [UIColor colorWithRed:116.0/255 green:184.0/255 blue:229.0/255 alpha:1.0];
-    
+    navbar.backgroundColor = [UIColor colorWithRed:116.0/255
+                                             green:184.0/255
+                                              blue:229.0/255
+                                             alpha:1.0];
+
     // Creates home button
     UIImage* homeImg = [UIImage imageNamed:@"setting_back"];
     UIButton* homeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    
-    homeBtn.frame = CGRectMake(9, (navbarHeight-homeImg.size.height-24)/2+statusBarHeight, homeImg.size.width+24, homeImg.size.height+24); // make the button 24px wider and longer
+    homeBtn.frame = CGRectMake(9,
+                               (navbarHeight-homeImg.size.height-24)/2+statusBarHeight,
+                               homeImg.size.width+24,
+                               homeImg.size.height+24);  // make the button 24px wider and longer
     [homeBtn setImage:homeImg forState:UIControlStateNormal];
     [homeBtn setImage:homeImg forState:UIControlStateHighlighted];
     [homeBtn addTarget:self action:@selector(homeButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
@@ -72,93 +92,35 @@
 
     // title for settings
     UILabel* title = [[UILabel alloc] init];
-    title.font = [UIFont fontWithName:@"Helvetica" size:24];
-    title.text = @"Settings";
-    title.backgroundColor = [UIColor clearColor];
-    title.textColor = [UIColor whiteColor];
+    [title setFont:[UIFont fontWithName:@"Helvetica" size:24]];
+    [title setText:@"Settings"];
+    [title setBackgroundColor:[UIColor clearColor]];
+    [title setTextColor:[UIColor whiteColor]];
     [title sizeToFit];
     CGRect frame = self.view.frame;
     CGRect f = title.frame;
     f.origin.x = (frame.size.width-f.size.width)/2;
     f.origin.y = (navbarHeight-f.size.height)/2 + statusBarHeight;
-    title.frame = f;
+    [title setFrame:f];
     [navbar addSubview:title];
-//    [totUtility enableBorder:title];
     [title release];
 
     float gap = 63;
-    float y = gap + statusBarHeight;
-    
-    
-    // Creates the background.
-    UIView* background = [[UIView alloc] initWithFrame:CGRectMake(10, y, 300, 43)];
-    background.layer.cornerRadius = 5;
-    background.layer.masksToBounds = YES;
-    [background setBackgroundColor:[UIColor whiteColor]];
-    
-    //UIView* separator = [[UIView alloc] initWithFrame:CGRectMake(0, 43, 300, 1)];
-    //[separator setBackgroundColor:[UIColor colorWithRed:0.9f green:0.9f blue:0.9f alpha:1.0f]];
-    //[background addSubview:separator];
-    //[separator release];
-    
+
     // Creates the tutorial button.
-    UIButton* tutorialButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [tutorialButton setFrame:CGRectMake(0, 0, 300, 43)];
-    [tutorialButton setBackgroundColor:[UIColor clearColor]];
-    [tutorialButton setTitle:@"Tutorial" forState:UIControlStateNormal];
-    [tutorialButton setTitleColor:[UIColor colorWithRed:0.4f green:0.4f blue:0.4f alpha:1.0f] forState:UIControlStateNormal];
-    [tutorialButton.titleLabel setFont:[UIFont fontWithName:@"Raleway-SemiBold_2" size:18.0f]];
-    [tutorialButton addTarget:self action:@selector(startTutorial:) forControlEvents:UIControlEventTouchUpInside];
-    [background addSubview:tutorialButton];
-    
-    [self.view addSubview:background];
-    [background release];
-    
-    /*
-    y += gap;
-    UIView* background1 = [[UIView alloc] initWithFrame:CGRectMake(10, y, 300, 43)];
-    background1.layer.cornerRadius = 5;
-    background1.layer.masksToBounds = YES;
-    [background1 setBackgroundColor:[UIColor whiteColor]];
-    
-    // Creates the clear button.
-    UIButton* clearButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [clearButton setFrame:CGRectMake(0, 0, 300, 43)];
-    [clearButton setBackgroundColor:[UIColor clearColor]];
-    [clearButton setTitle:@"Clear data" forState:UIControlStateNormal];
-    [clearButton setTitleColor:[UIColor colorWithRed:0.4f green:0.4f blue:0.4f alpha:1.0f] forState:UIControlStateNormal];
-    [clearButton.titleLabel setFont:[UIFont fontWithName:@"Raleway-SemiBold_2" size:18.0f]];
-    [clearButton addTarget:self action:@selector(clearData:) forControlEvents:UIControlEventTouchUpInside];
-    [background1 addSubview:clearButton];
-    
-    [self.view addSubview:background1];
-    [background1 release];
-    */
-    
+    float y = gap + statusBarHeight; [self addButton:@"Tutorial" position:y select:@selector(startTutorial:)];
     // Creates the reset password button.
-    y += gap;
-    UIView* background2 = [[UIView alloc] initWithFrame:CGRectMake(10, y, 300, 43)];
-    background2.layer.cornerRadius = 5;
-    background2.layer.masksToBounds = YES;
-    [background2 setBackgroundColor:[UIColor whiteColor]];
-    
-    UIButton* passwordBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [passwordBtn setFrame:CGRectMake(0, 0, 300, 43)];
-    [passwordBtn setBackgroundColor:[UIColor clearColor]];
-    [passwordBtn setTitle:@"Change password" forState:UIControlStateNormal];
-    [passwordBtn setTitleColor:[UIColor colorWithRed:0.4f green:0.4f blue:0.4f alpha:1.0f] forState:UIControlStateNormal];
-    [passwordBtn.titleLabel setFont:[UIFont fontWithName:@"RaleWay-SemiBold_2" size:18.0f]];
-    [passwordBtn addTarget:self action:@selector(resetPassword:) forControlEvents:UIControlEventTouchUpInside];
-    [background2 addSubview:passwordBtn];
-    
-    [self.view addSubview:background2];
-    [background2 release];
-    
+    y += gap; [self addButton:@"Change password" position:y select:@selector(resetPassword:)];
+    // Creates the rating button
+    y += gap; [self addButton:@"Help rate the app" position:y select:@selector(rate:)];
+    // Creates the contact button
+    y += gap; [self addButton:@"Contact us" position:y select:@selector(contact:)];
+
     // Creates logout button.
+    y += gap;
     UIButton* logoutBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     logoutBtn.layer.cornerRadius = 5;
     logoutBtn.layer.masksToBounds = YES;
-    y += gap;
     [logoutBtn setFrame:CGRectMake(10, y, 300, 43)];
     [logoutBtn setBackgroundColor:[UIColor colorWithRed:245/255.0f green:73/255.0 blue:82/255.0 alpha:1.0f]];
     [logoutBtn setTitle:@"Log out" forState:UIControlStateNormal];
@@ -166,6 +128,66 @@
     [logoutBtn.titleLabel setFont:[UIFont fontWithName:@"Raleway-SemiBold_2" size:18.0f]];
     [logoutBtn addTarget:self action:@selector(logout:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:logoutBtn];
+}
+
+#pragma MFMailComposeViewControllerDelegate
+- (void) mailComposeController:(MFMailComposeViewController *)controller
+           didFinishWithResult:(MFMailComposeResult)result
+                         error:(NSError *)error {
+    switch (result) {
+        case MFMailComposeResultCancelled:
+            NSLog(@"Mail cancelled");
+            break;
+        case MFMailComposeResultSaved:
+            NSLog(@"Mail saved");
+            break;
+        case MFMailComposeResultSent:
+            NSLog(@"Mail sent");
+            UIAlertView* alert = [[[UIAlertView alloc] initWithTitle:@"Message"
+                                                            message:@"Received your message. We'll contact you ASAP if necessary."
+                                                           delegate:self
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil] autorelease];
+            [alert show];
+        case MFMailComposeResultFailed:
+            NSLog(@"Mail sent failure: %@", [error localizedDescription]);
+            break;
+        default:
+            break;
+    }
+    // Close the Mail Interface
+    [self dismissViewControllerAnimated:YES completion:NULL];
+}
+
+- (void)contact: (id)sender {
+    // Email Subject
+    NSString *emailTitle = @"Contact tot team";
+    // Email Content
+    NSString *messageBody = @"";
+    // To address
+    NSArray *toRecipents = [NSArray arrayWithObject:@"totdevteam@gmail.com"];
+    
+    MFMailComposeViewController *mc = [[MFMailComposeViewController alloc] init];
+    mc.mailComposeDelegate = self;
+    [mc setSubject:emailTitle];
+    [mc setMessageBody:messageBody isHTML:NO];
+    [mc setToRecipients:toRecipents];
+    
+    // Present mail view controller on screen
+    [self presentViewController:mc animated:YES completion:NULL];
+    [mc release];
+}
+
+- (void)rate: (id)sender {
+    static NSString *const iOSAppStoreURLFormat =
+        @"itms-apps://itunes.apple.com/app/id632407645";
+    static NSString *const iOS7AppStoreURLFormat =
+        @"itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=632407645";
+    NSString* urlFormat = [[UIDevice currentDevice].systemVersion floatValue] >= 7.0f ? iOS7AppStoreURLFormat: iOSAppStoreURLFormat;
+    NSURL* reviewURL = [NSURL URLWithString:urlFormat];
+    
+    // Go to iTunes store.
+    [[UIApplication sharedApplication] openURL:reviewURL];
 }
 
 - (void)resetPassword: (id)sender {

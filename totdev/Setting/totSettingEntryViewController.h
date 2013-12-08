@@ -7,12 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MessageUI/MessageUI.h>
 #import "totModel.h"
 
 @class totHomeRootController;
 @class totResetPasswordView;
 
-@interface totSettingEntryViewController : UIViewController <UIAlertViewDelegate> {
+@interface totSettingEntryViewController : UIViewController <UIAlertViewDelegate, MFMailComposeViewControllerDelegate> {
     totResetPasswordView* resetPasswordView;
 }
 
