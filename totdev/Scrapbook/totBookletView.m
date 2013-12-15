@@ -92,7 +92,8 @@
             if(!mImage) mImage = [[UIImageView alloc] initWithFrame:self.frame];
             mImage.backgroundColor = [UIColor clearColor];
             UIImage* img = [UIImage imageWithContentsOfFile:image_path];
-            mImage.contentMode = UIViewContentModeScaleAspectFit;
+            //mImage.contentMode = UIViewContentModeScaleAspectFit;
+            [mImage setFrame:self.frame];
             mImage.image = img;
             [self addSubview:mImage];
         } else {
