@@ -70,7 +70,7 @@
     tutorialScrollView.contentSize = CGSizeMake(width * (image_cnt), height);
     [self.view addSubview:tutorialScrollView];
     
-    pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(0, _frame.size.height - 30, _frame.size.width, 15)];
+    pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(0, _frame.origin.y + _frame.size.height - 30, _frame.size.width, 15)];
     pageControl.pageIndicatorTintColor = [UIColor colorWithRed:158.0/255 green:158.0/255 blue:158.0/255 alpha:0.8];
     pageControl.currentPageIndicatorTintColor = [UIColor colorWithRed:130/255.0 green:185/255.0 blue:221/255.0 alpha:0.8];
     pageControl.numberOfPages = image_cnt;

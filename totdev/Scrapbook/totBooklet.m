@@ -10,6 +10,7 @@
 #import "Global.h"
 #import "totEventName.h"
 #import "totModel.h"
+#import "totUtility.h"
 
 ////////////////////////////////////////////////////////////////
 // totPageElement

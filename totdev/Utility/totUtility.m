@@ -95,7 +95,8 @@ void print(NSString* str) {
 }
 
 + (CGRect)getWindowRect {
-    return CGRectMake(WINDOW_X, WINDOW_Y, WINDOW_W, WINDOW_H);
+    return [[UIScreen mainScreen] bounds];
+    // return CGRectMake(WINDOW_X, WINDOW_Y, WINDOW_W, WINDOW_H);
 }
 
 + (void)showAlert:(NSString*)text {

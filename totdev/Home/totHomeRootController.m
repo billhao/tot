@@ -100,6 +100,8 @@
     if( SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0") )
         statusBarOffset = 0;
     
+    CGSize screenSize = [totUtility getScreenSize];
+    
     switch (viewIndex) {
         case kHomeViewEntryView:
         {
@@ -109,16 +111,16 @@
             //[nc.view insertSubview:nextView.view atIndex:0];
             [UIView animateWithDuration:.5 animations:^{
                 if( mCurrentViewIndex == kTimeline ) {
-                    currentView.view.frame = CGRectMake(0, 480, 320, 480-statusBarOffset);
+                    currentView.view.frame = CGRectMake(0, screenSize.height, 320, screenSize.height-statusBarOffset);
                 }
                 else if( mCurrentViewIndex == kScrapbook ) {
-                    currentView.view.frame = CGRectMake(320, 0, 320, 480-statusBarOffset);
+                    currentView.view.frame = CGRectMake(320, 0, 320, screenSize.height-statusBarOffset);
                 }
                 else if( mCurrentViewIndex == kSetting ) {
-                    currentView.view.frame = CGRectMake(320, 0, 320, 480-statusBarOffset);
+                    currentView.view.frame = CGRectMake(320, 0, 320, screenSize.height-statusBarOffset);
                 }
             } completion:^(BOOL finished) {
-                nextView.view.frame = CGRectMake(0, statusBarOffset, 320, 480-statusBarOffset);
+                nextView.view.frame = CGRectMake(0, statusBarOffset, 320, screenSize.height-statusBarOffset);
                 if([nc.viewControllers containsObject:nextView]) {
                     [nc popToViewController:nextView animated:FALSE];
                 }
@@ -134,7 +136,7 @@
         case kTimeline:
         {
             if( mCurrentViewIndex != kSetting ) {
-                nextView.view.frame = CGRectMake(0, 480, 320, 480-statusBarOffset);
+                nextView.view.frame = CGRectMake(0, screenSize.height, 320, screenSize.height-statusBarOffset);
             }
             else {
                 [currentView.view.superview insertSubview:nextView.view belowSubview:currentView.view];
@@ -142,10 +144,10 @@
             [UIView animateWithDuration:0.75
                              animations:^{
                                  if( mCurrentViewIndex == kSetting ) {
-                                     currentView.view.frame = CGRectMake(320, 0, 320, 480-statusBarOffset);
+                                     currentView.view.frame = CGRectMake(320, 0, 320, screenSize.height-statusBarOffset);
                                  }
                                  else {
-                                     nextView.view.frame = CGRectMake(0, statusBarOffset, 320, 480-statusBarOffset);
+                                     nextView.view.frame = CGRectMake(0, statusBarOffset, 320, screenSize.height-statusBarOffset);
                                      [nc.view addSubview:nextView.view];
                                  }
                              } completion:^(BOOL finished) {
@@ -161,7 +163,7 @@
         }
         case kScrapbook:
         {
-            nextView.view.frame = CGRectMake(320, statusBarOffset, 320, 480-statusBarOffset);
+            nextView.view.frame = CGRectMake(320, statusBarOffset, 320, screenSize.height-statusBarOffset);
             [UIView animateWithDuration:0.5
                              animations:^{
 //                                 if( currentX < nextX ) {
@@ -169,7 +171,7 @@
 //                                 } else {
 //                                     currentView.view.frame = CGRectMake(320, 20, 320, 460);
 //                                 }
-                                 nextView.view.frame = CGRectMake(0, statusBarOffset, 320, 480-statusBarOffset);
+                                 nextView.view.frame = CGRectMake(0, statusBarOffset, 320, screenSize.height-statusBarOffset);
                                  [nc.view addSubview:nextView.view];
                              } completion:^(BOOL finished) {
                                  if([nc.viewControllers containsObject:nextView]) {
@@ -185,12 +187,12 @@
         case kSetting:
         {
             if( mCurrentViewIndex != KTutorial ) {
-                nextView.view.frame = CGRectMake(320, statusBarOffset, 320, 480-statusBarOffset);
+                nextView.view.frame = CGRectMake(320, statusBarOffset, 320, screenSize.height-statusBarOffset);
             }
             [UIView animateWithDuration:0.5
                              animations:^{
                                  if( mCurrentViewIndex != KTutorial ) {
-                                     nextView.view.frame = CGRectMake(0, statusBarOffset, 320, 480-statusBarOffset);
+                                     nextView.view.frame = CGRectMake(0, statusBarOffset, 320, screenSize.height-statusBarOffset);
                                      [delegate.loginNavigationController.view addSubview:nextView.view];
                                  }
                              } completion:^(BOOL finished){
@@ -213,9 +215,11 @@
                 tutorialController.nextview = kSetting;
             else
                 tutorialController.nextview = kHomeViewEntryView;
-            statusBarOffset = 0; // always 0 for ios 6 & 7 because tutorial is full screen
+            //statusBarOffset = 0; // always 0 for ios 6 & 7 because tutorial is full screen
             nextView.view.alpha = 0.5;
-            nextView.view.frame = CGRectMake(0, statusBarOffset, 320, 480-statusBarOffset);
+            CGSize screenSize = [totUtility getScreenSize];
+            nextView.view.frame = CGRectMake(0, 0, screenSize.width, screenSize.height);
+            //CGRectMake(0, statusBarOffset + (screenSize.height-480+statusBarOffset)/2, 320, 480-statusBarOffset);
             [UIView animateWithDuration:.5 delay:0 options:UIViewAnimationOptionTransitionCrossDissolve
                              animations:^{
                                  nextView.view.alpha = 1;
@@ -310,8 +314,12 @@
 //        frame.size.height -= statusBarHeight;
 //    }
     if( tutorialController == nil ) {
-        CGRect window = [totUtility getWindowRect];
-        tutorialController = [[totTutorialViewController alloc] initWithFrame:window];
+        int statusBarOffset = 20;
+        if( SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0") )
+            statusBarOffset = 0;
+        CGSize screenSize = [totUtility getScreenSize];
+        CGRect rect = CGRectMake(0, statusBarOffset + (screenSize.height-480+statusBarOffset)/2, 320, 480-statusBarOffset);
+        tutorialController = [[totTutorialViewController alloc] initWithFrame:rect];
         tutorialController.homeController = self;
     }
     return tutorialController;

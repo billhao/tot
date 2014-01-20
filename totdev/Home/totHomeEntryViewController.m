@@ -54,15 +54,17 @@
     
 //    self.view.backgroundColor = [UIColor yellowColor];
     
+    CGSize screenSize = [totUtility getScreenSize];
+    
     // add photo view
-    mPhotoViewA = [[totImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
+    mPhotoViewA = [[totImageView alloc] initWithFrame:CGRectMake(0, 0, screenSize.width, screenSize.height)];
     mPhotoViewA.contentMode = UIViewContentModeScaleAspectFill;
     mPhotoViewA.backgroundColor = [UIColor clearColor];
     mPhotoViewA.clipsToBounds = TRUE;
     [self.view addSubview:mPhotoViewA];
     //[totUtility enableBorder:mPhotoViewA];
     
-    mPhotoViewB = [[totImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
+    mPhotoViewB = [[totImageView alloc] initWithFrame:CGRectMake(0, 0, screenSize.width, screenSize.height)];
     mPhotoViewB.contentMode = UIViewContentModeScaleAspectFill;
     mPhotoViewB.backgroundColor = [UIColor clearColor];
     mPhotoViewB.clipsToBounds = TRUE;
@@ -679,7 +681,9 @@
 
 - (void)animateFadeAndScale:(MediaInfo*)m {
     // prepare animation
-    CGRect f = CGRectMake(0, 0, 320, 480);
+    CGSize screenSize = [totUtility getScreenSize];
+    
+    CGRect f = CGRectMake(0, 0, screenSize.width, screenSize.height);
     float c = .1;
     f.origin.x = -f.size.width*c;
     f.origin.y = -f.size.height*c;
@@ -714,11 +718,12 @@
 
 - (void)animateLeftRight:(MediaInfo*)m direction:(ANIMATIONTYPE)direction {
     // prepare animation
+    CGSize screenSize = [totUtility getScreenSize];
     CGRect f;
     if( direction == Animation_Left_To_Right )
-        f = CGRectMake(-330, 0, 320, 480);
+        f = CGRectMake(-330, 0, 320, screenSize.height);
     else
-        f = CGRectMake(330, 0, 320, 480);
+        f = CGRectMake(330, 0, 320, screenSize.height);
     mPhotoViewB.frame = f;
     mPhotoViewB.alpha = 1;
     mPhotoViewB.hidden = FALSE;
@@ -726,12 +731,12 @@
     
     // show next one
     [UIView animateWithDuration:0.5 animations:^{
-        CGRect f = CGRectMake(0, 0, 320, 480);
+        CGRect f = CGRectMake(0, 0, 320, screenSize.height);
         mPhotoViewB.frame = f;
         if( direction == Animation_Left_To_Right )
-            mPhotoViewA.frame = CGRectMake(330, 0, 320, 480);
+            mPhotoViewA.frame = CGRectMake(330, 0, 320, screenSize.height);
         else
-            mPhotoViewA.frame = CGRectMake(-330, 0, 320, 480);
+            mPhotoViewA.frame = CGRectMake(-330, 0, 320, screenSize.height);
     } completion:^(BOOL finished) {
         // hide the other one
         mPhotoViewA.hidden = TRUE;

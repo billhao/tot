@@ -69,9 +69,14 @@
     return self;
 }
 
-- (id)initWithElement:(totPageElement *)data {
+- (id)initWithElement:(totPageElement *)data orientation:(BOOL)isLandscape {
+    CGSize screenSize = [totUtility getScreenSize];
+    float ratio = screenSize.height / 480.0f;
     // the top-left point has to be (0,0)
-    self = [super initWithFrame:CGRectMake(0, 0, data.w, data.h)];
+    if (isLandscape)
+        self = [super initWithFrame:CGRectMake(0, 0, data.w * ratio, data.h)];
+    else
+        self = [super initWithFrame:CGRectMake(0, 0, data.w, data.h * ratio)];
     if (self) {
         self.mData = data;
         mImage = nil;
@@ -231,7 +236,15 @@
 }
 
 - (id)initWithElementData:(totPageElement*)data bookvc:(totBookViewController*)bookViewController {
-    self = [super initWithFrame:CGRectMake(data.x, data.y, data.w, data.h)];
+    CGSize screenSize = [totUtility getScreenSize];
+    float ratio = screenSize.height / 480.0f;
+    isLandscape = bookViewController.mBook.orientationLandscape;
+    if ( isLandscape )
+        self = [super initWithFrame:CGRectMake(data.x * ratio, data.y, data.w * ratio, data.h)];
+    else
+        self = [super initWithFrame:CGRectMake(data.x, data.y * ratio, data.w, data.h * ratio)];
+    
+    //self = [super initWithFrame:CGRectMake(data.x, data.y, data.w, data.h)];
     if (self) {
         // Register tap gesture recognizers.
         UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
@@ -267,7 +280,8 @@
         self.autoresizesSubviews = TRUE;
         self.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
 
-        mView = [[totPageElementViewInternal alloc] initWithElement:data];
+        mView = [[totPageElementViewInternal alloc] initWithElement:data orientation:bookViewController.mBook.orientationLandscape];
+        
         [mView display];
         [mView rotateTo:data.radians];  // rotate to the specified angle.
         [self addSubview:mView];
@@ -280,7 +294,7 @@
         [mView removeFromSuperview];
         [mView release]; mView = nil;
     }
-    mView = [[totPageElementViewInternal alloc] initWithElement:data];
+    mView = [[totPageElementViewInternal alloc] initWithElement:data orientation:self.bookvc.mBook.orientationLandscape];
     [mView display];
     [mView rotate:data.radians];
     [self addSubview:mView];
@@ -323,9 +337,17 @@ static BOOL bAnimationStarted = NO;
     [UIView setAnimationWillStartSelector:@selector(animationDidStart:context:)];
     [UIView setAnimationDidStopSelector:@selector(animationDidStop:finished:context:)];
     if (bIsFullPage) {
-        [self setFrame:CGRectMake(mView.mData.x, mView.mData.y, mView.mData.w, mView.mData.h)];
+        CGSize screenSize = [totUtility getScreenSize];
+        float ratio = screenSize.height / 480;
+        if ( isLandscape ) {
+            [self setFrame:CGRectMake(mView.mData.x * ratio, mView.mData.y, mView.mData.w * ratio, mView.mData.h)];
+            [mView resizeTo:CGRectMake(0, 0, mView.mData.w * ratio, mView.mData.h)];
+        } else {
+            [self setFrame:CGRectMake(mView.mData.x, mView.mData.y * ratio, mView.mData.w, mView.mData.h * ratio)];
+            [mView resizeTo:CGRectMake(0, 0, mView.mData.w, mView.mData.h * ratio)];
+        }
+        //[self setFrame:CGRectMake(mView.mData.x, mView.mData.y, mView.mData.w, mView.mData.h)];
         mView.backgroundColor = [UIColor clearColor];
-        [mView resizeTo:CGRectMake(0, 0, mView.mData.w, mView.mData.h)];
         [mView rotateTo:mView.mData.radians];
         [bookvc hideOptionMenuAndButton:FALSE];
     } else {
@@ -568,6 +590,7 @@ static BOOL bAnimationStarted = NO;
     
     // Setup the background image
     mBackground = [[UIImageView alloc] initWithFrame:self.bounds];
+    mBackground.contentMode = UIViewContentModeScaleToFill;
     mBackground.image = [UIImage imageNamed:self.mPage.templateFilename];
     [self addSubview:mBackground];
     
@@ -589,12 +612,19 @@ static BOOL bAnimationStarted = NO;
     }
     
     // Pop up the text input view.
-    mTextInput = [[UITextField alloc] initWithFrame:CGRectMake(30, 40, 420, 86)];
+    CGSize screenSize = [totUtility getScreenSize];
+    if (self.bookvc.mBook.orientationLandscape)
+        mTextInput = [[UITextField alloc] initWithFrame:CGRectMake(30, 40, screenSize.height - 60, 86)];
+    else
+        mTextInput = [[UITextField alloc] initWithFrame:CGRectMake(10, 60, screenSize.width - 20, 86)];
     mTextInput.borderStyle = UITextBorderStyleRoundedRect;
     mTextInput.backgroundColor = [UIColor whiteColor];
     mTextInput.delegate = self;
     
-    mPopupTextInputView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 480, 240)];
+    if (self.bookvc.mBook.orientationLandscape)
+        mPopupTextInputView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenSize.height, 240)];
+    else
+        mPopupTextInputView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenSize.width, 400)];
     mPopupTextInputView.backgroundColor = [UIColor colorWithRed:0.4f green:0.4f blue:0.4f alpha:0.7f];
     mPopupTextInputView.hidden = YES;
     [mPopupTextInputView addSubview:mTextInput];

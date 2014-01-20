@@ -47,7 +47,7 @@
 @property (nonatomic, assign) UITextView* mTextView;
 @property (nonatomic, assign) UIImageView* mImage;
 
-- (id)initWithElement:(totPageElement*)data;
+- (id)initWithElement:(totPageElement*)data orientation:(BOOL)isLandscape;
 - (void)display;
 - (void)removeImage;
 - (void)resizeTo:(CGRect)size;
@@ -65,6 +65,8 @@
     CGPoint mTouchLastTime;
     
     int myIndexInSuperview; // this is used to remember the index of this view in its superview. when animate this view to full screen, we need this index when bring it back to original
+    
+    BOOL isLandscape;
 }
 
 @property(nonatomic, retain) totBookViewController* bookvc;

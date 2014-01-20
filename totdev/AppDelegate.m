@@ -42,26 +42,28 @@
     [totMediaLibrary checkMediaDirectory];
     
      // handle iphone 5 screen size
-    CGRect windowFrame = [[UIScreen mainScreen] bounds];
-    if( windowFrame.size.height > 480 ) {
-        // iphone 5, put the frame in the middle of the screen
-        int currentAppHeight = 480; // currently the app window is 480px in height
-        windowFrame.origin.y += (windowFrame.size.height-currentAppHeight)/2;
-        windowFrame.size.height = currentAppHeight;
-    }
-
-    if( SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0") ) {
-        windowFrame = CGRectMake(0, 0, 320, 480);
-    }
-    else {
-        // for anything below ios7
-        windowFrame = CGRectMake(0, 0, 320, 480);
-        // use transparent status bar
-//        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackTranslucent];
-//        loginNavigationController.wantsFullScreenLayout = TRUE;
-    }
+//    CGRect windowFrame = [[UIScreen mainScreen] bounds];
+//    if( windowFrame.size.height > 480 ) {
+//        // iphone 5, put the frame in the middle of the screen
+//        int currentAppHeight = 480; // currently the app window is 480px in height
+//        windowFrame.origin.y += (windowFrame.size.height-currentAppHeight)/2;
+//        windowFrame.size.height = currentAppHeight;
+//    }
+//
+//    if( SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0") ) {
+//        windowFrame = CGRectMake(0, 0, 320, 480);
+//    }
+//    else {
+//        // for anything below ios7
+//        windowFrame = CGRectMake(0, 0, 320, 480);
+//        // use transparent status bar
+////        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackTranslucent];
+////        loginNavigationController.wantsFullScreenLayout = TRUE;
+//    }
+//
     
-    self.window = [[[UIWindow alloc] initWithFrame:windowFrame] autorelease];
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    self.window = [[[UIWindow alloc] initWithFrame:screenRect] autorelease];
 
     // Override point for customization after application launch.
     
@@ -154,12 +156,6 @@
 
     // show login
     totLoginController* loginController = [[totLoginController alloc] initWithNibName:@"totLoginController" bundle:nil];
-    CGRect frame = self.window.bounds;
-    if( !SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0") ) {
-        float statusBarHeight = [UIApplication sharedApplication].statusBarFrame.size.height;
-        frame.size.height -= statusBarHeight;
-    }
-    loginController.view.frame = frame;
     if( global.baby==nil || global.baby.babyID == -1 )
         loginController.newuser = FALSE;
     else {
@@ -177,9 +173,12 @@
 
 //    CGRect frame = self.window.bounds;
     
-    if( !homeController )
+    //if( !homeController )
+    {
+        [homeController release];
         homeController = [[totHomeRootController alloc] init];
-    [loginNavigationController pushViewController:self.homeController animated:animated];
+        [loginNavigationController pushViewController:self.homeController animated:animated];
+    }
     [homeController switchTo:kHomeViewEntryView withContextInfo:nil];
     //self.homeController.view.backgroundColor = [UIColor grayColor];
 

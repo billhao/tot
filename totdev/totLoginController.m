@@ -62,23 +62,31 @@
     
     NSLog(@"[Login]new user mode=%d", newuser);
     
+    UIImage* bgImg;
     if( newuser ) {
         //mLogin.hidden = TRUE;
         //mNewuser.frame = CGRectMake(47, mNewuser.frame.origin.y, mNewuser.frame.size.width, mNewuser.frame.size.height);
         
         //set background
-        UIColor* bg = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"bg_registration"]];
-        self.view.backgroundColor = bg;
-        [bg release];
+        bgImg = [UIImage imageNamed:@"bg_registration"];
+//        UIColor* bg = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"bg_registration"]];
+//        self.view.backgroundColor = bg;
+//        [bg release];
     }
     else {
         mNewuser.hidden = FALSE;
         
         //set background
-        UIColor* bg = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"bg_login"]];
-        self.view.backgroundColor = bg;
-        [bg release];
+        bgImg = [UIImage imageNamed:@"bg_login"];
+//        UIColor* bg = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"bg_login"]];
+//        self.view.backgroundColor = bg;
+//        [bg release];
     }
+    self.view.backgroundColor = [UIColor blackColor];
+    UIImageView* bgImgView = [[UIImageView alloc] initWithImage:bgImg];
+    [self.view addSubview:bgImgView];
+    [self.view sendSubviewToBack:bgImgView];
+    [bgImgView release];
 
     // set email and clear password
     NSString* lastlogin = [model getPreferenceNoBaby:PREFERENCE_LAST_LOGGED_IN];

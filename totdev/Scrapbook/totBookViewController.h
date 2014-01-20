@@ -32,7 +32,8 @@
 }
 
 @property (nonatomic,assign) CGRect fullPageFrame; // this could be (0,0,320,480) for portrait or (0,0,480,320) for landscape. adjust when needed.
-@property (nonatomic, assign) BOOL disablePageSwipe; // if true disable swipe pages 
+@property (nonatomic, assign) BOOL disablePageSwipe; // if true disable swipe pages
+@property (nonatomic, assign) totBook* mBook;
 
 - (id)init:(totBookListViewController*)vc;
 

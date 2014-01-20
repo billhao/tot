@@ -20,7 +20,7 @@
 
 @implementation totBookViewController
 
-@synthesize fullPageFrame, disablePageSwipe;
+@synthesize fullPageFrame, disablePageSwipe, mBook;
 
 //- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 - (id)init:(totBookListViewController*)vc
@@ -39,7 +39,9 @@
         
         bookListVC = vc;
         
-        fullPageFrame = CGRectMake(0, 0, 480, 320);
+        CGSize screenSize = [totUtility getScreenSize];
+        
+        fullPageFrame = CGRectMake(0, 0, screenSize.height, 320);
         disablePageSwipe = FALSE;
     }
     return self;
