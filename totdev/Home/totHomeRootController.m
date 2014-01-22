@@ -314,11 +314,8 @@
 //        frame.size.height -= statusBarHeight;
 //    }
     if( tutorialController == nil ) {
-        int statusBarOffset = 20;
-        if( SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0") )
-            statusBarOffset = 0;
         CGSize screenSize = [totUtility getScreenSize];
-        CGRect rect = CGRectMake(0, statusBarOffset + (screenSize.height-480+statusBarOffset)/2, 320, 480-statusBarOffset);
+        CGRect rect = CGRectMake(0, (screenSize.height-480)/2, 320, 480);
         tutorialController = [[totTutorialViewController alloc] initWithFrame:rect];
         tutorialController.homeController = self;
     }
