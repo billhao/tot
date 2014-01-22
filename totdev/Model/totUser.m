@@ -31,20 +31,22 @@ static totModel* _model;
     return self;
 }
 
++(BOOL) addAccount:(NSString*)email password:(NSString*)pwd {
+    NSString* pwdhash = [self getPasswordHash:pwd salt:nil];
+    NSString* account_pref = [NSString stringWithFormat:PREFERENCE_ACCOUNT, email];
+    return [_model addPreferenceNoBaby:account_pref value:pwdhash];
+}
+
 // add a new user
 +(totUser*) newUser:(NSString*)email password:(NSString*)pwd message:(NSString**)message {
     // clean the email
     email = [email stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     
-    NSString* account_pref = [NSString stringWithFormat:PREFERENCE_ACCOUNT, email];
-    
-    NSString* pwdhash = [self getPasswordHash:pwd salt:nil];
-    
     // register with server
     totServerCommController* server = [[totServerCommController alloc] init];
     int retCode = [server sendRegInfo:@"" withEmail:email withPasscode:pwd returnMessage:message];
     if( retCode == SERVER_RESPONSE_CODE_SUCCESS ) {
-        BOOL re = [_model addPreferenceNoBaby:account_pref value:pwdhash];
+        BOOL re = [self addAccount:email password:pwd];
         if( re )
             return [[totUser alloc] initWithID:email];
         else {

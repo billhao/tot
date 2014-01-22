@@ -141,6 +141,8 @@
         
         // if yes and pwd matches, go to home view
         [self backgroundTap:nil]; // dismiss keyboard
+        // add account if this account does not exist on this device
+        [totUser addAccount:email password:pwd];
         [self setLoggedIn:email];
         [self showHomeView];
     }

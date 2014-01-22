@@ -41,7 +41,12 @@
     NSLog(@"%@", @"new baby view did load");
     
     //set background
-    self.view.backgroundColor = [[[UIColor alloc] initWithPatternImage:[UIImage imageNamed:@"bg_newbaby.png"]] autorelease];
+    self.view.backgroundColor = [UIColor blackColor];
+    UIImage* bgImg = [UIImage imageNamed:@"bg_newbaby.png"];
+    UIImageView* bgImgView = [[UIImageView alloc] initWithImage:bgImg];
+    [self.view addSubview:bgImgView];
+    [self.view sendSubviewToBack:bgImgView];
+    [bgImgView release];
     
     // set up events
     [mExistingAccount addTarget:self action:@selector(ExistingAccountButtonClicked:) forControlEvents:UIControlEventTouchUpInside];

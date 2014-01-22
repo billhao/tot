@@ -84,10 +84,10 @@
     cameraBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     UIImage* cameraImg = [UIImage imageNamed:@"camera_button"];
     CGRect f = self.view.frame;
-    // special handling here because self.view.frame is 480 in height after showing tutorial
+    // special handling here because self.view.frame is 480 or 568 in height after showing tutorial
     // utimately setting buttons' frame should be in viewWillAppear
     if( !SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0") ) {
-        if( f.size.height == 480 )
+        if( f.size.height == 480 || f.size.height == 568 )
             f.size.height -= 20;
     }
     
@@ -569,6 +569,13 @@
     
     // create the activity view (top view)
     CGRect f = self.view.frame;
+    // special handling here because self.view.frame is 480 or 568 in height after showing tutorial
+    // utimately setting buttons' frame should be in viewWillAppear
+    if( !SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0") ) {
+        if( f.size.height == 480 || f.size.height == 568 )
+            f.size.height -= 20;
+    }
+
     activityView = [[UIView alloc] initWithFrame:CGRectMake((f.size.width-scrollview_width)/2, f.size.height-margin_y_bottom_outside-scrollview_height, scrollview_width, scrollview_height)];
     activityView.clipsToBounds = TRUE;
     UIImageView* bg = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"activity_bg"]];
