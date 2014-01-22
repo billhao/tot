@@ -334,7 +334,7 @@
         [mCards insertObject:card atIndex:index];
     }
     else {
-        NSLog(@"[Timeline] Cannot load card %d %@", e.event_id, e.name);
+        //NSLog(@"[Timeline] Cannot load card %d %@", e.event_id, e.name);
     }
     [story release];
     return card;

@@ -213,10 +213,11 @@
     // show login screen
     global.baby = nil;
     global.user = nil;
-    [[totUtility getAppDelegate] showFirstView];
-    
+
     // unload all the views: home, timeline, scrapbook
     [[totUtility getAppDelegate].homeController releaseAllViews];
+
+    [[totUtility getAppDelegate] showFirstView];
 }
 
 - (void)clearData: (id)sender {

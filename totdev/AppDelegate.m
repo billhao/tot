@@ -75,13 +75,8 @@
     mCache = [[totImageCache alloc] init];
     
     // init navigation controller for login, registration and new baby
-    loginNavigationController = [[totLoginNavigationController alloc] init];
-    loginNavigationController.navigationBarHidden = TRUE;
-    loginNavigationController.view.frame = self.window.bounds;
-//    loginNavigationController.view.autoresizesSubviews = false;  // for iphone 5 screen size
-    
-    self.window.rootViewController = loginNavigationController;
-    //self.window.backgroundColor = [UIColor darkGrayColor];
+    [self createNavigationController];
+
     self.window.clipsToBounds = false;
 
     [self showFirstView];
@@ -93,9 +88,6 @@
 
 // determine the first view (new baby, login or homepage) and show it
 - (BOOL)showFirstView {
-    
-    //[loginNavigationController setViewControllers:nil];
-    
     // get # accounts in db
     int account = [totUser getTotalAccountCount];
 
@@ -167,10 +159,8 @@
 
 - (void)showHomeView:(BOOL)animated {
     // remove all previous views
-    //[loginNavigationController setViewControllers:nil];
-    // show home view
-    //loginNavigationController.view.backgroundColor = [UIColor blueColor];
-
+    [self createNavigationController];
+    
 //    CGRect frame = self.window.bounds;
     
     //if( !homeController )
@@ -199,7 +189,8 @@
 - (void)showTutorial {
     if( !homeController )
         homeController = [[totHomeRootController alloc] init];
-    [loginNavigationController pushViewController:self.homeController animated:FALSE];
+    if(![loginNavigationController.viewControllers containsObject:homeController])
+        [loginNavigationController pushViewController:self.homeController animated:FALSE];
     [homeController switchTo:KTutorial withContextInfo:nil];
     return;
     
@@ -257,5 +248,18 @@
     if( loginNavigationController != nil ) [loginNavigationController release];
     [mCache release];
 }
+
+#pragma mark - Helper functions
+
+- (void)createNavigationController {
+    if( loginNavigationController )
+        [loginNavigationController release];
+    self.loginNavigationController = [[totLoginNavigationController alloc] init];
+    loginNavigationController.navigationBarHidden = TRUE;
+    loginNavigationController.view.frame = self.window.bounds;
+    self.window.rootViewController = loginNavigationController;
+    NSLog(@"create navigation controller");
+}
+
 
 @end

@@ -24,6 +24,7 @@
     self = [super init];
     if (self) {
         // Custom initialization
+        mCurrentViewIndex = -1;
     }
     return self;
 }
@@ -39,22 +40,17 @@
 #pragma mark - View lifecycle
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
+//- (void)viewDidLoad
+//{
+//    [super viewDidLoad];
+//}
 
-    // customize the tab bar item
-    NSLog(@"%@", @"home root didload");
-
-    mCurrentViewIndex = -1;
-}
-
-- (void)viewDidAppear:(BOOL)animated {
+//- (void)viewDidAppear:(BOOL)animated {
 //    NSLog(@"root vc view did appear");
 //    [self switchTo:kHomeViewEntryView withContextInfo:nil];
     //[self switchTo:kTimeline withContextInfo:nil];
     //[self switchTo:kScrapbook withContextInfo:nil];
-}
+//}
 
 - (UIViewController*)getViewByIndex:(int)viewIndex {
     switch (viewIndex) {
@@ -69,7 +65,7 @@
         case KTutorial:
             return [self getTutorialVC];
         default:
-            printf("Invalid view index\n");
+            printf("Invalid view index: %d\n", viewIndex);
             return nil;
     }
 }
