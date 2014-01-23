@@ -143,8 +143,8 @@
             break;
         case MFMailComposeResultSent:
             NSLog(@"Mail sent");
-            UIAlertView* alert = [[[UIAlertView alloc] initWithTitle:@"Message"
-                                                            message:@"Received your message. We'll contact you ASAP if necessary."
+            UIAlertView* alert = [[[UIAlertView alloc] initWithTitle:nil
+                                                            message:@"Your message is sent. We will get back to you soon."
                                                            delegate:self
                                                   cancelButtonTitle:@"OK"
                                                   otherButtonTitles:nil] autorelease];
@@ -161,7 +161,7 @@
 
 - (void)contact: (id)sender {
     // Email Subject
-    NSString *emailTitle = @"Contact tot team";
+    NSString *emailTitle = @"Customer Support";
     // Email Content
     NSString *messageBody = @"";
     // To address
