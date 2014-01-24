@@ -25,9 +25,9 @@
           "radius": 0,
           "type": "text",
           "name": "cover",
-          "font-name": "HanziPen TC Regular",
+          "font-name": "Snell Roundhand",
           "font-color": "74,79,79",
-          "font-size": 12
+          "font-size": 20
         }
       ]
     },
@@ -78,9 +78,9 @@
           "radius": 0,
           "type": "text",
           "name": "P2",
-          "font-name": "HanziPen TC Regular",
+          "font-name": "Snell Roundhand",
           "font-color": "252,252,252",
-          "font-size": 10,
+          "font-size": 18,
         }
       ]
     },
@@ -147,9 +147,9 @@
           "radius": 0,
           "type": "text",
           "name": "P5",
-          "font-name": "HanziPen TC Regular",
+          "font-name": "Snell Roundhand",
           "font-color": "60,59,4",
-          "font-size": 6
+          "font-size": 16
         }
       ]
     },
@@ -202,9 +202,9 @@
           "radius": 10.6,
           "type": "text",
           "name": "P6",
-          "font-name": "HanziPen TC Regular",
+          "font-name": "Snell Roundhand",
           "font-color": "238,37,37",
-          "font-size": 8,
+          "font-size": 18,
         }
       ]
     },
@@ -239,9 +239,9 @@
           "radius": 0,
           "type": "text",
           "name": "P7",
-          "font-name": "HanziPen TC Regular",
+          "font-name": "Snell Roundhand",
           "font-color": "4,14,66",
-          "font-size": 8
+          "font-size": 18
         }
       ]
     }

@@ -80,7 +80,7 @@
           "radius": 0,
           "type": "text",
           "name": "P1",
-          "font-name": "Marker Felt Wide",
+          "font-name": "MarkerFelt-Wide",
           "font-color": "74,67,11",
          "font-size": 20,
         }
@@ -135,7 +135,7 @@
           "radius": 0,
           "type": "text",
           "name": "P2",
-          "font-name": "Marker Felt Wide",
+          "font-name": "MarkerFelt-Wide",
           "font-color": "127,138,119",
           "font-size": 20,
         },
@@ -147,7 +147,7 @@
           "radius": 0,
           "type": "text",
           "name": "P2",
-          "font-name": "Marker Felt Wide",
+          "font-name": "MarkerFelt-Wide",
           "font-color": "127,138,119",
           "font-size": 20,
         }
@@ -245,7 +245,7 @@
           "radius": 0,
           "type": "text",
           "name": "P4",
-          "font-name": "Marker Felt Wide",
+          "font-name": "MarkerFelt-Wide",
           "font-color": "70,54,166",
           "font-size": 20,
         }
@@ -359,7 +359,7 @@
           "radius": 0,
           "type": "text",
           "name": "P7",
-          "font-name": "Marker Felt Wide",
+          "font-name": "MarkerFelt-Wide",
           "font-color": "132,130,131",
           "font-size": 20
         }

@@ -43,9 +43,9 @@
           "radius": 0,
           "type": "text",
           "name": "cover",
-          "font-name": "Savoye LET",
+          "font-name": "Baskerville-Italic",
           "font-color": "47,74,19",
-          "font-size": 14
+          "font-size": 18
         }
       ]
     },
@@ -98,9 +98,9 @@
           "radius": 0,
           "type": "text",
           "name": "P1",
-          "font-name": "Savoye LET",
+          "font-name": "Baskerville-Italic",
           "font-color": "47,74,19",
-          "font-size": 14,
+          "font-size": 24,
         }
       ]
     },
@@ -119,7 +119,7 @@
           "name": "P2",
           "font-name": "Gurmukhi MN",
           "font-color": "47,74,19",
-          "font-size": 6,
+          "font-size": 20,
         },
         {
           "x": 295,
@@ -158,7 +158,7 @@
           "name": "P2",
           "font-name": "Gurmukhi MN",
           "font-color": "47,74,19",
-          "font-size": 6,
+          "font-size": 16,
         }
       ]
     },
@@ -247,7 +247,7 @@
           "name": "P4",
           "font-name": "Gurmukhi MN",
           "font-color": "47,74,19",
-          "font-size": 6,
+          "font-size": 20,
         }
       ]
     },
@@ -301,7 +301,7 @@
         },
         {
           "x": 72,
-          "y": 260,
+          "y": 240,
           "w": 343,
           "h": 31,
           "radius": -4.5,
@@ -309,7 +309,7 @@
           "name": "P6",
           "font-name": "Gurmukhi MN",
           "font-color": "47,74,19",
-          "font-size": 8,
+          "font-size": 16,
         }
       ]
     },
@@ -346,7 +346,7 @@
           "name": "P7",
         },
         {
-          "x": 75,
+          "x": 70,
           "y": 265,
           "w": 328,
           "h": 28,
@@ -355,7 +355,7 @@
           "name": "P7",
           "font-name": "Gurmukhi MN",
           "font-color": "47,74,19",
-          "font-size": 7,
+          "font-size": 18,
         }
       ]
     }

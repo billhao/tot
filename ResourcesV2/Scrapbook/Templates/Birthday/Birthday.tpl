@@ -25,7 +25,7 @@
           "radius": 0,
           "type": "text",
           "name": "cover",
-          "font-name": "Chalkboard",
+          "font-name": "Chalkboard SE",
           "font-color": "187,167,121",
           "font-size": 20,
           "alignment": "center"
@@ -56,56 +56,14 @@
           "name": "P2",
         },
         {
-          "x": 298,
-          "y": 142.625,
-          "w": 79.5,
-          "h": 21.375,
+          "x": 295,
+          "y": 139,
+          "w": 90,
+          "h": 117,
           "radius": 0,
           "type": "text",
           "name": "P2",
-          "font-name": "Raleway",
-          "font-color": "102,69,67",
-          "font-size": 20,
-          "alignment": "center"
-
-        },
-        {
-          "x": 298,
-          "y": 175,
-          "w": 79.21,
-          "h": 21.375,
-          "radius": 0,
-          "type": "text",
-          "name": "P2",
-          "font-name": "Chalkboard",
-          "font-color": "102,69,67",
-          "font-size": 16,
-          "alignment": "left"
-
-        },
-        {          
-          "x": 298,
-          "y": 197.5,
-          "w": 79.21,
-          "h": 21.375,
-          "radius": 0,
-          "type": "text",
-          "name": "P2", 
-          "font-name": "Chalkboard",
-          "font-color": "102,69,67",
-          "font-size": 16,
-          "alignment": "left"
-
-        },
-        {
-          "x": 298,
-          "y": 221.5,
-          "w": 79.21,
-          "h": 21.375,
-          "radius": 0,
-          "type": "text",
-          "name": "P2",
-          "font-name": "Chalkboard",
+          "font-name": "Chalkboard SE",
           "font-color": "102,69,67",
           "font-size": 16,
           "alignment": "left"
@@ -162,7 +120,7 @@
           "radius": 0,
           "type": "text",
           "name": "p4",
-          "font-name": "Chalkboard",
+          "font-name": "Chalkboard SE",
           "font-color": "103,36,36",
           "font-size": 20,
           "alignment": "left"

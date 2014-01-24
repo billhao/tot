@@ -140,7 +140,11 @@
                 b = [t intValue];
             }
             if (self.mData.fontSize > 0) {
-                UIFont* font = [UIFont fontWithName:self.mData.fontName size:self.mData.fontSize];
+                NSString* fontname = self.mData.fontName;
+                UIFont* font = [UIFont fontWithName:fontname size:self.mData.fontSize];
+                if( font == nil ) {
+                    NSLog(@"[Scrapbook]Warning: font %@ not found", fontname);
+                }
                 [mTextView setTextColor:[UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:1.0f]];
                 [mTextView setFont:font];
             }
@@ -287,6 +291,8 @@
         [mView display];
         [mView rotateTo:data.radians];  // rotate to the specified angle.
         [self addSubview:mView];
+        
+        //[totUtility enableBorder:self];
     }
     return self;
 }
@@ -373,7 +379,7 @@ static BOOL bAnimationStarted = NO;
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer { return YES; }
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
-    NSLog(@"%@", touch.view.class);
+    //NSLog(@"%@", touch.view.class);
     return YES;
 }
 
@@ -389,14 +395,14 @@ static BOOL bAnimationStarted = NO;
             printf("add new element\n");
             // display image selector here
             if( self.mView.mData.type == TEXT ) {
-                NSLog(@"Page element tap: show text editor");
+                //NSLog(@"Page element tap: show text editor");
             }
             else if( self.mView.mData.type == IMAGE ) {
-                NSLog(@"Page element tap: show image selector");
+                //NSLog(@"Page element tap: show image selector");
                 [self selectPhoto];
             }
             else if( self.mView.mData.type == VIDEO ) {
-                NSLog(@"Page element tap: show video selector");
+                //NSLog(@"Page element tap: show video selector");
                 [self launchVideo:nil];
             }
         }
@@ -411,7 +417,7 @@ static BOOL bAnimationStarted = NO;
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
-    NSLog(@"%d", buttonIndex);
+    //NSLog(@"%d", buttonIndex);
     if( buttonIndex == 0 ) {
         // replace photo
         [self selectPhoto];
@@ -423,7 +429,7 @@ static BOOL bAnimationStarted = NO;
 }
 
 - (void)showPopupMenu {
-    NSLog(@"show popup");
+    //NSLog(@"show popup");
     UIActionSheet *popup = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel"
         destructiveButtonTitle:nil otherButtonTitles:@"Replace photo", @"Remove photo", nil];
     popup.actionSheetStyle = UIActionSheetStyleDefault;
@@ -473,7 +479,7 @@ static BOOL bAnimationStarted = NO;
 
 #pragma mark - CameraViewDelegate
 - (void) cameraView:(id)cameraView didFinishSavingMedia:(MediaInfo*)mediaInfo {
-    NSLog(@"%@", mediaInfo.filename);
+    //NSLog(@"%@", mediaInfo.filename);
     
     //currentPhoto = mediaInfo;
     // update data
