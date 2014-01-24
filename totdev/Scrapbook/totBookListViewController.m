@@ -163,7 +163,7 @@
     NSMutableDictionary* book = booksAndTemplates[bookID];
     NSString* bookid   = [book objectForKey:@"id"];
     NSString* bookname = [book objectForKey:@"name"];
-    NSLog(@"delete book %d %@ %@", bookID, bookid, bookname);
+    //NSLog(@"delete book %d %@ %@", bookID, bookid, bookname);
 
     // delete the book from db
     [totBook deleteBook:bookid bookname:bookname];
@@ -228,7 +228,7 @@
         }
     }
     
-    NSLog(@"%@", booksAndTemplates);
+    //NSLog(@"%@", booksAndTemplates);
 }
 
 - (void)loadBooksAndTemplates:(int)bLoadData {
