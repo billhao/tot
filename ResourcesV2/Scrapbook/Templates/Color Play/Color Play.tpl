@@ -1,5 +1,5 @@
 {
-  "template_name" : "Colorful Play",
+  "template_name" : "Color Play",
   "orientation": "landscape",
 
   "pages" : [
@@ -202,28 +202,28 @@
       "name": "Color Play P4",
       "elements": [
         {
-          "x": 4.11,
-          "y": 70.94,
-          "w": 142.69,
-          "h": 183.40,
-          "radius": 6.8,
+          "x": -1,
+          "y": 80,
+          "w": 143,
+          "h": 179,
+          "radius": 6,
           "type": "image",
           "name": "P4",
         },
         {
-          "x": 135.37,
-          "y": 34.5,
-          "w": 131.56,
-          "h": 150.81,
+          "x": 145,
+          "y": 28,
+          "w": 130,
+          "h": 147,
           "radius": -6.5,
           "type": "image",
           "name": "P4",
         },
         {
-          "x": 310.84,
-          "y": 9.84,
-          "w": 105.65,
-          "h": 128.02,
+          "x": 313,
+          "y": 15,
+          "w": 104,
+          "h": 125,
           "radius": 6,
           "type": "image",
           "name": "P4",
@@ -257,10 +257,10 @@
       "name": "Color Play P5",
       "elements": [
         {
-          "x": 0,
-          "y": 48,
-          "w": 192,
-          "h": 235,
+          "x": 8,
+          "y": 41,
+          "w": 196,
+          "h": 225,
           "radius": -6.5,
           "type": "image",
           "name": "P5",

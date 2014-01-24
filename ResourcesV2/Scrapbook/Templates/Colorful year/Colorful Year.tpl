@@ -1,5 +1,5 @@
 {
-  "template_name" : "Color Year",
+  "template_name" : "Colorful Year",
   "orientation": "portrait",
 
   "pages" : [

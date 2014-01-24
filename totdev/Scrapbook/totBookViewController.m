@@ -211,7 +211,7 @@
 // change the book name
 - (void)editBookName {
     // show the input window
-    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Edit book name" message:@"What is the new book name?" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
+    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Edit book name" message:@"" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
     alert.alertViewStyle = UIAlertViewStylePlainTextInput;
     [alert textFieldAtIndex:0].text = mBook.bookname;
     [alert show];
