@@ -277,8 +277,9 @@
         
         self.bookvc = bookViewController;
         
-        self.autoresizesSubviews = TRUE;
-        self.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+        // comment out these two lines. they incorrectly enlarge the element views
+//        self.autoresizesSubviews = TRUE;
+//        self.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
 
         mView = [[totPageElementViewInternal alloc] initWithElement:data orientation:bookViewController.mBook.orientationLandscape];
         
@@ -378,10 +379,11 @@ static BOOL bAnimationStarted = NO;
 - (void)handleTap:(UIGestureRecognizer *)gestureRecognizer {
     [bookvc hideOptionMenu:TRUE];
 
-    NSLog(@"%@", gestureRecognizer.view.class);
+    //NSLog(@"%@", gestureRecognizer.view.class);
     if ([gestureRecognizer isKindOfClass:UITapGestureRecognizer.class] && [gestureRecognizer.view isKindOfClass:totPageElementView.class]) {
         if (![mView isEmpty]) {
-            [self animateRemaining];
+            if( mView.mData.type != TEXT )
+                [self animateRemaining];
         } else {
             printf("add new element\n");
             // display image selector here
