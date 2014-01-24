@@ -121,7 +121,8 @@
         mTextView.layer.borderColor = [UIColor grayColor].CGColor;
         mTextView.layer.borderWidth = 0;  // hide the border.
         mTextView.layer.cornerRadius = 2;
-        
+        mTextView.textAlignment = NSTextAlignmentCenter;
+
         if (self.mData.fontName) {
             int r = 0, g = 0, b = 0;
             if (self.mData.colorDescription) {

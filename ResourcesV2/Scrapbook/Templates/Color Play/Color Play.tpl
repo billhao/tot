@@ -54,7 +54,7 @@
           "name": "cover",
           "font-name": "Party LET",
           "font-color": "249, 244, 202",
-          "font-size": 40
+          "font-size": 30
         }
       ]
     },
