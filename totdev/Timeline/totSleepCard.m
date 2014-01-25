@@ -52,7 +52,6 @@
     float y = ([self height]-h)/2;
     start_button.frame = CGRectMake(x,y,w,h);
     start_button.backgroundColor = [UIColor lightGrayColor];
-//    start_button.alpha = 0.8;
     start_button.layer.cornerRadius = 2;
     start_button.titleLabel.font = font;
     [start_button setTitle:@"sleep" forState:UIControlStateNormal];
@@ -66,7 +65,6 @@
     stop_button.layer.cornerRadius = 2;
     stop_button.titleLabel.font = font;
     stop_button.hidden = YES;
-//    start_button.alpha = 0.7;
     start_button.titleLabel.font = font;
     [stop_button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [stop_button setTitle:@"wake up" forState:UIControlStateNormal];
@@ -172,10 +170,6 @@
 
 // save the start time to db
 - (void)saveTimeToDatabase:(BOOL)isStart {
-//    char now[256] = {0};
-//    sprintf(now, "%04d-%02d-%02d %02d:%02d:%02d", mYear, mMonth, mDay, mHour, mMinute, mSecond);
-//    printf("current time: %s\n", now);
-    
     totModel *model = global.model;
     
     if (isStart) {
@@ -286,7 +280,6 @@
     
     int h = [conversionInfo hour];
     int m = [conversionInfo minute];
-    //int s = [conversionInfo second];
     
     NSString* text;
     if( h>0 && m<10 ) {
@@ -316,7 +309,6 @@
     card_title.numberOfLines = 0;
     card_title.text = text;
     description.text = @"";
-//    card_title.text = [totSleepShowCard formatValue:sleepStartEvent.datetime d2:story_.mWhen];
     
     [self setTimestamp:[totTimeUtil getTimeDescriptionFromNow:sleepStartEvent.datetime]];
 }

@@ -94,7 +94,6 @@
         textView1.text = @"";
     }
     [self.parentView.parent moveToTop:self.parentView];
-    
     return YES;
 }
 
@@ -136,9 +135,7 @@
 
 #pragma mark - Helper functions
 
-- (void)display
-{
-    /* Init and display textView */
+- (void)display {
     textView.text = defaultTxt;
 }
 
@@ -183,13 +180,10 @@
     totEvent* e0 = nil;
     if( parentView.event_id != NO_EVENT ) {
         self.e = [global.model getEventByID:parentView.event_id];
-    }
-    else {
+    } else {
         NSArray* events = [global.model getEvent:global.baby.babyID event:event limit:2];
         if( events.count > 0 ) {
             self.e = [events objectAtIndex:0];
-//            if( events.count > 1 )
-//                e0 = [events objectAtIndex:1];
         }
     }
     

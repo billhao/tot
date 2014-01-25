@@ -34,12 +34,9 @@
         y = contentYOffset + margin_y;
         w1 = 140;
         w2 = 60;
-//        w3 = 40;
         h = 30;
-        
         foodBoxes = [[NSMutableArray alloc] init];
         quanBoxes = [[NSMutableArray alloc] init];
-//        unitBoxes = [[NSMutableArray alloc] init];
         inputViews = [[NSMutableArray alloc] init];
     }
     return self;
@@ -47,7 +44,9 @@
 
 - (void)dealloc {
     [mQuantity release];
-    
+    [foodBoxes release];
+    [quanBoxes release];
+    [inputViews release];
     [super dealloc];
 }
 
@@ -90,7 +89,6 @@
     // delete the text fields
     [foodBoxes removeObjectAtIndex:tag];
     [quanBoxes removeObjectAtIndex:tag];
-//    [unitBoxes removeObjectAtIndex:tag];
     [inputViews removeObjectAtIndex:tag];
     
     if( inputViews.count == 0 )
@@ -245,10 +243,6 @@
     quan.inputView = mQuantity.view;
     quan.inputAccessoryView = mQuantity.inputAccessoryView;
     [quanBoxes addObject:quan];
-
-//    f.origin.x += w2 + margin_x;
-//    f.size.width = w3;
-//    [unitBoxes addObject:[self createInputBox:f parentView:v]];
     
     // create delete button
     f.origin.x += w2 + margin_x;
@@ -311,7 +305,6 @@
         NSMutableDictionary *foodItem = [[NSMutableDictionary alloc] init];
         [foodItem setObject:food forKey:@"name"];
         [foodItem setObject:quantity forKey:@"quantity"];
-//        [foodItem setObject:((UITextField*)unitBoxes[i]).text forKey:@"unit"];
         [foodItem setObject:@"" forKey:@"category"];
         [list addObject:foodItem];
         [foodItem release];

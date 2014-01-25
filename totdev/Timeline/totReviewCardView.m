@@ -361,11 +361,11 @@
     [self.view addSubview:description];
     
     // add timestamp
-    timestamp = [[UILabel alloc] initWithFrame:CGRectMake(70, 30, 240, 30)];
+    timestamp = [[UILabel alloc] initWithFrame:CGRectMake(70, 30, 245, 30)];
     timestamp.textAlignment = NSTextAlignmentLeft;
     timestamp.text = @"";
     [timestamp setTextColor:[UIColor colorWithRed:128.0/255 green:130.0/255 blue:130.0/255 alpha:1.0]];
-    [timestamp setFont:[UIFont fontWithName:@"Raleway" size:15]];
+    [timestamp setFont:[UIFont fontWithName:@"Raleway" size:13]];
     [timestamp setBackgroundColor:[UIColor clearColor]];
     [self.view addSubview:timestamp];
     
@@ -502,31 +502,21 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
     if ([gestureRecognizer isKindOfClass:UIPanGestureRecognizer.class]) {
         UIPanGestureRecognizer* pan = (UIPanGestureRecognizer*)gestureRecognizer;
         CGPoint translation = [pan translationInView:self];
-        //NSLog(@"%d \t tx=%d \t ty=%d \t x=%.0f y=%.0f \t %d", nn, (int)touch_x, (int)touch_y, translation.x, translation.y, gestureRecognizer.state);
-        //nn++;
         if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
-//            NSLog(@"move began");
-//            touch_x = translation.x;
-//            touch_y = translation.y;
             origin_x = self.frame.origin.x;
             endGesture = FALSE;
-        } else
-        {
+        } else {
             if ( fabs(translation.y) * 4 > fabs(translation.x) ) {
-                //NSLog(@"return tx=%.1f ty=%.1f x=%.1f y=%.1f", translation.x, translation.y, touch_x, touch_y);
                 endGesture = TRUE;
             }
             else if( !endGesture ) {
                 CGRect f = self.frame;
                 f.origin.x = origin_x + translation.x;
                 self.frame = f;
-                //[pan setTranslation:CGPointMake(0, 0) inView:self];
             }
-//            touch_x = translation.x;
-//            touch_y = translation.y;
         }
         if ( endGesture || (gestureRecognizer.state == UIGestureRecognizerStateEnded) ) {
-            //printf("move the review card: %f %f\n", self.frame.origin.x, self.frame.size.width);
+            // printf("move the review card: %f %f\n", self.frame.origin.x, self.frame.size.width);
             int n = associated_delete_button.frame.origin.x + associated_delete_button.bounds.size.width;
             if (self.frame.origin.x >= n) {
                 [self performAnimation:YES];
@@ -765,62 +755,6 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
     
     
 }
-
-// Static methods.
-// Different type of cards may need different size.
-//+ (CGRect) getEditCardSizeOfType:(ReviewCardType)type {
-//    int w = 308, h = 100;
-//    if (type == SUMMARY) {
-//        w = [totSummaryCard width];
-//        h = [totSummaryCard height];
-//    } else if (type == HEIGHT||type == WEIGHT||type == HEAD) {
-//        w = [totHeightEditCard width];
-//        h = [totHeightEditCard height];
-//    } else if (type == DIAPER) {
-//        w = [totDiaperEditCard width];
-//        h = [totDiaperEditCard height];
-//    } else if (type == LANGUAGE) {
-//        w = [totLanguageEditCard width];
-//        h = [totLanguageEditCard height];
-//    } else if (type == SLEEP) {
-//        w = [totSleepEditCard width];
-//        h = [totSleepEditCard height];
-//    } else if (type == FEEDING) {
-//        w = [totFeedEditCard width];
-//        h = [totFeedEditCard height];
-//    } else {
-//        printf("please add size info to getEditCardSizeOfType\n");
-//        exit(-1);
-//    }
-//    return CGRectMake(0, 0, w, h);
-//}
-
-//+ (CGRect) getShowCardSizeOfType:(ReviewCardType)type {
-//    int w = 308, h = 100;
-//    if (type == SUMMARY) {
-//        w = [totSummaryCard width];
-//        h = [totSummaryCard height];
-//    } else if (type == HEIGHT||type == WEIGHT||type == HEAD) {
-//        w = [totHeightShowCard width];
-//        h = [totHeightShowCard height];
-//    } else if (type == DIAPER) {
-//        w = [totDiaperShowCard width];
-//        h = [totDiaperShowCard height];
-//    } else if (type == LANGUAGE) {
-//        w = [totLanguageShowCard width];
-//        h = [totLanguageShowCard height];
-//    } else if (type == SLEEP) {
-//        w = [totSleepShowCard width];
-//        h = [totSleepShowCard height];
-//    } else if (type == FEEDING) {
-//        w = [totFeedShowCard width];
-//        h = [totFeedShowCard height];
-//    } else {
-//        printf("please add size info to getShowCardSizeOfType\n");
-//        exit(-1);
-//    }
-//    return CGRectMake(0, 0, w, h);
-//}
 
 // return the width and height of the edit or show card depending on mode
 - (int) height {

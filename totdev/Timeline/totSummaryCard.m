@@ -27,10 +27,6 @@
 }
 
 - (void)viewDidLoad {
-    // we don't need title and desc for summary card
-//    [title removeFromSuperview];
-//    [description removeFromSuperview];
-    
     [self createBabyInfo];
     [self setBackground];
     [self loadIcons];
@@ -59,11 +55,16 @@
     // physical icons (as buttons)
     int icon_x[] = {10, 150, 10, 150, 10, 150, 10};
     int icon_y[] = {112, 112, 162, 162, 212, 212, 262};
-    NSMutableArray* icon_img_filename = [[NSMutableArray alloc] initWithObjects:
-                                  @"height_gray", @"weight_gray", @"hc_gray", @"diaper_gray", @"language_gray", @"sleep_gray", @"food_gray", nil];
+    NSMutableArray* icon_img_filename =
+        [[NSMutableArray alloc] initWithObjects: @"height_gray",
+                                                 @"weight_gray",
+                                                 @"hc_gray",
+                                                 @"diaper_gray",
+                                                 @"language_gray",
+                                                 @"sleep_gray", @"food_gray", nil];
     NSMutableArray* label_text = [[NSMutableArray alloc] initWithObjects:
                                   @"N/A", @"N/A", @"N/A", @"N/A", @"N/A", @"N/A", @"N/A", nil];
-    float icon_w  = 41;
+    float icon_w = 41;
     float icon_h = 41;
     int cnt = sizeof(icon_x)/sizeof(icon_x[0]);
     
@@ -116,10 +117,16 @@
         int label_y = icon_y[i] + 10;
         float h = label_h;
         float w = label_w;
-        if( i==cnt-1 ) {
+        if( i==cnt-1 ) {  // tune the position of feeding label.
+            label_y = label_y - 15;
             w = 200;  // make it longer for feeding
+            h = 60;   // make it high enough to hold multiple lines.
         }
         UILabel *label   = [[UILabel alloc] initWithFrame:CGRectMake(label_x, label_y, w, h)];
+        if (i==cnt-1) {
+            label.numberOfLines = 0;
+            label.lineBreakMode = NSLineBreakByWordWrapping;
+        }
         label.font = font3;
         label.textColor = fontColor;
         label.text = label_text[i];
@@ -316,9 +323,9 @@
 
 - (void)headButtonPressed:(id)sender {
     [global.cameraView setDelegate:self];
-    global.cameraView.saveToDB = FALSE;
-    global.cameraView.cropWidth  = headView.frame.size.width;
-    global.cameraView.cropHeight = headView.frame.size.height;
+     global.cameraView.saveToDB = FALSE;
+     global.cameraView.cropWidth  = headView.frame.size.width;
+     global.cameraView.cropHeight = headView.frame.size.height;
     [global.cameraView launchCamera:self.parentView.parent.controller withEditing:TRUE];
 }
 

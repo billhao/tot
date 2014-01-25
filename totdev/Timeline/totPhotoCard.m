@@ -20,7 +20,6 @@
     if (self) {
         mediaInfo = nil;
         mPhotoView = nil;
-
         margin_x = 5;
         margin_y = 5;
     }
@@ -30,7 +29,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setBackground];
-    //[self setIcon:@"language2.png"];
     
     mPhotoView = [[totImageView alloc] initWithFrame:CGRectMake(5, 5, [self width]-10, [self height]-10)];
     mPhotoView.contentMode = UIViewContentModeScaleAspectFit;
@@ -59,7 +57,6 @@
         card_title.text = @"";
         description.text = @"";
         [line removeFromSuperview];
-        //timestamp.textColor = [UIColor whiteColor];
         [self setTimestampWithDate:e.datetime];
         
         [mPhotoView imageFromFileContent:[totMediaLibrary getMediaPath:mediaInfo.filename]];
@@ -76,8 +73,7 @@
             smallPhoto = TRUE;
             mPhotoView.contentMode = UIViewContentModeCenter;
             h = mPhotoView.image.size.height;
-        }
-        else
+        } else
             mPhotoView.contentMode = UIViewContentModeScaleAspectFit;
 
         CGRect f = self.view.bounds;
@@ -93,13 +89,15 @@
         if( mediaInfo.activities ) {
             int cnt = mediaInfo.activities.count;
             activityView = [[UIView alloc] init];
-            f = CGRectMake(margin_x+internal_margin_x, margin_y+h-icon_height-3*internal_margin_y, internal_margin_x+cnt*(icon_width+internal_margin_x), icon_height+2*internal_margin_y);
+            f = CGRectMake(margin_x+internal_margin_x,
+                           margin_y+h-icon_height-3*internal_margin_y,
+                           internal_margin_x+cnt*(icon_width+internal_margin_x),
+                           icon_height+2*internal_margin_y);
             if( smallPhoto ) {
                 f.origin.x = margin_x;
                 f.origin.y = margin_y + h;
                 activityView.backgroundColor = [UIColor clearColor];
-            }
-            else {
+            } else {
                 activityView.backgroundColor = [UIColor colorWithRed:.8 green:.8 blue:.8 alpha:.3];
                 activityView.layer.cornerRadius = 2;
             }
@@ -110,7 +108,9 @@
                 NSString* activityIconName = [NSString stringWithFormat:@"activity_%@", tmpname];
                 
                 UIButton* activityBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-                activityBtn.frame = CGRectMake(internal_margin_x+i*(internal_margin_x+icon_width), internal_margin_y, icon_width, icon_height);
+                activityBtn.frame = CGRectMake(internal_margin_x+i*(internal_margin_x+icon_width),
+                                               internal_margin_y,
+                                               icon_width, icon_height);
                 activityBtn.tag = i;
                 [activityBtn setImage:[UIImage imageNamed:activityIconName] forState:UIControlStateNormal];
                 [activityView addSubview:activityBtn];
@@ -119,13 +119,12 @@
         }
 
         // update time stamp
-        [timestamp sizeToFit];
+        // [timestamp sizeToFit];
         f = timestamp.frame;
         if( activityView && smallPhoto ) {
             f.origin.x = margin_x + activityView.bounds.size.width;
             f.origin.y = activityView.frame.origin.y + activityView.frame.size.height - f.size.height;
-        }
-        else {
+        } else {
             f.origin.x = margin_x;
             f.origin.y = margin_y*2 + h;
         }
@@ -149,7 +148,9 @@
 }
 - (int) width { return 308; }
 
-- (void) updateCard { [self setTimestampWithDate:self.e.datetime]; }
+- (void) updateCard {
+    [self setTimestampWithDate:self.e.datetime];
+}
 
 @end
 

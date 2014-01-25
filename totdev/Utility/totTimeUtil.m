@@ -72,14 +72,30 @@
     // construct the time description
     if (current_year == event_year && current_month == event_month && current_day == event_day) {
         if (current_hour == event_hour && current_minute == event_minute) {
-            time_desc = [NSString stringWithFormat:@"%d seconds ago", (current_second - event_second)];
+            int second_diff = current_second - event_second;
+            if (second_diff == 1)
+                time_desc = [NSString stringWithFormat:@"1 second ago"];
+            else
+                time_desc = [NSString stringWithFormat:@"%d seconds ago", second_diff];
         } else if (current_hour == event_hour) {
-            time_desc = [NSString stringWithFormat:@"%d minutes ago", (current_minute - event_minute)];
+            int minute_diff = current_minute - event_minute;
+            if (minute_diff == 1)
+                time_desc = [NSString stringWithFormat:@"1 minute ago"];
+            else
+                time_desc = [NSString stringWithFormat:@"%d minutes ago", minute_diff];
         } else {
-            time_desc = [NSString stringWithFormat:@"about %d hours ago", (current_hour - event_hour)];
+            int hour_diff = current_hour - event_hour;
+            if (hour_diff == 1)
+                time_desc = [NSString stringWithFormat:@"about 1 hour ago"];
+            else
+                time_desc = [NSString stringWithFormat:@"about %d hours ago", hour_diff];
         }
     } else if (current_year == event_year && current_month == event_month) {
-        time_desc = [NSString stringWithFormat:@"%d days ago", (current_day - event_day)];
+        int day_diff = current_day - event_day;
+        if (day_diff == 1)
+            time_desc = [NSString stringWithFormat:@"about 1 day ago"];
+        else
+            time_desc = [NSString stringWithFormat:@"%d days ago", day_diff];
     } else {
         time_desc = [NSString stringWithString:[date_formatter stringFromDate:event_time]];
     }

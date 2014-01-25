@@ -39,21 +39,6 @@
 
 
 #pragma mark - Event handlers
-/*
-- (void) confirm: (UIButton*)btn {
-    // save to database
-    if (mDiaperType != -1) {
-        [self saveToDatabase:mDiaperType];
-    }
-
-    [self.parentView flip];
-}
-
-- (void) cancel: (UIButton*)btn {
-    [timer_ stop];
-}
-*/
-
 - (void)buttonPressed:(id)sender {
     int tag = ((UIButton*)sender).tag;
 
@@ -166,8 +151,7 @@
             [self.parentView.parent updateSummaryCard:DIAPER withValue:@"wet soiled"];
         
         return true;
-    }
-    else {
+    } else {
         [totUtility showAlert:@"Anything on the diaper?"];
         return false;
     }
