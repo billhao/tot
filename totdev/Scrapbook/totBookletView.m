@@ -43,8 +43,16 @@
     self.transform = CGAffineTransformMakeScale(sx, sy);
 }
 
+// The function name is misleading..
+// It is not moved to but moved by..
 - (void)moveTo:(CGPoint)p {
     self.transform = CGAffineTransformMakeTranslation(p.x, p.y);
+}
+
+- (void)move:(CGPoint)p {
+    float xx = p.x - self.frame.origin.x;
+    float yy = p.y - self.frame.origin.y;
+    self.transform = CGAffineTransformMakeTranslation(xx, yy);
 }
 
 @end
@@ -348,28 +356,63 @@ static BOOL bAnimationStarted = NO;
         CGSize screenSize = [totUtility getScreenSize];
         float ratio = screenSize.height / 480;
         if ( isLandscape ) {
-            [self setFrame:CGRectMake(mView.mData.x * ratio, mView.mData.y, mView.mData.w * ratio, mView.mData.h)];
-            [mView resizeTo:CGRectMake(0, 0, mView.mData.w * ratio, mView.mData.h)];
+            [self setFrame:CGRectMake(mView.mData.x * ratio,
+                                      mView.mData.y,
+                                      mView.mData.w * ratio,
+                                      mView.mData.h)];
+            [mView resizeTo:CGRectMake(0,
+                                       0,
+                                       mView.mData.w * ratio,
+                                       mView.mData.h)];
         } else {
-            [self setFrame:CGRectMake(mView.mData.x, mView.mData.y * ratio, mView.mData.w, mView.mData.h * ratio)];
-            [mView resizeTo:CGRectMake(0, 0, mView.mData.w, mView.mData.h * ratio)];
+            [self setFrame:CGRectMake(mView.mData.x,
+                                      mView.mData.y * ratio,
+                                      mView.mData.w,
+                                      mView.mData.h * ratio)];
+            [mView resizeTo:CGRectMake(0,
+                                       0,
+                                       mView.mData.w,
+                                       mView.mData.h * ratio)];
         }
-        //[self setFrame:CGRectMake(mView.mData.x, mView.mData.y, mView.mData.w, mView.mData.h)];
-        mView.backgroundColor = [UIColor clearColor];
         [mView rotateTo:mView.mData.radians];
+        [mView move:CGPointMake(0, 0)];
         [bookvc hideOptionMenuAndButton:FALSE];
+        
+        [self setBackgroundColor:[UIColor clearColor]];
     } else {
-        // put this view to top
+        // Put this view to top.
         UIView* superview = [self superview];
         myIndexInSuperview = [superview.subviews indexOfObject:self];
-        [superview bringSubviewToFront:self];
-        //[superview exchangeSubviewAtIndex:myIndexInSuperview withSubviewAtIndex:superview.subviews.count-1];
 
+        [superview bringSubviewToFront:self];
         [mView rotateTo:0];
-        mView.backgroundColor = [UIColor colorWithRed:.1 green:.1 blue:.1 alpha:0.95];
+
+        // mView.backgroundColor = [UIColor colorWithRed:.1 green:.1 blue:.1 alpha:0.95];
+        
         CGRect window = bookvc.fullPageFrame;
-        [mView resizeTo:window];
+
+        float image_height = mView.mImage.image.size.height;
+        float image_width  = mView.mImage.image.size.width;
+        float h_ratio = window.size.height / image_height;
+        float w_ratio = window.size.width / image_width;
+
+        float resized_h, resized_w;
+        if (h_ratio > w_ratio) {
+            resized_w = image_width * w_ratio;
+            resized_h = image_height * w_ratio;
+        } else {
+            resized_w = image_width * h_ratio;
+            resized_h = image_height * h_ratio;
+        }
+        
         [self setFrame:window];
+        [self setBackgroundColor:[UIColor colorWithRed:.1 green:.1 blue:.1 alpha:0.95]];
+        
+        float x0 = (window.size.width - resized_w) / 2;
+        float y0 = (window.size.height - resized_h) / 2;
+        [mView resizeTo:CGRectMake(0, 0, resized_w, resized_h)];
+        [mView moveTo:CGPointMake(x0, y0)];
+        
         [bookvc hideOptionMenuAndButton:TRUE];
     }
     [UIView commitAnimations];

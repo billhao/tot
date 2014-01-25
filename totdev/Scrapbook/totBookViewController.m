@@ -552,7 +552,8 @@
     }
     
     NSData* imgData = UIImagePNGRepresentation(img);
-    NSString* imagePath = [[totModel GetDocumentDirectory] stringByAppendingPathComponent:[NSString stringWithFormat:@"scrapbookCover/%@.png", bookid]];
+    NSString* imagePath =
+        [[totModel GetDocumentDirectory] stringByAppendingPathComponent:[NSString stringWithFormat:@"scrapbookCover/%@.png", bookid]];
 
     NSString* dir = [[totModel GetDocumentDirectory] stringByAppendingPathComponent:@"scrapbookCover"];
 
