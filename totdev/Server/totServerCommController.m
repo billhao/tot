@@ -34,6 +34,7 @@
         m_login_url          = [NSString stringWithFormat:@"%@/m/login",  HOSTNAME];
         m_changePasscode_url = [NSString stringWithFormat:@"%@/m/reset",  HOSTNAME];
         m_forgetPasscode_url = [NSString stringWithFormat:@"%@/m/forget", HOSTNAME];
+        m_sendUsrAct_url     = [NSString stringWithFormat:@"%@/m/usract", HOSTNAME];
     }
     return self;
 }
@@ -92,6 +93,18 @@
     NSString* loginInfo = [NSString stringWithFormat:@"email=%@",email];
     return [self sendStr:loginInfo toURL:m_forgetPasscode_url returnMessage:message];
 }
+
+// -----------------------------------------------
+//   send user activity to server
+// -----------------------------------------------
+- (int) sendUserActivityToServer: (NSString*) email withActivity: (NSString*) activity returnMessage:(NSString**)message{
+    NSString* actInfo = @"email=";
+    actInfo = [actInfo stringByAppendingString:email];
+    actInfo = [actInfo stringByAppendingString:@"&act="];
+    actInfo = [actInfo stringByAppendingString:activity];
+    return [self sendStr:actInfo toURL:m_sendUsrAct_url returnMessage:message];
+}
+
 
 // -----------------------------------------------
 //  basic func to send POST req to server

@@ -30,11 +30,12 @@ enum SERVER_RESPONSE_CODE {
     NSString *m_login_url; // url to the login handler
     NSString *m_changePasscode_url;  // url to the change passcode handler
     NSString *m_forgetPasscode_url;  // url to the forget passcode handler
+    NSString *m_sendUsrAct_url;  // usl to the user activity handler
 }
 
 - (int) sendRegInfo: (NSString*) usrname withEmail: (NSString*) email withPasscode: (NSString*) passcode returnMessage:(NSString**)message;
 - (int) sendLoginInfo: (NSString*) email withPasscode: (NSString*) passcode returnMessage:(NSString**)message;
 - (int) sendResetPasscodeForUser: (NSString*) email from: (NSString*) old_passcode to: (NSString*) new_passcode returnMessage: (NSString**)message;
 - (int) sendForgetPasscodeforUser: (NSString*) email returnMessage:(NSString**)message;
-
+- (int) sendUserActivityToServer: (NSString*) email withActivity: (NSString*) activity returnMessage:(NSString**)message;
 @end
