@@ -36,7 +36,8 @@
     // tutorial
     UIImage* bgImg = [UIImage imageNamed:@"tutorial_bg"];
     UIImageView* bgImgView = [[UIImageView alloc] initWithImage:bgImg];
-    bgImgView.frame = _frame;
+    bgImgView.contentMode = UIViewContentModeScaleToFill;
+    bgImgView.frame = self.view.bounds;
     [self.view addSubview:bgImgView];
     [bgImgView release];
     
