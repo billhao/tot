@@ -22,8 +22,7 @@
 
 @synthesize imagePicker, delegate, cropWidth, cropHeight, saveToDB;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
@@ -33,7 +32,7 @@
 
 -(void)dealloc {
     [editor release];
-    editor = nil;
+     editor = nil;
     
     [super dealloc];
 }
@@ -137,7 +136,7 @@
     NSLog(@"switch to photo library");
     [imagePicker dismissViewControllerAnimated:FALSE completion:^{
         [imagePicker release];
-        imagePicker = nil;
+         imagePicker = nil;
 
         [self launchCamera:hostVC type:UIImagePickerControllerSourceTypePhotoLibrary withEditing:TRUE];
     }];
@@ -187,8 +186,7 @@
                         [editor launchPhotoEditorWithImage:photo highResolutionImage:photo];
                     }
                 }
-            }
-            else {
+            } else {
                 UIImage *img = (UIImage*)[info objectForKey:@"UIImagePickerControllerOriginalImage"];
                 img = [editor editingResImageForAssetURL:assetURL];
                 [self saveImage:img];

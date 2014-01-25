@@ -190,7 +190,10 @@
     // our reference to the session.
     [context render:^(UIImage *result) {
         if (result) {
-            UIImageWriteToSavedPhotosAlbum(result, nil, nil, NULL);
+            //
+            // If you want to save the processed version into Album, uncomment this line
+            //
+            //UIImageWriteToSavedPhotosAlbum(result, nil, nil, NULL);
         }
         
         [[blockSelf sessions] removeObject:session];
