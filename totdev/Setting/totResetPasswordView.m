@@ -37,7 +37,7 @@
     if( ![totLoginController checkPwd:newpwd] ) return;
     
     msg = nil;
-    BOOL re = [totUser changePassword:newpwd message:&msg];
+    BOOL re = [totUser changePassword:newpwd oldPassword:oldpwd message:&msg];
     [totUtility showAlert:msg];
 }
 
@@ -85,13 +85,6 @@
         [navbar addSubview:title];
         [title release];
 
-//        UILabel* oldPassword = [[UILabel alloc] initWithFrame:CGRectMake(10, 70, 300, 30)];
-//        oldPassword.text = @"Old Password";
-//        [oldPassword setFont:[UIFont fontWithName:@"Raleway-SemiBold_2" size:18]];
-//        [oldPassword setTextColor:[UIColor colorWithRed:0.4f green:0.4f blue:0.4f alpha:1.0f]];
-//        [self addSubview:oldPassword];
-//        [oldPassword release];
-
         float gap = 63;
         float y = gap + statusBarHeight;
         
@@ -105,13 +98,6 @@
         oldPasswordTextField.secureTextEntry = TRUE;
         newPasswordTextField.delegate = self;
         oldPasswordTextField.delegate = self;
-
-//        UILabel* newPassword = [[UILabel alloc] initWithFrame:CGRectMake(10, 160, 300, 30)];
-//        newPassword.text = @"New Password";
-//        [newPassword setFont:[UIFont fontWithName:@"Raleway-SemiBold_2" size:18]];
-//        [newPassword setTextColor:[UIColor colorWithRed:0.4f green:0.4f blue:0.4f alpha:1.0f]];
-//        [self addSubview:newPassword];
-//        [newPassword release];
 
         y += gap;
         newPasswordTextField = [[UITextField alloc] initWithFrame:CGRectMake(10, y, 300, 40)];

@@ -32,7 +32,7 @@
 +(BOOL)forgotPassword:(NSString*)email message:(NSString**)message;
 
 // change to a new ped
-+(BOOL)changePassword:(NSString*)newPasswd message:(NSString**)message;
++(BOOL)changePassword:(NSString*)newPasswd oldPassword:(NSString*)oldPassword message:(NSString**)message;
 
 // return total # user accounts in db
 +(int) getTotalAccountCount;

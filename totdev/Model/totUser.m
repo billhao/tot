@@ -47,15 +47,17 @@ static totModel* _model;
     int retCode = [server sendRegInfo:@"" withEmail:email withPasscode:pwd returnMessage:message];
     if( retCode == SERVER_RESPONSE_CODE_SUCCESS ) {
         BOOL re = [self addAccount:email password:pwd];
-        if( re )
-            return [[totUser alloc] initWithID:email];
-        else {
+        if( re ) {
+            [server release];
+            return [[[totUser alloc] initWithID:email] autorelease];
+        } else {
             *message = [[[NSString alloc] initWithString:@"Cannot add user to database"] autorelease];
             // TODO should we delete this user from server? otherwise it wouldn't be possible to create the user next time
+            [server release];
             return nil;
         }
-    }
-    else {
+    } else {
+        [server release];
         return nil;
     }
 }
@@ -71,31 +73,33 @@ static totModel* _model;
     
     totServerCommController* server = [[totServerCommController alloc] init];
     int ret = [server sendLoginInfo:email withPasscode:pwd returnMessage:message];
-    if( ret == SERVER_RESPONSE_CODE_SUCCESS )
+    [server release];
+    if( ret == SERVER_RESPONSE_CODE_SUCCESS ) {
         return TRUE;
-    else
+    } else {
         return FALSE;
+    }
 }
 
 // request the server to reset password
 +(BOOL)forgotPassword:(NSString*)email message:(NSString**)message {
     totServerCommController* server = [[totServerCommController alloc] init];
     int retCode = [server sendForgetPasscodeforUser:email returnMessage:message];
+    [server release];
     if( retCode == SERVER_RESPONSE_CODE_SUCCESS ) {
         return TRUE;
-    }
-    else
+    } else
         return FALSE;
 }
 
 // change to a new ped
-+(BOOL)changePassword:(NSString*)newPasswd message:(NSString**)message {
++(BOOL)changePassword:(NSString*)newPasswd oldPassword:(NSString*)oldPassword message:(NSString**)message {
     totServerCommController* server = [[totServerCommController alloc] init];
-    int retCode = [server sendResetPasscodeForUser:global.user.email from:@"" to:newPasswd returnMessage:message ];
+    int retCode = [server sendResetPasscodeForUser:global.user.email from:oldPassword to:newPasswd returnMessage:message ];
+    [server release];
     if( retCode == SERVER_RESPONSE_CODE_SUCCESS ) {
         return TRUE;
-    }
-    else {
+    } else {
         return FALSE;
     }
 }
