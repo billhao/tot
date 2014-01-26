@@ -91,7 +91,7 @@
     [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     NSString *formattedDateString = [dateFormatter stringFromDate:datetime];
     [dateFormatter release];
-    NSLog(@"second time %@", formattedDateString);
+    //NSLog(@"second time %@", formattedDateString);
     return [self addEvent:baby_id event:event datetimeString:formattedDateString value:value];
 }
 

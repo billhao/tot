@@ -25,6 +25,9 @@
 
 // Reset the password.
 - (void)reset: (id)sender {
+    [oldPasswordTextField resignFirstResponder];
+    [newPasswordTextField resignFirstResponder];
+
     NSString* oldpwd = oldPasswordTextField.text;
     NSString* newpwd = newPasswordTextField.text;
 

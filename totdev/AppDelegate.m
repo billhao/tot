@@ -258,7 +258,6 @@
     loginNavigationController.navigationBarHidden = TRUE;
     loginNavigationController.view.frame = self.window.bounds;
     self.window.rootViewController = loginNavigationController;
-    NSLog(@"create navigation controller");
 }
 
 

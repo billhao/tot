@@ -111,7 +111,7 @@
 //    -> remember to check whether the return is nil
 // -----------------------------------------------
 - (int) sendStr: (NSString*) post toURL: (NSString *) dest_url returnMessage: (NSString**)message {
-    NSLog(@"post string: %@", post);
+    //NSLog(@"post string: %@", post);
     
     // TODO add try catch here
     
@@ -152,7 +152,7 @@
     if (POSTReply == nil) {
         NSLog(@"post response: empty");
     } else {
-        NSLog(@"post response: %@", strReply);
+        //NSLog(@"post response: %@", strReply);
     }
     int ret = SERVER_RESPONSE_CODE_FAIL;
     NSArray* ss = [strReply componentsSeparatedByString:@"::"];
