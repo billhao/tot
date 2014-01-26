@@ -89,6 +89,7 @@
         self.mData = data;
         mImage = nil;
     }
+    //[totUtility enableBorder:self];
     return self;
 }
 
