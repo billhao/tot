@@ -13,6 +13,7 @@
 @interface totServerCommController()
 
 - (int) sendStr: (NSString*) post toURL: (NSString *) dest_url returnMessage: (NSString**)message;
+- (void) sendStrAsync: (NSString*) post toURL: (NSString *) dest_url returnMessage: (NSString**)message;
 
 @end
 
@@ -102,7 +103,8 @@
     actInfo = [actInfo stringByAppendingString:email];
     actInfo = [actInfo stringByAppendingString:@"&act="];
     actInfo = [actInfo stringByAppendingString:activity];
-    return [self sendStr:actInfo toURL:m_sendUsrAct_url returnMessage:message];
+    [self sendStrAsync:actInfo toURL:m_sendUsrAct_url returnMessage:message];
+    return SERVER_RESPONSE_CODE_SUCCESS;
 }
 
 
@@ -114,30 +116,7 @@
     //NSLog(@"post string: %@", post);
     
     // TODO add try catch here
-    
-    // Construct a HTTP POST req
-    NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
-    NSString *postLen = [NSString stringWithFormat:@"%d", [postData length]];
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
-    [request setURL:[NSURL URLWithString:dest_url]];
-    [request setHTTPMethod:@"POST"];
-    [request setValue:postLen forHTTPHeaderField:@"Content-Length"];
-    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-    [request setHTTPBody:postData];
-    [request setCachePolicy:NSURLCacheStorageNotAllowed];
-    [request setTimeoutInterval:20.0];
-    
-    // ignore SSL certificate error
-    NSURL* destURL = [NSURL URLWithString:dest_url];
-    [NSURLRequest setAllowsAnyHTTPSCertificate:YES forHost:[destURL host]];
-    
-    
-    // add HTTP basic authentication header to the request
-    NSString *authStr = [NSString stringWithFormat:@"%@:%@", @"totdev", @"0000"];
-    NSData *authStrData = [authStr dataUsingEncoding:NSASCIIStringEncoding];
-    NSString *authStrDataEncoded = [Base64Encoder encode:authStrData];
-    NSString *authValue = [NSString stringWithFormat:@"Basic %@", authStrDataEncoded];
-    [request setValue:authValue forHTTPHeaderField:@"Authorization"];
+    NSMutableURLRequest* request = [self getRequest:post toURL:dest_url];
 
     // Send the req syncrhonously [will be async later]
     NSURLResponse *response;
@@ -156,6 +135,7 @@
     }
     int ret = SERVER_RESPONSE_CODE_FAIL;
     NSArray* ss = [strReply componentsSeparatedByString:@"::"];
+    [strReply release];
     if( ss.count >= 1 && ss.count <= 2 ) {
         ret = [(NSString*)ss[0] intValue];
         if( ss.count == 2 ) {
@@ -166,6 +146,43 @@
         *message = @"Cannot understand server's response";
 
     return ret;
+}
+
+- (void) sendStrAsync: (NSString*) post toURL: (NSString *) dest_url returnMessage: (NSString**)message {
+    //NSLog(@"post string: %@", post);
+    
+    // TODO add try catch here
+    NSMutableURLRequest* request = [self getRequest:post toURL:dest_url];
+    
+    // Send the req asyncrhonously
+    [NSURLConnection sendAsynchronousRequest:request queue:nil completionHandler:nil];
+}
+
+- (NSMutableURLRequest*)getRequest:(NSString*)post toURL: (NSString *)dest_url {
+    // Construct a HTTP POST req
+    NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+    NSString *postLen = [NSString stringWithFormat:@"%d", [postData length]];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    [request setURL:[NSURL URLWithString:dest_url]];
+    [request setHTTPMethod:@"POST"];
+    [request setValue:postLen forHTTPHeaderField:@"Content-Length"];
+    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    [request setHTTPBody:postData];
+    [request setCachePolicy:NSURLCacheStorageNotAllowed];
+    [request setTimeoutInterval:20.0];
+
+    // ignore SSL certificate error
+    NSURL* destURL = [NSURL URLWithString:dest_url];
+    [NSURLRequest setAllowsAnyHTTPSCertificate:YES forHost:[destURL host]];
+    
+    // add HTTP basic authentication header to the request
+    NSString *authStr = [NSString stringWithFormat:@"%@:%@", @"totdev", @"0000"];
+    NSData *authStrData = [authStr dataUsingEncoding:NSASCIIStringEncoding];
+    NSString *authStrDataEncoded = [Base64Encoder encode:authStrData];
+    NSString *authValue = [NSString stringWithFormat:@"Basic %@", authStrDataEncoded];
+    [request setValue:authValue forHTTPHeaderField:@"Authorization"];
+
+    return [request autorelease];
 }
 
 @end

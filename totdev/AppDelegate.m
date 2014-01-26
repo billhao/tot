@@ -17,6 +17,7 @@
 #import "Tutorial/totTutorialViewController.h"
 #import "totCameraViewController.h"
 #import "totBookListViewController.h"
+#import "totServerCommController.h"
 
 @implementation AppDelegate
 
@@ -41,7 +42,7 @@
 {
     [totMediaLibrary checkMediaDirectory];
     
-     // handle iphone 5 screen size
+// handle iphone 5 screen size
 //    CGRect windowFrame = [[UIScreen mainScreen] bounds];
 //    if( windowFrame.size.height > 480 ) {
 //        // iphone 5, put the frame in the middle of the screen
@@ -82,7 +83,7 @@
     [self showFirstView];
     [self.window makeKeyAndVisible];
     
-    
+    [self notifyServerOpenApp];
     return YES;
 }
 
@@ -260,5 +261,15 @@
     self.window.rootViewController = loginNavigationController;
 }
 
+- (void)notifyServerOpenApp {
+    NSString* email = @"";
+    if( global!=nil && global.user!=nil && global.user.email!=nil )
+        email = global.user.email;
+    NSString* message = [[NSString alloc] init];
+    totServerCommController* server = [[totServerCommController alloc] init];
+    int retCode = [server sendUserActivityToServer:email withActivity:@"open app" returnMessage:&message ];
+    [server release];
+    NSLog(@"notifyServerOpenApp=%d %@", retCode, message);
+}
 
 @end
