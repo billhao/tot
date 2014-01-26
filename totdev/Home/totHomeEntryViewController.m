@@ -110,6 +110,7 @@
     [self.view addSubview:scrapbookBtn];
 
     // add auto play icon
+    /*
     margin_x = margin_y;
     UIButton* autoplayBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     autoplayBtn.frame = CGRectMake(f.size.width-sbImg.size.width-margin_x, cameraBtn.frame.origin.y-2*sbImg.size.height+2, sbImg.size.width, sbImg.size.height);
@@ -117,6 +118,7 @@
     [autoplayBtn addTarget:self action:@selector(autoPlayButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:autoplayBtn];
     //[totUtility enableBorder:autoplayBtn];
+    */
 
     // add photo position in db
     int w = 36;
@@ -128,7 +130,7 @@
     photoPositionLabel.font = [UIFont fontWithName:@"Raleway" size:10.0];
     photoPositionLabel.textAlignment = NSTextAlignmentCenter;
     photoPositionLabel.layer.cornerRadius = 2;
-    [self.view addSubview:photoPositionLabel];
+    //[self.view addSubview:photoPositionLabel];
     
     // add menu icon
 //    menuBtn = [UIButton buttonWithType:UIButtonTypeCustom];
