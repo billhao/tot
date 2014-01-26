@@ -382,7 +382,8 @@
 //}
 
 -(void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView {
-    if (scrollView.contentOffset.y + 389 > scrollView.contentSize.height) {
+    int offset = 420;
+    if (scrollView.contentOffset.y + offset > scrollView.contentSize.height) {
         [self loadCardsNumber:10];
     }
 }
