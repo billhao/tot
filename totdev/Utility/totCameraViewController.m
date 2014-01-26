@@ -120,9 +120,7 @@
         [overlay addTarget:self action:@selector(photoLibButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
         imagePicker.cameraOverlayView = overlay;
         [vc presentViewController:imagePicker animated:TRUE completion:nil];
-    }
-    else if ( //(type == UIImagePickerControllerSourceTypePhotoLibrary) &&
-              [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
+    } else if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
         imagePicker.delegate = self;
         imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
         imagePicker.mediaTypes = [NSArray arrayWithObjects:(NSString*)kUTTypeMovie, (NSString*)kUTTypeImage, nil];
@@ -135,11 +133,24 @@
 - (void)photoLibButtonPressed:(id)sender {
     NSLog(@"switch to photo library");
     [imagePicker dismissViewControllerAnimated:FALSE completion:^{
-        [imagePicker release];
-         imagePicker = nil;
-
+        [imagePicker release]; imagePicker = nil;
         [self launchCamera:hostVC type:UIImagePickerControllerSourceTypePhotoLibrary withEditing:TRUE];
     }];
+}
+
+// Save the openning event into database.
+- (bool)isPhotoEditorFirstTimeShowup {
+    const int SHOW_UP_TIMES = 1;
+    totModel* totModel = global.model;
+    NSArray* events = [totModel getEvent:global.baby.babyID event:@"photoeditor"];
+
+    if ([events count] == SHOW_UP_TIMES) return false;
+
+    [totModel addEvent:global.baby.babyID
+                 event:@"photoeditor"
+              datetime:[NSDate date]
+                 value:@"open"];
+    return true;
 }
 
 - (void)imagePickerController:(UIImagePickerController*)picker didFinishPickingMediaWithInfo:(NSDictionary*)info {
@@ -152,8 +163,7 @@
             UIImage* photo = (UIImage*)[info objectForKey:@"UIImagePickerControllerOriginalImage"];
             UIImageWriteToSavedPhotosAlbum(photo, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
         }
-    }
-    else if ([mediaType isEqualToString:(NSString*)kUTTypeMovie]) {
+    } else if ([mediaType isEqualToString:(NSString*)kUTTypeMovie]) {
         if( picker.sourceType == UIImagePickerControllerSourceTypeCamera ) {
             // TODO check where video is saved (should be in media dir)
             NSString* filepath = [(NSURL*)[info valueForKey:UIImagePickerControllerMediaURL] absoluteString];
@@ -164,14 +174,17 @@
                 UISaveVideoAtPathToSavedPhotosAlbum(filepath, self, @selector(video:didFinishSavingWithError:contextInfo:), filepath);
             }
         }
-    }
-    else
+    } else {
         return;
+    }
     
     [imagePicker dismissViewControllerAnimated:FALSE completion:^{
         if ([mediaType isEqualToString:(NSString*)kUTTypeImage]) {
             NSURL* assetURL = [info objectForKey:UIImagePickerControllerReferenceURL];
             if( editing ) {
+                if ([self isPhotoEditorFirstTimeShowup]) {
+                   [totUtility showAlert:@"Cropping the photo may make your scrapbook look better."];
+                }
                 // call photo editor
                 if (!editor) editor = [[AviaryPhotoEditor alloc] init:nil];
                 editor.vc = hostVC;
@@ -191,8 +204,7 @@
                 img = [editor editingResImageForAssetURL:assetURL];
                 [self saveImage:img];
             }
-        }
-        else if ([mediaType isEqualToString:(NSString*)kUTTypeMovie]) {}
+        } else if ([mediaType isEqualToString:(NSString*)kUTTypeMovie]) {}
     }];
     [self hideCamera];
 }
@@ -340,7 +352,7 @@
     UIImage *resizedPhoto = [totUtility imageWithImage:photo scaledToSize:psize];
     NSString *imagePath = [totMediaLibrary getMediaPath:filename];
     NSData *data = UIImageJPEGRepresentation(resizedPhoto, 0.8);
-    //NSData *data = UIImagePNGRepresentation(resizedPhoto);
+    // NSData *data = UIImagePNGRepresentation(resizedPhoto);
     [data writeToFile:imagePath atomically:NO];
     return imagePath;
     

@@ -183,8 +183,7 @@
 //        mImage.layer.borderColor = [UIColor colorWithRed:0.7f green:0.7f blue:0.7f alpha:1.0f].CGColor;
 //        mImage.layer.borderWidth = 3.0f;
 //        mImage.layer.opacity = 1;
-    }
-    else {
+    } else {
         mImage.layer.cornerRadius = 0;
         mImage.layer.masksToBounds = YES;
         mImage.layer.borderColor = [UIColor clearColor].CGColor;
@@ -342,9 +341,7 @@ static BOOL bAnimationStarted = NO;
 }
 
 - (void)animateRemaining {
-    if( !bIsFullPage ) {
-        [mView setStyle:FALSE];
-    }
+    if( !bIsFullPage ) [mView setStyle:FALSE];
 
     [UIView beginAnimations:@"page_element_animation" context:nil];
     [UIView setAnimationDelegate:self];
@@ -354,6 +351,8 @@ static BOOL bAnimationStarted = NO;
     [UIView setAnimationDidStopSelector:@selector(animationDidStop:finished:context:)];
     if (bIsFullPage) {
         CGSize screenSize = [totUtility getScreenSize];
+        // The sequence of calls of move, rotate matters.
+        [mView move:CGPointMake(0, 0)];
         float ratio = screenSize.height / 480;
         if ( isLandscape ) {
             [self setFrame:CGRectMake(mView.mData.x * ratio,
@@ -374,10 +373,8 @@ static BOOL bAnimationStarted = NO;
                                        mView.mData.w,
                                        mView.mData.h * ratio)];
         }
-        [mView rotateTo:mView.mData.radians];
-        [mView move:CGPointMake(0, 0)];
+        [mView rotate:mView.mData.radians];
         [bookvc hideOptionMenuAndButton:FALSE];
-        
         [self setBackgroundColor:[UIColor clearColor]];
     } else {
         // Put this view to top.
@@ -411,8 +408,8 @@ static BOOL bAnimationStarted = NO;
         float x0 = (window.size.width - resized_w) / 2;
         float y0 = (window.size.height - resized_h) / 2;
         [mView resizeTo:CGRectMake(0, 0, resized_w, resized_h)];
-        [mView moveTo:CGPointMake(x0, y0)];
-        
+        [mView move:CGPointMake(x0, y0)];
+        //[mView rotateTo:0.0f];
         [bookvc hideOptionMenuAndButton:TRUE];
     }
     [UIView commitAnimations];
