@@ -225,7 +225,7 @@
 - (IBAction)swipeGestureEvent:(UISwipeGestureRecognizer *)swipeRecognizer {
     // Get the location of the gesture
     CGPoint location = [swipeRecognizer locationInView:self.view];
-    NSLog(@"Swipe %d", swipeRecognizer.direction);
+    //NSLog(@"Swipe %d", swipeRecognizer.direction);
     if( swipeRecognizer.direction == UISwipeGestureRecognizerDirectionLeft ) {
         // show newer photo
         //[self showNextImage:TRUE]; // show newer image

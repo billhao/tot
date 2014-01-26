@@ -278,7 +278,7 @@
     // mPageViews.count is unsigned int. pageIndex (could be -1) will be converted to unsigned int so -1 may be > mPageViews.count
     while( (pageIndex >= (int)mPageViews.count) && (pageIndex < (int)mBook.pageCount) ) {
         // add nil page
-        NSLog(@"Add a nil page");
+        //NSLog(@"Add a nil page");
         [mPageViews addObject:[NSNull null]];
     }
 
@@ -361,7 +361,7 @@
     [self hideOptionMenu:TRUE];
     // Get the location of the gesture
     CGPoint location = [swipeRecognizer locationInView:self.view];
-    NSLog(@"Swipe %d", swipeRecognizer.direction);
+    //NSLog(@"Swipe %d", swipeRecognizer.direction);
     if( swipeRecognizer.direction == UISwipeGestureRecognizerDirectionLeft ) {
         // go to next page
         [self nextPage];
