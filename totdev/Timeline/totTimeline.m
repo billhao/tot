@@ -382,7 +382,8 @@
 //}
 
 -(void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView {
-    int offset = 420;
+    CGSize screen_size = [totUtility getScreenSize];
+    int offset = screen_size.height - 20 - 56;
     if (scrollView.contentOffset.y + offset > scrollView.contentSize.height) {
         [self loadCardsNumber:10];
     }
