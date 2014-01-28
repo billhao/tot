@@ -70,7 +70,7 @@
     [self.view addGestureRecognizer:rightSwipeRecognizer];
     [rightSwipeRecognizer release];
 
-    NSLog(@"bookvc viewdidload %@", [totUtility getFrameString:self.view.frame]);
+    //NSLog(@"bookvc viewdidload %@", [totUtility getFrameString:self.view.frame]);
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -86,7 +86,7 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-    NSLog(@"bookvc viewdidappear %@", [totUtility getFrameString:self.view.frame]);
+    //NSLog(@"bookvc viewdidappear %@", [totUtility getFrameString:self.view.frame]);
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -118,7 +118,7 @@
 }
 
 - (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {
-    NSLog(@"bookvc preferredInterfaceOrientationForPresentation");
+    //NSLog(@"bookvc preferredInterfaceOrientationForPresentation");
     if( [mBook orientationLandscape] )
         return UIInterfaceOrientationLandscapeRight;
     else
@@ -137,7 +137,7 @@
 }
 
 - (void)viewWillLayoutSubviews {
-    NSLog(@"bookvc viewWillLayoutSubviews %@", [totUtility getFrameString:self.view.bounds]);
+    //NSLog(@"bookvc viewWillLayoutSubviews %@", [totUtility getFrameString:self.view.bounds]);
     bookview.frame = self.view.bounds;
 }
 
@@ -373,7 +373,7 @@
 }
 
 - (void)optionButtonPressed:(id)sender {
-    NSLog(@"option clicked");
+    //NSLog(@"option clicked");
     
     // hide option view
     optionView.hidden = TRUE;
@@ -427,7 +427,7 @@
 
 // edit book name
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
-    NSLog(@"Entered: %@",[[alertView textFieldAtIndex:0] text]);
+    //NSLog(@"Entered: %@",[[alertView textFieldAtIndex:0] text]);
     if( buttonIndex == 1 ) {
         // delete the book
         [mBook deleteBook];

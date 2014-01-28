@@ -325,11 +325,11 @@ static BOOL bIsFullPage = NO;
 static BOOL bAnimationStarted = NO;
 - (void)animationDidStart:(NSString*)animationID context:(void*)context {
     bAnimationStarted = YES;
-    printf("animation started\n");
+    //printf("animation started\n");
 }
 - (void)animationDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context {
     bAnimationStarted = NO;
-    printf("animation finished\n");
+    //printf("animation finished\n");
     if (bIsFullPage) {
         // bring this view to original z-index
         UIView* superview = self.superview;
