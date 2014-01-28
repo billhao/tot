@@ -152,7 +152,7 @@
     if ([curr_label.text isEqualToString:@"N/A"]) {
         UIButton* curr_button = (UIButton*)[physicalButtons objectAtIndex:i];
         NSMutableArray* icon_img_filename = [[NSMutableArray alloc] initWithObjects:
-                                             @"height2", @"weight2", @"hc2", @"diaper2", @"language2", @"sleep2", @"food2", nil];
+                                             @"height", @"weight", @"hc", @"diaper", @"language", @"sleep", @"food", nil];
         [curr_button setImage:[UIImage imageNamed:[icon_img_filename objectAtIndex:i]]
                      forState:UIControlStateNormal];
         [icon_img_filename release];
