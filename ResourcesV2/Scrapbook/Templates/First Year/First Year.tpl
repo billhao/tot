@@ -291,11 +291,11 @@
       "name": "First Year Template P6",
       "elements": [
         {
-          "x": 43,
-          "y": 45,
-          "w": 370,
-          "h": 245,
-          "radius": -4.5,
+          "x": 54,
+          "y": 38,
+          "w": 367,
+          "h": 205,
+          "radius": -4,
           "type": "image",
           "name": "P6",
         },
