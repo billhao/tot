@@ -85,7 +85,7 @@
     if( self.type == HEIGHT || self.type == HEAD ) {
         str = [NSString stringWithFormat:@"%.2f inches",value];
     } else if( self.type == WEIGHT ) {
-        str = [NSString stringWithFormat:@"%.2f pound",value];
+        str = [NSString stringWithFormat:@"%.2f pounds",value];
     } else
         return;
     selectedValueLabel.text = str;
@@ -230,7 +230,7 @@
             if( self.type == HEIGHT )
                 description.text = [NSString stringWithFormat:@"%@ is %.2f inches taller than last time", global.baby.name, incr];
             else if ( self.type == WEIGHT )
-                description.text = [NSString stringWithFormat:@"%@ weighs %.2f pound more than last time", global.baby.name, incr];
+                description.text = [NSString stringWithFormat:@"%@ weighs %.2f pounds more than last time", global.baby.name, incr];
             else if( self.type == HEAD )
                 description.text = [NSString stringWithFormat:@"%@'s head circumference is %.2f inches longer than last time", global.baby.name, incr];
         }
