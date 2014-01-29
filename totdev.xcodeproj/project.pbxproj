@@ -228,6 +228,30 @@
 		3F79A42817180453004E96F6 /* tutorial_3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F79A42617180453004E96F6 /* tutorial_3@2x.png */; };
 		3F7CDB5D157ABDCE009CD3D7 /* totdb.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 3F7CDB5C157ABDCE009CD3D7 /* totdb.sqlite */; };
 		3F7E655017AE19AF00C43C02 /* totMediaLibrary.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F7E654F17AE19AF00C43C02 /* totMediaLibrary.m */; };
+		3F7F86E01898F2D200492EDD /* Animals Template P1.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F7F86D81898F2D200492EDD /* Animals Template P1.png */; };
+		3F7F86E11898F2D200492EDD /* Animals Template P2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F7F86D91898F2D200492EDD /* Animals Template P2.png */; };
+		3F7F86E21898F2D200492EDD /* Animals Template P3.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F7F86DA1898F2D200492EDD /* Animals Template P3.png */; };
+		3F7F86E31898F2D200492EDD /* Animals Template P4.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F7F86DB1898F2D200492EDD /* Animals Template P4.png */; };
+		3F7F86E41898F2D200492EDD /* Animals Template P5.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F7F86DC1898F2D200492EDD /* Animals Template P5.png */; };
+		3F7F86E51898F2D200492EDD /* Animals Template P6.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F7F86DD1898F2D200492EDD /* Animals Template P6.png */; };
+		3F7F86E61898F2D200492EDD /* Animals Template P7.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F7F86DE1898F2D200492EDD /* Animals Template P7.png */; };
+		3F7F86E71898F2D200492EDD /* Animals Template P8.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F7F86DF1898F2D200492EDD /* Animals Template P8.png */; };
+		3F7F86F01898F2DB00492EDD /* Birthday Template P1.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F7F86E81898F2DB00492EDD /* Birthday Template P1.png */; };
+		3F7F86F11898F2DB00492EDD /* Birthday Template P2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F7F86E91898F2DB00492EDD /* Birthday Template P2.png */; };
+		3F7F86F21898F2DB00492EDD /* Birthday Template P3.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F7F86EA1898F2DB00492EDD /* Birthday Template P3.png */; };
+		3F7F86F31898F2DB00492EDD /* Birthday Template P4.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F7F86EB1898F2DB00492EDD /* Birthday Template P4.png */; };
+		3F7F86F41898F2DB00492EDD /* Birthday Template P5.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F7F86EC1898F2DB00492EDD /* Birthday Template P5.png */; };
+		3F7F86F51898F2DB00492EDD /* Birthday Template P6.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F7F86ED1898F2DB00492EDD /* Birthday Template P6.png */; };
+		3F7F86F61898F2DB00492EDD /* Birthday Template P7.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F7F86EE1898F2DB00492EDD /* Birthday Template P7.png */; };
+		3F7F86F71898F2DB00492EDD /* Birthday Template P8.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F7F86EF1898F2DB00492EDD /* Birthday Template P8.png */; };
+		3F7F87001898F2E500492EDD /* Flowers Template P1.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F7F86F81898F2E500492EDD /* Flowers Template P1.png */; };
+		3F7F87011898F2E500492EDD /* Flowers Template P2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F7F86F91898F2E500492EDD /* Flowers Template P2.png */; };
+		3F7F87021898F2E500492EDD /* Flowers Template P3.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F7F86FA1898F2E500492EDD /* Flowers Template P3.png */; };
+		3F7F87031898F2E500492EDD /* Flowers Template P4.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F7F86FB1898F2E500492EDD /* Flowers Template P4.png */; };
+		3F7F87041898F2E500492EDD /* Flowers Template P5.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F7F86FC1898F2E500492EDD /* Flowers Template P5.png */; };
+		3F7F87051898F2E500492EDD /* Flowers Template P6.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F7F86FD1898F2E500492EDD /* Flowers Template P6.png */; };
+		3F7F87061898F2E500492EDD /* Flowers Template P7.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F7F86FE1898F2E500492EDD /* Flowers Template P7.png */; };
+		3F7F87071898F2E500492EDD /* Flowers Template P8.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F7F86FF1898F2E500492EDD /* Flowers Template P8.png */; };
 		3F8A45F717BB7550006A7566 /* scrapbook_option_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F8A45F517BB7550006A7566 /* scrapbook_option_button@2x.png */; };
 		3F95918E17D9A437003FDBC7 /* photo_lib@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F95918D17D9A437003FDBC7 /* photo_lib@2x.png */; };
 		3F95919017DC701F003FDBC7 /* scrapbook_button_pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F95918F17DC701F003FDBC7 /* scrapbook_button_pressed@2x.png */; };
@@ -633,6 +657,30 @@
 		3F7CDB5C157ABDCE009CD3D7 /* totdb.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = totdb.sqlite; sourceTree = "<group>"; };
 		3F7E654E17AE19AF00C43C02 /* totMediaLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totMediaLibrary.h; path = Utility/totMediaLibrary.h; sourceTree = "<group>"; };
 		3F7E654F17AE19AF00C43C02 /* totMediaLibrary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totMediaLibrary.m; path = Utility/totMediaLibrary.m; sourceTree = "<group>"; };
+		3F7F86D81898F2D200492EDD /* Animals Template P1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Animals Template P1.png"; sourceTree = "<group>"; };
+		3F7F86D91898F2D200492EDD /* Animals Template P2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Animals Template P2.png"; sourceTree = "<group>"; };
+		3F7F86DA1898F2D200492EDD /* Animals Template P3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Animals Template P3.png"; sourceTree = "<group>"; };
+		3F7F86DB1898F2D200492EDD /* Animals Template P4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Animals Template P4.png"; sourceTree = "<group>"; };
+		3F7F86DC1898F2D200492EDD /* Animals Template P5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Animals Template P5.png"; sourceTree = "<group>"; };
+		3F7F86DD1898F2D200492EDD /* Animals Template P6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Animals Template P6.png"; sourceTree = "<group>"; };
+		3F7F86DE1898F2D200492EDD /* Animals Template P7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Animals Template P7.png"; sourceTree = "<group>"; };
+		3F7F86DF1898F2D200492EDD /* Animals Template P8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Animals Template P8.png"; sourceTree = "<group>"; };
+		3F7F86E81898F2DB00492EDD /* Birthday Template P1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Birthday Template P1.png"; sourceTree = "<group>"; };
+		3F7F86E91898F2DB00492EDD /* Birthday Template P2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Birthday Template P2.png"; sourceTree = "<group>"; };
+		3F7F86EA1898F2DB00492EDD /* Birthday Template P3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Birthday Template P3.png"; sourceTree = "<group>"; };
+		3F7F86EB1898F2DB00492EDD /* Birthday Template P4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Birthday Template P4.png"; sourceTree = "<group>"; };
+		3F7F86EC1898F2DB00492EDD /* Birthday Template P5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Birthday Template P5.png"; sourceTree = "<group>"; };
+		3F7F86ED1898F2DB00492EDD /* Birthday Template P6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Birthday Template P6.png"; sourceTree = "<group>"; };
+		3F7F86EE1898F2DB00492EDD /* Birthday Template P7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Birthday Template P7.png"; sourceTree = "<group>"; };
+		3F7F86EF1898F2DB00492EDD /* Birthday Template P8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Birthday Template P8.png"; sourceTree = "<group>"; };
+		3F7F86F81898F2E500492EDD /* Flowers Template P1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Flowers Template P1.png"; sourceTree = "<group>"; };
+		3F7F86F91898F2E500492EDD /* Flowers Template P2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Flowers Template P2.png"; sourceTree = "<group>"; };
+		3F7F86FA1898F2E500492EDD /* Flowers Template P3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Flowers Template P3.png"; sourceTree = "<group>"; };
+		3F7F86FB1898F2E500492EDD /* Flowers Template P4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Flowers Template P4.png"; sourceTree = "<group>"; };
+		3F7F86FC1898F2E500492EDD /* Flowers Template P5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Flowers Template P5.png"; sourceTree = "<group>"; };
+		3F7F86FD1898F2E500492EDD /* Flowers Template P6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Flowers Template P6.png"; sourceTree = "<group>"; };
+		3F7F86FE1898F2E500492EDD /* Flowers Template P7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Flowers Template P7.png"; sourceTree = "<group>"; };
+		3F7F86FF1898F2E500492EDD /* Flowers Template P8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Flowers Template P8.png"; sourceTree = "<group>"; };
 		3F8A45F517BB7550006A7566 /* scrapbook_option_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "scrapbook_option_button@2x.png"; sourceTree = "<group>"; };
 		3F95918D17D9A437003FDBC7 /* photo_lib@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "photo_lib@2x.png"; sourceTree = "<group>"; };
 		3F95918F17DC701F003FDBC7 /* scrapbook_button_pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "scrapbook_button_pressed@2x.png"; sourceTree = "<group>"; };
@@ -891,6 +939,14 @@
 		17B168C11897A786007E03E5 /* Animals */ = {
 			isa = PBXGroup;
 			children = (
+				3F7F86D81898F2D200492EDD /* Animals Template P1.png */,
+				3F7F86D91898F2D200492EDD /* Animals Template P2.png */,
+				3F7F86DA1898F2D200492EDD /* Animals Template P3.png */,
+				3F7F86DB1898F2D200492EDD /* Animals Template P4.png */,
+				3F7F86DC1898F2D200492EDD /* Animals Template P5.png */,
+				3F7F86DD1898F2D200492EDD /* Animals Template P6.png */,
+				3F7F86DE1898F2D200492EDD /* Animals Template P7.png */,
+				3F7F86DF1898F2D200492EDD /* Animals Template P8.png */,
 				17B168C21897A786007E03E5 /* Animals Template P1@2x.png */,
 				17B168C31897A786007E03E5 /* Animals Template P2@2x.png */,
 				17B168C41897A786007E03E5 /* Animals Template P3@2x.png */,
@@ -907,6 +963,14 @@
 		17B168CB1897A786007E03E5 /* Birthday */ = {
 			isa = PBXGroup;
 			children = (
+				3F7F86E81898F2DB00492EDD /* Birthday Template P1.png */,
+				3F7F86E91898F2DB00492EDD /* Birthday Template P2.png */,
+				3F7F86EA1898F2DB00492EDD /* Birthday Template P3.png */,
+				3F7F86EB1898F2DB00492EDD /* Birthday Template P4.png */,
+				3F7F86EC1898F2DB00492EDD /* Birthday Template P5.png */,
+				3F7F86ED1898F2DB00492EDD /* Birthday Template P6.png */,
+				3F7F86EE1898F2DB00492EDD /* Birthday Template P7.png */,
+				3F7F86EF1898F2DB00492EDD /* Birthday Template P8.png */,
 				17B168CC1897A786007E03E5 /* Birthday Template P1@2x.png */,
 				17B168CD1897A786007E03E5 /* Birthday Template P2@2x.png */,
 				17B168CE1897A786007E03E5 /* Birthday Template P3@2x.png */,
@@ -995,6 +1059,14 @@
 		17B1690B1897A787007E03E5 /* Flowers */ = {
 			isa = PBXGroup;
 			children = (
+				3F7F86F81898F2E500492EDD /* Flowers Template P1.png */,
+				3F7F86F91898F2E500492EDD /* Flowers Template P2.png */,
+				3F7F86FA1898F2E500492EDD /* Flowers Template P3.png */,
+				3F7F86FB1898F2E500492EDD /* Flowers Template P4.png */,
+				3F7F86FC1898F2E500492EDD /* Flowers Template P5.png */,
+				3F7F86FD1898F2E500492EDD /* Flowers Template P6.png */,
+				3F7F86FE1898F2E500492EDD /* Flowers Template P7.png */,
+				3F7F86FF1898F2E500492EDD /* Flowers Template P8.png */,
 				17B1690C1897A787007E03E5 /* Flowers Template P1@2x.png */,
 				17B1690D1897A787007E03E5 /* Flowers Template P2@2x.png */,
 				17B1690E1897A787007E03E5 /* Flowers Template P3@2x.png */,
@@ -1831,11 +1903,13 @@
 				17B169221897A787007E03E5 /* delete_button_pressed.png in Resources */,
 				17B168881897A390007E03E5 /* food.png in Resources */,
 				3F4D0F8F183F396400754E4E /* tutorial_4@2x.png in Resources */,
+				3F7F86E01898F2D200492EDD /* Animals Template P1.png in Resources */,
 				3F277101164EDFF900DF84EF /* bg_login.png in Resources */,
 				3F277102164EDFF900DF84EF /* bg_login@2x.png in Resources */,
 				17B1693D1897A787007E03E5 /* Color Play P3@2x.png in Resources */,
 				17B1693B1897A787007E03E5 /* Color Play P2@2x.png in Resources */,
 				3F277103164EDFF900DF84EF /* bg_newbaby.png in Resources */,
+				3F7F86F51898F2DB00492EDD /* Birthday Template P6.png in Resources */,
 				17B1687F1897A125007E03E5 /* weight@2x.png in Resources */,
 				17B168941897A3A9007E03E5 /* summary_head_bg.png in Resources */,
 				3F277104164EDFF900DF84EF /* bg_newbaby@2x.png in Resources */,
@@ -1866,17 +1940,20 @@
 				3F686B0D17B84C730018BE6E /* Activities.json in Resources */,
 				8E32868818271C10006E8F38 /* icons-language.png in Resources */,
 				17B168BD1897A736007E03E5 /* feeding_delete@2x.png in Resources */,
+				3F7F87041898F2E500492EDD /* Flowers Template P5.png in Resources */,
 				3F686B0E17B84C730018BE6E /* camera_button@2x.png in Resources */,
 				3F686B1317B84C730018BE6E /* scrapbook_button@2x.png in Resources */,
 				3F8A45F717BB7550006A7566 /* scrapbook_option_button@2x.png in Resources */,
 				17B1689F1897A459007E03E5 /* home_bg.png in Resources */,
 				17B1688B1897A390007E03E5 /* language.png in Resources */,
+				3F7F86F11898F2DB00492EDD /* Birthday Template P2.png in Resources */,
 				17B169491897A787007E03E5 /* Colorful Year P1.png in Resources */,
 				17B169701897A787007E03E5 /* Flowers Template P8@2x.png in Resources */,
 				3FD3C5E717C75BDE00DB1B71 /* delete_button_pressed@2x.png in Resources */,
 				17B169741897A787007E03E5 /* Birthday.png in Resources */,
 				3FD3C5E817C75BDE00DB1B71 /* delete_button@2x.png in Resources */,
 				3FD3C64117CDBCA700DB1B71 /* camera_button_pressed@2x.png in Resources */,
+				3F7F87011898F2E500492EDD /* Flowers Template P2.png in Resources */,
 				17B1698B1897AAD5007E03E5 /* Diaper_checkbox@2x.png in Resources */,
 				17B169281897A787007E03E5 /* Animals Template P5@2x.png in Resources */,
 				17B1689A1897A3D6007E03E5 /* add_text.png in Resources */,
@@ -1889,19 +1966,27 @@
 				3FD3C65317CDD60500DB1B71 /* activity_tag@2x.png in Resources */,
 				17B169651897A787007E03E5 /* First Year Template P6@2x.png in Resources */,
 				3FD3C6FA17CF36DC00DB1B71 /* activity_angry.png in Resources */,
+				3F7F86F61898F2DB00492EDD /* Birthday Template P7.png in Resources */,
 				3FD3C6FB17CF36DC00DB1B71 /* activity_angry@2x.png in Resources */,
 				3FD3C6FC17CF36DC00DB1B71 /* activity_chew.png in Resources */,
 				3FD3C6FD17CF36DC00DB1B71 /* activity_chew@2x.png in Resources */,
 				17B1696E1897A787007E03E5 /* Flowers Template P6@2x.png in Resources */,
+				3F7F86E71898F2D200492EDD /* Animals Template P8.png in Resources */,
 				3FD3C6FE17CF36DC00DB1B71 /* activity_clap.png in Resources */,
 				17B169461897A787007E03E5 /* Color Play.tpl in Resources */,
+				3F7F87071898F2E500492EDD /* Flowers Template P8.png in Resources */,
 				3FD3C6FF17CF36DC00DB1B71 /* activity_clap@2x.png in Resources */,
 				3FD3C70017CF36DC00DB1B71 /* activity_crawl.png in Resources */,
+				3F7F86F71898F2DB00492EDD /* Birthday Template P8.png in Resources */,
 				17B1696F1897A787007E03E5 /* Flowers Template P7@2x.png in Resources */,
 				3FD3C70117CF36DC00DB1B71 /* activity_crawl@2x.png in Resources */,
 				17B168921897A3A9007E03E5 /* female.png in Resources */,
+				3F7F86E61898F2D200492EDD /* Animals Template P7.png in Resources */,
+				3F7F87031898F2E500492EDD /* Flowers Template P4.png in Resources */,
 				3FD3C70217CF36DC00DB1B71 /* activity_cruise.png in Resources */,
+				3F7F87001898F2E500492EDD /* Flowers Template P1.png in Resources */,
 				17B1692E1897A787007E03E5 /* Birthday Template P2@2x.png in Resources */,
+				3F7F86E41898F2D200492EDD /* Animals Template P5.png in Resources */,
 				3FD3C70317CF36DC00DB1B71 /* activity_cruise@2x.png in Resources */,
 				3FD3C70417CF36DC00DB1B71 /* activity_dance.png in Resources */,
 				3FD3C70517CF36DC00DB1B71 /* activity_dance@2x.png in Resources */,
@@ -1909,6 +1994,7 @@
 				3FD3C70717CF36DC00DB1B71 /* activity_disgust@2x.png in Resources */,
 				17B1689B1897A3D6007E03E5 /* add_video.png in Resources */,
 				17B1695A1897A787007E03E5 /* First Year Template P1.png in Resources */,
+				3F7F86E31898F2D200492EDD /* Animals Template P4.png in Resources */,
 				17B1695F1897A787007E03E5 /* First Year Template P3@2x.png in Resources */,
 				17B168791897A125007E03E5 /* diaper@2x.png in Resources */,
 				3FD3C70817CF36DC00DB1B71 /* activity_eye_contact.png in Resources */,
@@ -1957,6 +2043,7 @@
 				3F0B453D184B2E0400A87429 /* AviarySDKResources.bundle in Resources */,
 				17B1692C1897A787007E03E5 /* Animals.tpl in Resources */,
 				3FD3C71517CF36DC00DB1B71 /* activity_lift_neck@2x.png in Resources */,
+				3F7F86F01898F2DB00492EDD /* Birthday Template P1.png in Resources */,
 				17B1688D1897A390007E03E5 /* weight.png in Resources */,
 				3F4D0F91183F396400754E4E /* tutorial_bg@2x.png in Resources */,
 				3FD3C71617CF36DC00DB1B71 /* activity_mirror.png in Resources */,
@@ -1971,6 +2058,7 @@
 				3FD3C71D17CF36DC00DB1B71 /* activity_run@2x.png in Resources */,
 				3FD3C71E17CF36DC00DB1B71 /* activity_sad.png in Resources */,
 				17B168B71897A61C007E03E5 /* sb_book_bg.png in Resources */,
+				3F7F86F41898F2DB00492EDD /* Birthday Template P5.png in Resources */,
 				3FD3C71F17CF36DC00DB1B71 /* activity_sad@2x.png in Resources */,
 				17B169311897A787007E03E5 /* Birthday Template P5@2x.png in Resources */,
 				17B1694F1897A787007E03E5 /* Colorful Year P4.png in Resources */,
@@ -1983,6 +2071,7 @@
 				17B169761897A787007E03E5 /* color play.png in Resources */,
 				3FD3C72417CF36DC00DB1B71 /* activity_stand.png in Resources */,
 				3FD3C72517CF36DC00DB1B71 /* activity_stand@2x.png in Resources */,
+				3F7F86F21898F2DB00492EDD /* Birthday Template P3.png in Resources */,
 				3FD3C72617CF36DC00DB1B71 /* activity_suck_thumb.png in Resources */,
 				17B169571897A787007E03E5 /* Colorful Year.tpl in Resources */,
 				3FD3C72717CF36DC00DB1B71 /* activity_suck_thumb@2x.png in Resources */,
@@ -2010,6 +2099,7 @@
 				3F049B4F17D2F79700F05727 /* activity_bg@2x.png in Resources */,
 				3F049B5717D4073400F05727 /* timeline_home.png in Resources */,
 				3F049B5817D4073400F05727 /* timeline_home@2x.png in Resources */,
+				3F7F87021898F2E500492EDD /* Flowers Template P3.png in Resources */,
 				17B169681897A787007E03E5 /* First Year.tpl in Resources */,
 				17B168B31897A5EC007E03E5 /* language_gray@2x.png in Resources */,
 				3F049B5917D4073400F05727 /* timeline_home_pressed.png in Resources */,
@@ -2052,6 +2142,8 @@
 				17B168B91897A66A007E03E5 /* lang_input_bg.png in Resources */,
 				17B168871897A390007E03E5 /* diaper.png in Resources */,
 				3FE470DE182CDC31005F9D5B /* settings.png in Resources */,
+				3F7F86E11898F2D200492EDD /* Animals Template P2.png in Resources */,
+				3F7F87061898F2E500492EDD /* Flowers Template P7.png in Resources */,
 				8E0EA48417D54D4400C75BD3 /* weight_gray.png in Resources */,
 				3F049B6C17D49C5300F05727 /* lang_input_bg@2x.png in Resources */,
 				17B169331897A787007E03E5 /* Birthday Template P7@2x.png in Resources */,
@@ -2077,7 +2169,10 @@
 				17B169261897A787007E03E5 /* Animals Template P3@2x.png in Resources */,
 				3FC63DCE17F12954003EA9D9 /* scrapbook_option_button.png in Resources */,
 				17B169401897A787007E03E5 /* Color Play P5.png in Resources */,
+				3F7F86F31898F2DB00492EDD /* Birthday Template P4.png in Resources */,
+				3F7F86E21898F2D200492EDD /* Animals Template P3.png in Resources */,
 				3F50B9F7184C0726001E8ED0 /* Default-568h@2x.png in Resources */,
+				3F7F87051898F2E500492EDD /* Flowers Template P6.png in Resources */,
 				17B168BC1897A736007E03E5 /* feeding_add@2x.png in Resources */,
 				17B1687B1897A125007E03E5 /* hc@2x.png in Resources */,
 				3FC63E0317F2C22D003EA9D9 /* female@2x.png in Resources */,
@@ -2086,6 +2181,7 @@
 				17B169291897A787007E03E5 /* Animals Template P6@2x.png in Resources */,
 				17B169471897A787007E03E5 /* Colorful Year Cover.png in Resources */,
 				3F11385117F926C300CE7ABF /* btn_forgotpwd@2x.png in Resources */,
+				3F7F86E51898F2D200492EDD /* Animals Template P6.png in Resources */,
 				3FA793E818011BCA005632F8 /* sb_book_bg@2x.png in Resources */,
 				3FA793EA180125FB005632F8 /* Raleway-Medium_2.ttf in Resources */,
 				3F50B9F9184C0726001E8ED0 /* Default~iphone.png in Resources */,
