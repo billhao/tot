@@ -11,10 +11,7 @@
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIconFiles</key>
-	<array>
-		<string>Logo.png</string>
-		<string>Logo@2x.png</string>
-	</array>
+	<array/>
 	<key>CFBundleIcons</key>
 	<dict>
 		<key>CFBundlePrimaryIcon</key>
@@ -27,9 +24,6 @@
 				<string>Logo-114x114</string>
 				<string>Logo-57x57</string>
 				<string>Logo-120x120</string>
-				<string>Logo@2x_120x120</string>
-				<string>Logo.png</string>
-				<string>Logo@2x.png</string>
 			</array>
 			<key>UIPrerenderedIcon</key>
 			<false/>

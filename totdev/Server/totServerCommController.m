@@ -13,13 +13,9 @@
 @interface totServerCommController()
 
 - (int) sendStr: (NSString*) post toURL: (NSString *) dest_url returnMessage: (NSString**)message;
-- (void) sendStrAsync: (NSString*) post toURL: (NSString *) dest_url returnMessage: (NSString**)message;
+- (void) sendStrAsync:(NSString*)post toURL:(NSString *)dest_url returnMessage:(NSString**)message
+             callback:(totURLConnectionCallback)callback;
 
-@end
-
-@interface NSURLRequest (DummyInterface)
-+ (BOOL)allowsAnyHTTPSCertificateForHost:(NSString*)host;
-+ (void)setAllowsAnyHTTPSCertificate:(BOOL)allow forHost:(NSString*)host;
 @end
 
 @implementation totServerCommController
@@ -98,13 +94,12 @@
 // -----------------------------------------------
 //   send user activity to server
 // -----------------------------------------------
-- (int) sendUserActivityToServer: (NSString*) email withActivity: (NSString*) activity returnMessage:(NSString**)message{
+- (void) sendUserActivityToServer: (NSString*) email withActivity: (NSString*) activity returnMessage:(NSString**)message callback:(void(^)(int ret, NSString* msg))callback {
     NSString* actInfo = @"email=";
     actInfo = [actInfo stringByAppendingString:email];
     actInfo = [actInfo stringByAppendingString:@"&act="];
     actInfo = [actInfo stringByAppendingString:activity];
-    [self sendStrAsync:actInfo toURL:m_sendUsrAct_url returnMessage:message];
-    return SERVER_RESPONSE_CODE_SUCCESS;
+    [self sendStrAsync:actInfo toURL:m_sendUsrAct_url returnMessage:message callback:callback];
 }
 
 
@@ -120,15 +115,23 @@
 
     // Send the req syncrhonously [will be async later]
     NSURLResponse *response;
-    NSData *POSTReply = [NSURLConnection sendSynchronousRequest:request
-                                              returningResponse:&response
-                                                          error:nil];
-    NSString *strReply = [[NSString alloc] initWithBytes:[POSTReply bytes]
-                                                  length:[POSTReply length]
-                                                encoding:NSASCIIStringEncoding];
     
+    totURLConnection* conn = [[totURLConnection alloc] initWithRequest:request delegate:self startImmediately:YES callback:^(int ret, NSString *msg) {
+    }];
+
+    NSRunLoop* myRunLoop = [NSRunLoop currentRunLoop];
+    
+    while( !conn.finished ) {
+        //[NSThread sleepForTimeInterval:0.01];
+        [myRunLoop runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.5]];
+    }
+    
+    NSData* data = conn.responseData;
+    NSString *strReply = [[NSString alloc] initWithBytes:[data bytes]
+                                                  length:[data length]
+                                                encoding:NSASCIIStringEncoding];
     // Debug printout
-    if (POSTReply == nil) {
+    if (strReply == nil) {
         NSLog(@"post response: empty");
     } else {
         //NSLog(@"post response: %@", strReply);
@@ -136,6 +139,7 @@
     int ret = SERVER_RESPONSE_CODE_FAIL;
     NSArray* ss = [strReply componentsSeparatedByString:@"::"];
     [strReply release];
+    
     if( ss.count >= 1 && ss.count <= 2 ) {
         ret = [(NSString*)ss[0] intValue];
         if( ss.count == 2 ) {
@@ -144,18 +148,19 @@
     }
     else
         *message = @"Cannot understand server's response";
-
+    
+    // release connection?
+    [conn release];
     return ret;
 }
 
-- (void) sendStrAsync: (NSString*) post toURL: (NSString *) dest_url returnMessage: (NSString**)message {
+- (void) sendStrAsync:(NSString*)post toURL:(NSString *)dest_url returnMessage:(NSString**)message
+             callback:(totURLConnectionCallback)callback {
     //NSLog(@"post string: %@", post);
     
     // TODO add try catch here
     NSMutableURLRequest* request = [self getRequest:post toURL:dest_url];
-    
-    // Send the req asyncrhonously
-    [NSURLConnection sendAsynchronousRequest:request queue:nil completionHandler:nil];
+    totURLConnection* conn = [[[totURLConnection alloc] initWithRequest:request delegate:self startImmediately:YES callback:callback] autorelease];
 }
 
 - (NSMutableURLRequest*)getRequest:(NSString*)post toURL: (NSString *)dest_url {
@@ -173,7 +178,7 @@
 
     // ignore SSL certificate error
     NSURL* destURL = [NSURL URLWithString:dest_url];
-    [NSURLRequest setAllowsAnyHTTPSCertificate:YES forHost:[destURL host]];
+    //[NSURLRequest setAllowsAnyHTTPSCertificate:YES forHost:[destURL host]];
     
     // add HTTP basic authentication header to the request
     NSString *authStr = [NSString stringWithFormat:@"%@:%@", @"totdev", @"0000"];
@@ -183,6 +188,77 @@
     [request setValue:authValue forHTTPHeaderField:@"Authorization"];
 
     return [request autorelease];
+}
+
+#pragma mark - NSURLConnection delegate
+
+- (BOOL)connection:(NSURLConnection *)connection canAuthenticateAgainstProtectionSpace:(NSURLProtectionSpace *)protectionSpace {
+    return [protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust];
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge {
+    if ([challenge.protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust]) {
+        NSString* s = challenge.protectionSpace.host;
+        if ([challenge.protectionSpace.host isEqualToString:HOSTNAME_SHORT]) {
+            [challenge.sender useCredential:[NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust] forAuthenticationChallenge:challenge];
+        }
+    }
+    
+    [challenge.sender continueWithoutCredentialForAuthenticationChallenge:challenge];
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
+    // A response has been received, this is where we initialize the instance var you created
+    // so that we can append data to it in the didReceiveData method
+    // Furthermore, this method is called each time there is a redirect so reinitializing it
+    // also serves to clear it
+    totURLConnection* conn = (totURLConnection*)connection;
+    conn.responseData = [[NSMutableData alloc] init];
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
+    // Append the new data to the instance variable you declared
+    totURLConnection* conn = (totURLConnection*)connection;
+    [conn.responseData appendData:data];
+}
+
+- (NSCachedURLResponse *)connection:(NSURLConnection *)connection
+                  willCacheResponse:(NSCachedURLResponse*)cachedResponse {
+    // Return nil to indicate not necessary to store a cached response for this connection
+    return nil;
+}
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
+    // The request is complete and data has been received
+    // You can parse the stuff in your instance variable now
+    
+    totURLConnection* conn = (totURLConnection*)connection;
+    NSData* data = conn.responseData;
+    NSString *strReply = [[NSString alloc] initWithBytes:[data bytes]
+                                                  length:[data length]
+                                                encoding:NSASCIIStringEncoding];
+    // Debug printout
+    if (strReply == nil) {
+        NSLog(@"post response: empty");
+    } else {
+        //NSLog(@"post response: %@", strReply);
+    }
+    int ret = SERVER_RESPONSE_CODE_FAIL;
+    NSArray* ss = [strReply componentsSeparatedByString:@"::"];
+    [strReply release];
+    
+    NSString* message = nil;
+    if( ss.count >= 1 && ss.count <= 2 ) {
+        ret = [(NSString*)ss[0] intValue];
+        if( ss.count == 2 ) {
+            message = [[(NSString*)ss[1] retain] autorelease];
+        }
+    }
+    else
+        message = @"Cannot understand server's response";
+    
+    conn.callback(ret, message);
+    conn.finished = TRUE;
 }
 
 @end

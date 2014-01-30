@@ -16,8 +16,10 @@
  */
 
 #import <Foundation/Foundation.h>
+#import "totURLConnection.h"
 
 #define HOSTNAME @"https://www.gettot.com"
+#define HOSTNAME_SHORT @"www.gettot.com"
 
 enum SERVER_RESPONSE_CODE {
     SERVER_RESPONSE_CODE_FAIL = -1,
@@ -25,7 +27,7 @@ enum SERVER_RESPONSE_CODE {
     SERVER_RESPONSE_CODE_REG_USER_EXIST = 1,
 };
 
-@interface totServerCommController : NSObject {
+@interface totServerCommController : NSObject <NSURLConnectionDelegate, NSURLConnectionDataDelegate> {
     NSString *m_reg_url;  // url to the registration handler
     NSString *m_login_url; // url to the login handler
     NSString *m_changePasscode_url;  // url to the change passcode handler
@@ -37,5 +39,7 @@ enum SERVER_RESPONSE_CODE {
 - (int) sendLoginInfo: (NSString*) email withPasscode: (NSString*) passcode returnMessage:(NSString**)message;
 - (int) sendResetPasscodeForUser: (NSString*) email from: (NSString*) old_passcode to: (NSString*) new_passcode returnMessage: (NSString**)message;
 - (int) sendForgetPasscodeforUser: (NSString*) email returnMessage:(NSString**)message;
-- (int) sendUserActivityToServer: (NSString*) email withActivity: (NSString*) activity returnMessage:(NSString**)message;
+- (void) sendUserActivityToServer: (NSString*) email withActivity: (NSString*) activity returnMessage:(NSString**)message
+                        callback:(void(^)(int ret, NSString* msg))callback;
+
 @end

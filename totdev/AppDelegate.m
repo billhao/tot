@@ -267,9 +267,10 @@
         email = global.user.email;
     NSString* message = [[NSString alloc] init];
     totServerCommController* server = [[totServerCommController alloc] init];
-    int retCode = [server sendUserActivityToServer:email withActivity:@"open app" returnMessage:&message ];
-    [server release];
-    NSLog(@"notifyServerOpenApp=%d %@", retCode, message);
+    [server sendUserActivityToServer:email withActivity:@"open app" returnMessage:&message callback:^(int ret, NSString *msg) {
+        NSLog(@"notifyServerOpenApp=%d %@", ret, message);
+        [server release];
+    }];
 }
 
 @end
