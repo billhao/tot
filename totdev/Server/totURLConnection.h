@@ -8,12 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
-typedef void (^totURLConnectionCallback)(int ret, NSString* msg);
+typedef void (^totURLConnectionCallback) (int ret, NSString* msg);
 
-@interface totURLConnection : NSURLConnection {
-}
+@interface totURLConnection : NSURLConnection {}
 
-- (id)initWithRequest:(NSURLRequest *)request delegate:(id)delegate startImmediately:(BOOL)startImmediately callback:(totURLConnectionCallback)callback;
+- (id)initWithRequest:(NSURLRequest *)request
+             delegate:(id)delegate
+     startImmediately:(BOOL)startImmediately
+             callback:(totURLConnectionCallback)callback;
 
 @property(nonatomic, retain) NSMutableData *responseData;
 @property(copy) totURLConnectionCallback callback ;

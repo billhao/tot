@@ -183,6 +183,7 @@
     [activityButtons release];
     if( scrapbookListController != nil ) [scrapbookListController release];
     if( photoPositionLabel ) [photoPositionLabel release];
+    if( selectedActivities_lineView ) [selectedActivities_lineView release];
 }
 
 - (void)viewDidUnload
@@ -388,7 +389,6 @@
     NSString* activityName = [NSString stringWithFormat:ACTIVITY_PHOTO_REPLACABLE, filename];
     [global.model setItem:global.baby.babyID name:activityName value:imageData];
 
-
     NSLog(@"Photo filename: %@", filename);
     [self saveImage:photo intoFile:filename];
     
@@ -444,9 +444,9 @@
     selectedActivities_bgView.backgroundColor = [[UIColor alloc] initWithPatternImage:bg];
     selectedActivities_lineView = [[UIImageView alloc] initWithImage:line];
     selectedActivities_lineView.frame = CGRectMake(0, 0, line.size.width, line.size.height);
+    selectedActivities_lineView.tag = -1; // set the tag so we never remove this view from bg_view when load a new photo
     [selectedActivities_bgView addSubview:selectedActivities_lineView];
     selectedActivities_bgView.hidden = TRUE;
-    selectedActivities_lineView.tag = -1; // set the tag so we never remove this view from bg_view when load a new photo
     [self.view addSubview:selectedActivities_bgView];
 }
 
@@ -517,7 +517,6 @@
     
     if( ![m isDefault] ) {
         // show photo
-        
         switch (animation) {
             case Animation_None:
                 [mPhotoViewA imageFromFileContent:[totMediaLibrary getMediaPath:m.filename]];

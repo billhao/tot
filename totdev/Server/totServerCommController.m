@@ -116,13 +116,13 @@
     // Send the req syncrhonously [will be async later]
     NSURLResponse *response;
     
-    totURLConnection* conn = [[totURLConnection alloc] initWithRequest:request delegate:self startImmediately:YES callback:^(int ret, NSString *msg) {
-    }];
+    totURLConnection* conn = [[totURLConnection alloc] initWithRequest:request
+                                                              delegate:self
+                                                      startImmediately:YES
+                                                              callback:^(int ret, NSString *msg) {}];
 
     NSRunLoop* myRunLoop = [NSRunLoop currentRunLoop];
-    
     while( !conn.finished ) {
-        //[NSThread sleepForTimeInterval:0.01];
         [myRunLoop runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.5]];
     }
     
@@ -145,8 +145,7 @@
         if( ss.count == 2 ) {
             *message = [[(NSString*)ss[1] retain] autorelease];
         }
-    }
-    else
+    } else
         *message = @"Cannot understand server's response";
     
     // release connection?
@@ -156,8 +155,6 @@
 
 - (void) sendStrAsync:(NSString*)post toURL:(NSString *)dest_url returnMessage:(NSString**)message
              callback:(totURLConnectionCallback)callback {
-    //NSLog(@"post string: %@", post);
-    
     // TODO add try catch here
     NSMutableURLRequest* request = [self getRequest:post toURL:dest_url];
     totURLConnection* conn = [[[totURLConnection alloc] initWithRequest:request delegate:self startImmediately:YES callback:callback] autorelease];
@@ -178,7 +175,6 @@
 
     // ignore SSL certificate error
     NSURL* destURL = [NSURL URLWithString:dest_url];
-    //[NSURLRequest setAllowsAnyHTTPSCertificate:YES forHost:[destURL host]];
     
     // add HTTP basic authentication header to the request
     NSString *authStr = [NSString stringWithFormat:@"%@:%@", @"totdev", @"0000"];
@@ -203,7 +199,6 @@
             [challenge.sender useCredential:[NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust] forAuthenticationChallenge:challenge];
         }
     }
-    
     [challenge.sender continueWithoutCredentialForAuthenticationChallenge:challenge];
 }
 
@@ -241,7 +236,7 @@
     if (strReply == nil) {
         NSLog(@"post response: empty");
     } else {
-        //NSLog(@"post response: %@", strReply);
+        // NSLog(@"post response: %@", strReply);
     }
     int ret = SERVER_RESPONSE_CODE_FAIL;
     NSArray* ss = [strReply componentsSeparatedByString:@"::"];
@@ -253,8 +248,7 @@
         if( ss.count == 2 ) {
             message = [[(NSString*)ss[1] retain] autorelease];
         }
-    }
-    else
+    } else
         message = @"Cannot understand server's response";
     
     conn.callback(ret, message);

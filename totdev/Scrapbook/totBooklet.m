@@ -502,7 +502,7 @@
     if( e == nil )
         return nil;
     
-    totBook* book = [[totBook alloc]init];
+    totBook* book = [[totBook alloc] init];
     book.bookid = bookid;
     [book loadFromJSONString:e.value];
     return book;
@@ -550,7 +550,6 @@
 }
 
 - (void)loadBook:(NSString*)bookid bookname:(NSString*)bookname {
-    
 }
 
 - (void)deleteBook {

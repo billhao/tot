@@ -40,7 +40,7 @@
     if( ![totLoginController checkPwd:newpwd] ) return;
     
     msg = nil;
-    BOOL re = [totUser changePassword:newpwd oldPassword:oldpwd message:&msg];
+    [totUser changePassword:newpwd oldPassword:oldpwd message:&msg];
     [totUtility showAlert:msg];
 }
 

@@ -12,12 +12,22 @@
 
 @synthesize responseData, finished;
 
-- (id)initWithRequest:(NSURLRequest *)request delegate:(id)delegate startImmediately:(BOOL)startImmediately callback:(totURLConnectionCallback)callback {
+- (id)initWithRequest:(NSURLRequest *)request
+             delegate:(id)delegate
+     startImmediately:(BOOL)startImmediately
+             callback:(totURLConnectionCallback)callback {
     if( self = [super initWithRequest:request delegate:delegate startImmediately:startImmediately] ) {
         self.callback = callback;
         self.finished = FALSE;
     }
     return self;
+}
+
+- (void)dealloc {
+    if (responseData) {
+        [responseData release]; responseData = nil;
+    }
+    [super dealloc];
 }
 
 @end

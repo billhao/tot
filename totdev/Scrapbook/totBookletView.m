@@ -115,9 +115,6 @@
             if(!mImage) mImage = [[UIImageView alloc] initWithFrame:self.frame];
             mImage.contentMode = UIViewContentModeCenter;
             mImage.image = img;  // default.
-            CGSize s = img.size;
-            CGRect f = mImage.frame;
-            s = mImage.image.size;
             [self addSubview:mImage];
         }
         [self setStyle:TRUE];
@@ -165,9 +162,6 @@
         if(!mImage) mImage = [[UIImageView alloc] initWithFrame:self.frame];
         mImage.contentMode = UIViewContentModeCenter;
         mImage.image = img;  // default.
-        CGSize s = img.size;
-        CGRect f = mImage.frame;
-        s = mImage.image.size;
         [self addSubview:mImage];
 
         if( text ) {
@@ -257,7 +251,7 @@
     else
         self = [super initWithFrame:CGRectMake(data.x, data.y * ratio, data.w, data.h * ratio)];
     
-    //self = [super initWithFrame:CGRectMake(data.x, data.y, data.w, data.h)];
+    // self = [super initWithFrame:CGRectMake(data.x, data.y, data.w, data.h)];
     if (self) {
         // Register tap gesture recognizers.
         UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];

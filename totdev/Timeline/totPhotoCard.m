@@ -52,7 +52,7 @@
 
 #pragma mark - Helper functions
 
-- (void)updateUI {
+- (void) updateUI {
     if( e && mediaInfo ) {
         card_title.text = @"";
         description.text = @"";
@@ -61,8 +61,6 @@
         
         [mPhotoView imageFromFileContent:[totMediaLibrary getMediaPath:mediaInfo.filename]];
         UIImage* img = [UIImage imageWithContentsOfFile:[totMediaLibrary getMediaPath:mediaInfo.filename]];
-        CGSize s1 = img.size;
-        CGSize s2 = mPhotoView.bounds.size;
         
         float w = [self width] - margin_x*2;
         float h = (mPhotoView.image.size.height/mPhotoView.image.size.width)*w;

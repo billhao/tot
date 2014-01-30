@@ -65,7 +65,9 @@
     
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
-    [self.mEntryView release];
+    if (self.mEntryView) {
+        [self.mEntryView release]; self.mEntryView = nil;
+    }
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

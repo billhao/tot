@@ -59,13 +59,15 @@
     
     // bind gesture events
     // left swipe
-    UISwipeGestureRecognizer* leftSwipeRecognizer = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipeGestureEvent:)];
+    UISwipeGestureRecognizer* leftSwipeRecognizer = [[UISwipeGestureRecognizer alloc]initWithTarget:self
+                                                                                             action:@selector(swipeGestureEvent:)];
     leftSwipeRecognizer.direction = UISwipeGestureRecognizerDirectionLeft;
     [self.view addGestureRecognizer:leftSwipeRecognizer];
     [leftSwipeRecognizer release];
     
     // right swipe
-    UISwipeGestureRecognizer* rightSwipeRecognizer = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipeGestureEvent:)];
+    UISwipeGestureRecognizer* rightSwipeRecognizer = [[UISwipeGestureRecognizer alloc]initWithTarget:self
+                                                                                              action:@selector(swipeGestureEvent:)];
     rightSwipeRecognizer.direction = UISwipeGestureRecognizerDirectionRight;
     [self.view addGestureRecognizer:rightSwipeRecognizer];
     [rightSwipeRecognizer release];
@@ -496,10 +498,10 @@
 
         // draw the separation line
         if( i != 0 ) {
-        UIView* line = [[UIView alloc] initWithFrame:CGRectMake(0, y, w, .5)];
-        line.backgroundColor = [UIColor lightGrayColor];
-        [optionView addSubview:line];
-        [line release];
+            UIView* line = [[UIView alloc] initWithFrame:CGRectMake(0, y, w, .5)];
+            line.backgroundColor = [UIColor lightGrayColor];
+            [optionView addSubview:line];
+            [line release];
         }
 
         UIButton* btn = [UIButton buttonWithType:UIButtonTypeCustom];

@@ -42,7 +42,9 @@ Global* global = nil;
     self.baby = nil;
     self.user = nil;
     
-    [self.cameraView release];
+    if (self.cameraView) {
+        [self.cameraView release]; self.cameraView = nil;
+    }
     
     [super dealloc];
 }
