@@ -342,7 +342,7 @@
 }
 
 - (void) loadIcons {
-    [self setIcon:@"food2.png"];
+    [self setIcon:@"food.png"];
 }
 
 - (void)viewDidLoad {

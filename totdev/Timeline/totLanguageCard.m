@@ -155,7 +155,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setBackground];
-    [self setIcon:@"language2.png"];
+    [self setIcon:@"language.png"];
 }
 
 

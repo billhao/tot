@@ -203,7 +203,7 @@
 }
 
 - (void) loadIcons {
-    [self setIcon:@"diaper2.png"];
+    [self setIcon:@"diaper.png"];
 }
 
 - (void) getDataFromDB {

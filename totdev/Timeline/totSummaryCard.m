@@ -241,7 +241,7 @@
     }
     
     NSMutableArray* icon_img_filename = [[NSMutableArray alloc] initWithObjects:
-                                         @"height2", @"weight2", @"hc2", @"diaper2", @"language2", @"sleep2", @"food2", nil];
+                                         @"height", @"weight", @"hc", @"diaper", @"language", @"sleep", @"food", nil];
     for( int i=0; i<physicalLabels.count; i++ ) {
         if( ![values[i] isKindOfClass:NSNull.class] ) {
             NSString* value = values[i];

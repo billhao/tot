@@ -182,11 +182,11 @@
     [super viewDidLoad];
     [self setBackground];
     if (self.type == HEIGHT) {
-        [self setIcon:@"height2"];
+        [self setIcon:@"height"];
     } else if (self.type == WEIGHT) {
-        [self setIcon:@"weight2"];
+        [self setIcon:@"weight"];
     } else if (self.type == HEAD) {
-        [self setIcon:@"hc2"];
+        [self setIcon:@"hc"];
     }
 }
 

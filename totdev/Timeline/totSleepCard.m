@@ -223,7 +223,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setBackground];
-    [self setIcon:@"sleep2"];
+    [self setIcon:@"sleep"];
 
     line.hidden = TRUE; // we don't need line for sleep;
 }
