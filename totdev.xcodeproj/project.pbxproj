@@ -528,7 +528,6 @@
 		3F7F88291898F85D00492EDD /* activity_wave.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FD3C6F817CF36DC00DB1B71 /* activity_wave.png */; };
 		3F7F882A1898F85D00492EDD /* activity_wave@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FD3C6F917CF36DC00DB1B71 /* activity_wave@2x.png */; };
 		3F7F882B1898F85D00492EDD /* Colorful Year P5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 17B168F31897A787007E03E5 /* Colorful Year P5@2x.png */; };
-		3F7F882C1898F85D00492EDD /* Raleway-Light_2.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3FD3C73117CF389500DB1B71 /* Raleway-Light_2.ttf */; };
 		3F7F882D1898F85D00492EDD /* Raleway-Regular_2.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3FD3C73217CF389500DB1B71 /* Raleway-Regular_2.ttf */; };
 		3F7F882E1898F85D00492EDD /* camera_button_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 17B169801897A81D007E03E5 /* camera_button_pressed.png */; };
 		3F7F882F1898F85D00492EDD /* Raleway-SemiBold_2.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3FD3C73317CF389500DB1B71 /* Raleway-SemiBold_2.ttf */; };
@@ -748,7 +747,6 @@
 		3FD3C72D17CF36DC00DB1B71 /* activity_walk@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FD3C6F717CF36DC00DB1B71 /* activity_walk@2x.png */; };
 		3FD3C72E17CF36DC00DB1B71 /* activity_wave.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FD3C6F817CF36DC00DB1B71 /* activity_wave.png */; };
 		3FD3C72F17CF36DC00DB1B71 /* activity_wave@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FD3C6F917CF36DC00DB1B71 /* activity_wave@2x.png */; };
-		3FD3C73417CF389500DB1B71 /* Raleway-Light_2.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3FD3C73117CF389500DB1B71 /* Raleway-Light_2.ttf */; };
 		3FD3C73517CF389500DB1B71 /* Raleway-Regular_2.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3FD3C73217CF389500DB1B71 /* Raleway-Regular_2.ttf */; };
 		3FD3C73617CF389500DB1B71 /* Raleway-SemiBold_2.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3FD3C73317CF389500DB1B71 /* Raleway-SemiBold_2.ttf */; };
 		3FE2881D1845DA0D00BBFB61 /* add_text@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FE2881C1845DA0D00BBFB61 /* add_text@2x.png */; };
@@ -1197,7 +1195,6 @@
 		3FD3C6F717CF36DC00DB1B71 /* activity_walk@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "activity_walk@2x.png"; sourceTree = "<group>"; };
 		3FD3C6F817CF36DC00DB1B71 /* activity_wave.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = activity_wave.png; sourceTree = "<group>"; };
 		3FD3C6F917CF36DC00DB1B71 /* activity_wave@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "activity_wave@2x.png"; sourceTree = "<group>"; };
-		3FD3C73117CF389500DB1B71 /* Raleway-Light_2.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Raleway-Light_2.ttf"; path = "Fonts/Raleway-Light_2.ttf"; sourceTree = "<group>"; };
 		3FD3C73217CF389500DB1B71 /* Raleway-Regular_2.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Raleway-Regular_2.ttf"; path = "Fonts/Raleway-Regular_2.ttf"; sourceTree = "<group>"; };
 		3FD3C73317CF389500DB1B71 /* Raleway-SemiBold_2.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Raleway-SemiBold_2.ttf"; path = "Fonts/Raleway-SemiBold_2.ttf"; sourceTree = "<group>"; };
 		3FE2881C1845DA0D00BBFB61 /* add_text@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "add_text@2x.png"; sourceTree = "<group>"; };
@@ -1927,7 +1924,6 @@
 			isa = PBXGroup;
 			children = (
 				3FA793E9180125FB005632F8 /* Raleway-Medium_2.ttf */,
-				3FD3C73117CF389500DB1B71 /* Raleway-Light_2.ttf */,
 				3FD3C73217CF389500DB1B71 /* Raleway-Regular_2.ttf */,
 				3FD3C73317CF389500DB1B71 /* Raleway-SemiBold_2.ttf */,
 			);
@@ -2547,7 +2543,6 @@
 				3F7F88291898F85D00492EDD /* activity_wave.png in Resources */,
 				3F7F882A1898F85D00492EDD /* activity_wave@2x.png in Resources */,
 				3F7F882B1898F85D00492EDD /* Colorful Year P5@2x.png in Resources */,
-				3F7F882C1898F85D00492EDD /* Raleway-Light_2.ttf in Resources */,
 				3F7F882D1898F85D00492EDD /* Raleway-Regular_2.ttf in Resources */,
 				3F7F882E1898F85D00492EDD /* camera_button_pressed.png in Resources */,
 				3F7F882F1898F85D00492EDD /* Raleway-SemiBold_2.ttf in Resources */,
@@ -2882,7 +2877,6 @@
 				3FD3C72E17CF36DC00DB1B71 /* activity_wave.png in Resources */,
 				3FD3C72F17CF36DC00DB1B71 /* activity_wave@2x.png in Resources */,
 				17B169521897A787007E03E5 /* Colorful Year P5@2x.png in Resources */,
-				3FD3C73417CF389500DB1B71 /* Raleway-Light_2.ttf in Resources */,
 				3FD3C73517CF389500DB1B71 /* Raleway-Regular_2.ttf in Resources */,
 				17B169821897A81D007E03E5 /* camera_button_pressed.png in Resources */,
 				3F7F88CE1899717600492EDD /* Logo-29x29.png in Resources */,

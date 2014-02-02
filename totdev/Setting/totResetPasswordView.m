@@ -124,7 +124,7 @@
         [resetBtn setBackgroundColor:[UIColor colorWithRed:245/255.0f green:73/255.0 blue:82/255.0 alpha:1.0f]];
         [resetBtn setTitle:@"Go" forState:UIControlStateNormal];
         [resetBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [resetBtn.titleLabel setFont:[UIFont fontWithName:@"Raleway-SemiBold_2" size:18.0f]];
+        [resetBtn.titleLabel setFont:[UIFont fontWithName:@"Raleway-Medium" size:18.0f]];
         [resetBtn addTarget:self action:@selector(reset:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:resetBtn];
     }
