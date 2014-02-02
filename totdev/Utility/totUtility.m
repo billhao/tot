@@ -80,7 +80,11 @@
 
 
 void print(NSString* str) {
-    if( DEBUG ) NSLog(@"%@", str);
+
+#ifdef DEBUG
+    NSLog(@"%@", str);
+#endif
+    
 }
 
 
