@@ -50,17 +50,24 @@
     mEmail = [[UITextField alloc] initWithFrame:CGRectMake(60, 71, 180, 37)];
     mPwd = [[UITextField alloc] initWithFrame:CGRectMake(60, 131, 180, 37)];
     
-    mPwd.secureTextEntry = YES;
-    
     [mEmail setAutocapitalizationType:UITextAutocapitalizationTypeNone];
     [mEmail setBorderStyle:UITextBorderStyleNone];
     [mEmail setPlaceholder:NSLocalizedString(@"Email", @"")];
     [mEmail setTextColor:[UIColor colorWithRed:0.5f green:0.5f blue:0.5f alpha:1.0f]];
     [self.view addSubview:mEmail];
+    mEmail.autocorrectionType = UITextAutocorrectionTypeNo;
+    mEmail.keyboardType = UIKeyboardTypeEmailAddress;
+    mEmail.returnKeyType = UIReturnKeyDone;
+    mEmail.enablesReturnKeyAutomatically = TRUE;
+    
     [mPwd setAutocapitalizationType:UITextAutocapitalizationTypeNone];
     [mPwd setBorderStyle:UITextBorderStyleNone];
     [mPwd setPlaceholder:NSLocalizedString(@"Password", @"")];
     [mPwd setTextColor:[UIColor colorWithRed:0.5f green:0.5f blue:0.5f alpha:1.0f]];
+    mPwd.autocorrectionType = UITextAutocorrectionTypeNo;
+    mPwd.returnKeyType = UIReturnKeyDone;
+    mPwd.enablesReturnKeyAutomatically = TRUE;
+    mPwd.secureTextEntry = TRUE;
     [self.view addSubview:mPwd];
     
     [mEmail setDelegate:self];
