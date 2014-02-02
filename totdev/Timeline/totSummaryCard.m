@@ -157,7 +157,7 @@
     // Update the icon if necessary.
     int i = (int)type;
     UILabel* curr_label = (UILabel*)[physicalLabels objectAtIndex:i];
-    if ([curr_label.text isEqualToString:@"N/A"]) {
+    if ([curr_label.text isEqualToString:NSLocalizedString(@"N/A", @"")]) {
         UIButton* curr_button = (UIButton*)[physicalButtons objectAtIndex:i];
         NSMutableArray* icon_img_filename = [[NSMutableArray alloc] initWithObjects:
                                              @"height", @"weight", @"hc", @"diaper", @"language", @"sleep", @"food", nil];
