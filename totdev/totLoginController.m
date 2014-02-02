@@ -39,15 +39,65 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     // Do any additional setup after loading the view from its nib.
     // set up events
     [mLogin addTarget:self action:@selector(LoginButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [mNewuser addTarget:self action:@selector(NewUserButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [mPrivacy addTarget:self action:@selector(PrivacyButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
-    mPrivacy.hidden = TRUE;
     [mForgotPwd addTarget:self action:@selector(ForgotPwdButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    
+    mEmail = [[UITextField alloc] initWithFrame:CGRectMake(60, 71, 180, 37)];
+    mPwd = [[UITextField alloc] initWithFrame:CGRectMake(60, 131, 180, 37)];
+    
+    mPwd.secureTextEntry = YES;
+    
+    [mEmail setAutocapitalizationType:UITextAutocapitalizationTypeNone];
+    [mEmail setBorderStyle:UITextBorderStyleNone];
+    [mEmail setPlaceholder:NSLocalizedString(@"Email", @"")];
+    [mEmail setTextColor:[UIColor colorWithRed:0.5f green:0.5f blue:0.5f alpha:1.0f]];
+    [self.view addSubview:mEmail];
+    [mPwd setAutocapitalizationType:UITextAutocapitalizationTypeNone];
+    [mPwd setBorderStyle:UITextBorderStyleNone];
+    [mPwd setPlaceholder:NSLocalizedString(@"Password", @"")];
+    [mPwd setTextColor:[UIColor colorWithRed:0.5f green:0.5f blue:0.5f alpha:1.0f]];
+    [self.view addSubview:mPwd];
+    
     [mEmail setDelegate:self];
     [mPwd setDelegate:self];
+    
+    NSString* email_string = @"Email";
+    if (![email_string isEqualToString:NSLocalizedString(@"Email", @"")]) {
+        UIButton* login_button = [UIButton buttonWithType:UIButtonTypeCustom];
+        login_button.layer.cornerRadius = 5;
+        [login_button setFrame:mLogin.frame];
+        [login_button setTitle:NSLocalizedString(@"Login", @"") forState:UIControlStateNormal];
+        [login_button setTitleColor:[UIColor colorWithRed:0.2f green:0.2f blue:0.2f alpha:1.0]
+                           forState:UIControlStateNormal];
+        [login_button setBackgroundColor:[UIColor colorWithRed:51/255.0f green:209/255.0 blue:33/255.0 alpha:1.0f]];
+        [login_button addTarget:self
+                         action:@selector(LoginButtonClicked:)
+               forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:login_button];
+        
+        UIButton* register_button = [UIButton buttonWithType:UIButtonTypeCustom];
+        register_button.layer.cornerRadius = 5;
+        [register_button setFrame:mNewuser.frame];
+        [register_button setTitle:NSLocalizedString(@"Register", @"") forState:UIControlStateNormal];
+        [register_button setTitleColor:[UIColor colorWithRed:0.2f green:0.2f blue:0.2f alpha:1.0]
+                              forState:UIControlStateNormal];
+        [register_button setBackgroundColor:[UIColor colorWithRed:245/255.0f green:73/255.0 blue:82/255.0 alpha:1.0f]];
+        [register_button addTarget:self
+                            action:@selector(NewUserButtonClicked:)
+                  forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:register_button];
+        
+        [mLogin setHidden:YES];
+        [mNewuser setHidden:YES];
+        [mForgotPwd setHidden:YES];
+    }
+    
+    mPrivacy.hidden = TRUE;
 }
 
 - (void)viewDidUnload
@@ -55,6 +105,8 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
+    [mEmail release];
+    [mPwd release];
 }
 
 - (void)viewWillAppear:(BOOL)animated {

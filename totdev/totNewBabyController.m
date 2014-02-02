@@ -53,9 +53,30 @@
     [mBoy addTarget:self action:@selector(BoyButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [mGirl addTarget:self action:@selector(GirlButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [mSave addTarget:self action:@selector(SaveButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+    
     [mName setDelegate:self];
     [mBDay addTarget:self action:@selector(BDayButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     [mBDay setDelegate:self];
+    [mName setPlaceholder:NSLocalizedString(@"name", @"")];
+    [mBDay setPlaceholder:NSLocalizedString(@"birthday", @"")];
+    
+    NSString* bday_string = @"birthday";
+    if (![bday_string isEqualToString:NSLocalizedString(@"birthday", @"")]) {
+        UIButton* save_button = [UIButton buttonWithType:UIButtonTypeCustom];
+        save_button.layer.cornerRadius = 5;
+        [save_button setFrame:mSave.frame];
+        [save_button setTitle:NSLocalizedString(@"Next", @"") forState:UIControlStateNormal];
+        [save_button setTitleColor:[UIColor colorWithRed:0.2f green:0.2f blue:0.2f alpha:1.0]
+                           forState:UIControlStateNormal];
+        [save_button setBackgroundColor:[UIColor colorWithRed:51/255.0f green:209/255.0 blue:33/255.0 alpha:1.0f]];
+        [save_button addTarget:self
+                         action:@selector(SaveButtonClicked:)
+               forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:save_button];
+        
+        [mSave setHidden:YES];
+    }
+
     mPrivacy.hidden = TRUE;
     
     mPicker.date = [NSDate date];

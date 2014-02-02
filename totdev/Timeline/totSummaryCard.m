@@ -89,7 +89,7 @@
     }
     
     // baby name
-    label_babyName = [[UILabel alloc] initWithFrame:CGRectMake(129, 42, 170, 32)];
+    label_babyName = [[UILabel alloc] initWithFrame:CGRectMake(129, 35, 170, 32)];
     UIFont* font1 = [UIFont fontWithName:@"Raleway" size:36];
     label_babyName.font = font1;
     label_babyName.textColor = [UIColor colorWithRed:100.0/255 green:100.0/255 blue:100.0/255 alpha:1.0];
