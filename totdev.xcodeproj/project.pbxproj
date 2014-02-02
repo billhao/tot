@@ -128,10 +128,10 @@
 		17B169731897A787007E03E5 /* Animals@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 17B169171897A787007E03E5 /* Animals@2x.png */; };
 		17B169741897A787007E03E5 /* Birthday.png in Resources */ = {isa = PBXBuildFile; fileRef = 17B169181897A787007E03E5 /* Birthday.png */; };
 		17B169751897A787007E03E5 /* Birthday@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 17B169191897A787007E03E5 /* Birthday@2x.png */; };
-		17B169761897A787007E03E5 /* color play.png in Resources */ = {isa = PBXBuildFile; fileRef = 17B1691A1897A787007E03E5 /* color play.png */; };
-		17B169771897A787007E03E5 /* color play@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 17B1691B1897A787007E03E5 /* color play@2x.png */; };
-		17B169781897A787007E03E5 /* colorful year.png in Resources */ = {isa = PBXBuildFile; fileRef = 17B1691C1897A787007E03E5 /* colorful year.png */; };
-		17B169791897A787007E03E5 /* colorful year@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 17B1691D1897A787007E03E5 /* colorful year@2x.png */; };
+		17B169761897A787007E03E5 /* Color Play.png in Resources */ = {isa = PBXBuildFile; fileRef = 17B1691A1897A787007E03E5 /* Color Play.png */; };
+		17B169771897A787007E03E5 /* Color Play@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 17B1691B1897A787007E03E5 /* Color Play@2x.png */; };
+		17B169781897A787007E03E5 /* Colorful Year.png in Resources */ = {isa = PBXBuildFile; fileRef = 17B1691C1897A787007E03E5 /* Colorful Year.png */; };
+		17B169791897A787007E03E5 /* Colorful Year@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 17B1691D1897A787007E03E5 /* Colorful Year@2x.png */; };
 		17B1697A1897A787007E03E5 /* First Year.png in Resources */ = {isa = PBXBuildFile; fileRef = 17B1691E1897A787007E03E5 /* First Year.png */; };
 		17B1697B1897A787007E03E5 /* First Year@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 17B1691F1897A787007E03E5 /* First Year@2x.png */; };
 		17B1697C1897A787007E03E5 /* Flowers.png in Resources */ = {isa = PBXBuildFile; fileRef = 17B169201897A787007E03E5 /* Flowers.png */; };
@@ -320,7 +320,7 @@
 		3F7F87541898F85D00492EDD /* btn_login@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F2770C2164E274100DF84EF /* btn_login@2x.png */; };
 		3F7F87551898F85D00492EDD /* btn_next_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F2770C3164E274100DF84EF /* btn_next_selected.png */; };
 		3F7F87561898F85D00492EDD /* btn_next_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F2770C4164E274100DF84EF /* btn_next_selected@2x.png */; };
-		3F7F87571898F85D00492EDD /* colorful year.png in Resources */ = {isa = PBXBuildFile; fileRef = 17B1691C1897A787007E03E5 /* colorful year.png */; };
+		3F7F87571898F85D00492EDD /* Colorful Year.png in Resources */ = {isa = PBXBuildFile; fileRef = 17B1691C1897A787007E03E5 /* Colorful Year.png */; };
 		3F7F87581898F85D00492EDD /* btn_next.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F2770C5164E274100DF84EF /* btn_next.png */; };
 		3F7F87591898F85D00492EDD /* Animals Template P2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 17B168C31897A786007E03E5 /* Animals Template P2@2x.png */; };
 		3F7F875A1898F85D00492EDD /* btn_next@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F2770C6164E274100DF84EF /* btn_next@2x.png */; };
@@ -507,7 +507,7 @@
 		3F7F88131898F85D00492EDD /* activity_salute@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FD3C6EB17CF36DC00DB1B71 /* activity_salute@2x.png */; };
 		3F7F88141898F85D00492EDD /* activity_sit.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FD3C6EC17CF36DC00DB1B71 /* activity_sit.png */; };
 		3F7F88151898F85D00492EDD /* activity_sit@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FD3C6ED17CF36DC00DB1B71 /* activity_sit@2x.png */; };
-		3F7F88161898F85D00492EDD /* color play.png in Resources */ = {isa = PBXBuildFile; fileRef = 17B1691A1897A787007E03E5 /* color play.png */; };
+		3F7F88161898F85D00492EDD /* Color Play.png in Resources */ = {isa = PBXBuildFile; fileRef = 17B1691A1897A787007E03E5 /* Color Play.png */; };
 		3F7F88171898F85D00492EDD /* activity_stand.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FD3C6EE17CF36DC00DB1B71 /* activity_stand.png */; };
 		3F7F88181898F85D00492EDD /* activity_stand@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FD3C6EF17CF36DC00DB1B71 /* activity_stand@2x.png */; };
 		3F7F88191898F85D00492EDD /* Birthday Template P3.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F7F86EA1898F2DB00492EDD /* Birthday Template P3.png */; };
@@ -576,7 +576,7 @@
 		3F7F88591898F85D00492EDD /* Birthday Template P4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 17B168CF1897A786007E03E5 /* Birthday Template P4@2x.png */; };
 		3F7F885A1898F85D00492EDD /* sleep_gray.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E0EA47C17D54D4400C75BD3 /* sleep_gray.png */; };
 		3F7F885B1898F85D00492EDD /* Birthday Template P8@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 17B168D31897A786007E03E5 /* Birthday Template P8@2x.png */; };
-		3F7F885C1898F85D00492EDD /* colorful year@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 17B1691D1897A787007E03E5 /* colorful year@2x.png */; };
+		3F7F885C1898F85D00492EDD /* Colorful Year@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 17B1691D1897A787007E03E5 /* Colorful Year@2x.png */; };
 		3F7F885D1898F85D00492EDD /* lang_input_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 17B168B81897A66A007E03E5 /* lang_input_bg.png */; };
 		3F7F885E1898F85D00492EDD /* diaper.png in Resources */ = {isa = PBXBuildFile; fileRef = 17B168801897A390007E03E5 /* diaper.png */; };
 		3F7F885F1898F85D00492EDD /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FE470DC182CDC31005F9D5B /* settings.png */; };
@@ -594,7 +594,7 @@
 		3F7F886B1898F85D00492EDD /* add_video@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FE470E1182CDC3F005F9D5B /* add_video@2x.png */; };
 		3F7F886C1898F85D00492EDD /* scrapbook_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F95919717DC74C4003FDBC7 /* scrapbook_bg@2x.png */; };
 		3F7F886D1898F85D00492EDD /* scrapbook_navbar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F95919817DC74C4003FDBC7 /* scrapbook_navbar@2x.png */; };
-		3F7F886E1898F85D00492EDD /* color play@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 17B1691B1897A787007E03E5 /* color play@2x.png */; };
+		3F7F886E1898F85D00492EDD /* Color Play@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 17B1691B1897A787007E03E5 /* Color Play@2x.png */; };
 		3F7F88701898F85D00492EDD /* scrapbook_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 17B168A51897A54F007E03E5 /* scrapbook_button.png */; };
 		3F7F88711898F85D00492EDD /* feeding_add.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FFD356117ED932B00C36504 /* feeding_add.png */; };
 		3F7F88721898F85D00492EDD /* food@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 17B168731897A125007E03E5 /* food@2x.png */; };
@@ -937,10 +937,10 @@
 		17B169171897A787007E03E5 /* Animals@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Animals@2x.png"; sourceTree = "<group>"; };
 		17B169181897A787007E03E5 /* Birthday.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Birthday.png; sourceTree = "<group>"; };
 		17B169191897A787007E03E5 /* Birthday@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Birthday@2x.png"; sourceTree = "<group>"; };
-		17B1691A1897A787007E03E5 /* color play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "color play.png"; sourceTree = "<group>"; };
-		17B1691B1897A787007E03E5 /* color play@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "color play@2x.png"; sourceTree = "<group>"; };
-		17B1691C1897A787007E03E5 /* colorful year.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "colorful year.png"; sourceTree = "<group>"; };
-		17B1691D1897A787007E03E5 /* colorful year@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "colorful year@2x.png"; sourceTree = "<group>"; };
+		17B1691A1897A787007E03E5 /* Color Play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Color Play.png"; sourceTree = "<group>"; };
+		17B1691B1897A787007E03E5 /* Color Play@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Color Play@2x.png"; sourceTree = "<group>"; };
+		17B1691C1897A787007E03E5 /* Colorful Year.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Colorful Year.png"; sourceTree = "<group>"; };
+		17B1691D1897A787007E03E5 /* Colorful Year@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Colorful Year@2x.png"; sourceTree = "<group>"; };
 		17B1691E1897A787007E03E5 /* First Year.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "First Year.png"; sourceTree = "<group>"; };
 		17B1691F1897A787007E03E5 /* First Year@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "First Year@2x.png"; sourceTree = "<group>"; };
 		17B169201897A787007E03E5 /* Flowers.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Flowers.png; sourceTree = "<group>"; };
@@ -1518,10 +1518,10 @@
 				17B169171897A787007E03E5 /* Animals@2x.png */,
 				17B169181897A787007E03E5 /* Birthday.png */,
 				17B169191897A787007E03E5 /* Birthday@2x.png */,
-				17B1691A1897A787007E03E5 /* color play.png */,
-				17B1691B1897A787007E03E5 /* color play@2x.png */,
-				17B1691C1897A787007E03E5 /* colorful year.png */,
-				17B1691D1897A787007E03E5 /* colorful year@2x.png */,
+				17B1691A1897A787007E03E5 /* Color Play.png */,
+				17B1691B1897A787007E03E5 /* Color Play@2x.png */,
+				17B1691C1897A787007E03E5 /* Colorful Year.png */,
+				17B1691D1897A787007E03E5 /* Colorful Year@2x.png */,
 				17B1691E1897A787007E03E5 /* First Year.png */,
 				17B1691F1897A787007E03E5 /* First Year@2x.png */,
 				17B169201897A787007E03E5 /* Flowers.png */,
@@ -2339,7 +2339,7 @@
 				3F7F87541898F85D00492EDD /* btn_login@2x.png in Resources */,
 				3F7F87551898F85D00492EDD /* btn_next_selected.png in Resources */,
 				3F7F87561898F85D00492EDD /* btn_next_selected@2x.png in Resources */,
-				3F7F87571898F85D00492EDD /* colorful year.png in Resources */,
+				3F7F87571898F85D00492EDD /* Colorful Year.png in Resources */,
 				3F7F87581898F85D00492EDD /* btn_next.png in Resources */,
 				3F7F87591898F85D00492EDD /* Animals Template P2@2x.png in Resources */,
 				3F7F875A1898F85D00492EDD /* btn_next@2x.png in Resources */,
@@ -2526,7 +2526,7 @@
 				3F7F88131898F85D00492EDD /* activity_salute@2x.png in Resources */,
 				3F7F88141898F85D00492EDD /* activity_sit.png in Resources */,
 				3F7F88151898F85D00492EDD /* activity_sit@2x.png in Resources */,
-				3F7F88161898F85D00492EDD /* color play.png in Resources */,
+				3F7F88161898F85D00492EDD /* Color Play.png in Resources */,
 				3F7F88171898F85D00492EDD /* activity_stand.png in Resources */,
 				3F7F88181898F85D00492EDD /* activity_stand@2x.png in Resources */,
 				3F7F88191898F85D00492EDD /* Birthday Template P3.png in Resources */,
@@ -2595,7 +2595,7 @@
 				3F7F88591898F85D00492EDD /* Birthday Template P4@2x.png in Resources */,
 				3F7F885A1898F85D00492EDD /* sleep_gray.png in Resources */,
 				3F7F885B1898F85D00492EDD /* Birthday Template P8@2x.png in Resources */,
-				3F7F885C1898F85D00492EDD /* colorful year@2x.png in Resources */,
+				3F7F885C1898F85D00492EDD /* Colorful Year@2x.png in Resources */,
 				3F7F885D1898F85D00492EDD /* lang_input_bg.png in Resources */,
 				3F7F885E1898F85D00492EDD /* diaper.png in Resources */,
 				3F7F885F1898F85D00492EDD /* settings.png in Resources */,
@@ -2613,7 +2613,7 @@
 				3F7F886B1898F85D00492EDD /* add_video@2x.png in Resources */,
 				3F7F886C1898F85D00492EDD /* scrapbook_bg@2x.png in Resources */,
 				3F7F886D1898F85D00492EDD /* scrapbook_navbar@2x.png in Resources */,
-				3F7F886E1898F85D00492EDD /* color play@2x.png in Resources */,
+				3F7F886E1898F85D00492EDD /* Color Play@2x.png in Resources */,
 				3F7F88701898F85D00492EDD /* scrapbook_button.png in Resources */,
 				3F7F88711898F85D00492EDD /* feeding_add.png in Resources */,
 				3F7F88721898F85D00492EDD /* food@2x.png in Resources */,
@@ -2669,7 +2669,7 @@
 				3F2770DF164E274100DF84EF /* btn_login@2x.png in Resources */,
 				3F2770E0164E274100DF84EF /* btn_next_selected.png in Resources */,
 				3F2770E1164E274100DF84EF /* btn_next_selected@2x.png in Resources */,
-				17B169781897A787007E03E5 /* colorful year.png in Resources */,
+				17B169781897A787007E03E5 /* Colorful Year.png in Resources */,
 				3F2770E2164E274100DF84EF /* btn_next.png in Resources */,
 				17B169251897A787007E03E5 /* Animals Template P2@2x.png in Resources */,
 				3F2770E3164E274100DF84EF /* btn_next@2x.png in Resources */,
@@ -2860,7 +2860,7 @@
 				3FD3C72117CF36DC00DB1B71 /* activity_salute@2x.png in Resources */,
 				3FD3C72217CF36DC00DB1B71 /* activity_sit.png in Resources */,
 				3FD3C72317CF36DC00DB1B71 /* activity_sit@2x.png in Resources */,
-				17B169761897A787007E03E5 /* color play.png in Resources */,
+				17B169761897A787007E03E5 /* Color Play.png in Resources */,
 				3FD3C72417CF36DC00DB1B71 /* activity_stand.png in Resources */,
 				3FD3C72517CF36DC00DB1B71 /* activity_stand@2x.png in Resources */,
 				3F7F86F21898F2DB00492EDD /* Birthday Template P3.png in Resources */,
@@ -2933,7 +2933,7 @@
 				17B169301897A787007E03E5 /* Birthday Template P4@2x.png in Resources */,
 				8E0EA48317D54D4400C75BD3 /* sleep_gray.png in Resources */,
 				17B169341897A787007E03E5 /* Birthday Template P8@2x.png in Resources */,
-				17B169791897A787007E03E5 /* colorful year@2x.png in Resources */,
+				17B169791897A787007E03E5 /* Colorful Year@2x.png in Resources */,
 				17B168B91897A66A007E03E5 /* lang_input_bg.png in Resources */,
 				17B168871897A390007E03E5 /* diaper.png in Resources */,
 				3FE470DE182CDC31005F9D5B /* settings.png in Resources */,
@@ -2952,7 +2952,7 @@
 				3FE4713B182CDC40005F9D5B /* add_video@2x.png in Resources */,
 				3F95919917DC74C4003FDBC7 /* scrapbook_bg@2x.png in Resources */,
 				3F95919A17DC74C4003FDBC7 /* scrapbook_navbar@2x.png in Resources */,
-				17B169771897A787007E03E5 /* color play@2x.png in Resources */,
+				17B169771897A787007E03E5 /* Color Play@2x.png in Resources */,
 				17B168A71897A54F007E03E5 /* scrapbook_button.png in Resources */,
 				3FFD356317ED932B00C36504 /* feeding_add.png in Resources */,
 				17B1687A1897A125007E03E5 /* food@2x.png in Resources */,

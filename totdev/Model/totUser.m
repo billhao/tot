@@ -26,9 +26,16 @@ static totModel* _model;
 // init to an existing user
 -(id) initWithID:(NSString*)_email {
     if( self = [super init] ) {
-        email = [_email retain]; // release at the end?
+        self.email = _email;
     }
     return self;
+}
+
+-(void) dealloc {
+    if (self.email) {
+        [self.email release];
+    }
+    [super dealloc];
 }
 
 +(BOOL) addAccount:(NSString*)email password:(NSString*)pwd {

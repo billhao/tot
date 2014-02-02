@@ -91,7 +91,8 @@
     NSString* str_bday = [dateFormatter stringFromDate:_birthday];
     [dateFormatter release];
     
-    NSString* output = [NSString stringWithFormat:@"Baby Info\nID = %d\nName = %@\nSex = %@\nBday = %@", _babyID, _name, str_sex, str_bday];
+    NSString* output =
+        [NSString stringWithFormat:@"Baby Info\nID = %d\nName = %@\nSex = %@\nBday = %@", _babyID, _name, str_sex, str_bday];
     NSLog(@"%@", output);
 }
 

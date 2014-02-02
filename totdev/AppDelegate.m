@@ -70,7 +70,7 @@
     
     // init the global variable before anything else
     // the global variable provides access to instances of totBaby and totUser
-    global = [[[Global alloc] init] retain];
+    global = [[Global alloc] init];
     
     // initialize the image cache
     mCache = [[totImageCache alloc] init];
