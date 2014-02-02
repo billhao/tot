@@ -53,7 +53,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setBackground];
-    [self setIcon:@"food_gray" confirmedIcon:@"food2"];
+    [self setIcon:@"food_gray" confirmedIcon:@"food"];
     [self setTitle:@"Feeding"];
     [self setTimestamp];
     [self createUI];

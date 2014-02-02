@@ -37,7 +37,7 @@
 }
 
 - (void)loadIcons {
-    [self setIcon:@"sleep2"];
+    [self setIcon:@"sleep"];
     [self setTitle:@"Sleep"];
     [self setTimestamp];
     

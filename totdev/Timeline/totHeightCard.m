@@ -103,13 +103,13 @@
 - (void) loadButtons {
     [self setTimestamp];
     if (self.type == HEIGHT) {
-        [self setIcon:@"height_gray" confirmedIcon:@"height2"];
+        [self setIcon:@"height_gray" confirmedIcon:@"height"];
         [self setTitle:@"Height"];
     } else if (self.type == WEIGHT) {
-        [self setIcon:@"weight_gray" confirmedIcon:@"weight2"];
+        [self setIcon:@"weight_gray" confirmedIcon:@"weight"];
         [self setTitle:@"Weight"];
     } else if (self.type == HEAD) {
-        [self setIcon:@"hc_gray" confirmedIcon:@"hc2"];
+        [self setIcon:@"hc_gray" confirmedIcon:@"hc"];
         [self setTitle:@"Head Circumference"];
     }
 }

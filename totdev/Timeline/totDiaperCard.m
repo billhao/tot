@@ -58,7 +58,7 @@
 }
 
 - (void) loadIcons {
-    [self setIcon:@"diaper_gray" confirmedIcon:@"diaper2"];
+    [self setIcon:@"diaper_gray" confirmedIcon:@"diaper"];
     //[self setCalendar:999];
     [self setTimestamp];
     [self setTitle:@"Diaper" ];
