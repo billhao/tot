@@ -123,7 +123,7 @@
 
     NSRunLoop* myRunLoop = [NSRunLoop currentRunLoop];
     while( !conn.finished ) {
-        [myRunLoop runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.5]];
+        [myRunLoop runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.1]];
     }
     
     NSData* data = conn.responseData;

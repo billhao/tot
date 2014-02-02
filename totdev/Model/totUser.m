@@ -56,7 +56,7 @@ static totModel* _model;
         BOOL re = [self addAccount:email password:pwd];
         if( re ) {
             [server release];
-            return [[[totUser alloc] initWithID:email] autorelease];
+            return [[totUser alloc] initWithID:email];
         } else {
             *message = [[[NSString alloc] initWithString:@"Cannot add user to database"] autorelease];
             // TODO should we delete this user from server? otherwise it wouldn't be possible to create the user next time

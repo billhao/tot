@@ -51,7 +51,8 @@
     [button setBackgroundColor:[UIColor clearColor]];
     [button setTitle:name forState:UIControlStateNormal];
     [button setTitleColor:[UIColor colorWithRed:0.4f green:0.4f blue:0.4f alpha:1.0f] forState:UIControlStateNormal];
-    [button.titleLabel setFont:[UIFont fontWithName:@"Raleway-SemiBold_2" size:18.0f]];
+    UIFont* font = [UIFont fontWithName:@"Raleway-Medium" size:18.0f];
+    [button.titleLabel setFont:font];
     [button addTarget:self action:action forControlEvents:UIControlEventTouchUpInside];
     [background addSubview:button];
     
@@ -125,7 +126,7 @@
     [logoutBtn setBackgroundColor:[UIColor colorWithRed:245/255.0f green:73/255.0 blue:82/255.0 alpha:1.0f]];
     [logoutBtn setTitle:NSLocalizedString(@"Log out", @"") forState:UIControlStateNormal];
     [logoutBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [logoutBtn.titleLabel setFont:[UIFont fontWithName:@"Raleway-SemiBold_2" size:18.0f]];
+    [logoutBtn.titleLabel setFont:[UIFont fontWithName:@"Raleway-Medium" size:18.0f]];
     [logoutBtn addTarget:self action:@selector(logout:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:logoutBtn];
 }
