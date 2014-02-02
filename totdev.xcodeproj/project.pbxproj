@@ -298,7 +298,6 @@
 		3F7F873D1898F85D00492EDD /* RNOpenSSLEncryptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FC63DC517F00D72003EA9D9 /* RNOpenSSLEncryptor.m */; };
 		3F7F873E1898F85D00492EDD /* totServerCommController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FC63DD417F16F81003EA9D9 /* totServerCommController.m */; };
 		3F7F873F1898F85D00492EDD /* totSleepCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E3286681827134A006E8F38 /* totSleepCard.m */; };
-		3F7F87411898F85D00492EDD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EF62837E1536674C004031D6 /* InfoPlist.strings */; };
 		3F7F87421898F85D00492EDD /* height@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 17B168751897A125007E03E5 /* height@2x.png */; };
 		3F7F87431898F85D00492EDD /* totLoginController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3F2216DD1571758F000E86F3 /* totLoginController.xib */; };
 		3F7F87441898F85D00492EDD /* totdb.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 3F7CDB5C157ABDCE009CD3D7 /* totdb.sqlite */; };
@@ -790,7 +789,7 @@
 		8E32868918271C10006E8F38 /* icons-language@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E32868718271C10006E8F38 /* icons-language@2x.png */; };
 		8E42F11718389DC9006DB992 /* totResetPasswordView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E42F11618389DC9006DB992 /* totResetPasswordView.m */; };
 		8E5692F117B9FE63001686CB /* totTimeUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E5692F017B9FE63001686CB /* totTimeUtil.m */; };
-		8EA42334189DFD8600D5F324 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8EA42333189DFD8600D5F324 /* Localizable.strings */; };
+		8EA42348189E30AF00D5F324 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8EA42346189E30AF00D5F324 /* Localizable.strings */; };
 		CE5C09FC154CCFDB00D41114 /* moviePlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5C09F9154CCFDB00D41114 /* moviePlayerViewController.m */; };
 		CEDB78B9155107C300805CC8 /* totImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDB78B8155107C300805CC8 /* totImageCache.m */; };
 		EF0D6BEA1555CCD00027F012 /* totTimerController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF0D6BE91555CCD00027F012 /* totTimerController.m */; };
@@ -804,7 +803,6 @@
 		EF6283761536674B004031D6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF6283751536674B004031D6 /* UIKit.framework */; };
 		EF6283781536674B004031D6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF6283771536674B004031D6 /* Foundation.framework */; };
 		EF62837A1536674B004031D6 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF6283791536674B004031D6 /* CoreGraphics.framework */; };
-		EF6283801536674C004031D6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EF62837E1536674C004031D6 /* InfoPlist.strings */; };
 		EF6283821536674C004031D6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EF6283811536674C004031D6 /* main.m */; };
 		EF6283861536674C004031D6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EF6283851536674C004031D6 /* AppDelegate.m */; };
 		EF62839815366D9A004031D6 /* totHomeRootController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF62839715366D9A004031D6 /* totHomeRootController.m */; };
@@ -1258,7 +1256,8 @@
 		8E42F11618389DC9006DB992 /* totResetPasswordView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totResetPasswordView.m; path = Setting/totResetPasswordView.m; sourceTree = "<group>"; };
 		8E5692EF17B9FE63001686CB /* totTimeUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totTimeUtil.h; path = Utility/totTimeUtil.h; sourceTree = "<group>"; };
 		8E5692F017B9FE63001686CB /* totTimeUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totTimeUtil.m; path = Utility/totTimeUtil.m; sourceTree = "<group>"; };
-		8EA42333189DFD8600D5F324 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
+		8EA42347189E30AF00D5F324 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		8EA42349189E30B400D5F324 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		CE5C09F8154CCFDB00D41114 /* moviePlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = moviePlayerViewController.h; path = Utility/moviePlayerViewController.h; sourceTree = "<group>"; };
 		CE5C09F9154CCFDB00D41114 /* moviePlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = moviePlayerViewController.m; path = Utility/moviePlayerViewController.m; sourceTree = "<group>"; };
 		CEDB78B7155107C300805CC8 /* totImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = totImageCache.h; sourceTree = "<group>"; };
@@ -1280,7 +1279,6 @@
 		EF6283771536674B004031D6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		EF6283791536674B004031D6 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		EF62837D1536674C004031D6 /* totdev-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "totdev-Info.plist"; sourceTree = "<group>"; };
-		EF62837F1536674C004031D6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		EF6283811536674C004031D6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		EF6283831536674C004031D6 /* totdev-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "totdev-Prefix.pch"; sourceTree = "<group>"; };
 		EF6283841536674C004031D6 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -2059,14 +2057,6 @@
 			name = Timeline;
 			sourceTree = "<group>";
 		};
-		8EA42332189DFD5100D5F324 /* zh_Hans.lproj */ = {
-			isa = PBXGroup;
-			children = (
-				8EA42333189DFD8600D5F324 /* Localizable.strings */,
-			);
-			name = zh_Hans.lproj;
-			sourceTree = "<group>";
-		};
 		EF043C3B154DE2D600975BCD /* Utility */ = {
 			isa = PBXGroup;
 			children = (
@@ -2150,9 +2140,8 @@
 		EF62837C1536674C004031D6 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				8EA42332189DFD5100D5F324 /* zh_Hans.lproj */,
+				8EA42346189E30AF00D5F324 /* Localizable.strings */,
 				EF62837D1536674C004031D6 /* totdev-Info.plist */,
-				EF62837E1536674C004031D6 /* InfoPlist.strings */,
 				EF6283811536674C004031D6 /* main.m */,
 				EF6283831536674C004031D6 /* totdev-Prefix.pch */,
 			);
@@ -2307,6 +2296,8 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				zh_Hans,
+				"zh-Hans",
 			);
 			mainGroup = EF6283661536674B004031D6;
 			productRefGroup = EF6283721536674B004031D6 /* Products */;
@@ -2324,7 +2315,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3F7F87411898F85D00492EDD /* InfoPlist.strings in Resources */,
 				3F7F87421898F85D00492EDD /* height@2x.png in Resources */,
 				3F7F87431898F85D00492EDD /* totLoginController.xib in Resources */,
 				3F7F87441898F85D00492EDD /* totdb.sqlite in Resources */,
@@ -2653,7 +2643,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EF6283801536674C004031D6 /* InfoPlist.strings in Resources */,
 				17B1687C1897A125007E03E5 /* height@2x.png in Resources */,
 				3F2216DF1571758F000E86F3 /* totLoginController.xib in Resources */,
 				3F7CDB5D157ABDCE009CD3D7 /* totdb.sqlite in Resources */,
@@ -2755,6 +2744,7 @@
 				3F7F87011898F2E500492EDD /* Flowers Template P2.png in Resources */,
 				17B1698B1897AAD5007E03E5 /* Diaper_checkbox@2x.png in Resources */,
 				17B169281897A787007E03E5 /* Animals Template P5@2x.png in Resources */,
+				8EA42348189E30AF00D5F324 /* Localizable.strings in Resources */,
 				17B1689A1897A3D6007E03E5 /* add_text.png in Resources */,
 				3FD3C64217CDBCA700DB1B71 /* home_bg@2x.png in Resources */,
 				3FD3C65017CDD60500DB1B71 /* activity_line.png in Resources */,
@@ -2895,7 +2885,6 @@
 				3F049B4E17D2F79700F05727 /* activity_bg.png in Resources */,
 				17B168AF1897A5EC007E03E5 /* diaper_gray@2x.png in Resources */,
 				3F049B4F17D2F79700F05727 /* activity_bg@2x.png in Resources */,
-				8EA42334189DFD8600D5F324 /* Localizable.strings in Resources */,
 				3F049B5717D4073400F05727 /* timeline_home.png in Resources */,
 				3F049B5817D4073400F05727 /* timeline_home@2x.png in Resources */,
 				3F7F87021898F2E500492EDD /* Flowers Template P3.png in Resources */,
@@ -3118,12 +3107,13 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		EF62837E1536674C004031D6 /* InfoPlist.strings */ = {
+		8EA42346189E30AF00D5F324 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				EF62837F1536674C004031D6 /* en */,
+				8EA42347189E30AF00D5F324 /* zh-Hans */,
+				8EA42349189E30B400D5F324 /* en */,
 			);
-			name = InfoPlist.strings;
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
