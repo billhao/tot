@@ -29,6 +29,8 @@
 #define WINDOW_W 320
 #define WINDOW_H 480
 
+#define DEBUG_APP true
+
 @class totUITabBarController;
 @class totHomeRootController;
 
