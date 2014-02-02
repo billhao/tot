@@ -76,7 +76,7 @@
         // Title for settings.
         UILabel* title = [[UILabel alloc] init];
         title.font = [UIFont fontWithName:@"Helvetica" size:24];
-        title.text = @"Change Password";
+        title.text = NSLocalizedString(@"Change Password", @"");
         title.backgroundColor = [UIColor clearColor];
         title.textColor = [UIColor whiteColor];
         [title sizeToFit];
@@ -94,7 +94,7 @@
         oldPasswordTextField = [[UITextField alloc] initWithFrame:CGRectMake(10, y, 300, 40)];
         oldPasswordTextField.borderStyle = UITextBorderStyleRoundedRect;
         oldPasswordTextField.backgroundColor = [UIColor whiteColor];
-        oldPasswordTextField.placeholder = @"old password";
+        oldPasswordTextField.placeholder = NSLocalizedString(@"old password", @"");
         oldPasswordTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
         oldPasswordTextField.autocorrectionType = UITextAutocorrectionTypeNo;
         oldPasswordTextField.returnKeyType = UIReturnKeyDone;
@@ -106,7 +106,7 @@
         newPasswordTextField = [[UITextField alloc] initWithFrame:CGRectMake(10, y, 300, 40)];
         newPasswordTextField.borderStyle = UITextBorderStyleRoundedRect;
         newPasswordTextField.backgroundColor = [UIColor whiteColor];
-        newPasswordTextField.placeholder = @"new password";
+        newPasswordTextField.placeholder = NSLocalizedString(@"new password", @"");
         newPasswordTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
         newPasswordTextField.autocorrectionType = UITextAutocorrectionTypeNo;
         newPasswordTextField.returnKeyType = UIReturnKeyDone;
@@ -122,7 +122,7 @@
         resetBtn.layer.masksToBounds = YES;
         [resetBtn setFrame:CGRectMake(10, y, 300, 43)];
         [resetBtn setBackgroundColor:[UIColor colorWithRed:245/255.0f green:73/255.0 blue:82/255.0 alpha:1.0f]];
-        [resetBtn setTitle:@"Go" forState:UIControlStateNormal];
+        [resetBtn setTitle:NSLocalizedString(@"Go", @"") forState:UIControlStateNormal];
         [resetBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [resetBtn.titleLabel setFont:[UIFont fontWithName:@"Raleway-SemiBold_2" size:18.0f]];
         [resetBtn addTarget:self action:@selector(reset:) forControlEvents:UIControlEventTouchUpInside];

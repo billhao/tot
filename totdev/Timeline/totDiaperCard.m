@@ -61,16 +61,16 @@
     [self setIcon:@"diaper_gray" confirmedIcon:@"diaper"];
     //[self setCalendar:999];
     [self setTimestamp];
-    [self setTitle:@"Diaper" ];
+    [self setTitle:NSLocalizedString(@"Diaper", @"")];
     
     // Initializes UI.
     UIButton* wetBtn       = [self createButton:y];
     UIButton* soiledBtn    = [self createButton:y+(h+margin_y)*1];
     UIButton* wetSoiledBtn = [self createButton:y+(h+margin_y)*2];
     
-    [wetBtn setTitle:@"wet" forState:UIControlStateNormal];
-    [soiledBtn setTitle:@"soiled" forState:UIControlStateNormal];
-    [wetSoiledBtn setTitle:@"wet soiled" forState:UIControlStateNormal];
+    [wetBtn setTitle:NSLocalizedString(@"wet", @"") forState:UIControlStateNormal];
+    [soiledBtn setTitle:NSLocalizedString(@"soiled", @"") forState:UIControlStateNormal];
+    [wetSoiledBtn setTitle:NSLocalizedString(@"wet soiled", @"") forState:UIControlStateNormal];
     
     wetBtn.tag = SELECTION_WET;
     soiledBtn.tag = SELECTION_SOILED;
@@ -126,11 +126,11 @@
     totModel *model = global.model;
     NSString* diaper;
     if (selection == SELECTION_WET) {
-        diaper = @"wet";
+        diaper = NSLocalizedString(@"wet", @"");
     } else if (selection == SELECTION_SOILED) {
-        diaper = @"soiled";
+        diaper = NSLocalizedString(@"soiled", @"");
     } else if (selection == SELECTION_WETSOILED) {
-        diaper = @"wet soiled";
+        diaper = NSLocalizedString(@"wet soiled", @"");
     }
     else
         return;
@@ -144,21 +144,19 @@
         
         // update the summary card.
         if (mDiaperType == SELECTION_WET)
-            [self.parentView.parent updateSummaryCard:DIAPER withValue:@"wet"];
+            [self.parentView.parent updateSummaryCard:DIAPER withValue:NSLocalizedString(@"wet", @"")];
         else if (mDiaperType == SELECTION_SOILED)
-            [self.parentView.parent updateSummaryCard:DIAPER withValue:@"soiled"];
+            [self.parentView.parent updateSummaryCard:DIAPER withValue:NSLocalizedString(@"soiled", @"")];
         else if (mDiaperType == SELECTION_WETSOILED)
-            [self.parentView.parent updateSummaryCard:DIAPER withValue:@"wet soiled"];
-        
+            [self.parentView.parent updateSummaryCard:DIAPER withValue:NSLocalizedString(@"wet soiled", @"")];
         return true;
     } else {
-        [totUtility showAlert:@"Anything on the diaper?"];
+        [totUtility showAlert:NSLocalizedString(@"Anything on the diaper?", @"")];
         return false;
     }
 }
 
 @end
-
 
 
 @implementation totDiaperShowCard

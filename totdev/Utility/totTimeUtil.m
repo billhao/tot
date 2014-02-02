@@ -74,28 +74,28 @@
         if (current_hour == event_hour && current_minute == event_minute) {
             int second_diff = current_second - event_second;
             if (second_diff == 1)
-                time_desc = [NSString stringWithFormat:@"1 second ago"];
+                time_desc = [NSString stringWithFormat:NSLocalizedString(@"1 second ago", @"")];
             else
-                time_desc = [NSString stringWithFormat:@"%d seconds ago", second_diff];
+                time_desc = [NSString stringWithFormat:@"%d %@", second_diff, NSLocalizedString(@"seconds ago", @"")];
         } else if (current_hour == event_hour) {
             int minute_diff = current_minute - event_minute;
             if (minute_diff == 1)
-                time_desc = [NSString stringWithFormat:@"1 minute ago"];
+                time_desc = [NSString stringWithFormat:NSLocalizedString(@"1 minute ago", @"")];
             else
-                time_desc = [NSString stringWithFormat:@"%d minutes ago", minute_diff];
+                time_desc = [NSString stringWithFormat:@"%d %@", minute_diff, NSLocalizedString(@"minutes ago", @"")];
         } else {
             int hour_diff = current_hour - event_hour;
             if (hour_diff == 1)
-                time_desc = [NSString stringWithFormat:@"about 1 hour ago"];
+                time_desc = [NSString stringWithFormat:NSLocalizedString(@"1 hour ago", @"")];
             else
-                time_desc = [NSString stringWithFormat:@"about %d hours ago", hour_diff];
+                time_desc = [NSString stringWithFormat:@"%d %@", hour_diff, NSLocalizedString(@"hours ago", @"")];
         }
     } else if (current_year == event_year && current_month == event_month) {
         int day_diff = current_day - event_day;
         if (day_diff == 1)
-            time_desc = [NSString stringWithFormat:@"about 1 day ago"];
+            time_desc = [NSString stringWithFormat:NSLocalizedString(@"about 1 day ago", @"")];
         else
-            time_desc = [NSString stringWithFormat:@"%d days ago", day_diff];
+            time_desc = [NSString stringWithFormat:@"%d %@", day_diff, NSLocalizedString(@"days ago", @"")];
     } else {
         time_desc = [NSString stringWithString:[date_formatter stringFromDate:event_time]];
     }

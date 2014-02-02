@@ -36,14 +36,14 @@
 
 - (void) loadIcons {
     [self setTimestamp];
-    [self setTitle:@"New Word"];
+    [self setTitle:NSLocalizedString(@"New Word", @"")];
     [self setIcon:@"language_gray" confirmedIcon:@"language"];
     //[self setCalendar:99];
     [self loadButtons];
 }
 
 - (void) loadButtons {    
-    defaultTxt = @"what did the baby say?";
+    defaultTxt = NSLocalizedString(@"what did the baby say?", @"");
     
     float y = contentYOffset + margin_y;
     float h = 80;
@@ -128,7 +128,7 @@
         
         return TRUE;
     } else {
-        [totUtility showAlert:@"What did the baby say?"];
+        [totUtility showAlert:NSLocalizedString(@"what did the baby say?", @"")];
         return FALSE;
     }
 }

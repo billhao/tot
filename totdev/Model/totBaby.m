@@ -110,34 +110,34 @@
     if( components.day == 0 )
         day = @"";
     else if( components.day == 1 )
-        day = @"1 day";
+        day = NSLocalizedString(@"1 day", @"");
     else
-        day = [NSString stringWithFormat:@"%d days", components.day];
+        day = [NSString stringWithFormat:@"%d %@", components.day, NSLocalizedString(@"days", @"")];
 
     if( components.month == 0 )
         month = @"";
     else if( components.month == 1 )
-        month = @"1 month";
+        month = NSLocalizedString(@"1 month", @"");
     else
-        month = [NSString stringWithFormat:@"%d months", components.month];
+        month = [NSString stringWithFormat:@"%d %@", components.month, NSLocalizedString(@"months", @"")];
 
     if( components.year == 0 )
         year = @"";
     else if( components.year == 1 )
-        year = @"1 year";
+        year = NSLocalizedString(@"1 year", @"");
     else
-        year = [NSString stringWithFormat:@"%d years", components.year];
+        year = [NSString stringWithFormat:@"%d %@", components.year, NSLocalizedString(@"years", @"")];
     
     if( components.year == 0 && components.month == 0 && components.day == 0 ) {
         // first day
-        str = [NSString stringWithFormat:@"first day!"];
+        str = [NSString stringWithFormat:NSLocalizedString(@"first day!", @"")];
     }
     else if( components.day == 0 && components.month == 0 ) {
         // today is birthday
         if( components.year == 1 )
-            str = [NSString stringWithFormat:@"one year! happy birthday!"];
+            str = [NSString stringWithFormat:NSLocalizedString(@"one year! happy birthday!", @"")];
         else
-            str = [NSString stringWithFormat:@"%d years! happy birthday!", components.year];
+            str = [NSString stringWithFormat:@"%d %@", components.year, NSLocalizedString(@"years! happy birthday!", @"")];
     }
     else {
         str = [NSString stringWithFormat:@"%@ %@ %@", year, month, day];

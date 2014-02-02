@@ -43,7 +43,10 @@
         inputAccessoryView = [self createInputAccessoryView];
         
         // all possible units
-        mUnit = [[NSMutableArray alloc] initWithObjects:@"oz", @"pc", @"lb", @"ct", nil];
+        mUnit = [[NSMutableArray alloc] initWithObjects:NSLocalizedString(@"oz", @""),
+                                                        NSLocalizedString(@"pc", @""),
+                                                        NSLocalizedString(@"lb", @""),
+                                                        NSLocalizedString(@"ct", @""), nil];
     }
     return self;
 }
@@ -146,9 +149,9 @@
         if( [delegate respondsToSelector:@selector(saveQuantity:)] ) {
             NSString *qu = nil; //quantity and unit
             
-            qu = [[NSString alloc] initWithFormat:@"%s %s",
-                 [[mQuantity objectAtIndex:mCurrentQuantityIdx] UTF8String],
-                 [[mUnit objectAtIndex:mCurrentUnitIdx] UTF8String]];
+            qu = [[NSString alloc] initWithFormat:@"%@ %@",
+                 [mQuantity objectAtIndex:mCurrentQuantityIdx],
+                 [mUnit objectAtIndex:mCurrentUnitIdx]];
             
             // call the delegate
             [delegate saveQuantity:qu];
@@ -166,8 +169,7 @@
 }
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
    [super viewDidLoad];
 
     self.view.userInteractionEnabled = YES;

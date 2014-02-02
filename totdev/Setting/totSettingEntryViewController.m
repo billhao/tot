@@ -93,7 +93,7 @@
     // title for settings
     UILabel* title = [[UILabel alloc] init];
     [title setFont:[UIFont fontWithName:@"Helvetica" size:24]];
-    [title setText:@"Settings"];
+    [title setText:NSLocalizedString(@"Settings", @"")];
     [title setBackgroundColor:[UIColor clearColor]];
     [title setTextColor:[UIColor whiteColor]];
     [title sizeToFit];
@@ -108,13 +108,13 @@
     float gap = 63;
 
     // Creates the tutorial button.
-    float y = gap + statusBarHeight; [self addButton:@"Tutorial" position:y select:@selector(startTutorial:)];
+    float y = gap + statusBarHeight; [self addButton:NSLocalizedString(@"Tutorial", @"") position:y select:@selector(startTutorial:)];
     // Creates the reset password button.
-    y += gap; [self addButton:@"Change password" position:y select:@selector(resetPassword:)];
+    y += gap; [self addButton:NSLocalizedString(@"Change password", @"") position:y select:@selector(resetPassword:)];
     // Creates the rating button
-    y += gap; [self addButton:@"Review on app store" position:y select:@selector(rate:)];
+    y += gap; [self addButton:NSLocalizedString(@"Review on app store", @"") position:y select:@selector(rate:)];
     // Creates the contact button
-    y += gap; [self addButton:@"Contact us" position:y select:@selector(contact:)];
+    y += gap; [self addButton:NSLocalizedString(@"Contact us", @"") position:y select:@selector(contact:)];
 
     // Creates logout button.
     y += gap;
@@ -123,7 +123,7 @@
     logoutBtn.layer.masksToBounds = YES;
     [logoutBtn setFrame:CGRectMake(10, y, 300, 43)];
     [logoutBtn setBackgroundColor:[UIColor colorWithRed:245/255.0f green:73/255.0 blue:82/255.0 alpha:1.0f]];
-    [logoutBtn setTitle:@"Log out" forState:UIControlStateNormal];
+    [logoutBtn setTitle:NSLocalizedString(@"Log out", @"") forState:UIControlStateNormal];
     [logoutBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [logoutBtn.titleLabel setFont:[UIFont fontWithName:@"Raleway-SemiBold_2" size:18.0f]];
     [logoutBtn addTarget:self action:@selector(logout:) forControlEvents:UIControlEventTouchUpInside];
@@ -144,7 +144,7 @@
         case MFMailComposeResultSent:
             NSLog(@"Mail sent");
             UIAlertView* alert = [[[UIAlertView alloc] initWithTitle:nil
-                                                            message:@"Your message is sent. We will get back to you soon."
+                                                            message:NSLocalizedString(@"Your message is sent. We will get back to you soon.", @"")
                                                            delegate:self
                                                   cancelButtonTitle:@"OK"
                                                   otherButtonTitles:nil] autorelease];
@@ -161,7 +161,7 @@
 
 - (void)contact: (id)sender {
     // Email Subject
-    NSString *emailTitle = @"Customer Support";
+    NSString *emailTitle = NSLocalizedString(@"Customer Support", @"");
     // Email Content
     NSString *messageBody = @"";
     // To address

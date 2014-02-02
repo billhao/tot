@@ -297,12 +297,10 @@
             UIImageView* coverImgView = [[UIImageView alloc] initWithFrame:CGRectMake(15, 7, 278, 153)];
             coverImgView.image = coverImg;
             [bookView addSubview:coverImgView];
-//            coverImgView.layer.borderWidth = 0.5;
-//            coverImgView.layer.borderColor = [UIColor grayColor].CGColor;
             [bookView addSubview:coverImgView];
-            bookBtn.backgroundColor = [UIColor clearColor];
 
-            bookView.tag = i;
+             bookBtn.backgroundColor = [UIColor clearColor];
+             bookView.tag = i;
             [bookBtnList addObject:bookView];
             
             UILabel* bookLabel = [[UILabel alloc] init];
@@ -315,10 +313,12 @@
             
             // TODO in the release, thumbnails for templates should be the same as books
             if( isTemplate ) {
-                bookLabel.text = [NSString stringWithFormat:@"%@ (template)", [book objectForKey:@"name"]];
+                bookLabel.text = [NSString stringWithFormat:@"%@ %@",
+                                  NSLocalizedString([book objectForKey:@"name"], @""),
+                                  NSLocalizedString(@"(template)", @"")];
             }
             else {
-                bookLabel.text = [book objectForKey:@"name"];
+                bookLabel.text = NSLocalizedString([book objectForKey:@"name"], @"");
             }
             [bookLabel sizeToFit];
             
@@ -402,7 +402,7 @@
     // title for scrapbook
     UILabel* title = [[UILabel alloc] init];
     title.font = [UIFont fontWithName:@"Helvetica" size:24];
-    title.text = @"Scrapbooks";
+    title.text = NSLocalizedString(@"Scrapbooks", @"");
     title.backgroundColor = [UIColor clearColor];
     title.textColor = [UIColor whiteColor];
     [title sizeToFit];

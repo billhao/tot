@@ -62,8 +62,16 @@
                                                  @"diaper_gray",
                                                  @"language_gray",
                                                  @"sleep_gray", @"food_gray", nil];
-    NSMutableArray* label_text = [[NSMutableArray alloc] initWithObjects:
-                                  @"N/A", @"N/A", @"N/A", @"N/A", @"N/A", @"N/A", @"N/A", nil];
+
+    NSString* not_available = NSLocalizedString(@"N/A", @"Not available.");
+    
+    NSMutableArray* label_text = [[NSMutableArray alloc] initWithObjects: not_available,
+                                                                          not_available,
+                                                                          not_available,
+                                                                          not_available,
+                                                                          not_available,
+                                                                          not_available,
+                                                                          not_available, nil];
     float icon_w = 41;
     float icon_h = 41;
     int cnt = sizeof(icon_x)/sizeof(icon_x[0]);

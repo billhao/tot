@@ -54,7 +54,7 @@
     [super viewDidLoad];
     [self setBackground];
     [self setIcon:@"food_gray" confirmedIcon:@"food"];
-    [self setTitle:@"Feeding"];
+    [self setTitle:NSLocalizedString(@"Feeding", @"")];
     [self setTimestamp];
     [self createUI];
 }
@@ -248,9 +248,9 @@
     f.origin.x += w2 + margin_x;
     f.size.width = h;
     UIButton* deleteBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    deleteBtn.frame = f;
     [deleteBtn setImage:[UIImage imageNamed:@"feeding_delete"] forState:UIControlStateNormal];
     [deleteBtn setImage:[UIImage imageNamed:@"feeding_delete"] forState:UIControlStateHighlighted];
-    deleteBtn.frame = f;
     [deleteBtn addTarget:self action:@selector(deleteBtnPressed:) forControlEvents:UIControlEventTouchUpInside];
     [v addSubview:deleteBtn];
 
@@ -277,7 +277,7 @@
     textView.textAlignment = UITextAlignmentCenter;
     textView.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     textView.backgroundColor = [UIColor clearColor];
-    textView.font = [UIFont fontWithName:@"Raleway" size:16.0];
+    // textView.font = [UIFont fontWithName:@"Raleway" size:16.0];
     textView.textColor = [UIColor colorWithRed:100.0/255 green:100.0/255 blue:100.0/255 alpha:1.0];
     // disable auto correction, capitalization and etc
     textView.autocapitalizationType = UITextAutocapitalizationTypeNone;
@@ -380,7 +380,7 @@
 - (void)updateUI:(NSString*)value {
     NSString* text = [totFeedShowCard formatValue:value];
     if( text.length > 0 ) {
-        card_title.text = @"Feeding";
+        card_title.text = NSLocalizedString(@"Feeding", @"");
         description.text = text;
     }
     else {

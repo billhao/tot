@@ -792,6 +792,7 @@
 		8E32868918271C10006E8F38 /* icons-language@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8E32868718271C10006E8F38 /* icons-language@2x.png */; };
 		8E42F11718389DC9006DB992 /* totResetPasswordView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E42F11618389DC9006DB992 /* totResetPasswordView.m */; };
 		8E5692F117B9FE63001686CB /* totTimeUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 8E5692F017B9FE63001686CB /* totTimeUtil.m */; };
+		8EA42334189DFD8600D5F324 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8EA42333189DFD8600D5F324 /* Localizable.strings */; };
 		CE5C09FC154CCFDB00D41114 /* moviePlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5C09F9154CCFDB00D41114 /* moviePlayerViewController.m */; };
 		CEDB78B9155107C300805CC8 /* totImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = CEDB78B8155107C300805CC8 /* totImageCache.m */; };
 		EF0D6BEA1555CCD00027F012 /* totTimerController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF0D6BE91555CCD00027F012 /* totTimerController.m */; };
@@ -1260,6 +1261,7 @@
 		8E42F11618389DC9006DB992 /* totResetPasswordView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totResetPasswordView.m; path = Setting/totResetPasswordView.m; sourceTree = "<group>"; };
 		8E5692EF17B9FE63001686CB /* totTimeUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totTimeUtil.h; path = Utility/totTimeUtil.h; sourceTree = "<group>"; };
 		8E5692F017B9FE63001686CB /* totTimeUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totTimeUtil.m; path = Utility/totTimeUtil.m; sourceTree = "<group>"; };
+		8EA42333189DFD8600D5F324 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		CE5C09F8154CCFDB00D41114 /* moviePlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = moviePlayerViewController.h; path = Utility/moviePlayerViewController.h; sourceTree = "<group>"; };
 		CE5C09F9154CCFDB00D41114 /* moviePlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = moviePlayerViewController.m; path = Utility/moviePlayerViewController.m; sourceTree = "<group>"; };
 		CEDB78B7155107C300805CC8 /* totImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = totImageCache.h; sourceTree = "<group>"; };
@@ -2061,6 +2063,14 @@
 			name = Timeline;
 			sourceTree = "<group>";
 		};
+		8EA42332189DFD5100D5F324 /* zh_Hans.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				8EA42333189DFD8600D5F324 /* Localizable.strings */,
+			);
+			name = zh_Hans.lproj;
+			sourceTree = "<group>";
+		};
 		EF043C3B154DE2D600975BCD /* Utility */ = {
 			isa = PBXGroup;
 			children = (
@@ -2144,6 +2154,7 @@
 		EF62837C1536674C004031D6 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				8EA42332189DFD5100D5F324 /* zh_Hans.lproj */,
 				EF62837D1536674C004031D6 /* totdev-Info.plist */,
 				EF62837E1536674C004031D6 /* InfoPlist.strings */,
 				EF6283811536674C004031D6 /* main.m */,
@@ -2890,6 +2901,7 @@
 				3F049B4E17D2F79700F05727 /* activity_bg.png in Resources */,
 				17B168AF1897A5EC007E03E5 /* diaper_gray@2x.png in Resources */,
 				3F049B4F17D2F79700F05727 /* activity_bg@2x.png in Resources */,
+				8EA42334189DFD8600D5F324 /* Localizable.strings in Resources */,
 				3F049B5717D4073400F05727 /* timeline_home.png in Resources */,
 				3F049B5817D4073400F05727 /* timeline_home@2x.png in Resources */,
 				3F7F87021898F2E500492EDD /* Flowers Template P3.png in Resources */,

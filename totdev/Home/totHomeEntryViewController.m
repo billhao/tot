@@ -609,7 +609,9 @@
             NSString* activityIcon = [NSString stringWithFormat:@"activity_%@", tmpname];
             
             UIButton* activityBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-            activityBtn.frame = CGRectMake(margin_x_left+c*(icon_width+margin_x), margin_y_top+r*(icon_height+label_height+margin_y), icon_width, icon_height);
+            activityBtn.frame = CGRectMake(margin_x_left+c*(icon_width+margin_x),
+                                           margin_y_top+r*(icon_height+label_height+margin_y),
+                                           icon_width, icon_height);
             [activityBtn setImage:[UIImage imageNamed:activityIcon] forState:UIControlStateNormal];
             [activityBtn setImage:[UIImage imageNamed:activityIcon] forState:UIControlStateHighlighted];
             activityBtn.tag = i;
@@ -633,18 +635,20 @@
             }
             
             UIButton* activityLabel = [UIButton buttonWithType:UIButtonTypeCustom];
-            activityLabel.frame = CGRectMake(margin_x_left+c*(icon_width+margin_x)-(label_width-icon_width)/2, margin_y_top+r*(icon_height+label_height+margin_y)+icon_height, label_width, label_height);
+            activityLabel.frame = CGRectMake(margin_x_left+c*(icon_width+margin_x)-(label_width-icon_width)/2,
+                                             margin_y_top+r*(icon_height+label_height+margin_y)+icon_height,
+                                             label_width, label_height);
             activityLabel.backgroundColor = [UIColor clearColor];
             activityLabel.alpha = 0.8;
             activityLabel.titleLabel.font = font;
             activityLabel.titleLabel.textAlignment = NSTextAlignmentCenter;
             activityLabel.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+            activityLabel.tag = i;
             if(debug) {
                 activityLabel.layer.borderColor = [UIColor blackColor].CGColor;
                 activityLabel.layer.borderWidth = 1.0;
             }
-            [activityLabel setTitle:activity forState:UIControlStateNormal];
-            activityLabel.tag = i;
+            [activityLabel setTitle:NSLocalizedString(activity, @"") forState:UIControlStateNormal];
             [activityLabel addTarget:self action:@selector(activityButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
             [scrollView addSubview:activityLabel];
         }

@@ -213,9 +213,13 @@
 // change the book name
 - (void)editBookName {
     // show the input window
-    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Edit book name" message:@"" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
+    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Edit book name", @"")
+                                                     message:@""
+                                                    delegate:self
+                                           cancelButtonTitle:NSLocalizedString(@"Cancel", @"")
+                                           otherButtonTitles:NSLocalizedString(@"OK", @""), nil];
     alert.alertViewStyle = UIAlertViewStylePlainTextInput;
-    [alert textFieldAtIndex:0].text = mBook.bookname;
+    [alert textFieldAtIndex:0].text = NSLocalizedString(mBook.bookname, @"");
     [alert show];
     [alert release];
 }
@@ -464,10 +468,10 @@
     if( optionView ) return;
     
     NSMutableArray* buttons = [[NSMutableArray alloc] initWithObjects:
-                               @"add page",
-                               @"delete page",
-                               @"book name",
-                               @"close book",
+                               NSLocalizedString(@"add page", @""),
+                               NSLocalizedString(@"delete page", @""),
+                               NSLocalizedString(@"book name", @""),
+                               NSLocalizedString(@"close book", @""),
                                nil];
 
     int margin_x_left = 0;

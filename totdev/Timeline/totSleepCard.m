@@ -38,7 +38,7 @@
 
 - (void)loadIcons {
     [self setIcon:@"sleep"];
-    [self setTitle:@"Sleep"];
+    [self setTitle:NSLocalizedString(@"Sleep", @"")];
     [self setTimestamp];
     
     line.hidden = TRUE; // we don't need line for sleep;
@@ -54,7 +54,7 @@
     start_button.backgroundColor = [UIColor lightGrayColor];
     start_button.layer.cornerRadius = 2;
     start_button.titleLabel.font = font;
-    [start_button setTitle:@"sleep" forState:UIControlStateNormal];
+    [start_button setTitle:NSLocalizedString(@"sleep", @"") forState:UIControlStateNormal];
     [start_button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [start_button addTarget:self action:@selector(startSleep:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:start_button];
@@ -67,7 +67,7 @@
     stop_button.hidden = YES;
     start_button.titleLabel.font = font;
     [stop_button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [stop_button setTitle:@"wake up" forState:UIControlStateNormal];
+    [stop_button setTitle:NSLocalizedString(@"wake up", @"") forState:UIControlStateNormal];
     [stop_button addTarget:self action:@selector(stopSleep:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:stop_button];
 }
@@ -146,7 +146,7 @@
     if( str.length > 0 )
         [self setTitle:[NSString stringWithFormat:@"%@", str]];
     else
-        [self setTitle:@"just now"];
+        [self setTitle:NSLocalizedString(@"just now", @"")];
 }
 
 - (NSString*)formatSleepTime {
@@ -162,9 +162,9 @@
     NSString* min = @"";
     NSString* text;
     if( h > 0 )
-        hour = [NSString stringWithFormat:@"%d hr ", h];
+        hour = [NSString stringWithFormat:@"%d %@", h, NSLocalizedString(@"hr", @"")];
     if( m > 0 )
-        min = [NSString stringWithFormat:@"%d min ", m];
+        min = [NSString stringWithFormat:@"%d %@", m, NSLocalizedString(@"min", @"")];
     return [NSString stringWithFormat:@"%@%@", hour, min];
 }
 
@@ -284,27 +284,40 @@
     NSString* text;
     if( h>0 && m<10 ) {
         if( h==1 )
-            text = [NSString stringWithFormat:@"%@ slept for about an hour", global.baby.name];
+            text = [NSString stringWithFormat:@"%@ %@ %@", global.baby.name,
+                                                           NSLocalizedString(@"slept for about", @""),
+                                                           NSLocalizedString(@"an hour", @"")];
         else
-            text = [NSString stringWithFormat:@"%@ slept for about %d hours", global.baby.name, h];
+            text = [NSString stringWithFormat:@"%@ %@ %d %@", global.baby.name, NSLocalizedString(@"slept for about", @""),
+                                                              h, NSLocalizedString(@"hours", @"")];
     }
     else if( m>50 ) {
         if( h==0 )
-            text = [NSString stringWithFormat:@"%@ slept for about an hour", global.baby.name];
+            text = [NSString stringWithFormat:@"%@ %@ %@", global.baby.name,
+                                                           NSLocalizedString(@"slept for about", @""),
+                                                           NSLocalizedString(@"an hour", @"")];
         else
-            text = [NSString stringWithFormat:@"%@ slept for about %d hours", global.baby.name, h+1];
+            text = [NSString stringWithFormat:@"%@ %@ %d %@", global.baby.name, NSLocalizedString(@"slept for about", @""),
+                                                              h+1, NSLocalizedString(@"hours", @"")];
     }
     else if( h==0 && m==0 )
-        text = [NSString stringWithFormat:@"%@ slept for less than a minute", global.baby.name];
+        text = [NSString stringWithFormat:@"%@ %@", global.baby.name, NSLocalizedString(@"slept for less than a minute", @"")];
     else if( h==0 && m==1 )
-        text = [NSString stringWithFormat:@"%@ slept for a minute", global.baby.name];
+        text = [NSString stringWithFormat:@"%@ %@", global.baby.name, NSLocalizedString(@"slept for a minute", @"")];
     else if( h==0 && m>1 )
-        text = [NSString stringWithFormat:@"%@ slept for %d minutes", global.baby.name, m];
+        text = [NSString stringWithFormat:@"%@ %@ %d %@", global.baby.name,
+                                                          NSLocalizedString(@"slept for", @""),
+                                                          m, NSLocalizedString(@"minutes", @"")];
     else if( h>=15 )
-        text = [NSString stringWithFormat:@"%@ slept for %d hours. Really?", global.baby.name, h];
+        text = [NSString stringWithFormat:@"%@ %@ %d %@. %@", global.baby.name,
+                                                              NSLocalizedString(@"slept for", @""), h,
+                                                              NSLocalizedString(@"hours", @""),
+                                                              NSLocalizedString(@"Really?", @"")];
     else
-        text = [NSString stringWithFormat:@"%@ slept for %d hours %d minutes", global.baby.name, h, m];
-    
+        text = [NSString stringWithFormat:@"%@ %@ %d %@ %d %@", global.baby.name,
+                                                                NSLocalizedString(@"slept for", @""), h,
+                                                                NSLocalizedString(@"hours", @""), m,
+                                                                NSLocalizedString(@"minutes", @"")];
     card_title.font = [UIFont fontWithName:@"Raleway-SemiBold" size:14];
     card_title.numberOfLines = 0;
     card_title.text = text;
@@ -324,9 +337,9 @@
     int m = [conversionInfo minute];
     
     if( h > 0 )
-        return [NSString stringWithFormat:@"%d hr %d min", h, m];
+        return [NSString stringWithFormat:@"%d %@ %d %@", h, NSLocalizedString(@"hr", @""), m, NSLocalizedString(@"min", @"")];
     else
-        return [NSString stringWithFormat:@"%d min", m];
+        return [NSString stringWithFormat:@"%d %@", m, NSLocalizedString(@"min", @"")];
 }
 
 - (void) updateCard { [self setTimestampWithDate:self.e.datetime]; }

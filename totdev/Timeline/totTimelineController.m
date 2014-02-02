@@ -134,7 +134,7 @@
     // title for timeline
     UILabel* title = [[UILabel alloc] init];
     title.font = [UIFont fontWithName:@"Helvetica" size:24];
-    title.text = @"Timeline";
+    title.text = NSLocalizedString(@"Timeline", @"Title for timeline view.");  //@"Timeline";
     title.backgroundColor = [UIColor clearColor];
     title.textColor = [UIColor whiteColor];
     [title sizeToFit];

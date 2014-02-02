@@ -1,0 +1,124 @@
+/* 
+  Localizable.strings
+  totdev
+
+  Created by Lixing Huang on 2/1/14.
+  Copyright (c) 2014 tot. All rights reserved.
+*/
+
+"Timeline" = "成长足迹";
+"N/A" = "无记录";
+"1 day" = "1天啦！";
+"days" = "天";
+"1 month" = "一个月啦！";
+"months" = "月";
+"1 year" = "周岁啦！";
+"years" = "岁";
+"first day!" = "我来啦！";
+"one year! happy birthday!" = "一周岁！生快！";
+"years! happy birthday!" = "岁！生日快乐";
+"wet" = "尿了";
+"soiled" = "拉臭臭";
+"wet soiled" = "屎尿啊";
+"Anything on the diaper?" = "尿了吗？";
+"Feeding" = "饮食";
+"oz" = "瓶";
+"pc" = "个";
+"lb" = "两";
+"ct" = "毫升";
+"Move the slider to select a number" = "请滑动滚动条选择合适数值";
+"inches" = "厘米";
+"pounds" = "斤";
+"Height" = "身高";
+"Weight" = "体重";
+"Head Circumference" = "头围";
+"what did the baby say?" = "宝宝说什么了？";
+"1 second ago" = "刚刚";
+"seconds ago" = "秒前";
+"1 minute ago" = "一分钟前";
+"minutes ago" = "分钟前";
+"1 hour ago" = "一小时前";
+"hours ago" = "小时前";
+"about 1 day ago" = "大约一天前";
+"days ago" = "天前";
+"sleep" = "睡了";
+"wake up" = "醒了";
+"just now" = "刚刚";
+
+"slept for about" = "睡了";
+"an hour" = "一小时";
+"hours" = "小时";
+"minutes" = "分钟";
+"slept for less than a minute" = "才睡了不到一分钟";
+"slept for a minute" = "睡了一分钟";
+"slept for" = "睡了";
+"Really?" = "真的？";
+"New Word" = "新词";
+
+"hr" = "小时";
+"min" = "分钟";
+
+
+"angry" = "生气";
+"fear" = "怕怕";
+"sad" = "伤心";
+"disgust" = "恶心";
+"happy" = "开心";
+"surprise" = "惊讶";
+"salute" = "敬礼";
+"clap" = "鼓掌";
+"pointing" = "指点";
+"suck toe" = "吃脚";
+"suck thumb" = "吮吸手指";
+"wave" = "招手";
+"chew" = "咀嚼";
+"crawl" = "爬";
+"cruise" = "扶墙走";
+"dance" = "跳舞";
+"jump" = "跳";
+"kick leg" = "踢腿";
+"lift neck" = "抬头";
+"roll over" = "翻身";
+"run" = "跑";
+"sit" = "坐";
+"stand" = "站";
+"walk" = "走路";
+"eye contact" = "眼神交流";
+"mirror" = "照镜子";
+
+"Sleep" = "睡眠";
+"Feeding" = "饮食";
+
+"Settings" = "设置";
+"Tutorial" = "使用手册";
+"Change password" = "修改密码";
+"Review on app store" = "评价我们的app";
+"Contact us"  = "联系我们";
+"Log out" = "退出";
+
+"Your message is sent. We will get back to you soon." = "我们已经收到您的邮件。我们会尽快联系您。";
+
+"Customer Support" = "技术支持";
+"Change Password" = "修改密码";
+"old password" = "旧密码";
+"new password" = "新密码";
+"Go" = "修改";
+
+"Scrapbooks" = "电子书";
+"Animals" = "小动物";
+"(template)" = "(模板)";
+"Birthday" = "生日";
+"Color Play" = "调色板";
+"Colorful Year" = "五彩生活";
+"First Year" = "第一年";
+"Flowers" = "小花朵";
+"Edit book name" = "修改书名";
+"Cancel" = "取消";
+"OK" = "修改";
+"add page" = "增加一页";
+"delete page" = "删除一页";
+"book name" = "修改书名";
+"close book" = "退出";
+
+"Diaper" = "尿布";
+

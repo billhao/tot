@@ -51,7 +51,7 @@
     // verify input
     NSString* value = selectedValueLabel.text;
     if( value.length == 0 ) {
-        [totUtility showAlert:@"Move the slider to select a number"];
+        [totUtility showAlert:NSLocalizedString(@"Move the slider to select a number", @"")];
         return false;
     }
     
@@ -83,9 +83,9 @@
 - (void)pickerView:(STHorizontalPicker *)picker didSelectValue:(CGFloat)value {
     NSString* str;
     if( self.type == HEIGHT || self.type == HEAD ) {
-        str = [NSString stringWithFormat:@"%.2f inches",value];
+        str = [NSString stringWithFormat:@"%.2f %@", value, NSLocalizedString(@"inches", @"")];
     } else if( self.type == WEIGHT ) {
-        str = [NSString stringWithFormat:@"%.2f pounds",value];
+        str = [NSString stringWithFormat:@"%.2f %@", value, NSLocalizedString(@"pounds", @"")];
     } else
         return;
     selectedValueLabel.text = str;
@@ -104,13 +104,13 @@
     [self setTimestamp];
     if (self.type == HEIGHT) {
         [self setIcon:@"height_gray" confirmedIcon:@"height"];
-        [self setTitle:@"Height"];
+        [self setTitle:NSLocalizedString(@"Height", @"")];
     } else if (self.type == WEIGHT) {
         [self setIcon:@"weight_gray" confirmedIcon:@"weight"];
-        [self setTitle:@"Weight"];
+        [self setTitle:NSLocalizedString(@"Weight", @"")];
     } else if (self.type == HEAD) {
         [self setIcon:@"hc_gray" confirmedIcon:@"hc"];
-        [self setTitle:@"Head Circumference"];
+        [self setTitle:NSLocalizedString(@"Head Circumference", @"")];
     }
 }
 
