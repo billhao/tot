@@ -93,7 +93,7 @@
     wetBtn.frame = CGRectMake(x, yy, w, h);
     wetBtn.titleLabel.font = font;
 
-    [wetBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
+    [wetBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 0)];
     [wetBtn setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, w-h)];
     [wetBtn setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
     [wetBtn.titleLabel setTextAlignment:NSTextAlignmentLeft];
