@@ -662,6 +662,20 @@
 		3FC1B6FC1543680300295447 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FC1B6FB1543680300295447 /* libsqlite3.dylib */; };
 		3FC1B7061543841800295447 /* totModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FC1B7051543841800295447 /* totModel.m */; };
 		3FC1B7091544F19700295447 /* totEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FC1B7081544F19600295447 /* totEvent.m */; };
+		3FC2A41118A33F9700FAE33D /* tutorial_0.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FC2A40A18A33F9700FAE33D /* tutorial_0.png */; };
+		3FC2A41218A33F9700FAE33D /* tutorial_0.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FC2A40A18A33F9700FAE33D /* tutorial_0.png */; };
+		3FC2A41318A33F9700FAE33D /* tutorial_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FC2A40B18A33F9700FAE33D /* tutorial_1.png */; };
+		3FC2A41418A33F9700FAE33D /* tutorial_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FC2A40B18A33F9700FAE33D /* tutorial_1.png */; };
+		3FC2A41518A33F9700FAE33D /* tutorial_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FC2A40C18A33F9700FAE33D /* tutorial_2.png */; };
+		3FC2A41618A33F9700FAE33D /* tutorial_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FC2A40C18A33F9700FAE33D /* tutorial_2.png */; };
+		3FC2A41718A33F9700FAE33D /* tutorial_3.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FC2A40D18A33F9700FAE33D /* tutorial_3.png */; };
+		3FC2A41818A33F9700FAE33D /* tutorial_3.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FC2A40D18A33F9700FAE33D /* tutorial_3.png */; };
+		3FC2A41918A33F9700FAE33D /* tutorial_4.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FC2A40E18A33F9700FAE33D /* tutorial_4.png */; };
+		3FC2A41A18A33F9700FAE33D /* tutorial_4.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FC2A40E18A33F9700FAE33D /* tutorial_4.png */; };
+		3FC2A41B18A33F9700FAE33D /* tutorial_5.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FC2A40F18A33F9700FAE33D /* tutorial_5.png */; };
+		3FC2A41C18A33F9700FAE33D /* tutorial_5.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FC2A40F18A33F9700FAE33D /* tutorial_5.png */; };
+		3FC2A41D18A33F9700FAE33D /* tutorial_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FC2A41018A33F9700FAE33D /* tutorial_bg.png */; };
+		3FC2A41E18A33F9700FAE33D /* tutorial_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 3FC2A41018A33F9700FAE33D /* tutorial_bg.png */; };
 		3FC56715181F8CDA00A5AD65 /* Base64Encoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FC56714181F8CDA00A5AD65 /* Base64Encoder.m */; };
 		3FC63DB217F00B6C003EA9D9 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FC63DB117F00B6B003EA9D9 /* Security.framework */; };
 		3FC63DC617F00D72003EA9D9 /* RNCryptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FC63DB917F00D72003EA9D9 /* RNCryptor.m */; };
@@ -1097,6 +1111,13 @@
 		3FC1B7051543841800295447 /* totModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totModel.m; path = totdev/Model/totModel.m; sourceTree = "<group>"; };
 		3FC1B7071544F19600295447 /* totEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = totEvent.h; path = totdev/Model/totEvent.h; sourceTree = "<group>"; };
 		3FC1B7081544F19600295447 /* totEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = totEvent.m; path = totdev/Model/totEvent.m; sourceTree = "<group>"; };
+		3FC2A40A18A33F9700FAE33D /* tutorial_0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tutorial_0.png; path = Resources/Tutorial/tutorial_0.png; sourceTree = "<group>"; };
+		3FC2A40B18A33F9700FAE33D /* tutorial_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tutorial_1.png; path = Resources/Tutorial/tutorial_1.png; sourceTree = "<group>"; };
+		3FC2A40C18A33F9700FAE33D /* tutorial_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tutorial_2.png; path = Resources/Tutorial/tutorial_2.png; sourceTree = "<group>"; };
+		3FC2A40D18A33F9700FAE33D /* tutorial_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tutorial_3.png; path = Resources/Tutorial/tutorial_3.png; sourceTree = "<group>"; };
+		3FC2A40E18A33F9700FAE33D /* tutorial_4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tutorial_4.png; path = Resources/Tutorial/tutorial_4.png; sourceTree = "<group>"; };
+		3FC2A40F18A33F9700FAE33D /* tutorial_5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tutorial_5.png; path = Resources/Tutorial/tutorial_5.png; sourceTree = "<group>"; };
+		3FC2A41018A33F9700FAE33D /* tutorial_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tutorial_bg.png; path = Resources/Tutorial/tutorial_bg.png; sourceTree = "<group>"; };
 		3FC56713181F8CDA00A5AD65 /* Base64Encoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base64Encoder.h; sourceTree = "<group>"; };
 		3FC56714181F8CDA00A5AD65 /* Base64Encoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Base64Encoder.m; sourceTree = "<group>"; };
 		3FC63DB117F00B6B003EA9D9 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -1651,6 +1672,13 @@
 		3F63C22B170539A70014E8C7 /* Tutorial */ = {
 			isa = PBXGroup;
 			children = (
+				3FC2A40A18A33F9700FAE33D /* tutorial_0.png */,
+				3FC2A40B18A33F9700FAE33D /* tutorial_1.png */,
+				3FC2A40C18A33F9700FAE33D /* tutorial_2.png */,
+				3FC2A40D18A33F9700FAE33D /* tutorial_3.png */,
+				3FC2A40E18A33F9700FAE33D /* tutorial_4.png */,
+				3FC2A40F18A33F9700FAE33D /* tutorial_5.png */,
+				3FC2A41018A33F9700FAE33D /* tutorial_bg.png */,
 				3F2CC25317120ED2001EDD75 /* tutorial_0@2x.png */,
 				3F63C22C170539D90014E8C7 /* tutorial_1@2x.png */,
 				3F63C22D170539D90014E8C7 /* tutorial_2@2x.png */,
@@ -2393,6 +2421,7 @@
 				3F7F878E1898F85D00492EDD /* Color Play P7@2x.png in Resources */,
 				3F7F878F1898F85D00492EDD /* First Year Template P3.png in Resources */,
 				3F7F87901898F85D00492EDD /* First Year@2x.png in Resources */,
+				3FC2A41A18A33F9700FAE33D /* tutorial_4.png in Resources */,
 				3F7F87911898F85D00492EDD /* settings@2x.png in Resources */,
 				3F7F87921898F85D00492EDD /* add_text@2x.png in Resources */,
 				3F7F87931898F85D00492EDD /* Activities.json in Resources */,
@@ -2405,6 +2434,7 @@
 				3F7F879A1898F85D00492EDD /* home_bg.png in Resources */,
 				3F7F879B1898F85D00492EDD /* language.png in Resources */,
 				3F7F879C1898F85D00492EDD /* Birthday Template P2.png in Resources */,
+				3FC2A41C18A33F9700FAE33D /* tutorial_5.png in Resources */,
 				3F7F879D1898F85D00492EDD /* Colorful Year P1.png in Resources */,
 				3F7F879E1898F85D00492EDD /* Flowers Template P8@2x.png in Resources */,
 				3F7F879F1898F85D00492EDD /* delete_button_pressed@2x.png in Resources */,
@@ -2527,6 +2557,7 @@
 				3F7F88171898F85D00492EDD /* activity_stand.png in Resources */,
 				3F7F88181898F85D00492EDD /* activity_stand@2x.png in Resources */,
 				3F7F88191898F85D00492EDD /* Birthday Template P3.png in Resources */,
+				3FC2A41E18A33F9700FAE33D /* tutorial_bg.png in Resources */,
 				3F7F881A1898F85D00492EDD /* activity_suck_thumb.png in Resources */,
 				3F7F881B1898F85D00492EDD /* Colorful Year.tpl in Resources */,
 				3F7F881C1898F85D00492EDD /* activity_suck_thumb@2x.png in Resources */,
@@ -2553,6 +2584,7 @@
 				3F7F88331898F85D00492EDD /* timeline_home.png in Resources */,
 				3F7F88341898F85D00492EDD /* timeline_home@2x.png in Resources */,
 				3F7F88351898F85D00492EDD /* Flowers Template P3.png in Resources */,
+				3FC2A41418A33F9700FAE33D /* tutorial_1.png in Resources */,
 				3F7F88361898F85D00492EDD /* First Year.tpl in Resources */,
 				3F7F88371898F85D00492EDD /* language_gray@2x.png in Resources */,
 				3F7F88381898F85D00492EDD /* timeline_home_pressed.png in Resources */,
@@ -2563,6 +2595,7 @@
 				3F7F883D1898F85D00492EDD /* timeline_navbar@2x.png in Resources */,
 				3F7F883E1898F85D00492EDD /* height_bg@2x.png in Resources */,
 				3F7F883F1898F85D00492EDD /* summary_head_bg@2x.png in Resources */,
+				3FC2A41818A33F9700FAE33D /* tutorial_3.png in Resources */,
 				3F7F88401898F85D00492EDD /* summary_head_default@2x.png in Resources */,
 				3F7F88411898F85D00492EDD /* tutorial_5@2x.png in Resources */,
 				3F7F88421898F85D00492EDD /* timeline_line.png in Resources */,
@@ -2585,6 +2618,7 @@
 				3F7F88531898F85D00492EDD /* Flowers Template P4@2x.png in Resources */,
 				3F7F88541898F85D00492EDD /* food_gray.png in Resources */,
 				3F7F88551898F85D00492EDD /* Animals Template P7@2x.png in Resources */,
+				3FC2A41218A33F9700FAE33D /* tutorial_0.png in Resources */,
 				3F7F88561898F85D00492EDD /* hc_gray.png in Resources */,
 				3F7F88571898F85D00492EDD /* height_gray.png in Resources */,
 				3F7F88581898F85D00492EDD /* language_gray.png in Resources */,
@@ -2635,6 +2669,7 @@
 				3F7F88871898F85D00492EDD /* Animals Template P6.png in Resources */,
 				3F7F88881898F85D00492EDD /* sb_book_bg@2x.png in Resources */,
 				3F7F88891898F85D00492EDD /* Raleway-Medium_2.ttf in Resources */,
+				3FC2A41618A33F9700FAE33D /* tutorial_2.png in Resources */,
 				3F7F888B1898F85D00492EDD /* summary_head_default.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2716,6 +2751,7 @@
 				17B168B41897A5EC007E03E5 /* sleep_gray@2x.png in Resources */,
 				17B169661897A787007E03E5 /* First Year Template P7.png in Resources */,
 				3F63C22F170539D90014E8C7 /* tutorial_2@2x.png in Resources */,
+				3FC2A41318A33F9700FAE33D /* tutorial_1.png in Resources */,
 				3FF6C2691708E7B2007B48DA /* icons-ok@2x.png in Resources */,
 				3F2CC25417120ED2001EDD75 /* tutorial_0@2x.png in Resources */,
 				17B169551897A787007E03E5 /* Colorful Year P7.png in Resources */,
@@ -2745,6 +2781,7 @@
 				17B1698B1897AAD5007E03E5 /* Diaper_checkbox@2x.png in Resources */,
 				17B169281897A787007E03E5 /* Animals Template P5@2x.png in Resources */,
 				8EA42348189E30AF00D5F324 /* Localizable.strings in Resources */,
+				3FC2A41118A33F9700FAE33D /* tutorial_0.png in Resources */,
 				17B1689A1897A3D6007E03E5 /* add_text.png in Resources */,
 				3FD3C64217CDBCA700DB1B71 /* home_bg@2x.png in Resources */,
 				3FD3C65017CDD60500DB1B71 /* activity_line.png in Resources */,
@@ -2764,6 +2801,7 @@
 				3FD3C6FE17CF36DC00DB1B71 /* activity_clap.png in Resources */,
 				17B169461897A787007E03E5 /* Color Play.tpl in Resources */,
 				3F7F87071898F2E500492EDD /* Flowers Template P8.png in Resources */,
+				3FC2A41D18A33F9700FAE33D /* tutorial_bg.png in Resources */,
 				3FD3C6FF17CF36DC00DB1B71 /* activity_clap@2x.png in Resources */,
 				3FD3C70017CF36DC00DB1B71 /* activity_crawl.png in Resources */,
 				3F7F86F71898F2DB00492EDD /* Birthday Template P8.png in Resources */,
@@ -2868,6 +2906,7 @@
 				3FD3C72917CF36DC00DB1B71 /* activity_suck_toe@2x.png in Resources */,
 				17B169671897A787007E03E5 /* First Year Template P7@2x.png in Resources */,
 				3FD3C72A17CF36DC00DB1B71 /* activity_surprise.png in Resources */,
+				3FC2A41B18A33F9700FAE33D /* tutorial_5.png in Resources */,
 				3FD3C72B17CF36DC00DB1B71 /* activity_surprise@2x.png in Resources */,
 				17B169541897A787007E03E5 /* Colorful Year P6@2x.png in Resources */,
 				17B168A61897A54F007E03E5 /* scrapbook_button_pressed.png in Resources */,
@@ -2891,6 +2930,7 @@
 				17B169681897A787007E03E5 /* First Year.tpl in Resources */,
 				17B168B31897A5EC007E03E5 /* language_gray@2x.png in Resources */,
 				3F049B5917D4073400F05727 /* timeline_home_pressed.png in Resources */,
+				3FC2A41918A33F9700FAE33D /* tutorial_4.png in Resources */,
 				3F049B5A17D4073400F05727 /* timeline_home_pressed@2x.png in Resources */,
 				3F049B5B17D4073400F05727 /* timeline_navbar.png in Resources */,
 				17B1697C1897A787007E03E5 /* Flowers.png in Resources */,
@@ -2920,6 +2960,7 @@
 				3F50B9F3184C0229001E8ED0 /* setting_back@2x.png in Resources */,
 				17B1696C1897A787007E03E5 /* Flowers Template P4@2x.png in Resources */,
 				8E0EA47F17D54D4400C75BD3 /* food_gray.png in Resources */,
+				3FC2A41718A33F9700FAE33D /* tutorial_3.png in Resources */,
 				17B1692A1897A787007E03E5 /* Animals Template P7@2x.png in Resources */,
 				8E0EA48017D54D4400C75BD3 /* hc_gray.png in Resources */,
 				8E0EA48117D54D4400C75BD3 /* height_gray.png in Resources */,
@@ -2935,6 +2976,7 @@
 				3F7F86E11898F2D200492EDD /* Animals Template P2.png in Resources */,
 				3F7F87061898F2E500492EDD /* Flowers Template P7.png in Resources */,
 				8E0EA48417D54D4400C75BD3 /* weight_gray.png in Resources */,
+				3FC2A41518A33F9700FAE33D /* tutorial_2.png in Resources */,
 				3F7F88CB1899717600492EDD /* Default~iphone.png in Resources */,
 				3F049B6C17D49C5300F05727 /* lang_input_bg@2x.png in Resources */,
 				17B169331897A787007E03E5 /* Birthday Template P7@2x.png in Resources */,
