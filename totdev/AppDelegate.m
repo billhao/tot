@@ -58,8 +58,8 @@
 //        // for anything below ios7
 //        windowFrame = CGRectMake(0, 0, 320, 480);
 //        // use transparent status bar
-////        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackTranslucent];
-////        loginNavigationController.wantsFullScreenLayout = TRUE;
+//        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackTranslucent];
+//        loginNavigationController.wantsFullScreenLayout = TRUE;
 //    }
 //
     

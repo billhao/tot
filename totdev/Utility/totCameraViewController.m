@@ -110,10 +110,10 @@
         // create overlay button for go to photo library
         UIImage* photoLibImg = [UIImage imageNamed:@"photo_lib"];
         CGRect f = CGRectMake(imagePicker.view.bounds.size.width-photoLibImg.size.width-10,
-                              imagePicker.view.bounds.size.height-photoLibImg.size.height-10-54,
+                              imagePicker.view.bounds.size.height-photoLibImg.size.height-10-54-50,
                               photoLibImg.size.width,
                               photoLibImg.size.height);
-
+        
         UIView *overlay_view = [[UIView alloc] initWithFrame:CGRectMake(f.origin.x, f.origin.y, f.size.width, f.size.height)];
         overlay_view.contentMode = UIViewContentModeTop;
         
@@ -129,6 +129,7 @@
         // imagePicker.cameraOverlayView = overlay;
         // imagePicker.cameraOverlayView = overlay_view;
         [imagePicker.cameraOverlayView addSubview:overlay_view];
+        [imagePicker.cameraOverlayView bringSubviewToFront:overlay_view];
         [overlay_view release];
         
         [vc presentViewController:imagePicker animated:TRUE completion:nil];
