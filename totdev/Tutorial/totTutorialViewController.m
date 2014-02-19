@@ -55,7 +55,8 @@
     int height = _frame.size.height;
     image_cnt = 0;
     while( image_cnt < 20 ) {
-        NSString* imgName = [NSString stringWithFormat:@"tutorial_%d", (image_cnt)];
+        NSString* imageFilename = [NSString stringWithFormat:@"tutorial_%d", (image_cnt)];
+        NSString* imgName = NSLocalizedString(imageFilename, nil);
         UIImage* img = [UIImage imageNamed:imgName];
         if( img == nil ) break;
         

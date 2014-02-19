@@ -104,7 +104,7 @@
 "new password" = "新密码";
 "Go" = "修改";
 
-"Scrapbooks" = "宝贝贴画";
+"Scrapbooks" = "宝贝贴贴";
 "Animals" = "小动物";
 "(template)" = "(模板)";
 "Birthday" = "生日";
@@ -130,6 +130,45 @@
 "name" = "姓名";
 "birthday" = "生日";
 "Next" = "下一步";
+
+// Tutorial for Chinese
+"tutorial_0"     = "cn_tutorial_0";
+"tutorial_1"     = "cn_tutorial_1";
+"tutorial_2"     = "cn_tutorial_2";
+"tutorial_3"     = "cn_tutorial_3";
+"tutorial_4"     = "cn_tutorial_4";
+"tutorial_0@2x"  = "cn_tutorial_0@2x";
+"tutorial_1@2x"  = "cn_tutorial_1@2x";
+"tutorial_2@2x"  = "cn_tutorial_2@2x";
+"tutorial_3@2x"  = "cn_tutorial_3@2x";
+"tutorial_4@2x"  = "cn_tutorial_4@2x";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
