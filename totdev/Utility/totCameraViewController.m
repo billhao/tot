@@ -127,9 +127,10 @@
         [overlay_view addSubview:overlay];
         
         // imagePicker.cameraOverlayView = overlay;
-        // imagePicker.cameraOverlayView = overlay_view;
-        [imagePicker.cameraOverlayView addSubview:overlay_view];
-        [imagePicker.cameraOverlayView bringSubviewToFront:overlay_view];
+        imagePicker.cameraOverlayView = overlay_view;
+        //UIView* v = imagePicker.cameraOverlayView;
+        //[imagePicker.cameraOverlayView addSubview:overlay_view];
+        //[imagePicker.cameraOverlayView bringSubviewToFront:overlay_view];
         [overlay_view release];
         
         [vc presentViewController:imagePicker animated:TRUE completion:nil];
